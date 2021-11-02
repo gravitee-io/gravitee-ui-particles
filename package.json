@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "lint": "yarn lint:commit && yarn lint:package && yarn workspaces foreach -pt run lint",
-    "lint:commit": "yarn commitlint --edit",
+    "lint:commit": "yarn commitlint --from $(git describe --tags --abbrev=0)",
     "lint:package": "yarn sort-package-json --check \"package.json\" \"ui-particles-angular/**/package.json\" ",
     "lint:package:fix": "yarn sort-package-json \"package.json\" \"ui-particles-angular/**/package.json\""
   },
