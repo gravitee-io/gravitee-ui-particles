@@ -1,0 +1,13 @@
+{
+  "name": "gravitee-ui-particles",
+  "description": "Gravitee.io - UI Particles",
+  "packageManager": "yarn@3.1.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gravitee-io/gravitee-ui-particles.git"
+  },
+  "workspaces": [
+    "ui-particles-angular"
+  ]
+}
