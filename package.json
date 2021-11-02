@@ -9,5 +9,8 @@
   },
   "workspaces": [
     "ui-particles-angular"
-  ]
+  ],
+  "devDependencies": {
+    "prettier": "^2.4.1"
+  }
 }

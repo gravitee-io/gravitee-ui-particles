@@ -17,10 +17,7 @@
     "module": "es2020",
     "lib": ["es2018", "dom"],
     "paths": {
-      "ui-particles-angular": [
-        "dist/ui-particles-angular/ui-particles-angular",
-        "dist/ui-particles-angular"
-      ]
+      "ui-particles-angular": ["dist/ui-particles-angular/ui-particles-angular", "dist/ui-particles-angular"]
     }
   },
   "angularCompilerOptions": {

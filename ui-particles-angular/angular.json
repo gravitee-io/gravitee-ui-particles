@@ -31,17 +31,14 @@
         "test": {
           "builder": "@angular-builders/jest:run",
           "options": {
-            "configPath":"projects/ui-particles-angular/jest.config.js",
+            "configPath": "projects/ui-particles-angular/jest.config.js",
             "tsConfig": "tsconfig.spec.json"
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "projects/ui-particles-angular/**/*.ts",
-              "projects/ui-particles-angular/**/*.html"
-            ]
+            "lintFilePatterns": ["projects/ui-particles-angular/**/*.ts", "projects/ui-particles-angular/**/*.html"]
           }
         }
       }

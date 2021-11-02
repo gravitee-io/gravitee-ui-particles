@@ -1,8 +1,8 @@
-import { TestBed } from "@angular/core/testing";
+import { TestBed } from '@angular/core/testing';
 
-import { UiParticlesAngularService } from "./ui-particles-angular.service";
+import { UiParticlesAngularService } from './ui-particles-angular.service';
 
-describe("UiParticlesAngularService", () => {
+describe('UiParticlesAngularService', () => {
   let service: UiParticlesAngularService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe("UiParticlesAngularService", () => {
     service = TestBed.inject(UiParticlesAngularService);
   });
 
-  it("should be created", () => {
+  it('should be created', () => {
     expect(service).toBeTruthy();
   });
 });

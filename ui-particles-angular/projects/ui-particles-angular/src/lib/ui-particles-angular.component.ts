@@ -1,7 +1,7 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
-  selector: "lib-ui-particles-angular",
+  selector: 'lib-ui-particles-angular',
   template: ` <p>ui-particles-angular works!</p> `,
   styles: [],
 })

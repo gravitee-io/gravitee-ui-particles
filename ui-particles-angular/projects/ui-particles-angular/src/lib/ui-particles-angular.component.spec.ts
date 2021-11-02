@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UiParticlesAngularComponent } from "./ui-particles-angular.component";
+import { UiParticlesAngularComponent } from './ui-particles-angular.component';
 
-describe("UiParticlesAngularComponent", () => {
+describe('UiParticlesAngularComponent', () => {
   let component: UiParticlesAngularComponent;
   let fixture: ComponentFixture<UiParticlesAngularComponent>;
 
@@ -18,7 +18,7 @@ describe("UiParticlesAngularComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
