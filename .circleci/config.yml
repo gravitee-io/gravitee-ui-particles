@@ -43,8 +43,31 @@ jobs:
           name: Run test
           command: yarn test
 
+  build:
+    parameters:
+      package_name:
+        type: string
+    executor:
+      class: medium
+      name: node-lts
+    steps:
+      - checkout
+      - yarn-install
+      - run:
+          name: Build
+          command: yarn build
+          working_directory: << parameters.package_name >>
+      - persist_to_workspace:
+          root: .
+          paths:
+            - << parameters.package_name >>/dist
+
 workflows:
   version: 2.1
   validate_build_branch:
     jobs:
-      - lint-test
+      - lint-test:
+          name: Lint & Test
+      - build:
+          name: Build Angular
+          package_name: ui-particles-angular
