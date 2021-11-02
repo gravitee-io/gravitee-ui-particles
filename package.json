@@ -11,9 +11,13 @@
     "ui-particles-angular"
   ],
   "scripts": {
-    "lint": "yarn workspaces foreach -pt run lint"
+    "lint": "yarn lint:commit && yarn workspaces foreach -pt run lint",
+    "lint:commit": "yarn commitlint --edit"
   },
   "devDependencies": {
+    "@commitlint/cli": "^14.1.0",
+    "@commitlint/config-conventional": "^14.1.0",
+    "husky": "^7.0.4",
     "prettier": "^2.4.1"
   }
 }
