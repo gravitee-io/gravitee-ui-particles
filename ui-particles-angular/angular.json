@@ -1,0 +1,51 @@
+{
+  "$schema": "../node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics",
+    "packageManager": "yarn"
+  },
+  "newProjectRoot": "projects",
+  "projects": {
+    "ui-particles-angular": {
+      "projectType": "library",
+      "root": "projects/ui-particles-angular",
+      "sourceRoot": "projects/ui-particles-angular/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ui-particles-angular/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ui-particles-angular/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ui-particles-angular/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "configPath":"projects/ui-particles-angular/jest.config.js",
+            "tsConfig": "tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ui-particles-angular/**/*.ts",
+              "projects/ui-particles-angular/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "ui-particles-angular"
+}
