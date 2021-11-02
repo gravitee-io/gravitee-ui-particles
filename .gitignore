@@ -10,3 +10,7 @@
 # Documentation here: https://yarnpkg.com/features/zero-installs
 # !/.yarn/cache
 /.pnp.*
+
+
+# Node
+node_modules
