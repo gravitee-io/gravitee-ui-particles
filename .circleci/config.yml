@@ -65,6 +65,7 @@ jobs:
           root: .
           paths:
             - << parameters.package_name >>/dist
+            - node_modules
 
   prerelease:
     parameters:
@@ -92,9 +93,47 @@ jobs:
             npm version $versionTag --git-tag-version=false
             npm publish --tag prerelease
 
+  release:
+    parameters:
+      package_name:
+        type: string
+      dry_run:
+        type: boolean
+        default: true
+    executor:
+      class: small
+      name: node-lts
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - 'ac:88:23:8f:c6:0f:7d:f0:fc:df:73:20:34:56:02:6c'
+      - checkout
+      - attach_workspace:
+          at: .
+      - when:
+          condition: << parameters.dry_run >>
+          steps:
+            - run:
+                name: 🧑‍🔬 dry-run release
+                working_directory: << parameters.package_name >>
+                command: yarn semantic-release --debug --no-ci --dry-run
+      - when:
+          condition:
+            not: << parameters.dry_run >>
+          steps:
+            - run:
+                name: 🚀 Release the Kraken
+                working_directory: << parameters.package_name >>
+                command: yarn semantic-release
+
 workflows:
   version: 2.1
   validate_build_branch:
+    # Trigger on all branches except `master`
+    when:
+      and:
+        - not:
+            equal: [master, << pipeline.git.branch >>]
     jobs:
       - lint-test:
           name: Lint & Test
@@ -102,15 +141,76 @@ workflows:
           name: Build Angular
           package_name: ui-particles-angular
       - prerelease:
-          filters:
-            branches:
-              ignore: master
           name: Prerelease Angular
           package_name: ui-particles-angular
           pre-steps:
             - secrethub/env-export:
                 secret-path: graviteeio/cicd/graviteebot/github_personal_access_token
                 var-name: GITHUB_TOKEN
+          context: gravitee-qa
+          requires:
+            - Build Angular
+      - release:
+          name: '[Dry Run] Release Angular'
+          package_name: ui-particles-angular
+          dry_run: true
+          pre-steps:
+            - secrethub/env-export:
+                secret-path: graviteeio/cicd/graviteebot/infra/npm_token
+                var-name: NPM_TOKEN
+            - secrethub/env-export:
+                secret-path: graviteeio/cicd/graviteebot/github_personal_access_token
+                var-name: GITHUB_TOKEN
+            - secrethub/env-export:
+                secret-path: graviteeio/cicd/graviteebot/git/user/name
+                var-name: GIT_AUTHOR_NAME
+            - secrethub/env-export:
+                secret-path: graviteeio/cicd/graviteebot/git/user/email
+                var-name: GIT_AUTHOR_EMAIL
+            - secrethub/env-export:
+                secret-path: graviteeio/cicd/graviteebot/git/user/name
+                var-name: GIT_COMMITTER_NAME
+            - secrethub/env-export:
+                secret-path: graviteeio/cicd/graviteebot/git/user/email
+                var-name: GIT_COMMITTER_EMAIL
+          context: gravitee-qa
+          requires:
+            - Build Angular
+
+  release:
+    # Trigger only for `master` branch
+    when:
+      or:
+        - equal: [master, << pipeline.git.branch >>]
+        # TODO: Remove me. Used to test release
+        - equal: [circleci, << pipeline.git.branch >>]
+    jobs:
+      - build:
+          name: Build Angular
+          package_name: ui-particles-angular
+      - release:
+          name: Release Angular
+          package_name: ui-particles-angular
+          dry_run: false
+          pre-steps:
+            - secrethub/env-export:
+                secret-path: graviteeio/cicd/graviteebot/infra/npm_token
+                var-name: NPM_TOKEN
+            - secrethub/env-export:
+                secret-path: graviteeio/cicd/graviteebot/github_personal_access_token
+                var-name: GITHUB_TOKEN
+            - secrethub/env-export:
+                secret-path: graviteeio/cicd/graviteebot/git/user/name
+                var-name: GIT_AUTHOR_NAME
+            - secrethub/env-export:
+                secret-path: graviteeio/cicd/graviteebot/git/user/email
+                var-name: GIT_AUTHOR_EMAIL
+            - secrethub/env-export:
+                secret-path: graviteeio/cicd/graviteebot/git/user/name
+                var-name: GIT_COMMITTER_NAME
+            - secrethub/env-export:
+                secret-path: graviteeio/cicd/graviteebot/git/user/email
+                var-name: GIT_COMMITTER_EMAIL
           context: gravitee-qa
           requires:
             - Build Angular
