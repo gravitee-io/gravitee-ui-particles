@@ -39,6 +39,9 @@ jobs:
       - run:
           name: Run lint
           command: yarn lint
+      - run:
+          name: Run test
+          command: yarn test
 
 workflows:
   version: 2.1
