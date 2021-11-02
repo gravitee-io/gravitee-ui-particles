@@ -1,0 +1,47 @@
+version: 2.1
+
+executors:
+  node-lts:
+    parameters:
+      class:
+        description: The resource class
+        type: enum
+        enum: ['small', 'medium', 'large', 'xlarge']
+        default: 'medium'
+    docker:
+      - image: cimg/node:14.18
+    resource_class: <<parameters.class>>
+
+commands:
+  yarn-install:
+    description: 'Runs Yarn install'
+    steps:
+      - restore_cache:
+          name: Restore Yarn cache
+          keys:
+            - gio-ui-particles-yarn-cache-v1-{{ checksum "yarn.lock" }}
+      - run:
+          name: 'Install Yarn dependencies'
+          command: yarn install
+      - save_cache:
+          paths:
+            - .yarn/cache
+          key: gio-ui-particles-yarn-cache-v1-{{ checksum "yarn.lock" }}
+
+jobs:
+  lint-test:
+    executor:
+      class: small
+      name: node-lts
+    steps:
+      - checkout
+      - yarn-install
+      - run:
+          name: Run lint
+          command: yarn lint
+
+workflows:
+  version: 2.1
+  validate_build_branch:
+    jobs:
+      - lint-test
