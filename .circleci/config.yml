@@ -1,5 +1,9 @@
 version: 2.1
 
+orbs:
+  secrethub: secrethub/cli@1.1.0
+  gh: circleci/github-cli@1.0.4
+
 executors:
   node-lts:
     parameters:
@@ -62,6 +66,32 @@ jobs:
           paths:
             - << parameters.package_name >>/dist
 
+  prerelease:
+    parameters:
+      package_name:
+        type: string
+    executor:
+      class: small
+      name: node-lts
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - gh/setup
+      - run:
+          name: 🐙 Prerelease the Kraken
+          working_directory: << parameters.package_name >>/dist/<< parameters.package_name >>
+          command: |
+            export version=$(git describe --tags --abbrev=0 | tr -d v)
+            export commit=$(git rev-parse --short HEAD)
+            export branch=$(git rev-parse --abbrev-ref HEAD | sed -E 's/[~^]+//g' | sed -E 's/[^a-zA-Z0-9]+/-/g' | sed -E 's/^-+|-+$//g' | tr A-Z a-z)
+            export versionTag=$version-$branch-$commit
+
+            echo //npm.pkg.github.com/:_authToken=$GITHUB_TOKEN > ~/.npmrc
+
+            npm version $versionTag --git-tag-version=false
+            npm publish --tag prerelease
+
 workflows:
   version: 2.1
   validate_build_branch:
@@ -71,3 +101,16 @@ workflows:
       - build:
           name: Build Angular
           package_name: ui-particles-angular
+      - prerelease:
+          filters:
+            branches:
+              ignore: master
+          name: Prerelease Angular
+          package_name: ui-particles-angular
+          pre-steps:
+            - secrethub/env-export:
+                secret-path: graviteeio/cicd/graviteebot/github_personal_access_token
+                var-name: GITHUB_TOKEN
+          context: gravitee-qa
+          requires:
+            - Build Angular
