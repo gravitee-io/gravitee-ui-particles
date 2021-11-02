@@ -14,10 +14,16 @@
     "lint": "yarn lint:commit && yarn workspaces foreach -pt run lint",
     "lint:commit": "yarn commitlint --edit"
   },
+  "lint-staged": {
+    "*.{js,ts,json,html,scss}": [
+      "prettier --write"
+    ]
+  },
   "devDependencies": {
     "@commitlint/cli": "^14.1.0",
     "@commitlint/config-conventional": "^14.1.0",
     "husky": "^7.0.4",
+    "lint-staged": "^11.2.6",
     "prettier": "^2.4.1"
   }
 }
