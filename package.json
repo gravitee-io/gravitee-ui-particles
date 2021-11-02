@@ -10,6 +10,9 @@
   "workspaces": [
     "ui-particles-angular"
   ],
+  "scripts": {
+    "lint": "yarn workspaces foreach -pt run lint"
+  },
   "devDependencies": {
     "prettier": "^2.4.1"
   }
