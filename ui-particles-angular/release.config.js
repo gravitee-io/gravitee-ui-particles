@@ -10,12 +10,7 @@ module.exports = {
         pkgRoot: 'dist/ui-particles-angular',
       },
     ],
-    [
-      '@semantic-release/github',
-      {
-        assets: [{ path: 'dist/ui-particles-angular', label: 'Ui Particles Angular' }],
-      },
-    ],
+    '@semantic-release/github',
     [
       '@semantic-release/git',
       {
