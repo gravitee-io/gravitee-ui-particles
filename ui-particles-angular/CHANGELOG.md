@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.0.2...v1.0.3) (2021-11-03)
+
+
+### Bug Fixes
+
+* remove @semantic-release/github assets config ([42d6995](https://github.com/gravitee-io/gravitee-ui-particles/commit/42d6995b62ef9adbc91fd9d8bfa8595f1eab6987))
+
 ## [1.0.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.0.1...v1.0.2) (2021-11-03)
 
 
