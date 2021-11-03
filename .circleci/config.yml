@@ -194,7 +194,7 @@ workflows:
           dry_run: false
           pre-steps:
             - secrethub/env-export:
-                secret-path: graviteeio/cicd/graviteebot/infra/npm_token
+                secret-path: graviteeio/cicd/graviteebot/github_personal_access_token
                 var-name: NPM_TOKEN
             - secrethub/env-export:
                 secret-path: graviteeio/cicd/graviteebot/github_personal_access_token
