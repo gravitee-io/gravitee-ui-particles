@@ -1,11 +1,12 @@
-# UiParticlesAngular
+# Ui Particles Angular
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
 
 ## Code scaffolding
 
 Run `ng generate component component-name --project ui-particles-angular` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ui-particles-angular`.
-> Note: Don't forget to add `--project ui-particles-angular` or else it will be added to the default project in your `angular.json` file. 
+
+> Note: Don't forget to add `--project ui-particles-angular` or else it will be added to the default project in your `angular.json` file.
 
 ## Build
 
