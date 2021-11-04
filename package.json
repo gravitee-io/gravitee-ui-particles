@@ -6,6 +6,7 @@
     "type": "git",
     "url": "git+https://github.com/gravitee-io/gravitee-ui-particles.git"
   },
+  "license": "Apache-2.0",
   "workspaces": [
     "ui-particles-angular"
   ],
