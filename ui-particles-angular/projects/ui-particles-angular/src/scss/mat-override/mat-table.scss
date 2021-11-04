@@ -1,0 +1,14 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@use '../gio-mat-theme-variable' as theme;
+
+$background: map.get(theme.$mat-theme, background);
+
+@mixin mat-table() {
+  .mat-table {
+    tbody tr:hover {
+      background-color: mat.get-color-from-palette($background, hover);
+    }
+  }
+}

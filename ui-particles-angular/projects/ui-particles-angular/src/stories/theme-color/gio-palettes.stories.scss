@@ -1,0 +1,22 @@
+@use '@angular/material' as mat;
+@use '../../scss' as gio;
+
+$colorNames: default, lighter, darker, default-contrast, lighter-contrast, darker-contrast;
+
+:export {
+  @each $name in $colorNames {
+    primary__#{$name}: mat.get-color-from-palette(gio.$mat-primary-palette, $name);
+  }
+  @each $name in $colorNames {
+    accent__#{$name}: mat.get-color-from-palette(gio.$mat-accent-palette, $name);
+  }
+  @each $name in $colorNames {
+    success__#{$name}: mat.get-color-from-palette(gio.$mat-success-palette, $name);
+  }
+  @each $name in $colorNames {
+    warning__#{$name}: mat.get-color-from-palette(gio.$mat-warning-palette, $name);
+  }
+  @each $name in $colorNames {
+    error__#{$name}: mat.get-color-from-palette(gio.$mat-error-palette, $name);
+  }
+}

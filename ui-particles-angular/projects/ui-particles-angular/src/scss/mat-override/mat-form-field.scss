@@ -1,0 +1,12 @@
+@use '@angular/material' as mat;
+
+@use '../gio-mat-theme-variable' as theme;
+
+@mixin mat-form-field() {
+  .mat-form-field {
+    .mat-hint,
+    .mat-error {
+      font-size: mat.font-size(theme.$mat-typography, caption);
+    }
+  }
+}

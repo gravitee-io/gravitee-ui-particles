@@ -1,0 +1,17 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '../projects/ui-particles-angular/src' as gio;
+
+$background: map.get(gio.$mat-theme, background);
+$typography: map.get(gio.$mat-theme, typography);
+
+@include gio.mat-theme();
+
+/**
+ * Reset `box-sizing` for all elements
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

@@ -1,0 +1,6 @@
+@forward './gio-mat-palettes' show $mat-primary-palette, $mat-accent-palette, $mat-info-palette, $mat-success-palette, $mat-warning-palette,
+  $mat-error-palette;
+
+@forward './gio-mat-theme-variable' show $mat-theme, $mat-typography;
+
+@forward './gio-mat-theme' show mat-theme;
