@@ -3,5 +3,6 @@
   "dest": "../../dist/ui-particles-angular",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "assets": ["index.scss", "src/scss/**/*.scss"]
 }

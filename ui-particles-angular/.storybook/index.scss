@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
-@use '../projects/ui-particles-angular/src' as gio;
+@use '../projects/ui-particles-angular' as gio;
 
 $background: map.get(gio.$mat-theme, background);
 $typography: map.get(gio.$mat-theme, typography);
