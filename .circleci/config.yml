@@ -293,6 +293,8 @@ workflows:
           package_name: ui-particles-angular
       - lint-test:
           name: Lint & Test
+          requires:
+            - Build Angular
       - build-storybook:
           name: Build Angular Storybook
           package_name: ui-particles-angular
