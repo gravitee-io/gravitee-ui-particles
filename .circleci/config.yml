@@ -93,6 +93,36 @@ jobs:
             npm version $versionTag --git-tag-version=false
             npm publish --tag prerelease
 
+            echo "export VERSION_TAG=$versionTag" >> $BASH_ENV
+      - run:
+          name: 🐙 Comment PR
+          command: |
+            # First check there is an associated pull request, otherwise just stop the job here
+            if ! gh pr view --json title;
+            then
+              echo "No PR found for this branch, stopping the job here."
+              exit 0
+            fi
+
+            gh pr comment --body "**Gravitee.io Automatic Deployment**
+
+            A prerelease version of this package has been published! 🚀
+
+            **This is still experimental ⚠️**
+
+            To use it in your project run the following lines:
+            \`\`\`shell
+            echo @gravitee-io:registry=https://npm.pkg.github.com > .npmrc
+
+            npm install @gravitee-io/ui-particles-angular@${VERSION_TAG}
+
+            yarn add @gravitee-io/ui-particles-angular@${VERSION_TAG}
+            \`\`\`
+
+            You may also need to login to the registry:
+            \`npm login --scope=@gravitee-io --registry=https://npm.pkg.github.com\`
+            "
+
   release:
     parameters:
       package_name:
