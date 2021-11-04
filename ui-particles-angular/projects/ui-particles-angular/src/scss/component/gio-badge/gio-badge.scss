@@ -1,0 +1,62 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@use '../../gio-mat-palettes.scss' as palettes;
+@use '../../gio-mat-theme-variable' as theme;
+
+/**
+ * Gravitee.io version of bootstrap "badge" element
+ */
+@mixin theme() {
+  .gio-badge {
+    display: inline-flex;
+
+    margin-left: 8px;
+    min-width: 10px;
+    padding: 4px 8px;
+    font-size: mat.font-size(theme.$mat-typography, caption);
+    font-weight: bold;
+    border-radius: 10px;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: mat.get-color-from-palette(palettes.$mat-primary-palette, light);
+    color: mat.get-color-from-palette(palettes.$mat-primary-palette, light-contrast);
+    text-transform: capitalize;
+
+    .mat-icon {
+      font-size: inherit;
+      height: inherit;
+      line-height: inherit;
+      width: inherit;
+      vertical-align: middle;
+
+      &.gio-right {
+        padding-left: 4px;
+      }
+
+      &.gio-left {
+        padding-right: 4px;
+      }
+    }
+  }
+
+  .gio-badge-accent {
+    @extend .gio-badge;
+    background-color: mat.get-color-from-palette(palettes.$mat-accent-palette, medium);
+    color: mat.get-color-from-palette(palettes.$mat-accent-palette, medium-contrast);
+  }
+
+  .gio-badge-success {
+    @extend .gio-badge;
+    background-color: mat.get-color-from-palette(palettes.$mat-success-palette, medium);
+    color: mat.get-color-from-palette(palettes.$mat-success-palette, medium-contrast);
+  }
+
+  .gio-badge-error {
+    @extend .gio-badge;
+    background-color: mat.get-color-from-palette(palettes.$mat-error-palette, medium);
+    color: mat.get-color-from-palette(palettes.$mat-error-palette, medium-contrast);
+  }
+}

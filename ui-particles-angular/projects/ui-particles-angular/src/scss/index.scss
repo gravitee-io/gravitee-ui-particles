@@ -4,3 +4,5 @@
 @forward './gio-mat-theme-variable' show $mat-theme, $mat-typography;
 
 @forward './gio-mat-theme' show mat-theme;
+
+@forward './gio-components.scss' show all-component;
