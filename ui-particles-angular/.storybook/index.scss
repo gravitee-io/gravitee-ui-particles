@@ -7,6 +7,8 @@ $typography: map.get(gio.$mat-theme, typography);
 
 @include gio.mat-theme();
 
+@include gio.all-component();
+
 /**
  * Reset `box-sizing` for all elements
  */

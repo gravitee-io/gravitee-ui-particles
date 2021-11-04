@@ -1,0 +1,6 @@
+@use './component/gio-badge/gio-badge';
+
+// All Gio component
+@mixin all-component() {
+  @include gio-badge.theme();
+}
