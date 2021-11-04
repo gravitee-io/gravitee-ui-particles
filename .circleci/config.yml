@@ -156,6 +156,30 @@ jobs:
                 working_directory: << parameters.package_name >>
                 command: yarn semantic-release
 
+  build-storybook:
+    parameters:
+      package_name:
+        type: string
+    executor:
+      class: medium
+      name: node-lts
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - yarn-install
+      - run:
+          name: Build
+          command: yarn storybook:build
+          working_directory: << parameters.package_name >>
+          environment:
+            NODE_OPTIONS: --max_old_space_size=3072
+      - persist_to_workspace:
+          root: .
+          paths:
+            - << parameters.package_name >>/storybook-static
+            - node_modules
+
 workflows:
   version: 2.1
   validate_build_branch:
@@ -204,6 +228,11 @@ workflows:
                 secret-path: graviteeio/cicd/graviteebot/git/user/email
                 var-name: GIT_COMMITTER_EMAIL
           context: gravitee-qa
+          requires:
+            - Build Angular
+      - build-storybook:
+          name: Build Angular Storybook
+          package_name: ui-particles-angular
           requires:
             - Build Angular
 
