@@ -7581,6 +7581,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chromatic@npm:^6.0.5":
+  version: 6.0.5
+  resolution: "chromatic@npm:6.0.5"
+  bin:
+    chroma: bin/main.cjs
+    chromatic: bin/main.cjs
+    chromatic-cli: bin/main.cjs
+  checksum: eb9a40f75db3c8c83cbed1a322080d4b4aec09769aee6895ea525030ab398e21f85d48164db8c52b46eb426a8a9c0158a2027efab497b8c8fa81266dcb8389fd
+  languageName: node
+  linkType: hard
+
 "chrome-trace-event@npm:^1.0.2":
   version: 1.0.3
   resolution: "chrome-trace-event@npm:1.0.3"
@@ -11412,6 +11423,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": ^14.1.0
     "@commitlint/config-conventional": ^14.1.0
+    chromatic: ^6.0.5
     husky: ^7.0.4
     lint-staged: ^11.2.6
     prettier: ^2.4.1

@@ -95,7 +95,7 @@ jobs:
 
             echo "export VERSION_TAG=$versionTag" >> $BASH_ENV
       - run:
-          name: 🐙 Comment PR
+          name: 🐙 Comment Pull Request
           command: |
             # First check there is an associated pull request, otherwise just stop the job here
             if ! gh pr view --json title;
@@ -180,6 +180,40 @@ jobs:
             - << parameters.package_name >>/storybook-static
             - node_modules
 
+  chromatic-deployment:
+    parameters:
+      package_name:
+        type: string
+    executor:
+      class: small
+      name: node-lts
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - run:
+          name: 📚 Running Chromatic
+          # TODO:
+          #  - Handle npx chromatic command failure, make the job fails
+          command: |
+            SB_URL=$(npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN --exit-once-uploaded -d=<< parameters.package_name >>/storybook-static | grep -o "View your Storybook at https:\/\/[0-9a-z-]*\.chromatic\.com" | grep -o "https:.*")
+            echo "export SB_URL=$SB_URL" >> $BASH_ENV
+      - gh/setup
+      - run:
+          name: 📚 Comment Pull Request
+          command: |
+            # First check there is an associated pull request, otherwise just stop the job here
+            if ! gh pr view --json title;
+            then
+              echo "No PR found for this branch, stopping the job here."
+              exit 0
+            fi
+
+            gh pr comment --body "**Gravitee.io Automatic Deployment**
+
+            📚 View the storybook of this branch [here](${SB_URL})
+            "
+
 workflows:
   version: 2.1
   validate_build_branch:
@@ -235,6 +269,16 @@ workflows:
           package_name: ui-particles-angular
           requires:
             - Build Angular
+      - chromatic-deployment:
+          name: Chromatic deployment for Angular
+          context: gravitee-qa
+          package_name: ui-particles-angular
+          requires:
+            - Build Angular Storybook
+          pre-steps:
+            - secrethub/env-export:
+                secret-path: graviteeio/cicd/graviteebot/github_personal_access_token
+                var-name: GITHUB_TOKEN
 
   release:
     # Trigger only for `master` branch
@@ -249,6 +293,21 @@ workflows:
           package_name: ui-particles-angular
       - lint-test:
           name: Lint & Test
+      - build-storybook:
+          name: Build Angular Storybook
+          package_name: ui-particles-angular
+          requires:
+            - Lint & Test
+      - chromatic-deployment:
+          name: Chromatic deployment for Angular
+          context: gravitee-qa
+          package_name: ui-particles-angular
+          requires:
+            - Build Angular Storybook
+          pre-steps:
+            - secrethub/env-export:
+                secret-path: graviteeio/cicd/graviteebot/github_personal_access_token
+                var-name: GITHUB_TOKEN
       - release:
           name: Release Angular
           package_name: ui-particles-angular
@@ -274,5 +333,4 @@ workflows:
                 var-name: GIT_COMMITTER_EMAIL
           context: gravitee-qa
           requires:
-            - Build Angular
-            - Lint & Test
+            - Chromatic deployment for Angular
