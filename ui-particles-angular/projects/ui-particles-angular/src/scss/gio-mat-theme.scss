@@ -1,0 +1,16 @@
+@use '@angular/material' as mat;
+
+@use './gio-mat-theme-variable' as theme-variable;
+
+@use './mat-override' as override;
+
+// Config material theme with gio theme
+@mixin mat-theme() {
+  @include mat.core(theme-variable.$mat-typography);
+  @include mat.all-component-themes(theme-variable.$mat-theme);
+
+  // Gio overrides
+  @include override.mat-form-field();
+  @include override.mat-table();
+  @include override.mat-card();
+}
