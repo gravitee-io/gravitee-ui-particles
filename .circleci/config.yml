@@ -170,7 +170,7 @@ jobs:
       - yarn-install
       - run:
           name: Build
-          command: npm run storybook:build
+          command: yarn storybook:build
           working_directory: << parameters.package_name >>
           environment:
             NODE_OPTIONS: --max_old_space_size=3072
