@@ -215,6 +215,8 @@ workflows:
       - build:
           name: Build Angular
           package_name: ui-particles-angular
+      - lint-test:
+          name: Lint & Test
       - release:
           name: Release Angular
           package_name: ui-particles-angular
@@ -241,3 +243,4 @@ workflows:
           context: gravitee-qa
           requires:
             - Build Angular
+            - Lint & Test
