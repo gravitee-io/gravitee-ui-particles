@@ -118,6 +118,9 @@ jobs:
 
             yarn add @gravitee-io/ui-particles-angular@${VERSION_TAG}
             \`\`\`
+
+            You may also need to login to the registry:
+            \`npm login --scope=@gravitee-io --registry=https://npm.pkg.github.com\`
             "
 
   release:
