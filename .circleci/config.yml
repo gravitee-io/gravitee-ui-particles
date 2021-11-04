@@ -217,11 +217,11 @@ jobs:
 workflows:
   version: 2.1
   validate_build_branch:
-    # Trigger on all branches except `master`
+    # Trigger on all branches except `main`
     when:
       and:
         - not:
-            equal: [master, << pipeline.git.branch >>]
+            equal: [main, << pipeline.git.branch >>]
     jobs:
       - lint-test:
           name: Lint & Test
@@ -281,10 +281,10 @@ workflows:
                 var-name: GITHUB_TOKEN
 
   release:
-    # Trigger only for `master` branch
+    # Trigger only for `main` branch
     when:
       or:
-        - equal: [master, << pipeline.git.branch >>]
+        - equal: [main, << pipeline.git.branch >>]
         # TODO: Remove me. Used to test release
         - equal: [circleci, << pipeline.git.branch >>]
     jobs:
