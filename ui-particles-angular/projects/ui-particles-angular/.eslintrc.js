@@ -14,7 +14,7 @@ module.exports = {
           'error',
           {
             type: 'attribute',
-            prefix: 'lib',
+            prefix: 'gio',
             style: 'camelCase',
           },
         ],
@@ -22,7 +22,7 @@ module.exports = {
           'error',
           {
             type: 'element',
-            prefix: 'lib',
+            prefix: 'gio',
             style: 'kebab-case',
           },
         ],
