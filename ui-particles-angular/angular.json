@@ -31,7 +31,7 @@
         "test": {
           "builder": "@angular-builders/jest:run",
           "options": {
-            "configPath": "projects/ui-particles-angular/jest.config.js",
+            "configPath": "jest.config.js",
             "tsConfig": "tsconfig.spec.json"
           }
         },
