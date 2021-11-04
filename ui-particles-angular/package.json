@@ -11,8 +11,8 @@
     "lint:prettier": "prettier --check \"**/*.{js,ts,json,html,scss}\"",
     "lint:prettier:fix": "prettier --write \"**/*.{js,ts,json,html,scss}\"",
     "ng": "ng",
-    "storybook": "ng run storybook:start",
-    "storybook:build": "ng run storybook:build",
+    "storybook": "mkdir -p node_modules && ng run storybook:start",
+    "storybook:build": "mkdir -p node_modules && ng run storybook:build",
     "test": "ng test",
     "watch": "ng build --watch --configuration development"
   },
