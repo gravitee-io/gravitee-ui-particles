@@ -1,0 +1,64 @@
+/*
+ * Copyright (C) 2015 The Gravitee team (http://gravitee.io)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+import { Component, Input } from '@angular/core';
+
+export type GioBannerTypes = 'error' | 'info' | 'success' | 'warning';
+
+@Component({
+  selector: 'gio-banner',
+  templateUrl: './gio-banner.component.html',
+  styleUrls: ['./gio-banner.component.scss'],
+})
+export class GioBannerComponent {
+  @Input()
+  type: GioBannerTypes = 'info';
+}
+
+@Component({
+  selector: 'gio-banner-error',
+  templateUrl: './gio-banner.component.html',
+  styleUrls: ['./gio-banner.component.scss'],
+})
+export class GioBannerErrorComponent extends GioBannerComponent {
+  type = 'error' as GioBannerTypes;
+}
+
+@Component({
+  selector: 'gio-banner-info',
+  templateUrl: './gio-banner.component.html',
+  styleUrls: ['./gio-banner.component.scss'],
+})
+export class GioBannerInfoComponent extends GioBannerComponent {
+  type = 'info' as GioBannerTypes;
+}
+
+@Component({
+  selector: 'gio-banner-success',
+  templateUrl: './gio-banner.component.html',
+  styleUrls: ['./gio-banner.component.scss'],
+})
+export class GioBannerSuccessComponent extends GioBannerComponent {
+  type = 'success' as GioBannerTypes;
+}
+
+@Component({
+  selector: 'gio-banner-warning',
+  templateUrl: './gio-banner.component.html',
+  styleUrls: ['./gio-banner.component.scss'],
+})
+export class GioBannerWarningComponent extends GioBannerComponent {
+  type = 'warning' as GioBannerTypes;
+}
