@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.1.0...v1.1.1) (2021-11-05)
+
+
+### Bug Fixes
+
+* try to make public release ([6716528](https://github.com/gravitee-io/gravitee-ui-particles/commit/6716528989511733bf827a0630bb3b471305a4c9))
+
 # [1.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.0.0...v1.1.0) (2021-11-05)
 
 
