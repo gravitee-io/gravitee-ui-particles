@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.0.0...v1.1.0) (2021-11-05)
+
+
+### Features
+
+* add gio banner component ([3ac3d58](https://github.com/gravitee-io/gravitee-ui-particles/commit/3ac3d58f79eccf568a56a52093603e5abd83a9f5))
+
 # 1.0.0 (2021-11-04)
 
 
