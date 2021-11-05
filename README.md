@@ -4,11 +4,16 @@
 
 Gravitee Ui Particles centralizes the design system applied to to all Gravitee consoles
 
+This project is a Yarn workspace
+
 ## Gravitee Ui Particles 🅰️ ngular
 
 [![CircleCI](https://circleci.com/gh/gravitee-io/gravitee-ui-particles/tree/main.svg?style=svg)](https://circleci.com/gh/gravitee-io/gravitee-ui-particles/tree/main)
 
-:books: [Storybook](https://main--6183b02d73381a003a3be1a6.chromatic.com/)
+Workspace project for the Angular framework. This project is itself an Angular workspace created by angular-cli.
+it contains (currently) only one library `projects/ui-particles-angular`
+
+📚 Go see the showcase of this project with : [Storybook](https://main--6183b02d73381a003a3be1a6.chromatic.com/)
 
 ### Install
 
@@ -28,8 +33,7 @@ npm login --scope=@gravitee-io --registry=https://npm.pkg.github.com
 ## Contributing
 
 You think Gravitee.io is awesome and want to contribute to the project?
-
-TODO :gmaisse-psychédélique:
+Here are few [guidelines](https://github.com/gravitee-io/gravitee-ui-particles/blob/master/CONTRIBUTING.md) that should help you get started.
 
 ## Copyright
 
