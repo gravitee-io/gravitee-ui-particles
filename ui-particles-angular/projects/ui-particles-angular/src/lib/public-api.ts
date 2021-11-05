@@ -20,3 +20,6 @@
 export * from './gio-save-bar/gio-save-bar.component';
 export * from './gio-save-bar/gio-save-bar.module';
 export * from './gio-save-bar/gio-save-bar.harness';
+
+export * from './gio-banner/gio-banner.component';
+export * from './gio-banner/gio-banner.module';
