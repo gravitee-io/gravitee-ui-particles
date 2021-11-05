@@ -10,10 +10,11 @@ This project is a Yarn workspace
 
 [![CircleCI](https://circleci.com/gh/gravitee-io/gravitee-ui-particles/tree/main.svg?style=svg)](https://circleci.com/gh/gravitee-io/gravitee-ui-particles/tree/main)
 
-Workspace project for the Angular framework. This project is itself an Angular workspace created by angular-cli.
-it contains (currently) only one library `projects/ui-particles-angular`
+Workspace project for the Angular framework
 
 📚 Go see the showcase of this project with : [Storybook](https://main--6183b02d73381a003a3be1a6.chromatic.com/)
+
+This project is itself an Angular workspace created by angular-cli. It contains (currently) only one library `projects/ui-particles-angular`
 
 ### Install
 
