@@ -11,13 +11,16 @@
     "ui-particles-angular"
   ],
   "scripts": {
-    "lint": "yarn lint:commit && yarn lint:package && yarn workspaces foreach -pt run lint",
+    "lint": "yarn lint:commit && yarn lint:package && yarn lint:license && yarn workspaces foreach -pt run lint",
     "lint:commit": "yarn commitlint --from $(git describe --tags --abbrev=0)",
+    "lint:license": "license-check-and-add check -f license-check-config.json",
+    "lint:license:fix": "license-check-and-add add -f license-check-config.json -r $(date +%Y)",
     "lint:package": "yarn sort-package-json --check \"package.json\" \"ui-particles-angular/**/package.json\" ",
     "lint:package:fix": "yarn sort-package-json \"package.json\" \"ui-particles-angular/**/package.json\"",
     "test": "yarn workspaces foreach -pt run test"
   },
   "lint-staged": {
+    "*": "yarn lint:license:fix",
     "*.{js,ts,json,html,scss}": [
       "prettier --write"
     ],
@@ -28,6 +31,7 @@
     "@commitlint/config-conventional": "^14.1.0",
     "chromatic": "^6.0.5",
     "husky": "^7.0.4",
+    "license-check-and-add": "^4.0.3",
     "lint-staged": "^11.2.6",
     "prettier": "^2.4.1",
     "sort-package-json": "^1.52.0"
