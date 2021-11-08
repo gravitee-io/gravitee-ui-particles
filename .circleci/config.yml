@@ -88,10 +88,10 @@ jobs:
             export branch=$(git rev-parse --abbrev-ref HEAD | sed -E 's/[~^]+//g' | sed -E 's/[^a-zA-Z0-9]+/-/g' | sed -E 's/^-+|-+$//g' | tr A-Z a-z)
             export versionTag=$version-$branch-$commit
 
-            echo //npm.pkg.github.com/:_authToken=$GITHUB_TOKEN > ~/.npmrc
+            echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > ~/.npmrc
 
             npm version $versionTag --git-tag-version=false
-            npm publish --tag prerelease
+            npm publish --tag prerelease --access=public
 
             echo "export VERSION_TAG=$versionTag" >> $BASH_ENV
       - run:
@@ -108,19 +108,12 @@ jobs:
 
             A prerelease version of this package has been published! 🚀
 
-            **This is still experimental ⚠️**
-
             To use it in your project run the following lines:
             \`\`\`shell
-            echo @gravitee-io:registry=https://npm.pkg.github.com > .npmrc
-
-            npm install @gravitee-io/ui-particles-angular@${VERSION_TAG}
-
-            yarn add @gravitee-io/ui-particles-angular@${VERSION_TAG}
+            npm install @gravitee/ui-particles-angular@${VERSION_TAG}
+            # or
+            yarn add @gravitee/ui-particles-angular@${VERSION_TAG}
             \`\`\`
-
-            You may also need to login to the registry:
-            \`npm login --scope=@gravitee-io --registry=https://npm.pkg.github.com\`
             "
 
   release:
@@ -233,6 +226,9 @@ workflows:
           package_name: ui-particles-angular
           pre-steps:
             - secrethub/env-export:
+                secret-path: graviteeio/cicd/graviteebot/infra/npm_token
+                var-name: NPM_TOKEN
+            - secrethub/env-export:
                 secret-path: graviteeio/cicd/graviteebot/github_personal_access_token
                 var-name: GITHUB_TOKEN
           context: gravitee-qa
@@ -244,7 +240,7 @@ workflows:
           dry_run: true
           pre-steps:
             - secrethub/env-export:
-                secret-path: graviteeio/cicd/graviteebot/github_personal_access_token
+                secret-path: graviteeio/cicd/graviteebot/infra/npm_token
                 var-name: NPM_TOKEN
             - secrethub/env-export:
                 secret-path: graviteeio/cicd/graviteebot/github_personal_access_token
@@ -316,7 +312,7 @@ workflows:
           dry_run: false
           pre-steps:
             - secrethub/env-export:
-                secret-path: graviteeio/cicd/graviteebot/github_personal_access_token
+                secret-path: graviteeio/cicd/graviteebot/infra/npm_token
                 var-name: NPM_TOKEN
             - secrethub/env-export:
                 secret-path: graviteeio/cicd/graviteebot/github_personal_access_token

@@ -54,7 +54,7 @@ export class ShowcaseColorComponent {
   matColorInScss = `
 @use 'sass:map';
 @use '@angular/material' as mat;
-@use '@gravitee-io/ui-particles-angular' as gio;
+@use '@gravitee/ui-particles-angular' as gio;
 
 $accent: map.get(gio.$mat-theme, accent);
 

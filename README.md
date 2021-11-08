@@ -21,15 +21,10 @@ This project is itself an Angular workspace created by angular-cli. It contains 
 To use it in your project run the following lines:
 
 ```bash
-echo @gravitee-io:registry=https://npm.pkg.github.com > .npmrc
-
-npm install @gravitee-io/ui-particles-angular
+npm install @gravitee/ui-particles-angular
 # or
-yarn add @gravitee-io/ui-particles-angular
+yarn add @gravitee/ui-particles-angular
 ```
-
-You may also need to login to the registry:
-npm login --scope=@gravitee-io --registry=https://npm.pkg.github.com
 
 ## Contributing
 
