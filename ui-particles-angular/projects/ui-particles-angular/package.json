@@ -1,5 +1,5 @@
 {
-  "name": "@gravitee-io/ui-particles-angular",
+  "name": "@gravitee/ui-particles-angular",
   "version": "0.0.0-semantically-released",
   "description": "Gravitee.io - UI Particles Angular",
   "repository": {
@@ -19,6 +19,6 @@
     "@angular/material": "^12.2.0"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   }
 }

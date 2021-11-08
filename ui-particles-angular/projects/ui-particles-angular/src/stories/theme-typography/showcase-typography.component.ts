@@ -23,7 +23,7 @@ export class ShowcaseTypographyComponent {
   typographyInScss = `
 @use 'sass:map';
 @use '@angular/material' as mat;
-@use '@gravitee-io/ui-particles-angular' as gio;
+@use '@gravitee/ui-particles-angular' as gio;
 
 $typography: map.get(gio.$mat-theme, typography);
 
