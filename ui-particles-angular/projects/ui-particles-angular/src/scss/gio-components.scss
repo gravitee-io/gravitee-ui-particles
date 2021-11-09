@@ -15,7 +15,7 @@
  */
 @use './component/gio-badge/gio-badge';
 
-// All Gio component
-@mixin all-component() {
+// All Gravitee.io SCSS components
+@mixin all-components() {
   @include gio-badge.theme();
 }
