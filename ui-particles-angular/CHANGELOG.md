@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.1.1...v1.2.0) (2021-11-09)
+
+
+### Features
+
+* create release on npm registry ([7357025](https://github.com/gravitee-io/gravitee-ui-particles/commit/73570252e58e2e0eb66583c4e5e18a1ef12ad262))
+
 ## [1.1.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.1.0...v1.1.1) (2021-11-05)
 
 
