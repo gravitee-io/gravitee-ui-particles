@@ -1,24 +1,37 @@
-# Gravitee Ui Particles
+# Gravitee UI Particles
+
+![](./assets/gravitee-ui-particules-logo.png)
 
 ## Overview
 
-Gravitee Ui Particles centralizes the design system applied to to all Gravitee consoles
+Gravitee UI Particles centralizes the design system applied to all Gravitee consoles.
 
-This project is a Yarn workspace
+It currently contains the following components:
+ - `@gravitee/ui-particles-angular`: Set of configuration and utilities to use Gravitee UI in Angular Material based applications
 
-## Gravitee Ui Particles 🅰️ ngular
+## Components
+
+### Gravitee UI Particles Angular
 
 [![CircleCI](https://circleci.com/gh/gravitee-io/gravitee-ui-particles/tree/main.svg?style=svg)](https://circleci.com/gh/gravitee-io/gravitee-ui-particles/tree/main)
+[![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)](https://main--6183b02d73381a003a3be1a6.chromatic.com/)
+
+#### Overview
 
 Workspace project for the Angular framework
 
-📚 Go see the showcase of this project with : [Storybook](https://main--6183b02d73381a003a3be1a6.chromatic.com/)
+This project is itself an Angular workspace created by Angular CLI and currently contains only one library:
+- `projects/ui-particles-angular`
 
-This project is itself an Angular workspace created by angular-cli. It contains (currently) only one library `projects/ui-particles-angular`
+For more details see the dedicated [README](./ui-particles-angular/README.md).
 
-### Install
+#### Live Demo
 
-To use it in your project run the following lines:
+All configuration helpers and Angular Material components are available on a deployed [Storybook](https://main--6183b02d73381a003a3be1a6.chromatic.com/).
+
+#### Usage
+
+To use it in your project just run:
 
 ```bash
 npm install @gravitee/ui-particles-angular

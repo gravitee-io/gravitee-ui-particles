@@ -1,18 +1,23 @@
 # Contributing to Gravitee.io
 
-You think Gravitee.io is awesome and want to contribute to the project?
-Here are few guidelines that should help you get started.
+You think Gravitee.io is awesome, and you'd like to contribute?
+Here are some guidelines that should help you get started.
 
 ## Using GitHub issues
 
-Found a bug in the source code? Or wants to propose new features or enhancements?
+We use GitHub issues to track bugs and enhancements. Found a bug in the source code? Want to propose new features or enhancements?
 You can help us by submitting an issue in the [repository](https://github.com/gravitee-io/gravitee-ui-particles).
-Before submitting your issue, search in the [archive issues](https://github.com/gravitee-io/issues/issues) if it doesn't have already been answered.
 
-Providing the following information will help us to deal quickly with your issue :
+Providing the following information will help us deal quickly with your issue:
 
-- **Overview of the issue** : describe the issue and why this is a bug for you.
-- **You have stack trace, screenshots, logs?** add these to the issue's description.
+* **Overview of the issue** : describe the issue and why this is a bug for you.
+* **UI Particles version(s)** : possible regression?
+* **Browsers and Operating System** : Linux/Windows/Docker? Browser version for the UI, etc ...
+* **You have stack trace, screenshots, logs ?** add these to the issue's description.
+
+## Setup
+
+This repository is using [Yarn workspaces.](https://yarnpkg.com/features/workspaces), so you need to have Yarn installed to contribute, see [Yarn's installation guide](https://yarnpkg.com/getting-started/install).
 
 ## Submitting changes
 
@@ -30,7 +35,7 @@ git checkout -b issue-<issue-id>-my-fix-branch main
 
 - Create your patch, **including appropriate test cases**.
 - Update the documentation if you create new features or think the documentation needs to be updated/completed.
-- Build your changes locally to **ensure all the linters rules and test pass**
+- Build your changes locally to **ensure all the linters rules and tests pass**
 
 ```shell
 yarn lint
@@ -72,4 +77,4 @@ Please sign our [Contributor License Agreement (CLA)](https://download.gravitee.
 
 ## Further Information
 
-You can find more detailed information about contributing in the [Github guides](https://guides.github.com/activities/contributing-to-open-source).
+You can find more detailed information about contributing in the [GitHub guides](https://guides.github.com/activities/contributing-to-open-source).
