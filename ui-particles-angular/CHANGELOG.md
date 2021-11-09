@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.2.0...v1.2.1) (2021-11-09)
+
+
+### Bug Fixes
+
+* fix name of mixin exporting all the SCSS components ([6843c0f](https://github.com/gravitee-io/gravitee-ui-particles/commit/6843c0f79ffabe9f452d64ff40003f0cb3e853b8))
+
 # [1.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.1.1...v1.2.0) (2021-11-09)
 
 
