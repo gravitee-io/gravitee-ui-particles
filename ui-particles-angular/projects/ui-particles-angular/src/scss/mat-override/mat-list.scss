@@ -13,7 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@forward 'mat-form-field';
-@forward 'mat-table';
-@forward 'mat-card';
-@forward 'mat-list' show mat-list;
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@use '../gio-mat-theme-variable' as theme;
+
+$background: map.get(theme.$mat-theme, background);
+
+@mixin mat-list() {
+  /**
+   * When a Mat List is inside a Mat Card then set a negative to balance default padding of the Mat Card
+   */
+  .mat-card > .mat-list {
+    margin: -16px;
+  }
+
+  /**
+   * Change background color of each list item on hover
+   */
+  .mat-list-item {
+    &:hover {
+      background-color: mat.get-color-from-palette($background, hover);
+    }
+  }
+}
