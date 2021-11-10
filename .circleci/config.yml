@@ -154,7 +154,7 @@ jobs:
       package_name:
         type: string
     executor:
-      class: medium
+      class: large
       name: node-lts
     steps:
       - checkout
