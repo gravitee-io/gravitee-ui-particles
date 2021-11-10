@@ -31,8 +31,9 @@
     min-width: 10px;
     padding: 4px 8px;
     font-size: mat.font-size(theme.$mat-typography, caption);
-    font-weight: bold;
+    font-weight: mat.font-weight(theme.$mat-typography, caption);
     border-radius: 10px;
+    border: 1px solid transparent;
     line-height: 1;
     text-align: center;
     white-space: nowrap;
@@ -62,17 +63,27 @@
     @extend .gio-badge;
     background-color: mat.get-color-from-palette(palettes.$mat-accent-palette, medium);
     color: mat.get-color-from-palette(palettes.$mat-accent-palette, medium-contrast);
+    border-color: mat.get-color-from-palette(palettes.$mat-accent-palette, dark);
   }
 
   .gio-badge-success {
     @extend .gio-badge;
     background-color: mat.get-color-from-palette(palettes.$mat-success-palette, medium);
     color: mat.get-color-from-palette(palettes.$mat-success-palette, medium-contrast);
+    border-color: mat.get-color-from-palette(palettes.$mat-success-palette, dark);
   }
 
   .gio-badge-error {
     @extend .gio-badge;
     background-color: mat.get-color-from-palette(palettes.$mat-error-palette, medium);
     color: mat.get-color-from-palette(palettes.$mat-error-palette, medium-contrast);
+    border-color: mat.get-color-from-palette(palettes.$mat-error-palette, dark);
+  }
+
+  .gio-badge-warning {
+    @extend .gio-badge;
+    background-color: mat.get-color-from-palette(palettes.$mat-warning-palette, medium);
+    color: mat.get-color-from-palette(palettes.$mat-warning-palette, medium-contrast);
+    border-color: mat.get-color-from-palette(palettes.$mat-warning-palette, dark);
   }
 }
