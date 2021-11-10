@@ -1,3 +1,16 @@
+# [1.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.2.1...v1.3.0) (2021-11-10)
+
+
+### Bug Fixes
+
+* **badge:** set margin on both sides instead of just left side ([7756fa5](https://github.com/gravitee-io/gravitee-ui-particles/commit/7756fa59176df2d76f4804319bba2791689365b6))
+
+
+### Features
+
+* add a hover and padding overrides on Mat List ([8c578bb](https://github.com/gravitee-io/gravitee-ui-particles/commit/8c578bb48ac13e69a509541d93743371b2292001))
+* **badge:** update badges to match new figma version ([9965aa3](https://github.com/gravitee-io/gravitee-ui-particles/commit/9965aa351250550664e19c0e1fbea40b1a64c595))
+
 ## [1.2.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.2.0...v1.2.1) (2021-11-09)
 
 
