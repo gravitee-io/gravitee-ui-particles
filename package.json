@@ -11,6 +11,7 @@
     "ui-particles-angular"
   ],
   "scripts": {
+    "postinstall": "husky install",
     "lint": "yarn lint:commit && yarn lint:package && yarn lint:license && yarn workspaces foreach -pt run lint",
     "lint:commit": "yarn commitlint --from $(git describe --tags --abbrev=0)",
     "lint:license": "license-check-and-add check -f license-check-config.json",
