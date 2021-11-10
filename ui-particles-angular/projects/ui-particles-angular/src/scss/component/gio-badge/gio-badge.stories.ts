@@ -19,7 +19,7 @@ import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
 import { MatIconModule } from '@angular/material/icon';
 
 export default {
-  title: 'Components/Badge',
+  title: 'Components / Badge',
   decorators: [
     moduleMetadata({
       imports: [MatIconModule],
@@ -28,7 +28,7 @@ export default {
   render: () => ({}),
 } as Meta;
 
-export const Badge: Story = {
+export const All: Story = {
   render: () => ({
     template: `
       <span class="gio-badge">Default</span>
@@ -36,6 +36,8 @@ export const Badge: Story = {
       <span class="gio-badge gio-badge-accent">Accent</span>
 
       <span class="gio-badge gio-badge-success">Success</span>
+      
+      <span class="gio-badge gio-badge-warning">Warning</span>
       
       <span class="gio-badge gio-badge-error">Error</span>
 
