@@ -18,7 +18,7 @@
 
 <div *ngIf="isOpen()" [@slideUpDown] [@.disabled]="creationMode" class="save-bar" [class.save-bar-sticky]="!creationMode">
   <mat-card class="save-bar__content" [class.mat-elevation-z3]="creationMode" [class.mat-elevation-z6]="!creationMode">
-    <div class="save-bar__content__label">Please note you have unsaved modifications.</div>
+    <div class="save-bar__content__label">{{ creationMode ? '' : 'Please note you have unsaved modifications.' }}</div>
     <div>
       <button *ngIf="!creationMode" class="save-bar__content__reset-button" mat-stroked-button type="button" (click)="onResetClicked()">
         Reset
