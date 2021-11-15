@@ -32,7 +32,22 @@ export default {
   ],
 } as Meta;
 
+export const SimpleUsageInUpdateMode: Story = {
+  name: 'Update Mode / Simple Usage',
+  render: () => ({
+    template: `
+    <div style="padding: 16px">
+       <gio-save-bar
+        [creationMode]="false"
+        [opened]="true">
+      </gio-save-bar>
+    </div>
+    `,
+  }),
+};
+
 export const Default: Story = {
+  name: 'Update Mode / Direct Bindings Usage',
   render: () => ({
     template: `
     <div style="padding-bottom: 400px">
@@ -62,6 +77,8 @@ export const Default: Story = {
 };
 
 export const ReactiveForm: Story = {
+  name: 'Update Mode / Reactive Form',
+
   render: () => {
     const form = new FormGroup({
       anInput: new FormControl('Edit me to display the save bar'),
@@ -93,7 +110,22 @@ export const ReactiveForm: Story = {
   },
 };
 
+export const SimpleUsageInCreationMode: Story = {
+  name: 'Creation Mode / Simple Usage',
+  render: () => ({
+    template: `
+    <div style="padding: 16px">
+       <gio-save-bar
+        [creationMode]="true"
+        [opened]="true">
+      </gio-save-bar>
+    </div>
+    `,
+  }),
+};
+
 export const CreationMode: Story = {
+  name: 'Creation Mode / Form',
   render: () => ({
     template: `
     <div style="padding-bottom: 400px">
