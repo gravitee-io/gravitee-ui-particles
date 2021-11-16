@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.3.0...v1.3.1) (2021-11-16)
+
+
+### Bug Fixes
+
+* **save-bar:** display info message only in update mode ([8ebaa92](https://github.com/gravitee-io/gravitee-ui-particles/commit/8ebaa9222007d565436c8628c9960dc425d6bf43))
+
 # [1.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.2.1...v1.3.0) (2021-11-10)
 
 
