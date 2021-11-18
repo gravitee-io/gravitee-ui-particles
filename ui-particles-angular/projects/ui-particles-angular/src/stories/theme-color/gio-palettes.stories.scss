@@ -29,6 +29,9 @@ $colorNames: default, lighter, darker, default-contrast, lighter-contrast, darke
     success__#{$name}: mat.get-color-from-palette(gio.$mat-success-palette, $name);
   }
   @each $name in $colorNames {
+    info__#{$name}: mat.get-color-from-palette(gio.$mat-info-palette, $name);
+  }
+  @each $name in $colorNames {
     warning__#{$name}: mat.get-color-from-palette(gio.$mat-warning-palette, $name);
   }
   @each $name in $colorNames {
