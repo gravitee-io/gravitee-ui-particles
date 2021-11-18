@@ -24,7 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 export default {
-  title: 'Material Override',
+  title: 'Material Override / MatFormField',
   decorators: [
     moduleMetadata({
       imports: [BrowserAnimationsModule, ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatIconModule],
@@ -33,7 +33,7 @@ export default {
   render: () => ({}),
 } as Meta;
 
-export const MatFormField: Story = {
+export const MatHintAndErrorFontSize: Story = {
   render: () => ({
     template: `
       <p>
@@ -41,15 +41,53 @@ export const MatFormField: Story = {
       </p>
       
       <mat-card>
-        <p>
+        <p style="display:flex; flex-direction:column;">
           <mat-form-field appearance="fill">
-            <mat-label>Legacy form field</mat-label>
+            <mat-label>Fill form field</mat-label>
             <input matInput placeholder="Placeholder" />
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
             <mat-hint>Hint</mat-hint>
           </mat-form-field>
+          <mat-form-field appearance="standard">
+            <mat-label>Click to see mat-error</mat-label>
+            <input matInput placeholder="Placeholder" required [formControl]="emailFormControl"/>
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
         </p>
-        <p>
+      </mat-card>
+    `,
+    props: {
+      emailFormControl: new FormControl('', [Validators.required, Validators.email]),
+    },
+  }),
+};
+
+export const MarginBetweenMatFormField: Story = {
+  render: () => ({
+    template: `
+      <p>
+      Add default top margin between mat-form-field
+      </p>
+      
+      <mat-card>
+        <p style="display:flex; flex-direction:column;">
+          <mat-form-field appearance="fill">
+            <mat-label>Fill form field</mat-label>
+            <input matInput placeholder="Placeholder" />
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Second Fill form field</mat-label>
+            <input matInput placeholder="Placeholder" />
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
           <mat-form-field appearance="standard">
             <mat-label>Click to see mat-error</mat-label>
             <input matInput placeholder="Placeholder" required [formControl]="emailFormControl"/>
