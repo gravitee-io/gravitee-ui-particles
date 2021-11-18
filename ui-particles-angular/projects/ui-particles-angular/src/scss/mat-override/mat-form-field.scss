@@ -24,4 +24,9 @@
       font-size: mat.font-size(theme.$mat-typography, caption);
     }
   }
+
+  // Default margin between two mat-form-field
+  .mat-form-field + .mat-form-field {
+    margin-top: 8px;
+  }
 }
