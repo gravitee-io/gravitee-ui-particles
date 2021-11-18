@@ -52,9 +52,9 @@ $mat-accent-palette: mat.define-palette(
 // Info color
 $mat-info-palette: mat.define-palette(
   (
-    dark: #1045a1,
-    default: #2196f3,
-    light: #bbdefb,
+    dark: hsl(218, 82%, 35%),
+    medium: hsl(207, 90%, 54%),
+    light: hsl(207, 89%, 86%),
     contrast: (
       dark: #262626,
       medium: #262626,
