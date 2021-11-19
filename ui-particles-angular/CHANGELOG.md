@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.3.1...v1.4.0) (2021-11-19)
+
+
+### Bug Fixes
+
+* add info palette in color story and fix color key ([1fab5bc](https://github.com/gravitee-io/gravitee-ui-particles/commit/1fab5bc406316407bfe2c1cf972f706a474d10a0))
+
+
+### Features
+
+* add default margin between two mat-form-field ([e53de15](https://github.com/gravitee-io/gravitee-ui-particles/commit/e53de15a2049323247d2df58e98f0cc94c881b76))
+
 ## [1.3.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.3.0...v1.3.1) (2021-11-16)
 
 
