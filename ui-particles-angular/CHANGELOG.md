@@ -1,3 +1,10 @@
+## [1.4.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.4.1...v1.4.2) (2021-12-01)
+
+
+### Bug Fixes
+
+* **deps:** pin dependency rxjs to v6.6.7 ([0f63aa7](https://github.com/gravitee-io/gravitee-ui-particles/commit/0f63aa74ea014fb015c64f24c7c57248893d0eea))
+
 ## [1.4.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.4.0...v1.4.1) (2021-12-01)
 
 
