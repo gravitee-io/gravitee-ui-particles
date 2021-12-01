@@ -1,0 +1,73 @@
+{
+  "extends": ["config:base", "helpers:disableTypesNodeMajor"],
+  "packageRules": [
+    {
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackagePatterns": ["*"],
+      "groupSlug": "all-devDependencies-minor-patch",
+      "groupName": "All devDependencies (minor/patch)"
+    },
+    {
+      "matchPackagePatterns": ["^rxjs.*"],
+      "groupSlug": "rxjs",
+      "groupName": "RxJs dependencies"
+    },
+    {
+      "matchPackagePatterns": ["^prettier"],
+      "groupSlug": "prettier",
+      "groupName": "Prettier dependencies"
+    },
+    {
+      "matchPackagePatterns": [
+        "^@angular/.*",
+        "^@angular-devkit/.*",
+        "^@schematics/.*",
+        "^@angular/cdk$",
+        "^@angular/cli$",
+        "^@angular/cdk-experimental$",
+        "^@angular/flex-layout$",
+        "^@angular/material$",
+        "^@angular-builders/.*",
+        "^ng-packagr$",
+        "^zone.js"
+      ],
+      "groupSlug": "angular",
+      "groupName": "Angular dependencies",
+      "postUpgradeTasks": {
+        "commands": ["ng update {{{depName}}} --from={{{fromVersion}}} --to={{{toVersion}}} --migrateOnly --allowDirty --force"],
+        "fileFilters": ["**/**"]
+      }
+    },
+    {
+      "matchPackagePatterns": ["^@commitlint/.*"],
+      "groupSlug": "commitlint",
+      "groupName": "Commitlint dependencies"
+    },
+    {
+      "matchPackagePatterns": ["^@types/eslint$", "^@angular-eslint/.*", "^@typescript-eslint/.*", "^eslint.*"],
+      "groupSlug": "eslint",
+      "groupName": "Eslint dependencies"
+    },
+    {
+      "matchPackagePatterns": ["^@types/jest$", "^jest.*", "^ts-jest$", "^jest-preset-angular$"],
+      "groupSlug": "jest",
+      "groupName": "Jest dependencies"
+    },
+    {
+      "matchPackagePatterns": ["@types/node"],
+      "groupSlug": "nodejs",
+      "groupName": "NodeJs dependencies"
+    },
+    {
+      "matchPackagePatterns": ["^typescript", "^tslib"],
+      "groupSlug": "typescript",
+      "groupName": "Typescript dependencies"
+    },
+    {
+      "matchPackagePatterns": ["^@storybook/.*"],
+      "groupSlug": "storybook",
+      "groupName": "Storybook dependencies"
+    }
+  ]
+}
