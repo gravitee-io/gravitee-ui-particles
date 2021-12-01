@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.4.0...v1.4.1) (2021-12-01)
+
+
+### Bug Fixes
+
+* **deps:** pin dependencies ([6aa68b6](https://github.com/gravitee-io/gravitee-ui-particles/commit/6aa68b69dbda398f5eecd934fc603e48d70f204a))
+
 # [1.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.3.1...v1.4.0) (2021-11-19)
 
 
