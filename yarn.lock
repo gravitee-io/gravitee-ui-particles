@@ -2214,7 +2214,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/cli@npm:^14.1.0":
+"@commitlint/cli@npm:14.1.0":
   version: 14.1.0
   resolution: "@commitlint/cli@npm:14.1.0"
   dependencies:
@@ -2233,7 +2233,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/config-conventional@npm:^14.1.0":
+"@commitlint/config-conventional@npm:14.1.0":
   version: 14.1.0
   resolution: "@commitlint/config-conventional@npm:14.1.0"
   dependencies:
@@ -11458,8 +11458,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "gravitee-ui-particles@workspace:."
   dependencies:
-    "@commitlint/cli": ^14.1.0
-    "@commitlint/config-conventional": ^14.1.0
+    "@commitlint/cli": 14.1.0
+    "@commitlint/config-conventional": 14.1.0
     chromatic: 6.0.5
     husky: 7.0.4
     license-check-and-add: 4.0.3

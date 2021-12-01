@@ -28,8 +28,8 @@
     "package.json": "sort-package-json"
   },
   "devDependencies": {
-    "@commitlint/cli": "^14.1.0",
-    "@commitlint/config-conventional": "^14.1.0",
+    "@commitlint/cli": "14.1.0",
+    "@commitlint/config-conventional": "14.1.0",
     "chromatic": "6.0.5",
     "husky": "7.0.4",
     "license-check-and-add": "4.0.3",
