@@ -5075,7 +5075,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^12.11.1":
+"@types/node@npm:12.20.36":
   version: 12.20.36
   resolution: "@types/node@npm:12.20.36"
   checksum: 096748b23e70f6a60ea3f93e4abc7b52b93977270ae48bb793b73a6ab3d4ef2a03294f73e86213a957255f50ce29ebaf39ffdf30a2e068662a18416ba3942656
@@ -21750,7 +21750,7 @@ __metadata:
     "@storybook/builder-webpack5": 6.4.0-beta.31
     "@storybook/manager-webpack5": 6.4.0-beta.31
     "@types/jest": 27.0.2
-    "@types/node": ^12.11.1
+    "@types/node": 12.20.36
     "@typescript-eslint/eslint-plugin": 4.28.2
     "@typescript-eslint/parser": 4.28.2
     eslint: ^7.26.0
