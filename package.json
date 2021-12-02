@@ -30,12 +30,12 @@
   "devDependencies": {
     "@commitlint/cli": "14.1.0",
     "@commitlint/config-conventional": "14.1.0",
-    "chromatic": "6.0.5",
+    "chromatic": "6.1.0",
     "husky": "7.0.4",
     "license-check-and-add": "4.0.3",
     "lint-staged": "11.2.6",
     "prettier": "2.4.1",
-    "sort-package-json": "1.52.0"
+    "sort-package-json": "1.53.1"
   },
   "packageManager": "yarn@3.1.1"
 }
