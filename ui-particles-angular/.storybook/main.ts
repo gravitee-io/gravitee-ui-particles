@@ -1,7 +1,9 @@
+const path = require('path');
+
 module.exports = {
   framework: '@storybook/angular',
   stories: ['../projects/**/*.stories.@(ts|mdx)'],
-  addons: ['@storybook/addon-essentials'],
+  addons: ['@storybook/addon-essentials', path.resolve(__dirname + '/addon-angular-docs/preset.js')],
   features: {
     previewCsfV3: true,
     storyStoreV7: true,
