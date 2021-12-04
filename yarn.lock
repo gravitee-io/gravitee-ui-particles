@@ -11691,7 +11691,7 @@ __metadata:
     husky: 7.0.4
     license-check-and-add: 4.0.3
     lint-staged: 11.2.6
-    prettier: 2.4.1
+    prettier: 2.5.1
     sort-package-json: 1.53.1
   languageName: unknown
   linkType: soft
@@ -18333,7 +18333,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:2.4.1, prettier@npm:^2.2.1":
+"prettier@npm:2.5.1":
+  version: 2.5.1
+  resolution: "prettier@npm:2.5.1"
+  bin:
+    prettier: bin-prettier.js
+  checksum: 21b9408476ea1c544b0e45d51ceb94a84789ff92095abb710942d780c862d0daebdb29972d47f6b4d0f7ebbfb0ffbf56cc2cfa3e3e9d1cca54864af185b15b66
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^2.2.1":
   version: 2.4.1
   resolution: "prettier@npm:2.4.1"
   bin:
@@ -22087,7 +22096,7 @@ __metadata:
     jest: 27.4.3
     jest-preset-angular: 11.0.1
     ng-packagr: 12.2.5
-    prettier: 2.4.1
+    prettier: 2.5.1
     rxjs: 6.6.7
     semantic-release: 18.0.1
     tslib: 2.3.1
