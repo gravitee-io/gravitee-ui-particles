@@ -11,6 +11,8 @@
     {
       "matchPackagePatterns": ["^rxjs.*"],
       "groupSlug": "rxjs",
+      "matchUpdateTypes": ["minor", "patch"],
+      "separateMinorPatch": true,
       "groupName": "RxJs dependencies"
     },
     {
@@ -61,6 +63,7 @@
     },
     {
       "matchPackagePatterns": ["^typescript", "^tslib"],
+      "updateTypes": ["patch"],
       "groupSlug": "typescript",
       "groupName": "Typescript dependencies"
     },
