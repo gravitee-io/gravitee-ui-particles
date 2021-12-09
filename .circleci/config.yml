@@ -31,6 +31,10 @@ commands:
           paths:
             - .yarn/cache
           key: gio-ui-particles-yarn-cache-v1-{{ checksum "yarn.lock" }}
+      - persist_to_workspace:
+          root: .
+          paths:
+            - node_modules
 
 jobs:
   lint-test:
