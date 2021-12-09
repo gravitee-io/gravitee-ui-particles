@@ -35,7 +35,7 @@ commands:
 jobs:
   lint-test:
     executor:
-      class: small
+      class: medium
       name: node-lts
     steps:
       - checkout
