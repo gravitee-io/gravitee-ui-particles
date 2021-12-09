@@ -1,4 +1,8 @@
 {
   "extends": "../tsconfig.json",
-  "exclude": ["**/*.spec.ts"]
+  "exclude": ["**/*.spec.ts"],
+  "include": ["../projects/**/*.ts", "*.ts"],
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true
+  }
 }
