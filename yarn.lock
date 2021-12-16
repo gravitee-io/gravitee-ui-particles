@@ -3498,9 +3498,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@semantic-release/exec@npm:6.0.2":
-  version: 6.0.2
-  resolution: "@semantic-release/exec@npm:6.0.2"
+"@semantic-release/exec@npm:6.0.3":
+  version: 6.0.3
+  resolution: "@semantic-release/exec@npm:6.0.3"
   dependencies:
     "@semantic-release/error": ^3.0.0
     aggregate-error: ^3.0.0
@@ -3510,7 +3510,7 @@ __metadata:
     parse-json: ^5.0.0
   peerDependencies:
     semantic-release: ">=18.0.0"
-  checksum: 27b3bfe376af56a111ed26db9aeba52117959c55ef9c741788ccdc79d68b92305a0c9d9a1631a6107b467fb6f5fc8bd7b4091c9da68739b5ff1237b1cef7ad4f
+  checksum: c6ad2f02ff01a4709c4914f560d0343efea9afe993c733ff971da8bf89604a1460d87b26a1a2ace5992c5ace8e8d384cf314504e0c4b623fc8433e8e8d9e2fe0
   languageName: node
   linkType: hard
 
@@ -7696,14 +7696,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:6.2.0":
-  version: 6.2.0
-  resolution: "chromatic@npm:6.2.0"
+"chromatic@npm:6.2.1":
+  version: 6.2.1
+  resolution: "chromatic@npm:6.2.1"
   bin:
     chroma: bin/main.cjs
     chromatic: bin/main.cjs
     chromatic-cli: bin/main.cjs
-  checksum: d0726a511531c2707d2c9964e26223cf30f890d3b322983180013d7d42de54ac6d3708ff0ef08e66c399be55639694004ecdd8a5110b58d2aea463be964c0905
+  checksum: 5acd88ab28201f4593487cd29d5237e34c0ad04e30c14d1603f304125806cf2c150822502277a188995464206985cf35c4f29ce97cd423fa2f1ef341adc52b0b
   languageName: node
   linkType: hard
 
@@ -11743,7 +11743,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": 15.0.0
     "@commitlint/config-conventional": 15.0.0
-    chromatic: 6.2.0
+    chromatic: 6.2.1
     husky: 7.0.4
     license-check-and-add: 4.0.3
     lint-staged: 12.1.2
@@ -22090,7 +22090,7 @@ __metadata:
     "@angular/platform-browser-dynamic": 12.2.14
     "@angular/router": 12.2.14
     "@semantic-release/changelog": 6.0.1
-    "@semantic-release/exec": 6.0.2
+    "@semantic-release/exec": 6.0.3
     "@semantic-release/git": 10.0.1
     "@storybook/addon-essentials": 6.4.9
     "@storybook/angular": 6.4.9
