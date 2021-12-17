@@ -7696,14 +7696,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:6.2.1":
-  version: 6.2.1
-  resolution: "chromatic@npm:6.2.1"
+"chromatic@npm:6.2.3":
+  version: 6.2.3
+  resolution: "chromatic@npm:6.2.3"
   bin:
     chroma: bin/main.cjs
     chromatic: bin/main.cjs
     chromatic-cli: bin/main.cjs
-  checksum: 5acd88ab28201f4593487cd29d5237e34c0ad04e30c14d1603f304125806cf2c150822502277a188995464206985cf35c4f29ce97cd423fa2f1ef341adc52b0b
+  checksum: b7e8a7b630dfabd6552eb00db8e1a22f945d572224ce4f5237cd2949556e77d96958b2aeffa9e4da6dc421f879b4f48975a712cb97c6429967d07ab7bc38d523
   languageName: node
   linkType: hard
 
@@ -11743,7 +11743,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": 15.0.0
     "@commitlint/config-conventional": 15.0.0
-    chromatic: 6.2.1
+    chromatic: 6.2.3
     husky: 7.0.4
     license-check-and-add: 4.0.3
     lint-staged: 12.1.2
