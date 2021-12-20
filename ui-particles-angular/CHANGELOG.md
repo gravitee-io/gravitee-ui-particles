@@ -1,3 +1,10 @@
+## [1.4.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.4.2...v1.4.3) (2021-12-20)
+
+
+### Bug Fixes
+
+* **deps:** update angular dependencies to v12.2.15 ([0a9a0df](https://github.com/gravitee-io/gravitee-ui-particles/commit/0a9a0dfe6005d9d29adebb2246d6879f752f7959))
+
 ## [1.4.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.4.1...v1.4.2) (2021-12-01)
 
 
