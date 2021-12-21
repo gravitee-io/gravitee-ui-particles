@@ -5102,10 +5102,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:12.20.37":
-  version: 12.20.37
-  resolution: "@types/node@npm:12.20.37"
-  checksum: 8c8b12f802678b3b87c5344b6c84082be08561dda81dc161d42be8cd327330d1a5227cef039c45a5e63a6d4a01ef5ef215dccc42d06100f59f6a8814b4f91cdd
+"@types/node@npm:12.20.38":
+  version: 12.20.38
+  resolution: "@types/node@npm:12.20.38"
+  checksum: eb3395bbda31a43353a4555013f9be50c619f553e4c5a90b342c16c70c884d3c18ed64269c5f10dee2f3ab570a6a0ec8e3d4a0191e2c4896db95c38a1bfbeb2e
   languageName: node
   linkType: hard
 
@@ -22103,7 +22103,7 @@ __metadata:
     "@storybook/builder-webpack5": 6.4.9
     "@storybook/manager-webpack5": 6.4.9
     "@types/jest": 27.0.3
-    "@types/node": 12.20.37
+    "@types/node": 12.20.38
     "@typescript-eslint/eslint-plugin": 4.33.0
     "@typescript-eslint/parser": 4.33.0
     eslint: 7.32.0
