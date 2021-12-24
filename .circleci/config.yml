@@ -193,7 +193,7 @@ jobs:
             echo "export SB_URL=$SB_URL" >> $BASH_ENV
       - gh/setup
       - run:
-          name: 📚 Comment Pull Request
+          name: 📚 Edit Pull Request Description
           command: |
             # First check there is an associated pull request, otherwise just stop the job here
             if ! gh pr view --json title;
@@ -202,10 +202,24 @@ jobs:
               exit 0
             fi
 
-            gh pr comment --body "**Gravitee.io Automatic Deployment**
+            # If PR state is different from OPEN
+            if [ "$(gh pr view --json state --jq .state)" != "OPEN" ];
+            then
+              echo "PR is not opened, stopping the job here."
+              exit 0
+            fi
 
-            📚 View the storybook of this branch [here](${SB_URL})
+            export PR_BODY_STORYBOOK_SECTION="
+            <!-- Storybook placeholder -->
+            ---
+
+            📚&nbsp;&nbsp;View the storybook of this branch [here](${SB_URL})
+            <!-- Storybook placeholder end -->
             "
+
+            export CLEAN_BODY=$(gh pr view --json body --jq .body | sed '/Storybook placeholder -->/,/Storybook placeholder end -->/d')
+
+            gh pr edit --body "$CLEAN_BODY$PR_BODY_STORYBOOK_SECTION"
 
 workflows:
   version: 2.1
