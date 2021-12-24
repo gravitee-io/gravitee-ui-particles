@@ -61,6 +61,7 @@
     },
     {
       "matchPackagePatterns": ["^typescript", "^tslib"],
+      "matchUpdateTypes": ["patch"],
       "groupSlug": "typescript",
       "groupName": "Typescript dependencies"
     },
