@@ -1,5 +1,7 @@
 {
-  "extends": ["config:base", "helpers:disableTypesNodeMajor"],
+  "extends": ["config:base", "helpers:disableTypesNodeMajor", "schedule:earlyMondays"],
+  "prConcurrentLimit": 3,
+  "dependencyDashboard": true,
   "packageRules": [
     {
       "matchDepTypes": ["devDependencies"],
