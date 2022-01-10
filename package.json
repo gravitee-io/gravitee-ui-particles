@@ -27,6 +27,9 @@
     ],
     "package.json": "sort-package-json"
   },
+  "resolutions": {
+    "colors": "1.4.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "15.0.0",
     "@commitlint/config-conventional": "15.0.0",
