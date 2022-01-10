@@ -1,3 +1,10 @@
+## [1.4.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.4.3...v1.4.4) (2022-01-10)
+
+
+### Bug Fixes
+
+* pin colors version to avoid vulnerability ([fbabfbf](https://github.com/gravitee-io/gravitee-ui-particles/commit/fbabfbf28f633f2e48f0998e82834182f4d3dc58)), closes [Marak/colors.js#285](https://github.com/Marak/colors.js/issues/285)
+
 ## [1.4.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.4.2...v1.4.3) (2021-12-20)
 
 
