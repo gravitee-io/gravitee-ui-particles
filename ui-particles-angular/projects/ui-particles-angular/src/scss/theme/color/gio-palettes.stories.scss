@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 @use '@angular/material' as mat;
-@use '../../scss' as gio;
+@use '../../../scss' as gio;
 
 $colorNames: default, lighter, darker, default-contrast, lighter-contrast, darker-contrast;
 

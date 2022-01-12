@@ -18,21 +18,21 @@ import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 
-import { ShowcaseTypographyComponent } from './showcase-typography.component';
+import { ShowcaseColorComponent } from './showcase-color.component';
 
 export default {
-  title: 'Theme',
+  title: 'Theme / Color',
   decorators: [
     moduleMetadata({
       imports: [BrowserAnimationsModule, MatCardModule],
-      declarations: [ShowcaseTypographyComponent],
+      declarations: [ShowcaseColorComponent],
     }),
   ],
   render: () => ({}),
 } as Meta;
 
-export const Typography: Story = {
+export const Palettes: Story = {
   render: () => ({
-    component: ShowcaseTypographyComponent,
+    component: ShowcaseColorComponent,
   }),
 };
