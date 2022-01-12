@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@use 'sass:map';
 @use '@angular/material' as mat;
 
 @use './gio-mat-palettes' as palettes;
@@ -35,7 +36,8 @@ $mat-typography: mat.define-typography-config(
   $input: mat.define-typography-level(inherit, 1.125, 400),
 );
 
-$mat-theme: mat.define-light-theme(
+// Mat default light theme
+$mat-theme-default: mat.define-light-theme(
   (
     color: (
       primary: palettes.$mat-primary-palette,
@@ -43,5 +45,45 @@ $mat-theme: mat.define-light-theme(
       warn: palettes.$mat-error-palette,
     ),
     typography: $mat-typography,
+  )
+);
+
+// Custom mat background & foreground color
+$mat-background: map.get($mat-theme-default, background);
+$mat-foreground: map.get($mat-theme-default, foreground);
+
+// Override $light-theme-background-palette config from node_modules/@angular/material/core/theming/_palette.scss
+$gio-background: map.merge(
+  $mat-background,
+  (
+    background: mat.get-color-from-palette(palettes.$mat-decorative-palette, lighter-background),
+    tooltip: mat.get-color-from-palette(palettes.$mat-neutral-palette, darker),
+  )
+);
+
+// Override $light-theme-foreground-palette config from node_modules/@angular/material/core/theming/_palette.scss
+$gio-foreground: map.merge(
+  $mat-foreground,
+  (
+    text: mat.get-color-from-palette(palettes.$mat-content-palette, darker),
+    slider-min: mat.get-color-from-palette(palettes.$mat-content-palette, darker),
+  )
+);
+
+$gio-background-foreground: (
+  background: $gio-background,
+  foreground: $gio-foreground,
+);
+
+// For backward compatibility with Material Design merge $gio-background-foreground into $mat-theme-default and into $mat-theme-default.color.
+// Otherwise the colors of bg and fg seton partially applied
+$mat-color: map.merge(map.get($mat-theme-default, color), $gio-background-foreground);
+$mat-theme: map.merge(
+  $mat-theme-default,
+  map.merge(
+    $gio-background-foreground,
+    (
+      color: $mat-color,
+    )
   )
 );

@@ -19,13 +19,25 @@
   <div class="sc__zone">
     <h3>Button</h3>
 
-    <mat-card style="display: flex; justify-content: space-around">
-      <button mat-button>Basic</button> <button mat-raised-button color="primary">Primary</button>
-      <button mat-raised-button color="accent">Accent</button>
-      <button mat-raised-button color="warn">Warn</button>
-      <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-        <mat-icon>more_vert</mat-icon>
-      </button>
+    <mat-card style="display: flex; justify-content: space-around; flex-direction: column">
+      <div>
+        <button mat-button>Basic</button>
+        <button mat-raised-button color="primary">Primary</button>
+        <button mat-raised-button color="accent">Accent</button>
+        <button mat-raised-button color="warn">Warn</button>
+        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </div>
+      <div>
+        <button mat-button disabled>Basic</button>
+        <button mat-raised-button color="primary" disabled>Primary</button>
+        <button mat-raised-button color="accent" disabled>Accent</button>
+        <button mat-raised-button color="warn" disabled>Warn</button>
+        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon" disabled>
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </div>
     </mat-card>
   </div>
 

@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@forward './gio-mat-palettes' show $mat-primary-palette, $mat-accent-palette, $mat-info-palette, $mat-success-palette, $mat-warning-palette,
-  $mat-error-palette;
+@forward './gio-mat-palettes' show $mat-primary-palette, $mat-accent-palette, $mat-content-palette, $mat-neutral-palette,
+  $mat-success-palette, $mat-warning-palette, $mat-error-palette, $mat-decorative-palette, $mat-method-palette;
 
 @forward './theme/typography/gio-typography' show subtitle-typography, code-typography;
 

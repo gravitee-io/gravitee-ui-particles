@@ -1,0 +1,54 @@
+import { Meta, Story } from '@storybook/addon-docs';
+
+<Meta title="Theme / Color / README" />
+
+<Story id="theme-color--palettes"></Story>
+
+## Use it in SCSS
+
+```scss
+@use '@angular/material' as mat;
+@use '@gravitee/ui-particles-angular' as gio;
+
+.my-class {
+  background-color: mat.get-color-from-palette(gio.$mat-accent-palette);
+  color: mat.get-color-from-palette(gio.$mat-accent-palette, contrast);
+}
+
+.my-class-lighter {
+  background-color: mat.get-color-from-palette(gio.$mat-accent-palette, lighter);
+  color: mat.get-color-from-palette(gio.$mat-accent-palette, lighter-contrast);
+}
+```
+
+## Useful methodes
+
+### Gets a color from a theme palette
+
+Get color with key ex: default, lighter, darker, or any of the aforementioned prefixed with "-contrast".
+
+```scss
+/*
+ @param {Map} $palette The palette from which to extract a color.
+ @param {String | Number} $hue The hue from the palette to use. If this is a value between 0 and 1, it will be treated as opacity.
+ @param {Number} $opacity The alpha channel value for the color.
+ @returns {Color} The color for the given palette, hue, and opacity.
+ */
+@function get-color-from-palette($palette, $hue: default, $opacity: null) {
+```
+
+### Get Background or Forground color
+
+To get some spesific color only defined into material background or forground
+
+```scss
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '@gravitee/ui-particles-angular' as gio;
+
+$background: map.get(gio.$mat-theme, background);
+
+.disabled {
+  background-color: mat.get-color-from-palette($background, disabled);
+}
+```

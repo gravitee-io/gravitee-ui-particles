@@ -20,13 +20,20 @@ import gioMaterialColorString from './gio-palettes.stories.scss';
 /**
  * Hack to get the color string from the gio-palettes.stories.scss file
  */
-const gioMaterialColor: Record<string, string> = gioMaterialColorString
+const gioMaterialColor: { key: string; value: string }[] = gioMaterialColorString
   .split(':export ')[1]
   .replace(/\{|\}/g, '')
   .split(';')
   .map(color => color.split(':'))
   .filter(color => !!color[1])
-  .reduce((acc, [name, value]) => ({ ...acc, [`${name}`.trim()]: `${value}`.trim() }), {});
+  .reduce((acc, [key, value]) => {
+    acc.push({
+      key: `${key}`.trim(),
+      value: `${value}`.trim(),
+    });
+
+    return acc;
+  }, [] as { key: string; value: string }[]);
 
 @Component({
   selector: 'gio-color',
@@ -34,32 +41,28 @@ const gioMaterialColor: Record<string, string> = gioMaterialColorString
   styleUrls: ['./showcase-color.component.scss'],
 })
 export class ShowcaseColorComponent {
-  public colorPalettes = Object.entries(gioMaterialColor).reduce((prev, [key, value]) => {
+  public colorPalettes = gioMaterialColor.reduce((prev, { key, value }) => {
     const [paletteName, fullColorName] = key.split('__');
     const colorName = fullColorName.split('-contrast')[0];
 
-    if (!prev[paletteName]) {
-      prev[paletteName] = {};
+    let palette = prev.find(p => p.name === paletteName);
+    if (!palette) {
+      palette = { name: paletteName, colors: [] };
+      prev.push(palette);
+    }
+
+    let color = palette.colors.find(p => p.name === colorName);
+    if (!color) {
+      color = { name: colorName };
+      palette.colors.push(color);
     }
 
     if (fullColorName.endsWith('-contrast')) {
-      prev[paletteName][colorName] = { ...prev[paletteName][colorName], contrast: value };
+      color.contrast = value;
     } else {
-      prev[paletteName][colorName] = { ...prev[paletteName][colorName], color: value };
+      color.color = value;
     }
 
     return prev;
-  }, {} as Record<string, Record<string, { color?: string; contrast?: string }>>);
-
-  public matColorInScss = `
-@use 'sass:map';
-@use '@angular/material' as mat;
-@use '@gravitee/ui-particles-angular' as gio;
-
-$accent: map.get(gio.$mat-theme, accent);
-
-.my-class {
-  color: mat.get-color-from-palette($accent); // or mat.get-color-from-palette($accent, lighter);
-  
-}`;
+  }, [] as { name: string; colors: { name: string; color?: string; contrast?: string }[] }[]);
 }

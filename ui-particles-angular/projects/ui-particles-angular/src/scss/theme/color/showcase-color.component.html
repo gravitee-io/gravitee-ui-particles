@@ -19,33 +19,24 @@
   <table class="sc-table">
     <thead>
       <tr>
-        <td>Palette</td>
+        <td>Palettes</td>
         <td></td>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let colorPalette of colorPalettes | keyvalue">
-        <td class="palette-name">{{ colorPalette.key }}</td>
+      <tr *ngFor="let colorPalette of colorPalettes">
+        <td class="palette-name">$mat-{{ colorPalette.name }}-palette</td>
         <td class="palette">
           <div
-            *ngFor="let color of colorPalette.value | keyvalue"
-            [style.background-color]="color.value.color"
-            [style.color]="color.value.contrast"
+            *ngFor="let color of colorPalette.colors"
+            [style.background-color]="color.color"
+            [style.color]="color.contrast"
             class="color"
           >
-            {{ color.key }}
+            {{ color.name }}
           </div>
         </td>
       </tr>
     </tbody>
   </table>
-</mat-card>
-
-<br />
-
-<mat-card>
-  <h2>Use it in SCSS</h2>
-  <pre>
-    <code [innerHTML]="matColorInScss"></code>
-  </pre>
 </mat-card>

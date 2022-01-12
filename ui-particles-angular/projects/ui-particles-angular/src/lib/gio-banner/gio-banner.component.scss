@@ -23,7 +23,7 @@ $background: map-get(gio.$mat-theme, background);
 // Map for palette by type
 $types: (
   error: gio.$mat-error-palette,
-  info: gio.$mat-info-palette,
+  info: gio.$mat-primary-palette,
   success: gio.$mat-success-palette,
   warning: gio.$mat-warning-palette,
 );
@@ -43,16 +43,16 @@ $types: (
     &.#{$typeName} {
       color: mat.get-color-from-palette($typePalette, darker);
       background-color: mat.get-color-from-palette($background, card);
-      border: 1px solid mat.get-color-from-palette($typePalette, medium);
+      border: 1px solid mat.get-color-from-palette($typePalette, default);
 
-      box-shadow: 8px 0px 0px 0px mat.get-color-from-palette($typePalette, light, 0.12) inset;
+      box-shadow: 8px 0px 0px 0px mat.get-color-from-palette($typePalette, lighter, 0.12) inset;
 
       $typeTarget: &; // current css target
       // when banner is inside mat-card
       :host-context(.mat-card) {
         #{$typeTarget} {
           box-shadow: none;
-          background-color: mat.get-color-from-palette($typePalette, light, 0.12);
+          background-color: mat.get-color-from-palette($typePalette, lighter, 0.12);
         }
       }
     }
