@@ -1,5 +1,6 @@
-// Set material classes to the Storybook root div
-window.document.getElementById('root')?.classList.add('mat-typography');
+// Set material classes to the Storybook body
+window.document.body?.classList.add('mat-app-background');
+window.document.body?.classList.add('mat-typography');
 
 export const parameters = {
   docs: {
