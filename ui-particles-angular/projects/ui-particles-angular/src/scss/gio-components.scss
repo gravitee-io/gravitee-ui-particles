@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 @use './component/gio-badge/gio-badge';
+@use './component/gio-code/gio-code';
 
 // All Gravitee.io SCSS components
 @mixin all-components() {
   @include gio-badge.theme();
+  @include gio-code.theme();
 }

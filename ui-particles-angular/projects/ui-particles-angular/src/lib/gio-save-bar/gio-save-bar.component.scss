@@ -48,17 +48,17 @@ $typography: map.get(gio.$mat-theme, typography);
     }
 
     &__submit-button {
-      background-color: mat.get-color-from-palette(gio.$mat-success-palette, 'medium');
+      background-color: mat.get-color-from-palette(gio.$mat-success-palette, 'default');
 
       &:hover:enabled {
         background-color: mat.get-color-from-palette(gio.$mat-success-palette, 'dark');
       }
 
       &.invalid {
-        background-color: mat.get-color-from-palette(gio.$mat-success-palette, 'light');
+        background-color: mat.get-color-from-palette(gio.$mat-success-palette, 'lighter');
 
         &:hover:enabled {
-          background-color: mat.get-color-from-palette(gio.$mat-success-palette, 'medium');
+          background-color: mat.get-color-from-palette(gio.$mat-success-palette, 'default');
         }
       }
     }

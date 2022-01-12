@@ -18,101 +18,155 @@
 // Primary
 $mat-primary-palette: mat.define-palette(
   (
-    dark: hsl(236, 50%, 7%),
-    medium: hsl(236, 38%, 17%),
-    light: hsl(220, 38%, 27%),
+    darker: #2546c0,
+    default: #325afe,
+    lighter: #d6deff,
     contrast: (
-      dark: #fff,
-      medium: #fff,
-      light: #fff,
+      darker: #d6deff,
+      default: #d6deff,
+      lighter: #2546c0,
     ),
   ),
-  medium,
-  light,
-  dark
+  default,
+  lighter,
+  darker
 );
 
 // Accent
 $mat-accent-palette: mat.define-palette(
   (
-    dark: hsl(183, 75%, 37%),
-    medium: hsl(183, 75%, 47%),
-    light: hsl(183, 75%, 57%),
+    darker: #346aa5,
+    default: #01b6ff,
+    lighter: #ebf7ff,
     contrast: (
-      dark: #000,
-      medium: #000,
-      light: #000,
+      darker: #ebf7ff,
+      default: #292c35,
+      lighter: #346aa5,
     ),
   ),
-  medium,
-  light,
-  dark
+  default,
+  lighter,
+  darker
 );
 
-// Info color
-$mat-info-palette: mat.define-palette(
+// Content color
+$mat-content-palette: mat.define-palette(
   (
-    dark: hsl(218, 82%, 35%),
-    medium: hsl(207, 90%, 54%),
-    light: hsl(207, 89%, 86%),
+    darker: #292c35,
+    default: #828aa1,
+    disabled: #d6d6d6,
     contrast: (
-      dark: #262626,
-      medium: #262626,
-      light: #262626,
+      darker: #eee,
+      default: #000,
+      disabled: #000,
     ),
   ),
-  medium,
-  light,
-  dark
+  default,
+  lighter,
+  darker
+);
+
+// Neutral color
+$mat-neutral-palette: mat.define-palette(
+  (
+    darker: #535b76,
+    default: #e6e8ec,
+    lighter: #eff2ff,
+    contrast: (
+      darker: #eff2ff,
+      default: #292c35,
+      lighter: #535b76,
+    ),
+  ),
+  default,
+  lighter,
+  darker
 );
 
 // Success color
 $mat-success-palette: mat.define-palette(
   (
-    dark: hsl(118, 39%, 40%),
-    medium: hsl(122, 39%, 50%),
-    light: hsl(126, 39%, 65%),
+    darker: #2c6249,
+    default: #53d687,
+    lighter: #ebfdee,
     contrast: (
-      dark: #fff,
-      medium: #fff,
-      light: #fff,
+      darker: #ebfdee,
+      default: #292c35,
+      lighter: #2c6249,
     ),
   ),
-  medium,
-  light,
-  dark
+  default,
+  lighter,
+  darker
 );
 
 // Warning color
 $mat-warning-palette: mat.define-palette(
   (
-    dark: hsl(30, 100%, 48%),
-    medium: hsl(34, 100%, 50%),
-    light: hsl(38, 100%, 65%),
+    darker: #c67700,
+    default: #feaa2e,
+    lighter: #fef9ef,
     contrast: (
-      dark: #000,
-      medium: #000,
-      light: #000,
+      darker: #fef9ef,
+      default: #292c35,
+      lighter: #c67700,
     ),
   ),
-  medium,
-  light,
-  dark
+  default,
+  lighter,
+  darker
 );
 
 // Error color
 $mat-error-palette: mat.define-palette(
   (
-    dark: hsl(356, 80%, 40%),
-    medium: hsl(360, 80%, 50%),
-    light: hsl(4, 80%, 65%),
+    darker: #bf3133,
+    default: #e36160,
+    lighter: #fff5f4,
     contrast: (
-      dark: #eee,
-      medium: #eee,
-      light: #000,
+      darker: #fff5f4,
+      default: #292c35,
+      lighter: #bf3133,
     ),
   ),
-  medium,
-  light,
-  dark
+  default,
+  lighter,
+  darker
+);
+
+// Decorative color
+$mat-decorative-palette: mat.define-palette(
+  (
+    background: #eff2ff,
+    lighter-background: #f7f8fd,
+    surface: #ffffff,
+    divider: #f3f4f9,
+    contrast: (
+      background: #292c35,
+      default: #292c35,
+      surface: #292c35,
+      divider: #000,
+    ),
+  ),
+  default,
+  lighter,
+  darker
+);
+
+// Method color
+$mat-method-palette: mat.define-palette(
+  (
+    patch: #e5fffb,
+    post: #ebfdee,
+    put: #fbf2f2,
+    get: #ebf7ff,
+    delete: #fff5f4,
+    contrast: (
+      patch: #337777,
+      post: #2c6249,
+      put: #a15e35,
+      get: #346aa5,
+      delete: #bf3133,
+    ),
+  )
 );

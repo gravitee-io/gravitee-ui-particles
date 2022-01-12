@@ -13,28 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@use 'sass:map';
 @use '@angular/material' as mat;
 @use '../../../scss' as gio;
 
-$colorNames: default, lighter, darker, default-contrast, lighter-contrast, darker-contrast;
+$colorNames: lighter, default, darker, disabled;
+
+$palettes: (
+  primary: gio.$mat-primary-palette,
+  accent: gio.$mat-accent-palette,
+  neutral: gio.$mat-neutral-palette,
+  success: gio.$mat-success-palette,
+  warning: gio.$mat-warning-palette,
+  error: gio.$mat-error-palette,
+  content: gio.$mat-content-palette,
+);
 
 :export {
-  @each $name in $colorNames {
-    primary__#{$name}: mat.get-color-from-palette(gio.$mat-primary-palette, $name);
+  @each $paletteName, $palette in $palettes {
+    @each $colorName in $colorNames {
+      @if (map.has-key($palette, $colorName)) {
+        #{$paletteName}__#{$colorName}: mat.get-color-from-palette($palette, $colorName);
+        #{$paletteName}__#{$colorName}-contrast: mat.get-color-from-palette($palette, #{$colorName}-contrast);
+      }
+    }
   }
-  @each $name in $colorNames {
-    accent__#{$name}: mat.get-color-from-palette(gio.$mat-accent-palette, $name);
+
+  @each $colorName in (background, lighter-background, surface, divider) {
+    decorative__#{$colorName}: mat.get-color-from-palette(gio.$mat-decorative-palette, $colorName);
+    decorative__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-decorative-palette, #{$colorName}-contrast);
   }
-  @each $name in $colorNames {
-    success__#{$name}: mat.get-color-from-palette(gio.$mat-success-palette, $name);
-  }
-  @each $name in $colorNames {
-    info__#{$name}: mat.get-color-from-palette(gio.$mat-info-palette, $name);
-  }
-  @each $name in $colorNames {
-    warning__#{$name}: mat.get-color-from-palette(gio.$mat-warning-palette, $name);
-  }
-  @each $name in $colorNames {
-    error__#{$name}: mat.get-color-from-palette(gio.$mat-error-palette, $name);
+
+  @each $colorName in (patch, post, put, get, delete) {
+    method__#{$colorName}: mat.get-color-from-palette(gio.$mat-method-palette, $colorName);
+    method__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-method-palette, #{$colorName}-contrast);
   }
 }
