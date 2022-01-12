@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@forward './gio-mat-palettes' show $mat-primary-palette, $mat-accent-palette, $mat-info-palette, $mat-success-palette, $mat-warning-palette,
-  $mat-error-palette;
 
-@forward './theme/typography/gio-typography' show subtitle-typography, code-typography;
+@use '../theme/typography/gio-typography' as typo;
 
-@forward './gio-mat-theme-variable' show $mat-theme, $mat-typography;
-
-@forward './gio-mat-theme' show mat-theme;
-
-@forward './gio-components' show all-components;
+@mixin mat-h5() {
+  .mat-h5,
+  .mat-typography h5,
+  .mat-typography .mat-h5 {
+    @include typo.subtitle-typography();
+  }
+}

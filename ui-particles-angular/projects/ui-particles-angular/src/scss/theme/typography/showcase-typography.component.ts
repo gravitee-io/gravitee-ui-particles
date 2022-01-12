@@ -19,15 +19,4 @@ import { Component } from '@angular/core';
   selector: 'gio-typography',
   templateUrl: './showcase-typography.component.html',
 })
-export class ShowcaseTypographyComponent {
-  public typographyInScss = `
-@use 'sass:map';
-@use '@angular/material' as mat;
-@use '@gravitee/ui-particles-angular' as gio;
-
-$typography: map.get(gio.$mat-theme, typography);
-
-.my-class {
-  @include mat.typography-level($typography, body-2);
-}`;
-}
+export class ShowcaseTypographyComponent {}
