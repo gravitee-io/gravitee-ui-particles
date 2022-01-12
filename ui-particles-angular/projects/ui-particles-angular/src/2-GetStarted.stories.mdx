@@ -1,0 +1,39 @@
+import { Meta, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs';
+
+import { VERSION } from '@angular/core';
+
+<Meta title="Get started" />
+
+# Introduction
+
+<p>Installation provided for the version {VERSION.major} of Angular & Angular Material</p>
+
+# Install
+
+## Config Material
+
+> These config allow to:
+>
+> - Configure material with the right Gravitee typography and color palette
+> - Add global override to angular material
+> - Add Gravitee components that are shared in this lib
+
+1. Add in the `main.scss` or `styles.scss` of the Angular project
+
+```scss
+@use '../projects/ui-particles-angular' as gio;
+
+@include gio.mat-theme();
+@include gio.all-components();
+```
+
+2. Add `.mat-typography` class into body of the `index.html` to override typography for native h1, h2, ... html element
+3. If user's content isn't inside of a `mat-sidenav-container` -> add `.mat-app-background` class into body of the `index.html` to add default background and text color from angular material config. [source](https://github.com/angular/components/blob/52155aca6bee6dc622ea311490746edabcf19d48/src/material/core/_core-theme.scss#L16)
+4. Add `<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">` into head of the `index.html` to load material icons
+
+⚠️ It should not be nessesary to add material configuration in the project with these functions:
+
+```scss
+@include mat.core();
+@include mat.all-component-themes(t);
+```
