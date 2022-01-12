@@ -37,3 +37,29 @@ import { VERSION } from '@angular/core';
 @include mat.core();
 @include mat.all-component-themes(t);
 ```
+
+## Add typography Font
+
+Font family:
+
+- Default : `'Inter'` with `400;500;600;700` weights
+- Code : `Fira Mono` with `400` weight
+
+The fonts are present in the lib in assets/fonts.They are downlaod from Google Fonts: [Inter & Fira Mono](https://fonts.google.com/share?selection.family=Fira%20Mono%7CInter:wght@400;500;600;700)
+to add them to your project you can :
+
+1. simply use
+
+Add the font in your assets and a `<link href="...">` tag in the index.html or add a `@import url(...)` in the scss style. Like:
+
+```scss
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono&family=Inter:wght@400;500;600;700&display=swap');
+```
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+```
+
+2. Or add them from the local assets of your application

@@ -1,0 +1,44 @@
+import { Meta, Story } from '@storybook/addon-docs';
+
+<Meta title="Theme / Typography / README" />
+
+<Story id="theme-typography--showcase"></Story>
+
+## About fonts
+
+Font family include with `gio.import-fonts()`:
+
+- Default : `'Inter'` with `400;500;600;700` weights
+- Code : `Fira Mono` with `400` weight
+- MatIcons : `Material Icons`
+
+All this font come from https://fontsource.org/fonts to be self hosted
+
+## Include typography from Material
+
+```scss
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '@gravitee/ui-particles-angular' as gio;
+
+$typography: map.get(gio.$mat-theme, typography);
+
+.my-class {
+  @include mat.typography-level($typography, body-2);
+}
+```
+
+## Include typography from Gio
+
+These typography are not included by material it is possible to include them by this way
+
+```scss
+@use '@gravitee/ui-particles-angular' as gio;
+
+.subtitle {
+  @include gio.subtitle-typography();
+}
+.code {
+  @include gio.code-typography();
+}
+```
