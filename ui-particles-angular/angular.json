@@ -48,20 +48,10 @@
       "projectType": "library",
       "root": "./",
       "architect": {
-        "style-injection": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "tsConfig": ".storybook/tsconfig.json",
-            "styles": [".storybook/index.scss"],
-            "outputPath": "noop",
-            "index": "noop",
-            "main": "noop"
-          }
-        },
         "start": {
           "builder": "@storybook/angular:start-storybook",
           "options": {
-            "browserTarget": "storybook:style-injection",
+            "styles": [".storybook/index.scss"],
             "compodoc": false,
             "port": 9008
           }
@@ -69,7 +59,7 @@
         "build": {
           "builder": "@storybook/angular:build-storybook",
           "options": {
-            "browserTarget": "storybook:style-injection",
+            "styles": [".storybook/index.scss"],
             "compodoc": false
           }
         }
