@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig.json",
-  "exclude": ["**/*.spec.ts"],
+  "exclude": ["**/*.spec.ts", "**/setup-jest.ts"],
   "include": ["../projects/**/*.ts", "*.ts"],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true

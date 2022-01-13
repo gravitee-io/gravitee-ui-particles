@@ -54,3 +54,5 @@ Object.defineProperty(console, 'warn', {
     }
   },
 });
+
+export {};
