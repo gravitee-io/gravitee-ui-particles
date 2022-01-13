@@ -3,7 +3,7 @@
   "version": "0.0.0-semantically-released",
   "private": true,
   "scripts": {
-    "build": "ng build",
+    "build": "ng build ui-particles-angular && yarn ng build ui-policy-studio-angular",
     "lint": "yarn lint:eslint && yarn lint:prettier",
     "lint:eslint": "ng lint",
     "lint:eslint:fix": "ng lint --fix",

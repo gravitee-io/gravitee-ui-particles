@@ -25,6 +25,12 @@ module.exports = {
         pkgRoot: 'dist/ui-particles-angular',
       },
     ],
+    [
+      '@semantic-release/npm',
+      {
+        pkgRoot: 'dist/ui-policy-studio-angular',
+      },
+    ],
     '@semantic-release/github',
     [
       '@semantic-release/git',

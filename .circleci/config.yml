@@ -71,6 +71,8 @@ jobs:
     parameters:
       package_name:
         type: string
+      angular_package_name:
+        type: string
     executor:
       class: small
       name: node-lts
@@ -81,7 +83,7 @@ jobs:
       - gh/setup
       - run:
           name: 🐙 Prerelease the Kraken
-          working_directory: << parameters.package_name >>/dist/<< parameters.package_name >>
+          working_directory: << parameters.package_name >>/dist/<< parameters.angular_package_name >>
           command: |
             export version=$(git describe --tags --abbrev=0 | tr -d v)
             export commit=$(git rev-parse --short HEAD)
@@ -110,9 +112,9 @@ jobs:
 
             To use it in your project run the following lines:
             \`\`\`shell
-            npm install @gravitee/ui-particles-angular@${VERSION_TAG}
+            npm install @gravitee/<< parameters.angular_package_name >>@${VERSION_TAG}
             # or
-            yarn add @gravitee/ui-particles-angular@${VERSION_TAG}
+            yarn add @gravitee/<< parameters.angular_package_name >>@${VERSION_TAG}
             \`\`\`
             "
 
@@ -236,8 +238,23 @@ workflows:
           name: Build Angular
           package_name: ui-particles-angular
       - prerelease:
-          name: Prerelease Angular
+          name: Prerelease ui-particles-angular
           package_name: ui-particles-angular
+          angular_package_name: ui-particles-angular
+          pre-steps:
+            - secrethub/env-export:
+                secret-path: graviteeio/cicd/graviteebot/infra/npm_token
+                var-name: NPM_TOKEN
+            - secrethub/env-export:
+                secret-path: graviteeio/cicd/graviteebot/github_personal_access_token
+                var-name: GITHUB_TOKEN
+          context: gravitee-qa
+          requires:
+            - Build Angular
+      - prerelease:
+          name: Prerelease ui-policy-studio-angular
+          package_name: ui-particles-angular
+          angular_package_name: ui-policy-studio-angular
           pre-steps:
             - secrethub/env-export:
                 secret-path: graviteeio/cicd/graviteebot/infra/npm_token
