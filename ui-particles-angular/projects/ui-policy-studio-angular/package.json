@@ -1,0 +1,24 @@
+{
+  "name": "@gravitee/ui-policy-studio-angular",
+  "version": "0.0.0-semantically-released",
+  "description": "Gravitee.io - UI Policy Studio Angular",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gravitee-io/gravitee-ui-particles.git"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "peerDependencies": {
+    "@angular/animations": "^12.2.0",
+    "@angular/cdk": "^12.2.0",
+    "@angular/common": "^12.2.0",
+    "@angular/core": "^12.2.0",
+    "@angular/forms": "^12.2.0",
+    "@angular/material": "^12.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

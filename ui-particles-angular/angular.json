@@ -44,6 +44,42 @@
         }
       }
     },
+    "ui-policy-studio-angular": {
+      "projectType": "library",
+      "root": "projects/ui-policy-studio-angular",
+      "sourceRoot": "projects/ui-policy-studio-angular/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ui-policy-studio-angular/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ui-policy-studio-angular/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ui-policy-studio-angular/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "configPath": "jest.config.js",
+            "tsConfig": "tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["projects/ui-policy-studio-angular/**/*.ts", "projects/ui-policy-studio-angular/**/*.html"]
+          }
+        }
+      }
+    },
     "storybook": {
       "projectType": "library",
       "root": "./",

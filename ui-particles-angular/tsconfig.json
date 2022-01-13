@@ -17,7 +17,9 @@
     "module": "es2020",
     "lib": ["es2018", "dom"],
     "paths": {
-      "ui-particles-angular": ["dist/ui-particles-angular/ui-particles-angular", "dist/ui-particles-angular"]
+      // Added by angular-cli
+      "ui-particles-angular": ["dist/ui-particles-angular/ui-particles-angular", "dist/ui-particles-angular"],
+      "ui-policy-studio-angular": ["dist/ui-policy-studio-angular/ui-policy-studio-angular", "dist/ui-policy-studio-angular"]
     }
   },
   "angularCompilerOptions": {
