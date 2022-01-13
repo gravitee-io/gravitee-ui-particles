@@ -76,6 +76,10 @@ export const AllWithTypeInput: Story = {
 
 export const Default: Story = {
   render: () => ({
-    template: `<gio-banner>This is an Default banner!</gio-banner>`,
+    template: `<gio-banner>This is an Default banner!</gio-banner>
+    <mat-card>
+      <gio-banner-error>Error <br> Second line <br> Wow another one</gio-banner-error>
+    </mat-card>
+    `,
   }),
 };
