@@ -1,7 +1,31 @@
-import { Meta, ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/addon-docs';
 
 <Meta title="Components / Banner / README" />
 
 # Gio Banner
 
-TODO by :gmaisse-psychédélique:
+Documentation and examples for banner. Allows you to display banner in cards or or outside cards. The display is different if it is in a card or not.
+
+## Demo
+
+<Story id="components-banner--default"></Story>
+
+## Usage
+
+`<gio-banner></gio-banner>` can be used with a `type` input to change its color and icon dinamically.
+
+It is also possible to use it with the following tag declination:
+
+```html
+<gio-banner-error>
+  Error <br />
+  Second line <br />
+  Wow another one
+</gio-banner-error>
+
+<gio-banner-info>This is an info banner!</gio-banner-info>
+
+<gio-banner-success>This is a success banner!</gio-banner-success>
+
+<gio-banner-warning>This is a warning banner!</gio-banner-warning>
+```
