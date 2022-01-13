@@ -49,16 +49,20 @@ $typography: map.get(gio.$mat-theme, typography);
 
     &__submit-button {
       background-color: mat.get-color-from-palette(gio.$mat-success-palette, 'default');
+      color: mat.get-color-from-palette(gio.$mat-success-palette, 'default-contrast');
 
       &:hover:enabled {
-        background-color: mat.get-color-from-palette(gio.$mat-success-palette, 'dark');
+        background-color: mat.get-color-from-palette(gio.$mat-success-palette, 'darker');
+        color: mat.get-color-from-palette(gio.$mat-success-palette, 'darker-contrast');
       }
 
       &.invalid {
         background-color: mat.get-color-from-palette(gio.$mat-success-palette, 'lighter');
+        color: mat.get-color-from-palette(gio.$mat-success-palette, 'lighter-contrast');
 
         &:hover:enabled {
           background-color: mat.get-color-from-palette(gio.$mat-success-palette, 'default');
+          color: mat.get-color-from-palette(gio.$mat-success-palette, 'default-contrast');
         }
       }
     }
