@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Gravitee team (http://gravitee.io)
+ * Copyright (C) 2015 The Gravitee team (http://gravitee.io)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/*
- * Public API Surface of ui-policy-studio-angular
- */
-export * from './lib/models';
-export * from './lib/services';
-export * from './lib/gio-policy-studio.module';
-export * from './lib/gio-policy-studio.component';
+
+import { Json } from '../json';
+
+export type Grammar = Record<string, Json>;
