@@ -19,7 +19,4 @@ module.exports = {
     builder: 'webpack5',
   },
   staticDirs: [{ from: '../../node_modules/@gravitee/ui-components/assets', to: '/' }],
-  previewHead: (head: unknown) =>
-    `${head}
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">`,
 };

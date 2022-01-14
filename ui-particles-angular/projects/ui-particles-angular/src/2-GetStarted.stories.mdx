@@ -10,8 +10,6 @@ import { VERSION } from '@angular/core';
 
 # Install
 
-## Config Material
-
 > These config allow to:
 >
 > - Configure material with the right Gravitee typography and color palette
@@ -21,15 +19,15 @@ import { VERSION } from '@angular/core';
 1. Add in the `main.scss` or `styles.scss` of the Angular project
 
 ```scss
-@use '../projects/ui-particles-angular' as gio;
+@use '@gravitee/ui-particles-angular' as gio;
 
+@include gio.import-fonts();
 @include gio.mat-theme();
 @include gio.all-components();
 ```
 
 2. Add `.mat-typography` class into body of the `index.html` to override typography for native h1, h2, ... html element
 3. If user's content isn't inside of a `mat-sidenav-container` -> add `.mat-app-background` class into body of the `index.html` to add default background and text color from angular material config. [source](https://github.com/angular/components/blob/52155aca6bee6dc622ea311490746edabcf19d48/src/material/core/_core-theme.scss#L16)
-4. Add `<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">` into head of the `index.html` to load material icons
 
 ⚠️ It should not be nessesary to add material configuration in the project with these functions:
 
@@ -37,29 +35,3 @@ import { VERSION } from '@angular/core';
 @include mat.core();
 @include mat.all-component-themes(t);
 ```
-
-## Add typography Font
-
-Font family:
-
-- Default : `'Inter'` with `400;500;600;700` weights
-- Code : `Fira Mono` with `400` weight
-
-The fonts are present in the lib in assets/fonts.They are downlaod from Google Fonts: [Inter & Fira Mono](https://fonts.google.com/share?selection.family=Fira%20Mono%7CInter:wght@400;500;600;700)
-to add them to your project you can :
-
-1. simply use
-
-Add the font in your assets and a `<link href="...">` tag in the index.html or add a `@import url(...)` in the scss style. Like:
-
-```scss
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono&family=Inter:wght@400;500;600;700&display=swap');
-```
-
-```html
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-```
-
-2. Or add them from the local assets of your application

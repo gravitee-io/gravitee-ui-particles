@@ -5,5 +5,6 @@
     "entryFile": "src/public-api.ts",
     "styleIncludePaths": ["../../../node_modules"]
   },
-  "assets": ["index.scss", "src/scss/**/*.scss", "LICENSE.txt"]
+  "assets": ["index.scss", "src/scss/**/*.scss", "LICENSE.txt"],
+  "allowedNonPeerDependencies": ["@fontsource/fira-mono", "@fontsource/inter", "@fontsource/material-icons"]
 }

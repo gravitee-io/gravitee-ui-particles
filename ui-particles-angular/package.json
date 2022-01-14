@@ -28,6 +28,9 @@
     "@angular/platform-browser-dynamic": "12.2.15",
     "@angular/router": "12.2.15",
     "@asciidoctor/core": "^2.2.5",
+    "@fontsource/fira-mono": "4.5.0",
+    "@fontsource/inter": "4.5.1",
+    "@fontsource/material-icons": "4.5.1",
     "@gravitee/ui-components": "^3.28.5",
     "@highcharts/map-collection": "^1.1.4",
     "asciidoctor": "^2.2.5",
@@ -35,7 +38,7 @@
     "highcharts": "^9.3.2",
     "highlight.js": "^11.4.0",
     "lodash": "^4.17.21",
-    "rxjs": "^6.0.0",
+    "rxjs": "6.6.7",
     "tslib": "2.3.1",
     "zone.js": "0.11.4"
   },
