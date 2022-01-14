@@ -1,10 +1,11 @@
 @use '../projects/ui-particles-angular' as gio;
 
+@include gio.import-fonts();
+
 @include gio.mat-theme();
 
 @include gio.all-components();
 
-@import url('https://fonts.googleapis.com/css2?family=Fira+Mono&family=Inter:wght@400;500;600;700&display=swap');
 /**
  * Reset `box-sizing` for all elements
  */

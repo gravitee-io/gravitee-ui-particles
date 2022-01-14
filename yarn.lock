@@ -3079,6 +3079,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/fira-mono@npm:4.5.0":
+  version: 4.5.0
+  resolution: "@fontsource/fira-mono@npm:4.5.0"
+  checksum: e99627013459f973f95f58ffde0a8729851588cbccb266a1e7790efdf5d20d8c078133130697b040c1ef98e6f96f37f5f41b81b982c2d04a1b269dd62577ba37
+  languageName: node
+  linkType: hard
+
+"@fontsource/inter@npm:4.5.1":
+  version: 4.5.1
+  resolution: "@fontsource/inter@npm:4.5.1"
+  checksum: 53c1288366682887a763596c251021f19eb82a203144bf3050e97f915fab2eece1615a69f6a6ee9bbbfc2a86577f938798da9951b91ada231f5cb7a9d470685d
+  languageName: node
+  linkType: hard
+
+"@fontsource/material-icons@npm:4.5.1":
+  version: 4.5.1
+  resolution: "@fontsource/material-icons@npm:4.5.1"
+  checksum: e8e589417346f92790f54393ca5d190fa040091b9710a33103df13681d448b784c6a7b9b74595d016734cbb167d32ca523b5b8d1eac62eed790707db991ceb4b
+  languageName: node
+  linkType: hard
+
 "@formatjs/ecma402-abstract@npm:1.11.1":
   version: 1.11.1
   resolution: "@formatjs/ecma402-abstract@npm:1.11.1"
@@ -20644,7 +20665,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:6.6.7, rxjs@npm:^6.0.0, rxjs@npm:^6.5.0, rxjs@npm:^6.5.4":
+"rxjs@npm:6.6.7, rxjs@npm:^6.5.0, rxjs@npm:^6.5.4":
   version: 6.6.7
   resolution: "rxjs@npm:6.6.7"
   dependencies:
@@ -23016,6 +23037,9 @@ __metadata:
     "@angular/platform-browser-dynamic": 12.2.15
     "@angular/router": 12.2.15
     "@asciidoctor/core": ^2.2.5
+    "@fontsource/fira-mono": 4.5.0
+    "@fontsource/inter": 4.5.1
+    "@fontsource/material-icons": 4.5.1
     "@gravitee/ui-components": ^3.28.5
     "@highcharts/map-collection": ^1.1.4
     "@semantic-release/changelog": 6.0.1
@@ -23042,7 +23066,7 @@ __metadata:
     lodash: ^4.17.21
     ng-packagr: 12.2.6
     prettier: 2.5.1
-    rxjs: ^6.0.0
+    rxjs: 6.6.7
     semantic-release: 18.0.1
     tslib: 2.3.1
     typescript: 4.3.5
