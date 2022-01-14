@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.4.4...v1.5.0) (2022-01-14)
+
+
+### Features
+
+* generate new ui-policy-studio-angular library ([22818b3](https://github.com/gravitee-io/gravitee-ui-particles/commit/22818b38ff37adc37822841d2c481a8a5f8ce1bb))
+
 ## [1.4.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.4.3...v1.4.4) (2022-01-10)
 
 
