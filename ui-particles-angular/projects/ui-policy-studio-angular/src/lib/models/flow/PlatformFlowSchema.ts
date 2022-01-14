@@ -13,21 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
-import { UiPolicyStudioAngularComponent, UiPolicyStudioAngularModule } from '../public-api';
 
-export default {
-  title: 'Policy Studio',
-  component: UiPolicyStudioAngularComponent,
-  decorators: [
-    moduleMetadata({
-      imports: [UiPolicyStudioAngularModule],
-    }),
-  ],
-  render: () => ({}),
-} as Meta;
+import { Json } from '../json';
 
-export const Default: Story = {
-  render: () => ({}),
-};
+export type PlatformFlowSchema = Record<string, Json>;
