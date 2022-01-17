@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 The Gravitee team (http://gravitee.io)
+ * Copyright (C) 2015 The Gravitee team (http://gravitee.io)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,14 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/**
+ * 📝 Used by Jest to transform what is needed to make the policy studio & lit compo work
+ */
 module.exports = {
-  preset: 'jest-preset-angular',
-  roots: [__dirname + '/src'],
-  setupFilesAfterEnv: [__dirname + '/src/setup-jest.ts'],
-  transform: {
-    '^.+\\.(js|jsx)$': 'babel-jest',
-  },
-  transformIgnorePatterns: [
-    '/node_modules/(?!(@gravitee/ui-components/.*?\\.js)|lit|@lit/reactive-element|(lit-element/.*?\\.js)|(lit-html/.*?\\.js)|(resize-observer-polyfill/.*?\\.js)|(date-fns/.*?\\.js)$)',
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        targets: {
+          node: 'current',
+        },
+      },
+    ],
   ],
 };

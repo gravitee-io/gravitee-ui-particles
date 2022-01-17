@@ -20,11 +20,7 @@ import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
 import { GioPolicyStudioModule } from './gio-policy-studio.module';
 
-const apimPolicies = require('./stories-resources/apim-policies.json');
-const apimResourceTypes = require('./stories-resources/apim-resource-types.json');
-const apimDefinition = require('./stories-resources/apim-definition.json');
-const apimFlow = require('./stories-resources/apim-flow.json');
-const apimPropertyProviders = require('./stories-resources/apim-property-providers.json');
+import { apimPolicies, apimResourceTypes, apimDefinition, apimFlow, apimPropertyProviders } from '../testing';
 
 export default {
   title: 'Policy Studio / APIM',

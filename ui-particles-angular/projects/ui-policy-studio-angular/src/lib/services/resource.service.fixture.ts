@@ -17,7 +17,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { ResourceDocumentation, ResourceListItem } from '../models/resource';
-import { fakeResourceDocumentation, fakeResourceListItem } from '../models/resource/testing';
+import { fakeResourceDocumentation, fakeResourceListItem } from '../models/resource/index-testing';
 
 import { ListParams, ResourceServiceAbstract } from './resource.abstract.service';
 

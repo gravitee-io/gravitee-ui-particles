@@ -17,7 +17,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PolicyDocumentation, PolicyListItem, PolicySchema } from '../models/policy';
-import { fakePolicyListItem, fakePolicySchema, fakePolicyDocumentation } from '../models/policy/testing';
+import { fakePolicyListItem, fakePolicySchema, fakePolicyDocumentation } from '../models/policy/index-testing';
 
 import { PolicyServiceAbstract } from './policy.abstract.service';
 import { ListParams } from './resource.abstract.service';

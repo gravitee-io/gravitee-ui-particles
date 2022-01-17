@@ -20,7 +20,9 @@
       // Added by angular-cli
       "ui-particles-angular": ["dist/ui-particles-angular/ui-particles-angular", "dist/ui-particles-angular"],
       "ui-policy-studio-angular": ["dist/ui-policy-studio-angular/ui-policy-studio-angular", "dist/ui-policy-studio-angular"]
-    }
+    },
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
