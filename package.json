@@ -16,8 +16,8 @@
     "lint:commit": "yarn commitlint --from $(git describe --tags --abbrev=0)",
     "lint:license": "license-check-and-add check -f license-check-config.json",
     "lint:license:fix": "license-check-and-add add -f license-check-config.json -r $(date +%Y)",
-    "lint:package": "yarn sort-package-json --check \"package.json\" \"ui-particles-angular/**/package.json\" ",
-    "lint:package:fix": "yarn sort-package-json \"package.json\" \"ui-particles-angular/**/package.json\"",
+    "lint:package": "yarn lint:package:fix --check",
+    "lint:package:fix": "yarn sort-package-json \"**/package.json\" \"!**/node_modules/**/package.json\" \"!**/dist/**/package.json\"",
     "test": "yarn workspaces foreach -pt run test"
   },
   "lint-staged": {
