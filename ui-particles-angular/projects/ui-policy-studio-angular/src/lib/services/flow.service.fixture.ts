@@ -16,7 +16,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { FlowConfigurationSchema, PlatformFlowSchema, OrganizationFlowConfiguration } from '../models/flow';
-import { fakeFlowConfigurationSchema, fakeOrganizationFlowConfiguration, fakePlatformFlowSchema } from '../models/flow/testing';
+import { fakeFlowConfigurationSchema, fakeOrganizationFlowConfiguration, fakePlatformFlowSchema } from '../models/flow/index-testing';
 
 import { FlowServiceAbstract } from './flow.abstract.service';
 
