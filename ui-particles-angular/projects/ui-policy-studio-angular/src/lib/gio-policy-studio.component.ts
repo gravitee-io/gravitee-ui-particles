@@ -42,77 +42,76 @@ interface UrlParams {
 export class GioPolicyStudioComponent implements OnInit {
   @Input()
   // TODO: Remove ! and add init value ! for all
-  canAdd!: boolean;
+  public canAdd!: boolean;
 
   @Input()
-  canDebug!: boolean;
+  public canDebug!: boolean;
 
   @Input()
-  hasResources!: boolean;
+  public hasResources!: boolean;
 
   @Input()
-  hasProperties!: boolean;
+  public hasProperties!: boolean;
 
   @Input()
-  hasPolicyFilter!: boolean;
+  public hasPolicyFilter!: boolean;
 
   @Input()
-  sortable!: boolean;
+  public sortable!: boolean;
 
   @Input()
-  set policies(policies: PolicyListItem[]) {
+  public set policies(policies: PolicyListItem[]) {
     this._policies = chain(policies)
       .map(policy => (!isNil(policy.category) ? policy : { ...policy, category: this.unknownPolicyCategory }))
       // First sort by category (based on category order) and then by name
       .sortBy([policy => this.policyCategoriesOrder.indexOf(policy.category ?? ''), policy => policy.name])
       .value();
   }
-
-  get policies() {
+  public get policies(): PolicyListItem[] {
     return this._policies;
   }
 
   @Input()
-  definition: unknown;
+  public definition: unknown;
 
   @Input()
-  services: Record<string, unknown> = {};
+  public services: Record<string, unknown> = {};
 
   @Input()
-  flowSchema: unknown;
+  public flowSchema: unknown;
 
   @Input()
-  resourceTypes!: unknown[];
+  public resourceTypes!: unknown[];
 
   @Input()
-  propertyProviders!: unknown[];
+  public propertyProviders!: unknown[];
 
   @Input()
-  readonlyPlans!: boolean;
+  public readonlyPlans!: boolean;
 
   @Input()
-  dynamicPropertySchema: unknown = {};
+  public dynamicPropertySchema: unknown = {};
 
   @Input()
-  debugResponse: unknown;
+  public debugResponse: unknown;
 
   @Input()
-  flowsTitle!: string;
+  public flowsTitle!: string;
 
   @Input()
-  hasConditionalSteps!: boolean;
+  public hasConditionalSteps!: boolean;
 
   @Input()
-  configurationInformation =
+  public configurationInformation =
     'By default, the selection of a flow is based on the operator defined in the flow itself. This operator allows either to select a flow when the path matches exactly, or when the start of the path matches. The "Best match" option allows you to select the flow from the path that is closest.';
 
   @Output()
-  save = new EventEmitter<unknown>();
+  public save = new EventEmitter<unknown>();
 
-  tabId!: string;
-  selectedFlowsIds!: string;
-  configurationSchema!: FlowConfigurationSchema;
-  policyDocumentation!: { id: string; image: string; content: string };
+  public tabId!: string;
+  public selectedFlowsIds!: string;
+  public configurationSchema!: FlowConfigurationSchema;
+  public policyDocumentation!: { id: string; image: string; content: string };
 
   private readonly unknownPolicyCategory = 'others';
   private readonly policyCategoriesOrder = ['security', 'performance', 'transformation', this.unknownPolicyCategory];
@@ -126,7 +125,7 @@ export class GioPolicyStudioComponent implements OnInit {
     @Inject('SpelService') private readonly spelService: SpelServiceAbstract,
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.flowService
       .getConfigurationSchemaForm()
       .pipe(
@@ -162,7 +161,7 @@ export class GioPolicyStudioComponent implements OnInit {
     target,
   }: {
     resourceType: { id: string; icon: string };
-    target: { documentation: any };
+    target: { documentation: unknown };
   }): void {
     this.resourceService
       .getDocumentation(resourceType.id)

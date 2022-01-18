@@ -17,7 +17,7 @@
 import { ComponentHarness } from '@angular/cdk/testing';
 
 export class GioSaveBarHarness extends ComponentHarness {
-  static hostSelector = 'gio-save-bar';
+  public static hostSelector = 'gio-save-bar';
 
   private readonly resetButtonSelector = '.save-bar__content__reset-button';
   private readonly submitButtonSelector = '.save-bar__content__submit-button';
@@ -25,27 +25,27 @@ export class GioSaveBarHarness extends ComponentHarness {
   protected getSubmitButton = this.locatorFor(this.submitButtonSelector);
   protected getResetButton = this.locatorFor(this.resetButtonSelector);
 
-  async isVisible(): Promise<boolean> {
+  public async isVisible(): Promise<boolean> {
     const submitButton = await this.locatorForOptional(this.submitButtonSelector)();
     return submitButton !== null;
   }
 
-  async clickSubmit(): Promise<void> {
+  public async clickSubmit(): Promise<void> {
     const submitButton = await this.getSubmitButton();
     return submitButton.click();
   }
 
-  async isSubmitButtonInvalid(): Promise<boolean> {
+  public async isSubmitButtonInvalid(): Promise<boolean> {
     const submitButton = await this.getSubmitButton();
     return submitButton.hasClass('invalid');
   }
 
-  async isResetButtonVisible(): Promise<boolean> {
+  public async isResetButtonVisible(): Promise<boolean> {
     const submitButton = await this.locatorForOptional(this.resetButtonSelector)();
     return submitButton !== null;
   }
 
-  async clickReset(): Promise<void> {
+  public async clickReset(): Promise<void> {
     const resetButton = await this.getResetButton();
     return resetButton.click();
   }

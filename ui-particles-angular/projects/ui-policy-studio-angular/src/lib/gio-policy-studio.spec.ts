@@ -18,6 +18,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { apimPolicies } from '../testing';
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
 import { GioPolicyStudioModule } from './gio-policy-studio.module';
+import { PolicyListItem } from './models';
 
 describe('UiPolicyStudioComponent', () => {
   let component: GioPolicyStudioComponent;
@@ -33,7 +34,7 @@ describe('UiPolicyStudioComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(GioPolicyStudioComponent);
     component = fixture.componentInstance;
-    component.policies = apimPolicies.data as any;
+    component.policies = apimPolicies.data as PolicyListItem[];
     fixture.detectChanges();
   });
 

@@ -41,6 +41,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./showcase-material.component.scss'],
 })
 export class ShowcaseMaterialComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  public displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  public dataSource = ELEMENT_DATA;
 }

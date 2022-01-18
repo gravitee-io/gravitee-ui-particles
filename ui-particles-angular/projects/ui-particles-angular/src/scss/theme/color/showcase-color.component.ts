@@ -34,7 +34,7 @@ const gioMaterialColor: Record<string, string> = gioMaterialColorString
   styleUrls: ['./showcase-color.component.scss'],
 })
 export class ShowcaseColorComponent {
-  colorPalettes = Object.entries(gioMaterialColor).reduce((prev, [key, value]) => {
+  public colorPalettes = Object.entries(gioMaterialColor).reduce((prev, [key, value]) => {
     const [paletteName, fullColorName] = key.split('__');
     const colorName = fullColorName.split('-contrast')[0];
 
@@ -51,7 +51,7 @@ export class ShowcaseColorComponent {
     return prev;
   }, {} as Record<string, Record<string, { color?: string; contrast?: string }>>);
 
-  matColorInScss = `
+  public matColorInScss = `
 @use 'sass:map';
 @use '@angular/material' as mat;
 @use '@gravitee/ui-particles-angular' as gio;

@@ -27,7 +27,7 @@ import { SpelService } from './services/spel.service.fixture';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class GioPolicyStudioModule {
-  static forSpecs(): GioPolicyStudioModule {
+  public static forSpecs(): GioPolicyStudioModule {
     return {
       ngModule: GioPolicyStudioModule,
       providers: [

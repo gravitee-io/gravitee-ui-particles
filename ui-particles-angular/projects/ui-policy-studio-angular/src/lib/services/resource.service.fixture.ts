@@ -23,11 +23,11 @@ import { ListParams, ResourceServiceAbstract } from './resource.abstract.service
 
 @Injectable()
 export class ResourceService extends ResourceServiceAbstract {
-  list(_params: ListParams): Observable<ResourceListItem[]> {
+  public list(_params: ListParams): Observable<ResourceListItem[]> {
     return of([fakeResourceListItem()]);
   }
 
-  getDocumentation(_resourceId: string): Observable<ResourceDocumentation> {
+  public getDocumentation(_resourceId: string): Observable<ResourceDocumentation> {
     return of(fakeResourceDocumentation());
   }
 }
