@@ -24,7 +24,7 @@ import { SpelServiceAbstract } from './spel.abstract.service';
   providedIn: 'root',
 })
 export class SpelService extends SpelServiceAbstract {
-  getGrammar(): Observable<Grammar> {
+  public getGrammar(): Observable<Grammar> {
     return of(fakeGrammar());
   }
 }

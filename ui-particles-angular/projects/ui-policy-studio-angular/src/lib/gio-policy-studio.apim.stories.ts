@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';

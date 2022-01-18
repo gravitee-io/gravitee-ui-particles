@@ -20,7 +20,7 @@ Object.defineProperty(document, 'doctype', {
 Object.defineProperty(window, 'getComputedStyle', {
   value: () => {
     return {
-      getPropertyValue: (prop: unknown) => {
+      getPropertyValue: () => {
         return '';
       },
     };

@@ -36,34 +36,34 @@ import { FormGroup } from '@angular/forms';
 })
 export class GioSaveBarComponent {
   @Input()
-  opened = false;
+  public opened = false;
 
   /**
    * When true, the submit button have invalidate display
    * And on submit clicked the output event is emit on submitInvalidState (and not on submit)
    */
   @Input()
-  invalidState?: boolean = false;
+  public invalidState?: boolean = false;
 
   @Input()
-  creationMode = false;
+  public creationMode = false;
 
   @Input()
-  form?: FormGroup;
+  public form?: FormGroup;
 
   @Input()
-  formInitialValues?: unknown;
+  public formInitialValues?: unknown;
 
   @Output()
-  resetClicked = new EventEmitter<void>();
+  public resetClicked = new EventEmitter<void>();
 
   @Output()
-  submitted = new EventEmitter<void>();
+  public submitted = new EventEmitter<void>();
 
   @Output()
-  submittedInvalidState = new EventEmitter();
+  public submittedInvalidState = new EventEmitter();
 
-  isOpen() {
+  public isOpen(): boolean {
     if (this.creationMode) {
       return true;
     }
@@ -74,7 +74,7 @@ export class GioSaveBarComponent {
     return this.opened;
   }
 
-  onResetClicked(): void {
+  public onResetClicked(): void {
     if (this.form) {
       this.form.reset(this.formInitialValues);
       this.form.markAsPristine();
@@ -82,7 +82,7 @@ export class GioSaveBarComponent {
     this.resetClicked.emit();
   }
 
-  onSubmitClicked(): void {
+  public onSubmitClicked(): void {
     if ((this.form && this.form.invalid) || this.invalidState) {
       this.form?.markAllAsTouched();
       this.submittedInvalidState.emit();

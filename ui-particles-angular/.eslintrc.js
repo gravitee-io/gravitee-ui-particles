@@ -10,12 +10,28 @@ module.exports = {
         createDefaultProgram: true,
       },
       extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
         'plugin:@angular-eslint/recommended',
         'plugin:@angular-eslint/template/process-inline-templates',
         'prettier',
         'plugin:prettier/recommended',
       ],
-      rules: {},
+      rules: {
+        'no-unused-vars': ['off'],
+        '@typescript-eslint/no-unused-vars': [
+          'error',
+          { ignoreRestSiblings: true, argsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' },
+        ],
+        '@typescript-eslint/explicit-member-accessibility': [
+          'error',
+          {
+            overrides: {
+              constructors: 'no-public',
+            },
+          },
+        ],
+      },
     },
     {
       files: ['*.html'],

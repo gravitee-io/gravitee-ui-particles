@@ -5,8 +5,8 @@
   "scripts": {
     "build": "ng build ui-particles-angular && yarn ng build ui-policy-studio-angular",
     "lint": "yarn lint:eslint && yarn lint:prettier",
-    "lint:eslint": "ng lint",
-    "lint:eslint:fix": "ng lint --fix",
+    "lint:eslint": "ng lint --max-warnings=0",
+    "lint:eslint:fix": "ng lint  --max-warnings=0 --fix",
     "lint:fix": "yarn lint:eslint:fix && yarn lint:prettier:fix",
     "lint:prettier": "prettier --check \"**/*.{js,ts,json,html,scss}\"",
     "lint:prettier:fix": "prettier --write \"**/*.{js,ts,json,html,scss}\"",

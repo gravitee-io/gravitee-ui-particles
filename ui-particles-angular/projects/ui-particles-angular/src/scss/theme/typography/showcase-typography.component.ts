@@ -20,7 +20,7 @@ import { Component } from '@angular/core';
   templateUrl: './showcase-typography.component.html',
 })
 export class ShowcaseTypographyComponent {
-  typographyInScss = `
+  public typographyInScss = `
 @use 'sass:map';
 @use '@angular/material' as mat;
 @use '@gravitee/ui-particles-angular' as gio;

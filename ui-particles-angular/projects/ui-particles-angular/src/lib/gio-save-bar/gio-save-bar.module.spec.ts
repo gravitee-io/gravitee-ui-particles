@@ -45,11 +45,11 @@ describe('GioFormCardGroupModule', () => {
       `,
     })
     class TestComponent {
-      opened = false;
-      invalidState = false;
-      onReset = onResetMock;
-      onSubmit = onSubmitMock;
-      onSubmitInvalidState = onSubmitInvalidStateMock;
+      public opened = false;
+      public invalidState = false;
+      public onReset = onResetMock;
+      public onSubmit = onSubmitMock;
+      public onSubmitInvalidState = onSubmitInvalidStateMock;
     }
 
     let component: TestComponent;
@@ -131,9 +131,9 @@ describe('GioFormCardGroupModule', () => {
       `,
     })
     class TestComponentWithFormComponent {
-      form = aForm;
-      formInitialValues = this.form.getRawValue();
-      ngSubmit = onSubmitMock;
+      public form = aForm;
+      public formInitialValues = this.form.getRawValue();
+      public ngSubmit = onSubmitMock;
     }
 
     let fixture: ComponentFixture<TestComponentWithFormComponent>;
@@ -246,7 +246,7 @@ describe('GioFormCardGroupModule', () => {
       `,
     })
     class TestComponent {
-      onSubmit = onSubmitMock;
+      public onSubmit = onSubmitMock;
     }
 
     let fixture: ComponentFixture<TestComponent>;

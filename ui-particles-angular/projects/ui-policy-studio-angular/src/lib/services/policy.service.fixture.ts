@@ -24,19 +24,19 @@ import { ListParams } from './resource.abstract.service';
 
 @Injectable()
 export class PolicyService extends PolicyServiceAbstract {
-  list(_params: ListParams): Observable<PolicyListItem[]> {
+  public list(_params: ListParams): Observable<PolicyListItem[]> {
     return of([fakePolicyListItem()]);
   }
 
-  listSwaggerPolicies(): Observable<PolicyListItem[]> {
+  public listSwaggerPolicies(): Observable<PolicyListItem[]> {
     return of([fakePolicyListItem()]);
   }
 
-  getSchema(_policyId: string): Observable<PolicySchema> {
+  public getSchema(_policyId: string): Observable<PolicySchema> {
     return of(fakePolicySchema());
   }
 
-  getDocumentation(_policyId: string): Observable<PolicyDocumentation> {
+  public getDocumentation(_policyId: string): Observable<PolicyDocumentation> {
     return of(fakePolicyDocumentation()).pipe(map(buffer => buffer.toString()));
   }
 }

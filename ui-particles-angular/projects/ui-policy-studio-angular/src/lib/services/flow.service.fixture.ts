@@ -22,15 +22,15 @@ import { FlowServiceAbstract } from './flow.abstract.service';
 
 @Injectable()
 export class FlowService extends FlowServiceAbstract {
-  getConfigurationSchemaForm(): Observable<FlowConfigurationSchema> {
+  public getConfigurationSchemaForm(): Observable<FlowConfigurationSchema> {
     return of(fakeFlowConfigurationSchema());
   }
 
-  getPlatformFlowSchemaForm(): Observable<PlatformFlowSchema> {
+  public getPlatformFlowSchemaForm(): Observable<PlatformFlowSchema> {
     return of(fakePlatformFlowSchema());
   }
 
-  getConfiguration(): Observable<OrganizationFlowConfiguration> {
+  public getConfiguration(): Observable<OrganizationFlowConfiguration> {
     return of(fakeOrganizationFlowConfiguration());
   }
 }

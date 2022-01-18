@@ -24,7 +24,7 @@ export type GioBannerTypes = 'error' | 'info' | 'success' | 'warning';
 })
 export class GioBannerComponent {
   @Input()
-  type: GioBannerTypes = 'info';
+  public type: GioBannerTypes = 'info';
 }
 
 @Component({
@@ -33,7 +33,7 @@ export class GioBannerComponent {
   styleUrls: ['./gio-banner.component.scss'],
 })
 export class GioBannerErrorComponent extends GioBannerComponent {
-  type = 'error' as GioBannerTypes;
+  public type = 'error' as GioBannerTypes;
 }
 
 @Component({
@@ -42,7 +42,7 @@ export class GioBannerErrorComponent extends GioBannerComponent {
   styleUrls: ['./gio-banner.component.scss'],
 })
 export class GioBannerInfoComponent extends GioBannerComponent {
-  type = 'info' as GioBannerTypes;
+  public type = 'info' as GioBannerTypes;
 }
 
 @Component({
@@ -51,7 +51,7 @@ export class GioBannerInfoComponent extends GioBannerComponent {
   styleUrls: ['./gio-banner.component.scss'],
 })
 export class GioBannerSuccessComponent extends GioBannerComponent {
-  type = 'success' as GioBannerTypes;
+  public type = 'success' as GioBannerTypes;
 }
 
 @Component({
@@ -60,5 +60,5 @@ export class GioBannerSuccessComponent extends GioBannerComponent {
   styleUrls: ['./gio-banner.component.scss'],
 })
 export class GioBannerWarningComponent extends GioBannerComponent {
-  type = 'warning' as GioBannerTypes;
+  public type = 'warning' as GioBannerTypes;
 }
