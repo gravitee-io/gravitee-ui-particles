@@ -35,7 +35,7 @@
     [attr.sortable]="sortable ? sortable : null"
     [attr.readonly-plans]="readonlyPlans ? readonlyPlans : null"
     [attr.flows-title]="flowsTitle"
-    [attr.has-conditional-steps]="flowsTitle"
+    [attr.has-conditional-steps]="hasConditionalSteps"
     [debugResponse]="debugResponse"
     [tabId]="tabId"
     (:gv-policy-studio:change-tab)="onTabChanged($any($event).detail)"
