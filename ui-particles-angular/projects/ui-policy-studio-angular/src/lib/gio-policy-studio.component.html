@@ -32,6 +32,7 @@
     [attr.has-resources]="hasResources ? hasResources : null"
     [attr.has-properties]="hasProperties ? hasProperties : null"
     [attr.has-policy-filter]="hasPolicyFilter ? hasPolicyFilter : null"
+    [attr.has-plans]="hasPlans ? hasPlans : null"
     [attr.sortable]="sortable ? sortable : null"
     [attr.readonly-plans]="readonlyPlans ? readonlyPlans : null"
     [attr.flows-title]="flowsTitle"
@@ -46,6 +47,7 @@
     [attr.selected-flows-id]="selectedFlowsIds ? selectedFlowsIds : null"
     (:gv-policy-studio:select-flows)="onFlowSelectionChanged($any($event).detail)"
     (:gv-policy-studio:save)="save.emit($any($event).detail)"
+    (:gv-policy-studio:debug)="debug.emit($any($event).detail)"
   >
   </gv-policy-studio>
 </div>
