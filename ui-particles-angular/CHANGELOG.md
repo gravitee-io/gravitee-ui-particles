@@ -1,3 +1,15 @@
+# [1.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.5.0...v1.6.0) (2022-01-19)
+
+
+### Bug Fixes
+
+* handle `has conditional steps`with right Input ([69ab516](https://github.com/gravitee-io/gravitee-ui-particles/commit/69ab516f4136229314042ffac0551d42531a86b0))
+
+
+### Features
+
+* add gio-policy-studio component ([9d471af](https://github.com/gravitee-io/gravitee-ui-particles/commit/9d471af15e4ff6fbf3f2794f3155e428cb4ab316))
+
 # [1.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.4.4...v1.5.0) (2022-01-14)
 
 
