@@ -57,6 +57,12 @@ export class GioPolicyStudioComponent implements OnInit {
   public hasPolicyFilter!: boolean;
 
   @Input()
+  public hasConditionalSteps!: boolean;
+
+  @Input()
+  public hasPlans = false;
+
+  @Input()
   public sortable!: boolean;
 
   @Input()
@@ -99,14 +105,14 @@ export class GioPolicyStudioComponent implements OnInit {
   public flowsTitle!: string;
 
   @Input()
-  public hasConditionalSteps!: boolean;
-
-  @Input()
   public configurationInformation =
     'By default, the selection of a flow is based on the operator defined in the flow itself. This operator allows either to select a flow when the path matches exactly, or when the start of the path matches. The "Best match" option allows you to select the flow from the path that is closest.';
 
   @Output()
   public save = new EventEmitter<unknown>();
+
+  @Output()
+  public debug = new EventEmitter<{ definition: unknown; services: unknown; request: unknown }>();
 
   public tabId!: string;
   public selectedFlowsIds!: string;
