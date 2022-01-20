@@ -59,7 +59,10 @@
     {
       "matchPackagePatterns": ["@types/node"],
       "groupSlug": "nodejs",
-      "groupName": "NodeJs dependencies"
+      "groupName": "NodeJs dependencies",
+      "patch": {
+        "enabled": false
+      }
     },
     {
       "matchPackagePatterns": ["^typescript", "^tslib"],
