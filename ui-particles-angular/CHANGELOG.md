@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.6.0...v1.7.0) (2022-01-21)
+
+
+### Features
+
+* add policy studio `hasPlan` Input and `debug` Output ([ffb2825](https://github.com/gravitee-io/gravitee-ui-particles/commit/ffb2825f40c79adac1c70bdea4bab3a5e2371094))
+
 # [1.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.5.0...v1.6.0) (2022-01-19)
 
 
