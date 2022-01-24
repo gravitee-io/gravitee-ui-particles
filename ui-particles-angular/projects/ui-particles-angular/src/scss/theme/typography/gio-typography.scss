@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 @mixin subtitle-typography() {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 500;
   line-height: 24px;
+  letter-spacing: 0.25px;
 }
 
 @mixin code-typography() {
