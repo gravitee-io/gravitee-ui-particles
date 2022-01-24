@@ -35,3 +35,20 @@ import { VERSION } from '@angular/core';
 @include mat.core();
 @include mat.all-component-themes(t);
 ```
+
+4. Add @gravitee/ui-particles-angular assets to `angular.json`
+
+```json
+...
+// projects > [your project name] > architect > build >
+"assets": [
+    ...
+        {
+            "glob": "*",
+            "input": "node_modules/@gravitee/ui-particles-angular/assets",
+            "output": "assets/"
+        }
+     ...
+    ]
+...
+```

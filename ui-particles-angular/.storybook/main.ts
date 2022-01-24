@@ -18,5 +18,8 @@ module.exports = {
   core: {
     builder: 'webpack5',
   },
-  staticDirs: [{ from: '../../node_modules/@gravitee/ui-components/assets', to: '/' }],
+  staticDirs: [
+    { from: '../../node_modules/@gravitee/ui-components/assets', to: '/' },
+    { from: '../projects/ui-particles-angular/assets', to: '/assets' },
+  ],
 };
