@@ -1,3 +1,26 @@
+# [2.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.7.0...v2.0.0) (2022-01-24)
+
+
+### Bug Fixes
+
+* add right typo and background to storybook ([efae5db](https://github.com/gravitee-io/gravitee-ui-particles/commit/efae5db6f6c41e5ea5879ad4434549b8bf106dc8))
+
+
+### Features
+
+* add gio-code for simple code with right typo ([23628fd](https://github.com/gravitee-io/gravitee-ui-particles/commit/23628fd211835eadffdc58c5c087ab2aee8acc24))
+* config and add new fonts and typography ([1f668a8](https://github.com/gravitee-io/gravitee-ui-particles/commit/1f668a8eb31ff737f5f287ff4457d40433203e37))
+* replace inter font by golos-ui ([93634da](https://github.com/gravitee-io/gravitee-ui-particles/commit/93634dab588ae5510b72d780d9c7d2ad01c597ee))
+* self hosted fonts used by design system ([1c42a7c](https://github.com/gravitee-io/gravitee-ui-particles/commit/1c42a7ceea9dd62ecbee9f98feb39befd4c294e4))
+* update all colors to match the new design token ([f32066a](https://github.com/gravitee-io/gravitee-ui-particles/commit/f32066ab68b07da1fd5107e5cb6135d6fe986f08))
+
+
+### BREAKING CHANGES
+
+* - `$mat-info-palette` is deleted. Use `$mat-accent-palette` instead.
+- all `light, medium, dark` color name are changed to `lighter, default, darker` to avoid color
+name duplication
+
 # [1.7.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.6.0...v1.7.0) (2022-01-21)
 
 
