@@ -26,7 +26,6 @@ $palettes: (
   success: gio.$mat-success-palette,
   warning: gio.$mat-warning-palette,
   error: gio.$mat-error-palette,
-  content: gio.$mat-content-palette,
 );
 
 :export {
@@ -37,6 +36,13 @@ $palettes: (
         #{$paletteName}__#{$colorName}-contrast: mat.get-color-from-palette($palette, #{$colorName}-contrast);
       }
     }
+  }
+
+  // Special palettes
+
+  @each $colorName in (darker, default, disabled) {
+    content__#{$colorName}: mat.get-color-from-palette(gio.$mat-content-palette, $colorName);
+    content__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-content-palette, #{$colorName}-contrast);
   }
 
   @each $colorName in (background, lighter-background, surface, divider) {
