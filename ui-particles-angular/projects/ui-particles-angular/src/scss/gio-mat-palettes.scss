@@ -148,9 +148,9 @@ $mat-decorative-palette: mat.define-palette(
       divider: #000,
     ),
   ),
-  default,
-  lighter,
-  darker
+  surface,
+  surface,
+  surface
 );
 
 // Method color
@@ -168,5 +168,8 @@ $mat-method-palette: mat.define-palette(
       get: #346aa5,
       delete: #bf3133,
     ),
-  )
+  ),
+  patch,
+  patch,
+  patch
 );
