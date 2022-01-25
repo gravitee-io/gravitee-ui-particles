@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.0.1...v2.0.2) (2022-01-25)
+
+
+### Bug Fixes
+
+* angular 13.x error with color not exist in palette ([c2e25c3](https://github.com/gravitee-io/gravitee-ui-particles/commit/c2e25c3a7cf6d8b841f374cb7260cab04fd9afa5))
+
 ## [2.0.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.0.0...v2.0.1) (2022-01-25)
 
 
