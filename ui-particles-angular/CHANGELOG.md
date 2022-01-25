@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.0.0...v2.0.1) (2022-01-25)
+
+
+### Bug Fixes
+
+* manage mat-content-palette like a special palette ([229d8d1](https://github.com/gravitee-io/gravitee-ui-particles/commit/229d8d1074c1e489f56ab443425ca538de703f41))
+
 # [2.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v1.7.0...v2.0.0) (2022-01-24)
 
 
