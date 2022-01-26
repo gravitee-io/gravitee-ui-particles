@@ -1,3 +1,17 @@
+# [2.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.0.2...v2.1.0) (2022-01-26)
+
+
+### Bug Fixes
+
+* disabled color value in content palette ([4b53c84](https://github.com/gravitee-io/gravitee-ui-particles/commit/4b53c84609c32e362c9087a525dc7e7fffe6c02b))
+
+
+### Features
+
+* add GioIconsModule ([a02f701](https://github.com/gravitee-io/gravitee-ui-particles/commit/a02f701c06661bd1e683aae1f69c718b11ef7032))
+* add lighter color to content palette ([c14f80c](https://github.com/gravitee-io/gravitee-ui-particles/commit/c14f80ce33f5f6bb87a1dd2ec6dbf8bcf061ff15))
+* change typography level with last figma values ([3bec744](https://github.com/gravitee-io/gravitee-ui-particles/commit/3bec744d214400f7bd9f6bb2a96e839fd037b72c))
+
 ## [2.0.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.0.1...v2.0.2) (2022-01-25)
 
 
