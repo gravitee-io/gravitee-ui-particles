@@ -54,12 +54,12 @@ $mat-content-palette: mat.define-palette(
   (
     darker: #292c35,
     default: #828aa1,
-    disabled: #d6d6d6,
+    disabled: #e0e0e0,
     lighter: #ffffff,
     contrast: (
       darker: #eee,
       default: #000,
-      disabled: #000,
+      disabled: #a6a6a6,
       lighter: #000,
     ),
   ),
