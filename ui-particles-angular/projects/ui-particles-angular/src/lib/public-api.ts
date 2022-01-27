@@ -23,3 +23,5 @@ export * from './gio-save-bar/gio-save-bar.harness';
 
 export * from './gio-banner/gio-banner.component';
 export * from './gio-banner/gio-banner.module';
+
+export * from './gio-icons/gio-icons.module';
