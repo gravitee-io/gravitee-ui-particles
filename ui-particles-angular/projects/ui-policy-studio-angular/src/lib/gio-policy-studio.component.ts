@@ -108,13 +108,18 @@ export class GioPolicyStudioComponent implements OnInit {
   public configurationInformation =
     'By default, the selection of a flow is based on the operator defined in the flow itself. This operator allows either to select a flow when the path matches exactly, or when the start of the path matches. The "Best match" option allows you to select the flow from the path that is closest.';
 
+  @Input()
+  public hideTab = false;
+
+  @Input()
+  public tabId!: string;
+
   @Output()
   public save = new EventEmitter<unknown>();
 
   @Output()
   public debug = new EventEmitter<{ definition: unknown; services: unknown; request: unknown }>();
 
-  public tabId!: string;
   public selectedFlowsIds!: string;
   public configurationSchema!: FlowConfigurationSchema;
   public policyDocumentation!: { id: string; image: string; content: string };
@@ -143,7 +148,10 @@ export class GioPolicyStudioComponent implements OnInit {
 
     const { tabId, flowsIds } = this.parseUrl();
 
-    this.tabId = tabId;
+    if (!this.hideTab) {
+      this.tabId = tabId;
+    }
+
     this.selectedFlowsIds = JSON.stringify(flowsIds);
   }
 
