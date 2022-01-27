@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.1.0...v2.1.1) (2022-01-27)
+
+
+### Bug Fixes
+
+* export GioIconsModule ([973896a](https://github.com/gravitee-io/gravitee-ui-particles/commit/973896a2e0f8ef34631ea68b785c73a3ec9ea70e))
+
 # [2.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.0.2...v2.1.0) (2022-01-26)
 
 
