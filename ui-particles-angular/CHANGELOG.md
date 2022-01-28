@@ -1,3 +1,15 @@
+# [2.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.1.1...v2.2.0) (2022-01-28)
+
+
+### Bug Fixes
+
+* remove css var `--gv-policy-studio--h` ([2be4f2f](https://github.com/gravitee-io/gravitee-ui-particles/commit/2be4f2f458b540e061adcb4286552bd3688d2fa6))
+
+
+### Features
+
+* add tabId and hideTab Input ([481ee75](https://github.com/gravitee-io/gravitee-ui-particles/commit/481ee7570e07e338f52b21b8a528609b5acaa8b3))
+
 ## [2.1.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.1.0...v2.1.1) (2022-01-27)
 
 
