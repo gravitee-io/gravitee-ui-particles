@@ -25,21 +25,13 @@
     [dynamicPropertySchema]="dynamicPropertySchema"
     [definition]="definition"
     [flowSchema]="flowSchema"
-    [configurationSchema]="configurationSchema"
-    [configurationInformation]="configurationInformation"
     [attr.can-add]="canAdd ? canAdd : null"
-    [attr.can-debug]="canDebug ? canDebug : null"
-    [attr.has-resources]="hasResources ? hasResources : null"
-    [attr.has-properties]="hasProperties ? hasProperties : null"
     [attr.has-policy-filter]="hasPolicyFilter ? hasPolicyFilter : null"
     [attr.has-plans]="hasPlans ? hasPlans : null"
     [attr.sortable]="sortable ? sortable : null"
     [attr.readonly-plans]="readonlyPlans ? readonlyPlans : null"
     [attr.flows-title]="flowsTitle"
     [attr.has-conditional-steps]="hasConditionalSteps"
-    [debugResponse]="debugResponse"
-    [tabId]="tabId"
-    (:gv-policy-studio:change-tab)="onTabChanged($any($event).detail)"
     [documentation]="policyDocumentation"
     (:gv-policy-studio:fetch-documentation)="fetchPolicyDocumentation($any($event).detail)"
     (:gv-resources:fetch-documentation)="fetchResourceDocumentation($any($event).detail)"
@@ -48,6 +40,9 @@
     (:gv-policy-studio:select-flows)="onFlowSelectionChanged($any($event).detail)"
     (:gv-policy-studio:save)="save.emit($any($event).detail)"
     (:gv-policy-studio:debug)="debug.emit($any($event).detail)"
+    hide-tabs
+    hide-title
+    hide-save
   >
   </gv-policy-studio>
 </div>
