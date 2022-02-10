@@ -1,0 +1,47 @@
+/*
+ * Copyright (C) 2021 The Gravitee team (http://gravitee.io)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@use '../../gio-mat-palettes.scss' as palettes;
+@use '../../gio-mat-theme-variable' as theme;
+@use '../../theme/typography/gio-typography' as typo;
+
+$background: map.get(theme.$mat-theme, background);
+
+@mixin theme() {
+  table.gio-table-light {
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    th,
+    td {
+      // FIXME: add color to palette ? replace/keep ?
+      border: 1px solid #e6e7e8;
+      padding: 8px;
+    }
+
+    thead {
+      @include typo.table-head-typography();
+      background-color: mat.get-color-from-palette(palettes.$mat-decorative-palette, lighter-background);
+    }
+
+    tbody {
+      @include typo.table-body-typography();
+      background-color: mat.get-color-from-palette(palettes.$mat-content-palette, lighter);
+    }
+  }
+}

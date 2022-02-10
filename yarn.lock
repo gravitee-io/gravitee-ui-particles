@@ -3086,6 +3086,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/inter@npm:4.5.3":
+  version: 4.5.3
+  resolution: "@fontsource/inter@npm:4.5.3"
+  checksum: 23381906f1f87eaf059fafd9324fab973221c363d99802074040d87f99e76f40b32ed1e90243ec98b8eea566c7a6360436b9c79ee3bf938a5996c91a312277a6
+  languageName: node
+  linkType: hard
+
 "@fontsource/material-icons@npm:4.5.1":
   version: 4.5.1
   resolution: "@fontsource/material-icons@npm:4.5.1"
@@ -23031,6 +23038,7 @@ __metadata:
     "@angular/router": 12.2.15
     "@asciidoctor/core": ^2.2.5
     "@fontsource/fira-mono": 4.5.0
+    "@fontsource/inter": 4.5.3
     "@fontsource/material-icons": 4.5.1
     "@gravitee/ui-components": ^3.28.5
     "@highcharts/map-collection": ^1.1.4
