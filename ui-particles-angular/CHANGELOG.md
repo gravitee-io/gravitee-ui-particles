@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.2.0...v2.3.0) (2022-02-10)
+
+
+### Features
+
+* add gio-table-light component ([58b84fa](https://github.com/gravitee-io/gravitee-ui-particles/commit/58b84faafee4f168cd5c1e9e63aaa8ccc7a8b740))
+
 # [2.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.1.1...v2.2.0) (2022-01-28)
 
 
