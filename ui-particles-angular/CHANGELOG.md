@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.3.0...v2.4.0) (2022-02-11)
+
+
+### Features
+
+* **gio-save-bar:** add possibility to override default css ([e9d88c5](https://github.com/gravitee-io/gravitee-ui-particles/commit/e9d88c55b0b232955fcf15498280edfd384c47d8))
+
 # [2.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.2.0...v2.3.0) (2022-02-10)
 
 
