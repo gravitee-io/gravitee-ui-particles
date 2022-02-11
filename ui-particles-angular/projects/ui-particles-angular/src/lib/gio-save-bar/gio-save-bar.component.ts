@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -35,6 +35,11 @@ import { FormGroup } from '@angular/forms';
   ],
 })
 export class GioSaveBarComponent {
+  @HostBinding('class.save-bar-sticky')
+  public get isSticky(): boolean {
+    return !this.creationMode;
+  }
+
   @Input()
   public opened = false;
 
