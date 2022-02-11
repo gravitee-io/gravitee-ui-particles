@@ -14,17 +14,6 @@
  * limitations under the License.
  */
 
-@mixin fontFaceGolosUi($weight: $weight) {
-  @font-face {
-    font-family: 'Golos UI';
-    font-style: 'normal';
-    font-display: 'swap';
-    font-weight: $weight;
-    src: url('/assets/fonts/golos-ui-all-#{$weight}-normal.woff2') format('woff2'),
-      url('/assets/fonts/golos-ui-all-#{$weight}-normal.woff') format('woff');
-  }
-}
-
 /**
  * Import Gio Design System fonts
  */
@@ -32,16 +21,16 @@
   @if $withTilde == true {
     @import '~@fontsource/material-icons/400.css';
     @import '~@fontsource/fira-mono/400.css';
-    @import '~@fontsource/inter/700.css';
+    @import '~@fontsource/golos-ui/400.css';
+    @import '~@fontsource/golos-ui/500.css';
+    @import '~@fontsource/golos-ui/600.css';
   }
 
   @if $withTilde == false {
     @import '@fontsource/material-icons/400.css';
     @import '@fontsource/fira-mono/400.css';
-    @import '@fontsource/inter/700.css';
+    @import '@fontsource/golos-ui/400.css';
+    @import '@fontsource/golos-ui/500.css';
+    @import '@fontsource/golos-ui/600.css';
   }
-
-  @include fontFaceGolosUi(400);
-  @include fontFaceGolosUi(500);
-  @include fontFaceGolosUi(600);
 }

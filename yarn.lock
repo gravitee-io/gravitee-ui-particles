@@ -3086,10 +3086,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/inter@npm:4.5.3":
-  version: 4.5.3
-  resolution: "@fontsource/inter@npm:4.5.3"
-  checksum: 23381906f1f87eaf059fafd9324fab973221c363d99802074040d87f99e76f40b32ed1e90243ec98b8eea566c7a6360436b9c79ee3bf938a5996c91a312277a6
+"@fontsource/golos-ui@npm:^4.5.1":
+  version: 4.5.1
+  resolution: "@fontsource/golos-ui@npm:4.5.1"
+  checksum: f2ad6d241b5f7e7042706c792a0bd102997f759ffaa39337f269bf628220f5a18e5adca87ec791b7fc39cb9620ecfb214b178e271b466b5cd9c5998fac1c7633
   languageName: node
   linkType: hard
 
@@ -23038,7 +23038,7 @@ __metadata:
     "@angular/router": 12.2.15
     "@asciidoctor/core": ^2.2.5
     "@fontsource/fira-mono": 4.5.0
-    "@fontsource/inter": 4.5.3
+    "@fontsource/golos-ui": ^4.5.1
     "@fontsource/material-icons": 4.5.1
     "@gravitee/ui-components": ^3.28.5
     "@highcharts/map-collection": ^1.1.4
