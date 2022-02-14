@@ -16,13 +16,13 @@
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
 
-import { MatIconModule } from '@angular/material/icon';
+import { GioIconsModule } from '../../../lib/gio-icons/gio-icons.module';
 
 export default {
   title: 'Components / Method Badge',
   decorators: [
     moduleMetadata({
-      imports: [MatIconModule],
+      imports: [GioIconsModule],
     }),
   ],
 } as Meta;
