@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 @use './component/gio-badge/gio-badge';
+@use './component/gio-method-badge/gio-method-badge';
 @use './component/gio-code/gio-code';
 @use './component/gio-table-light/gio-table-light';
 
 // All Gravitee.io SCSS components
 @mixin all-components() {
   @include gio-badge.theme();
+  @include gio-method-badge.theme();
   @include gio-code.theme();
   @include gio-table-light.theme();
 }

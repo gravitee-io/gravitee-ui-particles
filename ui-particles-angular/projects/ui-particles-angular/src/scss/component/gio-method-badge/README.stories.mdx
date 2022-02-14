@@ -1,0 +1,31 @@
+import { Meta, Story } from '@storybook/addon-docs';
+
+<Meta title="Components / Method Badge / README" />
+
+# Badges
+
+Documentation and examples for method badges, a labeling component based on badge and dedicated to HTTP verbs.
+
+## Demo
+
+<Story id="components-method-badge--all"></Story>
+
+## Usage
+
+Multiple `gio-method-badge-XXXXX` classes are available and can be used on any html element according to the HTTP verb you want to display.
+
+Here are some examples with simple `span` elements:
+
+```html
+<span class="gio-method-badge-post">POST</span>
+
+<span class="gio-method-badge-get">GET</span>
+
+<span class="gio-method-badge-patch">PATCH</span>
+
+<span class="gio-method-badge-put">PUT</span>
+
+<span class="gio-method-badge-delete">DELETE</span>
+```
+
+ℹ️  &nbsp;The content of `gio-method-badge-XXXXX` class will always be transform to UPPERCASE so you don't need to take care of this on your side.
