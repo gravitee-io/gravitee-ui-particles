@@ -16,36 +16,56 @@
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
 
+import { GioIconsModule } from '../../../lib/gio-icons/gio-icons.module';
 import { MatIconModule } from '@angular/material/icon';
 
 export default {
   title: 'Components / Badge',
   decorators: [
     moduleMetadata({
-      imports: [MatIconModule],
+      imports: [MatIconModule, GioIconsModule],
     }),
   ],
-  render: () => ({}),
 } as Meta;
+
+const classByNames = {
+  Primary: 'gio-badge-primary',
+  Neutral: 'gio-badge-neutral',
+  Accent: 'gio-badge-accent',
+  Success: 'gio-badge-success',
+  Warning: 'gio-badge-warning',
+  Error: 'gio-badge-error',
+};
+
+const simpleCases: string = Object.entries(classByNames).reduce((previousValue, [name, cssClass]) => {
+  return `${previousValue}
+      <div style='margin: 10px'>
+        <span class="${cssClass}">${name}</span>
+      </div>`;
+}, '');
 
 export const All: Story = {
   render: () => ({
     template: `
-      <span class="gio-badge">Default</span>
+      <h4>Text Only</h4>
+      ${simpleCases}
+     
+      <h4>With Icons</h4>
+      <div style='margin: 10px'>      
+        <span class="gio-badge-error"><mat-icon svgIcon="gio:lock"></mat-icon></span>
+      </div>
       
-      <span class="gio-badge gio-badge-accent">Accent</span>
+      <div style='margin: 10px'>      
+        <span class="gio-badge-error"><mat-icon class="gio-left" svgIcon="gio:lock"></mat-icon>Lock</span>
+      </div>
 
-      <span class="gio-badge gio-badge-success">Success</span>
-      
-      <span class="gio-badge gio-badge-warning">Warning</span>
-      
-      <span class="gio-badge gio-badge-error">Error</span>
-
-      <span class="gio-badge gio-badge-error"><mat-icon>lock</mat-icon></span>
-
-      <span class="gio-badge gio-badge-error"><mat-icon class="gio-left">lock</mat-icon> Lock</span>
-
-      <span class="gio-badge gio-badge-error">Lock<mat-icon class="gio-right">lock</mat-icon></span>
+      <div style='margin: 10px'>
+        <span class="gio-badge-error">Lock<mat-icon class="gio-right" svgIcon="gio:lock"></mat-icon></span>
+      </div>  
+            
+      <div style='margin: 10px'>
+        <span class="gio-badge-error">Lock<mat-icon class="gio-right">lock</mat-icon></span>
+      </div>  
     `,
   }),
 };
