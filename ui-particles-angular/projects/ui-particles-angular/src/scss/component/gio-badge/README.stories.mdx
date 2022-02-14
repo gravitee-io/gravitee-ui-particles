@@ -12,25 +12,30 @@ Documentation and examples for badges, a small count and labeling component insp
 
 ## Usage
 
-`gio-badge` is a simple SCSS class that can be used on any html element.
+Multiple `gio-badge-XXXXX` classes are available and can be used on any html element according to the type of badge you want to display.
 
 Here are some examples with simple `span` elements:
 
 ```html
-<span class="gio-badge">Default</span>
+<span class="gio-badge-primary">Primary</span>
 
-<span class="gio-badge gio-badge-accent">Accent</span>
+<span class="gio-badge-neutral">Neutral</span>
 
-<span class="gio-badge gio-badge-success">Success</span>
+<span class="gio-badge-accent">Accent</span>
 
-<span class="gio-badge gio-badge-warning">Warning</span>
+<span class="gio-badge-success">Success</span>
 
-<span class="gio-badge gio-badge-error">Error</span>
+<span class="gio-badge-warning">Warning</span>
 
-<span class="gio-badge gio-badge-error"><mat-icon>lock</mat-icon></span>
+<span class="gio-badge-error">Error</span>
 
-<span class="gio-badge gio-badge-error"><mat-icon class="gio-left">lock</mat-icon> Lock</span>
+<span class="gio-badge-error"><mat-icon svgIcon="gio:lock"></mat-icon></span>
 
-<span class="gio-badge gio-badge-error">Lock<mat-icon class="gio-right">lock</mat-icon></span>
+<span class="gio-badge-error"><mat-icon class="gio-left" svgIcon="gio:lock"></mat-icon> Lock</span>
+
+<span class="gio-badge-error">Lock<mat-icon class="gio-right" svgIcon="gio:lock"></mat-icon></span>
+
+<!-- ⚠ Material icons are also working BUT you should ALWAYS PREFER icons from the Gravitee lib (see Icons story)️  -->
+<span class="gio-badge-error">Lock<mat-icon class="gio-right">lock</mat-icon></span>
 ```
 
