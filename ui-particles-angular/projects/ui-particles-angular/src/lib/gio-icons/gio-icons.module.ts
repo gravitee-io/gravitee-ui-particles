@@ -21,6 +21,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, MatIconModule],
+  exports: [MatIconModule],
   entryComponents: [],
 })
 export class GioIconsModule {
