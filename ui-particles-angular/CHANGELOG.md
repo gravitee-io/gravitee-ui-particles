@@ -1,3 +1,12 @@
+# [2.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.5.0...v2.6.0) (2022-02-14)
+
+
+### Features
+
+* add method badge CSS classes ([ae67d47](https://github.com/gravitee-io/gravitee-ui-particles/commit/ae67d471b28cb57ec29e381c9118b3ac294ac9db))
+* export MatIconModule in GioIconsModule ([8b8f498](https://github.com/gravitee-io/gravitee-ui-particles/commit/8b8f4987348c873c91fc6b34575c72343f8614d1))
+* update Badges with the new design ([d316738](https://github.com/gravitee-io/gravitee-ui-particles/commit/d316738f18a8c2e00303b5d7ee9906be975b57b8))
+
 # [2.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.4.0...v2.5.0) (2022-02-14)
 
 
