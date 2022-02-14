@@ -14,7 +14,7 @@ It currently contains the following components:
 ### Gravitee UI Particles Angular
 
 [![CircleCI](https://circleci.com/gh/gravitee-io/gravitee-ui-particles/tree/main.svg?style=svg)](https://circleci.com/gh/gravitee-io/gravitee-ui-particles/tree/main)
-[![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)](https://main--6183b02d73381a003a3be1a6.chromatic.com/)
+[![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)](https://particles.gravitee.io/)
 
 #### Overview
 
