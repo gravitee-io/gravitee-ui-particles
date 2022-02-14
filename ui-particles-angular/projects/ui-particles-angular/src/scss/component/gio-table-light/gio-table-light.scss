@@ -18,9 +18,9 @@
 
 @use '../../gio-mat-palettes.scss' as palettes;
 @use '../../gio-mat-theme-variable' as theme;
-@use '../../theme/typography/gio-typography' as typo;
 
 $background: map.get(theme.$mat-theme, background);
+$typography: map.get(theme.$mat-theme, typography);
 
 @mixin theme() {
   table.gio-table-light {
@@ -35,12 +35,15 @@ $background: map.get(theme.$mat-theme, background);
     }
 
     thead {
-      @include typo.table-head-typography();
+      @include mat.typography-level($typography, 'body-2');
+
       background-color: mat.get-color-from-palette(palettes.$mat-decorative-palette, lighter-background);
+      text-align: left;
+      text-transform: uppercase;
     }
 
     tbody {
-      @include typo.table-body-typography();
+      @include mat.typography-level($typography, 'body-1');
       background-color: mat.get-color-from-palette(palettes.$mat-content-palette, lighter);
     }
   }

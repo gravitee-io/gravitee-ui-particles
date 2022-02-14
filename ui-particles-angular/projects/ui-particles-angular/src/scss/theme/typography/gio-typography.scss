@@ -13,13 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@mixin subtitle-typography() {
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  letter-spacing: 0.4px;
-}
-
 @mixin code-typography() {
   font-family: 'Fira Mono', monospace;
   font-size: 13px;
@@ -27,23 +20,9 @@
   font-weight: 400;
 }
 
-@mixin table-head-typography() {
-  font-family: 'Inter', monospace;
-  font-size: 11px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 16px;
-  letter-spacing: 0.75px;
-  text-align: left;
-  text-transform: uppercase;
-}
-
-@mixin table-body-typography() {
-  font-family: 'Golos UI', monospace;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px;
+@mixin subtitle-typography() {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
   letter-spacing: 0.4px;
-  text-align: left;
 }
