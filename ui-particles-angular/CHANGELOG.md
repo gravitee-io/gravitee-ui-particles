@@ -1,3 +1,10 @@
+# [2.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.4.0...v2.5.0) (2022-02-14)
+
+
+### Features
+
+* **mat-tabs:** override material to remove tabs label min-width ([27e97be](https://github.com/gravitee-io/gravitee-ui-particles/commit/27e97bec1da650653ba4a9216c6d99decdce6c65))
+
 # [2.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.3.0...v2.4.0) (2022-02-11)
 
 
