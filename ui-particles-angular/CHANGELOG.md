@@ -1,3 +1,10 @@
+## [2.6.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.6.0...v2.6.1) (2022-02-15)
+
+
+### Bug Fixes
+
+* remove unused icons + add color customization ([85eefa4](https://github.com/gravitee-io/gravitee-ui-particles/commit/85eefa4b20b7db0b7e0441a44ad1bacc67c2f37a))
+
 # [2.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.5.0...v2.6.0) (2022-02-14)
 
 
