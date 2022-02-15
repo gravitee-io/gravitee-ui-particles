@@ -73,11 +73,21 @@
     color: mat.get-color-from-palette(palettes.$mat-method-palette, delete-contrast);
   }
 
-  .gio-method-badge-option,
-  .gio-method-badge-trace,
+  .gio-method-badge-option {
+    @extend .gio-method-badge;
+    background-color: mat.get-color-from-palette(palettes.$mat-method-palette, option);
+    color: mat.get-color-from-palette(palettes.$mat-method-palette, option-contrast);
+  }
+
+  .gio-method-badge-trace {
+    @extend .gio-method-badge;
+    background-color: mat.get-color-from-palette(palettes.$mat-method-palette, trace);
+    color: mat.get-color-from-palette(palettes.$mat-method-palette, trace-contrast);
+  }
+
   .gio-method-badge-head {
     @extend .gio-method-badge;
-    background-color: mat.get-color-from-palette(palettes.$mat-neutral-palette, default);
-    color: mat.get-color-from-palette(palettes.$mat-neutral-palette, default-contrast);
+    background-color: mat.get-color-from-palette(palettes.$mat-method-palette, head);
+    color: mat.get-color-from-palette(palettes.$mat-method-palette, head-contrast);
   }
 }
