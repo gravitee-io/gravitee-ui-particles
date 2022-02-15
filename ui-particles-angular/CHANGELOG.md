@@ -1,3 +1,10 @@
+## [2.6.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.6.1...v2.6.2) (2022-02-15)
+
+
+### Bug Fixes
+
+* update colors of OPTION, TRACE and HEAD methods ([b3fdb6f](https://github.com/gravitee-io/gravitee-ui-particles/commit/b3fdb6f4b4c8d2b4fd0b37c6482aec764339ddd7))
+
 ## [2.6.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.6.0...v2.6.1) (2022-02-15)
 
 
