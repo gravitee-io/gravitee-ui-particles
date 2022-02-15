@@ -50,7 +50,7 @@ $palettes: (
     decorative__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-decorative-palette, #{$colorName}-contrast);
   }
 
-  @each $colorName in (patch, post, put, get, delete) {
+  @each $colorName in (patch, post, put, get, delete, option, trace, head) {
     method__#{$colorName}: mat.get-color-from-palette(gio.$mat-method-palette, $colorName);
     method__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-method-palette, #{$colorName}-contrast);
   }
