@@ -296,12 +296,16 @@ workflows:
           package_name: ui-particles-angular
           requires:
             - Build Angular
+      - trigger-chromatic:
+          type: approval
+          requires:
+            - Build Angular Storybook
       - chromatic-deployment:
           name: Chromatic deployment for Angular
           context: gravitee-qa
           package_name: ui-particles-angular
           requires:
-            - Build Angular Storybook
+            - trigger-chromatic
           pre-steps:
             - secrethub/env-export:
                 secret-path: graviteeio/cicd/graviteebot/github_personal_access_token
