@@ -22,7 +22,7 @@ $typography: map.get(gio.$mat-theme, typography);
 
 :host {
   display: block;
-  height: 50px;
+  height: 68px;
   margin-top: 32px;
   z-index: 1000;
 }
@@ -38,11 +38,11 @@ $typography: map.get(gio.$mat-theme, typography);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 32px;
+  padding: 16px 24px;
   height: 100%;
 
   &__label {
-    @include mat.typography-level($typography, body-2);
+    @include mat.typography-level($typography, body-1);
   }
 
   &__reset-button {
@@ -50,21 +50,13 @@ $typography: map.get(gio.$mat-theme, typography);
   }
 
   &__submit-button {
-    background-color: mat.get-color-from-palette(gio.$mat-success-palette, 'default');
-    color: mat.get-color-from-palette(gio.$mat-success-palette, 'default-contrast');
-
-    &:hover:enabled {
-      background-color: mat.get-color-from-palette(gio.$mat-success-palette, 'darker');
-      color: mat.get-color-from-palette(gio.$mat-success-palette, 'darker-contrast');
-    }
-
     &.invalid {
-      background-color: mat.get-color-from-palette(gio.$mat-success-palette, 'lighter');
-      color: mat.get-color-from-palette(gio.$mat-success-palette, 'lighter-contrast');
+      background-color: mat.get-color-from-palette(gio.$mat-primary-palette, 'lighter');
+      color: mat.get-color-from-palette(gio.$mat-primary-palette, 'lighter-contrast');
 
       &:hover:enabled {
-        background-color: mat.get-color-from-palette(gio.$mat-success-palette, 'default');
-        color: mat.get-color-from-palette(gio.$mat-success-palette, 'default-contrast');
+        background-color: mat.get-color-from-palette(gio.$mat-primary-palette, 'default');
+        color: mat.get-color-from-palette(gio.$mat-primary-palette, 'default-contrast');
       }
     }
   }
