@@ -1,3 +1,10 @@
+# [2.7.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.6.2...v2.7.0) (2022-02-17)
+
+
+### Features
+
+* update design of the save bar to match new mockup ([299fb56](https://github.com/gravitee-io/gravitee-ui-particles/commit/299fb568c600f786602a21d3b38fb132832296dc))
+
 ## [2.6.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.6.1...v2.6.2) (2022-02-15)
 
 
