@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import { Observable } from 'rxjs';
+
 import { Grammar } from '../models/spel';
 
 export abstract class SpelServiceAbstract {

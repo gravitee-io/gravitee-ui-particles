@@ -20,7 +20,9 @@ import { MatInputModule } from '@angular/material/input';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
+
 import { GioBannerModule } from '../gio-banner/gio-banner.module';
+
 import { GioIconsModule } from './gio-icons.module';
 import { SbGetIconsListPipe } from './sb-get-icons-list.pipe';
 

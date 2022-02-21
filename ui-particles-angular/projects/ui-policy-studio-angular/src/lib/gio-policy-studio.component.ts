@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { chain, isNil } from 'lodash';
+import { catchError, tap } from 'rxjs/operators';
 import { Location } from '@angular/common';
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
-import { catchError, tap } from 'rxjs/operators';
-import { chain, isNil } from 'lodash';
-
-import '@gravitee/ui-components/wc/gv-policy-studio';
 import { EMPTY } from 'rxjs';
+import '@gravitee/ui-components/wc/gv-policy-studio';
+
 import { FlowServiceAbstract } from './services/flow.abstract.service';
 import { FlowConfigurationSchema } from './models/flow/ConfigurationSchema';
 import { PolicyListItem } from './models/policy';

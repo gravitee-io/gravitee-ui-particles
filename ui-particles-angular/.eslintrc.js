@@ -1,6 +1,7 @@
 module.exports = {
   root: true,
   ignorePatterns: ['projects/**/*'],
+  plugins: ['eslint-plugin-import'],
   overrides: [
     {
       files: ['*.ts'],
@@ -14,6 +15,7 @@ module.exports = {
         'plugin:@typescript-eslint/recommended',
         'plugin:@angular-eslint/recommended',
         'plugin:@angular-eslint/template/process-inline-templates',
+        'plugin:import/typescript',
         'prettier',
         'plugin:prettier/recommended',
       ],
@@ -29,6 +31,13 @@ module.exports = {
             overrides: {
               constructors: 'no-public',
             },
+          },
+        ],
+        'import/order': [
+          'error',
+          {
+            groups: ['external', 'builtin', 'internal', 'object', 'type', 'parent', 'index', 'sibling'],
+            'newlines-between': 'always',
           },
         ],
       },

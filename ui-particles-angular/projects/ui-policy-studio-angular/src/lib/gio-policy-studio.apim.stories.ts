@@ -16,10 +16,11 @@
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
-import { GioPolicyStudioComponent } from './gio-policy-studio.component';
-import { GioPolicyStudioModule } from './gio-policy-studio.module';
 
 import { apimPolicies, apimResourceTypes, apimDefinition, apimFlow, apimPropertyProviders } from '../testing';
+
+import { GioPolicyStudioComponent } from './gio-policy-studio.component';
+import { GioPolicyStudioModule } from './gio-policy-studio.module';
 
 export default {
   title: 'Policy Studio / APIM',

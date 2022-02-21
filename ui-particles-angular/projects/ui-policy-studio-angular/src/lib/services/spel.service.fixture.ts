@@ -15,6 +15,7 @@
  */
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+
 import { Grammar } from '../models/spel';
 import { fakeGrammar } from '../models/spel/index-testing';
 
