@@ -16,6 +16,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 import { PolicyDocumentation, PolicyListItem, PolicySchema } from '../models/policy';
 import { fakePolicyListItem, fakePolicySchema, fakePolicyDocumentation } from '../models/policy/index-testing';
 
