@@ -20,8 +20,8 @@
 
 // All Gravitee.io SCSS components
 @mixin all-components() {
-  @include gio-badge.theme();
-  @include gio-method-badge.theme();
-  @include gio-code.theme();
-  @include gio-table-light.theme();
+  @include gio-badge.theme;
+  @include gio-method-badge.theme;
+  @include gio-code.theme;
+  @include gio-table-light.theme;
 }

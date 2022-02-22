@@ -18,7 +18,6 @@
 @use '../../../scss' as gio;
 
 $colorNames: lighter, default, darker, disabled;
-
 $palettes: (
   primary: gio.$mat-primary-palette,
   accent: gio.$mat-accent-palette,
@@ -28,10 +27,11 @@ $palettes: (
   error: gio.$mat-error-palette,
 );
 
+/* stylelint-disable selector-pseudo-class-no-unknown */
 :export {
   @each $paletteName, $palette in $palettes {
     @each $colorName in $colorNames {
-      @if (map.has-key($palette, $colorName)) {
+      @if map.has-key($palette, $colorName) {
         #{$paletteName}__#{$colorName}: mat.get-color-from-palette($palette, $colorName);
         #{$paletteName}__#{$colorName}-contrast: mat.get-color-from-palette($palette, #{$colorName}-contrast);
       }

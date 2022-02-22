@@ -18,6 +18,6 @@
 @mixin theme() {
   code,
   .gio-code {
-    @include typo.code-typography();
+    @include typo.code-typography;
   }
 }

@@ -20,6 +20,6 @@
   .mat-h5,
   .mat-typography h5,
   .mat-typography .mat-h5 {
-    @include typo.subtitle-typography();
+    @include typo.subtitle-typography;
   }
 }

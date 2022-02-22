@@ -21,25 +21,25 @@
 $typography: map.get(gio.$mat-theme, typography);
 
 :host {
+  z-index: 1000;
   display: block;
   height: 68px;
   margin-top: 32px;
-  z-index: 1000;
 }
 
 :host(.save-bar-sticky) {
   position: sticky;
   bottom: 0;
-  margin-left: -16px;
   margin-right: -16px;
+  margin-left: -16px;
 }
 
 .save-bar__content {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 24px;
   height: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
 
   &__label {
     @include mat.typography-level($typography, body-1);

@@ -29,9 +29,10 @@ $typography: map.get(theme.$mat-theme, typography);
 
     th,
     td {
+      padding: 8px;
+
       // FIXME: add color to palette ? replace/keep ?
       border: 1px solid #e6e7e8;
-      padding: 8px;
     }
 
     thead {
@@ -44,6 +45,7 @@ $typography: map.get(theme.$mat-theme, typography);
 
     tbody {
       @include mat.typography-level($typography, 'body-1');
+
       background-color: mat.get-color-from-palette(palettes.$mat-content-palette, lighter);
     }
   }
