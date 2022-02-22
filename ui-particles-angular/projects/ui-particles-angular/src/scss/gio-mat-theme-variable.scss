@@ -69,7 +69,6 @@ $gio-foreground: map.merge(
     slider-min: mat.get-color-from-palette(palettes.$mat-content-palette, darker),
   )
 );
-
 $gio-background-foreground: (
   background: $gio-background,
   foreground: $gio-foreground,

@@ -55,7 +55,7 @@ $mat-content-palette: mat.define-palette(
     darker: #292c35,
     default: #828aa1,
     disabled: #e0e0e0,
-    lighter: #ffffff,
+    lighter: #fff,
     contrast: (
       darker: #eee,
       default: #000,
@@ -141,7 +141,7 @@ $mat-decorative-palette: mat.define-palette(
   (
     background: #eff2ff,
     lighter-background: #f7f8fd,
-    surface: #ffffff,
+    surface: #fff,
     divider: #f3f4f9,
     contrast: (
       background: #292c35,
@@ -167,7 +167,7 @@ $mat-method-palette: mat.define-palette(
     trace: #eff2ff,
     head: #faf4ff,
     contrast: (
-      patch: #337777,
+      patch: #377,
       post: #2c6249,
       put: #a15e35,
       get: #346aa5,

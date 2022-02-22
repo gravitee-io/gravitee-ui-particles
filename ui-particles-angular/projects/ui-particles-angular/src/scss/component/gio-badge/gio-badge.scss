@@ -23,34 +23,34 @@
  * Gravitee.io version of bootstrap "badge" element
  */
 @mixin theme() {
-  .gio-badge {
+  %gio-badge-base {
     display: inline-flex;
-    align-items: center;
-
-    margin-left: 4px;
-    margin-right: 4px;
     min-width: 10px;
+    align-items: center;
     padding: 4px 8px;
+    margin-right: 4px;
+    margin-left: 4px;
+    background-color: mat.get-color-from-palette(palettes.$mat-primary-palette, lighter);
+    border-radius: 16px;
+    color: mat.get-color-from-palette(palettes.$mat-primary-palette, lighter-contrast);
     font-size: mat.font-size(theme.$mat-typography, caption);
     font-weight: mat.font-weight(theme.$mat-typography, caption);
-    border-radius: 16px;
     line-height: 16px;
     text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    background-color: mat.get-color-from-palette(palettes.$mat-primary-palette, lighter);
-    color: mat.get-color-from-palette(palettes.$mat-primary-palette, lighter-contrast);
     text-transform: capitalize;
+    vertical-align: middle;
+    white-space: nowrap;
 
     .mat-icon {
-      font-size: inherit;
-      height: inherit;
-      line-height: inherit;
       width: inherit;
-      vertical-align: middle;
+      max-width: 16px;
+      height: inherit;
+
       // Set max height and width when using SVG icons (i.e. not coming from a web font) otherwise they are just HUGE
       max-height: 16px;
-      max-width: 16px;
+      font-size: inherit;
+      line-height: inherit;
+      vertical-align: middle;
 
       &.gio-right {
         margin-left: 4px;
@@ -62,36 +62,45 @@
     }
   }
 
+  .gio-badge {
+    @extend %gio-badge-base;
+  }
+
   .gio-badge-primary {
-    @extend .gio-badge;
+    @extend %gio-badge-base;
   }
 
   .gio-badge-accent {
-    @extend .gio-badge;
+    @extend %gio-badge-base;
+
     background-color: mat.get-color-from-palette(palettes.$mat-accent-palette, lighter);
     color: mat.get-color-from-palette(palettes.$mat-accent-palette, lighter-contrast);
   }
 
   .gio-badge-neutral {
-    @extend .gio-badge;
+    @extend %gio-badge-base;
+
     background-color: mat.get-color-from-palette(palettes.$mat-neutral-palette, lighter);
     color: mat.get-color-from-palette(palettes.$mat-neutral-palette, lighter-contrast);
   }
 
   .gio-badge-success {
-    @extend .gio-badge;
+    @extend %gio-badge-base;
+
     background-color: mat.get-color-from-palette(palettes.$mat-success-palette, lighter);
     color: mat.get-color-from-palette(palettes.$mat-success-palette, lighter-contrast);
   }
 
   .gio-badge-error {
-    @extend .gio-badge;
+    @extend %gio-badge-base;
+
     background-color: mat.get-color-from-palette(palettes.$mat-error-palette, lighter);
     color: mat.get-color-from-palette(palettes.$mat-error-palette, lighter-contrast);
   }
 
   .gio-badge-warning {
-    @extend .gio-badge;
+    @extend %gio-badge-base;
+
     background-color: mat.get-color-from-palette(palettes.$mat-warning-palette, lighter);
     color: mat.get-color-from-palette(palettes.$mat-warning-palette, lighter-contrast);
   }

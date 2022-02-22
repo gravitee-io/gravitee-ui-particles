@@ -25,10 +25,10 @@
   @include mat.all-component-themes(theme-variable.$mat-theme);
 
   // Gio overrides
-  @include override.mat-h5();
-  @include override.mat-form-field();
-  @include override.mat-table();
-  @include override.mat-card();
-  @include override.mat-list();
-  @include override.mat-tabs();
+  @include override.mat-h5;
+  @include override.mat-form-field;
+  @include override.mat-table;
+  @include override.mat-card;
+  @include override.mat-list;
+  @include override.mat-tabs;
 }

@@ -23,70 +23,81 @@
  * Gravitee.io version of bootstrap "badge" element dedicated to HTTP verbs
  */
 @mixin theme() {
-  .gio-method-badge {
+  %gio-method-badge-base {
     display: inline-flex;
-    justify-content: center;
-    align-items: center;
-
-    margin-left: 4px;
-    margin-right: 4px;
     width: 72px;
     height: 24px;
+    align-items: center;
+    justify-content: center;
     padding: 4px 8px;
+    margin-right: 4px;
+    margin-left: 4px;
+    border-radius: 6px;
     font-size: mat.font-size(theme.$mat-typography, caption);
     font-weight: mat.font-weight(theme.$mat-typography, caption);
-    border-radius: 6px;
     line-height: 16px;
     text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
     text-transform: uppercase;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  .gio-method-badge {
+    @extend %gio-method-badge-base;
   }
 
   .gio-method-badge-post {
-    @extend .gio-method-badge;
+    @extend %gio-method-badge-base;
+
     background-color: mat.get-color-from-palette(palettes.$mat-method-palette, post);
     color: mat.get-color-from-palette(palettes.$mat-method-palette, post-contrast);
   }
 
   .gio-method-badge-get {
-    @extend .gio-method-badge;
+    @extend %gio-method-badge-base;
+
     background-color: mat.get-color-from-palette(palettes.$mat-method-palette, get);
     color: mat.get-color-from-palette(palettes.$mat-method-palette, get-contrast);
   }
 
   .gio-method-badge-patch {
-    @extend .gio-method-badge;
+    @extend %gio-method-badge-base;
+
     background-color: mat.get-color-from-palette(palettes.$mat-method-palette, patch);
     color: mat.get-color-from-palette(palettes.$mat-method-palette, patch-contrast);
   }
 
   .gio-method-badge-put {
-    @extend .gio-method-badge;
+    @extend %gio-method-badge-base;
+
     background-color: mat.get-color-from-palette(palettes.$mat-method-palette, put);
     color: mat.get-color-from-palette(palettes.$mat-method-palette, put-contrast);
   }
 
   .gio-method-badge-delete {
-    @extend .gio-method-badge;
+    @extend %gio-method-badge-base;
+
     background-color: mat.get-color-from-palette(palettes.$mat-method-palette, delete);
     color: mat.get-color-from-palette(palettes.$mat-method-palette, delete-contrast);
   }
 
   .gio-method-badge-option {
-    @extend .gio-method-badge;
+    @extend %gio-method-badge-base;
+
     background-color: mat.get-color-from-palette(palettes.$mat-method-palette, option);
     color: mat.get-color-from-palette(palettes.$mat-method-palette, option-contrast);
   }
 
   .gio-method-badge-trace {
-    @extend .gio-method-badge;
+    @extend %gio-method-badge-base;
+
     background-color: mat.get-color-from-palette(palettes.$mat-method-palette, trace);
     color: mat.get-color-from-palette(palettes.$mat-method-palette, trace-contrast);
   }
 
   .gio-method-badge-head {
-    @extend .gio-method-badge;
+    @extend %gio-method-badge-base;
+
     background-color: mat.get-color-from-palette(palettes.$mat-method-palette, head);
     color: mat.get-color-from-palette(palettes.$mat-method-palette, head-contrast);
   }

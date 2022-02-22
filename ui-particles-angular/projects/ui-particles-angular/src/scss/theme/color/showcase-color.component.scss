@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 .sc-table {
-  text-align: center;
   width: 100%;
+  text-align: center;
 
   td.palette-name {
     width: 200px;
@@ -26,8 +26,8 @@
     display: flex;
 
     .color {
-      flex: 1;
       height: 58px;
+      flex: 1;
       line-height: 29px;
     }
   }
