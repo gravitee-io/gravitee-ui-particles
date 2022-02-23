@@ -1,0 +1,37 @@
+import { Meta, Story } from '@storybook/addon-docs';
+
+<Meta title="Components / Form Tags Input / README" />
+
+# Form Tags Input
+
+Documentation and examples for Form Tags Input, a component to specify a list of values based on material chip-list
+
+## Demo
+
+<Story id="components-form-tags-input--with-initial-value"/>
+
+## Usage
+
+**Inputs**
+ - `ariaLabel`: `string` - Aria label for the input.
+ - `addOnBlur`: `boolean` - Whether or not the chipEnd event will be emitted when the input is blurred.
+ - `tagValidationHook`: `function(tag, validationCallback())` - Function called each time a tag is added. Useful to hook inside the addition process to, for instance, have custom validation in the components using `gio-form-tags-input`.
+ - `placeholder`: `string` - The input's placeholder text.
+ - `required`: `boolean` - Whether the input requires to have at least one value.
+ - `disabled`: `boolean` - Whether the input is disabled.
+
+Example:
+
+```html
+
+what about this one :
+
+<mat-form-field appearance="fill">
+  <mat-label>Tags</mat-label>
+  <gio-form-tags-input
+    [required]="required"
+    [placeholder]="Add a tag"
+    [formControl]="tagsControl"
+  ></gio-form-tags-input>
+</mat-form-field>
+```
