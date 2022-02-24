@@ -1,3 +1,10 @@
+## [2.8.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.8.0...v2.8.1) (2022-02-24)
+
+
+### Bug Fixes
+
+* add form-tags-input to public api ([4096e40](https://github.com/gravitee-io/gravitee-ui-particles/commit/4096e40ef61d3bf64b25242540d0ec864b7ef3a0))
+
 # [2.8.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.7.0...v2.8.0) (2022-02-24)
 
 
