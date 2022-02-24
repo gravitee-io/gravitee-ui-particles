@@ -1,3 +1,10 @@
+# [2.8.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.7.0...v2.8.0) (2022-02-24)
+
+
+### Features
+
+* add form-tags-input component ([261dc74](https://github.com/gravitee-io/gravitee-ui-particles/commit/261dc74534910b49d702bed8d92d372dbd222a7d))
+
 # [2.7.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.6.2...v2.7.0) (2022-02-17)
 
 
