@@ -21,5 +21,7 @@
   .mat-typography h5,
   .mat-typography .mat-h5 {
     @include typo.subtitle-typography;
+
+    margin-bottom: 4px;
   }
 }
