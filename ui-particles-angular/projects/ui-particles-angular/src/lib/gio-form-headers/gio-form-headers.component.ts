@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FocusMonitor } from '@angular/cdk/a11y';
+import { Component, ElementRef, forwardRef, OnInit } from '@angular/core';
+import { ControlValueAccessor, FormArray, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { dropRight, isEmpty } from 'lodash';
 import { tap } from 'rxjs/operators';
 
 export type Header = { key: string; value: string };
@@ -24,11 +26,15 @@ export type Header = { key: string; value: string };
   selector: 'gio-form-headers',
   templateUrl: './gio-form-headers.component.html',
   styleUrls: ['./gio-form-headers.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => GioFormHeadersComponent),
+      multi: true,
+    },
+  ],
 })
-export class GioFormHeadersComponent implements OnInit, OnChanges {
-  @Input()
-  public headers: Header[] = [];
-
+export class GioFormHeadersComponent implements OnInit, ControlValueAccessor {
   public mainForm: FormGroup;
   public headersFormArray = new FormArray([
     new FormGroup({
@@ -37,49 +43,84 @@ export class GioFormHeadersComponent implements OnInit, OnChanges {
     }),
   ]);
 
-  constructor() {
+  private headers: Header[] = [];
+
+  private _onChange: (_headers: Header[] | null) => void = () => ({});
+
+  private _onTouched: () => void = () => ({});
+
+  constructor(private readonly fm: FocusMonitor, private readonly elRef: ElementRef) {
     this.mainForm = new FormGroup({
       headers: this.headersFormArray,
     });
+  }
+
+  // From ControlValueAccessor interface
+  public writeValue(value: Header[] | null): void {
+    if (!value) {
+      return;
+    }
+
+    this.headers = value ?? [];
+    this.initHeadersForm();
+  }
+
+  // From ControlValueAccessor interface
+  public registerOnChange(fn: (headers: Header[] | null) => void): void {
+    this._onChange = fn;
+  }
+
+  // From ControlValueAccessor interface
+  public registerOnTouched(fn: () => void): void {
+    this._onTouched = fn;
+  }
+
+  // From ControlValueAccessor interface
+  public setDisabledState(_isDisabled: boolean): void {
+    // this.disabled = isDisabled;
   }
 
   public ngOnInit(): void {
     // When user start to complete last header add new empty one a the end
     this.headersFormArray.valueChanges
       .pipe(
+        tap(headers => this._onChange(removeLastEmptyHeader(headers))),
         tap((headers: Header[]) => {
-          if (headers[headers.length - 1].key !== '' || headers[headers.length - 1].value !== '') {
+          if (headers.length > 0 && (headers[headers.length - 1].key !== '' || headers[headers.length - 1].value !== '')) {
             this.addEmptyHeader();
           }
         }),
       )
       .subscribe();
+
+    this.fm.monitor(this.elRef.nativeElement, true).subscribe(() => {
+      this._onTouched();
+    });
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.headers.currentValue !== changes.headers.previousValue) {
-      // Clear all previous headers
-      this.headersFormArray.clear();
+  public initHeadersForm(): void {
+    // Clear all previous headers
+    this.headersFormArray.clear();
 
-      // Populate headers array from headers
-      this.headers.forEach(({ key, value }) => {
-        this.headersFormArray.push(
-          new FormGroup({
-            key: new FormControl(key),
-            value: new FormControl(value),
-          }),
-          {
-            emitEvent: false,
-          },
-        );
-      });
+    // Populate headers array from headers
+    this.headers.forEach(({ key, value }) => {
+      this.headersFormArray.push(
+        new FormGroup({
+          key: new FormControl(key),
+          value: new FormControl(value),
+        }),
+        {
+          emitEvent: false,
+        },
+      );
+    });
 
-      // add one empty header a the end
-      this.addEmptyHeader();
-    }
+    // add one empty header a the end
+    this.addEmptyHeader();
   }
 
   public onDeleteHeader(headerIndex: number): void {
+    this._onTouched();
     this.headersFormArray.removeAt(headerIndex);
   }
 
@@ -93,3 +134,12 @@ export class GioFormHeadersComponent implements OnInit, OnChanges {
     );
   }
 }
+
+const removeLastEmptyHeader = (headers: Header[]) => {
+  const lastHeader = headers[headers.length - 1];
+
+  if (lastHeader && isEmpty(lastHeader.key) && isEmpty(lastHeader.value)) {
+    return dropRight(headers);
+  }
+  return headers;
+};
