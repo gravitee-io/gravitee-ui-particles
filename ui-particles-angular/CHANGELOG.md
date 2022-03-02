@@ -1,3 +1,10 @@
+## [2.8.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.8.1...v2.8.2) (2022-03-02)
+
+
+### Bug Fixes
+
+* set h5 bottom-margin to gio default ([e777e81](https://github.com/gravitee-io/gravitee-ui-particles/commit/e777e81e52fb7ad332dcd38e38bd07bb4d394972))
+
 ## [2.8.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.8.0...v2.8.1) (2022-02-24)
 
 
