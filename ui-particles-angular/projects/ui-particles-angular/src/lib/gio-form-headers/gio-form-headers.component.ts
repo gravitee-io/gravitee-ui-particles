@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { startWith, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 export type Header = { key: string; value: string };
 
@@ -30,7 +30,12 @@ export class GioFormHeadersComponent implements OnInit, OnChanges {
   public headers: Header[] = [];
 
   public mainForm: FormGroup;
-  public headersFormArray = new FormArray([]);
+  public headersFormArray = new FormArray([
+    new FormGroup({
+      key: new FormControl(''),
+      value: new FormControl(''),
+    }),
+  ]);
 
   constructor() {
     this.mainForm = new FormGroup({
@@ -39,38 +44,52 @@ export class GioFormHeadersComponent implements OnInit, OnChanges {
   }
 
   public ngOnInit(): void {
+    // When user start to complete last header add new empty one a the end
     this.headersFormArray.valueChanges
       .pipe(
-        startWith([]),
         tap((headers: Header[]) => {
-          if (headers.length == 0 || headers[headers.length - 1].key !== '' || headers[headers.length - 1].value !== '') {
-            this.headersFormArray.push(
-              new FormGroup({
-                key: new FormControl(''),
-                value: new FormControl(''),
-              }),
-              { emitEvent: false },
-            );
+          if (headers[headers.length - 1].key !== '' || headers[headers.length - 1].value !== '') {
+            this.addEmptyHeader();
           }
         }),
       )
       .subscribe();
   }
 
-  public ngOnChanges(): void {
-    this.headersFormArray.clear();
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.headers.currentValue !== changes.headers.previousValue) {
+      // Clear all previous headers
+      this.headersFormArray.clear();
 
-    this.headers.forEach(({ key, value }) => {
-      this.headersFormArray.push(
-        new FormGroup({
-          key: new FormControl(key),
-          value: new FormControl(value),
-        }),
-      );
-    });
+      // Populate headers array from headers
+      this.headers.forEach(({ key, value }) => {
+        this.headersFormArray.push(
+          new FormGroup({
+            key: new FormControl(key),
+            value: new FormControl(value),
+          }),
+          {
+            emitEvent: false,
+          },
+        );
+      });
+
+      // add one empty header a the end
+      this.addEmptyHeader();
+    }
   }
 
   public onDeleteHeader(headerIndex: number): void {
     this.headersFormArray.removeAt(headerIndex);
+  }
+
+  private addEmptyHeader() {
+    this.headersFormArray.push(
+      new FormGroup({
+        key: new FormControl(''),
+        value: new FormControl(''),
+      }),
+      { emitEvent: false },
+    );
   }
 }

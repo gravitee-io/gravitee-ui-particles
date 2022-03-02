@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { BaseHarnessFilters, ComponentHarness, HarnessPredicate } from '@angular/cdk/testing';
+import { AsyncFactoryFn, BaseHarnessFilters, ComponentHarness, HarnessPredicate } from '@angular/cdk/testing';
+import { MatInputHarness } from '@angular/material/input/testing';
 
 import { GioFormTagsInputHarness } from '../public-api';
 
@@ -30,5 +31,33 @@ export class GioFormHeadersHarness extends ComponentHarness {
    */
   public static with(options: BaseHarnessFilters = {}): HarnessPredicate<GioFormTagsInputHarness> {
     return new HarnessPredicate(GioFormTagsInputHarness, options);
+  }
+
+  public getHeaderRowsElement = this.locatorForAll('tr.gio-form-headers__table__header-row');
+
+  public getHeaderRowInputKey = (rowIndex: number): AsyncFactoryFn<MatInputHarness> =>
+    this.locatorFor(MatInputHarness.with({ ancestor: `[ng-reflect-name="${rowIndex}"]`, selector: '[formControlName=key]' }));
+
+  public getHeaderRowInputValue = (rowIndex: number): AsyncFactoryFn<MatInputHarness> =>
+    this.locatorFor(MatInputHarness.with({ ancestor: `tr[ng-reflect-name="${rowIndex}"]`, selector: '[formControlName=value]' }));
+
+  public async getHeaderRows(): Promise<{ keyInput: MatInputHarness; valueInput: MatInputHarness }[]> {
+    const rows = await this.getHeaderRowsElement();
+
+    return Promise.all(
+      rows.map(async (_, rowIndex) => ({
+        keyInput: await this.getHeaderRowInputKey(rowIndex)(),
+        valueInput: await this.getHeaderRowInputValue(rowIndex)(),
+      })),
+    );
+  }
+
+  public async getLastHeaderRow(): Promise<{ keyInput: MatInputHarness; valueInput: MatInputHarness }> {
+    const rows = await this.getHeaderRowsElement();
+
+    return {
+      keyInput: await this.getHeaderRowInputKey(rows.length - 1)(),
+      valueInput: await this.getHeaderRowInputValue(rows.length - 1)(),
+    };
   }
 }
