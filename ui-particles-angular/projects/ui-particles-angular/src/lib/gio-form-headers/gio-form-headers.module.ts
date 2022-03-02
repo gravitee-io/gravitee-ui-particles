@@ -15,13 +15,19 @@
  */
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
-import { GioEditableTableComponent } from './gio-form-headers.component';
+import { GioIconsModule } from '../gio-icons/gio-icons.module';
+
+import { GioFormHeadersComponent } from './gio-form-headers.component';
 
 @NgModule({
-  imports: [CommonModule],
-  declarations: [GioEditableTableComponent],
-  exports: [GioEditableTableComponent],
-  entryComponents: [GioEditableTableComponent],
+  imports: [CommonModule, MatInputModule, MatFormFieldModule, ReactiveFormsModule, GioIconsModule, MatButtonModule],
+  declarations: [GioFormHeadersComponent],
+  exports: [GioFormHeadersComponent],
+  entryComponents: [GioFormHeadersComponent],
 })
 export class GioFormHeadersModule {}
