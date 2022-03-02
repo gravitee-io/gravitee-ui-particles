@@ -29,3 +29,7 @@ export * from './gio-banner/gio-banner.component';
 export * from './gio-banner/gio-banner.module';
 
 export * from './gio-icons/gio-icons.module';
+
+export * from './gio-form-headers/gio-form-headers.component';
+export * from './gio-form-headers/gio-form-headers.module';
+export * from './gio-form-headers/gio-form-headers.harness';
