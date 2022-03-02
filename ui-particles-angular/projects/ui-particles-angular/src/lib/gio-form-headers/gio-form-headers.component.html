@@ -15,4 +15,36 @@
     limitations under the License.
 
 -->
-🚧
+<table class="gio-table-light" [formGroup]="mainForm">
+  <thead>
+    <tr>
+      <th>KEY</th>
+      <th>VALUE</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody formArrayName="headers">
+    <tr *ngFor="let control of headersFormArray.controls; index as headerIndex" [formGroupName]="headerIndex">
+      <td>
+        <mat-form-field appearance="standard">
+          <input formControlName="key" matInput type="text" placeholder="Name...." />
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field appearance="standard">
+          <input formControlName="value" matInput type="text" placeholder="Value...." />
+        </mat-form-field>
+      </td>
+      <td>
+        <button
+          *ngIf="headersFormArray.controls.length - 1 !== headerIndex"
+          mat-icon-button
+          aria-label="Delete"
+          (click)="onDeleteHeader(headerIndex)"
+        >
+          <mat-icon svgIcon="gio:cancel"></mat-icon>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

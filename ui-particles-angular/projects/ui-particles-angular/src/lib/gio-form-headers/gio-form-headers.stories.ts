@@ -29,7 +29,32 @@ export default {
     }),
   ],
   argTypes: {},
-  render: () => ({}),
+  render: args => ({
+    template: `<gio-form-headers [headers]="headers"></gio-form-headers>`,
+    props: args,
+  }),
+  args: {
+    headers: [],
+  },
 } as Meta;
 
 export const Default: Story = {};
+
+export const Filled: Story = {
+  args: {
+    headers: [
+      {
+        key: 'host',
+        value: 'api.gravitee.io',
+      },
+      {
+        key: 'accept',
+        value: '*/*',
+      },
+      {
+        key: 'connection',
+        value: 'keep-alive',
+      },
+    ],
+  },
+};

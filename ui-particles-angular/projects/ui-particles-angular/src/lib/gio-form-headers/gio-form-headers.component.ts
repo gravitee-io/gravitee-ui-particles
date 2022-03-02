@@ -14,11 +14,63 @@
  * limitations under the License.
  */
 
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { startWith, tap } from 'rxjs/operators';
+
+export type Header = { key: string; value: string };
 
 @Component({
   selector: 'gio-form-headers',
   templateUrl: './gio-form-headers.component.html',
   styleUrls: ['./gio-form-headers.component.scss'],
 })
-export class GioFormHeadersComponent {}
+export class GioFormHeadersComponent implements OnInit, OnChanges {
+  @Input()
+  public headers: Header[] = [];
+
+  public mainForm: FormGroup;
+  public headersFormArray = new FormArray([]);
+
+  constructor() {
+    this.mainForm = new FormGroup({
+      headers: this.headersFormArray,
+    });
+  }
+
+  public ngOnInit(): void {
+    this.headersFormArray.valueChanges
+      .pipe(
+        startWith([]),
+        tap((headers: Header[]) => {
+          if (headers.length == 0 || headers[headers.length - 1].key !== '' || headers[headers.length - 1].value !== '') {
+            this.headersFormArray.push(
+              new FormGroup({
+                key: new FormControl(''),
+                value: new FormControl(''),
+              }),
+              { emitEvent: false },
+            );
+          }
+        }),
+      )
+      .subscribe();
+  }
+
+  public ngOnChanges(): void {
+    this.headersFormArray.clear();
+
+    this.headers.forEach(({ key, value }) => {
+      this.headersFormArray.push(
+        new FormGroup({
+          key: new FormControl(key),
+          value: new FormControl(value),
+        }),
+      );
+    });
+  }
+
+  public onDeleteHeader(headerIndex: number): void {
+    this.headersFormArray.removeAt(headerIndex);
+  }
+}
