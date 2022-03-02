@@ -15,6 +15,7 @@
  */
 
 import { AsyncFactoryFn, BaseHarnessFilters, ComponentHarness, HarnessPredicate } from '@angular/cdk/testing';
+import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 
 import { GioFormTagsInputHarness } from '../public-api';
@@ -33,21 +34,27 @@ export class GioFormHeadersHarness extends ComponentHarness {
     return new HarnessPredicate(GioFormTagsInputHarness, options);
   }
 
-  public getHeaderRowsElement = this.locatorForAll('tr.gio-form-headers__table__header-row');
+  private getHeaderRowsElement = this.locatorForAll('tr.gio-form-headers__table__header-row');
 
-  public getHeaderRowInputKey = (rowIndex: number): AsyncFactoryFn<MatInputHarness> =>
+  private getHeaderRowInputKey = (rowIndex: number): AsyncFactoryFn<MatInputHarness> =>
     this.locatorFor(MatInputHarness.with({ ancestor: `[ng-reflect-name="${rowIndex}"]`, selector: '[formControlName=key]' }));
 
-  public getHeaderRowInputValue = (rowIndex: number): AsyncFactoryFn<MatInputHarness> =>
+  private getHeaderRowInputValue = (rowIndex: number): AsyncFactoryFn<MatInputHarness> =>
     this.locatorFor(MatInputHarness.with({ ancestor: `tr[ng-reflect-name="${rowIndex}"]`, selector: '[formControlName=value]' }));
 
-  public async getHeaderRows(): Promise<{ keyInput: MatInputHarness; valueInput: MatInputHarness }[]> {
+  private getHeaderRowRemoveButton = (rowIndex: number): AsyncFactoryFn<MatButtonHarness | null> =>
+    this.locatorForOptional(MatButtonHarness.with({ ancestor: `tr[ng-reflect-name="${rowIndex}"]`, selector: '[aria-label="Delete"]' }));
+
+  public async getHeaderRows(): Promise<
+    { keyInput: MatInputHarness; valueInput: MatInputHarness; removeButton: MatButtonHarness | null }[]
+  > {
     const rows = await this.getHeaderRowsElement();
 
     return Promise.all(
       rows.map(async (_, rowIndex) => ({
         keyInput: await this.getHeaderRowInputKey(rowIndex)(),
         valueInput: await this.getHeaderRowInputValue(rowIndex)(),
+        removeButton: await this.getHeaderRowRemoveButton(rowIndex)(),
       })),
     );
   }

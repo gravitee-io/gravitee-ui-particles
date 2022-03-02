@@ -17,23 +17,24 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { Header } from './gio-form-headers.component';
 import { GioFormHeadersHarness } from './gio-form-headers.harness';
 import { GioFormHeadersModule } from './gio-form-headers.module';
 
 @Component({
-  template: `<gio-form-headers [headers]="headers"></gio-form-headers> `,
+  template: `<gio-form-headers [formControl]="headersControl"></gio-form-headers> `,
 })
 class TestComponent {
-  public headers: Header[] = [];
+  public headersControl = new FormControl([]);
 }
 
 describe('GioFormHeadersModule', () => {
   let fixture: ComponentFixture<TestComponent>;
   let loader: HarnessLoader;
+  let testComponent: TestComponent;
 
   const HEADERS = [
     {
@@ -53,15 +54,16 @@ describe('GioFormHeadersModule', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      imports: [NoopAnimationsModule, GioFormHeadersModule, MatIconTestingModule],
+      imports: [NoopAnimationsModule, GioFormHeadersModule, MatIconTestingModule, ReactiveFormsModule],
     });
     fixture = TestBed.createComponent(TestComponent);
     loader = TestbedHarnessEnvironment.loader(fixture);
+    testComponent = fixture.componentInstance;
   });
 
   it('should display headers', async () => {
+    testComponent.headersControl.setValue(HEADERS);
     const formHeaders = await loader.getHarness(GioFormHeadersHarness);
-    fixture.componentInstance.headers = HEADERS;
 
     const headerRows = await formHeaders.getHeaderRows();
 
@@ -100,11 +102,13 @@ describe('GioFormHeadersModule', () => {
       key: 'host',
       value: 'api.gravitee.io',
     });
+
+    expect(testComponent.headersControl.value).toEqual([{ key: 'host', value: 'api.gravitee.io' }]);
   });
 
   it('should edit header', async () => {
+    testComponent.headersControl.setValue(HEADERS);
     const formHeaders = await loader.getHarness(GioFormHeadersHarness);
-    fixture.componentInstance.headers = HEADERS;
 
     const headerRowToEdit = (await formHeaders.getHeaderRows())[1];
 
@@ -116,5 +120,64 @@ describe('GioFormHeadersModule', () => {
       key: 'Content-Type',
       value: 'text/html; charset=UTF-8',
     });
+
+    expect(testComponent.headersControl.value).toEqual([
+      HEADERS[0],
+      {
+        key: 'Content-Type',
+        value: 'text/html; charset=UTF-8',
+      },
+      HEADERS[2],
+    ]);
+  });
+
+  it('should remove header row', async () => {
+    testComponent.headersControl.setValue(HEADERS);
+    const formHeaders = await loader.getHarness(GioFormHeadersHarness);
+
+    const initialHeaderRows = await formHeaders.getHeaderRows();
+    expect(initialHeaderRows.length).toEqual(4);
+
+    const headerRowToRemove = initialHeaderRows[1];
+    await headerRowToRemove.removeButton?.click();
+
+    const newHeaderRows = await formHeaders.getHeaderRows();
+    expect(newHeaderRows.length).toEqual(3);
+
+    // Check last row dose not have remove button
+    expect(newHeaderRows[2].removeButton).toEqual(null);
+
+    expect(testComponent.headersControl.value).toEqual([HEADERS[0], HEADERS[2]]);
+  });
+
+  it('should handle touched & dirty on focus and change value', async () => {
+    testComponent.headersControl.setValue(HEADERS);
+    const formHeaders = await loader.getHarness(GioFormHeadersHarness);
+
+    expect(testComponent.headersControl.touched).toEqual(false);
+    expect(testComponent.headersControl.dirty).toEqual(false);
+
+    await (await formHeaders.getHeaderRows())[0].keyInput.focus();
+
+    expect(testComponent.headersControl.touched).toEqual(true);
+    expect(testComponent.headersControl.dirty).toEqual(false);
+
+    await (await formHeaders.getHeaderRows())[0].keyInput.setValue('Content-Type');
+
+    expect(testComponent.headersControl.touched).toEqual(true);
+    expect(testComponent.headersControl.dirty).toEqual(true);
+  });
+
+  it('should handle touched & dirty on focus and change value', async () => {
+    testComponent.headersControl.setValue(HEADERS);
+    const formHeaders = await loader.getHarness(GioFormHeadersHarness);
+
+    expect(testComponent.headersControl.touched).toEqual(false);
+    expect(testComponent.headersControl.dirty).toEqual(false);
+
+    await (await formHeaders.getHeaderRows())[0].removeButton?.click();
+
+    expect(testComponent.headersControl.touched).toEqual(true);
+    expect(testComponent.headersControl.dirty).toEqual(true);
   });
 });

@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 import { Meta, moduleMetadata } from '@storybook/angular';
+import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { GioFormHeadersComponent } from './gio-form-headers.component';
 import { GioFormHeadersModule } from './gio-form-headers.module';
@@ -25,12 +27,12 @@ export default {
   component: GioFormHeadersComponent,
   decorators: [
     moduleMetadata({
-      imports: [BrowserAnimationsModule, GioFormHeadersModule],
+      imports: [BrowserAnimationsModule, GioFormHeadersModule, FormsModule, ReactiveFormsModule],
     }),
   ],
   argTypes: {},
   render: args => ({
-    template: `<gio-form-headers [headers]="headers"></gio-form-headers>`,
+    template: `<gio-form-headers [ngModel]="headers"></gio-form-headers>`,
     props: args,
   }),
   args: {
@@ -56,5 +58,42 @@ export const Filled: Story = {
         value: 'keep-alive',
       },
     ],
+  },
+};
+
+export const ReactiveForm: Story = {
+  render: args => {
+    const headersControl = new FormControl({
+      value: args.headers,
+      disabled: args.disabled,
+    });
+
+    headersControl.valueChanges.subscribe(value => {
+      action('Tags')(value);
+    });
+
+    return {
+      template: `<gio-form-headers [formControl]="headersControl"></gio-form-headers>`,
+      props: {
+        headersControl,
+      },
+    };
+  },
+  args: {
+    headers: [
+      {
+        key: 'host',
+        value: 'api.gravitee.io',
+      },
+      {
+        key: 'accept',
+        value: '*/*',
+      },
+      {
+        key: 'connection',
+        value: 'keep-alive',
+      },
+    ],
+    disabled: false,
   },
 };
