@@ -13,3 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+:host {
+  display: block;
+}
+
+.gio-form-headers {
+  &__table {
+    width: 100%;
+
+    &__header-row {
+      &__td-key,
+      &__td-value {
+        &__field {
+          display: flex;
+          overflow: hidden;
+          height: 32px;
+          flex-direction: column;
+          justify-content: center;
+        }
+      }
+
+      &__td-remove {
+        width: 32px;
+        height: 32px;
+        padding: 0;
+      }
+    }
+  }
+}
+
+::ng-deep {
+  gio-form-headers {
+    .gio-form-headers__table__header-row {
+      // Allow to have form-field with width less than 180px
+      .mat-form-field-infix {
+        width: inherit;
+      }
+    }
+  }
+}

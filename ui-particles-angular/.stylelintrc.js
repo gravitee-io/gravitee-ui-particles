@@ -4,5 +4,11 @@ module.exports = {
   rules: {
     'scss/dollar-variable-pattern': null,
     'selector-class-pattern': null,
+    'selector-pseudo-element-no-unknown': [
+      true,
+      {
+        ignorePseudoElements: ['ng-deep'],
+      },
+    ],
   },
 };
