@@ -97,3 +97,26 @@ export const ReactiveForm: Story = {
     disabled: false,
   },
 };
+
+export const SmallWidth: Story = {
+  render: args => ({
+    template: `<div style="width: 200px;"><gio-form-headers [ngModel]="headers"></gio-form-headers></div>`,
+    props: args,
+  }),
+  args: {
+    headers: [
+      {
+        key: 'host',
+        value: 'api.gravitee.io',
+      },
+      {
+        key: 'accept',
+        value: '*/*',
+      },
+      {
+        key: 'connection',
+        value: 'keep-alive',
+      },
+    ],
+  },
+};
