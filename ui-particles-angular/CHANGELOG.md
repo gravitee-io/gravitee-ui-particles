@@ -1,3 +1,12 @@
+# [2.9.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.8.2...v2.9.0) (2022-03-07)
+
+
+### Features
+
+* impl form headers step 1 ([3ce95e2](https://github.com/gravitee-io/gravitee-ui-particles/commit/3ce95e24feed0b75ccb416e3684fb4a906dac822))
+* improve style for form-header to make it smaller in height ([0d60670](https://github.com/gravitee-io/gravitee-ui-particles/commit/0d60670303185d0ebeec3d08d36283f68e14bedd))
+* make gio form headers public ([25170a2](https://github.com/gravitee-io/gravitee-ui-particles/commit/25170a26cb307532823dbfcb9f1d38687870ab7a))
+
 ## [2.8.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.8.1...v2.8.2) (2022-03-02)
 
 
