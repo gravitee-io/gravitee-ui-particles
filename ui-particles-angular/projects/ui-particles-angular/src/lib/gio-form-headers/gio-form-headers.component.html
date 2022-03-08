@@ -20,7 +20,6 @@
     <tr>
       <th>KEY</th>
       <th>VALUE</th>
-      <th></th>
     </tr>
   </thead>
   <tbody formArrayName="headers">
@@ -38,9 +37,8 @@
         <mat-form-field class="gio-form-headers__table__header-row__td-value__field" [floatLabel]="'never'">
           <input formControlName="value" matInput type="text" placeholder="Value..." />
         </mat-form-field>
-      </td>
-      <td class="gio-form-headers__table__header-row__td-remove">
         <button
+          class="gio-form-headers__table__header-row__td-value__button"
           *ngIf="headersFormArray.controls.length - 1 !== headerIndex"
           mat-icon-button
           aria-label="Delete"
