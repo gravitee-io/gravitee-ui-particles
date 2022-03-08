@@ -18,9 +18,83 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { Component, ElementRef, forwardRef, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormArray, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { dropRight, isEmpty } from 'lodash';
-import { tap } from 'rxjs/operators';
+import { map, startWith, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 
 export type Header = { key: string; value: string };
+const HEADER_NAMES = [
+  'Accept',
+  'Accept-Charset',
+  'Accept-Encoding',
+  'Accept-Language',
+  'Accept-Ranges',
+  'Access-Control-Allow-Credentials',
+  'Access-Control-Allow-Headers',
+  'Access-Control-Allow-Methods',
+  'Access-Control-Allow-Origin',
+  'Access-Control-Expose-Headers',
+  'Access-Control-Max-Age',
+  'Access-Control-Request-Headers',
+  'Access-Control-Request-Method',
+  'Age',
+  'Allow',
+  'Authorization',
+  'Cache-Control',
+  'Connection',
+  'Content-Disposition',
+  'Content-Encoding',
+  'Content-ID',
+  'Content-Language',
+  'Content-Length',
+  'Content-Location',
+  'Content-MD5',
+  'Content-Range',
+  'Content-Type',
+  'Cookie',
+  'Date',
+  'ETag',
+  'Expires',
+  'Expect',
+  'Forwarded',
+  'From',
+  'Host',
+  'If-Match',
+  'If-Modified-Since',
+  'If-None-Match',
+  'If-Unmodified-Since',
+  'Keep-Alive',
+  'Last-Modified',
+  'Location',
+  'Link',
+  'Max-Forwards',
+  'MIME-Version',
+  'Origin',
+  'Pragma',
+  'Proxy-Authenticate',
+  'Proxy-Authorization',
+  'Proxy-Connection',
+  'Range',
+  'Referer',
+  'Retry-After',
+  'Server',
+  'Set-Cookie',
+  'Set-Cookie2',
+  'TE',
+  'Trailer',
+  'Transfer-Encoding',
+  'Upgrade',
+  'User-Agent',
+  'Vary',
+  'Via',
+  'Warning',
+  'WWW-Authenticate',
+  'X-Forwarded-For',
+  'X-Forwarded-Proto',
+  'X-Forwarded-Server',
+  'X-Forwarded-Host',
+  'X-Forwarded-Port',
+  'X-Forwarded-Prefix',
+];
 
 @Component({
   selector: 'gio-form-headers',
@@ -48,6 +122,8 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor {
   private _onChange: (_headers: Header[] | null) => void = () => ({});
 
   private _onTouched: () => void = () => ({});
+
+  private filteredHeaderNames: Observable<string[]>[] = [];
 
   constructor(private readonly fm: FocusMonitor, private readonly elRef: ElementRef) {
     this.mainForm = new FormGroup({
@@ -103,10 +179,10 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor {
     this.headersFormArray.clear();
 
     // Populate headers array from headers
-    this.headers.forEach(({ key, value }) => {
+    this.headers.forEach(({ key, value }, headerIndex) => {
       this.headersFormArray.push(
         new FormGroup({
-          key: new FormControl(key),
+          key: this.initKeyFormControl(key, headerIndex),
           value: new FormControl(value),
         }),
         {
@@ -119,6 +195,26 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor {
     this.addEmptyHeader();
   }
 
+  public getFilteredHeaderNames(headerIndex: number, header: Header): Observable<string[]> {
+    if (!this.filteredHeaderNames[headerIndex]) {
+      return this.filteredHeaderNames[headerIndex];
+    }
+    if (header.key != null && header.key != '') {
+      this.filteredHeaderNames[headerIndex] = of(header.key).pipe(map(value => this._filter(value)));
+    }
+    return of(HEADER_NAMES);
+  }
+
+  private initKeyFormControl(key: string, headerIndex: number) {
+    const control = new FormControl(key);
+    const filteredKeys = control.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value)),
+    );
+    this.filteredHeaderNames.splice(headerIndex, 0, filteredKeys);
+    return control;
+  }
+
   public onDeleteHeader(headerIndex: number): void {
     this._onTouched();
     this.headersFormArray.removeAt(headerIndex);
@@ -127,11 +223,16 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor {
   private addEmptyHeader() {
     this.headersFormArray.push(
       new FormGroup({
-        key: new FormControl(''),
+        key: this.initKeyFormControl('', this.headersFormArray.length),
         value: new FormControl(''),
       }),
       { emitEvent: false },
     );
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return HEADER_NAMES.filter(option => option.toLowerCase().includes(filterValue));
   }
 }
 

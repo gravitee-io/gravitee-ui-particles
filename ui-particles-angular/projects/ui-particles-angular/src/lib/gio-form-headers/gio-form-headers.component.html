@@ -30,8 +30,20 @@
     >
       <td class="gio-form-headers__table__header-row__td-key">
         <mat-form-field class="gio-form-headers__table__header-row__td-key__field" [floatLabel]="'never'">
-          <textarea formControlName="key" matInput placeholder="Name..." cdkTextareaAutosize cdkAutosizeMinRows="1"></textarea>
+          <textarea
+            formControlName="key"
+            matInput
+            placeholder="Name..."
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="1"
+            [matAutocomplete]="headerNamesAutocomplete"
+          ></textarea>
         </mat-form-field>
+        <mat-autocomplete #headerNamesAutocomplete="matAutocomplete">
+          <mat-option *ngFor="let headerName of getFilteredHeaderNames(headerIndex, control.value) | async" [value]="headerName">{{
+            headerName
+          }}</mat-option>
+        </mat-autocomplete>
       </td>
       <td class="gio-form-headers__table__header-row__td-value">
         <mat-form-field class="gio-form-headers__table__header-row__td-value__field" [floatLabel]="'never'">
