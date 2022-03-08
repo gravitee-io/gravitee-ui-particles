@@ -19,31 +19,51 @@
 
 :host {
   display: block;
+  overflow: hidden;
 }
 
 .gio-form-headers {
   &__table {
     width: 100%;
 
-    &__header-row:hover .gio-form-headers__table__header-row__td-value__button {
-      display: block;
-    }
-
     &__header-row {
       &__td-key,
       &__td-value {
         position: relative;
+        width: 50%;
 
         &__field {
           display: flex;
           overflow: hidden;
-          height: 32px;
+          width: 100%;
+          max-height: 32px;
           flex-direction: column;
           justify-content: center;
+
+          * {
+            top: 0;
+            overflow: hidden;
+            max-height: 32px;
+          }
+        }
+
+        &__field:focus-within {
+          position: absolute;
+          z-index: 100;
+          top: 1px;
+          right: 0;
+          left: 0;
+          height: auto;
+          max-height: none;
+          padding: 0.2rem;
+          background-color: mat.get-color-from-palette(gio.$mat-content-palette, 'lighter');
+
+          * {
+            max-height: none;
+          }
         }
 
         &__button {
-          display: none;
           position: absolute;
           top: 3px;
           right: 3px;
