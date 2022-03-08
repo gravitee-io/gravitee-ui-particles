@@ -13,23 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 @use '@angular/material' as mat;
 
-@use './gio-mat-theme-variable' as theme-variable;
+@use '../gio-mat-theme-variable' as theme;
 
-@use './mat-override' as override;
-
-// Config material theme with gio theme
-@mixin mat-theme() {
-  @include mat.core(theme-variable.$mat-typography);
-  @include mat.all-component-themes(theme-variable.$mat-theme);
-
-  // Gio overrides
-  @include override.mat-h5;
-  @include override.mat-form-field;
-  @include override.mat-table;
-  @include override.mat-card;
-  @include override.mat-list;
-  @include override.mat-tabs;
-  @include override.mat-option;
+@mixin mat-option() {
+  .mat-option,
+  .mat-typography .mat-option {
+    height: 40px;
+    font-size: mat.font-size(theme.$mat-typography, input);
+    line-height: mat.line-height(theme.$mat-typography, input);
+  }
 }
