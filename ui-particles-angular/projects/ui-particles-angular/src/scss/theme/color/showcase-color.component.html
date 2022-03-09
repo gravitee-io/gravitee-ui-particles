@@ -15,32 +15,30 @@
     limitations under the License.
 
 -->
-<mat-card>
-  <table class="sc-table">
-    <thead>
-      <tr>
-        <td>Palettes</td>
-        <td></td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let colorPalette of colorPalettes">
-        <td class="palette-name">$mat-{{ colorPalette.name }}-palette</td>
-        <td class="palette">
-          <div
-            *ngFor="let color of colorPalette.colors"
-            [style.background-color]="color.color"
-            [style.color]="color.contrast"
-            class="color"
-            title="name / background-color / color"
-          >
-            <div>
-              <b>{{ color.name }}</b>
+<mat-card class="card">
+  <h3 class="title">Color Palettes</h3>
+  <div class="row" *ngFor="let colorPalette of colorPalettes">
+    <h4 class="title">$mat-{{ colorPalette.name }}-palette</h4>
+    <div class="palette">
+      <div class="color" *ngFor="let color of colorPalette.colors">
+        <div
+          class="color__box"
+          [style.background-color]="color.color"
+          [style.color]="color.contrast"
+          title="name / background-color / color"
+        >
+          <div class="color__box__values">
+            <div class="values">
+              <span>{{ color.name }}</span>
+              <span>{{ color.color }}</span>
             </div>
-            <div>{{ color.color }} - {{ color.contrast }}</div>
+            <div class="values">
+              <span>contrast</span>
+              <span>{{ color.contrast }}</span>
+            </div>
           </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </mat-card>

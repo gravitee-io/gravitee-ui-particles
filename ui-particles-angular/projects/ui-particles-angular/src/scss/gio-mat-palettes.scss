@@ -18,13 +18,13 @@
 // Primary
 $mat-primary-palette: mat.define-palette(
   (
-    darker: #2546c0,
+    darker: #0d298e,
     default: #325afe,
-    lighter: #d6deff,
+    lighter: #e2e8ff,
     contrast: (
       darker: #d6deff,
-      default: #d6deff,
-      lighter: #2546c0,
+      default: #fff,
+      lighter: #0d298e,
     ),
   ),
   default,
@@ -35,13 +35,13 @@ $mat-primary-palette: mat.define-palette(
 // Accent
 $mat-accent-palette: mat.define-palette(
   (
-    darker: #346aa5,
-    default: #01b6ff,
-    lighter: #ebf7ff,
+    darker: #504190,
+    default: #7259de,
+    lighter: #f0edff,
     contrast: (
-      darker: #ebf7ff,
-      default: #292c35,
-      lighter: #346aa5,
+      darker: #f2efff,
+      default: #fff,
+      lighter: #504190,
     ),
   ),
   default,
@@ -52,15 +52,15 @@ $mat-accent-palette: mat.define-palette(
 // Content color
 $mat-content-palette: mat.define-palette(
   (
-    darker: #292c35,
-    default: #828aa1,
+    darker: #100c27,
+    default: #fff,
     disabled: #e0e0e0,
     lighter: #fff,
     contrast: (
       darker: #eee,
-      default: #000,
+      default: #9698a2,
       disabled: #a6a6a6,
-      lighter: #000,
+      lighter: #100c27,
     ),
   ),
   default,
@@ -71,13 +71,13 @@ $mat-content-palette: mat.define-palette(
 // Neutral color
 $mat-neutral-palette: mat.define-palette(
   (
-    darker: #535b76,
+    darker: #434b67,
     default: #e6e8ec,
     lighter: #eff2ff,
     contrast: (
-      darker: #eff2ff,
-      default: #292c35,
-      lighter: #535b76,
+      darker: #fff,
+      default: #100c27,
+      lighter: #434b67,
     ),
   ),
   default,
@@ -88,13 +88,13 @@ $mat-neutral-palette: mat.define-palette(
 // Success color
 $mat-success-palette: mat.define-palette(
   (
-    darker: #2c6249,
-    default: #53d687,
-    lighter: #ebfdee,
+    darker: #2c6161,
+    default: #0ca4a4,
+    lighter: #ecffff,
     contrast: (
-      darker: #ebfdee,
-      default: #292c35,
-      lighter: #2c6249,
+      darker: #fff,
+      default: #100c27,
+      lighter: #2c6161,
     ),
   ),
   default,
@@ -105,13 +105,13 @@ $mat-success-palette: mat.define-palette(
 // Warning color
 $mat-warning-palette: mat.define-palette(
   (
-    darker: #c67700,
-    default: #feaa2e,
-    lighter: #fef9ef,
+    darker: #c94d00,
+    default: #fe733f,
+    lighter: #fff3ef,
     contrast: (
       darker: #fef9ef,
-      default: #292c35,
-      lighter: #c67700,
+      default: #100c27,
+      lighter: #9e3d00,
     ),
   ),
   default,
@@ -122,13 +122,13 @@ $mat-warning-palette: mat.define-palette(
 // Error color
 $mat-error-palette: mat.define-palette(
   (
-    darker: #bf3133,
-    default: #e36160,
-    lighter: #fff5f4,
+    darker: #8b1750,
+    default: #c23a7d,
+    lighter: #fff0f7,
     contrast: (
-      darker: #fff5f4,
-      default: #292c35,
-      lighter: #bf3133,
+      darker: #fff,
+      default: #fff,
+      lighter: #8b1750,
     ),
   ),
   default,
@@ -142,11 +142,11 @@ $mat-decorative-palette: mat.define-palette(
     background: #eff2ff,
     lighter-background: #f7f8fd,
     surface: #fff,
-    divider: #f3f4f9,
+    divider: #e6e7e8,
     contrast: (
-      background: #292c35,
-      default: #292c35,
-      surface: #292c35,
+      background: #100c27,
+      lighter-background: #100c27,
+      surface: #100c27,
       divider: #000,
     ),
   ),
@@ -160,21 +160,21 @@ $mat-method-palette: mat.define-palette(
   (
     patch: #e5fffb,
     post: #ebfdee,
-    put: #fbf2f2,
+    put: #fff5f5,
     get: #ebf7ff,
-    delete: #fff5f4,
+    delete: #fff6fb,
     option: #f4f6ff,
     trace: #eff2ff,
     head: #faf4ff,
     contrast: (
-      patch: #377,
-      post: #2c6249,
-      put: #a15e35,
-      get: #346aa5,
-      delete: #bf3133,
+      patch: #1a5959,
+      post: #124b31,
+      put: #712c01,
+      get: #144881,
+      delete: #8b1750,
       option: #313fbf,
-      trace: #535b76,
-      head: #9a31bf,
+      trace: #313542,
+      head: #730b98,
     ),
   ),
   patch,
