@@ -1,3 +1,13 @@
+# [2.10.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.9.1...v2.10.0) (2022-03-09)
+
+
+### Features
+
+* **form-headers:** add suggestions for header names ([cd5e099](https://github.com/gravitee-io/gravitee-ui-particles/commit/cd5e099b1c59c9ee8c3c5b2d34d92c28e929002c))
+* **form-headers:** display delete btn on row hover ([4be9d1d](https://github.com/gravitee-io/gravitee-ui-particles/commit/4be9d1ddc3668f6ec95d2a770fc12adeb8dd3abf))
+* **form-headers:** improve usability with long text ([3244e0f](https://github.com/gravitee-io/gravitee-ui-particles/commit/3244e0ffcae5a789ae1ddb9eea48d9146db66223))
+* **mat-option:** override theme with gravitee design ([1fa8636](https://github.com/gravitee-io/gravitee-ui-particles/commit/1fa86368d9e1c5f2ae76d5abed014b09aa8a29b3))
+
 ## [2.9.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.9.0...v2.9.1) (2022-03-08)
 
 
