@@ -13,22 +13,48 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-.sc-table {
-  width: 100%;
-  text-align: center;
+@use 'sass:map';
+@use '@angular/material' as mat;
 
-  td.palette-name {
-    width: 200px;
-    font-weight: bold;
-  }
+@use '../../../scss' as gio;
 
-  td.palette {
-    display: flex;
+.title {
+  flex: 1 1 30%;
+  color: mat.get-color-from-palette(gio.$mat-neutral-palette, default-contrast);
+}
 
-    .color {
-      height: 58px;
-      flex: 1;
-      line-height: 29px;
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.palette {
+  display: flex;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+
+  .color {
+    margin: 5px;
+
+    &__box {
+      display: flex;
+      min-width: 140px;
+      height: 72px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+
+      &__values {
+        display: flex;
+        flex-direction: row;
+
+        .values {
+          display: flex;
+          flex-direction: column;
+          margin: 5px;
+        }
+      }
     }
   }
 }
