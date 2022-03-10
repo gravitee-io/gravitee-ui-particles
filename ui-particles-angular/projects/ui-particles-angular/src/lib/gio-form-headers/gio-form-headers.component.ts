@@ -201,6 +201,7 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor {
     }
     if (header.key != null && header.key != '') {
       this.filteredHeaderNames[headerIndex] = of(header.key).pipe(map(value => this._filter(value)));
+      return this.filteredHeaderNames[headerIndex];
     }
     return of(HEADER_NAMES);
   }
