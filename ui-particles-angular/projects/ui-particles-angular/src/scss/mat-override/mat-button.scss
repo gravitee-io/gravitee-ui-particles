@@ -13,24 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@use '@angular/material' as mat;
+@mixin mat-button() {
+  .mat-button.mat-button-base,
+  .mat-stroked-button.mat-button-base,
+  .mat-raised-button.mat-button-base,
+  .mat-flat-button.mat-button-base {
+    border-radius: 8px;
 
-@use './gio-mat-theme-variable' as theme-variable;
+    &:hover {
+      filter: brightness(115%);
+      transition: all 0.3s linear;
+    }
+  }
 
-@use './mat-override' as override;
-
-// Config material theme with gio theme
-@mixin mat-theme() {
-  @include mat.core(theme-variable.$mat-typography);
-  @include mat.all-component-themes(theme-variable.$mat-theme);
-
-  // Gio overrides
-  @include override.mat-h5;
-  @include override.mat-form-field;
-  @include override.mat-table;
-  @include override.mat-card;
-  @include override.mat-list;
-  @include override.mat-tabs;
-  @include override.mat-option;
-  @include override.mat-button;
+  .mat-icon-button.mat-button-base:hover {
+    filter: brightness(115%);
+    transition: all 0.3s linear;
+  }
 }
