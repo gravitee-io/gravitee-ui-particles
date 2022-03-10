@@ -180,4 +180,18 @@ describe('GioFormHeadersModule', () => {
     expect(testComponent.headersControl.touched).toEqual(true);
     expect(testComponent.headersControl.dirty).toEqual(true);
   });
+
+  it('should filter header keys', async () => {
+    testComponent.headersControl.setValue(HEADERS);
+    const formHeaders = await loader.getHarness(GioFormHeadersHarness);
+
+    const headerRowToEdit = (await formHeaders.getHeaderRows())[1];
+    await headerRowToEdit.keyInput.setValue('');
+    let matOptionHarnesses = await headerRowToEdit.keyAutocomplete.getOptions();
+    expect(matOptionHarnesses.length).toEqual(71);
+
+    await headerRowToEdit.keyInput.setValue('Content-Type');
+    matOptionHarnesses = await headerRowToEdit.keyAutocomplete.getOptions();
+    expect(matOptionHarnesses.length).toEqual(1);
+  });
 });
