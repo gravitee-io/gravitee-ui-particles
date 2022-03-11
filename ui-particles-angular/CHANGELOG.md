@@ -1,3 +1,10 @@
+## [2.10.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.10.0...v2.10.1) (2022-03-11)
+
+
+### Bug Fixes
+
+* **form-headers:** filter suggestions with header name ([ee70a20](https://github.com/gravitee-io/gravitee-ui-particles/commit/ee70a2032d2e1c1f238e5e0974a5027e374bafa8)), closes [gravitee-io#7149](https://github.com/gravitee-io/issues/7149)
+
 # [2.10.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.9.1...v2.10.0) (2022-03-09)
 
 
