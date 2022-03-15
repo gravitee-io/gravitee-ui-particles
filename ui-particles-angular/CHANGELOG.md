@@ -1,3 +1,10 @@
+## [2.10.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.10.1...v2.10.2) (2022-03-15)
+
+
+### Bug Fixes
+
+* add missing icons ([eefe0e1](https://github.com/gravitee-io/gravitee-ui-particles/commit/eefe0e16d936763c4bca93cd444d6b6f09d207fa))
+
 ## [2.10.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.10.0...v2.10.1) (2022-03-11)
 
 
