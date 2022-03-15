@@ -29,4 +29,8 @@
   .mat-form-field + .mat-form-field {
     margin-top: 8px;
   }
+
+  .mat-form-field-disabled {
+    cursor: not-allowed;
+  }
 }
