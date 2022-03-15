@@ -105,3 +105,27 @@ export const MarginBetweenMatFormField: Story = {
     },
   }),
 };
+
+export const DisabledMatFormFieldShouldHaveNotAllowedCursor: Story = {
+  render: () => ({
+    template: `
+      <p>
+      Set cursor not-allowed on disabled form field
+      </p>
+      
+      <mat-card>
+        <p style="display:flex; flex-direction:column;">
+          <mat-form-field appearance="fill" disabled="true">
+            <mat-label>Fill form field</mat-label>
+            <input matInput placeholder="Placeholder" disabled />
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+        </p>
+      </mat-card>
+    `,
+    props: {
+      emailFormControl: new FormControl('', [Validators.required, Validators.email]),
+    },
+  }),
+};
