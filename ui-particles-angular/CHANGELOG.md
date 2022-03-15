@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.11.0...v3.0.0) (2022-03-15)
+
+
+### Features
+
+* update mat palette colors ([2c8b19e](https://github.com/gravitee-io/gravitee-ui-particles/commit/2c8b19e357198c3628924ea54d662a19de7cc170))
+
+
+### BREAKING CHANGES
+
+* update of mat palette colors
+
 # [2.11.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.10.2...v2.11.0) (2022-03-15)
 
 
