@@ -1,3 +1,10 @@
+# [2.11.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.10.2...v2.11.0) (2022-03-15)
+
+
+### Features
+
+* override mat-button style ([ffccf30](https://github.com/gravitee-io/gravitee-ui-particles/commit/ffccf307017f001ecda5ec9f12643f8fef292a80))
+
 ## [2.10.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.10.1...v2.10.2) (2022-03-15)
 
 
