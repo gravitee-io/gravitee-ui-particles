@@ -19,6 +19,7 @@
 @use '../../scss' as gio;
 
 $background: map.get(gio.$mat-theme, background);
+$typography: map.get(gio.$mat-theme, typography);
 
 // Map for palette by type
 $types: (
@@ -34,38 +35,28 @@ $types: (
 }
 
 .banner {
+  @include mat.typography-level($typography, body-2);
+
   display: flex;
   align-items: center;
-  padding: 0 16px;
-  border-radius: 4px;
+  padding: 16px;
+  border-radius: 8px;
 
   @each $typeName, $typePalette in $types {
     &.#{$typeName} {
       border: 1px solid mat.get-color-from-palette($typePalette, default);
-      background-color: mat.get-color-from-palette($background, card);
-      box-shadow: 8px 0 0 0 mat.get-color-from-palette($typePalette, lighter, 0.12) inset;
-      color: mat.get-color-from-palette($typePalette, darker);
-
-      $typeTarget: &; // current css target
-      // when banner is inside mat-card
-      :host-context(.mat-card) {
-        #{$typeTarget} {
-          background-color: mat.get-color-from-palette($typePalette, lighter, 0.12);
-          box-shadow: none;
-        }
-      }
+      background-color: mat.get-color-from-palette($typePalette, lighter);
+      color: mat.get-color-from-palette($typePalette, default);
     }
   }
 
   &__icon {
-    padding-top: 8px;
-    margin-right: 16px;
-    opacity: 0.9;
+    display: flex;
+    margin-right: 18px;
   }
 
   &__content {
     flex: 1 1 auto;
-    padding: 8px 0;
     line-height: normal;
   }
 }

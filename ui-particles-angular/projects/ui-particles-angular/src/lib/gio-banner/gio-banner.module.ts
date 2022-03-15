@@ -17,6 +17,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
+import { GioIconsModule } from '../gio-icons/gio-icons.module';
+
 import {
   GioBannerComponent,
   GioBannerErrorComponent,
@@ -26,7 +28,7 @@ import {
 } from './gio-banner.component';
 
 @NgModule({
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatIconModule, GioIconsModule],
   declarations: [GioBannerComponent, GioBannerErrorComponent, GioBannerInfoComponent, GioBannerSuccessComponent, GioBannerWarningComponent],
   exports: [GioBannerComponent, GioBannerErrorComponent, GioBannerInfoComponent, GioBannerSuccessComponent, GioBannerWarningComponent],
   entryComponents: [

@@ -22,13 +22,11 @@
   [class.warning]="type === 'warning'"
   [class.success]="type === 'success'"
 >
-  <div class="banner__icon">
-    <div [ngSwitch]="type">
-      <mat-icon *ngSwitchCase="'info'">info</mat-icon>
-      <mat-icon *ngSwitchCase="'error'">error</mat-icon>
-      <mat-icon *ngSwitchCase="'warning'">warning</mat-icon>
-      <mat-icon *ngSwitchCase="'success'">check_circle</mat-icon>
-    </div>
+  <div class="banner__icon" [ngSwitch]="type">
+    <mat-icon *ngSwitchCase="'info'" svgIcon="gio:info-empty">info</mat-icon>
+    <mat-icon *ngSwitchCase="'error'" svgIcon="gio:warning-circled-outline"></mat-icon>
+    <mat-icon *ngSwitchCase="'warning'" svgIcon="gio:warning-triangle-outline"></mat-icon>
+    <mat-icon *ngSwitchCase="'success'" svgIcon="gio:check-circled-outline"></mat-icon>
   </div>
   <div class="banner__content">
     <ng-content></ng-content>
