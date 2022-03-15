@@ -3310,6 +3310,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@figspec/components@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@figspec/components@npm:1.0.0"
+  dependencies:
+    copy-to-clipboard: ^3.0.0
+    lit-element: ^2.4.0
+    lit-html: ^1.1.1
+  checksum: c1649e11ecbeecc20861c38dbdad582713c5ac7ac8bfe2b83082a902befe6a846e6b5a7fb9e698fb9d23b272e5ac1a3dcbe9c79d62e919ce9b0f21609e7cf2f8
+  languageName: node
+  linkType: hard
+
+"@figspec/react@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@figspec/react@npm:1.0.0"
+  dependencies:
+    "@figspec/components": ^1.0.0
+  peerDependencies:
+    react: ^16.14.0 || ^17.0.0
+  checksum: 27d7e2f6854c2381d4e7343312195788b53cc094079edc700ac26bc950763a735effaa09eb9df0ec8b4e7c941ff5e00a77e0e3692ee7b756193e285fd9e47558
+  languageName: node
+  linkType: hard
+
 "@fontsource/fira-mono@npm:4.5.0":
   version: 4.5.0
   resolution: "@fontsource/fira-mono@npm:4.5.0"
@@ -9468,7 +9490,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"copy-to-clipboard@npm:^3.3.1":
+"copy-to-clipboard@npm:^3.0.0, copy-to-clipboard@npm:^3.3.1":
   version: 3.3.1
   resolution: "copy-to-clipboard@npm:3.3.1"
   dependencies:
@@ -13043,6 +13065,7 @@ __metadata:
     lint-staged: 12.1.4
     prettier: 2.5.1
     sort-package-json: 1.53.1
+    storybook-addon-designs: 6.2.1
   languageName: unknown
   linkType: soft
 
@@ -16247,6 +16270,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lit-element@npm:^2.4.0":
+  version: 2.5.1
+  resolution: "lit-element@npm:2.5.1"
+  dependencies:
+    lit-html: ^1.1.1
+  checksum: c4f45d0cc84d49cc9dca2502b5e0bd14289c46a5ee331c21fb0014693541a4824887f8c2c6725310d380d713adecbe31fba1eda6f8aabc14927f524d6527f6c9
+  languageName: node
+  linkType: hard
+
 "lit-element@npm:^3.1.0":
   version: 3.1.1
   resolution: "lit-element@npm:3.1.1"
@@ -16254,6 +16286,13 @@ __metadata:
     "@lit/reactive-element": ^1.1.0
     lit-html: ^2.1.0
   checksum: 93cac9b4c36f8601c6c54566f4e572c8a5462f1b0842ef6c21252f8723c822529624dc2bb5fb36aefc7284a7939714c33e13a89bdcf37d19a02255c9588e22d6
+  languageName: node
+  linkType: hard
+
+"lit-html@npm:^1.1.1":
+  version: 1.4.1
+  resolution: "lit-html@npm:1.4.1"
+  checksum: 6e1bb335cd8493700d2f1eaf1e019c2f6bf78ac641bdba5e2ff9f1545430e0fec15c6721ee1c8ca75559e1d52a1d34cdc568da46319681304299d9aff83a6346
   languageName: node
   linkType: hard
 
@@ -22435,6 +22474,15 @@ __metadata:
   version: 2.12.0
   resolution: "store2@npm:2.12.0"
   checksum: dd4184a677b11e5efc304b910d08f43e2b0ea018930a4e5ac407cb3472f08a6d42004c43b5f249c7299ba9cfd05cbe1eed998ea3f3388d2ca0f0650a6efb5dc4
+  languageName: node
+  linkType: hard
+
+"storybook-addon-designs@npm:6.2.1":
+  version: 6.2.1
+  resolution: "storybook-addon-designs@npm:6.2.1"
+  dependencies:
+    "@figspec/react": ^1.0.0
+  checksum: 0ea3ef4d1b08b5604ac0592697793a5e30eac33fae8499bd772a1568bc21bb2ea67ed638d9b4c2f4e94713ceb5321e23fb4985d381e3c9c61094abe3a6b58063
   languageName: node
   linkType: hard
 
