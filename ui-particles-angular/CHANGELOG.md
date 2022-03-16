@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.0.0...v3.0.1) (2022-03-16)
+
+
+### Bug Fixes
+
+* use default color and not the contrast color for content palette ([0a447e9](https://github.com/gravitee-io/gravitee-ui-particles/commit/0a447e9536e344b270a00d5b4f2d76d010ead4b8))
+
 # [3.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v2.11.0...v3.0.0) (2022-03-15)
 
 
