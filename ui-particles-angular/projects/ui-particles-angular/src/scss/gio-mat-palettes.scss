@@ -53,12 +53,12 @@ $mat-accent-palette: mat.define-palette(
 $mat-content-palette: mat.define-palette(
   (
     darker: #100c27,
-    default: #fff,
+    default: #9698a2,
     disabled: #e0e0e0,
     lighter: #fff,
     contrast: (
       darker: #eee,
-      default: #9698a2,
+      default: #fff,
       disabled: #a6a6a6,
       lighter: #100c27,
     ),
