@@ -1,0 +1,43 @@
+import { Meta, Story } from '@storybook/addon-docs';
+
+<Meta title="Components / Confirm dialog / README" />
+
+# Confirm dialog
+
+Documentation and examples for Confirm dialog, a component to asking for confirmation.
+
+## Demo
+
+<Story id="components-confirm-dialog--custom"/>
+
+## Usage
+
+**Inputs**
+ - `title`: `string` - The dialog title.
+ - `content`: `string` - The dialog content override.
+ - `confirmButton`: `string` - The dialog confirmation button override.
+ - `confirmCancel`: `string` - The dialog cancel button override.
+
+Example:
+
+```typescript
+
+this.matDialog
+  .open<GioConfirmDialogComponent, GioConfirmDialogData, boolean>(GioConfirmDialogComponent, {
+    data: {
+      title: 'title override',
+      content: 'content override',
+      confirmButton: 'confirmButton override',
+      cancelButton: 'cancelButton override',
+    },
+    role: 'alertdialog',
+    id: 'confirmDialog',
+  })
+  .afterClosed()
+  .pipe(
+    tap(confirmed => {
+      action('confirmed?')(confirmed);
+    }),
+  )
+  .subscribe((confirmed => {});
+```
