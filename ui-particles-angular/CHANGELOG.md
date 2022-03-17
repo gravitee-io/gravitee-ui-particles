@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.0.1...v3.1.0) (2022-03-17)
+
+
+### Features
+
+* **banner:** update style to match the new design ([acf286e](https://github.com/gravitee-io/gravitee-ui-particles/commit/acf286efd1f5783a0df44464325888026aa148c8))
+
 ## [3.0.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.0.0...v3.0.1) (2022-03-16)
 
 
