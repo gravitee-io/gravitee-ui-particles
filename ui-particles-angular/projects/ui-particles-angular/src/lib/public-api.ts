@@ -28,6 +28,10 @@ export * from './gio-form-tags-input/gio-form-tags-input.harness';
 export * from './gio-banner/gio-banner.component';
 export * from './gio-banner/gio-banner.module';
 
+export * from './gio-confirm-dialog/gio-confirm-dialog.component';
+export * from './gio-confirm-dialog/gio-confirm-dialog.module';
+export * from './gio-confirm-dialog/gio-confirm-dialog.harness';
+
 export * from './gio-icons/gio-icons.module';
 
 export * from './gio-form-headers/gio-form-headers.component';
