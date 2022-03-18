@@ -1,3 +1,10 @@
+# [3.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.2.0...v3.3.0) (2022-03-18)
+
+
+### Features
+
+* add gio-confirm-dialog component ([c2eaea2](https://github.com/gravitee-io/gravitee-ui-particles/commit/c2eaea2de12d47076ed9a5705a81630751b064fa))
+
 # [3.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.1.0...v3.2.0) (2022-03-18)
 
 
