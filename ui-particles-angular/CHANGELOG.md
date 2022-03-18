@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.1.0...v3.2.0) (2022-03-18)
+
+
+### Features
+
+* add cursor not allowed on disabled form field ([09c1935](https://github.com/gravitee-io/gravitee-ui-particles/commit/09c193503ed2903266e79c8e64fb89fc5f3c82ce))
+
 # [3.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.0.1...v3.1.0) (2022-03-17)
 
 
