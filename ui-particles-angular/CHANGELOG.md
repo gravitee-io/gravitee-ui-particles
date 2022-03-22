@@ -1,3 +1,10 @@
+## [3.3.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.3.0...v3.3.1) (2022-03-22)
+
+
+### Bug Fixes
+
+* **banner:** remove extra info text in info banner ([b709841](https://github.com/gravitee-io/gravitee-ui-particles/commit/b70984129961339d2194750c3bf64694b6c41a1e))
+
 # [3.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.2.0...v3.3.0) (2022-03-18)
 
 
