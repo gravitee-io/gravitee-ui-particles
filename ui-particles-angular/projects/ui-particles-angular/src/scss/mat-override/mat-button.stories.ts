@@ -67,7 +67,7 @@ export const MatButton: Story = {
               </div>
               
               <div>
-                  <h4>Flat</h4>
+                  <h4>Stroked</h4>
                   <div class="button-container">
                       <button mat-stroked-button>Basic</button>
                       <button mat-stroked-button color="primary">Primary</button>
