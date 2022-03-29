@@ -234,7 +234,9 @@ workflows:
             - keeper/env-export:
                 secret-url: keeper://TIlcGPFq4rN5GvgnZb9hng/field/password
                 var-name: GITHUB_TOKEN
-          context: gravitee-qa
+          context: 
+            - gravitee-qa
+            - cicd-orchestrator
           requires:
             - Build Angular
       - prerelease:
@@ -248,7 +250,9 @@ workflows:
             - keeper/env-export:
                 secret-url: keeper://TIlcGPFq4rN5GvgnZb9hng/field/password
                 var-name: GITHUB_TOKEN
-          context: gravitee-qa
+          context: 
+            - gravitee-qa
+            - cicd-orchestrator
           requires:
             - Build Angular
       - release:
@@ -274,7 +278,9 @@ workflows:
             - keeper/env-export:
                 secret-url: keeper://q9AKrHbbTqSGDoUl-Lg85g/custom_field/email
                 var-name: GIT_COMMITTER_EMAIL
-          context: gravitee-qa
+          context: 
+            - gravitee-qa
+            - cicd-orchestrator
           requires:
             - Build Angular
       - build-storybook:
@@ -288,7 +294,9 @@ workflows:
             - Build Angular Storybook
       - chromatic-deployment:
           name: Chromatic deployment for Angular
-          context: gravitee-qa
+          context: 
+            - gravitee-qa
+            - cicd-orchestrator
           package_name: ui-particles-angular
           requires:
             - trigger-chromatic
@@ -319,7 +327,9 @@ workflows:
             - Lint & Test
       - chromatic-deployment:
           name: Chromatic deployment for Angular
-          context: gravitee-qa
+          context: 
+            - gravitee-qa
+            - cicd-orchestrator
           package_name: ui-particles-angular
           requires:
             - Build Angular Storybook
@@ -350,6 +360,8 @@ workflows:
             - keeper/env-export:
                 secret-url: keeper://q9AKrHbbTqSGDoUl-Lg85g/custom_field/email
                 var-name: GIT_COMMITTER_EMAIL
-          context: gravitee-qa
+          context: 
+            - gravitee-qa
+            - cicd-orchestrator
           requires:
             - Chromatic deployment for Angular
