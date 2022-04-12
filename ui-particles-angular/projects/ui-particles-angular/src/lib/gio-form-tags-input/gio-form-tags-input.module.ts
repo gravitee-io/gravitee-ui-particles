@@ -17,14 +17,16 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 import { GioFormTagsInputComponent } from './gio-form-tags-input.component';
 
 @NgModule({
-  imports: [CommonModule, A11yModule, MatChipsModule, MatInputModule, FormsModule, MatIconModule],
+  imports: [CommonModule, A11yModule, MatChipsModule, MatInputModule, FormsModule, MatIconModule, MatAutocompleteModule, MatSelectModule],
   declarations: [GioFormTagsInputComponent],
   exports: [GioFormTagsInputComponent],
   entryComponents: [GioFormTagsInputComponent],

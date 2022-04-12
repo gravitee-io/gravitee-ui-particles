@@ -173,3 +173,40 @@ export const WithTagValidationHook: Story = {
     },
   },
 };
+
+export const WithAutocomplete: Story = {
+  render: ({ tags, placeholder, required, disabled }) => {
+    const tagsControl = new FormControl({ value: tags, disabled });
+
+    tagsControl.valueChanges.subscribe(value => {
+      action('Tags')(value);
+    });
+
+    return {
+      template: `
+      <mat-form-field appearance="fill" style="width:100%">
+        <mat-label>Labels</mat-label>
+        <gio-form-tags-input
+          [required]="required" 
+          [placeholder]="placeholder" 
+          [formControl]="tagsControl"
+          [autocompleteOptions]="['Abc', 'Aaa', 'Bbb', 'Cccc', 'Dddd']"
+        >
+        </gio-form-tags-input>
+      </mat-form-field>
+      `,
+      props: {
+        tags,
+        placeholder,
+        required,
+        disabled,
+        tagsControl,
+      },
+    };
+  },
+  args: {
+    tags: ['A'],
+    disabled: false,
+    placeholder: 'Add a tag',
+  },
+};

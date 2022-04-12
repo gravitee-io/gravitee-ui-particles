@@ -17,12 +17,13 @@
 
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Component, DoCheck, ElementRef, HostBinding, Input, OnDestroy, Optional, Self, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, DoCheck, ElementRef, HostBinding, Input, OnDestroy, Optional, Self, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { MatChipInputEvent } from '@angular/material/chips';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { isEmpty } from 'lodash';
-import { Subject } from 'rxjs';
+import { fromEvent, Observable, Subject } from 'rxjs';
+import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
 
 export type Tags = Array<string>;
 
@@ -64,8 +65,19 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
   @Input()
   public tagValidationHook: ((tag: string, validationCb: (shouldAddTag: boolean) => void) => void) | undefined = undefined;
 
+  @Input()
+  public set autocompleteOptions(v: string[] | undefined) {
+    this._autocompleteOptions = v;
+    this.initAutocomplete();
+  }
+  public _autocompleteOptions?: string[];
+
   @ViewChild('tagInput')
-  public tagInput: ElementRef<HTMLInputElement> | null = null;
+  public set tagInput(v: ElementRef<HTMLInputElement> | null) {
+    this._tagInput = v;
+    this.initAutocomplete();
+  }
+  private _tagInput: ElementRef<HTMLInputElement> | null = null;
 
   // From ControlValueAccessor interface
   public get value(): Tags | null {
@@ -100,12 +112,14 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
 
   private _placeholder = '';
 
+  public autocompleteFilteredOptions$?: Observable<string[]>;
+
   // From ControlValueAccessor interface
   public focused = false;
 
   // From ControlValueAccessor interface
   public get empty(): boolean {
-    return isEmpty(this.value) && isEmpty(this.tagInput?.nativeElement?.value);
+    return isEmpty(this.value) && isEmpty(this._tagInput?.nativeElement?.value);
   }
 
   // From ControlValueAccessor interface
@@ -165,6 +179,7 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
     @Optional() @Self() public readonly ngControl: NgControl,
     private readonly elRef: ElementRef,
     private readonly fm: FocusMonitor,
+    private changeDetectorRef: ChangeDetectorRef,
   ) {
     // Replace the provider from above with this.
     if (this.ngControl != null) {
@@ -221,8 +236,8 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
   public onContainerClick(_event: MouseEvent): void {}
 
-  public addChipToFormControl(event: MatChipInputEvent): void {
-    const input = event.chipInput?.inputElement;
+  public addChipToFormControl(event: { value: string }): void {
+    const input = this._tagInput?.nativeElement;
     const tagToAdd = (event.value ?? '').trim();
 
     if (isEmpty(tagToAdd)) {
@@ -253,5 +268,31 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
 
   public removeChipToFormControl(tag: string): void {
     this.value = [...(this.value ?? [])].filter(v => v !== tag);
+  }
+
+  public onAutocompleteSelect(event: MatAutocompleteSelectedEvent): void {
+    this.addChipToFormControl({ value: event.option.value });
+  }
+
+  public onMatChipTokenEnd(): void {
+    // Give priority to the `onAutocompleteSelect` when validating with the blur event
+    setTimeout(() => {
+      this.addChipToFormControl({ value: this._tagInput?.nativeElement.value ?? '' });
+    }, 100);
+  }
+
+  private initAutocomplete(): void {
+    if (this._autocompleteOptions && this._tagInput?.nativeElement) {
+      this.autocompleteFilteredOptions$ = fromEvent(this._tagInput.nativeElement, 'keyup').pipe(
+        startWith([] as string[]),
+        map(() => {
+          return (this._autocompleteOptions ?? []).filter(defaultHeader =>
+            defaultHeader.toLowerCase().includes((this._tagInput?.nativeElement.value ?? '').toLowerCase()),
+          );
+        }),
+        distinctUntilChanged(),
+      );
+      this.changeDetectorRef.detectChanges();
+    }
   }
 }

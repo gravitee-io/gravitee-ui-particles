@@ -23,9 +23,16 @@
   <input
     *ngIf="!disabled"
     #tagInput
+    [matAutocompleteDisabled]="!_autocompleteOptions"
+    [matAutocomplete]="auto"
     [placeholder]="placeholder"
     [matChipInputFor]="tagChipList"
     [matChipInputAddOnBlur]="addOnBlur"
-    (matChipInputTokenEnd)="addChipToFormControl($event)"
+    (matChipInputTokenEnd)="onMatChipTokenEnd()"
   />
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onAutocompleteSelect($event)">
+    <mat-option *ngFor="let value of autocompleteFilteredOptions$ | async" [value]="value">
+      {{ value }}
+    </mat-option>
+  </mat-autocomplete>
 </mat-chip-list>
