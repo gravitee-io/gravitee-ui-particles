@@ -15,6 +15,7 @@
  */
 
 import { BaseHarnessFilters, ComponentHarness, HarnessPredicate, parallel, TestKey } from '@angular/cdk/testing';
+import { MatAutocompleteHarness } from '@angular/material/autocomplete/testing';
 import { MatChipListHarness } from '@angular/material/chips/testing';
 
 export type GioFormTagsInputHarnessFilters = BaseHarnessFilters;
@@ -62,5 +63,11 @@ export class GioFormTagsInputHarness extends ComponentHarness {
     if (chips[0]) {
       await chips[0].remove();
     }
+  }
+
+  public async getMatAutocompleteHarness(): Promise<MatAutocompleteHarness | null> {
+    const matAutocompleteHarness = await this.locatorForOptional(MatAutocompleteHarness)();
+
+    return matAutocompleteHarness;
   }
 }

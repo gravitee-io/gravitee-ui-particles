@@ -34,6 +34,7 @@ import { GioFormTagsInputModule } from './gio-form-tags-input.module';
         [placeholder]="placeholder"
         [formControl]="tagsControl"
         [tagValidationHook]="tagValidationHook"
+        [autocompleteOptions]="autocompleteOptions"
       ></gio-form-tags-input>
       <mat-error>Error</mat-error>
     </mat-form-field>
@@ -43,6 +44,7 @@ class TestComponent {
   public required = false;
   public placeholder = 'Add a tag';
   public tagValidationHook: ((tag: string, validationCb: (shouldAddTag: boolean) => void) => void) | undefined = undefined;
+  public autocompleteOptions?: string[] = undefined;
 
   public tagsControl = new FormControl(null, Validators.required);
 }
@@ -139,5 +141,33 @@ describe('GioFormTagsInputModule', () => {
     component.tagsControl.markAsTouched();
 
     expect(await matFormFieldHarness.hasErrors()).toBe(true);
+  });
+
+  describe('with autocomplete', () => {
+    beforeEach(() => {
+      fixture.detectChanges();
+      component.autocompleteOptions = ['alpha', 'beta', 'gamma'];
+      fixture.detectChanges();
+    });
+
+    it('should add tag by autocomplete', async () => {
+      const formTagsInputHarness = await loader.getHarness(GioFormTagsInputHarness);
+      fixture.detectChanges();
+
+      const matAutocomplete = await formTagsInputHarness.getMatAutocompleteHarness();
+
+      await matAutocomplete?.enterText('al');
+
+      const options = await matAutocomplete?.getOptions();
+      if (options?.length !== 1) {
+        throw new Error('Should be equal to 1');
+      }
+
+      expect(await options[0].getText()).toEqual('alpha');
+
+      await options[0].click();
+
+      expect(await formTagsInputHarness.getTags()).toEqual(['alpha']);
+    });
   });
 });
