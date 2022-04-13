@@ -1,3 +1,10 @@
+# [3.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.3.1...v3.4.0) (2022-04-13)
+
+
+### Features
+
+* add autocomplete options for gio-form-tags ([7e29fb9](https://github.com/gravitee-io/gravitee-ui-particles/commit/7e29fb964dc54469ca2f904364f1f2cb8d969066))
+
 ## [3.3.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.3.0...v3.3.1) (2022-03-22)
 
 
