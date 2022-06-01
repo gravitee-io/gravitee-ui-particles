@@ -31,8 +31,8 @@
     "colors": "1.4.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "15.0.0",
-    "@commitlint/config-conventional": "15.0.0",
+    "@commitlint/cli": "17.0.2",
+    "@commitlint/config-conventional": "17.0.2",
     "chromatic": "6.3.3",
     "husky": "7.0.4",
     "license-check-and-add": "4.0.3",
