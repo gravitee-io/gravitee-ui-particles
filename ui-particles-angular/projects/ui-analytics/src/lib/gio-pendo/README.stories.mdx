@@ -1,0 +1,56 @@
+import { Meta, Story } from '@storybook/addon-docs';
+
+<Meta title="Tools / Pendo Analytics / README" />
+
+# Pendo Analytics
+
+Enable Pendo Analytics.
+
+`npm install @gravitee/ui-analytics` or `yarn add @gravitee/ui-analytics`
+
+## Configuration
+
+Add the `GioPendoModule.forRoot()` to your application. And configure it with a provider like :
+
+```ts
+{
+  provide: GIO_PENDO_SETTINGS_TOKEN,
+  useFactory: (constants: Constants) => {
+    return {
+      enabled: constants.org?.settings?.analyticsPendo?.enabled ?? false,
+      apiKey: constants.org?.settings?.analyticsPendo?.apiKey,
+    };
+  },
+  deps: ['Constants'],
+}
+```
+
+or directly with `forRoot(settings?: GioPendoSettings)` settings
+
+For lazy module only import `GioPendoModule`
+
+## Usage
+
+### GioPendoService
+
+You can use `GioPendoService` to interact with pendo [api](https://engageapi.pendo.io/)
+
+#### Initialise
+
+Completely re-initialize the Agent with new options, which does NOT reload Guides automatically. See loadGuides instead
+
+```ts
+initialize(visitor: { id: string } & Record<string, string>, account?: { id: string } & Record<string, string>): void
+```
+
+#### Track
+
+Queue a trackType event or transmission, optionally including metadata as the payload for the event.
+
+```ts
+track(event: string, properties: Record<string, unknown>): void
+```
+
+## Testing
+
+Run this into browser console to validate Pendo installation : `pendo.validateInstall()`

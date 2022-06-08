@@ -18,6 +18,7 @@
     "lib": ["es2018", "dom"],
     "paths": {
       // Added by angular-cli
+      "ui-analytics": ["dist/ui-analytics/ui-analytics", "dist/ui-analytics"],
       "ui-particles-angular": ["dist/ui-particles-angular/ui-particles-angular", "dist/ui-particles-angular"],
       "ui-policy-studio-angular": ["dist/ui-policy-studio-angular/ui-policy-studio-angular", "dist/ui-policy-studio-angular"]
     },
