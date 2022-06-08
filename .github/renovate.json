@@ -65,10 +65,16 @@
       }
     },
     {
-      "matchPackagePatterns": ["^typescript", "^tslib"],
+      "matchPackagePatterns": ["^typescript$"],
       "matchUpdateTypes": ["patch"],
       "groupSlug": "typescript",
       "groupName": "Typescript dependencies"
+    },
+    {
+      "matchPackagePatterns": ["^tslib"],
+      "matchUpdateTypes": ["patch"],
+      "groupSlug": "tslib",
+      "groupName": "Tslib dependencies"
     },
     {
       "matchPackagePatterns": ["^@storybook/.*"],
