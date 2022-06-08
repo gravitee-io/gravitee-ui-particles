@@ -14,35 +14,7 @@
  * limitations under the License.
  */
 module.exports = {
-  branches: ['main'],
-  plugins: [
-    '@semantic-release/commit-analyzer',
-    '@semantic-release/release-notes-generator',
-    '@semantic-release/changelog',
-    [
-      '@semantic-release/npm',
-      {
-        pkgRoot: 'dist/ui-analytics',
-      },
-    ],
-    [
-      '@semantic-release/npm',
-      {
-        pkgRoot: 'dist/ui-particles-angular',
-      },
-    ],
-    [
-      '@semantic-release/npm',
-      {
-        pkgRoot: 'dist/ui-policy-studio-angular',
-      },
-    ],
-    '@semantic-release/github',
-    [
-      '@semantic-release/git',
-      {
-        message: 'chore(release): ${nextRelease.version} [skip ci]',
-      },
-    ],
-  ],
+  preset: 'jest-preset-angular',
+  roots: [__dirname + '/src'],
+  setupFilesAfterEnv: [__dirname + '/src/setup-jest.ts'],
 };

@@ -8,6 +8,42 @@
   },
   "newProjectRoot": "projects",
   "projects": {
+    "ui-analytics": {
+      "projectType": "library",
+      "root": "projects/ui-analytics",
+      "sourceRoot": "projects/ui-analytics/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ui-analytics/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ui-analytics/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ui-analytics/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "configPath": "jest.config.js",
+            "tsConfig": "tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["projects/ui-analytics/**/*.ts", "projects/ui-analytics/**/*.html"]
+          }
+        }
+      }
+    },
     "ui-particles-angular": {
       "projectType": "library",
       "root": "projects/ui-particles-angular",
