@@ -1,3 +1,10 @@
+# [3.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.4.0...v3.5.0) (2022-06-09)
+
+
+### Features
+
+* create new ui-analytics with pendo module ([67739bc](https://github.com/gravitee-io/gravitee-ui-particles/commit/67739bc9f85de239a2e818dd419b3d28bd754e97))
+
 # [3.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.3.1...v3.4.0) (2022-04-13)
 
 
