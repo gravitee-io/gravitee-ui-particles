@@ -3432,9 +3432,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gravitee/ui-components@npm:^3.28.5":
-  version: 3.28.5
-  resolution: "@gravitee/ui-components@npm:3.28.5"
+"@gravitee/ui-components@npm:^3.36.1":
+  version: 3.36.1
+  resolution: "@gravitee/ui-components@npm:3.36.1"
   dependencies:
     "@codemirror/basic-setup": ^0.19.1
     "@codemirror/language-data": ^0.19.1
@@ -3453,10 +3453,10 @@ __metadata:
     whatwg-fetch: ^3.4.1
   peerDependencies:
     "@asciidoctor/core": ^2.2.4
-    "@highcharts/map-collection": ^1.0.0
+    "@highcharts/map-collection": ^1.0.0 || ^2.0.0
     asciidoctor: ^2.2.4
     asciidoctor-highlight.js: ^0.3.0 || ^0.4.0
-    highcharts: ^8.0.0 || ^9.0.0
+    highcharts: ^8.0.0 || ^9.0.0 || ^10.0.0
     highlight.js: ^10.7.0 || ^11.1.0
   peerDependenciesMeta:
     "@asciidoctor/core":
@@ -3471,7 +3471,7 @@ __metadata:
       optional: true
     highlight.js:
       optional: true
-  checksum: 454fe26c4ad99528fe896a37ab72b0cd776904a30e3fdb749ab29c72d9dd18ce0ac82e0ce462994e7a4d6006ff0e728c2d9157d9aa640913b2adb4328c681557
+  checksum: b0796f77d312efa55e2b27591bf47f86aee529f76ac401a2dedb1cb1c6857d946e2a8ffb57bb185542d6b64ac8f91c97c924d6e36de637f335315dca61847cbd
   languageName: node
   linkType: hard
 
@@ -24219,7 +24219,7 @@ __metadata:
     "@fontsource/fira-mono": 4.5.0
     "@fontsource/golos-ui": ^4.5.1
     "@fontsource/material-icons": 4.5.1
-    "@gravitee/ui-components": ^3.28.5
+    "@gravitee/ui-components": ^3.36.1
     "@highcharts/map-collection": ^1.1.4
     "@semantic-release/changelog": 6.0.1
     "@semantic-release/exec": 6.0.3

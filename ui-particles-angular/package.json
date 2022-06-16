@@ -33,7 +33,7 @@
     "@fontsource/fira-mono": "4.5.0",
     "@fontsource/golos-ui": "^4.5.1",
     "@fontsource/material-icons": "4.5.1",
-    "@gravitee/ui-components": "^3.28.5",
+    "@gravitee/ui-components": "^3.36.1",
     "@highcharts/map-collection": "^1.1.4",
     "asciidoctor": "^2.2.5",
     "asciidoctor-highlight.js": "^0.4.0",
