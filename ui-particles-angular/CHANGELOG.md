@@ -1,3 +1,10 @@
+## [3.5.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.5.0...v3.5.1) (2022-06-16)
+
+
+### Bug Fixes
+
+* reword flow-mode into flow_mode ([fc6b2e9](https://github.com/gravitee-io/gravitee-ui-particles/commit/fc6b2e9225a49ebdc615ab0eeb80a464a6d8de0b))
+
 # [3.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.4.0...v3.5.0) (2022-06-09)
 
 
