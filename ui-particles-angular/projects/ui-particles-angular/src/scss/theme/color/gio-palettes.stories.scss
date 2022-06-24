@@ -54,4 +54,89 @@ $palettes: (
     method__#{$colorName}: mat.get-color-from-palette(gio.$mat-method-palette, $colorName);
     method__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-method-palette, #{$colorName}-contrast);
   }
+
+  @each $colorName
+    in (
+      black,
+      white,
+      space,
+      space10,
+      space20,
+      space30,
+      space40,
+      space50,
+      space60,
+      space70,
+      space80,
+      dove,
+      dove10,
+      dove20,
+      dove30,
+      dove40,
+      dove50,
+      dove60,
+      dove70,
+      dove80
+    )
+  {
+    neutrals__#{$colorName}: mat.get-color-from-palette(gio.$mat-neutrals-palette, $colorName);
+    neutrals__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-neutrals-palette, #{$colorName}-contrast);
+  }
+
+  @each $colorName in (tealDark80, tealDark60, tealDark40, tealDark20, teal, tealLight20, tealLight40, tealLight60) {
+    teal__#{$colorName}: mat.get-color-from-palette(gio.$mat-teal-palette, $colorName);
+    teal__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-teal-palette, #{$colorName}-contrast);
+  }
+
+  @each $colorName
+    in (purpleDark80, purpleDark60, purpleDark40, purpleDark20, purple, purpleLight20, purpleLight40, purpleLight60, purpleLight80)
+  {
+    purple__#{$colorName}: mat.get-color-from-palette(gio.$mat-purple-palette, $colorName);
+    purple__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-purple-palette, #{$colorName}-contrast);
+  }
+
+  @each $colorName
+    in (
+      errordark80,
+      errordark60,
+      errordark40,
+      errordark20,
+      error,
+      errorlight20,
+      errorlight40,
+      errorlight60,
+      errorlight80,
+      successdark80,
+      successdark60,
+      successdark40,
+      successdark20,
+      success,
+      successlight20,
+      successlight40,
+      successlight60,
+      successlight80,
+      warningdark80,
+      warningdark60,
+      warningdark40,
+      warningdark20,
+      warning,
+      warninglight20,
+      warninglight40,
+      warninglight60,
+      warninglight80,
+      cyan,
+      cyan20,
+      cyan40,
+      cyan60,
+      cyan80,
+      blue,
+      blue20,
+      blue40,
+      blue60,
+      blue80
+    )
+  {
+    secondary__#{$colorName}: mat.get-color-from-palette(gio.$mat-secondary-palette, $colorName);
+    secondary__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-secondary-palette, #{$colorName}-contrast);
+  }
 }
