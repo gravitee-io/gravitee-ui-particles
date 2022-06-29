@@ -21,3 +21,4 @@ export * from './gio-pendo/GioPendoSettings';
 export * from './gio-pendo/gio-pendo.module';
 export * from './gio-pendo/gio-pendo.service';
 export * from './gio-pendo/gio-pendo.token';
+export * from './gio-pendo/gio-pendo.injectors';
