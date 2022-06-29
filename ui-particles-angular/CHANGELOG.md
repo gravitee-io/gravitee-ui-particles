@@ -1,3 +1,10 @@
+## [3.5.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.5.1...v3.5.2) (2022-06-29)
+
+
+### Bug Fixes
+
+* **pendo:** make injectors public ([f4e257a](https://github.com/gravitee-io/gravitee-ui-particles/commit/f4e257a07fd06c5a7b4bfabb12ef8fd367b9933a))
+
 ## [3.5.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.5.0...v3.5.1) (2022-06-16)
 
 
