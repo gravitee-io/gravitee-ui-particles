@@ -74,7 +74,7 @@
     "jest-preset-angular": "11.1.1",
     "ng-packagr": "12.2.6",
     "prettier": "2.5.1",
-    "semantic-release": "18.0.1",
+    "semantic-release": "19.0.3",
     "stylelint": "14.9.0",
     "stylelint-config-idiomatic-order": "^8.1.0",
     "stylelint-config-prettier-scss": "^0.0.1",
