@@ -3151,13 +3151,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@csstools/selector-specificity@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@csstools/selector-specificity@npm:2.0.0"
+"@csstools/selector-specificity@npm:^2.0.1":
+  version: 2.0.2
+  resolution: "@csstools/selector-specificity@npm:2.0.2"
   peerDependencies:
-    postcss: ^8.3
+    postcss: ^8.2
     postcss-selector-parser: ^6.0.10
-  checksum: 46bc5a941334393ed596d493fc66c57e0839150ca86692b269f230641d0f073f258eb32fce289b8ab8a12e73b3329d266d4626b08a8705429f8a12929a8f64ae
+  checksum: a2045a27276a6cfe645b6e212afc217d9a43174ea7a1fa1ab8918d5a0ace72380fbd9837fe1920c547985c11a9070dc48c5c80d483d3f581ddf7aa688204d44f
   languageName: node
   linkType: hard
 
@@ -3172,6 +3172,13 @@ __metadata:
   version: 0.5.6
   resolution: "@discoveryjs/json-ext@npm:0.5.6"
   checksum: e97df618511fb202dffa2eb0d23e17dfb02943a70e5bc38f6b9603ad1cb1d6b525aa2b07ff9fb00b041abe425b341146ddd9e487f1e35ddadc8c6b8c56358ae0
+  languageName: node
+  linkType: hard
+
+"@discoveryjs/json-ext@npm:^0.5.7":
+  version: 0.5.7
+  resolution: "@discoveryjs/json-ext@npm:0.5.7"
+  checksum: 2176d301cc258ea5c2324402997cf8134ebb212469c0d397591636cea8d3c02f2b3cf9fd58dcb748c7a0dade77ebdc1b10284fa63e608c033a1db52fddc69918
   languageName: node
   linkType: hard
 
@@ -6389,6 +6396,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/webpack-env@npm:^1.17.0":
+  version: 1.17.0
+  resolution: "@types/webpack-env@npm:1.17.0"
+  checksum: 9ad4d208c4429c9427191d1f4c92e4c43e530384c17a6bc298acb89003fc47fcde1d8372e50acefa3061e9100e57fd9d616e96def875afd06c0c2afe508f298e
+  languageName: node
+  linkType: hard
+
 "@types/webpack-sources@npm:*":
   version: 3.2.0
   resolution: "@types/webpack-sources@npm:3.2.0"
@@ -8876,14 +8890,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:6.5.6":
-  version: 6.5.6
-  resolution: "chromatic@npm:6.5.6"
+"chromatic@npm:6.7.2":
+  version: 6.7.2
+  resolution: "chromatic@npm:6.7.2"
+  dependencies:
+    "@discoveryjs/json-ext": ^0.5.7
+    "@types/webpack-env": ^1.17.0
   bin:
     chroma: bin/main.cjs
     chromatic: bin/main.cjs
     chromatic-cli: bin/main.cjs
-  checksum: dbfe276683add0420e559c1dc42e5c10d9dcd8c3b53fb4a1d36de684077a455d472c5e64427d83ccb88f3b73643aabc4979bd1b38339c42784c73e3659377fc2
+  checksum: 437424b9ed87123784e085bf36cc624c975361eec602870acf3369fce2d45989f30675fddeb69880045bdd2cc470a67f68299db46eb332cf6e711297ec01cb3c
   languageName: node
   linkType: hard
 
@@ -13164,13 +13181,13 @@ __metadata:
   dependencies:
     "@commitlint/cli": 17.0.2
     "@commitlint/config-conventional": 17.0.2
-    chromatic: 6.5.6
+    chromatic: 6.7.2
     husky: 7.0.4
     license-check-and-add: 4.0.5
     lint-staged: 12.5.0
     prettier: 2.5.1
     sort-package-json: 1.57.0
-    storybook-addon-designs: 6.2.1
+    storybook-addon-designs: 6.3.1
   languageName: unknown
   linkType: soft
 
@@ -22657,12 +22674,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook-addon-designs@npm:6.2.1":
-  version: 6.2.1
-  resolution: "storybook-addon-designs@npm:6.2.1"
+"storybook-addon-designs@npm:6.3.1":
+  version: 6.3.1
+  resolution: "storybook-addon-designs@npm:6.3.1"
   dependencies:
     "@figspec/react": ^1.0.0
-  checksum: 0ea3ef4d1b08b5604ac0592697793a5e30eac33fae8499bd772a1568bc21bb2ea67ed638d9b4c2f4e94713ceb5321e23fb4985d381e3c9c61094abe3a6b58063
+  checksum: 63d91358540a59801028b4fe2fe61a2cad52ac2354efde0959f081379045230af4ea6dea6a8abddae2a7eb14699fd04024dec44b6fd396065e0e585d31980635
   languageName: node
   linkType: hard
 
@@ -23165,11 +23182,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint@npm:14.9.0":
-  version: 14.9.0
-  resolution: "stylelint@npm:14.9.0"
+"stylelint@npm:14.9.1":
+  version: 14.9.1
+  resolution: "stylelint@npm:14.9.1"
   dependencies:
-    "@csstools/selector-specificity": ^2.0.0
+    "@csstools/selector-specificity": ^2.0.1
     balanced-match: ^2.0.0
     colord: ^2.9.2
     cosmiconfig: ^7.0.1
@@ -23211,7 +23228,7 @@ __metadata:
     write-file-atomic: ^4.0.1
   bin:
     stylelint: bin/stylelint.js
-  checksum: 9996238740feb045c2f14def7152ed2a1a512c4cfd632c02bf136193f8be1c24f1357e53c27cd3c59876a73897f0f7bd5a1df0ee5af614050574ac8fc6ea179a
+  checksum: 53c65c9a1d0009ba15847905afc34efc2f4820edc989f8c2aeecf6b7873b2de3040a1969761ef0983caca2e773947482962df5c25216cb9e3f21af241675bb50
   languageName: node
   linkType: hard
 
@@ -24153,6 +24170,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:4.7.4":
+  version: 4.7.4
+  resolution: "typescript@npm:4.7.4"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 5750181b1cd7e6482c4195825547e70f944114fb47e58e4aa7553e62f11b3f3173766aef9c281783edfd881f7b8299cf35e3ca8caebe73d8464528c907a164df
+  languageName: node
+  linkType: hard
+
 "typescript@npm:^4.6.4":
   version: 4.7.2
   resolution: "typescript@npm:4.7.2"
@@ -24170,6 +24197,16 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 61fc1a2ca5037420de5bbe17c6ddc4cbcc0d52301ed94f0a7b5821c55ff9eb96307f0816f745ca8f0fc87ed92f3951cde6d97cd6fd6bc6920c02ea63b5b26259
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@4.7.4#~builtin<compat/typescript>":
+  version: 4.7.4
+  resolution: "typescript@patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=493e53"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 96d3030cb01143570567cb4f3a616b10df65f658f0e74e853e77a089a6a954e35c800be7db8b9bfe9a1ae05d9c2897e281359f65e4caa1caf266368e1c4febd3
   languageName: node
   linkType: hard
 
@@ -24248,13 +24285,13 @@ __metadata:
     prettier: 2.5.1
     rxjs: 6.6.7
     semantic-release: 18.0.1
-    stylelint: 14.9.0
+    stylelint: 14.9.1
     stylelint-config-idiomatic-order: ^8.1.0
     stylelint-config-prettier-scss: ^0.0.1
     stylelint-config-standard-scss: ^3.0.0
     stylelint-order: ^5.0.0
     tslib: 2.3.1
-    typescript: 4.3.5
+    typescript: 4.7.4
     zone.js: 0.11.4
   languageName: unknown
   linkType: soft
