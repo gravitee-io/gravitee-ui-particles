@@ -1,3 +1,10 @@
+# [3.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.5.2...v3.6.0) (2022-08-30)
+
+
+### Features
+
+* add kubernetes icon ([c20a5a9](https://github.com/gravitee-io/gravitee-ui-particles/commit/c20a5a9bcc13218f10377580cf70e54de58b5c90))
+
 ## [3.5.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.5.1...v3.5.2) (2022-06-29)
 
 
