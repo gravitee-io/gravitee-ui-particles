@@ -46,7 +46,7 @@ $types: (
     &.#{$typeName} {
       border: 1px solid mat.get-color-from-palette($typePalette, default);
       background-color: mat.get-color-from-palette($typePalette, lighter);
-      color: mat.get-color-from-palette($typePalette, default);
+      color: mat.get-color-from-palette($typePalette, darker);
     }
   }
 
