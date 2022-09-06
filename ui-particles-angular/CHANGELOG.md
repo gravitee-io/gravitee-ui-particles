@@ -1,3 +1,10 @@
+## [3.6.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.6.0...v3.6.1) (2022-09-06)
+
+
+### Bug Fixes
+
+* **banner:** change text color to darker for accessibility ([bc5dfc1](https://github.com/gravitee-io/gravitee-ui-particles/commit/bc5dfc137b3b28b938103efb20a02495d2d1f3e6))
+
 # [3.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.5.2...v3.6.0) (2022-08-30)
 
 
