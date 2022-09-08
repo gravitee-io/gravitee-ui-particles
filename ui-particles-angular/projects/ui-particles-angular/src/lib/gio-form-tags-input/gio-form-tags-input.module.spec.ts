@@ -126,9 +126,9 @@ describe('GioFormTagsInputModule', () => {
     component.tagsControl.disable();
     fixture.detectChanges();
 
-    const matFormFieldHarness = await loader.getHarness(MatFormFieldHarness);
+    const formTagsInputHarness = await loader.getHarness(GioFormTagsInputHarness);
 
-    expect(await matFormFieldHarness.isDisabled()).toBe(true);
+    expect(await formTagsInputHarness.isDisabled()).toBe(true);
   });
 
   it('should update error state when control is touched', async () => {
