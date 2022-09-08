@@ -36,6 +36,11 @@ export class GioFormTagsInputHarness extends ComponentHarness {
 
   protected getMatChipListHarness = this.locatorFor(MatChipListHarness);
 
+  public async isDisabled(): Promise<boolean> {
+    const matChipList = await this.getMatChipListHarness();
+    return matChipList.isDisabled();
+  }
+
   public async getTags(): Promise<string[]> {
     const matChipList = await this.getMatChipListHarness();
 
