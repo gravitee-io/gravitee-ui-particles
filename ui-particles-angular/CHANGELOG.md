@@ -1,3 +1,10 @@
+# [3.7.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.6.1...v3.7.0) (2022-09-12)
+
+
+### Features
+
+* **angular:** add isDisabled() to GioFormTagsInputHarness ([e0b64c4](https://github.com/gravitee-io/gravitee-ui-particles/commit/e0b64c4ad0cfbb840d9974457e53565d70c3cec3))
+
 ## [3.6.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.6.0...v3.6.1) (2022-09-06)
 
 
