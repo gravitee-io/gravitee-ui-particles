@@ -1,3 +1,10 @@
+# [3.8.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.7.0...v3.8.0) (2022-09-15)
+
+
+### Features
+
+* **angular:** add simple addHeader to GioFormHeadersHarness ([eb38da2](https://github.com/gravitee-io/gravitee-ui-particles/commit/eb38da249230d275702a427bcb199b35120bd5db))
+
 # [3.7.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.6.1...v3.7.0) (2022-09-12)
 
 
