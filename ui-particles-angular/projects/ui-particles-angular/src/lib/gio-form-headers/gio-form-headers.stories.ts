@@ -98,6 +98,43 @@ export const ReactiveForm: Story = {
   },
 };
 
+export const ReactiveFormDisabled: Story = {
+  render: args => {
+    const headersControl = new FormControl({
+      value: args.headers,
+      disabled: args.disabled,
+    });
+
+    headersControl.valueChanges.subscribe(value => {
+      action('Tags')(value);
+    });
+
+    return {
+      template: `<gio-form-headers [formControl]="headersControl"></gio-form-headers>`,
+      props: {
+        headersControl,
+      },
+    };
+  },
+  args: {
+    headers: [
+      {
+        key: 'host',
+        value: 'api.gravitee.io',
+      },
+      {
+        key: 'accept',
+        value: '*/*',
+      },
+      {
+        key: 'connection',
+        value: 'keep-alive',
+      },
+    ],
+    disabled: true,
+  },
+};
+
 export const SmallWidth: Story = {
   render: args => ({
     template: `<div style="width: 200px;"><gio-form-headers [ngModel]="headers"></gio-form-headers></div>`,
