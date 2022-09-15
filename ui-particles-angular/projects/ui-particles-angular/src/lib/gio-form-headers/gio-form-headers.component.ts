@@ -15,7 +15,7 @@
  */
 
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { Component, ElementRef, forwardRef, OnInit } from '@angular/core';
+import { Component, ElementRef, forwardRef, HostBinding, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormArray, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { dropRight, isEmpty } from 'lodash';
 import { map, startWith, tap } from 'rxjs/operators';
@@ -117,6 +117,9 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor {
     }),
   ]);
 
+  @HostBinding('class.disabled')
+  public disabled = false;
+
   private headers: Header[] = [];
 
   private _onChange: (_headers: Header[] | null) => void = () => ({});
@@ -152,8 +155,15 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor {
   }
 
   // From ControlValueAccessor interface
-  public setDisabledState(_isDisabled: boolean): void {
-    // this.disabled = isDisabled;
+  public setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+    if (isDisabled) {
+      this.headersFormArray.disable({ emitEvent: false });
+      this.removeLastHeader();
+      return;
+    }
+    this.headersFormArray.enable({ emitEvent: false });
+    this.addEmptyHeader();
   }
 
   public ngOnInit(): void {
@@ -229,6 +239,10 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor {
       }),
       { emitEvent: false },
     );
+  }
+
+  private removeLastHeader() {
+    this.headersFormArray.removeAt(this.headersFormArray.length - 1, { emitEvent: false });
   }
 
   private _filter(value: string): string[] {

@@ -206,4 +206,21 @@ describe('GioFormHeadersModule', () => {
     matOptionHarnesses = await headerRowToEdit.keyAutocomplete.getOptions();
     expect(matOptionHarnesses.length).toEqual(1);
   });
+
+  it('should display disabled headers', async () => {
+    testComponent.headersControl.disable();
+    testComponent.headersControl.setValue(HEADERS);
+
+    const formHeaders = await loader.getHarness(GioFormHeadersHarness);
+    expect(await formHeaders.isDisabled()).toEqual(true);
+
+    const headerRows = await formHeaders.getHeaderRows();
+    const headers = await Promise.all(
+      headerRows.map(async row => ({
+        key: await row.keyInput.getValue(),
+        value: await row.valueInput.getValue(),
+      })),
+    );
+    expect(headers).toEqual(HEADERS);
+  });
 });

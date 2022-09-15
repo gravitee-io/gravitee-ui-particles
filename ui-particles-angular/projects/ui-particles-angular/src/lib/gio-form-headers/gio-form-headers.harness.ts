@@ -82,4 +82,8 @@ export class GioFormHeadersHarness extends ComponentHarness {
     await keyInput.setValue(key);
     await valueInput.setValue(value);
   }
+
+  public async isDisabled(): Promise<boolean> {
+    return (await this.host()).hasClass('disabled');
+  }
 }
