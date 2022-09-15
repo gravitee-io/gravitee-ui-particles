@@ -97,13 +97,25 @@ describe('GioFormHeadersModule', () => {
 
     await emptyLastHeaderRow.valueInput.setValue('api.gravitee.io');
 
-    const addedHeaderRow = (await formHeaders.getHeaderRows())[0];
+    let addedHeaderRow = (await formHeaders.getHeaderRows())[0];
     expect({ key: await addedHeaderRow.keyInput.getValue(), value: await addedHeaderRow.valueInput.getValue() }).toEqual({
       key: 'host',
       value: 'api.gravitee.io',
     });
 
-    expect(testComponent.headersControl.value).toEqual([{ key: 'host', value: 'api.gravitee.io' }]);
+    // Expect new row was added
+    await formHeaders.addHeader({ key: 'accept', value: '*/*' });
+
+    addedHeaderRow = (await formHeaders.getHeaderRows())[1];
+    expect({ key: await addedHeaderRow.keyInput.getValue(), value: await addedHeaderRow.valueInput.getValue() }).toEqual({
+      key: 'accept',
+      value: '*/*',
+    });
+
+    expect(testComponent.headersControl.value).toEqual([
+      { key: 'host', value: 'api.gravitee.io' },
+      { key: 'accept', value: '*/*' },
+    ]);
   });
 
   it('should edit header', async () => {

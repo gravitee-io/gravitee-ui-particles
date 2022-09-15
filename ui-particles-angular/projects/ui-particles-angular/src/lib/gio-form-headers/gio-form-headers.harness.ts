@@ -19,8 +19,6 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { MatAutocompleteHarness } from '@angular/material/autocomplete/testing';
 
-import { GioFormTagsInputHarness } from '../public-api';
-
 export class GioFormHeadersHarness extends ComponentHarness {
   public static hostSelector = 'gio-form-headers';
 
@@ -31,8 +29,8 @@ export class GioFormHeadersHarness extends ComponentHarness {
    * @param options Options for filtering which input instances are considered a match.
    * @return a `HarnessPredicate` configured with the given options.
    */
-  public static with(options: BaseHarnessFilters = {}): HarnessPredicate<GioFormTagsInputHarness> {
-    return new HarnessPredicate(GioFormTagsInputHarness, options);
+  public static with(options: BaseHarnessFilters = {}): HarnessPredicate<GioFormHeadersHarness> {
+    return new HarnessPredicate(GioFormHeadersHarness, options);
   }
 
   private getHeaderRowsElement = this.locatorForAll('tr.gio-form-headers__table__header-row');
@@ -76,5 +74,12 @@ export class GioFormHeadersHarness extends ComponentHarness {
       keyInput: await this.getHeaderRowInputKey(rows.length - 1)(),
       valueInput: await this.getHeaderRowInputValue(rows.length - 1)(),
     };
+  }
+
+  public async addHeader({ key, value }: { key: string; value: string }): Promise<void> {
+    const { keyInput, valueInput } = await this.getLastHeaderRow();
+
+    await keyInput.setValue(key);
+    await valueInput.setValue(value);
   }
 }
