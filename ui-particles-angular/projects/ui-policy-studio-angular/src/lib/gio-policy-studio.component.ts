@@ -41,6 +41,9 @@ interface UrlParams {
 })
 export class GioPolicyStudioComponent implements OnInit {
   @Input()
+  public readonly!: boolean;
+
+  @Input()
   // TODO: Remove ! and add init value ! for all
   public canAdd!: boolean;
 

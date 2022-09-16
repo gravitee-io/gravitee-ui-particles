@@ -35,6 +35,7 @@ export default {
 export const Default: Story = {
   render: props => ({
     template: `<gio-policy-studio
+    [readonly]='readonly'
     [canAdd]='canAdd'
     [canDebug]='canDebug'
     [hasResources]='hasResources'
@@ -58,6 +59,7 @@ export const Default: Story = {
     props,
   }),
   args: {
+    readonly: false,
     policies: apimPolicies.data,
     services: {},
     resourceTypes: apimResourceTypes.data,
