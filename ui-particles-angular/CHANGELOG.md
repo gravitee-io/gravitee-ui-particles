@@ -1,3 +1,10 @@
+# [3.10.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.9.0...v3.10.0) (2022-09-16)
+
+
+### Features
+
+* **ps:** add readonly input ([94dac9d](https://github.com/gravitee-io/gravitee-ui-particles/commit/94dac9db4dc7963dc80bfe596af7db772a4fa2df))
+
 # [3.9.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.8.0...v3.9.0) (2022-09-16)
 
 
