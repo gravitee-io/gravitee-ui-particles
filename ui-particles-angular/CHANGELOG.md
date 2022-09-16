@@ -1,3 +1,10 @@
+# [3.9.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.8.0...v3.9.0) (2022-09-16)
+
+
+### Features
+
+* add disable state for gio-form-headers compo ([a9aab96](https://github.com/gravitee-io/gravitee-ui-particles/commit/a9aab96fda73fcf17743d7ee59ec8a01c6848048))
+
 # [3.8.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.7.0...v3.8.0) (2022-09-15)
 
 
