@@ -17647,6 +17647,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ngx-file-helpers@npm:7.0.0":
+  version: 7.0.0
+  resolution: "ngx-file-helpers@npm:7.0.0"
+  dependencies:
+    tslib: ^2.3.0
+  peerDependencies:
+    "@angular/common": ^13.0.0
+    "@angular/core": ^13.0.0
+  checksum: edbdfc8919f9202f9e9a3b6c94b77591fb0a38669a4913d971d451a8ad2d69a6f3495bcb7a16e0c5504618bf10cc3714eb2f767273ac2372b579ff61ec5d2614
+  languageName: node
+  linkType: hard
+
 "nice-napi@npm:^1.0.2":
   version: 1.0.2
   resolution: "nice-napi@npm:1.0.2"
@@ -24245,6 +24257,7 @@ __metadata:
     jest-preset-angular: 11.1.1
     lodash: ^4.17.21
     ng-packagr: 12.2.6
+    ngx-file-helpers: 7.0.0
     prettier: 2.5.1
     rxjs: 6.6.7
     semantic-release: 18.0.1
