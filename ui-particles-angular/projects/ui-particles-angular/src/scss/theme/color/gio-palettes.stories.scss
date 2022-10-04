@@ -17,7 +17,7 @@
 @use '@angular/material' as mat;
 @use '../../../scss' as gio;
 
-$colorNames: lighter, default, darker, disabled;
+$colorNames: lighter, lighter60, lighter40, lighter20, default, darker20, darker40, darker60, darker, disabled, cyan, blue;
 $palettes: (
   primary: gio.$mat-primary-palette,
   accent: gio.$mat-accent-palette,
@@ -53,5 +53,25 @@ $palettes: (
   @each $colorName in (patch, post, put, get, delete, option, trace, head) {
     method__#{$colorName}: mat.get-color-from-palette(gio.$mat-method-palette, $colorName);
     method__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-method-palette, #{$colorName}-contrast);
+  }
+
+  @each $colorName in (white, black) {
+    basic__#{$colorName}: mat.get-color-from-palette(gio.$mat-basic-palette, $colorName);
+    basic__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-basic-palette, #{$colorName}-contrast);
+  }
+
+  @each $colorName in (lighter80, lighter70, lighter60, lighter50, lighter40, lighter30, lighter20, lighter10, default) {
+    space__#{$colorName}: mat.get-color-from-palette(gio.$mat-space-palette, $colorName);
+    space__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-space-palette, #{$colorName}-contrast);
+  }
+
+  @each $colorName in (lighter80, lighter60, lighter40, lighter20, default) {
+    cyan__#{$colorName}: mat.get-color-from-palette(gio.$mat-cyan-palette, $colorName);
+    cyan__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-cyan-palette, #{$colorName}-contrast);
+  }
+
+  @each $colorName in (lighter80, lighter60, lighter40, lighter20, default) {
+    blue__#{$colorName}: mat.get-color-from-palette(gio.$mat-blue-palette, $colorName);
+    blue__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-blue-palette, #{$colorName}-contrast);
   }
 }
