@@ -37,3 +37,7 @@ export * from './gio-icons/gio-icons.module';
 export * from './gio-form-headers/gio-form-headers.component';
 export * from './gio-form-headers/gio-form-headers.module';
 export * from './gio-form-headers/gio-form-headers.harness';
+
+export * from './gio-form-file-picker/gio-form-file-picker.module';
+export * from './gio-form-file-picker/gio-form-file-picker.component';
+export * from './gio-form-file-picker/gio-form-file-picker.component.harness';

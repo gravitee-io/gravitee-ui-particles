@@ -1,0 +1,121 @@
+/*
+ * Copyright (C) 2022 The Gravitee team (http://gravitee.io)
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '../../scss' as gio;
+
+$card-size: 130px;
+$radius: 6px;
+$background: map.get(gio.$mat-theme, 'background');
+$accent: mat.get-color-from-palette(gio.$mat-accent-palette, 'default');
+
+.file-picker {
+  display: flex;
+  width: calc($card-size + 8px /* preview margin */ + 8px /* .file-picker padding */);
+  flex-flow: row wrap;
+  padding: 4px;
+
+  &__add-button {
+    min-height: $card-size;
+    flex: 0 0 $card-size;
+    border: 2px dashed mat.get-color-from-palette(gio.$mat-content-palette, 'default');
+    margin: 4px;
+    border-radius: $radius;
+    cursor: pointer;
+
+    &:hover,
+    &.drag-hover {
+      border: 2px dashed $accent;
+      background-color: mat.get-color-from-palette($background, 'hover');
+    }
+
+    &.drag-hover {
+      // Keep the drag hover
+      pointer-events: none;
+    }
+
+    &.complete {
+      padding: 6px;
+      border: none;
+    }
+
+    &.error {
+      border: 2px dashed mat.get-color-from-palette(gio.$mat-error-palette, 'default');
+    }
+  }
+
+  &__preview,
+  &__preview-empty {
+    position: relative;
+    display: flex;
+    min-height: $card-size;
+    flex: 0 0 $card-size;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    padding: 6px;
+    border: 2px solid mat.get-color-from-palette(gio.$mat-content-palette, 'default');
+    margin: 4px;
+    border-radius: $radius;
+    inline-size: fit-content;
+
+    &.drag-hover {
+      // Keep the drag hover
+      pointer-events: none;
+    }
+
+    &__header-image {
+      width: 100%;
+      height: 100%;
+      background-position-x: center;
+      background-position-y: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    &.disabled {
+      border: 2px solid mat.get-color-from-palette(gio.$mat-content-palette, 'disabled');
+    }
+  }
+
+  &__preview {
+    &.error {
+      border: 2px solid mat.get-color-from-palette(gio.$mat-error-palette, 'default');
+    }
+
+    &__delete {
+      position: absolute;
+      z-index: 200;
+      top: 0;
+      right: 0;
+      width: 24px;
+      height: 24px;
+      background-color: mat.get-color-from-palette(gio.$mat-decorative-palette, 'background', 0.7);
+      border-radius: calc($radius / 2);
+      color: mat.get-color-from-palette(gio.$mat-content-palette, 'darker');
+      cursor: pointer;
+
+      &:hover {
+        color: mat.get-color-from-palette(gio.$mat-warning-palette, 'default');
+      }
+    }
+  }
+
+  &__preview-empty {
+    &__default {
+      text-align: center;
+    }
+  }
+}
