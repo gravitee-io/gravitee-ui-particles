@@ -1,3 +1,10 @@
+# [3.11.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.10.0...v3.11.0) (2022-10-10)
+
+
+### Features
+
+* add file picker component ([6604d4b](https://github.com/gravitee-io/gravitee-ui-particles/commit/6604d4baeebd449c2ee8e63290d70f3fe7d6fcee))
+
 # [3.10.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.9.0...v3.10.0) (2022-09-16)
 
 
