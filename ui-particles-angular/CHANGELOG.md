@@ -1,3 +1,10 @@
+## [3.11.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.11.0...v3.11.1) (2022-10-11)
+
+
+### Bug Fixes
+
+* export sub component in GioFormFilePicker ([7e3ae4e](https://github.com/gravitee-io/gravitee-ui-particles/commit/7e3ae4e9878cda31c1326d326c6ec16a7ac51c3b))
+
 # [3.11.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.10.0...v3.11.0) (2022-10-10)
 
 
