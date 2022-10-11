@@ -14,3 +14,8 @@
  * limitations under the License.
  */
 export * from './gio-form-file-picker.module';
+export * from './gio-form-file-picker.component';
+export * from './gio-form-file-picker-add-button/gio-form-file-picker-add-button.component';
+export * from './gio-form-file-picker-empty/gio-form-file-picker-empty.component';
+
+export * from './gio-form-file-picker.component.harness';

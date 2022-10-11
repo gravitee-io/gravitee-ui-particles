@@ -28,7 +28,7 @@ import { GioFormFilePickerComponent } from './gio-form-file-picker.component';
 
 @NgModule({
   declarations: [GioFormFilePickerComponent, GioFormFilePickerAddButtonComponent, GioFormFilePickerEmptyComponent],
-  exports: [GioFormFilePickerComponent],
+  exports: [GioFormFilePickerComponent, GioFormFilePickerAddButtonComponent, GioFormFilePickerEmptyComponent],
   imports: [CommonModule, ReactiveFormsModule, NgxFileHelpersModule, MatRippleModule, MatIconModule, GioIconsModule],
 })
 export class GioFormFilePickerModule {}
