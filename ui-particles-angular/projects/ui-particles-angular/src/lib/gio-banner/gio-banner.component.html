@@ -23,10 +23,10 @@
   [class.success]="type === 'success'"
 >
   <div class="banner__icon" [ngSwitch]="type">
-    <mat-icon *ngSwitchCase="'info'" svgIcon="gio:info-empty"></mat-icon>
-    <mat-icon *ngSwitchCase="'error'" svgIcon="gio:warning-circled-outline"></mat-icon>
-    <mat-icon *ngSwitchCase="'warning'" svgIcon="gio:warning-triangle-outline"></mat-icon>
-    <mat-icon *ngSwitchCase="'success'" svgIcon="gio:check-circled-outline"></mat-icon>
+    <mat-icon *ngSwitchCase="'info'" svgIcon="gio:chat-lines"></mat-icon>
+    <mat-icon *ngSwitchCase="'error'" svgIcon="gio:chat-bubble-error"></mat-icon>
+    <mat-icon *ngSwitchCase="'warning'" svgIcon="gio:chat-bubble-warning"></mat-icon>
+    <mat-icon *ngSwitchCase="'success'" svgIcon="gio:chat-bubble-check"></mat-icon>
   </div>
   <div class="banner__content">
     <ng-content></ng-content>
