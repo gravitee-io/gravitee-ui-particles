@@ -31,12 +31,20 @@
       [ngModel]="confirmValue"
       (ngModelChange)="onConfirmChange($event)"
       required
+      data-testid="confirm-input-dialog"
     />
   </mat-form-field>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end" class="confirm-dialog__actions">
-  <button class="confirm-dialog__confirm-button" [disabled]="!isValid" color="warn" mat-raised-button [mat-dialog-close]="true">
+  <button
+    class="confirm-dialog__confirm-button"
+    [disabled]="!isValid"
+    color="warn"
+    mat-raised-button
+    [mat-dialog-close]="true"
+    data-testid="confirm-dialog"
+  >
     {{ confirmButton }}
   </button>
   <button class="confirm-dialog__cancel-button" mat-flat-button [mat-dialog-close]="false">
