@@ -1,0 +1,50 @@
+import { Meta, Story } from '@storybook/addon-docs';
+
+<Meta title="Components / Confirm and validate dialog / README" />
+
+# Confirm and validate dialog
+
+Documentation and examples for Confirm and Validate dialog, a component to asking for confirmation.
+
+## Demo
+
+<Story id="components-confirm-and-validate-dialog--custom" />
+
+## Usage
+
+**Inputs**
+
+- `title`: `string` - The dialog title.
+- `warning`: `string` - Add this string into warning banner
+- `content`: `string` - The dialog content override.
+- `validationMessage`: `string` - The action to do to validate. Default: `Please, type in <code>confirm</code> to confirm.`
+- `validationValue`: `string` - The dialog content override. Default: `confirm`
+- `confirmButton`: `string` - The dialog confirmation button override.
+- `confirmCancel`: `string` - The dialog cancel button override.
+
+Example:
+
+```typescript
+
+this.matDialog
+  .open<GioConfirmAndValidateDialogComponent, GioConfirmAndValidateDialogData, boolean>(GioConfirmAndValidateDialogComponent, {
+    data: {
+      title: 'title override',
+      warning: 'warning override',
+      content: 'content override',
+      validationMessage: 'validationMessage override',
+      validationValue: 'validationValue override',
+      confirmButton: 'confirmButton override',
+      cancelButton: 'cancelButton override',
+    },
+    role: 'alertdialog',
+    id: 'confirmDialog',
+  })
+  .afterClosed()
+  .pipe(
+    tap(confirmed => {
+      action('confirmed?')(confirmed);
+    }),
+  )
+  .subscribe((confirmed => {});
+```
