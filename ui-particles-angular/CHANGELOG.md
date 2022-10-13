@@ -1,3 +1,11 @@
+# [3.12.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.11.1...v3.12.0) (2022-10-13)
+
+
+### Features
+
+* **banner:** update icons ([c5823c3](https://github.com/gravitee-io/gravitee-ui-particles/commit/c5823c3c6fec0f24b5de63ef115073b96ed14867))
+* udpate icons ([aa9dc3a](https://github.com/gravitee-io/gravitee-ui-particles/commit/aa9dc3a015ab5e929d8a82b1dae0d53ae86f9af6))
+
 ## [3.11.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.11.0...v3.11.1) (2022-10-11)
 
 
