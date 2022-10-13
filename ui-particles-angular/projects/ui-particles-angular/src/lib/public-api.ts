@@ -32,6 +32,10 @@ export * from './gio-confirm-dialog/gio-confirm-dialog.component';
 export * from './gio-confirm-dialog/gio-confirm-dialog.module';
 export * from './gio-confirm-dialog/gio-confirm-dialog.harness';
 
+export * from './gio-confirm-and-validate-dialog/gio-confirm-and-validate-dialog.component';
+export * from './gio-confirm-and-validate-dialog/gio-confirm-and-validate-dialog.module';
+export * from './gio-confirm-and-validate-dialog/gio-confirm-and-validate-dialog.harness';
+
 export * from './gio-icons/gio-icons.module';
 
 export * from './gio-form-headers/gio-form-headers.component';
