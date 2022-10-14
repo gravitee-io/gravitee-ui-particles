@@ -1,3 +1,11 @@
+# [3.13.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.12.0...v3.13.0) (2022-10-14)
+
+
+### Features
+
+* add `data-testid` for e2e test ([632c46b](https://github.com/gravitee-io/gravitee-ui-particles/commit/632c46bec517949b053ab4b4269ceb7061c10232))
+* add confirm and validate dialog component ([957046e](https://github.com/gravitee-io/gravitee-ui-particles/commit/957046e93cdef95bc85ff7d87298909d2ef0bc48))
+
 # [3.12.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.11.1...v3.12.0) (2022-10-13)
 
 
