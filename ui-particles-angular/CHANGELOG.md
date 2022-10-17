@@ -1,3 +1,10 @@
+## [3.13.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.13.0...v3.13.1) (2022-10-17)
+
+
+### Bug Fixes
+
+* add icons for dialog component ([8381972](https://github.com/gravitee-io/gravitee-ui-particles/commit/83819727be28662d4a6f3a348d3b732b1ed9f2f7))
+
 # [3.13.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.12.0...v3.13.0) (2022-10-14)
 
 
