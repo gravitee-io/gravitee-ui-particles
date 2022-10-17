@@ -1,0 +1,27 @@
+<!--
+
+    Copyright (C) 2022 The Gravitee team (http://gravitee.io)
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<div class="gio-menu" [class.gio-menu__reduced]="reduced">
+  <ng-content *ngIf="!reduced" select="gio-menu-header"></ng-content>
+  <ng-content select="gio-menu-list"></ng-content>
+  <ng-content select="gio-menu-footer"></ng-content>
+  <gio-menu-footer>
+    <gio-menu-item class="gio-menu-footer__collapse" [icon]="getCollapseButtonIcon()" (click)="reduceMenu()" [outlined]="true"
+      >Collapse menu</gio-menu-item
+    >
+  </gio-menu-footer>
+</div>
