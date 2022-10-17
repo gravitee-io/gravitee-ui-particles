@@ -43,3 +43,5 @@ export * from './gio-form-headers/gio-form-headers.module';
 export * from './gio-form-headers/gio-form-headers.harness';
 
 export * from './gio-form-file-picker';
+
+export * from './gio-menu';
