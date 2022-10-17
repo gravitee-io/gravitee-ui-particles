@@ -8,7 +8,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@fontsource/fira-mono": "4.5.0",
+    "@fontsource/fira-mono": "4.5.9",
     "@fontsource/golos-ui": "^4.5.1",
     "@fontsource/material-icons": "4.5.1",
     "tslib": "2.3.1"
