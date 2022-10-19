@@ -1,3 +1,11 @@
+## [3.13.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.13.1...v3.13.2) (2022-10-19)
+
+
+### Bug Fixes
+
+* add usefull icons ([8c62326](https://github.com/gravitee-io/gravitee-ui-particles/commit/8c623265ec9b7d66cccc30134df6895cf39bf15a))
+* avoid opening system file picker to trigger control emit value ([d8fc16e](https://github.com/gravitee-io/gravitee-ui-particles/commit/d8fc16e68f1816bc9c0143030895b62906e8ba9d))
+
 ## [3.13.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.13.0...v3.13.1) (2022-10-17)
 
 
