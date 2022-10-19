@@ -135,8 +135,6 @@ export class GioFormFilePickerComponent implements OnInit, ControlValueAccessor 
 
   public onTouched(): void {
     this.onTouchedCallback();
-    // sends current value allows parent component to check validation
-    this.emitFileValue();
     this.dragHover = false;
   }
 
