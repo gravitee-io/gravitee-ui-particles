@@ -122,6 +122,8 @@ describe('FilePickerInputComponent', () => {
       fixture.detectChanges();
 
       expect(await filePickerInputHarness.hasErrorClass()).toEqual(true);
+      expect(component.myForm.touched).toEqual(true);
+      expect(component.myForm.dirty).toEqual(false);
     });
   });
 
