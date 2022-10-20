@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 import { BaseHarnessFilters, ComponentHarness, HarnessPredicate } from '@angular/cdk/testing';
-import { ComponentFixture } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-
-import { GioFormFilePickerComponent } from './gio-form-file-picker.component';
 
 interface GioFormFilePickerHarnessFilters extends BaseHarnessFilters {
   /** Filters based on the formControlName  */
@@ -35,12 +31,41 @@ export class GioFormFilePickerInputHarness extends ComponentHarness {
     );
   }
 
+  /**
+   * Hack force onload on Image Object
+   * GioFormFilePickerComponent use a Image Object to check if the file is an image.
+   * This method allow to force onload event on the Image Object.
+   * @param excludeSrc call onerror instead of onload for this src
+   */
+  public static forceImageOnload(excludeSrc: string[] = []): void {
+    Object.defineProperties(Image.prototype, {
+      src: {
+        get: function () {
+          return this._src;
+        },
+        set: function (src) {
+          this._src = src;
+        },
+      },
+      onload: {
+        get: function () {
+          return this._onload;
+        },
+        set: function (fn) {
+          this._onload = fn;
+
+          excludeSrc.includes(this._src) ? this.onerror() : this.onload();
+        },
+      },
+    });
+  }
+
   protected _mainDiv = this.locatorFor('.file-picker__add-button');
   protected _hasErrorClass = this.locatorForOptional('[class="file-picker__add-button error"]');
   protected _inputFile = this.locatorFor('input[type="file"]');
   protected _getDisabledElement = this.locatorForOptional('.disabled');
 
-  public async getFormControlName(): Promise<string | null> {
+  private async getFormControlName(): Promise<string | null> {
     const filePickerInputHarness = await this.host();
     return filePickerInputHarness.getAttribute('formControlName');
   }
@@ -57,9 +82,14 @@ export class GioFormFilePickerInputHarness extends ComponentHarness {
     return await (await this._inputFile()).getAttribute('accept');
   }
 
-  public async getPreviewImages(): Promise<(string | null)[]> {
-    const previewImages = await this.locatorForAll('.file-picker__preview__header-image')();
-    return Promise.all(previewImages.map(previewImage => previewImage.getAttribute('style')));
+  public async getPreviews(): Promise<(string | null)[]> {
+    const previewImages = await this.locatorForAll('.file-picker__preview__image')();
+    const previewFiles = await this.locatorForAll('.file-picker__preview__file')();
+
+    return Promise.all([
+      ...previewImages.map(previewImage => previewImage.getAttribute('style')),
+      ...previewFiles.map(previewFile => previewFile.text()),
+    ]);
   }
 
   public async isAddButtonPresent(): Promise<boolean> {
@@ -76,26 +106,13 @@ export class GioFormFilePickerInputHarness extends ComponentHarness {
     return deleteButtons[fileIndex].click();
   }
 
-  // as Harness doesn't seem to work with input type=file
-  // we use the fixture to find the instance and interact with it.
-  public async dropFiles(fixture: ComponentFixture<unknown>, files: File[]): Promise<void> {
-    const classValue = await (await this.host()).getAttribute('class');
-    const cssClassSelector = classValue ? `[class="${classValue}"]` : '';
-    const cssFormControlNameSelector = (await this.getFormControlName()) ? `[formControlName="${await this.getFormControlName()}"]` : '';
+  public async dropFiles(files: File[]): Promise<void> {
+    const filePickerDropZone = await this.locatorFor('.file-picker')();
 
-    const filePickerInputComponentInstance = fixture.debugElement.query(
-      By.css(`${GioFormFilePickerInputHarness.hostSelector}${cssClassSelector}${cssFormControlNameSelector}`),
-    ).componentInstance as GioFormFilePickerComponent;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    await filePickerDropZone.dispatchEvent('drop', { dataTransfer: { files } } as any);
 
-    files.forEach(f => {
-      filePickerInputComponentInstance.onFileDropped({
-        name: f.name,
-        readMode: filePickerInputComponentInstance.readMode,
-        size: f.size,
-        type: f.type,
-        content: f,
-        underlyingFile: f,
-      });
-    });
+    // Wait event is dispatched
+    await new Promise(resolve => setTimeout(resolve, 50));
   }
 }

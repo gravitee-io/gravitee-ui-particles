@@ -17,7 +17,15 @@
 @use '@angular/material' as mat;
 @use '../../../scss' as gio;
 
+@use '../gio-form-file-picker.component.scss' as main;
+
 $typography: map.get(gio.$mat-theme, typography);
+
+:host {
+  display: block;
+  width: main.$card-size-default;
+  height: main.$card-size-default;
+}
 
 .add-button {
   height: 100%;

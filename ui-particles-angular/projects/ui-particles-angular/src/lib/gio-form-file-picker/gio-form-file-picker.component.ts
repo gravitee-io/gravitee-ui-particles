@@ -19,6 +19,16 @@ import { isArray, isNil, remove } from 'lodash';
 import { ReadFile, ReadMode } from 'ngx-file-helpers';
 import { tap } from 'rxjs/operators';
 
+import { NewFile } from './gio-form-file-picker.model';
+
+type FileValue = {
+  name: string;
+  isNew: boolean;
+  dataUrl: string;
+  file?: File;
+  isImage: boolean;
+};
+
 @Component({
   selector: 'gio-form-file-picker',
   templateUrl: './gio-form-file-picker.component.html',
@@ -37,15 +47,13 @@ export class GioFormFilePickerComponent implements OnInit, ControlValueAccessor 
     this.setDisabledState(disabled);
   }
 
-  public readFileValues: ReadFile[] = [];
+  public fileValues: FileValue[] = [];
   public readMode: ReadMode = ReadMode.dataURL;
   public dragHover = false;
   public isDisabled = false;
 
-  private static REMOTE_FILES_TYPE = 'remote-file';
-
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private onChangeCallback: (files: File[]) => void = () => {};
+  private onChangeCallback: (files: (string | NewFile)[]) => void = () => {};
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onTouchedCallback = () => {};
 
@@ -65,7 +73,7 @@ export class GioFormFilePickerComponent implements OnInit, ControlValueAccessor 
   }
 
   public get isComplete(): boolean {
-    return (!this.multiple && this.readFileValues.length === 1) || false;
+    return (!this.multiple && this.fileValues.length === 1) || false;
   }
 
   public get isValid(): boolean | null {
@@ -73,32 +81,21 @@ export class GioFormFilePickerComponent implements OnInit, ControlValueAccessor 
   }
 
   // implement by ControlValueAccessor
-  public writeValue(inputs?: (File | string)[]): void {
+  public async writeValue(inputs?: string[]): Promise<void> {
     if (isNil(inputs) || !isArray(inputs)) {
-      this.readFileValues = [];
-      return;
+      this.fileValues = [];
+      return Promise.resolve();
     }
-    this.readFileValues = inputs.map(input => {
-      if (isFile(input)) {
-        return {
-          name: input.name,
-          readMode: this.readMode,
-          size: input.size,
-          type: input.type,
-          content: input,
-          underlyingFile: input,
-        };
-      }
 
-      return {
+    this.fileValues = await Promise.all(
+      inputs.map(async input => ({
+        isNew: false,
         name: input,
-        readMode: this.readMode,
-        size: 0,
-        type: GioFormFilePickerComponent.REMOTE_FILES_TYPE,
-        content: input,
-        underlyingFile: new File([], input),
-      };
-    });
+        dataUrl: input,
+        isImage: await isImgUrl(input),
+      })),
+    );
+    this.changeDetectorRef.markForCheck();
   }
 
   // implement by ControlValueAccessor
@@ -124,11 +121,11 @@ export class GioFormFilePickerComponent implements OnInit, ControlValueAccessor 
     this.handleReceivedFileEvent(event);
   }
 
-  public onRemoveFile(event: ReadFile): void {
+  public onRemoveFile(file: FileValue): void {
     this.onTouchedCallback();
     this.dragHover = false;
 
-    remove(this.readFileValues, { name: event.name });
+    remove(this.fileValues, { name: file.name });
 
     this.emitFileValue();
   }
@@ -157,29 +154,42 @@ export class GioFormFilePickerComponent implements OnInit, ControlValueAccessor 
 
   private handleReceivedFileEvent(event: ReadFile) {
     this.onTouchedCallback();
+
     this.dragHover = false;
 
     if (!this.multiple) {
-      this.readFileValues = [];
+      this.fileValues = [];
     }
 
-    this.readFileValues.push(event);
+    this.fileValues.push({
+      name: event.name,
+      isNew: true,
+      dataUrl: event.content,
+      file: event.underlyingFile,
+      isImage: event.type.startsWith('image/'),
+    });
 
     this.emitFileValue();
   }
 
   private emitFileValue() {
     this.onChangeCallback(
-      this.readFileValues.map(f => {
-        if (f.type === GioFormFilePickerComponent.REMOTE_FILES_TYPE) {
-          return f.content;
-        }
-        return f.underlyingFile;
-      }),
+      this.fileValues.map(fileValue =>
+        fileValue.isNew ? new NewFile(fileValue.name, fileValue.dataUrl, fileValue.file) : fileValue.dataUrl,
+      ),
     );
   }
 }
 
-const isFile = (obj: unknown): obj is File => {
-  return obj instanceof File;
+const isImgUrl = (url: string): Promise<boolean> => {
+  try {
+    const img = new Image();
+    img.src = url;
+    return new Promise(resolve => {
+      img.onerror = () => resolve(false);
+      img.onload = () => resolve(true);
+    });
+  } catch (error) {
+    return Promise.resolve(false);
+  }
 };

@@ -56,6 +56,13 @@ export const WithCustomContent: Story = () => ({
 
       <br>
 
+      <p>With custom add button style</p>
+      <gio-form-file-picker (ngModelChange)="onChange($event)" [multiple]="true">
+        <gio-form-file-picker-add-button style="width:200px; text-align:center;"><span>Glissez votre fichier</span><p>250x250 px minimum</p></gio-form-file-picker-add-button>
+      </gio-form-file-picker>
+
+      <br>
+
       <p>Disabled with a custom empty text</p>
       <gio-form-file-picker (ngModelChange)="onChange($event)" [disabled]="true">
         <gio-form-file-picker-add-button><span>Glissez votre fichier</span><p>250x250 px minimum</p></gio-form-file-picker-add-button>
@@ -126,7 +133,7 @@ export const WithInitValues: Story = () => ({
         'https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Gundam.jpg/250px-Gundam.jpg',
         'https://upload.wikimedia.org/wikipedia/en/c/c2/ZetaBluRay2.jpg',
       ],
-      ...['assets/GRAVITEE_LOGOV2_RECT.png'],
+      ...['assets/gravitee-logo-cyan.svg'],
     ],
     multiple: true,
     ngModelChange: action('ngModelChange'),
@@ -152,7 +159,7 @@ export const DisabledWithInitValues: Story = () => ({
         'https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Gundam.jpg/250px-Gundam.jpg',
         'https://upload.wikimedia.org/wikipedia/en/c/c2/ZetaBluRay2.jpg',
       ],
-      ...['assets/GRAVITEE_LOGOV2_RECT.png'],
+      ...['assets/gravitee-logo-cyan.svg'],
     ],
     multiple: true,
     ngModelChange: action('ngModelChange'),

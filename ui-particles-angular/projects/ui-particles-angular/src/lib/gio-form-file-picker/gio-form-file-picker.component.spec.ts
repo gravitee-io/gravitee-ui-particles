@@ -21,6 +21,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 
 import { GioFormFilePickerInputHarness } from './gio-form-file-picker.component.harness';
+import { NewFile } from './gio-form-file-picker.model';
 import { GioFormFilePickerModule } from './gio-form-file-picker.module';
 
 @Component({
@@ -70,6 +71,8 @@ describe('FilePickerInputComponent', () => {
     fixture = TestBed.createComponent(TestFilePickerInputComponent);
     component = fixture.componentInstance;
     loader = TestbedHarnessEnvironment.loader(fixture);
+
+    GioFormFilePickerInputHarness.forceImageOnload(['file.json']);
   });
 
   it('should have accept input', async () => {
@@ -90,9 +93,16 @@ describe('FilePickerInputComponent', () => {
       const FILE = newFile('file.png');
 
       const filePickerInputHarness = await loader.getHarness(GioFormFilePickerInputHarness.with({ formControlName: 'file' }));
-      await filePickerInputHarness.dropFiles(fixture, [FILE]);
+      await filePickerInputHarness.dropFiles([FILE]);
 
-      expect(component.myForm.controls.file.value).toEqual([FILE]);
+      expect(component.myForm.controls.file.value).toEqual([
+        {
+          dataUrl: expect.any(String),
+          file: FILE,
+          name: FILE.name,
+        },
+      ]);
+      expect(component.myForm.controls.file.value[0]).toBeInstanceOf(NewFile);
     });
   });
 
@@ -106,9 +116,12 @@ describe('FilePickerInputComponent', () => {
       const FILES = [newFile('file1.png'), newFile('file2.png')];
 
       const filePickerInputHarness = await loader.getHarness(GioFormFilePickerInputHarness.with({ formControlName: 'file' }));
-      await filePickerInputHarness.dropFiles(fixture, FILES);
+      await filePickerInputHarness.dropFiles(FILES);
 
-      expect(component.myForm.controls.file.value).toEqual(FILES);
+      expect(component.myForm.controls.file.value).toEqual([
+        { dataUrl: expect.any(String), file: FILES[0], name: 'file1.png' },
+        { dataUrl: expect.any(String), file: FILES[1], name: 'file2.png' },
+      ]);
     });
   });
 
@@ -129,12 +142,23 @@ describe('FilePickerInputComponent', () => {
 
   describe('with init values', () => {
     it('should display the remote file', async () => {
+      component.myForm.controls.file.setValue(['file.json']);
+      fixture.detectChanges();
+
+      const filePickerInputHarness = await loader.getHarness(GioFormFilePickerInputHarness.with({ formControlName: 'file' }));
+
+      const previewImages = await filePickerInputHarness.getPreviews();
+      expect(previewImages).toEqual(['file.json']);
+      expect(await filePickerInputHarness.isAddButtonPresent()).toBeFalsy();
+    });
+
+    it('should display the remote image file', async () => {
       component.myForm.controls.file.setValue(['rperr-aa.png']);
       fixture.detectChanges();
 
       const filePickerInputHarness = await loader.getHarness(GioFormFilePickerInputHarness.with({ formControlName: 'file' }));
 
-      const previewImages = await filePickerInputHarness.getPreviewImages();
+      const previewImages = await filePickerInputHarness.getPreviews();
       expect(previewImages).toEqual(['background-image: url(rperr-aa.png);']);
       expect(await filePickerInputHarness.isAddButtonPresent()).toBeFalsy();
     });
@@ -146,7 +170,7 @@ describe('FilePickerInputComponent', () => {
 
       const filePickerInputHarness = await loader.getHarness(GioFormFilePickerInputHarness.with({ formControlName: 'file' }));
 
-      const previewImages = await filePickerInputHarness.getPreviewImages();
+      const previewImages = await filePickerInputHarness.getPreviews();
       expect(previewImages).toEqual(['background-image: url(rperr-aa.png);', 'background-image: url(mschaller-shocked.gif);']);
       expect(await filePickerInputHarness.isAddButtonPresent()).toBeTruthy();
     });
@@ -159,9 +183,16 @@ describe('FilePickerInputComponent', () => {
       const FILE = newFile('actual-file.png');
 
       const filePickerInputHarness = await loader.getHarness(GioFormFilePickerInputHarness.with({ formControlName: 'file' }));
-      await filePickerInputHarness.dropFiles(fixture, [FILE]);
+      await filePickerInputHarness.dropFiles([FILE]);
 
-      expect(component.myForm.controls.file.value).toEqual([...INITIAL_VALUES, FILE]);
+      expect(component.myForm.controls.file.value).toEqual([
+        ...INITIAL_VALUES,
+        {
+          dataUrl: expect.any(String),
+          file: FILE,
+          name: 'actual-file.png',
+        },
+      ]);
     });
 
     it('should remove initial input value', async () => {
@@ -176,8 +207,17 @@ describe('FilePickerInputComponent', () => {
       expect(component.myForm.controls.file.value).toEqual([]);
     });
 
-    it('should remove file or initial value', async () => {
-      const INITIAL_VALUES = ['savon-ça-coupe.tiff', 'gbihet-ça-tricote-pas.png', newFile('tavenier-selfie-réjoui.tiff')];
+    it('should remove added file', async () => {
+      const INITIAL_VALUES = [
+        'savon-ça-coupe.tiff',
+        'gbihet-ça-tricote-pas.png',
+        {
+          dataUrl: 'data:image/png;base64,',
+          isImage: true,
+          isNew: false,
+          name: 'gmaisse-lapin-réjoui.jpg',
+        },
+      ];
       component.myForm.controls.file.setValue(INITIAL_VALUES);
       component.multiple = true;
       fixture.detectChanges();
@@ -185,14 +225,22 @@ describe('FilePickerInputComponent', () => {
       const FILE_TO_REMOVE = newFile('gio-gio-blink.gif');
 
       const filePickerInputHarness = await loader.getHarness(GioFormFilePickerInputHarness.with({ formControlName: 'file' }));
-      await filePickerInputHarness.dropFiles(fixture, [FILE, FILE_TO_REMOVE]);
+      await filePickerInputHarness.dropFiles([FILE, FILE_TO_REMOVE]);
       await filePickerInputHarness.deleteFile(1); // Delete the second initial value
       await filePickerInputHarness.deleteFile(3); // Delete the last dropped file
 
-      expect(component.myForm.controls.file.value).toEqual([INITIAL_VALUES[0], INITIAL_VALUES[2], FILE]);
+      expect(component.myForm.controls.file.value).toEqual([
+        INITIAL_VALUES[0],
+        INITIAL_VALUES[2],
+        {
+          dataUrl: expect.any(String),
+          file: FILE,
+          name: 'actual-file.png',
+        },
+      ]);
     });
 
-    it('should remove all when form reset()', async () => {
+    it('should remove added file when form reset()', async () => {
       const INITIAL_VALUES = ['gbihet-ça-tricote-pas.png', 'gmaisse-lapin-réjoui.jpg'];
       component.myForm.controls.file.setValue(INITIAL_VALUES);
       component.multiple = true;
@@ -200,14 +248,21 @@ describe('FilePickerInputComponent', () => {
       const FILE = newFile('actual-file.png');
 
       const filePickerInputHarness = await loader.getHarness(GioFormFilePickerInputHarness.with({ formControlName: 'file' }));
-      await filePickerInputHarness.dropFiles(fixture, [FILE]);
+      await filePickerInputHarness.dropFiles([FILE]);
 
-      expect(component.myForm.controls.file.value).toEqual([...INITIAL_VALUES, FILE]);
-      expect((await filePickerInputHarness.getPreviewImages()).length).toEqual(3);
+      expect(component.myForm.controls.file.value).toEqual([
+        ...INITIAL_VALUES,
+        {
+          dataUrl: expect.any(String),
+          file: FILE,
+          name: 'actual-file.png',
+        },
+      ]);
+      expect((await filePickerInputHarness.getPreviews()).length).toEqual(3);
 
       component.myForm.reset();
       expect(component.myForm.controls.file.value).toEqual(null);
-      expect((await filePickerInputHarness.getPreviewImages()).length).toEqual(0);
+      expect((await filePickerInputHarness.getPreviews()).length).toEqual(0);
     });
 
     describe('disabled component', () => {
@@ -236,16 +291,5 @@ describe('FilePickerInputComponent', () => {
 });
 
 function newFile(fileName: string) {
-  // tslint:disable-next-line: max-classes-per-file
-  class MockFile {
-    constructor(
-      // tslint:disable-next-line: max-union-size
-      public parts: (string | Blob | ArrayBuffer | ArrayBufferView)[],
-      public name: string,
-      public filename: string,
-      public properties?: FilePropertyBag,
-    ) {}
-  }
-
-  return new MockFile(['arrayBuffer'], fileName, fileName, {}) as unknown as File;
+  return new File([''], fileName, {});
 }
