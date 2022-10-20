@@ -1,3 +1,10 @@
+# [3.14.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.13.2...v3.14.0) (2022-10-20)
+
+
+### Features
+
+* improve gio-form-file-picker ([695de08](https://github.com/gravitee-io/gravitee-ui-particles/commit/695de086a6ff0894e55efdb58aa4bfb7559d6e4f))
+
 ## [3.13.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.13.1...v3.13.2) (2022-10-19)
 
 
