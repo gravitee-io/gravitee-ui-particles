@@ -38,30 +38,39 @@
     (filePick)="onFilePicked($event)"
     (click)="onTouched()"
   >
-    <span #addButtonCustom><ng-content select="gio-form-file-picker-add-button"></ng-content></span>
-    <span>
-      <gio-form-file-picker-add-button *ngIf="addButtonCustom.children.length === 0"></gio-form-file-picker-add-button>
-    </span>
+    <div #addButton class="file-picker__add-button__content"><ng-content select="gio-form-file-picker-add-button"></ng-content></div>
+    <gio-form-file-picker-add-button *ngIf="addButton.children.length === 0"></gio-form-file-picker-add-button>
   </div>
-  <div *ngFor="let readFileValue of readFileValues" class="file-picker__preview" [class.drag-hover]="dragHover" [class.error]="!isValid">
-    <a class="file-picker__preview__delete" (click)="onRemoveFile(readFileValue)">
+  <div *ngFor="let fileValue of fileValues" class="file-picker__preview" [class.drag-hover]="dragHover" [class.error]="!isValid">
+    <a class="file-picker__preview__delete" (click)="onRemoveFile(fileValue)">
       <mat-icon svgIcon="gio:cancel"></mat-icon>
     </a>
-    <div class="file-picker__preview__header-image" [style.background-image]="'url(' + readFileValue.content + ')'"></div>
+
+    <ng-container *ngTemplateOutlet="filePreview; context: { fileValue: this.fileValue }"></ng-container>
   </div>
 </div>
 
 <ng-template #disabledTpl>
   <div class="file-picker disabled">
-    <ng-container *ngIf="readFileValues.length === 0">
+    <ng-container *ngIf="fileValues.length === 0">
       <span #previewEmpty class="file-picker__preview-empty disabled">
         <ng-content select="gio-form-file-picker-empty"></ng-content>
-        <span *ngIf="previewEmpty.children.length === 0" class="file-picker__preview-empty__default"> No file defined </span>
+        <gio-form-file-picker-empty
+          *ngIf="previewEmpty.children.length === 0"
+          class="file-picker__preview-empty__default"
+        ></gio-form-file-picker-empty>
       </span>
     </ng-container>
 
-    <div class="file-picker__preview disabled" *ngFor="let readFileValue of readFileValues">
-      <div class="file-picker__preview__header-image" [style.background-image]="'url(' + readFileValue.content + ')'"></div>
+    <div class="file-picker__preview disabled" *ngFor="let fileValue of fileValues">
+      <ng-container *ngTemplateOutlet="filePreview; context: { fileValue: this.fileValue }"></ng-container>
     </div>
+  </div>
+</ng-template>
+
+<ng-template #filePreview let-fileValue="fileValue">
+  <div class="file-picker__preview__image" *ngIf="fileValue.isImage" [style.background-image]="'url(' + fileValue.dataUrl + ')'"></div>
+  <div class="file-picker__preview__file" *ngIf="!fileValue.isImage">
+    <p>{{ fileValue.name }}</p>
   </div>
 </ng-template>

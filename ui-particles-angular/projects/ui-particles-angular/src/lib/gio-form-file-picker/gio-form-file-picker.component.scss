@@ -17,20 +17,23 @@
 @use '@angular/material' as mat;
 @use '../../scss' as gio;
 
-$card-size: 130px;
+$card-size-default: 130px;
 $radius: 6px;
 $background: map.get(gio.$mat-theme, 'background');
 $accent: mat.get-color-from-palette(gio.$mat-accent-palette, 'default');
+$typography: map.get(gio.$mat-theme, typography);
+
+:host {
+  display: flex;
+}
 
 .file-picker {
   display: flex;
-  width: calc($card-size + 8px /* preview margin */ + 8px /* .file-picker padding */);
+  flex: 1 1 auto;
   flex-flow: row wrap;
   padding: 4px;
 
   &__add-button {
-    min-height: $card-size;
-    flex: 0 0 $card-size;
     border: 2px dashed mat.get-color-from-palette(gio.$mat-content-palette, 'default');
     margin: 4px;
     border-radius: $radius;
@@ -61,8 +64,9 @@ $accent: mat.get-color-from-palette(gio.$mat-accent-palette, 'default');
   &__preview-empty {
     position: relative;
     display: flex;
-    min-height: $card-size;
-    flex: 0 0 $card-size;
+    min-width: $card-size-default;
+    min-height: $card-size-default;
+    flex: 0 0 $card-size-default;
     flex-flow: column nowrap;
     justify-content: space-between;
     padding: 6px;
@@ -76,13 +80,28 @@ $accent: mat.get-color-from-palette(gio.$mat-accent-palette, 'default');
       pointer-events: none;
     }
 
-    &__header-image {
+    &__image {
       width: 100%;
       height: 100%;
       background-position-x: center;
       background-position-y: center;
       background-repeat: no-repeat;
       background-size: contain;
+    }
+
+    &__file {
+      display: flex;
+      flex: 1 1 auto;
+      flex-direction: column;
+      align-content: center;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      @include mat.typography-level($typography, 'caption');
+
+      code {
+        @include mat.typography-level($typography, 'caption');
+      }
     }
 
     &.disabled {

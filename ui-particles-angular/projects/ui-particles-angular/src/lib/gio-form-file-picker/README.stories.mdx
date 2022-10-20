@@ -16,6 +16,10 @@ Documentation and examples for Form File Picker input, a component to upload a f
  - `multiple`: `boolean` - Indicates if file picker allows to select multiple files.
  - `accept`: `string` - Type of files accepted by file input. See accepted values [here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers). Default is `'*'`
  - `disabled`: `boolean` - Is the input disabled.
+ - `ngModel`:  `string[]` - List of file (url or base64 data)
+
+**Output**
+ - `ngModelChange`:  `(string | NewFile)[]` - List of file (url or base64 data) for unchanged file. And return new file with `NewFile` object
 
 Example:
 

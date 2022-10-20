@@ -13,10 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './gio-form-file-picker.module';
-export * from './gio-form-file-picker.component';
-export * from './gio-form-file-picker.model';
-export * from './gio-form-file-picker-add-button/gio-form-file-picker-add-button.component';
-export * from './gio-form-file-picker-empty/gio-form-file-picker-empty.component';
 
-export * from './gio-form-file-picker.component.harness';
+export class NewFile {
+  constructor(public readonly name: string, public readonly dataUrl: string, public readonly file?: File) {}
+}
