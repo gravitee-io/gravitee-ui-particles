@@ -20,7 +20,7 @@
 
 @forward './theme/typography/gio-typography' show subtitle-typography, code-typography;
 
-@forward './gio-mat-theme-variable' show $mat-theme, $mat-typography;
+@forward './gio-mat-theme-variable' show $mat-theme, $mat-typography, $mat-theme-dark;
 
 @forward './gio-fonts' show import-fonts;
 
