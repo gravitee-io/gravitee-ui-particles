@@ -48,6 +48,18 @@ $mat-theme-default: mat.define-light-theme(
   )
 );
 
+// Mat default dark theme
+$mat-theme-dark: mat.define-dark-theme(
+  (
+    color: (
+      primary: palettes.$mat-primary-palette,
+      accent: palettes.$mat-accent-palette,
+      warn: palettes.$mat-error-palette,
+    ),
+    typography: $mat-typography,
+  )
+);
+
 // Custom mat background & foreground color
 $mat-background: map.get($mat-theme-default, background);
 $mat-foreground: map.get($mat-theme-default, foreground);
