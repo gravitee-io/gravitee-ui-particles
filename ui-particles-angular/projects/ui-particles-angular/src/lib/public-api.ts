@@ -45,3 +45,4 @@ export * from './gio-form-headers/gio-form-headers.harness';
 export * from './gio-form-file-picker';
 
 export * from './gio-menu';
+export * from './gio-submenu';
