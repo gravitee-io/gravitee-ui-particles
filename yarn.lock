@@ -6352,6 +6352,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/svg-parser@npm:2.0.3":
+  version: 2.0.3
+  resolution: "@types/svg-parser@npm:2.0.3"
+  checksum: ccadff4f96ab02bf37255f92be583f5c2d7ef2178ae6dc73031bf2c202e959b79c828f5544894dfd0de343b63986e283666626084a84d82bacc85c9ba50aadf1
+  languageName: node
+  linkType: hard
+
 "@types/tapable@npm:^1, @types/tapable@npm:^1.0.5":
   version: 1.0.8
   resolution: "@types/tapable@npm:1.0.8"
@@ -13164,6 +13171,7 @@ __metadata:
   dependencies:
     "@commitlint/cli": 17.0.2
     "@commitlint/config-conventional": 17.0.2
+    "@types/svg-parser": 2.0.3
     chromatic: 6.5.6
     husky: 7.0.4
     license-check-and-add: 4.0.5
@@ -13171,6 +13179,7 @@ __metadata:
     prettier: 2.5.1
     sort-package-json: 1.57.0
     storybook-addon-designs: 6.2.1
+    svg-parser: 2.0.4
   languageName: unknown
   linkType: soft
 
@@ -23309,6 +23318,13 @@ __metadata:
     has-flag: ^4.0.0
     supports-color: ^7.0.0
   checksum: aef04fb41f4a67f1bc128f7c3e88a81b6cf2794c800fccf137006efe5bafde281da3e42e72bf9206c2fcf42e6438f37e3a820a389214d0a88613ca1f2d36076a
+  languageName: node
+  linkType: hard
+
+"svg-parser@npm:2.0.4":
+  version: 2.0.4
+  resolution: "svg-parser@npm:2.0.4"
+  checksum: b3de6653048212f2ae7afe4a423e04a76ec6d2d06e1bf7eacc618a7c5f7df7faa5105561c57b94579ec831fbbdbf5f190ba56a9205ff39ed13eabdf8ab086ddf
   languageName: node
   linkType: hard
 
