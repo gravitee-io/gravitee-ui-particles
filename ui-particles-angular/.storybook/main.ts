@@ -2,6 +2,7 @@ module.exports = {
   framework: '@storybook/angular',
   stories: ['../projects/**/*.stories.@(ts|mdx)'],
   addons: [
+    '@storybook/addon-a11y',
     'storybook-addon-designs',
     '@storybook/addon-essentials',
     {
