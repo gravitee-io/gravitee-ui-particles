@@ -1,3 +1,15 @@
+# [4.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.14.2...v4.0.0) (2022-10-27)
+
+
+### Features
+
+* udpate all colors with perseverance ([caf9d1c](https://github.com/gravitee-io/gravitee-ui-particles/commit/caf9d1cf0a163e84859fd3be99f5d6f34257e888))
+
+
+### BREAKING CHANGES
+
+* colors are updated with perseverance design
+
 ## [3.14.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.14.1...v3.14.2) (2022-10-26)
 
 
