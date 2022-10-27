@@ -4693,6 +4693,38 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/addon-a11y@npm:6.4.12":
+  version: 6.4.12
+  resolution: "@storybook/addon-a11y@npm:6.4.12"
+  dependencies:
+    "@storybook/addons": 6.4.12
+    "@storybook/api": 6.4.12
+    "@storybook/channels": 6.4.12
+    "@storybook/client-logger": 6.4.12
+    "@storybook/components": 6.4.12
+    "@storybook/core-events": 6.4.12
+    "@storybook/csf": 0.0.2--canary.87bc651.0
+    "@storybook/theming": 6.4.12
+    axe-core: ^4.2.0
+    core-js: ^3.8.2
+    global: ^4.4.0
+    lodash: ^4.17.21
+    react-sizeme: ^3.0.1
+    regenerator-runtime: ^0.13.7
+    ts-dedent: ^2.0.0
+    util-deprecate: ^1.0.2
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0
+    react-dom: ^16.8.0 || ^17.0.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 89323a409a8ae33921d403f442f208fe93d5664c43ec919d12b945dfe5ff392612042561998fc2db509b2565465ed8ec839ac05d3f285da24d4052eec17a9fe6
+  languageName: node
+  linkType: hard
+
 "@storybook/addon-actions@npm:6.4.12":
   version: 6.4.12
   resolution: "@storybook/addon-actions@npm:6.4.12"
@@ -7774,6 +7806,13 @@ __metadata:
   version: 1.11.0
   resolution: "aws4@npm:1.11.0"
   checksum: 5a00d045fd0385926d20ebebcfba5ec79d4482fe706f63c27b324d489a04c68edb0db99ed991e19eda09cb8c97dc2452059a34d97545cebf591d7a2b5a10999f
+  languageName: node
+  linkType: hard
+
+"axe-core@npm:^4.2.0":
+  version: 4.5.0
+  resolution: "axe-core@npm:4.5.0"
+  checksum: 05b5fa52a8ed8498215cec4a43253d115cc2b43616e840768e05b1b00d6789e7480e5b29159920a45a9504489423836b2fe65a49a67b54cbc5d53b1b37245750
   languageName: node
   linkType: hard
 
@@ -24252,6 +24291,7 @@ __metadata:
     "@semantic-release/changelog": 6.0.1
     "@semantic-release/exec": 6.0.3
     "@semantic-release/git": 10.0.1
+    "@storybook/addon-a11y": 6.4.12
     "@storybook/addon-essentials": 6.4.12
     "@storybook/angular": 6.4.12
     "@storybook/builder-webpack5": 6.4.12
