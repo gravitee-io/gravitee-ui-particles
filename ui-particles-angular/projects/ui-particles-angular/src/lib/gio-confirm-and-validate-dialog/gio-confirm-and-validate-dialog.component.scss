@@ -24,10 +24,15 @@
       color: mat.get-color-from-palette(gio.$mat-content-palette);
     }
 
+    &__validate-message {
+      margin-bottom: 8px;
+    }
+
     &__validate-input {
       overflow: hidden;
       width: 100%;
       height: 62px;
+      padding-top: 4px;
     }
   }
 
