@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './gio-form-file-picker.module';
-export * from './gio-form-file-picker.component';
-export * from './gio-form-file-picker.model';
-export * from './gio-form-file-picker-add-button/gio-form-file-picker-add-button.component';
-export * from './gio-form-file-picker-empty/gio-form-file-picker-empty.component';
-export * from './gio-form-file-picker-label/gio-form-file-picker-label.component';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-export * from './gio-form-file-picker.component.harness';
+@Component({
+  selector: 'gio-form-file-picker-label',
+  templateUrl: './gio-form-file-picker-label.component.html',
+  styleUrls: ['./gio-form-file-picker-label.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class GioFormFilePickerLabelComponent {}

@@ -24,11 +24,22 @@ import { GioIconsModule } from '../gio-icons/gio-icons.module';
 
 import { GioFormFilePickerAddButtonComponent } from './gio-form-file-picker-add-button/gio-form-file-picker-add-button.component';
 import { GioFormFilePickerEmptyComponent } from './gio-form-file-picker-empty/gio-form-file-picker-empty.component';
+import { GioFormFilePickerLabelComponent } from './gio-form-file-picker-label/gio-form-file-picker-label.component';
 import { GioFormFilePickerComponent } from './gio-form-file-picker.component';
 
 @NgModule({
-  declarations: [GioFormFilePickerComponent, GioFormFilePickerAddButtonComponent, GioFormFilePickerEmptyComponent],
-  exports: [GioFormFilePickerComponent, GioFormFilePickerAddButtonComponent, GioFormFilePickerEmptyComponent],
+  declarations: [
+    GioFormFilePickerComponent,
+    GioFormFilePickerAddButtonComponent,
+    GioFormFilePickerEmptyComponent,
+    GioFormFilePickerLabelComponent,
+  ],
+  exports: [
+    GioFormFilePickerComponent,
+    GioFormFilePickerAddButtonComponent,
+    GioFormFilePickerEmptyComponent,
+    GioFormFilePickerLabelComponent,
+  ],
   imports: [CommonModule, ReactiveFormsModule, NgxFileHelpersModule, MatRippleModule, MatIconModule, GioIconsModule],
 })
 export class GioFormFilePickerModule {}

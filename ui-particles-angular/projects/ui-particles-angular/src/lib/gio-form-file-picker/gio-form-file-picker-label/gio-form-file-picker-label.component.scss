@@ -1,23 +1,20 @@
 /*
- * Copyright (C) 2015 The Gravitee team (http://gravitee.io)
- *
+ * Copyright (C) 2022 The Gravitee team (http://gravitee.io)
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * 
  *         http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './gio-form-file-picker.module';
-export * from './gio-form-file-picker.component';
-export * from './gio-form-file-picker.model';
-export * from './gio-form-file-picker-add-button/gio-form-file-picker-add-button.component';
-export * from './gio-form-file-picker-empty/gio-form-file-picker-empty.component';
-export * from './gio-form-file-picker-label/gio-form-file-picker-label.component';
 
-export * from './gio-form-file-picker.component.harness';
+:host {
+  padding-left: 8px;
+  margin-bottom: -4px;
+}
