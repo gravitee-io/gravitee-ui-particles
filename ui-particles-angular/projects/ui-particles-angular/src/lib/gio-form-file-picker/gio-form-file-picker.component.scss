@@ -25,6 +25,7 @@ $typography: map.get(gio.$mat-theme, typography);
 
 :host {
   display: flex;
+  flex-direction: column;
 }
 
 .file-picker {

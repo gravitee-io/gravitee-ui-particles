@@ -51,6 +51,7 @@ export const WithCustomContent: Story = () => ({
   template: `
       <p>With custom add button</p>
       <gio-form-file-picker (ngModelChange)="onChange($event)">
+        <gio-form-file-picker-label>Avatar</gio-form-file-picker-label>
         <gio-form-file-picker-add-button><span>Glissez votre fichier</span><p>250x250 px minimum</p></gio-form-file-picker-add-button>
       </gio-form-file-picker>
 
@@ -58,6 +59,7 @@ export const WithCustomContent: Story = () => ({
 
       <p>With custom add button style</p>
       <gio-form-file-picker (ngModelChange)="onChange($event)" [multiple]="true">
+        <gio-form-file-picker-label>Avatar</gio-form-file-picker-label>
         <gio-form-file-picker-add-button style="width:200px; text-align:center;"><span>Glissez votre fichier</span><p>250x250 px minimum</p></gio-form-file-picker-add-button>
       </gio-form-file-picker>
 
@@ -65,6 +67,7 @@ export const WithCustomContent: Story = () => ({
 
       <p>Disabled with a custom empty text</p>
       <gio-form-file-picker (ngModelChange)="onChange($event)" [disabled]="true">
+        <gio-form-file-picker-label>Avatar</gio-form-file-picker-label>
         <gio-form-file-picker-add-button><span>Glissez votre fichier</span><p>250x250 px minimum</p></gio-form-file-picker-add-button>
         <gio-form-file-picker-empty><span class="mat-small">No image defined</span></gio-form-file-picker-empty>
       </gio-form-file-picker>
@@ -124,7 +127,7 @@ export const WithInitValues: Story = () => ({
         [ngModel]="ngModel"
         [multiple]="multiple"
         (ngModelChange)="ngModelChange($event)"
-      ></gio-form-file-picker>
+      ><gio-form-file-picker-label>Images</gio-form-file-picker-label></gio-form-file-picker>
   `,
   props: {
     formControl: new FormControl(),
