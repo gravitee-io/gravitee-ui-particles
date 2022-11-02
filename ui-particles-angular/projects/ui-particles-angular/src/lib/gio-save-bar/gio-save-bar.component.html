@@ -16,7 +16,7 @@
 
 -->
 
-<div *ngIf="isOpen()" [@slideUpDown] [@.disabled]="creationMode">
+<div *ngIf="isOpen" [@slideUpDown] [@.disabled]="creationMode">
   <mat-card class="save-bar__content" [class.mat-elevation-z3]="creationMode" [class.mat-elevation-z6]="!creationMode">
     <div class="save-bar__content__label">{{ creationMode ? '' : 'You have unsaved changes' }}</div>
     <div>
