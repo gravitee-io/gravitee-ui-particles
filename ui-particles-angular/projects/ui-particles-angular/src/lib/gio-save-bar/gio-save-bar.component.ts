@@ -68,7 +68,8 @@ export class GioSaveBarComponent {
   @Output()
   public submittedInvalidState = new EventEmitter();
 
-  public isOpen(): boolean {
+  @HostBinding('class.is-open')
+  public get isOpen(): boolean {
     if (this.creationMode) {
       return true;
     }

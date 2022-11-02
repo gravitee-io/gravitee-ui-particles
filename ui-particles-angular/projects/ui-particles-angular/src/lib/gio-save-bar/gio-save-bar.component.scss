@@ -25,6 +25,11 @@ $typography: map.get(gio.$mat-theme, typography);
   display: block;
   height: 68px;
   margin-top: 32px;
+  visibility: hidden;
+}
+
+:host.is-open {
+  visibility: visible;
 }
 
 :host(.save-bar-sticky) {
