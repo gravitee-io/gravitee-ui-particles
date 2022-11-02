@@ -1,3 +1,15 @@
+# [4.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.0.0...v4.1.0) (2022-11-02)
+
+
+### Bug Fixes
+
+* add padding to avoid label overflow glyph ([962f2b1](https://github.com/gravitee-io/gravitee-ui-particles/commit/962f2b1879e6426cfb6ead9d7510f60b17094c84))
+
+
+### Features
+
+* add label for form file picker component ([1029fb7](https://github.com/gravitee-io/gravitee-ui-particles/commit/1029fb71f51791795f612485d7169d3d1f36838b))
+
 # [4.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v3.14.2...v4.0.0) (2022-10-27)
 
 
