@@ -18,6 +18,8 @@ import { Story } from '@storybook/angular/types-7-0';
 import { withDesign } from 'storybook-addon-designs';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
+import { GioSubmenuModule } from '../gio-submenu';
+
 import { GioMenuModule } from './gio-menu.module';
 import { GioMenuItemComponent } from './gio-menu-item/gio-menu-item.component';
 
@@ -26,7 +28,7 @@ export default {
   component: GioMenuItemComponent,
   decorators: [
     moduleMetadata({
-      imports: [GioMenuModule, NoopAnimationsModule],
+      imports: [GioMenuModule, NoopAnimationsModule, GioSubmenuModule],
     }),
     withDesign,
   ],
@@ -34,6 +36,7 @@ export default {
 } as Meta;
 
 let route = 'apis';
+let subRoute = '';
 const gioMenuContent = `
             <gio-menu-header>    
               <gio-menu-selector [selectedItemValue]="selectedItemValue" selectorTitle="Environment" [selectorItems]="selectorItems" (selectChange)="selectedItemValue=$event"></gio-menu-selector>
@@ -132,6 +135,59 @@ export const WithOneItemInSelector: Story = {
     props: {
       onClick: (target: string) => (route = target),
       isActive: (target: string) => (route != target ? null : true),
+      selectedItemValue: 'onlyOne',
+      selectorItems: [{ value: 'onlyOne', displayValue: '🧪 Only Env' }],
+    },
+    styles: [
+      ` 
+        #sidenav {
+            height: 100vh;
+            display: flex;
+        }
+        
+        #sidenav h1 {
+            margin-left: 12px
+        };
+        `,
+    ],
+  }),
+};
+
+export const WithSubMenu: Story = {
+  render: () => ({
+    template: `
+        <div id="sidenav">
+          <gio-menu>
+            ${gioMenuContent}
+          </gio-menu>
+            <gio-submenu>
+              <gio-submenu-item>Portal</gio-submenu-item>
+              <gio-submenu-subitem (click)="onSubClick('general')" [active]="isSubActive('general')">General</gio-submenu-subitem>
+              <gio-submenu-subitem (click)="onSubClick('plans')" [active]="isSubActive('plans')">Plans</gio-submenu-subitem>
+              <gio-submenu-subitem (click)="onSubClick('doc')" [active]="isSubActive('doc')">Documentation</gio-submenu-subitem>
+              <gio-submenu-subitem (click)="onSubClick('user')" [active]="isSubActive('user')">User & Group Access</gio-submenu-subitem>
+              <gio-submenu-item>Proxy</gio-submenu-item>
+              <gio-submenu-subitem (click)="onSubClick('general-2')" [active]="isSubActive('general-2')">General</gio-submenu-subitem>
+              <gio-submenu-subitem (click)="onSubClick('backend')" [active]="isSubActive('backend')">Backend services</gio-submenu-subitem>
+              <gio-submenu-item>Design</gio-submenu-item>
+              <gio-submenu-subitem (click)="onSubClick('policies')" [active]="isSubActive('policies')">Policies</gio-submenu-subitem>
+              <gio-submenu-subitem (click)="onSubClick('resources')" [active]="isSubActive('resources')">Resources</gio-submenu-subitem>
+              <gio-submenu-subitem (click)="onSubClick('properties')" [active]="isSubActive('properties')">Properties</gio-submenu-subitem>
+              <gio-submenu-item>Analytics</gio-submenu-item>
+              <gio-submenu-subitem (click)="onSubClick('overview')" [active]="isSubActive('overview')">Overview</gio-submenu-subitem>
+              <gio-submenu-subitem (click)="onSubClick('logs')" [active]="isSubActive('logs')">Logs</gio-submenu-subitem>
+              <gio-submenu-subitem (click)="onSubClick('path')" [active]="isSubActive('path')">Path mappings</gio-submenu-subitem>
+              <gio-submenu-subitem (click)="onSubClick('alerts')" [active]="isSubActive('alerts')">Alerts</gio-submenu-subitem>
+              <gio-submenu-item>Audit</gio-submenu-item>
+          </gio-submenu>
+          <h1>Selected env: {{ selectedItemValue }}</h1>
+        </div>
+        `,
+    props: {
+      onClick: (target: string) => (route = target),
+      isActive: (target: string) => (route != target ? null : true),
+      onSubClick: (target: string) => (subRoute = target),
+      isSubActive: (target: string) => (subRoute != target ? null : true),
       selectedItemValue: 'onlyOne',
       selectorItems: [{ value: 'onlyOne', displayValue: '🧪 Only Env' }],
     },

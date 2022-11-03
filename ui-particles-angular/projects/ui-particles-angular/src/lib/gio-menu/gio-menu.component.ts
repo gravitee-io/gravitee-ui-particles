@@ -15,6 +15,8 @@
  */
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 
+import { GioMenuService } from './gio-menu.service';
+
 @Component({
   selector: 'gio-menu',
   templateUrl: './gio-menu.component.html',
@@ -24,8 +26,11 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 export class GioMenuComponent {
   @Input() public reduced = false;
 
+  constructor(private readonly gioMenuService: GioMenuService) {}
+
   public reduceMenu(): void {
     this.reduced = !this.reduced;
+    this.gioMenuService.reduced(this.reduced);
   }
 
   public getCollapseButtonIcon(): string {
