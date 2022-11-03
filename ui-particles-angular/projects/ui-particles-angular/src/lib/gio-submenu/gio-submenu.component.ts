@@ -13,11 +13,59 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { combineLatest, Subject } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
+
+import { GioMenuService } from '../gio-menu/gio-menu.service';
 
 @Component({
   selector: 'gio-submenu',
   templateUrl: './gio-submenu.component.html',
   styleUrls: ['./gio-submenu.component.scss'],
 })
-export class GioSubmenuComponent {}
+export class GioSubmenuComponent implements OnInit, OnDestroy {
+  public reduced = false;
+  public overlay = false;
+  private hover = false;
+  @ViewChild('gioSubmenu', { static: false })
+  private gioSubmenu: ElementRef<HTMLDivElement> | undefined;
+  private unsubscribe$ = new Subject();
+
+  constructor(private readonly gioMenuService: GioMenuService) {}
+
+  public ngOnInit(): void {
+    combineLatest([this.gioMenuService.reduce, this.gioMenuService.mouseOver])
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        tap(([reduced, mouseOver]) => {
+          this.reduced = reduced;
+          if (this.gioSubmenu) {
+            this.overlay = mouseOver.enter;
+            if (this.overlay && this.reduced) {
+              this.gioSubmenu.nativeElement.style.top = `${mouseOver.top}px`;
+              this.gioSubmenu.nativeElement.style.height = 'auto';
+              this.gioSubmenu.nativeElement.style.maxHeight = `calc(100vh - ${mouseOver.top + 8}px)`;
+            } else if (!this.hover) {
+              this.gioSubmenu.nativeElement.style.height = '100%';
+              this.gioSubmenu.nativeElement.style.maxHeight = 'auto%';
+            }
+          }
+        }),
+      )
+      .subscribe();
+  }
+
+  public onMouseEnter(): void {
+    this.hover = true;
+  }
+
+  public onMouseLeave(): void {
+    this.hover = false;
+  }
+
+  public ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.unsubscribe();
+  }
+}

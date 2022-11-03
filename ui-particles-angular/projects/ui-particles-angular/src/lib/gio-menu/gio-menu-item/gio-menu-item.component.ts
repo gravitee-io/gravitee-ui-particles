@@ -15,6 +15,8 @@
  */
 import { Component, Input } from '@angular/core';
 
+import { GioMenuService } from '../gio-menu.service';
+
 @Component({
   selector: 'gio-menu-item',
   templateUrl: './gio-menu-item.component.html',
@@ -24,4 +26,26 @@ export class GioMenuItemComponent {
   @Input() public icon = '';
   @Input() public active = false;
   @Input() public outlined = false;
+
+  constructor(private readonly gioMenuService: GioMenuService) {}
+
+  public onMouseLeave($event: MouseEvent): void {
+    if (this.active) {
+      const target = $event.target as HTMLInputElement;
+      const menuItem = target.closest('.gio-menu-item') as HTMLInputElement;
+      setTimeout(() => this.gioMenuService.mouseOverItem({ enter: false, top: menuItem.getBoundingClientRect().top }), 50);
+    }
+  }
+
+  public onMouseEnter($event: MouseEvent): void {
+    if (this.active) {
+      const target = $event.target as HTMLInputElement;
+      const menuItem = target.closest('.gio-menu-item') as HTMLInputElement;
+      this.gioMenuService.mouseOverItem({ enter: true, top: menuItem.getBoundingClientRect().top });
+    }
+  }
+
+  public onClick($event: MouseEvent): void {
+    setTimeout(() => this.onMouseEnter($event), 0);
+  }
 }

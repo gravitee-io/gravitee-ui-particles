@@ -21,6 +21,7 @@
 $background: map.get(gio.$mat-content-palette, darker);
 
 .gio-submenu {
+  z-index: 1000;
   display: flex;
   width: 266px;
   height: 100%;
@@ -28,7 +29,22 @@ $background: map.get(gio.$mat-content-palette, darker);
   flex-direction: column;
   flex-grow: 0;
   justify-content: flex-start;
-  order: 0;
   padding: 16px;
   background: $background;
+
+  &__reduced {
+    position: absolute;
+    overflow: auto;
+    margin: 0 0 0 8px;
+    border-radius: 8px;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &__overlay,
+  &:hover {
+    opacity: 1;
+    transition: opacity 230ms, visibility 230ms;
+    visibility: visible;
+  }
 }
