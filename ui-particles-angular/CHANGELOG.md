@@ -1,3 +1,17 @@
+# [4.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.1.0...v4.2.0) (2022-11-03)
+
+
+### Bug Fixes
+
+* allows to interact with elements under the sticky save-bar ([0443019](https://github.com/gravitee-io/gravitee-ui-particles/commit/044301932d8bcaee011d9a859bec80b548ed3941))
+
+
+### Features
+
+* add dark theme for material ([7530ed0](https://github.com/gravitee-io/gravitee-ui-particles/commit/7530ed0c3dde676d9ede1dcb5d690d68a116e70e))
+* add menu component ([7379d91](https://github.com/gravitee-io/gravitee-ui-particles/commit/7379d915e9c55b57ba75ea50e2017216587cf2cd))
+* add submenu component ([8b1d642](https://github.com/gravitee-io/gravitee-ui-particles/commit/8b1d6422b13b447c4c7f8ef998deac2e06276f42))
+
 # [4.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.0.0...v4.1.0) (2022-11-02)
 
 
