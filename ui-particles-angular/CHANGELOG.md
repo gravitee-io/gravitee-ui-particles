@@ -1,3 +1,10 @@
+# [4.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.2.0...v4.3.0) (2022-11-04)
+
+
+### Features
+
+* improve banner to have optional body ([60f4b39](https://github.com/gravitee-io/gravitee-ui-particles/commit/60f4b3983d0076920916059d7cd5da9864ce7fb4))
+
 # [4.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.1.0...v4.2.0) (2022-11-03)
 
 
