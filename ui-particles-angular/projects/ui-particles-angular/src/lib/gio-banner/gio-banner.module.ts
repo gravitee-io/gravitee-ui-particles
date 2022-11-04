@@ -21,6 +21,7 @@ import { GioIconsModule } from '../gio-icons/gio-icons.module';
 
 import {
   GioBannerComponent,
+  GioBannerBodyDirective,
   GioBannerErrorComponent,
   GioBannerInfoComponent,
   GioBannerSuccessComponent,
@@ -29,8 +30,22 @@ import {
 
 @NgModule({
   imports: [CommonModule, MatIconModule, GioIconsModule],
-  declarations: [GioBannerComponent, GioBannerErrorComponent, GioBannerInfoComponent, GioBannerSuccessComponent, GioBannerWarningComponent],
-  exports: [GioBannerComponent, GioBannerErrorComponent, GioBannerInfoComponent, GioBannerSuccessComponent, GioBannerWarningComponent],
+  declarations: [
+    GioBannerComponent,
+    GioBannerErrorComponent,
+    GioBannerInfoComponent,
+    GioBannerSuccessComponent,
+    GioBannerWarningComponent,
+    GioBannerBodyDirective,
+  ],
+  exports: [
+    GioBannerComponent,
+    GioBannerErrorComponent,
+    GioBannerInfoComponent,
+    GioBannerSuccessComponent,
+    GioBannerWarningComponent,
+    GioBannerBodyDirective,
+  ],
   entryComponents: [
     GioBannerComponent,
     GioBannerErrorComponent,

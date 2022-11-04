@@ -12,7 +12,7 @@ Documentation and examples for banner. Allows you to display banner in cards or 
 
 ## Usage
 
-`<gio-banner></gio-banner>` can be used with a `type` input to change its color and icon dinamically.
+`<gio-banner></gio-banner>` can be used with a `type` input to change its color and icon dynamically.
 
 It is also possible to use it with the following tag declination:
 
@@ -28,4 +28,13 @@ It is also possible to use it with the following tag declination:
 <gio-banner-success>This is a success banner!</gio-banner-success>
 
 <gio-banner-warning>This is a warning banner!</gio-banner-warning>
+```
+
+It is possible to add body with [gioBannerBody] directive
+
+```html 
+<gio-banner>
+  Title content
+  <span gioBannerBody>This is the body of the banner.</span>
+</gio-banner>
 ```
