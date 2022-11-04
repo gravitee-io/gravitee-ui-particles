@@ -35,10 +35,9 @@ $types: (
 }
 
 .banner {
-  @include mat.typography-level($typography, body-2);
-
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
   padding: 16px;
   border-radius: 8px;
 
@@ -50,13 +49,30 @@ $types: (
     }
   }
 
-  &__icon {
+  &__wrapper {
     display: flex;
-    margin-right: 18px;
+    align-items: center;
+
+    @include mat.typography-level($typography, body-2);
+
+    &__icon {
+      display: flex;
+      margin-right: 16px;
+    }
+
+    &__head {
+      flex: 1 1 auto;
+      line-height: normal;
+    }
   }
 
-  &__content {
-    flex: 1 1 auto;
-    line-height: normal;
+  &__body {
+    padding-top: 2px;
+    padding-left: 24px + 16px;
+    @include mat.typography-level($typography, body-1);
+
+    &.hide {
+      display: none;
+    }
   }
 }

@@ -22,13 +22,18 @@
   [class.warning]="type === 'warning'"
   [class.success]="type === 'success'"
 >
-  <div class="banner__icon" [ngSwitch]="type">
-    <mat-icon *ngSwitchCase="'info'" svgIcon="gio:chat-lines"></mat-icon>
-    <mat-icon *ngSwitchCase="'error'" svgIcon="gio:chat-bubble-error"></mat-icon>
-    <mat-icon *ngSwitchCase="'warning'" svgIcon="gio:chat-bubble-warning"></mat-icon>
-    <mat-icon *ngSwitchCase="'success'" svgIcon="gio:chat-bubble-check"></mat-icon>
+  <div class="banner__wrapper">
+    <div class="banner__wrapper__icon" [ngSwitch]="type">
+      <mat-icon *ngSwitchCase="'info'" svgIcon="gio:chat-lines"></mat-icon>
+      <mat-icon *ngSwitchCase="'error'" svgIcon="gio:chat-bubble-error"></mat-icon>
+      <mat-icon *ngSwitchCase="'warning'" svgIcon="gio:chat-bubble-warning"></mat-icon>
+      <mat-icon *ngSwitchCase="'success'" svgIcon="gio:chat-bubble-check"></mat-icon>
+    </div>
+    <div class="banner__wrapper__head">
+      <ng-content></ng-content>
+    </div>
   </div>
-  <div class="banner__content">
-    <ng-content></ng-content>
+  <div #body class="banner__body" [class.hide]="!body.children.length">
+    <ng-content select="[gioBannerBody]"></ng-content>
   </div>
 </div>

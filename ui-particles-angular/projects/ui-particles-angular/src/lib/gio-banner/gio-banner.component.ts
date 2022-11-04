@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Input } from '@angular/core';
+import { Component, Directive, Input } from '@angular/core';
 
 export type GioBannerTypes = 'error' | 'info' | 'success' | 'warning';
 
@@ -26,6 +26,11 @@ export class GioBannerComponent {
   @Input()
   public type: GioBannerTypes = 'info';
 }
+
+@Directive({
+  selector: '[gioBannerBody]',
+})
+export class GioBannerBodyDirective {}
 
 @Component({
   selector: 'gio-banner-error',
