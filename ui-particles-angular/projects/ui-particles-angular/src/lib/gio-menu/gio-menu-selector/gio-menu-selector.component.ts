@@ -36,6 +36,9 @@ export class GioMenuSelectorComponent {
   @Input()
   public selectedItemValue = '';
 
+  @Input()
+  public tabIndex = 1;
+
   @Output()
   public selectChange: EventEmitter<string> = new EventEmitter<string>();
 

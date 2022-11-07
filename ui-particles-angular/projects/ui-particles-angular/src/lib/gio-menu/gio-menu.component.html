@@ -20,7 +20,13 @@
   <ng-content select="gio-menu-list"></ng-content>
   <ng-content select="gio-menu-footer"></ng-content>
   <gio-menu-footer>
-    <gio-menu-item class="gio-menu-footer__collapse" [icon]="getCollapseButtonIcon()" (click)="reduceMenu()" [outlined]="true"
+    <gio-menu-item
+      tabIndex="1"
+      type="button"
+      class="gio-menu-footer__collapse"
+      [icon]="getCollapseButtonIcon()"
+      (click)="reduceMenu()"
+      [outlined]="true"
       >Collapse menu</gio-menu-item
     >
   </gio-menu-footer>

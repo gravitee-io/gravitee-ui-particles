@@ -39,19 +39,19 @@ let route = 'apis';
 let subRoute = '';
 const gioMenuContent = `
             <gio-menu-header>    
-              <gio-menu-selector [selectedItemValue]="selectedItemValue" selectorTitle="Environment" [selectorItems]="selectorItems" (selectChange)="selectedItemValue=$event"></gio-menu-selector>
+              <gio-menu-selector tabindex="1" [selectedItemValue]="selectedItemValue" selectorTitle="Environment" [selectorItems]="selectorItems" (selectChange)="selectedItemValue=$event"></gio-menu-selector>
             </gio-menu-header>
             <gio-menu-list>    
-              <gio-menu-item icon="gio:home" (click)="onClick('dashboard')" [active]="isActive('dashboard')">Dashboard</gio-menu-item>
-              <gio-menu-item icon="gio:upload-cloud" (click)="onClick('apis')" [active]="isActive('apis')">Apis</gio-menu-item>
-              <gio-menu-item icon="gio:multi-window" (click)="onClick('apps')" [active]="isActive('apps')">Applications</gio-menu-item>
-              <gio-menu-item icon="gio:cloud-server" (click)="onClick('gateways')" [active]="isActive('gateways')">Gateways</gio-menu-item>
-              <gio-menu-item icon="gio:verified" (click)="onClick('audit')" [active]="isActive('audit')">Audit</gio-menu-item>
-              <gio-menu-item icon="gio:message-text" (click)="onClick('messages')" [active]="isActive('messages')">Messages</gio-menu-item>
-              <gio-menu-item icon="gio:settings" (click)="onClick('settings')" [active]="isActive('settings')">Settings</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:home" (click)="onClick('dashboard')" [active]="isActive('dashboard')">Dashboard</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:upload-cloud" (click)="onClick('apis')" [active]="isActive('apis')">Apis</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:multi-window" (click)="onClick('apps')" [active]="isActive('apps')">Applications</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:cloud-server" (click)="onClick('gateways')" [active]="isActive('gateways')">Gateways</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:verified" (click)="onClick('audit')" [active]="isActive('audit')">Audit</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:message-text" (click)="onClick('messages')" [active]="isActive('messages')">Messages</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:settings" (click)="onClick('settings')" [active]="isActive('settings')">Settings</gio-menu-item>
             </gio-menu-list>
             <gio-menu-footer>
-              <gio-menu-item icon="gio:building" (click)="onClick('org')" [active]="isActive('org')">Organization settings</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:building" (click)="onClick('org')" [active]="isActive('org')">Organization settings</gio-menu-item>
             </gio-menu-footer>`;
 
 export const Default: Story = {
@@ -162,22 +162,22 @@ export const WithSubMenu: Story = {
           </gio-menu>
             <gio-submenu>
               <gio-submenu-item>Portal</gio-submenu-item>
-              <gio-submenu-subitem (click)="onSubClick('general')" [active]="isSubActive('general')">General</gio-submenu-subitem>
-              <gio-submenu-subitem (click)="onSubClick('plans')" [active]="isSubActive('plans')">Plans</gio-submenu-subitem>
-              <gio-submenu-subitem (click)="onSubClick('doc')" [active]="isSubActive('doc')">Documentation</gio-submenu-subitem>
-              <gio-submenu-subitem (click)="onSubClick('user')" [active]="isSubActive('user')">User & Group Access</gio-submenu-subitem>
+              <gio-submenu-subitem tabindex="1" (click)="onSubClick('general')" [active]="isSubActive('general')">General</gio-submenu-subitem>
+              <gio-submenu-subitem tabindex="1" (click)="onSubClick('plans')" [active]="isSubActive('plans')">Plans</gio-submenu-subitem>
+              <gio-submenu-subitem tabindex="1" (click)="onSubClick('doc')" [active]="isSubActive('doc')">Documentation</gio-submenu-subitem>
+              <gio-submenu-subitem tabindex="1" (click)="onSubClick('user')" [active]="isSubActive('user')">User & Group Access</gio-submenu-subitem>
               <gio-submenu-item>Proxy</gio-submenu-item>
-              <gio-submenu-subitem (click)="onSubClick('general-2')" [active]="isSubActive('general-2')">General</gio-submenu-subitem>
-              <gio-submenu-subitem (click)="onSubClick('backend')" [active]="isSubActive('backend')">Backend services</gio-submenu-subitem>
+              <gio-submenu-subitem tabindex="1" (click)="onSubClick('general-2')" [active]="isSubActive('general-2')">General</gio-submenu-subitem>
+              <gio-submenu-subitem tabindex="1" (click)="onSubClick('backend')" [active]="isSubActive('backend')">Backend services</gio-submenu-subitem>
               <gio-submenu-item>Design</gio-submenu-item>
-              <gio-submenu-subitem (click)="onSubClick('policies')" [active]="isSubActive('policies')">Policies</gio-submenu-subitem>
-              <gio-submenu-subitem (click)="onSubClick('resources')" [active]="isSubActive('resources')">Resources</gio-submenu-subitem>
-              <gio-submenu-subitem (click)="onSubClick('properties')" [active]="isSubActive('properties')">Properties</gio-submenu-subitem>
+              <gio-submenu-subitem tabindex="1" (click)="onSubClick('policies')" [active]="isSubActive('policies')">Policies</gio-submenu-subitem>
+              <gio-submenu-subitem tabindex="1" (click)="onSubClick('resources')" [active]="isSubActive('resources')">Resources</gio-submenu-subitem>
+              <gio-submenu-subitem tabindex="1" (click)="onSubClick('properties')" [active]="isSubActive('properties')">Properties</gio-submenu-subitem>
               <gio-submenu-item>Analytics</gio-submenu-item>
-              <gio-submenu-subitem (click)="onSubClick('overview')" [active]="isSubActive('overview')">Overview</gio-submenu-subitem>
-              <gio-submenu-subitem (click)="onSubClick('logs')" [active]="isSubActive('logs')">Logs</gio-submenu-subitem>
-              <gio-submenu-subitem (click)="onSubClick('path')" [active]="isSubActive('path')">Path mappings</gio-submenu-subitem>
-              <gio-submenu-subitem (click)="onSubClick('alerts')" [active]="isSubActive('alerts')">Alerts</gio-submenu-subitem>
+              <gio-submenu-subitem tabindex="1" (click)="onSubClick('overview')" [active]="isSubActive('overview')">Overview</gio-submenu-subitem>
+              <gio-submenu-subitem tabindex="1" (click)="onSubClick('logs')" [active]="isSubActive('logs')">Logs</gio-submenu-subitem>
+              <gio-submenu-subitem tabindex="1" (click)="onSubClick('path')" [active]="isSubActive('path')">Path mappings</gio-submenu-subitem>
+              <gio-submenu-subitem tabindex="1" (click)="onSubClick('alerts')" [active]="isSubActive('alerts')">Alerts</gio-submenu-subitem>
               <gio-submenu-item>Audit</gio-submenu-item>
           </gio-submenu>
           <h1>Selected env: {{ selectedItemValue }}</h1>
