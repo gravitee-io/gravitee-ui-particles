@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 
 import { GioMenuService } from '../gio-menu.service';
 
@@ -26,6 +26,9 @@ export class GioMenuItemComponent {
   @Input() public icon = '';
   @Input() public active = false;
   @Input() public outlined = false;
+
+  @ViewChild('gioMenuItem', { static: false })
+  private gioMenuItem: ElementRef<HTMLDivElement> | undefined;
 
   constructor(private readonly gioMenuService: GioMenuService) {}
 
@@ -45,7 +48,15 @@ export class GioMenuItemComponent {
     }
   }
 
+  @HostListener('click', ['$event'])
   public onClick($event: MouseEvent): void {
     setTimeout(() => this.onMouseEnter($event), 0);
+  }
+
+  @HostListener('keydown', ['$event'])
+  public onKeydownHandler(event: KeyboardEvent): void {
+    if (event.key === ' ' || event.key === 'Enter') {
+      this.gioMenuItem?.nativeElement.click();
+    }
   }
 }

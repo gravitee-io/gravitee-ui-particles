@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'gio-submenu-subitem',
@@ -22,4 +22,14 @@ import { Component, Input } from '@angular/core';
 })
 export class GioSubmenuSubitemComponent {
   @Input() public active = false;
+
+  @ViewChild('gioSubmenuSubitem', { static: false })
+  private gioSubmenuSubitem: ElementRef<HTMLDivElement> | undefined;
+
+  @HostListener('keydown', ['$event'])
+  public onKeydownHandler(event: KeyboardEvent): void {
+    if (event.key === ' ' || event.key === 'Enter') {
+      this.gioSubmenuSubitem?.nativeElement.click();
+    }
+  }
 }
