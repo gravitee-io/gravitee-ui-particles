@@ -1,3 +1,10 @@
+# [4.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.4.0...v4.5.0) (2022-11-08)
+
+
+### Features
+
+* **menu:** implement keyboard nav ([f550275](https://github.com/gravitee-io/gravitee-ui-particles/commit/f5502753a641771387a0d284c2c9319d0875a4a0))
+
 # [4.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.3.0...v4.4.0) (2022-11-08)
 
 
