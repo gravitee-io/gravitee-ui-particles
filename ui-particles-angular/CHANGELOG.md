@@ -1,3 +1,10 @@
+# [4.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.3.0...v4.4.0) (2022-11-08)
+
+
+### Features
+
+* **menu:** improve the reduce mode ([b2cb7a3](https://github.com/gravitee-io/gravitee-ui-particles/commit/b2cb7a31ac40b95f9b76987445e574342118da89))
+
 # [4.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.2.0...v4.3.0) (2022-11-04)
 
 
