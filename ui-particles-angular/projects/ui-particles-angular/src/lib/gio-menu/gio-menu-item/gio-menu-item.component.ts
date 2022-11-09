@@ -34,9 +34,7 @@ export class GioMenuItemComponent {
 
   public onMouseLeave($event: MouseEvent): void {
     if (this.active) {
-      const target = $event.target as HTMLInputElement;
-      const menuItem = target.closest('.gio-menu-item') as HTMLInputElement;
-      setTimeout(() => this.gioMenuService.mouseOverItem({ enter: false, top: menuItem.getBoundingClientRect().top }), 50);
+      this.gioMenuService.overlay({ open: false });
     }
   }
 
@@ -44,7 +42,7 @@ export class GioMenuItemComponent {
     if (this.active) {
       const target = $event.target as HTMLInputElement;
       const menuItem = target.closest('.gio-menu-item') as HTMLInputElement;
-      this.gioMenuService.mouseOverItem({ enter: true, top: menuItem.getBoundingClientRect().top });
+      this.gioMenuService.overlay({ open: true, top: menuItem.getBoundingClientRect().top, parent: menuItem });
     }
   }
 
