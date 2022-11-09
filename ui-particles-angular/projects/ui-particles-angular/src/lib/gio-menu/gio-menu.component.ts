@@ -37,7 +37,7 @@ export class GioMenuComponent {
     return this.reduced ? 'gio:expande' : 'gio:collapse';
   }
 
-  public onMouseLeave($event: MouseEvent): void {
+  public onMouseLeave(): void {
     if (this.reduced) {
       this.gioMenuService.overlay({ open: false });
     }

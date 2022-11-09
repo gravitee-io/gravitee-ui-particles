@@ -22,7 +22,7 @@
   [class.gio-menu-item__outlined]="outlined"
   (click)="onClick($event)"
   (mouseenter)="onMouseEnter($event)"
-  (mouseleave)="onMouseLeave($event)"
+  (mouseleave)="onMouseLeave()"
 >
   <mat-icon *ngIf="icon" class="gio-menu-item__icon" [svgIcon]="icon"></mat-icon>
   <span class="gio-menu-item__title"><ng-content></ng-content></span>

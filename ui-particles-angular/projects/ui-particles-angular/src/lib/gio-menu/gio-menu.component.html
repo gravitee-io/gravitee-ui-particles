@@ -15,7 +15,7 @@
     limitations under the License.
 
 -->
-<div class="gio-menu" [class.gio-menu__reduced]="reduced" (mouseleave)="onMouseLeave($event)">
+<div class="gio-menu" [class.gio-menu__reduced]="reduced" (mouseleave)="onMouseLeave()">
   <ng-content *ngIf="!reduced" select="gio-menu-header"></ng-content>
   <ng-content select="gio-menu-list"></ng-content>
   <ng-content select="gio-menu-footer"></ng-content>
