@@ -49,7 +49,7 @@ export class GioSubmenuComponent implements OnInit, OnDestroy {
               this.gioSubmenu.nativeElement.style.maxHeight = `calc(100vh - ${top + 8}px)`;
             } else if (!this.hover) {
               this.gioSubmenu.nativeElement.style.height = '100%';
-              this.gioSubmenu.nativeElement.style.maxHeight = 'auto';
+              this.gioSubmenu.nativeElement.style.maxHeight = 'none';
             }
           }
         }),
