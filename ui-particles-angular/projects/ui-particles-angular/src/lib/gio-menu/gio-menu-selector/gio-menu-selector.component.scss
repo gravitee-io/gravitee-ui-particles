@@ -44,6 +44,9 @@ $text: map.get(gio.$mat-dove-palette, default);
   }
 
   .mat-form-field-appearance-legacy .mat-form-field-wrapper {
-    padding-bottom: 16px;
+    padding-bottom: 6px;
+  }
+  .mat-form-field-underline {
+    display: none;
   }
 }
