@@ -32,7 +32,7 @@ export class GioMenuItemComponent {
 
   constructor(private readonly gioMenuService: GioMenuService) {}
 
-  public onMouseLeave($event: MouseEvent): void {
+  public onMouseLeave(): void {
     if (this.active) {
       this.gioMenuService.overlay({ open: false });
     }

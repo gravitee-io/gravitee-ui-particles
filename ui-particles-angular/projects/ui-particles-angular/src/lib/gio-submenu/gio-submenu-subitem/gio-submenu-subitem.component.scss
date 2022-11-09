@@ -19,6 +19,7 @@
 @use '../../../scss' as gio;
 
 $activeBackground: map.get(gio.$mat-space-palette, lighter30);
+$hoverBackground: map.get(gio.$mat-space-palette, lighter20);
 $textLight: map.get(gio.$mat-basic-palette, white);
 
 :host {
@@ -46,5 +47,9 @@ $textLight: map.get(gio.$mat-basic-palette, white);
     flex-grow: 0;
     color: $textLight;
     letter-spacing: 0.4px;
+  }
+
+  &:hover:not(.gio-menu-item__active) {
+    background: $hoverBackground;
   }
 }
