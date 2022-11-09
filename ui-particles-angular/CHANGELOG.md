@@ -1,3 +1,11 @@
+## [4.5.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.5.0...v4.5.1) (2022-11-09)
+
+
+### Bug Fixes
+
+* **menu:** add hover background on submenu item ([c664e0b](https://github.com/gravitee-io/gravitee-ui-particles/commit/c664e0b26d48b434414fe3ea7aedef79373bbd32))
+* **menu:** improve submenu overlay ([bbd544e](https://github.com/gravitee-io/gravitee-ui-particles/commit/bbd544e10713e875b5983e59aab0e5771d52de1d))
+
 # [4.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.4.0...v4.5.0) (2022-11-08)
 
 
