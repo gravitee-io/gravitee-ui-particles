@@ -31,3 +31,7 @@
 .gio-menu-footer__content {
   padding: 0 16px;
 }
+
+:host-context(.gio-menu__reduced) .gio-menu-footer__content {
+  padding: 0 26px;
+}

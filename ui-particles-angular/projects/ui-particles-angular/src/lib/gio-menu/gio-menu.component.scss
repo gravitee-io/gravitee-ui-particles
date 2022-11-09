@@ -32,11 +32,11 @@ $background: map.get(gio.$mat-space-palette, lighter10);
     0 5px 10px mat.get-color-from-palette(gio.$mat-basic-palette, black, 0.2),
     0 15px 40px mat.get-color-from-palette(gio.$mat-basic-palette, black, 0.4);
 
-  &__reduced {
-    width: 88px;
-  }
-
   .gio-menu-footer__collapse {
     margin: 16px 0;
+  }
+
+  &__reduced {
+    width: 88px;
   }
 }

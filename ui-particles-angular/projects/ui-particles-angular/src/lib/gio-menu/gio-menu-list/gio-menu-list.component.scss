@@ -28,3 +28,7 @@
     margin: 8px 0;
   }
 }
+
+:host-context(.gio-menu__reduced) .gio-menu-list {
+  padding: 0 26px;
+}

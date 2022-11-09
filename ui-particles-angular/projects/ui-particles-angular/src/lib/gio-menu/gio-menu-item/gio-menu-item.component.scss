@@ -30,12 +30,12 @@ $text: map.get(gio.$mat-dove-palette, default);
 .gio-menu-item {
   display: flex;
   width: 192px;
-  height: 56px;
+  height: 36px;
   flex: none;
   flex-direction: row;
   flex-grow: 0;
   align-items: center;
-  padding: 16px;
+  padding: 16px 12px;
   margin: 4px 0;
   background: $background;
   border-radius: 4px;
@@ -55,19 +55,26 @@ $text: map.get(gio.$mat-dove-palette, default);
 
   &__icon {
     position: absolute;
+    width: 20px;
+    height: 20px;
   }
 
   &__title:not(:first-child) {
-    margin: 18px 0 18px 48px;
+    margin: 18px 0 18px 32px;
   }
 }
 
 :host-context(.gio-menu__reduced) .gio-menu-item {
-  width: 56px;
+  width: 36px;
+  padding: 16px 8px;
 
   &__title {
     display: none;
   }
+}
+
+:host-context(.gio-menu__reduced) .gio-menu-item__outlined {
+  padding: 16px 4px;
 }
 
 .gio-menu-item:hover:not(.gio-menu-item__active) {
