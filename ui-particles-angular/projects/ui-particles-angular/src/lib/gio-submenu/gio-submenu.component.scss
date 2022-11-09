@@ -20,8 +20,11 @@
 
 $background: map.get(gio.$mat-content-palette, darker);
 
+:host {
+  z-index: 100;
+}
+
 .gio-submenu {
-  z-index: 1000;
   display: flex;
   width: 266px;
   height: 100%;
