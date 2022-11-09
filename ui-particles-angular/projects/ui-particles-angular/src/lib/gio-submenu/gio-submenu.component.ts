@@ -26,7 +26,7 @@ import { GioMenuService } from '../gio-menu/gio-menu.service';
 })
 export class GioSubmenuComponent implements OnInit, OnDestroy {
   public reduced = false;
-  public overlay = false;
+  public overlayOptions = { open: false };
   private hover = false;
   @ViewChild('gioSubmenu', { static: false })
   private gioSubmenu: ElementRef<HTMLDivElement> | undefined;
@@ -35,17 +35,18 @@ export class GioSubmenuComponent implements OnInit, OnDestroy {
   constructor(private readonly gioMenuService: GioMenuService) {}
 
   public ngOnInit(): void {
-    combineLatest([this.gioMenuService.reduce, this.gioMenuService.mouseOver])
+    combineLatest([this.gioMenuService.reduce, this.gioMenuService.overlayObservable])
       .pipe(
         takeUntil(this.unsubscribe$),
-        tap(([reduced, mouseOver]) => {
+        tap(([reduced, overlayOptions]) => {
           this.reduced = reduced;
           if (this.gioSubmenu) {
-            this.overlay = mouseOver.enter;
-            if (this.overlay && this.reduced) {
-              this.gioSubmenu.nativeElement.style.top = `${mouseOver.top}px`;
+            this.overlayOptions = overlayOptions;
+            if (overlayOptions.open && this.reduced) {
+              const top = overlayOptions.top || 0;
+              this.gioSubmenu.nativeElement.style.top = `${top}px`;
               this.gioSubmenu.nativeElement.style.height = 'auto';
-              this.gioSubmenu.nativeElement.style.maxHeight = `calc(100vh - ${mouseOver.top + 8}px)`;
+              this.gioSubmenu.nativeElement.style.maxHeight = `calc(100vh - ${top + 8}px)`;
             } else if (!this.hover) {
               this.gioSubmenu.nativeElement.style.height = '100%';
               this.gioSubmenu.nativeElement.style.maxHeight = 'auto';
@@ -58,10 +59,12 @@ export class GioSubmenuComponent implements OnInit, OnDestroy {
 
   public onMouseEnter(): void {
     this.hover = true;
+    this.gioMenuService.overlay(this.overlayOptions);
   }
 
   public onMouseLeave(): void {
     this.hover = false;
+    this.gioMenuService.overlay({ open: false });
   }
 
   public ngOnDestroy(): void {

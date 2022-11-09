@@ -14,25 +14,30 @@
  * limitations under the License.
  */
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, timer } from 'rxjs';
+import { debounce, distinctUntilChanged } from 'rxjs/operators';
 
-interface MouseOverItem {
-  enter: boolean;
-  top: number;
+interface OverlayOptions {
+  top?: number;
+  parent?: HTMLInputElement;
+  open: boolean;
 }
 
 @Injectable()
 export class GioMenuService {
   private reduceSource = new BehaviorSubject<boolean>(false);
-  private mouseOverSource = new BehaviorSubject<MouseOverItem>({ enter: false, top: 0 });
+  private overlaySource = new BehaviorSubject<OverlayOptions>({ open: false });
   public reduce = this.reduceSource.asObservable();
-  public mouseOver = this.mouseOverSource.asObservable();
+  public overlayObservable = this.overlaySource.asObservable().pipe(
+    distinctUntilChanged((prev, curr) => prev.open === curr.open),
+    debounce(overlayOptions => timer(overlayOptions.open ? 150 : 500)),
+  );
 
   public reduced(reduced: boolean): void {
     this.reduceSource.next(reduced);
   }
 
-  public mouseOverItem(overlay: MouseOverItem): void {
-    this.mouseOverSource.next(overlay);
+  public overlay(overlayOptions: OverlayOptions): void {
+    this.overlaySource.next(overlayOptions);
   }
 }
