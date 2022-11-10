@@ -1,3 +1,13 @@
+## [4.5.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.5.1...v4.5.2) (2022-11-10)
+
+
+### Bug Fixes
+
+* **menu:** improve style ([85dd20b](https://github.com/gravitee-io/gravitee-ui-particles/commit/85dd20b549a5d1292a0fd26a8c4b1f3ff44b9dec))
+* **menu:** remove the underline from the Env field ([a3c53e1](https://github.com/gravitee-io/gravitee-ui-particles/commit/a3c53e1861dedda848215ee08a129eb8af32cf68))
+* **menu:** reset maxHeight on normal mode ([fb36ebb](https://github.com/gravitee-io/gravitee-ui-particles/commit/fb36ebb0dbff2848ad348a147db11d271acefd09))
+* **menu:** set z-index only when submenu overlay mode ([6ae3f2b](https://github.com/gravitee-io/gravitee-ui-particles/commit/6ae3f2b2b4b3fe9de6287704dedf29c6f87b4494))
+
 ## [4.5.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.5.0...v4.5.1) (2022-11-09)
 
 
