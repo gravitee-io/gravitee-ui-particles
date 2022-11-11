@@ -24,3 +24,7 @@
 .gio-menu-header {
   padding: 0 16px;
 }
+
+:host-context(.gio-menu__reduced) .gio-menu-header {
+  display: none;
+}

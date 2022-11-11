@@ -21,17 +21,11 @@
   flex-grow: 0;
 }
 
-.gio-menu-footer__rule {
-  width: 100%;
-  height: 1px;
-  border-color: map.get(gio.$mat-space-palette, lighter40);
-  margin: 0;
+.gio-menu-footer {
+  padding: 16px;
+  border-top: 1px solid map.get(gio.$mat-space-palette, lighter40);
 }
 
-.gio-menu-footer__content {
+:host-context(.gio-menu__reduced) .gio-menu-footer {
   padding: 0 16px;
-}
-
-:host-context(.gio-menu__reduced) .gio-menu-footer__content {
-  padding: 0 26px;
 }
