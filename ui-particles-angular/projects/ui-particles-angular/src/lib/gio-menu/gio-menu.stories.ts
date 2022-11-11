@@ -76,7 +76,7 @@ export const Default: Story = {
     styles: [
       ` 
         #sidenav {
-            height: 100vh;
+            height: 956px;
             display: flex;
         }
         
@@ -110,7 +110,7 @@ export const Reduced: Story = {
     styles: [
       ` 
         #sidenav {
-            height: 100vh;
+            height: 956px;
             display: flex;
         }
         
@@ -141,7 +141,7 @@ export const WithOneItemInSelector: Story = {
     styles: [
       ` 
         #sidenav {
-            height: 100vh;
+            height: 956px;
             display: flex;
         }
         
@@ -194,7 +194,7 @@ export const WithSubMenu: Story = {
     styles: [
       ` 
         #sidenav {
-            height: 100vh;
+            height: 956px;
             display: flex;
         }
         

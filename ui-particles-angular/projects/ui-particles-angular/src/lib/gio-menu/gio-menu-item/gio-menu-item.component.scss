@@ -35,7 +35,7 @@ $text: map.get(gio.$mat-dove-palette, default);
   flex-direction: row;
   flex-grow: 0;
   align-items: center;
-  padding: 16px 12px;
+  padding: 16px;
   margin: 4px 0;
   background: $background;
   border-radius: 4px;
@@ -47,7 +47,6 @@ $text: map.get(gio.$mat-dove-palette, default);
   }
 
   &__outlined {
-    padding-left: 12px;
     border-style: solid;
     border-color: map.get(gio.$mat-space-palette, lighter40);
     border-radius: 4px;
@@ -65,16 +64,18 @@ $text: map.get(gio.$mat-dove-palette, default);
 }
 
 :host-context(.gio-menu__reduced) .gio-menu-item {
-  width: 36px;
-  padding: 16px 8px;
+  width: 44px;
+  justify-content: center;
+  padding: 0;
+  margin: 8px 0;
 
   &__title {
     display: none;
   }
 }
 
-:host-context(.gio-menu__reduced) .gio-menu-item__outlined {
-  padding: 16px 4px;
+:host-context(.gio-menu__reduced .gio-menu-footer) .gio-menu-item__outlined {
+  margin: 16px 0;
 }
 
 .gio-menu-item:hover:not(.gio-menu-item__active) {

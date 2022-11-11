@@ -50,7 +50,7 @@ $textLight: map.get(gio.$mat-basic-palette, white);
     letter-spacing: 0.4px;
   }
 
-  &:hover:not(.gio-menu-item__active) {
+  &:hover:not(.gio-submenu-subitem__active) {
     background: $hoverBackground;
   }
 }
