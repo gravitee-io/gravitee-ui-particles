@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'gio-submenu-group',
   templateUrl: './gio-submenu-group.component.html',
   styleUrls: ['./gio-submenu-group.component.scss'],
 })
-export class GioSubmenuGroupComponent {}
+export class GioSubmenuGroupComponent {
+  @Input() public title = '';
+}

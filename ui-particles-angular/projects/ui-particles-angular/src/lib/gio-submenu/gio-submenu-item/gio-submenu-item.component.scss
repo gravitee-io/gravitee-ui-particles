@@ -49,8 +49,12 @@ $textLight: map.get(gio.$mat-basic-palette, white);
     color: $textLight;
     letter-spacing: 0.4px;
   }
+}
 
-  &:hover:not(.gio-submenu-item__active) {
-    background: $hoverBackground;
-  }
+:host-context(.gio-submenu-group) .gio-submenu-item {
+  padding: 8px 20px;
+}
+
+.gio-submenu-item:hover:not(.gio-submenu-item__active) {
+  background: $hoverBackground;
 }
