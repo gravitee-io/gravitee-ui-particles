@@ -22,11 +22,11 @@ import { GioMenuService } from '../gio-menu/gio-menu.service';
 
 import { GioSubmenuGroupComponent } from './gio-submenu-group/gio-submenu-group.component';
 import { GioSubmenuComponent } from './gio-submenu.component';
-import { GioSubmenuSubitemComponent } from './gio-submenu-subitem/gio-submenu-subitem.component';
+import { GioSubmenuItemComponent } from './gio-submenu-item/gio-submenu-item.component';
 
 @NgModule({
-  declarations: [GioSubmenuComponent, GioSubmenuGroupComponent, GioSubmenuSubitemComponent],
-  exports: [GioSubmenuComponent, GioSubmenuGroupComponent, GioSubmenuSubitemComponent],
+  declarations: [GioSubmenuComponent, GioSubmenuGroupComponent, GioSubmenuItemComponent],
+  exports: [GioSubmenuComponent, GioSubmenuGroupComponent, GioSubmenuItemComponent],
   imports: [CommonModule, MatIconModule, GioIconsModule],
   providers: [GioMenuService],
 })
