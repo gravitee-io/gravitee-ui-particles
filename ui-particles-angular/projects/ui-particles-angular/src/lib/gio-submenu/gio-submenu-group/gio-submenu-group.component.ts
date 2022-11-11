@@ -16,8 +16,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'gio-submenu-item',
-  templateUrl: './gio-submenu-item.component.html',
-  styleUrls: ['./gio-submenu-item.component.scss'],
+  selector: 'gio-submenu-group',
+  templateUrl: './gio-submenu-group.component.html',
+  styleUrls: ['./gio-submenu-group.component.scss'],
 })
-export class GioSubmenuItemComponent {}
+export class GioSubmenuGroupComponent {}
