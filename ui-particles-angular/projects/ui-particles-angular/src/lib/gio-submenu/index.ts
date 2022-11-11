@@ -17,4 +17,4 @@
 export * from './gio-submenu.component';
 export * from './gio-submenu.module';
 export * from './gio-submenu-group/gio-submenu-group.component';
-export * from './gio-submenu-subitem/gio-submenu-subitem.component';
+export * from './gio-submenu-item/gio-submenu-item.component';

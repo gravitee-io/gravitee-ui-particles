@@ -162,22 +162,22 @@ export const WithSubMenu: Story = {
           </gio-menu>
             <gio-submenu>
               <gio-submenu-group>Portal</gio-submenu-group>
-              <gio-submenu-subitem tabindex="1" (click)="onSubClick('general')" [active]="isSubActive('general')">General</gio-submenu-subitem>
-              <gio-submenu-subitem tabindex="1" (click)="onSubClick('plans')" [active]="isSubActive('plans')">Plans</gio-submenu-subitem>
-              <gio-submenu-subitem tabindex="1" (click)="onSubClick('doc')" [active]="isSubActive('doc')">Documentation</gio-submenu-subitem>
-              <gio-submenu-subitem tabindex="1" (click)="onSubClick('user')" [active]="isSubActive('user')">User & Group Access</gio-submenu-subitem>
+              <gio-submenu-item tabindex="1" (click)="onSubClick('general')" [active]="isSubActive('general')">General</gio-submenu-item>
+              <gio-submenu-item tabindex="1" (click)="onSubClick('plans')" [active]="isSubActive('plans')">Plans</gio-submenu-item>
+              <gio-submenu-item tabindex="1" (click)="onSubClick('doc')" [active]="isSubActive('doc')">Documentation</gio-submenu-item>
+              <gio-submenu-item tabindex="1" (click)="onSubClick('user')" [active]="isSubActive('user')">User & Group Access</gio-submenu-item>
               <gio-submenu-group>Proxy</gio-submenu-group>
-              <gio-submenu-subitem tabindex="1" (click)="onSubClick('general-2')" [active]="isSubActive('general-2')">General</gio-submenu-subitem>
-              <gio-submenu-subitem tabindex="1" (click)="onSubClick('backend')" [active]="isSubActive('backend')">Backend services</gio-submenu-subitem>
+              <gio-submenu-item tabindex="1" (click)="onSubClick('general-2')" [active]="isSubActive('general-2')">General</gio-submenu-item>
+              <gio-submenu-item tabindex="1" (click)="onSubClick('backend')" [active]="isSubActive('backend')">Backend services</gio-submenu-item>
               <gio-submenu-group>Design</gio-submenu-group>
-              <gio-submenu-subitem tabindex="1" (click)="onSubClick('policies')" [active]="isSubActive('policies')">Policies</gio-submenu-subitem>
-              <gio-submenu-subitem tabindex="1" (click)="onSubClick('resources')" [active]="isSubActive('resources')">Resources</gio-submenu-subitem>
-              <gio-submenu-subitem tabindex="1" (click)="onSubClick('properties')" [active]="isSubActive('properties')">Properties</gio-submenu-subitem>
+              <gio-submenu-item tabindex="1" (click)="onSubClick('policies')" [active]="isSubActive('policies')">Policies</gio-submenu-item>
+              <gio-submenu-item tabindex="1" (click)="onSubClick('resources')" [active]="isSubActive('resources')">Resources</gio-submenu-item>
+              <gio-submenu-item tabindex="1" (click)="onSubClick('properties')" [active]="isSubActive('properties')">Properties</gio-submenu-item>
               <gio-submenu-group>Analytics</gio-submenu-group>
-              <gio-submenu-subitem tabindex="1" (click)="onSubClick('overview')" [active]="isSubActive('overview')">Overview</gio-submenu-subitem>
-              <gio-submenu-subitem tabindex="1" (click)="onSubClick('logs')" [active]="isSubActive('logs')">Logs</gio-submenu-subitem>
-              <gio-submenu-subitem tabindex="1" (click)="onSubClick('path')" [active]="isSubActive('path')">Path mappings</gio-submenu-subitem>
-              <gio-submenu-subitem tabindex="1" (click)="onSubClick('alerts')" [active]="isSubActive('alerts')">Alerts</gio-submenu-subitem>
+              <gio-submenu-item tabindex="1" (click)="onSubClick('overview')" [active]="isSubActive('overview')">Overview</gio-submenu-item>
+              <gio-submenu-item tabindex="1" (click)="onSubClick('logs')" [active]="isSubActive('logs')">Logs</gio-submenu-item>
+              <gio-submenu-item tabindex="1" (click)="onSubClick('path')" [active]="isSubActive('path')">Path mappings</gio-submenu-item>
+              <gio-submenu-item tabindex="1" (click)="onSubClick('alerts')" [active]="isSubActive('alerts')">Alerts</gio-submenu-item>
               <gio-submenu-group>Audit</gio-submenu-group>
           </gio-submenu>
           <h1>Selected env: {{ selectedItemValue }}</h1>

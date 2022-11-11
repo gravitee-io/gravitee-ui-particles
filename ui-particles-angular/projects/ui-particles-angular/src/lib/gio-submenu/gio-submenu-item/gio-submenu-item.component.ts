@@ -16,20 +16,20 @@
 import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'gio-submenu-subitem',
-  templateUrl: './gio-submenu-subitem.component.html',
-  styleUrls: ['./gio-submenu-subitem.component.scss'],
+  selector: 'gio-submenu-item',
+  templateUrl: './gio-submenu-item.component.html',
+  styleUrls: ['./gio-submenu-item.component.scss'],
 })
-export class GioSubmenuSubitemComponent {
+export class GioSubmenuItemComponent {
   @Input() public active = false;
 
-  @ViewChild('gioSubmenuSubitem', { static: false })
-  private gioSubmenuSubitem: ElementRef<HTMLDivElement> | undefined;
+  @ViewChild('gioSubmenuItem', { static: false })
+  private gioSubmenuItem: ElementRef<HTMLDivElement> | undefined;
 
   @HostListener('keydown', ['$event'])
   public onKeydownHandler(event: KeyboardEvent): void {
     if (event.key === ' ' || event.key === 'Enter') {
-      this.gioSubmenuSubitem?.nativeElement.click();
+      this.gioSubmenuItem?.nativeElement.click();
     }
   }
 }
