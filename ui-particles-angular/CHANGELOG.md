@@ -1,3 +1,11 @@
+## [4.5.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.5.2...v4.5.3) (2022-11-14)
+
+
+### Bug Fixes
+
+* improve menu style ([e2c3e89](https://github.com/gravitee-io/gravitee-ui-particles/commit/e2c3e8996f480a61aa9c2b2f49da3c895bf31c46))
+* redesign the submenu ([a3928c9](https://github.com/gravitee-io/gravitee-ui-particles/commit/a3928c9bcdef31bb6fb0816061c70fbadb2c9712))
+
 ## [4.5.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.5.1...v4.5.2) (2022-11-10)
 
 
