@@ -25,3 +25,13 @@ To add the icon in the html you have to use mat-icon like :
 ## Testing
 
 If you encounter this error `Expected no open requests, found 1: GET assets/gio-icons.svg` you should probably add `MatIconTestingModule` to your test import
+
+## Updating the icons sprite
+
+You can watch the [Loom video that shows how to generate the sprite](https://www.loom.com/share/17548f9ed6f24b73ad22e4c4a4c37923), or follow the instructions:
+
+1. Ask the Design Team for edition rights for the Figma 'Perseverance Design System' file, it is needed to be able to access the 'SVG Export' plugin used in the process. The team will give you access for as long as you need to make the sprite modification.
+2. [Select the 'Icons' frame](https://www.figma.com/file/okDdv0Rs884yxKgXQROqaG/Perseverance-design-system?node-id=4071%3A10855&t=z6p1kvtDEkTc5qSA-4) from the Figma 'Perseverance Design System' file and select all the icons by hitting “Enter” twice.
+3. Open the Figma plugin named 'SVG Export' and clic on 'Export all' button (to install it, you can [open the plugin](https://www.figma.com/community/plugin/814345141907543603/SVG-Export) on your browser and click on the 'Try it out' button. Then you need to [save the plugin](https://help.figma.com/hc/en-us/articles/360042532714-Use-plugins-in-files#Save_plugins) to access it from Figma files).
+4. Generate the sprite file by opening the [https://svgsprit.es](https://svgsprit.es/) website, drag and drop the icon into the browser, and click on 'Download Sprite' button on the bottom.
+5. Open a code editor, and do a 'Find & Replace' command: ```Find: fill="#000” and Replace by: fill="currentColor"``` and ```Find: stroke="#000” and Replace by: stroke="currentColor"``` 💡 *This is to make color overload possible by gravitee CSS*
