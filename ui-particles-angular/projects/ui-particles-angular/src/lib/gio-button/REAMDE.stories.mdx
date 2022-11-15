@@ -4,4 +4,44 @@ import { Meta, Story } from '@storybook/addon-docs';
 
 # Gio Button
 
-Documentation and examples
+A button element is used to indicate an action.
+
+## Button styles
+
+- **Primary**: Provide the strongest visual emphasis to an action with a solid background — one per context.
+- **Basic**: For less prominent, and sometimes independent, actions.
+- **Accent**: For promotion actions.
+- **Warn**: For actions that could have destructive effects on the user’s data.
+- **Link**: Style an anchor link.
+
+## When no to use
+
+If you are directing a user to a new location, consider using an anchor `<a>` element, which can also be styled like a button when actions and destinations are present in the same set of controls.
+
+## Best practices
+
+- Use a primary button to indicate the main action of a group button set.
+- Keep buttons visually grouped.
+- Keep buttons inline when space allows.
+- Use concise and clear enough action verb to tell the users what happens when the button is activated.
+
+## Alignment
+
+- **Left alignment**: In page, buttons align with other content on the page.
+- **Right alignment**: In containers like modals, global actions or toolbars.
+- **Center alignment**: Only used for empty states where the actions are the only ones available in context.
+
+## Order
+
+- The visual hierarchy is primary buttons on the left edge, followed by basic buttons.
+
+## Icon
+
+- An icon can be used in place of text. If the action may not be universally understood, then consider using a tooltip to provide the action in text form.
+- When used with text, the icon is generally aligned to the left of the text. You can align the button to the right for actions that take users out of context. An example would be: External link.
+
+## Accessibility
+
+- Icon-only buttons must use `aria-label` to indicate the action.
+- When an icon is used with a text label, the icon should be hidden from screen readers with `aria-hidden="true"`.
+- Maintain parity between focus order and visual order (don't use CSS to reorder buttons).
