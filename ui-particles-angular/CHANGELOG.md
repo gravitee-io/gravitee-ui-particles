@@ -1,3 +1,10 @@
+# [4.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.5.3...v4.6.0) (2022-11-16)
+
+
+### Features
+
+* update icons ([4314d2d](https://github.com/gravitee-io/gravitee-ui-particles/commit/4314d2d23095fd248255658ac837e7cc486972dd))
+
 ## [4.5.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.5.2...v4.5.3) (2022-11-14)
 
 
