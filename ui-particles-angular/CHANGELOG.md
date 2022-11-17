@@ -1,3 +1,10 @@
+## [4.6.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.6.0...v4.6.1) (2022-11-17)
+
+
+### Bug Fixes
+
+* make sure gio header still disabled after new value ([ded4d32](https://github.com/gravitee-io/gravitee-ui-particles/commit/ded4d3231dc1ff7042e3715d2561d9ecd719e3ea))
+
 # [4.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.5.3...v4.6.0) (2022-11-16)
 
 
