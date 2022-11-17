@@ -156,6 +156,11 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor {
 
   // From ControlValueAccessor interface
   public setDisabledState(isDisabled: boolean): void {
+    if (isDisabled === this.disabled) {
+      // do nothing if the disabled state is not changed
+      return;
+    }
+
     this.disabled = isDisabled;
     if (isDisabled) {
       this.headersFormArray.disable({ emitEvent: false });
@@ -168,9 +173,9 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor {
 
   public ngOnInit(): void {
     // When user start to complete last header add new empty one a the end
-    this.headersFormArray.valueChanges
+    this.headersFormArray?.valueChanges
       .pipe(
-        tap(headers => this._onChange(removeLastEmptyHeader(headers))),
+        tap(headers => headers.length > 0 && this._onChange(removeLastEmptyHeader(headers))),
         tap((headers: Header[]) => {
           if (headers.length > 0 && (headers[headers.length - 1].key !== '' || headers[headers.length - 1].value !== '')) {
             this.addEmptyHeader();
@@ -193,7 +198,7 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor {
       this.headersFormArray.push(
         new FormGroup({
           key: this.initKeyFormControl(key, headerIndex),
-          value: new FormControl(value),
+          value: new FormControl({ value, disabled: this.disabled }),
         }),
         {
           emitEvent: false,
@@ -217,7 +222,7 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor {
   }
 
   private initKeyFormControl(key: string, headerIndex: number) {
-    const control = new FormControl(key);
+    const control = new FormControl({ value: key, disabled: this.disabled });
     const filteredKeys = control.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value)),
@@ -232,6 +237,10 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor {
   }
 
   private addEmptyHeader() {
+    if (this.disabled) {
+      return;
+    }
+
     this.headersFormArray.push(
       new FormGroup({
         key: this.initKeyFormControl('', this.headersFormArray.length),
