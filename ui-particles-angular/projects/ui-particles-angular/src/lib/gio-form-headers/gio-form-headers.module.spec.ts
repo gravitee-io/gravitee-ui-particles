@@ -208,13 +208,21 @@ describe('GioFormHeadersModule', () => {
   });
 
   it('should display disabled headers', async () => {
+    testComponent.headersControl.setValue([]);
+    fixture.detectChanges();
     testComponent.headersControl.disable();
+    fixture.detectChanges();
     testComponent.headersControl.setValue(HEADERS);
+    fixture.detectChanges();
 
     const formHeaders = await loader.getHarness(GioFormHeadersHarness);
     expect(await formHeaders.isDisabled()).toEqual(true);
 
     const headerRows = await formHeaders.getHeaderRows();
+
+    expect(await headerRows[0].keyInput.isDisabled()).toEqual(true);
+    expect(await headerRows[0].valueInput.isDisabled()).toEqual(true);
+
     const headers = await Promise.all(
       headerRows.map(async row => ({
         key: await row.keyInput.getValue(),
