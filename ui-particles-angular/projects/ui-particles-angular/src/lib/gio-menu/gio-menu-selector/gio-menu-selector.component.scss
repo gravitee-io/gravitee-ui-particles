@@ -28,6 +28,10 @@ $text: map.get(gio.$mat-dove-palette, default);
   margin-bottom: 8px;
   border-radius: 4px;
   color: $text;
+
+  &__mat-form-field {
+    padding-bottom: 0;
+  }
 }
 
 ::ng-deep {
