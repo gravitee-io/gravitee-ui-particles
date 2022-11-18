@@ -39,6 +39,7 @@
           max-height: 32px;
           flex-direction: column;
           justify-content: center;
+          padding-bottom: 0;
 
           * {
             top: 0;
@@ -48,14 +49,8 @@
         }
 
         &__field:focus-within {
-          position: absolute;
           z-index: 100;
-          top: 1px;
-          right: 0;
-          left: 0;
           height: auto;
-          max-height: none;
-          padding: 0.2rem;
           background-color: mat.get-color-from-palette(gio.$mat-content-palette, 'lighter');
 
           * {

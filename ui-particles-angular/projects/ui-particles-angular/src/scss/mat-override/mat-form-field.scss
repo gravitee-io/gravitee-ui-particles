@@ -19,15 +19,13 @@
 
 @mixin mat-form-field() {
   .mat-form-field {
+    // Increase default padding to have space for two lines of hint & error bellow the input
+    padding-bottom: 16px;
+
     .mat-hint,
     .mat-error {
       font-size: mat.font-size(theme.$mat-typography, caption);
     }
-  }
-
-  // Default margin between two mat-form-field
-  .mat-form-field + .mat-form-field {
-    margin-top: 8px;
   }
 
   .mat-form-field-disabled {

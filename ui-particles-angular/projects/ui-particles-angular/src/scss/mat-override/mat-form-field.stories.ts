@@ -66,7 +66,7 @@ export const MatHintAndErrorFontSize: Story = {
   }),
 };
 
-export const MarginBetweenMatFormField: Story = {
+export const PaddingBottomMatFormField: Story = {
   render: () => ({
     template: `
       <p>
@@ -79,7 +79,7 @@ export const MarginBetweenMatFormField: Story = {
             <mat-label>Fill form field</mat-label>
             <input matInput placeholder="Placeholder" />
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-            <mat-hint>Hint</mat-hint>
+            <mat-hint>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br> Nullam auctor, nunc vel</mat-hint>
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Second Fill form field</mat-label>
