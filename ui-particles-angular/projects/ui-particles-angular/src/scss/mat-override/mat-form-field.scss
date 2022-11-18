@@ -28,7 +28,7 @@
     }
   }
 
-  .mat-form-field-disabled {
-    cursor: not-allowed;
+  .mat-form-field-disabled * {
+    cursor: not-allowed !important;
   }
 }
