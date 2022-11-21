@@ -1,3 +1,11 @@
+## [4.6.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.6.1...v4.6.2) (2022-11-21)
+
+
+### Bug Fixes
+
+* for disabled form field add set cursor for all inner component ([97937c5](https://github.com/gravitee-io/gravitee-ui-particles/commit/97937c5c713c41d085aac6de3177a244fa8bb002))
+* increase default padding to have space for two lines of hint & error bellow the input ([0acd79a](https://github.com/gravitee-io/gravitee-ui-particles/commit/0acd79ac49d34b120e48d5c0cc17c5595ca18223))
+
 ## [4.6.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.6.0...v4.6.1) (2022-11-17)
 
 
