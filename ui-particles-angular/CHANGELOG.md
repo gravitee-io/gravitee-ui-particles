@@ -1,3 +1,10 @@
+# [4.7.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.6.2...v4.7.0) (2022-11-21)
+
+
+### Features
+
+* add drag indicator icon ([e881412](https://github.com/gravitee-io/gravitee-ui-particles/commit/e881412b9f14e18dab0fa723607b223bee18f750))
+
 ## [4.6.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.6.1...v4.6.2) (2022-11-21)
 
 
