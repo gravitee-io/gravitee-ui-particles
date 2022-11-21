@@ -23,6 +23,7 @@ const icons = [
   'accessibility',
   'activity',
   'add-database-script',
+  'alarm',
   'alert-circle',
   'align-center',
   'align-justify',
@@ -114,6 +115,7 @@ const icons = [
   'down-circle',
   'download',
   'download-cloud',
+  'drag-indicator',
   'droplet',
   'edit-pencil',
   'empty-page',
@@ -124,6 +126,7 @@ const icons = [
   'file-minus',
   'file-plus',
   'filter',
+  'fingerprint',
   'flag',
   'folder',
   'folder-minus',
@@ -135,6 +138,9 @@ const icons = [
   'git-pull-request',
   'github',
   'gitlab',
+  'graphql',
+  'gravitee',
+  'grpc',
   'hand',
   'hard-drive',
   'hash',
@@ -146,6 +152,7 @@ const icons = [
   'info',
   'integer',
   'italic',
+  'kafka',
   'key',
   'key-alt-minus',
   'key-alt-plus',
@@ -159,6 +166,7 @@ const icons = [
   'life-buoy',
   'link',
   'list',
+  'list-check',
   'loader',
   'lock',
   'lock-circle',
@@ -202,6 +210,7 @@ const icons = [
   'on-rounded',
   'open-vpn',
   'page',
+  'palette',
   'pause-circle',
   'percent',
   'pie-chart',
@@ -270,10 +279,12 @@ const icons = [
   'trending-up',
   'triangle',
   'underline',
+  'unlock',
   'up-circle',
   'upload',
   'upload-cloud',
   'user',
+  'user-blocked',
   'user-check',
   'user-circle-alt',
   'user-minus',
@@ -283,6 +294,8 @@ const icons = [
   'verified',
   'voicemail',
   'web-window',
+  'webhook',
+  'websocket',
   'wifi',
   'wristwatch',
   'x-circle',
@@ -298,7 +311,6 @@ describe('Icons', () => {
     const parsed = parse(data);
     const element = parsed.children[0] as ElementNode;
     const all = (element.children as Array<ElementNode>).map(child => child.properties?.id);
-    const loose = icons.filter(iconId => !all.includes(iconId));
-    expect(loose).toHaveLength(0);
+    expect(all.sort()).toStrictEqual(icons.sort());
   });
 });
