@@ -1,3 +1,10 @@
+# [4.8.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.7.0...v4.8.0) (2022-11-23)
+
+
+### Features
+
+* **top-bar:** create a top-bar component ([1e1cc34](https://github.com/gravitee-io/gravitee-ui-particles/commit/1e1cc34c455a73c0d9474ebf6f0f84d9d70696c4))
+
 # [4.7.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.6.2...v4.7.0) (2022-11-21)
 
 
