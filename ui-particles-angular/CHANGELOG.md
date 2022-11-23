@@ -1,3 +1,10 @@
+## [4.8.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.8.0...v4.8.1) (2022-11-23)
+
+
+### Bug Fixes
+
+* **submenu:** resolve dynamic height ([660bc5e](https://github.com/gravitee-io/gravitee-ui-particles/commit/660bc5e6c610876ec152abd7b1eb809ef1ab3448))
+
 # [4.8.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.7.0...v4.8.0) (2022-11-23)
 
 
