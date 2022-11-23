@@ -42,15 +42,15 @@ export class GioSubmenuComponent implements OnInit, OnDestroy {
           this.reduced = reduced;
           if (this.gioSubmenu) {
             this.overlayOptions = overlayOptions;
-            if (overlayOptions.open && this.reduced) {
+            if (this.reduced) {
               const top = overlayOptions.top || 0;
               this.gioSubmenu.nativeElement.style.top = `${top}px`;
               this.gioSubmenu.nativeElement.style.height = 'auto';
               this.gioSubmenu.nativeElement.style.maxHeight = `calc(100vh - ${top + 8}px)`;
-            } else if (!this.hover) {
-              this.gioSubmenu.nativeElement.style.height = '100%';
-              this.gioSubmenu.nativeElement.style.maxHeight = 'none';
+              return;
             }
+            this.gioSubmenu.nativeElement.style.height = '100%';
+            this.gioSubmenu.nativeElement.style.maxHeight = 'none';
           }
         }),
       )
