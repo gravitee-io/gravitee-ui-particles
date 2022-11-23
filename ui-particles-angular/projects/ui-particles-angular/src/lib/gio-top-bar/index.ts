@@ -21,4 +21,3 @@ export * from './gio-top-bar-menu/gio-top-bar-menu.component';
 export * from './gio-top-bar-link/gio-top-bar-link.module';
 export * from './gio-top-bar-link/gio-top-bar-link.component';
 export * from './gio-top-bar-content/gio-top-bar-content.component';
-export * from './gio-top-bar-home.directive';
