@@ -30,10 +30,15 @@
       <mat-icon *ngSwitchCase="'success'" svgIcon="gio:chat-bubble-check"></mat-icon>
     </div>
     <div class="banner__wrapper__head">
-      <ng-content></ng-content>
+      <div class="banner__wrapper__title">
+        <ng-content></ng-content>
+      </div>
+      <div #body class="banner__wrapper__body" [class.hide]="!body.children.length">
+        <ng-content select="[gioBannerBody]"></ng-content>
+      </div>
     </div>
-  </div>
-  <div #body class="banner__body" [class.hide]="!body.children.length">
-    <ng-content select="[gioBannerBody]"></ng-content>
+    <div #action class="banner__wrapper__action" [class.hide]="!action.children.length">
+      <ng-content select="[gioBannerAction]"></ng-content>
+    </div>
   </div>
 </div>

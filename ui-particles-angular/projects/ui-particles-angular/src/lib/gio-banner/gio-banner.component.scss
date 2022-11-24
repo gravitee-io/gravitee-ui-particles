@@ -18,7 +18,7 @@
 
 @use '../../scss' as gio;
 
-$background: map.get(gio.$mat-theme, background);
+$background: map.get(gio.$mat-basic-palette, white);
 $typography: map.get(gio.$mat-theme, typography);
 
 // Map for palette by type
@@ -38,18 +38,29 @@ $types: (
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  padding: 16px;
+  padding: 12px 16px;
+  background-color: $background;
   border-radius: 8px;
 
   @each $typeName, $typePalette in $types {
     &.#{$typeName} {
-      border: 1px solid mat.get-color-from-palette($typePalette, default);
-      background-color: mat.get-color-from-palette($typePalette, lighter);
+      border: 3px solid mat.get-color-from-palette($typePalette, default);
       color: mat.get-color-from-palette($typePalette, darker);
+
+      .mat-icon {
+        color: mat.get-color-from-palette($typePalette, default);
+      }
+
+      ::ng-deep {
+        a {
+          color: mat.get-color-from-palette($typePalette, default);
+        }
+      }
     }
   }
 
   &__wrapper {
+    position: relative;
     display: flex;
     align-items: center;
 
@@ -57,21 +68,34 @@ $types: (
 
     &__icon {
       display: flex;
+      align-self: flex-start;
       margin-right: 16px;
     }
 
     &__head {
+      display: flex;
       flex: 1 1 auto;
+      flex-direction: column;
       line-height: normal;
     }
-  }
 
-  &__body {
-    padding-top: 2px;
-    padding-left: 24px + 16px;
-    @include mat.typography-level($typography, body-1);
+    &__title {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      padding: 4px 0;
+    }
 
-    &.hide {
+    &__action {
+      align-self: flex-start;
+      padding-left: 16px;
+    }
+
+    &__body {
+      @include mat.typography-level($typography, body-1);
+    }
+
+    .hide {
       display: none;
     }
   }

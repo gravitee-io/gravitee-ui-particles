@@ -32,6 +32,11 @@ export class GioBannerComponent {
 })
 export class GioBannerBodyDirective {}
 
+@Directive({
+  selector: '[gioBannerAction]',
+})
+export class GioBannerActionDirective {}
+
 @Component({
   selector: 'gio-banner-error',
   templateUrl: './gio-banner.component.html',

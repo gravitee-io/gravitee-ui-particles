@@ -17,6 +17,8 @@ import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
 import { MatCardModule } from '@angular/material/card';
 import { withDesign } from 'storybook-addon-designs';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 import { GioBannerModule } from './gio-banner.module';
 import { GioBannerComponent } from './gio-banner.component';
@@ -26,7 +28,7 @@ export default {
   component: GioBannerComponent,
   decorators: [
     moduleMetadata({
-      imports: [GioBannerModule, MatCardModule],
+      imports: [GioBannerModule, MatCardModule, MatButtonModule, MatIconModule],
     }),
     withDesign,
   ],
@@ -95,6 +97,14 @@ export const Default: Story = {
     <gio-banner>
       Title content
       <span gioBannerBody>This is the body of the banner.</span>
+    </gio-banner>
+    <h5>With action</h5>
+    <gio-banner>
+      <div>Title content</div>
+      <div gioBannerAction>
+          <button  mat-raised-button color="basic">Action</button>
+      </div>
+      <span gioBannerBody>This is the body of the banner. <a href="">Learn more</a></span>
     </gio-banner>
     `,
   }),
