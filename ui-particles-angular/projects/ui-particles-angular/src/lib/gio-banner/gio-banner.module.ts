@@ -26,6 +26,7 @@ import {
   GioBannerInfoComponent,
   GioBannerSuccessComponent,
   GioBannerWarningComponent,
+  GioBannerActionDirective,
 } from './gio-banner.component';
 
 @NgModule({
@@ -37,6 +38,7 @@ import {
     GioBannerSuccessComponent,
     GioBannerWarningComponent,
     GioBannerBodyDirective,
+    GioBannerActionDirective,
   ],
   exports: [
     GioBannerComponent,
@@ -45,6 +47,7 @@ import {
     GioBannerSuccessComponent,
     GioBannerWarningComponent,
     GioBannerBodyDirective,
+    GioBannerActionDirective,
   ],
   entryComponents: [
     GioBannerComponent,
