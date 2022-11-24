@@ -47,3 +47,4 @@ export * from './gio-form-file-picker';
 export * from './gio-menu';
 export * from './gio-submenu';
 export * from './gio-top-bar';
+export * from './gio-avatar';
