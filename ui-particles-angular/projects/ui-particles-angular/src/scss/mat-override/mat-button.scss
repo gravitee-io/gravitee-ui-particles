@@ -30,4 +30,16 @@
     filter: brightness(115%);
     transition: all 0.3s linear;
   }
+
+  .mat-button,
+  .mat-raised-button,
+  .mat-flat-button,
+  .mat-stroked-button {
+    .mat-icon {
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
+      line-height: 18px;
+    }
+  }
 }
