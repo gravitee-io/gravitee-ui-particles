@@ -53,7 +53,7 @@ $types: (
 
       ::ng-deep {
         a {
-          color: mat.get-color-from-palette($typePalette, default);
+          color: inherit;
         }
       }
     }
