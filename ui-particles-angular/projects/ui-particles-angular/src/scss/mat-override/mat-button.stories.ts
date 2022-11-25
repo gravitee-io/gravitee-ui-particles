@@ -18,11 +18,13 @@ import { Story } from '@storybook/angular/types-7-0';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
+import { GioIconsModule } from '../../lib/gio-icons/gio-icons.module';
+
 export default {
   title: 'Material Override',
   decorators: [
     moduleMetadata({
-      imports: [MatButtonModule, MatIconModule],
+      imports: [MatButtonModule, MatIconModule, GioIconsModule],
     }),
   ],
   render: () => ({}),
@@ -97,6 +99,91 @@ export const MatButton: Story = {
                       </button>
                   </div>
               </div>
+              
+              <div>
+                  <h4>Icon with text</h4>
+                  <div class="button-container">
+                      <button mat-button aria-label="Example icon button with a edit-pencil icon">
+                          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>Edit
+                      </button>
+                      <button mat-button color="primary" aria-label="Example icon button with a edit-pencil icon">
+                          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>Edit
+                      </button>
+                      <button mat-button color="accent" aria-label="Example icon button with a edit-pencil icon">
+                          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>Edit
+                      </button>
+                      <button mat-button color="warn" aria-label="Example icon button with a edit-pencil icon">
+                          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>Edit
+                      </button>
+                      <button mat-button disabled aria-label="Example icon button with a edit-pencil icon">
+                          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>Edit
+                      </button>
+                  </div>
+              </div>
+              
+              <div>
+                  <h4>Raised icon with text</h4>
+                  <div class="button-container">
+                      <button mat-raised-button aria-label="Example icon button with a edit-pencil icon">
+                          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>Edit
+                      </button>
+                      <button mat-raised-button color="primary" aria-label="Example icon button with a edit-pencil icon">
+                          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>Edit
+                      </button>
+                      <button mat-raised-button color="accent" aria-label="Example icon button with a edit-pencil icon">
+                          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>Edit
+                      </button>
+                      <button mat-raised-button color="warn" aria-label="Example icon button with a edit-pencil icon">
+                          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>Edit
+                      </button>
+                      <button mat-raised-button disabled aria-label="Example icon button with a edit-pencil icon">
+                          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>Edit
+                      </button>
+                  </div>
+              </div>
+              
+              <div>
+                  <h4>Flat icon with text</h4>
+                  <div class="button-container">
+                      <button mat-flat-button aria-label="Example icon button with a edit-pencil icon">
+                          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>Edit
+                      </button>
+                      <button mat-flat-button color="primary" aria-label="Example icon button with a edit-pencil icon">
+                          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>Edit
+                      </button>
+                      <button mat-flat-button color="accent" aria-label="Example icon button with a edit-pencil icon">
+                          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>Edit
+                      </button>
+                      <button mat-flat-button color="warn" aria-label="Example icon button with a edit-pencil icon">
+                          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>Edit
+                      </button>
+                      <button mat-flat-button disabled aria-label="Example icon button with a edit-pencil icon">
+                          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>Edit
+                      </button>
+                  </div>
+              </div>
+              
+              <div>
+                  <h4>Stroked icon with text</h4>
+                  <div class="button-container">
+                      <button mat-stroked-button aria-label="Example icon button with a edit-pencil icon">
+                          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>Edit
+                      </button>
+                      <button mat-stroked-button color="primary" aria-label="Example icon button with a edit-pencil icon">
+                          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>Edit
+                      </button>
+                      <button mat-stroked-button color="accent" aria-label="Example icon button with a edit-pencil icon">
+                          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>Edit
+                      </button>
+                      <button mat-stroked-button color="warn" aria-label="Example icon button with a edit-pencil icon">
+                          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>Edit
+                      </button>
+                      <button mat-stroked-button disabled aria-label="Example icon button with a edit-pencil icon">
+                          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>Edit
+                      </button>
+                  </div>
+              </div>
+              
           </div>
         `,
     styles: [
