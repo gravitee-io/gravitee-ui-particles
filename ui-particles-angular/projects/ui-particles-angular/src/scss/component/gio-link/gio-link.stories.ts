@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 The Gravitee team (http://gravitee.io)
+ * Copyright (C) 2015 The Gravitee team (http://gravitee.io)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,17 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@use './component/gio-badge/gio-badge';
-@use './component/gio-method-badge/gio-method-badge';
-@use './component/gio-code/gio-code';
-@use './component/gio-table-light/gio-table-light';
-@use './component/gio-link/gio-link';
+import { Meta, moduleMetadata } from '@storybook/angular';
+import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
 
-// All Gravitee.io SCSS components
-@mixin all-components() {
-  @include gio-badge.theme;
-  @include gio-method-badge.theme;
-  @include gio-code.theme;
-  @include gio-table-light.theme;
-  @include gio-link.theme;
-}
+export default {
+  title: 'Components / Link',
+  decorators: [moduleMetadata({})],
+  render: () => ({}),
+} as Meta;
+
+export const All: Story = {
+  render: () => ({
+    template: `
+      <p><a>Link</a></p>
+    `,
+  }),
+};

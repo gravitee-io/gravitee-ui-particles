@@ -18,7 +18,7 @@
   $mat-success-palette, $mat-warning-palette, $mat-error-palette, $mat-decorative-palette, $mat-method-palette, $mat-basic-palette,
   $mat-blue-palette, $mat-cyan-palette, $mat-space-palette, $mat-dove-palette;
 
-@forward './theme/typography/gio-typography' show subtitle-typography, code-typography;
+@forward './theme/typography/gio-typography' show subtitle-typography, code-typography, link-typography;
 
 @forward './gio-mat-theme-variable' show $mat-theme, $mat-typography, $mat-theme-dark;
 
