@@ -1,3 +1,12 @@
+# [4.9.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.8.1...v4.9.0) (2022-11-25)
+
+
+### Features
+
+* **banner:** improve banner with perseverance design ([7207530](https://github.com/gravitee-io/gravitee-ui-particles/commit/7207530c2e3dcaa4feac0fe6faab9d9f494affcb))
+* **button:** override button with icon & text ([b33de26](https://github.com/gravitee-io/gravitee-ui-particles/commit/b33de267e9c76865ee986b9a9e992fdc762475c4))
+* **link:** add link typography ([6a73797](https://github.com/gravitee-io/gravitee-ui-particles/commit/6a737978e9381e408c2edfaee77633666977bd61))
+
 ## [4.8.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.8.0...v4.8.1) (2022-11-23)
 
 
