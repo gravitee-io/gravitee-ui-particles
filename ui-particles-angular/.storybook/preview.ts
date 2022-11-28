@@ -6,4 +6,11 @@ export const parameters = {
   docs: {
     inlineStories: true,
   },
+  options: {
+    storySort: {
+      method: 'alphabetical',
+      order: ['README', 'Theme', 'Guidelines'],
+      includeName: true,
+    },
+  },
 };
