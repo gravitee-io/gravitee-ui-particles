@@ -1,3 +1,10 @@
+# [4.10.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.9.0...v4.10.0) (2022-11-29)
+
+
+### Features
+
+* add avatar component ([fedd066](https://github.com/gravitee-io/gravitee-ui-particles/commit/fedd06633f775331f1e089b0d6c66f6b1972688a))
+
 # [4.9.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.8.1...v4.9.0) (2022-11-25)
 
 
