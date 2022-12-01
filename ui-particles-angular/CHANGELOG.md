@@ -1,3 +1,10 @@
+## [4.10.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.10.0...v4.10.1) (2022-12-01)
+
+
+### Bug Fixes
+
+* **gio-save-bar:** prevent multiple submit ([18d9715](https://github.com/gravitee-io/gravitee-ui-particles/commit/18d971569fd16a800c915fc603123bfab01bb875))
+
 # [4.10.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.9.0...v4.10.0) (2022-11-29)
 
 
