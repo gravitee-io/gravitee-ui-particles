@@ -16,6 +16,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'gio-save-bar',
@@ -35,6 +36,8 @@ import { FormGroup } from '@angular/forms';
   ],
 })
 export class GioSaveBarComponent {
+  public isSubmitted = false;
+
   @HostBinding('class.save-bar-sticky')
   public get isSticky(): boolean {
     return !this.creationMode;
@@ -94,7 +97,10 @@ export class GioSaveBarComponent {
       this.submittedInvalidState.emit();
       return;
     }
-
-    this.submitted.emit();
+    if (!this.isSubmitted) {
+      this.submitted.emit();
+      this.isSubmitted = true;
+      timer(2000).subscribe(() => (this.isSubmitted = false));
+    }
   }
 }
