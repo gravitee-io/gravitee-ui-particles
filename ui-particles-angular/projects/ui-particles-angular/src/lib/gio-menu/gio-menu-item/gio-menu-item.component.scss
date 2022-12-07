@@ -74,8 +74,12 @@ $text: map.get(gio.$mat-dove-palette, default);
   }
 }
 
+:host-context(.gio-menu__reduced .gio-menu-footer) .gio-menu-item {
+  margin: 20px 0;
+}
+
 :host-context(.gio-menu__reduced .gio-menu-footer) .gio-menu-item__outlined {
-  margin: 16px 0;
+  margin: 20px 0;
 }
 
 .gio-menu-item:hover:not(.gio-menu-item__active) {
