@@ -153,6 +153,47 @@ export const WithOneItemInSelector: Story = {
   }),
 };
 
+export const SmallMenu: Story = {
+  render: () => ({
+    template: `
+        <div id="sidenav">
+          <gio-menu>
+            <gio-menu-header>    
+              <gio-menu-selector tabindex="1" [selectedItemValue]="selectedItemValue" selectorTitle="Environment" [selectorItems]="selectorItems" (selectChange)="selectedItemValue=$event"></gio-menu-selector>
+            </gio-menu-header>
+            <gio-menu-list>    
+              <gio-menu-item tabindex="1" icon="gio:home" (click)="onClick('dashboard')" [active]="isActive('dashboard')">Dashboard</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:upload-cloud" (click)="onClick('apis')" [active]="isActive('apis')">Apis</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:settings" (click)="onClick('settings')" [active]="isActive('settings')">Settings</gio-menu-item>
+            </gio-menu-list>
+            <gio-menu-footer>
+              <gio-menu-item tabindex="1" icon="gio:building" (click)="onClick('org')" [active]="isActive('org')">Settings</gio-menu-item>
+            </gio-menu-footer>
+          </gio-menu>
+          <h1>Selected env: {{ selectedItemValue }}</h1>
+        </div>
+        `,
+    props: {
+      onClick: (target: string) => (route = target),
+      isActive: (target: string) => (route != target ? null : true),
+      selectedItemValue: 'onlyOne',
+      selectorItems: [{ value: 'onlyOne', displayValue: '🧪 Only Env' }],
+    },
+    styles: [
+      ` 
+        #sidenav {
+            height: 500px;
+            display: flex;
+        }
+        
+        #sidenav h1 {
+            margin-left: 12px
+        };
+        `,
+    ],
+  }),
+};
+
 export const WithSubMenu: Story = {
   render: () => ({
     template: `
