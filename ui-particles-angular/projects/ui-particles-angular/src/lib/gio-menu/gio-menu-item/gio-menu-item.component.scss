@@ -47,8 +47,7 @@ $text: map.get(gio.$mat-dove-palette, default);
   }
 
   &__outlined {
-    border-style: solid;
-    border-color: map.get(gio.$mat-space-palette, lighter40);
+    border: 1px solid map.get(gio.$mat-space-palette, lighter40);
     border-radius: 4px;
   }
 
