@@ -1,3 +1,11 @@
+## [4.10.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.10.1...v4.10.2) (2022-12-07)
+
+
+### Bug Fixes
+
+* **gio-menu:** fix menu item border size ([3559b9b](https://github.com/gravitee-io/gravitee-ui-particles/commit/3559b9bb5a9690ff8f2592c7376a4f16df130b45))
+* **gio-menu:** make footer items same size when collapsed or expanded ([f1b8309](https://github.com/gravitee-io/gravitee-ui-particles/commit/f1b830958196b08ce6e0b39625a8ee2df0e21044))
+
 ## [4.10.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.10.0...v4.10.1) (2022-12-01)
 
 
