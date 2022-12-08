@@ -18,7 +18,7 @@ import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 import { GioIconsModule } from '../gio-icons/gio-icons.module';
-import { GioMenuService } from '../gio-menu/gio-menu.service';
+import { GioMenuService } from '../gio-menu';
 
 import { GioSubmenuGroupComponent } from './gio-submenu-group/gio-submenu-group.component';
 import { GioSubmenuComponent } from './gio-submenu.component';

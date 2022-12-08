@@ -23,8 +23,14 @@ interface OverlayOptions {
   open: boolean;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class GioMenuService {
+  constructor() {
+    console.log('New instance of menu service', this);
+  }
+
   private reduceSource = new BehaviorSubject<boolean>(false);
   private overlaySource = new BehaviorSubject<OverlayOptions>({ open: false });
   public reduce = this.reduceSource.asObservable();
