@@ -1,3 +1,10 @@
+## [4.10.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.10.2...v4.10.3) (2022-12-12)
+
+
+### Bug Fixes
+
+* **colors:** fix tooltip background color ([1cfc757](https://github.com/gravitee-io/gravitee-ui-particles/commit/1cfc75726bfbfd71cd03214d964850bd57e711e0))
+
 ## [4.10.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.10.1...v4.10.2) (2022-12-07)
 
 
