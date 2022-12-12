@@ -282,7 +282,7 @@ $mat-blue-palette: mat.define-palette(
 // DEPRECATED - Neutral color
 $mat-neutral-palette: mat.define-palette(
   (
-    darker: mat.get-color-from-palette($mat-primary-palette, lighter30),
+    darker: mat.get-color-from-palette($mat-dove-palette, darker70),
     default: mat.get-color-from-palette($mat-dove-palette, darker10),
     lighter: mat.get-color-from-palette($mat-dove-palette, default),
     contrast: (

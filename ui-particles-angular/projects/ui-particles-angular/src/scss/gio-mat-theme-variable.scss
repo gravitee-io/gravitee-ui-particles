@@ -69,7 +69,7 @@ $gio-background: map.merge(
   $mat-background,
   (
     background: mat.get-color-from-palette(palettes.$mat-decorative-palette, lighter-background),
-    tooltip: mat.get-color-from-palette(palettes.$mat-neutral-palette, darker),
+    tooltip: mat.get-color-from-palette(palettes.$mat-space-palette, default),
   )
 );
 
