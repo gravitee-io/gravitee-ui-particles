@@ -24,7 +24,7 @@ import { MatInputHarness } from '@angular/material/input/testing';
 import { GioSaveBarModule } from './gio-save-bar.module';
 import { GioSaveBarHarness } from './gio-save-bar.harness';
 
-describe('GioFormCardGroupModule', () => {
+describe('GioSaveBarModule', () => {
   describe('simple usage', () => {
     const onResetMock = jest.fn();
     const onSubmitMock = jest.fn();
