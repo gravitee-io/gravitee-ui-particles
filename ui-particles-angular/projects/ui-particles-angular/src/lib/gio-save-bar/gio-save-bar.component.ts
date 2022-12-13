@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { timer } from 'rxjs';
 
@@ -59,6 +59,8 @@ export class GioSaveBarComponent {
   @Input()
   public form?: FormGroup;
 
+  private hasSubmitLock = true;
+
   @Input()
   public formInitialValues?: unknown;
 
@@ -91,14 +93,24 @@ export class GioSaveBarComponent {
     this.resetClicked.emit();
   }
 
+  @HostListener('disable-submit-lock')
+  public onDisableSubmitLock(): void {
+    this.hasSubmitLock = true;
+  }
+
   public onSubmitClicked(): void {
     if ((this.form && this.form.invalid) || this.invalidState) {
       this.form?.markAllAsTouched();
       this.submittedInvalidState.emit();
       return;
     }
-    if (!this.isSubmitted) {
-      this.submitted.emit();
+
+    if (this.isSubmitted) {
+      return;
+    }
+
+    this.submitted.emit();
+    if (this.hasSubmitLock) {
       this.isSubmitted = true;
       timer(2000).subscribe(() => (this.isSubmitted = false));
     }

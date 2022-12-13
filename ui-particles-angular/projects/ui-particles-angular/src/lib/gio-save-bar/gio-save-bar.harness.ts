@@ -31,6 +31,8 @@ export class GioSaveBarHarness extends ComponentHarness {
   }
 
   public async clickSubmit(): Promise<void> {
+    const host = await this.host();
+    await host.dispatchEvent('disable-submit-lock');
     const submitButton = await this.getSubmitButton();
     return submitButton.click();
   }
