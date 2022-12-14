@@ -95,7 +95,7 @@ export class GioSaveBarComponent {
 
   @HostListener('disable-submit-lock')
   public onDisableSubmitLock(): void {
-    this.hasSubmitLock = true;
+    this.hasSubmitLock = false;
   }
 
   public onSubmitClicked(): void {
