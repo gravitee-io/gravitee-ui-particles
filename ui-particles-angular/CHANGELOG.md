@@ -1,3 +1,10 @@
+## [4.10.5](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.10.4...v4.10.5) (2022-12-14)
+
+
+### Bug Fixes
+
+* **gio-save-bar:** deal with timer in submit handler ([00f8500](https://github.com/gravitee-io/gravitee-ui-particles/commit/00f85000f7d4b8dabd3ad4cb8fbcdfdaf466e3fb))
+
 ## [4.10.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.10.3...v4.10.4) (2022-12-13)
 
 
