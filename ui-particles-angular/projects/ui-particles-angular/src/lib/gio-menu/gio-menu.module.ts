@@ -27,6 +27,7 @@ import { GioMenuListComponent } from './gio-menu-list/gio-menu-list.component';
 import { GioMenuSelectorComponent } from './gio-menu-selector/gio-menu-selector.component';
 import { GioMenuHeaderComponent } from './gio-menu-header/gio-menu-header.component';
 import { GioMenuService } from './gio-menu.service';
+import { GioMenuSharedServiceModule } from './gio-menu-shared-service.module';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,6 @@ import { GioMenuService } from './gio-menu.service';
     GioMenuHeaderComponent,
     GioMenuSelectorComponent,
   ],
-  imports: [CommonModule, MatIconModule, GioIconsModule, MatSelectModule],
-  providers: [GioMenuService],
+  imports: [CommonModule, MatIconModule, GioIconsModule, MatSelectModule, GioMenuSharedServiceModule.forRoot()],
 })
 export class GioMenuModule {}
