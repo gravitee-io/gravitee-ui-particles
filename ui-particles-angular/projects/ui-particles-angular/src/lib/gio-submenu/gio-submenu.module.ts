@@ -18,7 +18,6 @@ import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 import { GioIconsModule } from '../gio-icons/gio-icons.module';
-import { GioMenuService } from '../gio-menu/gio-menu.service';
 
 import { GioSubmenuGroupComponent } from './gio-submenu-group/gio-submenu-group.component';
 import { GioSubmenuComponent } from './gio-submenu.component';
@@ -28,6 +27,5 @@ import { GioSubmenuItemComponent } from './gio-submenu-item/gio-submenu-item.com
   declarations: [GioSubmenuComponent, GioSubmenuGroupComponent, GioSubmenuItemComponent],
   exports: [GioSubmenuComponent, GioSubmenuGroupComponent, GioSubmenuItemComponent],
   imports: [CommonModule, MatIconModule, GioIconsModule],
-  providers: [GioMenuService],
 })
 export class GioSubmenuModule {}
