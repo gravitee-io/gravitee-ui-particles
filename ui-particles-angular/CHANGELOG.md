@@ -1,3 +1,10 @@
+## [4.10.6](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.10.5...v4.10.6) (2022-12-16)
+
+
+### Bug Fixes
+
+* make menu service singleton ([bf3e8d7](https://github.com/gravitee-io/gravitee-ui-particles/commit/bf3e8d71128bd1a2dc69dd1df12752ec2ee1de33))
+
 ## [4.10.5](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.10.4...v4.10.5) (2022-12-14)
 
 
