@@ -1,3 +1,15 @@
+# [4.11.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.10.6...v4.11.0) (2022-12-16)
+
+
+### Bug Fixes
+
+* **gio-menu:** resolve submenu position ([eea431d](https://github.com/gravitee-io/gravitee-ui-particles/commit/eea431dd1c6d77688dd1b1bdcc217e3b48c19dc2))
+
+
+### Features
+
+* **gio-submenu:** add title directive ([dc41ba9](https://github.com/gravitee-io/gravitee-ui-particles/commit/dc41ba95b15046e31f64c25aeb593b3fadc5fefa))
+
 ## [4.10.6](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.10.5...v4.10.6) (2022-12-16)
 
 
