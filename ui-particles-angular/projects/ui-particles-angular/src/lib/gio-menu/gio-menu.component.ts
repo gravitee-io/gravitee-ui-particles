@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { GioMenuService } from './gio-menu.service';
 
@@ -23,10 +23,14 @@ import { GioMenuService } from './gio-menu.service';
   styleUrls: ['./gio-menu.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class GioMenuComponent {
+export class GioMenuComponent implements OnInit {
   @Input() public reduced = false;
 
   constructor(private readonly gioMenuService: GioMenuService) {}
+
+  public ngOnInit(): void {
+    this.gioMenuService.reduced(this.reduced);
+  }
 
   public reduceMenu(): void {
     this.reduced = !this.reduced;

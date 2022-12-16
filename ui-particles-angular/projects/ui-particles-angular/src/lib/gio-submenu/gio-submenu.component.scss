@@ -19,6 +19,7 @@
 @use '../../scss' as gio;
 
 $background: map.get(gio.$mat-content-palette, darker);
+$textLight: map.get(gio.$mat-basic-palette, white);
 
 :host {
   z-index: 100;
@@ -53,5 +54,14 @@ $background: map.get(gio.$mat-content-palette, darker);
     opacity: 1;
     transition: opacity 230ms, visibility 230ms;
     visibility: visible;
+  }
+
+  &__title {
+    padding-bottom: 8px;
+    color: $textLight;
+  }
+
+  .hide {
+    display: none;
   }
 }
