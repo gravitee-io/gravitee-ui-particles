@@ -18,6 +18,7 @@
 <div
   #gioSubmenu
   class="gio-submenu"
+  [class.gio-submenu__loaded]="loaded"
   [class.gio-submenu__reduced]="reduced"
   [class.gio-submenu__overlay]="overlayOptions.open"
   (mouseenter)="onMouseEnter()"

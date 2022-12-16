@@ -26,6 +26,7 @@ import { GioMenuService } from '../gio-menu/gio-menu.service';
 })
 export class GioSubmenuComponent implements OnInit, OnDestroy {
   public reduced = false;
+  public loaded = false;
   public overlayOptions = { open: false };
   private hover = false;
   @ViewChild('gioSubmenu', { static: false })
@@ -52,6 +53,7 @@ export class GioSubmenuComponent implements OnInit, OnDestroy {
             this.gioSubmenu.nativeElement.style.height = '100%';
             this.gioSubmenu.nativeElement.style.maxHeight = 'none';
           }
+          this.loaded = true;
         }),
       )
       .subscribe();
