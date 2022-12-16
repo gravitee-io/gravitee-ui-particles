@@ -20,12 +20,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { GioIconsModule } from '../gio-icons/gio-icons.module';
 
 import { GioSubmenuGroupComponent } from './gio-submenu-group/gio-submenu-group.component';
-import { GioSubmenuComponent } from './gio-submenu.component';
+import { GioSubmenuComponent, GioSubmenuTitleDirective } from './gio-submenu.component';
 import { GioSubmenuItemComponent } from './gio-submenu-item/gio-submenu-item.component';
 
 @NgModule({
-  declarations: [GioSubmenuComponent, GioSubmenuGroupComponent, GioSubmenuItemComponent],
-  exports: [GioSubmenuComponent, GioSubmenuGroupComponent, GioSubmenuItemComponent],
+  declarations: [GioSubmenuComponent, GioSubmenuGroupComponent, GioSubmenuItemComponent, GioSubmenuTitleDirective],
+  exports: [GioSubmenuComponent, GioSubmenuGroupComponent, GioSubmenuItemComponent, GioSubmenuTitleDirective],
   imports: [CommonModule, MatIconModule, GioIconsModule],
 })
 export class GioSubmenuModule {}

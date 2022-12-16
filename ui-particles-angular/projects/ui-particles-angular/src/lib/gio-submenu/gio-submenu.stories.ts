@@ -37,6 +37,7 @@ export const Default: Story = {
   render: () => ({
     template: `
         <gio-submenu>
+            <div gioSubmenuTitle>Submenu title</div>   
             <gio-submenu-item (click)="onClick('message')" [active]="isActive('message')">Message</gio-submenu-item>
             <gio-submenu-group title="Portal">
               <gio-submenu-item (click)="onClick('general')" [active]="isActive('general')">General</gio-submenu-item>

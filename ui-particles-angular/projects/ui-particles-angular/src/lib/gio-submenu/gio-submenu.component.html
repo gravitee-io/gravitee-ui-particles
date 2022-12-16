@@ -24,5 +24,8 @@
   (mouseenter)="onMouseEnter()"
   (mouseleave)="onMouseLeave()"
 >
+  <div #title class="gio-submenu__title" [class.hide]="!title.children.length || reduced">
+    <ng-content select="[gioSubmenuTitle]"></ng-content>
+  </div>
   <ng-content></ng-content>
 </div>

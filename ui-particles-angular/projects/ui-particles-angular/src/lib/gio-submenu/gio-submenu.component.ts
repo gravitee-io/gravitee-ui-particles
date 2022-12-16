@@ -13,11 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Directive, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { combineLatest, Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 
 import { GioMenuService } from '../gio-menu/gio-menu.service';
+
+@Directive({
+  selector: '[gioSubmenuTitle]',
+})
+export class GioSubmenuTitleDirective {}
 
 @Component({
   selector: 'gio-submenu',
@@ -41,6 +46,7 @@ export class GioSubmenuComponent implements OnInit, OnDestroy {
         takeUntil(this.unsubscribe$),
         tap(([reduced, overlayOptions]) => {
           this.reduced = reduced;
+          this.loaded = true;
           if (this.gioSubmenu) {
             this.overlayOptions = overlayOptions;
             if (this.reduced) {
@@ -53,7 +59,6 @@ export class GioSubmenuComponent implements OnInit, OnDestroy {
             this.gioSubmenu.nativeElement.style.height = '100%';
             this.gioSubmenu.nativeElement.style.maxHeight = 'none';
           }
-          this.loaded = true;
         }),
       )
       .subscribe();
