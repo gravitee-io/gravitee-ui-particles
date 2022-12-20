@@ -22,3 +22,4 @@ export * from './gio-menu-list/gio-menu-list.component';
 export * from './gio-menu-footer/gio-menu-footer.component';
 export * from './gio-menu-header/gio-menu-header.component';
 export * from './gio-menu-selector/gio-menu-selector.component';
+export * from './gio-menu-selector/gio-menu-selector.harness';
