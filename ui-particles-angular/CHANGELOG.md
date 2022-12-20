@@ -1,3 +1,10 @@
+## [4.11.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.11.0...v4.11.1) (2022-12-20)
+
+
+### Bug Fixes
+
+* **gv-menu:** improve overlay menu position ([006a416](https://github.com/gravitee-io/gravitee-ui-particles/commit/006a41602e7bed634b796b6cb66aad9a270270b1))
+
 # [4.11.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.10.6...v4.11.0) (2022-12-16)
 
 
