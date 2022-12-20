@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Directive, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { combineLatest, Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { AfterViewInit, Component, Directive, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { Subject } from 'rxjs';
+import { filter, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { GioMenuService } from '../gio-menu/gio-menu.service';
 
@@ -29,36 +29,46 @@ export class GioSubmenuTitleDirective {}
   templateUrl: './gio-submenu.component.html',
   styleUrls: ['./gio-submenu.component.scss'],
 })
-export class GioSubmenuComponent implements OnInit, OnDestroy {
+export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
   public reduced = false;
   public loaded = false;
   public overlayOptions = { open: false };
   private hover = false;
   @ViewChild('gioSubmenu', { static: false })
-  private gioSubmenu: ElementRef<HTMLDivElement> | undefined;
+  private gioSubmenu!: ElementRef<HTMLDivElement>;
   private unsubscribe$ = new Subject();
 
   constructor(private readonly gioMenuService: GioMenuService) {}
 
-  public ngOnInit(): void {
-    combineLatest([this.gioMenuService.reduce, this.gioMenuService.overlayObservable])
+  public ngAfterViewInit(): void {
+    this.gioMenuService.reduce
       .pipe(
         takeUntil(this.unsubscribe$),
-        tap(([reduced, overlayOptions]) => {
-          this.reduced = reduced;
+        filter(reduced => reduced),
+        tap(() => {
+          this.reduced = true;
           this.loaded = true;
-          if (this.gioSubmenu) {
-            this.overlayOptions = overlayOptions;
-            if (this.reduced) {
-              const top = overlayOptions.top || 0;
-              this.gioSubmenu.nativeElement.style.top = `${top}px`;
-              this.gioSubmenu.nativeElement.style.height = 'auto';
-              this.gioSubmenu.nativeElement.style.maxHeight = `calc(100vh - ${top + 8}px)`;
-              return;
-            }
-            this.gioSubmenu.nativeElement.style.height = '100%';
-            this.gioSubmenu.nativeElement.style.maxHeight = 'none';
-          }
+        }),
+        switchMap(() => this.gioMenuService.overlayObservable),
+        tap(overlayOptions => {
+          const top = overlayOptions.top || 0;
+          this.overlayOptions = overlayOptions;
+          this.gioSubmenu.nativeElement.style.top = `${top}px`;
+          this.gioSubmenu.nativeElement.style.height = 'auto';
+          this.gioSubmenu.nativeElement.style.maxHeight = `calc(100vh - ${top + 8}px)`;
+        }),
+      )
+      .subscribe();
+
+    this.gioMenuService.reduce
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        filter(reduced => !reduced),
+        tap(() => {
+          this.reduced = false;
+          this.loaded = true;
+          this.gioSubmenu.nativeElement.style.height = '100%';
+          this.gioSubmenu.nativeElement.style.maxHeight = 'none';
         }),
       )
       .subscribe();
