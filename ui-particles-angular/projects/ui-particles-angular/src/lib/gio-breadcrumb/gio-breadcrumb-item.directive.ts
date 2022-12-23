@@ -13,31 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@use 'sass:map';
-@use '@angular/material' as mat;
+import { Directive, TemplateRef } from '@angular/core';
 
-@use '../../gio-mat-palettes.scss' as palettes;
-
-@mixin code-typography() {
-  font-family: 'Fira Mono', monospace;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 18px;
-}
-
-@mixin subtitle-typography() {
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: 0.4px;
-  line-height: 24px;
-}
-
-@mixin link-typography() {
-  color: mat.get-color-from-palette(palettes.$mat-primary-palette, 'darker40');
-  cursor: pointer;
-  text-decoration-thickness: 2px;
-
-  &:hover {
-    color: mat.get-color-from-palette(palettes.$mat-primary-palette, 'darker20');
-  }
+@Directive({
+  selector: '[gioBreadcrumbItem]',
+})
+export class GioBreadcrumbItemDirective {
+  constructor(public templateRef: TemplateRef<unknown>) {}
 }
