@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Gravitee team (http://gravitee.io)
+ * Copyright (C) 2015 The Gravitee team (http://gravitee.io)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,29 +15,32 @@
  */
 @use 'sass:map';
 @use '@angular/material' as mat;
+@use '../../scss' as gio;
 
-@use '../../gio-mat-palettes.scss' as palettes;
+$textColor: mat.get-color-from-palette(gio.$mat-space-palette, 'lighter40');
+$iconColor: mat.get-color-from-palette(gio.$mat-space-palette, 'lighter80');
 
-@mixin code-typography() {
-  font-family: 'Fira Mono', monospace;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 18px;
-}
+.gio-breadcrumb {
+  display: flex;
+  flex-flow: wrap;
+  align-items: center;
+  margin: 2px;
 
-@mixin subtitle-typography() {
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: 0.4px;
-  line-height: 24px;
-}
+  &__content {
+    display: flex;
+    align-items: center;
+    color: $textColor;
 
-@mixin link-typography() {
-  color: mat.get-color-from-palette(palettes.$mat-primary-palette, 'darker40');
-  cursor: pointer;
-  text-decoration-thickness: 2px;
+    &:last-child {
+      font-weight: bold;
+    }
+  }
 
-  &:hover {
-    color: mat.get-color-from-palette(palettes.$mat-primary-palette, 'darker20');
+  &__icon {
+    width: 12px;
+    height: 12px;
+    margin: 0 6px;
+    color: $iconColor;
+    line-height: 12px;
   }
 }
