@@ -1,3 +1,10 @@
+# [4.12.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.11.1...v4.12.0) (2023-01-06)
+
+
+### Features
+
+* add gio-breadcrumb component ([098c6ab](https://github.com/gravitee-io/gravitee-ui-particles/commit/098c6ab0c35f9d8c5a6affa5355e577dcf697e97))
+
 ## [4.11.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.11.0...v4.11.1) (2022-12-20)
 
 
