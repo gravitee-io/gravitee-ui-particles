@@ -17,10 +17,11 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, timer } from 'rxjs';
 import { debounce, distinctUntilChanged } from 'rxjs/operators';
 
-interface OverlayOptions {
+export interface OverlayOptions {
   top?: number;
-  parent?: HTMLInputElement;
+  parent?: HTMLElement;
   open: boolean;
+  focus?: boolean;
 }
 
 @Injectable({ providedIn: 'root' })
