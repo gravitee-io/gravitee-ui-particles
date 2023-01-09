@@ -28,7 +28,7 @@ export class GioSubmenuItemComponent {
 
   @HostListener('keydown', ['$event'])
   public onKeydownHandler(event: KeyboardEvent): void {
-    if (event.key === ' ' || event.key === 'Enter') {
+    if (event.key === 'Enter') {
       this.gioSubmenuItem?.nativeElement.click();
     }
   }

@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy } from '@angular/core';
+import { of, Subject } from 'rxjs';
+import { delay, filter, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { GioMenuService } from '../gio-menu.service';
 
@@ -22,15 +24,19 @@ import { GioMenuService } from '../gio-menu.service';
   templateUrl: './gio-menu-item.component.html',
   styleUrls: ['./gio-menu-item.component.scss'],
 })
-export class GioMenuItemComponent {
+export class GioMenuItemComponent implements OnDestroy {
   @Input() public icon = '';
   @Input() public active = false;
   @Input() public outlined = false;
 
-  @ViewChild('gioMenuItem', { static: false })
-  private gioMenuItem: ElementRef<HTMLDivElement> | undefined;
+  private unsubscribe$ = new Subject();
 
   constructor(private readonly gioMenuService: GioMenuService) {}
+
+  public ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.unsubscribe();
+  }
 
   public onMouseLeave(): void {
     if (this.active) {
@@ -40,21 +46,38 @@ export class GioMenuItemComponent {
 
   public onMouseEnter($event: MouseEvent): void {
     if (this.active) {
-      const target = $event.target as HTMLInputElement;
-      const menuItem = target.closest('.gio-menu-item') as HTMLInputElement;
+      const menuItem = $event.target as HTMLInputElement;
       this.gioMenuService.overlay({ open: true, top: menuItem.getBoundingClientRect().top, parent: menuItem });
     }
   }
 
   @HostListener('click', ['$event'])
   public onClick($event: MouseEvent): void {
-    setTimeout(() => this.onMouseEnter($event), 0);
+    of(true)
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        delay(0),
+        tap(() => this.onMouseEnter($event)),
+      )
+      .subscribe();
   }
 
   @HostListener('keydown', ['$event'])
-  public onKeydownHandler(event: KeyboardEvent): void {
-    if (event.key === ' ' || event.key === 'Enter') {
-      this.gioMenuItem?.nativeElement.click();
-    }
+  public onKeydownHandler($event: KeyboardEvent): void {
+    of($event.key === 'Enter' && $event.target)
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        filter(enterKey => !!enterKey),
+        switchMap(() => of($event.target as HTMLElement)),
+        tap(menuItem => {
+          this.gioMenuService.overlay({ open: false });
+          if (this.active) {
+            this.gioMenuService.overlay({ open: true, top: menuItem.getBoundingClientRect().top, parent: menuItem, focus: true });
+          } else {
+            menuItem.click();
+          }
+        }),
+      )
+      .subscribe();
   }
 }

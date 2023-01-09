@@ -52,7 +52,7 @@ $textLight: map.get(gio.$mat-basic-palette, white);
   &__overlay,
   &:hover {
     opacity: 1;
-    transition: opacity 230ms, visibility 230ms;
+    transition: opacity 150ms, visibility 150ms;
     visibility: visible;
   }
 

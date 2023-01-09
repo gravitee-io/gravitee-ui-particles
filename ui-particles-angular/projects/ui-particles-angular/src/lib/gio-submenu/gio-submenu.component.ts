@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { AfterViewInit, Component, Directive, ElementRef, OnDestroy, ViewChild } from '@angular/core';
-import { Subject } from 'rxjs';
-import { filter, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { AfterViewInit, Component, Directive, ElementRef, HostListener, OnDestroy, ViewChild } from '@angular/core';
+import { of, Subject } from 'rxjs';
+import { delay, filter, switchMap, takeUntil, tap } from 'rxjs/operators';
 
-import { GioMenuService } from '../gio-menu/gio-menu.service';
+import { GioMenuService, OverlayOptions } from '../gio-menu/gio-menu.service';
 
 @Directive({
   selector: '[gioSubmenuTitle]',
@@ -32,7 +32,7 @@ export class GioSubmenuTitleDirective {}
 export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
   public reduced = false;
   public loaded = false;
-  public overlayOptions = { open: false };
+  public overlayOptions: OverlayOptions = { open: false };
   private hover = false;
   @ViewChild('gioSubmenu', { static: false })
   private gioSubmenu!: ElementRef<HTMLDivElement>;
@@ -57,6 +57,11 @@ export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
           this.gioSubmenu.nativeElement.style.height = 'auto';
           this.gioSubmenu.nativeElement.style.maxHeight = `calc(100vh - ${top + 8}px)`;
         }),
+        filter(overlayOptions => !!overlayOptions.focus),
+        delay(200),
+        switchMap(() => of(this.gioSubmenu.nativeElement.querySelectorAll<HTMLElement>('gio-submenu-item'))),
+        filter(submenuItems => submenuItems.length > 0),
+        tap(submenuItems => submenuItems[0].focus()),
       )
       .subscribe();
 
@@ -74,6 +79,11 @@ export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
       .subscribe();
   }
 
+  public ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.unsubscribe();
+  }
+
   public onMouseEnter(): void {
     this.hover = true;
     this.gioMenuService.overlay(this.overlayOptions);
@@ -84,8 +94,15 @@ export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
     this.gioMenuService.overlay({ open: false });
   }
 
-  public ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.unsubscribe();
+  @HostListener('keydown', ['$event'])
+  public onKeydownHandler(event: KeyboardEvent): void {
+    of(this.reduced && event.key === 'Escape')
+      .pipe(
+        filter(reducedAndEcape => reducedAndEcape),
+        tap(() => this.gioMenuService.overlay({ open: false })),
+        delay(100),
+        tap(() => this.overlayOptions.parent?.focus()),
+      )
+      .subscribe();
   }
 }
