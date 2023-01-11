@@ -30,6 +30,5 @@ import { GioConfirmAndValidateDialogComponent } from './gio-confirm-and-validate
   imports: [CommonModule, FormsModule, MatButtonModule, MatDialogModule, MatInputModule, MatFormFieldModule, A11yModule, GioBannerModule],
   declarations: [GioConfirmAndValidateDialogComponent],
   exports: [GioConfirmAndValidateDialogComponent],
-  entryComponents: [GioConfirmAndValidateDialogComponent],
 })
 export class GioConfirmAndValidateDialogModule {}

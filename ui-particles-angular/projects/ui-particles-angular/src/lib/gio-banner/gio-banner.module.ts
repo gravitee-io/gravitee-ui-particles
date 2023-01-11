@@ -49,12 +49,5 @@ import {
     GioBannerBodyDirective,
     GioBannerActionDirective,
   ],
-  entryComponents: [
-    GioBannerComponent,
-    GioBannerErrorComponent,
-    GioBannerInfoComponent,
-    GioBannerSuccessComponent,
-    GioBannerWarningComponent,
-  ],
 })
 export class GioBannerModule {}
