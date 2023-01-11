@@ -24,6 +24,5 @@ import { GioSaveBarComponent } from './gio-save-bar.component';
   imports: [CommonModule, MatCardModule, MatButtonModule],
   declarations: [GioSaveBarComponent],
   exports: [GioSaveBarComponent],
-  entryComponents: [GioSaveBarComponent],
 })
 export class GioSaveBarModule {}

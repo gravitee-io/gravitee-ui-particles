@@ -39,6 +39,5 @@ import { GioFormHeadersComponent } from './gio-form-headers.component';
   ],
   declarations: [GioFormHeadersComponent],
   exports: [GioFormHeadersComponent],
-  entryComponents: [GioFormHeadersComponent],
 })
 export class GioFormHeadersModule {}

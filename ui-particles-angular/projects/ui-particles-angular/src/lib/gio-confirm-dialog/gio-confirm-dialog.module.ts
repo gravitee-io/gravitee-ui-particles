@@ -25,6 +25,5 @@ import { GioConfirmDialogComponent } from './gio-confirm-dialog.component';
   imports: [CommonModule, MatButtonModule, MatDialogModule, A11yModule],
   declarations: [GioConfirmDialogComponent],
   exports: [GioConfirmDialogComponent],
-  entryComponents: [GioConfirmDialogComponent],
 })
 export class GioConfirmDialogModule {}

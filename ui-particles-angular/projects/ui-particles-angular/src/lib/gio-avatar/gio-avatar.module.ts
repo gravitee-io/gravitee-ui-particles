@@ -22,6 +22,5 @@ import { GioAvatarComponent } from './gio-avatar.component';
   imports: [CommonModule],
   declarations: [GioAvatarComponent],
   exports: [GioAvatarComponent],
-  entryComponents: [GioAvatarComponent],
 })
 export class GioAvatarModule {}

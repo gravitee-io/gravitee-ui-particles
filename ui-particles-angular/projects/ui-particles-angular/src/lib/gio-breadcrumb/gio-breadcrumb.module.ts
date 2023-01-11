@@ -25,6 +25,5 @@ import { GioBreadcrumbItemDirective } from './gio-breadcrumb-item.directive';
   imports: [CommonModule, GioIconsModule],
   declarations: [GioBreadcrumbComponent, GioBreadcrumbItemDirective],
   exports: [GioBreadcrumbComponent, GioBreadcrumbItemDirective],
-  entryComponents: [GioBreadcrumbComponent],
 })
 export class GioBreadcrumbModule {}

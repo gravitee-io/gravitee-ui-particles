@@ -29,6 +29,5 @@ import { GioFormTagsInputComponent } from './gio-form-tags-input.component';
   imports: [CommonModule, A11yModule, MatChipsModule, MatInputModule, FormsModule, MatIconModule, MatAutocompleteModule, MatSelectModule],
   declarations: [GioFormTagsInputComponent],
   exports: [GioFormTagsInputComponent],
-  entryComponents: [GioFormTagsInputComponent],
 })
 export class GioFormTagsInputModule {}
