@@ -101,15 +101,26 @@ jobs:
               echo "No PR found for this branch, stopping the job here."
               exit 0
             fi
-            gh pr comment --body "**Gravitee.io Automatic Deployment**
-            A prerelease version of this package has been published! 🚀
-            To use it in your project run the following lines:
-            \`\`\`shell
+            # If PR state is different from OPEN
+            if [ "$(gh pr view --json state --jq .state)" != "OPEN" ];
+            then
+              echo "PR is not opened, stopping the job here."
+              exit 0
+            fi
+            export PR_BODY_PRERELEASE_SECTION="
+            <!-- Prerelease placeholder -->
+            ---
+            #### 🧪&nbsp;&nbsp;Gravitee.io Automatic Prerelease
+            \`\`\`
             npm install @gravitee/<< parameters.angular_package_name >>@${VERSION_TAG}
-            # or
+            \`\`\`
+            \`\`\`
             yarn add @gravitee/<< parameters.angular_package_name >>@${VERSION_TAG}
             \`\`\`
+            <!-- Prerelease placeholder end -->
             "
+            export CLEAN_BODY=$(gh pr view --json body --jq .body | sed '/Prerelease placeholder -->/,/Prerelease placeholder end -->/d')
+            gh pr edit --body "$CLEAN_BODY$PR_BODY_PRERELEASE_SECTION"
   release:
     parameters:
       package_name:
@@ -204,7 +215,7 @@ jobs:
             export PR_BODY_STORYBOOK_SECTION="
             <!-- Storybook placeholder -->
             ---
-            📚&nbsp;&nbsp;View the storybook of this branch [here](${SB_URL})
+            #### 📚&nbsp;&nbsp;View the storybook of this branch [here](${SB_URL})
             <!-- Storybook placeholder end -->
             "
             export CLEAN_BODY=$(gh pr view --json body --jq .body | sed '/Storybook placeholder -->/,/Storybook placeholder end -->/d')
