@@ -1,3 +1,10 @@
+# [4.13.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.12.0...v4.13.0) (2023-01-11)
+
+
+### Features
+
+* **gio-menu:** add keyboard accessibility in collapse mode ([de5a5c1](https://github.com/gravitee-io/gravitee-ui-particles/commit/de5a5c1e14dae18b668a4344d3d2b7019ea41743))
+
 # [4.12.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.11.1...v4.12.0) (2023-01-06)
 
 
