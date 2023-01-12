@@ -18,5 +18,5 @@ import { Observable } from 'rxjs';
 import { Grammar } from '../models/spel';
 
 export abstract class SpelServiceAbstract {
-  abstract getGrammar(): Observable<Grammar>;
+  public abstract getGrammar(): Observable<Grammar>;
 }

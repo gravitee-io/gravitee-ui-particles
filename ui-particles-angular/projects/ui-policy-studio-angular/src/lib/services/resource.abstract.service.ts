@@ -24,7 +24,7 @@ export interface ListParams {
 }
 
 export abstract class ResourceServiceAbstract {
-  abstract list(params: ListParams): Observable<ResourceListItem[]>;
+  public abstract list(params: ListParams): Observable<ResourceListItem[]>;
 
-  abstract getDocumentation(resourceId: string): Observable<ResourceDocumentation>;
+  public abstract getDocumentation(resourceId: string): Observable<ResourceDocumentation>;
 }

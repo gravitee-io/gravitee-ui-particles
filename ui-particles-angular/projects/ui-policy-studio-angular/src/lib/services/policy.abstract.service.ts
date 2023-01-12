@@ -24,11 +24,11 @@ interface ListParams {
 }
 
 export abstract class PolicyServiceAbstract {
-  abstract list(params: ListParams): Observable<PolicyListItem[]>;
+  public abstract list(params: ListParams): Observable<PolicyListItem[]>;
 
-  abstract listSwaggerPolicies(): Observable<PolicyListItem[]>;
+  public abstract listSwaggerPolicies(): Observable<PolicyListItem[]>;
 
-  abstract getSchema(policyId: string): Observable<PolicySchema>;
+  public abstract getSchema(policyId: string): Observable<PolicySchema>;
 
-  abstract getDocumentation(policyId: string): Observable<PolicyDocumentation>;
+  public abstract getDocumentation(policyId: string): Observable<PolicyDocumentation>;
 }
