@@ -4544,24 +4544,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/fira-mono@npm:4.5.0":
-  version: 4.5.0
-  resolution: "@fontsource/fira-mono@npm:4.5.0"
-  checksum: e99627013459f973f95f58ffde0a8729851588cbccb266a1e7790efdf5d20d8c078133130697b040c1ef98e6f96f37f5f41b81b982c2d04a1b269dd62577ba37
+"@fontsource/fira-mono@npm:4.5.10":
+  version: 4.5.10
+  resolution: "@fontsource/fira-mono@npm:4.5.10"
+  checksum: 0bf058ff1d6f4dcd0bedb4d459ed21124ffd93b7ca1c540068f98057fd7cf96320c69126e88caf1bc5e318c920d9157a2b0b30fd0835573ea6808ffa63c16fad
   languageName: node
   linkType: hard
 
-"@fontsource/golos-ui@npm:^4.5.1":
-  version: 4.5.1
-  resolution: "@fontsource/golos-ui@npm:4.5.1"
-  checksum: f2ad6d241b5f7e7042706c792a0bd102997f759ffaa39337f269bf628220f5a18e5adca87ec791b7fc39cb9620ecfb214b178e271b466b5cd9c5998fac1c7633
+"@fontsource/golos-ui@npm:^4.5.3":
+  version: 4.5.3
+  resolution: "@fontsource/golos-ui@npm:4.5.3"
+  checksum: 178344692977c4ccd2b64f3c6224e1e450a22963fc82176ed7371c55917ef81ca521bf236d0ad8b1448b9475ce7cc3e8f9011444db8ba6a7cc95d907873282a7
   languageName: node
   linkType: hard
 
-"@fontsource/material-icons@npm:4.5.1":
-  version: 4.5.1
-  resolution: "@fontsource/material-icons@npm:4.5.1"
-  checksum: e8e589417346f92790f54393ca5d190fa040091b9710a33103df13681d448b784c6a7b9b74595d016734cbb167d32ca523b5b8d1eac62eed790707db991ceb4b
+"@fontsource/material-icons@npm:4.5.4":
+  version: 4.5.4
+  resolution: "@fontsource/material-icons@npm:4.5.4"
+  checksum: 681f05a3b3fcf236b01827d25bd09a5d646f05c3c161808c26a796a655131f585d1a124a27e79f676c79a815e85869b9c4280a21a904f7c36a41c920bfec6582
   languageName: node
   linkType: hard
 
@@ -4631,9 +4631,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gravitee/ui-components@npm:^3.36.1":
-  version: 3.36.1
-  resolution: "@gravitee/ui-components@npm:3.36.1"
+"@gravitee/ui-components@npm:^3.38.4":
+  version: 3.38.4
+  resolution: "@gravitee/ui-components@npm:3.38.4"
   dependencies:
     "@codemirror/basic-setup": ^0.19.1
     "@codemirror/language-data": ^0.19.1
@@ -4670,7 +4670,7 @@ __metadata:
       optional: true
     highlight.js:
       optional: true
-  checksum: b0796f77d312efa55e2b27591bf47f86aee529f76ac401a2dedb1cb1c6857d946e2a8ffb57bb185542d6b64ac8f91c97c924d6e36de637f335315dca61847cbd
+  checksum: 8dd449fa6da3daa44e4d0fe672344735674ba557ddaa69ffefeb89c89df22985a0e44d39035519c0a8c132e52fb420f2567640641cd7246a3d35674d45d92459
   languageName: node
   linkType: hard
 
@@ -27068,10 +27068,10 @@ __metadata:
     "@angular/platform-browser-dynamic": 13.3.12
     "@angular/router": 13.3.12
     "@asciidoctor/core": ^2.2.5
-    "@fontsource/fira-mono": 4.5.0
-    "@fontsource/golos-ui": ^4.5.1
-    "@fontsource/material-icons": 4.5.1
-    "@gravitee/ui-components": ^3.36.1
+    "@fontsource/fira-mono": 4.5.10
+    "@fontsource/golos-ui": ^4.5.3
+    "@fontsource/material-icons": 4.5.4
+    "@gravitee/ui-components": ^3.38.4
     "@highcharts/map-collection": ^1.1.4
     "@ngx-formly/core": 6.0.4
     "@ngx-formly/material": 6.0.4
