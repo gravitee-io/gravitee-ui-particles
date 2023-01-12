@@ -18,9 +18,9 @@ import { Observable } from 'rxjs';
 import { FlowConfigurationSchema, OrganizationFlowConfiguration, PlatformFlowSchema } from '../models/flow';
 
 export abstract class FlowServiceAbstract {
-  abstract getConfigurationSchemaForm(): Observable<FlowConfigurationSchema>;
+  public abstract getConfigurationSchemaForm(): Observable<FlowConfigurationSchema>;
 
-  abstract getPlatformFlowSchemaForm(): Observable<PlatformFlowSchema>;
+  public abstract getPlatformFlowSchemaForm(): Observable<PlatformFlowSchema>;
 
-  abstract getConfiguration(): Observable<OrganizationFlowConfiguration>;
+  public abstract getConfiguration(): Observable<OrganizationFlowConfiguration>;
 }
