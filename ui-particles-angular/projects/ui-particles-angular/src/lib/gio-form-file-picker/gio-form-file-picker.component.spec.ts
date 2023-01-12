@@ -58,14 +58,12 @@ describe('FilePickerInputComponent', () => {
   let fixture: ComponentFixture<TestFilePickerInputComponent>;
   let component: TestFilePickerInputComponent;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [ReactiveFormsModule, GioFormFilePickerModule, MatIconTestingModule],
-        declarations: [TestFilePickerInputComponent],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [ReactiveFormsModule, GioFormFilePickerModule, MatIconTestingModule],
+      declarations: [TestFilePickerInputComponent],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TestFilePickerInputComponent);

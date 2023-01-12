@@ -16,7 +16,7 @@
 @use '@angular/material' as mat;
 
 @mixin mat-card() {
-  .mat-card:not(.mat-card .mat-card):not([class*='mat-elevation-z']) {
+  .mat-card:not(.mat-card .mat-card, [class*='mat-elevation-z']) {
     @include mat.elevation(3);
   }
 }

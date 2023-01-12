@@ -39,8 +39,8 @@ $textLight: map.get(gio.$mat-basic-palette, white);
   &__reduced {
     position: absolute;
     overflow: auto;
-    margin: 0 0 0 8px;
     border-radius: 8px;
+    margin: 0 0 0 8px;
     opacity: 0;
     visibility: hidden;
   }
