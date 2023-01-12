@@ -5202,6 +5202,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ngx-formly/core@npm:6.0.4":
+  version: 6.0.4
+  resolution: "@ngx-formly/core@npm:6.0.4"
+  dependencies:
+    tslib: ^2.0.0
+  peerDependencies:
+    "@angular/forms": ">=13.2.0"
+    rxjs: ^6.5.3 || ^7.0.0
+  checksum: 6b3901211c1f54b6a1770221e5c7200da47de479a022365deb60136a3286c297ecf1fdf88b93d396cbd5e5f1dfc0cae0b3fe68c34fb5c701fa6466d7ee22e8ea
+  languageName: node
+  linkType: hard
+
+"@ngx-formly/material@npm:6.0.4":
+  version: 6.0.4
+  resolution: "@ngx-formly/material@npm:6.0.4"
+  dependencies:
+    tslib: ^2.0.0
+  peerDependencies:
+    "@angular/material": ">=13.0.0"
+    "@ngx-formly/core": 6.0.4
+  checksum: 8cb800a7face6e5e1a1d1c7acd89d3b6f30c04c64f1f3b70a81c8cc089e2539e060b8e602bbf609c9c1538ec09046aadf1bc28f032853065812794568ef30b66
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -25913,6 +25937,8 @@ __metadata:
     "@fontsource/material-icons": 4.5.1
     "@gravitee/ui-components": ^3.36.1
     "@highcharts/map-collection": ^1.1.4
+    "@ngx-formly/core": 6.0.4
+    "@ngx-formly/material": 6.0.4
     "@semantic-release/changelog": 6.0.1
     "@semantic-release/exec": 6.0.3
     "@semantic-release/git": 10.0.1
