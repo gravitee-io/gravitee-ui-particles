@@ -18,7 +18,7 @@
     "lint:license:fix": "license-check-and-add add -f license-check-config.json -r $(date +%Y)",
     "lint:package": "yarn lint:package:fix --check",
     "lint:package:fix": "yarn sort-package-json \"**/package.json\" \"!**/node_modules/**/package.json\" \"!**/dist/**/package.json\"",
-    "test": "yarn workspaces foreach -pt run test"
+    "test": "yarn workspaces foreach -pti run test"
   },
   "lint-staged": {
     "*": "yarn lint:license:fix",

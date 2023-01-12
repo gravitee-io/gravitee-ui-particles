@@ -22,19 +22,19 @@ commands:
       - restore_cache:
           name: Restore Yarn cache
           keys:
-            - gio-ui-particles-yarn-cache-v1-{{ checksum "yarn.lock" }}
+            - gio-ui-particles-yarn-cache-v2-{{ checksum "yarn.lock" }}
       - run:
           name: 'Install Yarn dependencies'
           command: yarn install
       - save_cache:
           paths:
             - .yarn/cache
-          key: gio-ui-particles-yarn-cache-v1-{{ checksum "yarn.lock" }}
+          key: gio-ui-particles-yarn-cache-v2-{{ checksum "yarn.lock" }}
 
 jobs:
   lint-test:
     executor:
-      class: medium
+      class: large
       name: node-lts
     steps:
       - checkout
