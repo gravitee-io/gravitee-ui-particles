@@ -28,10 +28,10 @@
     min-width: 10px;
     align-items: center;
     padding: 4px 8px;
+    border-radius: 16px;
     margin-right: 4px;
     margin-left: 4px;
     background-color: mat.get-color-from-palette(palettes.$mat-primary-palette, lighter);
-    border-radius: 16px;
     color: mat.get-color-from-palette(palettes.$mat-primary-palette, lighter-contrast);
     font-size: mat.font-size(theme.$mat-typography, caption);
     font-weight: mat.font-weight(theme.$mat-typography, caption);

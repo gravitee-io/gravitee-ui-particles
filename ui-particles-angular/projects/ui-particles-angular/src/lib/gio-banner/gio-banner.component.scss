@@ -39,8 +39,8 @@ $types: (
   flex-direction: column;
   align-items: stretch;
   padding: 12px 16px;
-  background-color: $background;
   border-radius: 8px;
+  background-color: $background;
 
   @each $typeName, $typePalette in $types {
     &.#{$typeName} {

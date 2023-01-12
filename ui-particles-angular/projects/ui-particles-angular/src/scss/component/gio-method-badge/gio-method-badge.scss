@@ -30,9 +30,9 @@
     align-items: center;
     justify-content: center;
     padding: 4px 8px;
+    border-radius: 6px;
     margin-right: 4px;
     margin-left: 4px;
-    border-radius: 6px;
     font-size: mat.font-size(theme.$mat-typography, caption);
     font-weight: mat.font-weight(theme.$mat-typography, caption);
     line-height: 16px;

@@ -25,8 +25,8 @@ $text: map.get(gio.$mat-dove-palette, default);
   padding: 10px 14px 0;
   border-style: solid;
   border-color: map.get(gio.$mat-space-palette, lighter40);
-  margin-bottom: 8px;
   border-radius: 4px;
+  margin-bottom: 8px;
   color: $text;
 
   &__mat-form-field {
