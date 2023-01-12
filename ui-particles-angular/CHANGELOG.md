@@ -1,3 +1,15 @@
+# [5.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.13.0...v5.0.0) (2023-01-12)
+
+
+### chore
+
+* update to angular 13 ([d7e5bb8](https://github.com/gravitee-io/gravitee-ui-particles/commit/d7e5bb834139c8dc73eac578f231b58a46a55a9c))
+
+
+### BREAKING CHANGES
+
+* Migrate to Angular 13.3.x
+
 # [4.13.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.12.0...v4.13.0) (2023-01-11)
 
 
