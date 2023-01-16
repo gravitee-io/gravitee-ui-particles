@@ -1,3 +1,10 @@
+# [5.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.0.0...v5.1.0) (2023-01-16)
+
+
+### Features
+
+* init gio-form-json-schema module ([4e34110](https://github.com/gravitee-io/gravitee-ui-particles/commit/4e34110a5944590cf2d3070f6540af3ae1e7c725))
+
 # [5.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.13.0...v5.0.0) (2023-01-12)
 
 
