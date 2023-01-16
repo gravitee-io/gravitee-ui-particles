@@ -80,7 +80,7 @@
     "jest-preset-angular": "12.2.3",
     "ng-packagr": "13.3.1",
     "prettier": "2.8.2",
-    "semantic-release": "18.0.1",
+    "semantic-release": "19.0.3",
     "stylelint": "14.16.1",
     "stylelint-config-idiomatic-order": "^9.0.0",
     "stylelint-config-prettier-scss": "^0.0.1",
