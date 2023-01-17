@@ -33,7 +33,138 @@ export default {
 export const MatButton: Story = {
   render: () => ({
     template: `
-          <h3>Buttons</h3>
+        <h3>Design System buttons</h3>
+        <div>
+            <div>
+                <h4>Button primary</h4>
+                <div class="button-container">
+                    <button mat-flat-button color="primary">Default</button>
+<!--                    TODO :see how we can define new css classes for sizing-->
+                    <button mat-flat-button color="primary" class="button-large">Large button</button>
+                    <button mat-flat-button color="primary" class="medium">Medium button</button>
+                    <button mat-flat-button color="primary" class="small">Small button</button>
+                    </div>
+                <div class="button-container">
+                    <button mat-flat-button color="primary" class="large"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-flat-button color="primary" class="medium"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-flat-button color="primary" class="small"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    </div>
+                <div class="button-container">
+                    <button mat-flat-button color="primary" class="large"><mat-icon svgIcon="gio:star-outline"></mat-icon>Large button</button>
+                    <button mat-flat-button color="primary" class="medium"><mat-icon svgIcon="gio:star-outline"></mat-icon>Medium button</button>
+                    <button mat-flat-button color="primary" class="small"><mat-icon svgIcon="gio:star-outline"></mat-icon>Small button</button>
+                </div>
+                <div class="button-container">
+                    <button mat-flat-button color="primary" class="large">Large button<mat-icon svgIcon="gio:star-outline"></mat-icon></button>
+                    <button mat-flat-button color="primary" class="medium">Medium button<mat-icon svgIcon="gio:star-outline"></mat-icon></button>
+                    <button mat-flat-button color="primary" class="small">Small button<mat-icon svgIcon="gio:star-outline"></mat-icon></button>
+                </div>
+            </div>
+            <div>
+                <h4>Button secondary</h4>
+                <div class="button-container">
+                    <button mat-stroked-button>Default</button>
+<!--                    TODO :see how we can define new css classes for sizing-->
+                    <button mat-stroked-button class="large">Large button</button>
+                    <button mat-stroked-button class="medium">Medium button</button>
+                    <button mat-stroked-button class="small">Small button</button>
+                    </div>
+                <div class="button-container">
+                    <button mat-stroked-button class="large"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-stroked-button class="medium"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-stroked-button class="small"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    </div>
+                <div class="button-container">
+                    <button mat-stroked-button class="large"><mat-icon svgIcon="gio:star-outline"></mat-icon>Large button</button>
+                    <button mat-stroked-button class="medium"><mat-icon svgIcon="gio:star-outline"></mat-icon>Medium button</button>
+                    <button mat-stroked-button class="small"><mat-icon svgIcon="gio:star-outline"></mat-icon>Small button</button>
+                </div>
+                <div class="button-container">
+                    <button mat-stroked-button class="large">Large button<mat-icon svgIcon="gio:star-outline"></mat-icon></button>
+                    <button mat-stroked-button class="medium">Medium button<mat-icon svgIcon="gio:star-outline"></mat-icon></button>
+                    <button mat-stroked-button class="small">Small button<mat-icon svgIcon="gio:star-outline"></mat-icon></button>
+                </div>
+            </div>
+            <div>
+                <h4>Button tertiary</h4>
+                <div class="button-container">
+                    <button mat-button>Default</button>
+<!--                    TODO :see how we can define new css classes for sizing-->
+                    <button mat-button class="large">Large button</button>
+                    <button mat-button class="medium">Medium button</button>
+                    <button mat-button class="small">Small button</button>
+                    </div>
+                <div class="button-container">
+                    <button mat-button class="large"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-button class="medium"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-button class="small"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    </div>
+                <div class="button-container">
+                    <button mat-button class="large"><mat-icon svgIcon="gio:star-outline"></mat-icon>Large button</button>
+                    <button mat-button class="medium"><mat-icon svgIcon="gio:star-outline"></mat-icon>Medium button</button>
+                    <button mat-button class="small"><mat-icon svgIcon="gio:star-outline"></mat-icon>Small button</button>
+                </div>
+                <div class="button-container">
+                    <button mat-button class="large">Large button<mat-icon svgIcon="gio:star-outline"></mat-icon></button>
+                    <button mat-button class="medium">Medium button<mat-icon svgIcon="gio:star-outline"></mat-icon></button>
+                    <button mat-button class="small">Small button<mat-icon svgIcon="gio:star-outline"></mat-icon></button>
+                </div>
+            </div>
+            <div>
+                <h4>Button accent</h4>
+                <div class="button-container">
+                    <button mat-flat-button color="accent">Default</button>
+<!--                    TODO :see how we can define new css classes for sizing-->
+                    <button mat-flat-button color="accent" class="large">Large button</button>
+                    <button mat-flat-button color="accent" class="medium">Medium button</button>
+                    <button mat-flat-button color="accent" class="small">Small button</button>
+                    </div>
+                <div class="button-container">
+                    <button mat-flat-button color="accent" class="large"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-flat-button color="accent" class="medium"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-flat-button color="accent" class="small"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    </div>
+                <div class="button-container">
+                    <button mat-flat-button color="accent" class="large"><mat-icon svgIcon="gio:star-outline"></mat-icon>Large button</button>
+                    <button mat-flat-button color="accent" class="medium"><mat-icon svgIcon="gio:star-outline"></mat-icon>Medium button</button>
+                    <button mat-flat-button color="accent" class="small"><mat-icon svgIcon="gio:star-outline"></mat-icon>Small button</button>
+                </div>
+                <div class="button-container">
+                    <button mat-flat-button color="accent" class="large">Large button<mat-icon svgIcon="gio:star-outline"></mat-icon></button>
+                    <button mat-flat-button color="accent" class="medium">Medium button<mat-icon svgIcon="gio:star-outline"></mat-icon></button>
+                    <button mat-flat-button color="accent" class="small">Small button<mat-icon svgIcon="gio:star-outline"></mat-icon></button>
+                </div>
+            </div>
+            <div>
+                <h4>Button danger</h4>
+                <div class="button-container">
+                    <button mat-flat-button color="warn">Default</button>
+<!--                    TODO :see how we can define new css classes for sizing-->
+                    <button mat-flat-button color="warn" class="large">Large button</button>
+                    <button mat-flat-button color="warn" class="medium">Medium button</button>
+                    <button mat-flat-button color="warn" class="small">Small button</button>
+                    </div>
+                <div class="button-container">
+                    <button mat-flat-button color="warn" class="large"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-flat-button color="warn" class="medium"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-flat-button color="warn" class="small"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    </div>
+                <div class="button-container">
+                    <button mat-flat-button color="warn" class="large"><mat-icon svgIcon="gio:star-outline"></mat-icon>Large button</button>
+                    <button mat-flat-button color="warn" class="medium"><mat-icon svgIcon="gio:star-outline"></mat-icon>Medium button</button>
+                    <button mat-flat-button color="warn" class="small"><mat-icon svgIcon="gio:star-outline"></mat-icon>Small button</button>
+                </div>
+                <div class="button-container">
+                    <button mat-flat-button color="warn" class="large">Large button<mat-icon svgIcon="gio:star-outline"></mat-icon></button>
+                    <button mat-flat-button color="warn" class="medium">Medium button<mat-icon svgIcon="gio:star-outline"></mat-icon></button>
+                    <button mat-flat-button color="warn" class="small">Small button<mat-icon svgIcon="gio:star-outline"></mat-icon></button>
+                </div>
+            </div>
+        </div>
+
+
+        <div>
+          <h3>Material Buttons</h3>
           <div>
               <div>
                   <h4>Default</h4>
@@ -185,6 +316,7 @@ export const MatButton: Story = {
               </div>
               
           </div>
+        </div>
         `,
     styles: [
       `
