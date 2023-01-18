@@ -307,6 +307,9 @@ workflows:
             - keeper/env-export:
                 secret-url: keeper://TIlcGPFq4rN5GvgnZb9hng/field/password
                 var-name: GITHUB_TOKEN
+            - keeper/env-export:
+                secret-url: keeper://ZC9NhWiu_AgpJbmW0naJag/field/password
+                var-name: CHROMATIC_PROJECT_TOKEN
 
   release:
     # Trigger only for `main` branch
@@ -338,6 +341,9 @@ workflows:
             - keeper/env-export:
                 secret-url: keeper://TIlcGPFq4rN5GvgnZb9hng/field/password
                 var-name: GITHUB_TOKEN
+            - keeper/env-export:
+                secret-url: keeper://ZC9NhWiu_AgpJbmW0naJag/field/password
+                var-name: CHROMATIC_PROJECT_TOKEN
       - release:
           name: Release Angular
           package_name: ui-particles-angular
