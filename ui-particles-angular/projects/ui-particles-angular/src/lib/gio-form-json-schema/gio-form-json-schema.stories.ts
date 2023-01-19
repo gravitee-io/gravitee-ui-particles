@@ -16,18 +16,23 @@
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { DemoComponent } from './gio-form-json-schema.stories.component';
 import { GioFormJsonSchemaModule } from './gio-form-json-schema.module';
+import { fakeInteger } from './testing-json-schema/integer';
+import { fakeString } from './testing-json-schema/string';
+import { fakeMixed } from './testing-json-schema/mixed';
 
 @NgModule({
   declarations: [DemoComponent],
-  imports: [CommonModule, ReactiveFormsModule, MatCardModule, GioFormJsonSchemaModule],
-  exports: [DemoComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatCardModule, MatInputModule, MatFormFieldModule, GioFormJsonSchemaModule],
+  exports: [DemoComponent, GioFormJsonSchemaModule],
 })
 export class GioFJSStoryModule {}
 
@@ -43,20 +48,23 @@ export default {
 export const String: Story = {
   name: 'String',
   render: () => ({
-    template: `<gio-demo jsonSchemaName="string"></gio-demo>`,
+    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
+    props: { jsonSchema: fakeString },
   }),
 };
 
 export const Number: Story = {
   name: 'Number',
   render: () => ({
-    template: `<gio-demo jsonSchemaName="integer"></gio-demo>`,
+    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
+    props: { jsonSchema: fakeInteger },
   }),
 };
 
 export const Mixed: Story = {
   name: 'Mixed',
   render: () => ({
-    template: `<gio-demo jsonSchemaName="mixed"></gio-demo>`,
+    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
+    props: { jsonSchema: fakeMixed },
   }),
 };

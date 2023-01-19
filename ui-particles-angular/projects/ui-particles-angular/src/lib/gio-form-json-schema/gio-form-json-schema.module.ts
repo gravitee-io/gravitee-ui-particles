@@ -35,9 +35,10 @@ import {
   maxItemsValidationMessage,
   constValidationMessage,
 } from './util/validation-message.util';
+import { GioFormJsonSchemaComponent } from './gio-form-json-schema.component';
 
 @NgModule({
-  declarations: [GioFjsNullTypeComponent, GioFjsObjectTypeComponent, GioFjsArrayTypeComponent],
+  declarations: [GioFormJsonSchemaComponent, GioFjsNullTypeComponent, GioFjsObjectTypeComponent, GioFjsArrayTypeComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -65,6 +66,6 @@ import {
     }),
     FormlyMaterialModule,
   ],
-  exports: [FormlyModule],
+  exports: [GioFormJsonSchemaComponent, FormlyModule],
 })
 export class GioFormJsonSchemaModule {}

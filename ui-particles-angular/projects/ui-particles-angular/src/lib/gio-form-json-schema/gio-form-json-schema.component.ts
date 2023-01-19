@@ -15,27 +15,34 @@
  */
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FormlyFormOptions } from '@ngx-formly/core';
+import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
+import { FormlyJsonschema } from '@ngx-formly/core/json-schema';
+import { isObject } from 'lodash';
 
 import { FormlyJSONSchema7 } from './model/FormlyJSONSchema7';
 
 @Component({
-  selector: 'gio-demo',
-  templateUrl: './gio-form-json-schema.stories.component.html',
-  styleUrls: ['./gio-form-json-schema.stories.component.scss'],
+  selector: 'gio-form-json-schema',
+  template: `<formly-form [fields]="fields" [options]="options" [form]="formGroup"></formly-form>`,
 })
-export class DemoComponent {
+export class GioFormJsonSchemaComponent {
   @Input()
-  public jsonSchema: FormlyJSONSchema7 = {};
+  public set jsonSchema(jsonSchema: FormlyJSONSchema7) {
+    if (isObject(jsonSchema)) {
+      this.fields = [this.toFormlyFieldConfig(jsonSchema)];
+    }
+  }
+  @Input()
+  public formGroup: FormGroup = new FormGroup({});
 
-  public form = new FormGroup({});
+  @Input()
   public options: FormlyFormOptions = {};
 
-  public jsonSchemaChange(jsonSchema: string): void {
-    this.jsonSchema = JSON.parse(jsonSchema);
-  }
+  public fields: FormlyFieldConfig[] = [];
 
-  public onSubmit(): void {
-    alert(JSON.stringify(this.form.getRawValue(), null, 4));
+  constructor(private readonly formlyJsonschema: FormlyJsonschema) {}
+
+  private toFormlyFieldConfig(jsonSchema: FormlyJSONSchema7): FormlyFieldConfig {
+    return this.formlyJsonschema.toFieldConfig(jsonSchema);
   }
 }

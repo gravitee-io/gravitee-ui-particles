@@ -15,11 +15,36 @@
     limitations under the License.
 
 -->
-<mat-card>
-  <mat-card-title>{{ title }}</mat-card-title>
-  <br />
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
-    <button type="submit">Submit</button>
-  </form>
-</mat-card>
+<div class="json-schema-storie">
+  <mat-card class="json-schema-storie__json-schema">
+    <mat-card-title>Json Schema</mat-card-title>
+
+    <mat-card-content>
+      <mat-form-field>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="10"
+          cdkAutosizeMaxRows="48"
+          [ngModel]="jsonSchema | json"
+          (ngModelChange)="jsonSchemaChange($event)"
+        ></textarea>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="json-schema-storie__preview">
+    <mat-card-title>Preview</mat-card-title>
+
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <gio-form-json-schema [jsonSchema]="jsonSchema" [options]="options" [formGroup]="form"></gio-form-json-schema>
+
+        --- <br />
+        <button type="submit">Submit</button><br />
+        --- <br />
+        <pre>{{ form.value | json }}</pre>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
