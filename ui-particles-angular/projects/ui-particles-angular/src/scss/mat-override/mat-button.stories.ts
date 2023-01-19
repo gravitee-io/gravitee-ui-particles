@@ -38,10 +38,9 @@ export const MatButton: Story = {
             <div>
                 <h4>Button primary</h4>
                 <div class="button-container">
-                    <button mat-flat-button color="primary">Default</button>
 <!--                    TODO :see how we can define new css classes for sizing-->
                     <button mat-flat-button color="primary" class="button-large">Large button</button>
-                    <button mat-flat-button color="primary" class="medium">Medium button</button>
+                    <button mat-flat-button color="primary" class="medium">Medium button (Default)</button>
                     <button mat-flat-button color="primary" class="small">Small button</button>
                     </div>
                 <div class="button-container">
@@ -63,10 +62,9 @@ export const MatButton: Story = {
             <div>
                 <h4>Button secondary</h4>
                 <div class="button-container">
-                    <button mat-stroked-button>Default</button>
 <!--                    TODO :see how we can define new css classes for sizing-->
                     <button mat-stroked-button class="large">Large button</button>
-                    <button mat-stroked-button class="medium">Medium button</button>
+                    <button mat-stroked-button class="medium">Medium button (Default)</button>
                     <button mat-stroked-button class="small">Small button</button>
                     </div>
                 <div class="button-container">
@@ -88,10 +86,9 @@ export const MatButton: Story = {
             <div>
                 <h4>Button tertiary</h4>
                 <div class="button-container">
-                    <button mat-button>Default</button>
 <!--                    TODO :see how we can define new css classes for sizing-->
                     <button mat-button class="large">Large button</button>
-                    <button mat-button class="medium">Medium button</button>
+                    <button mat-button class="medium">Medium button (Default)</button>
                     <button mat-button class="small">Small button</button>
                     </div>
                 <div class="button-container">
@@ -113,10 +110,9 @@ export const MatButton: Story = {
             <div>
                 <h4>Button accent</h4>
                 <div class="button-container">
-                    <button mat-flat-button color="accent">Default</button>
 <!--                    TODO :see how we can define new css classes for sizing-->
                     <button mat-flat-button color="accent" class="large">Large button</button>
-                    <button mat-flat-button color="accent" class="medium">Medium button</button>
+                    <button mat-flat-button color="accent" class="medium">Medium button (Default)</button>
                     <button mat-flat-button color="accent" class="small">Small button</button>
                     </div>
                 <div class="button-container">
@@ -138,10 +134,9 @@ export const MatButton: Story = {
             <div>
                 <h4>Button danger</h4>
                 <div class="button-container">
-                    <button mat-flat-button color="warn">Default</button>
 <!--                    TODO :see how we can define new css classes for sizing-->
                     <button mat-flat-button color="warn" class="large">Large button</button>
-                    <button mat-flat-button color="warn" class="medium">Medium button</button>
+                    <button mat-flat-button color="warn" class="medium">Medium button (Default)</button>
                     <button mat-flat-button color="warn" class="small">Small button</button>
                     </div>
                 <div class="button-container">
