@@ -22,12 +22,14 @@ import { NgModule } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 import { DemoComponent } from './gio-form-json-schema.stories.component';
 import { GioFormJsonSchemaModule } from './gio-form-json-schema.module';
 import { fakeInteger } from './testing-json-schema/integer';
 import { fakeString } from './testing-json-schema/string';
 import { fakeMixed } from './testing-json-schema/mixed';
+import { entrypointsGetResponse, getEntrypointConnectorSchema } from './testing-json-schema/entrypoints';
 
 @NgModule({
   declarations: [DemoComponent],
@@ -40,7 +42,7 @@ export default {
   title: 'Components / Form Json schema',
   decorators: [
     moduleMetadata({
-      imports: [BrowserAnimationsModule, CommonModule, GioFJSStoryModule],
+      imports: [BrowserAnimationsModule, CommonModule, MatSelectModule, GioFJSStoryModule],
     }),
   ],
 } as Meta;
@@ -66,5 +68,19 @@ export const Mixed: Story = {
   render: () => ({
     template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
     props: { jsonSchema: fakeMixed },
+  }),
+};
+
+export const Entrypoints: Story = {
+  name: 'Gio - V4 Entrypoints',
+  render: () => ({
+    template: `<mat-form-field appearance="fill" style="width:100%">
+    <mat-label>--Please choose an entrypoint--</mat-label>
+      <mat-select (selectionChange)="jsonSchema = getEntrypointConnectorSchema($event.value)" >
+          <mat-option *ngFor="let entrypoint of entrypoints" [value]="entrypoint.id">{{ entrypoint.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <gio-demo *ngIf="jsonSchema" [jsonSchema]="jsonSchema"></gio-demo>`,
+    props: { jsonSchema: undefined, entrypoints: entrypointsGetResponse, getEntrypointConnectorSchema },
   }),
 };
