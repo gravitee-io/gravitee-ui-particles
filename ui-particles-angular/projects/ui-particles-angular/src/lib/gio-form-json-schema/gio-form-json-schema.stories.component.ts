@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFormOptions } from '@ngx-formly/core';
 
@@ -24,18 +24,30 @@ import { FormlyJSONSchema7 } from './model/FormlyJSONSchema7';
   templateUrl: './gio-form-json-schema.stories.component.html',
   styleUrls: ['./gio-form-json-schema.stories.component.scss'],
 })
-export class DemoComponent {
+export class DemoComponent implements OnChanges {
   @Input()
   public jsonSchema: FormlyJSONSchema7 = {};
 
-  public form = new FormGroup({});
+  public form?: FormGroup;
   public options: FormlyFormOptions = {};
+
+  public formValue: unknown;
+
+  constructor(private changeDetectorRef: ChangeDetectorRef) {}
+
+  public ngOnChanges(): void {
+    this.form = new FormGroup({});
+    this.form.valueChanges.subscribe(value => {
+      this.formValue = value;
+      this.changeDetectorRef.detectChanges();
+    });
+  }
 
   public jsonSchemaChange(jsonSchema: string): void {
     this.jsonSchema = JSON.parse(jsonSchema);
   }
 
   public onSubmit(): void {
-    alert(JSON.stringify(this.form.getRawValue(), null, 4));
+    alert(JSON.stringify(this.form?.getRawValue(), null, 4));
   }
 }
