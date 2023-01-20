@@ -51,11 +51,13 @@ export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
         }),
         switchMap(() => this.gioMenuService.overlayObservable),
         tap(overlayOptions => {
-          const top = overlayOptions.top || 0;
           this.overlayOptions = overlayOptions;
-          this.gioSubmenu.nativeElement.style.top = `${top}px`;
-          this.gioSubmenu.nativeElement.style.height = 'auto';
-          this.gioSubmenu.nativeElement.style.maxHeight = `calc(100vh - ${top + 8}px)`;
+          if (overlayOptions.open) {
+            const top = overlayOptions.top || 0;
+            this.gioSubmenu.nativeElement.style.top = `${top}px`;
+            this.gioSubmenu.nativeElement.style.height = 'auto';
+            this.gioSubmenu.nativeElement.style.maxHeight = `calc(100vh - ${top + 8}px)`;
+          }
         }),
         filter(overlayOptions => !!overlayOptions.focus),
         delay(200),
@@ -98,7 +100,7 @@ export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
   public onKeydownHandler(event: KeyboardEvent): void {
     of(this.reduced && event.key === 'Escape')
       .pipe(
-        filter(reducedAndEcape => reducedAndEcape),
+        filter(reducedAndEscape => reducedAndEscape),
         tap(() => this.gioMenuService.overlay({ open: false })),
         delay(100),
         tap(() => this.overlayOptions.parent?.focus()),
