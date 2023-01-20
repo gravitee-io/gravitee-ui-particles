@@ -1,3 +1,10 @@
+## [5.1.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.1.0...v5.1.1) (2023-01-20)
+
+
+### Bug Fixes
+
+* **mat-button:** remove duplicate buttons (default and medium) ([c465587](https://github.com/gravitee-io/gravitee-ui-particles/commit/c4655877c3feee6ba219a08272b42d6c492f3427))
+
 # [5.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.0.0...v5.1.0) (2023-01-16)
 
 
