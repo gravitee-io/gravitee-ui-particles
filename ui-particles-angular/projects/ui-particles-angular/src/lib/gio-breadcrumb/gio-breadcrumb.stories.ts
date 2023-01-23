@@ -16,7 +16,6 @@
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
 import { withDesign } from 'storybook-addon-designs';
-import { MatButtonModule } from '@angular/material/button';
 
 import { GioIconsModule } from '../gio-icons/gio-icons.module';
 
@@ -28,7 +27,7 @@ export default {
   component: GioBreadcrumbComponent,
   decorators: [
     moduleMetadata({
-      imports: [GioBreadcrumbModule, MatButtonModule, GioIconsModule],
+      imports: [GioBreadcrumbModule, GioIconsModule],
     }),
     withDesign,
   ],
@@ -38,9 +37,19 @@ export default {
 export const Default: Story = {
   render: () => ({
     template: `<gio-breadcrumb>
+                  <span *gioBreadcrumbItem>APIs</span>
+                  <span *gioBreadcrumbItem>My api</span>
+                  <span *gioBreadcrumbItem>Portal</span>
+               </gio-breadcrumb>`,
+  }),
+};
+
+export const Links: Story = {
+  render: () => ({
+    template: `<gio-breadcrumb>
                   <a href="/apis" *gioBreadcrumbItem>APIs</a>
                   <a href="/apis/my-api" *gioBreadcrumbItem>My api</a>
-                  <button mat-button color="primary" *gioBreadcrumbItem>My api</button>
+                  <a *gioBreadcrumbItem>Portal</a>
                </gio-breadcrumb>`,
   }),
 };
