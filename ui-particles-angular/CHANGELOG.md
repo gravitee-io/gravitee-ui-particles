@@ -1,3 +1,10 @@
+## [5.1.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.1.1...v5.1.2) (2023-01-23)
+
+
+### Bug Fixes
+
+* **submenu:** resolve submenu position when deal with escape key ([72152d9](https://github.com/gravitee-io/gravitee-ui-particles/commit/72152d9e5e10c6775458d87adaed169cccaacd42))
+
 ## [5.1.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.1.0...v5.1.1) (2023-01-20)
 
 
