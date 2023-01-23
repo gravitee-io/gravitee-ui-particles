@@ -1,3 +1,10 @@
+## [5.1.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.1.2...v5.1.3) (2023-01-23)
+
+
+### Bug Fixes
+
+* **gio-breadcrumb:** fix styles ([9dd072b](https://github.com/gravitee-io/gravitee-ui-particles/commit/9dd072b642671ca4cd735c1e238680fc8b796a2e))
+
 ## [5.1.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.1.1...v5.1.2) (2023-01-23)
 
 
