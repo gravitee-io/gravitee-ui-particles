@@ -19,22 +19,14 @@
 
 $textColor: mat.get-color-from-palette(gio.$mat-space-palette, 'lighter40');
 $iconColor: mat.get-color-from-palette(gio.$mat-space-palette, 'lighter80');
+$lastTextColor: mat.get-color-from-palette(gio.$mat-accent-palette, 'darker20');
 
 .gio-breadcrumb {
   display: flex;
   flex-flow: wrap;
   align-items: center;
   margin: 2px;
-
-  &__content {
-    display: flex;
-    align-items: center;
-    color: $textColor;
-
-    &:last-child {
-      font-weight: bold;
-    }
-  }
+  color: $textColor;
 
   &__icon {
     width: 12px;
@@ -42,5 +34,14 @@ $iconColor: mat.get-color-from-palette(gio.$mat-space-palette, 'lighter80');
     margin: 0 6px;
     color: $iconColor;
     line-height: 12px;
+  }
+}
+
+::ng-deep {
+  .gio-breadcrumb {
+    > *:last-child {
+      color: $lastTextColor;
+      font-weight: bold;
+    }
   }
 }
