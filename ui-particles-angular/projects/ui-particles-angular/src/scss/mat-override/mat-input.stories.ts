@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import { MatInputModule } from '@angular/material/input';
-import { GioFormTagsInputModule, GioIconsModule } from 'ui-particles-angular';
 import { MatIconModule } from '@angular/material/icon';
 import { Story } from '@storybook/angular/types-7-0';
 import { Meta, moduleMetadata } from '@storybook/angular';
@@ -25,6 +24,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { action } from '@storybook/addon-actions';
 
 import { Tags } from '../../lib/gio-form-tags-input/gio-form-tags-input.component';
+import { GioFormTagsInputModule, GioIconsModule } from '../../public-api';
 
 export default {
   title: 'Material Override',
