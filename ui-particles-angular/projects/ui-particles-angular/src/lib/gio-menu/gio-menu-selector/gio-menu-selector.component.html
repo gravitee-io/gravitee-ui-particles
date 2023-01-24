@@ -16,7 +16,7 @@
 
 -->
 <div class="gio-menu-selector">
-  <mat-form-field class="gio-menu-selector__mat-form-field">
+  <mat-form-field class="gio-menu-selector__mat-form-field" appearance="legacy">
     <mat-label>{{ selectorTitle }}</mat-label>
     <mat-select [tabIndex]="tabIndex" [value]="selectedItemValue" (selectionChange)="onSelectionChange($event)" [disabled]="isDisabled()">
       <mat-option *ngFor="let item of selectorItems" [value]="item.value">

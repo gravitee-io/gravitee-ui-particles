@@ -52,3 +52,16 @@ import { VERSION } from '@angular/core';
     ]
 ...
 ```
+
+5. Import the mat config module to root module
+
+```typescript
+import { NgModule } from "@angular/core";
+import { GioMatConfigModule } from "@gravitee/ui-particles-angular";
+
+@NgModule({
+  imports: [
+    GioMatConfigModule,
+  ],
+})
+```
