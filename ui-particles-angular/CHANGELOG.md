@@ -1,3 +1,10 @@
+## [5.1.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.1.3...v5.1.4) (2023-01-24)
+
+
+### Bug Fixes
+
+* **mat-form-field:** apply styling on mat form field prefix ([c67fff7](https://github.com/gravitee-io/gravitee-ui-particles/commit/c67fff7b05fbc1e1f6194cf78bc4a2106ed64e52))
+
 ## [5.1.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.1.2...v5.1.3) (2023-01-23)
 
 
