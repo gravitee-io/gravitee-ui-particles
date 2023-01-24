@@ -52,64 +52,64 @@ export const MatInput: Story = {
         <h3>Design System inputs</h3>
         
         <div class="container">
-          <mat-form-field appearance="outline">
+          <mat-form-field>
             <mat-label>Simple input</mat-label>
             <input matInput>
           </mat-form-field>
-          <mat-form-field appearance="outline">
+          <mat-form-field>
             <mat-icon svgIcon="gio:star-outline" matPrefix></mat-icon>
             <mat-label>Simple input with icon</mat-label>
             <input matInput>
           </mat-form-field>
-          <mat-form-field appearance="outline">
+          <mat-form-field>
             <mat-icon svgIcon="gio:star-outline" matPrefix></mat-icon>
             <mat-label>Simple input with icon and hint</mat-label>
             <input matInput>
             <mat-hint>This is a hint text</mat-hint>
           </mat-form-field>
-          <mat-form-field appearance="outline" >
+          <mat-form-field >
             <mat-icon svgIcon="gio:star-outline" matPrefix></mat-icon>
             <mat-label>Click to see control with error</mat-label>
             <input matInput required [formControl]="errorFormControl">
             <mat-error *ngIf="errorFormControl.hasError('required')">This is an error message</mat-error>
           </mat-form-field>
           
-          <mat-form-field appearance="outline">
+          <mat-form-field>
             <mat-label>Number input</mat-label>
             <input matInput type="number">
           </mat-form-field>
           
-          <mat-form-field appearance="outline">
+          <mat-form-field>
             <mat-label>Color input</mat-label>
             NB: a custom component is available in APIM
             <input matInput type="color">
           </mat-form-field>
           
-          <mat-form-field appearance="outline">
+          <mat-form-field>
             <mat-label>Password input</mat-label>
             <input matInput type="password">
           </mat-form-field>
           
-          <mat-form-field appearance="outline">
+          <mat-form-field>
             <mat-label>Multi text input</mat-label>
             <gio-form-tags-input [disabled]="disabled" [required]="required" [placeholder]="placeholder" [ngModel]="fruits" (ngModelChange)="onTagsChange($event)">
             </gio-form-tags-input>
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <mat-form-field>
             <mat-label>Multi text input with icon prefix</mat-label>
             <mat-icon svgIcon="gio:star-outline" matPrefix></mat-icon>
             <gio-form-tags-input [disabled]="disabled" [required]="required" [placeholder]="placeholder" [ngModel]="fruits" (ngModelChange)="onTagsChange($event)">
             </gio-form-tags-input>
           </mat-form-field>
           
-          <mat-form-field appearance="outline">
+          <mat-form-field>
             <mat-label>Input with text prefix</mat-label>
             <span matPrefix>http://</span>
             <input matInput>
           </mat-form-field>
   
-          <mat-form-field appearance="outline">
+          <mat-form-field>
             <mat-label>Search input</mat-label>
             <mat-icon svgIcon="gio:search" matPrefix></mat-icon>
             <input matInput #input>
@@ -124,7 +124,7 @@ export const MatInput: Story = {
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
           
-          <mat-form-field appearance="outline">
+          <mat-form-field>
             <mat-label>Text area</mat-label>
             <textarea matInput #text></textarea>
             <mat-hint>{{text.value.length}}/250</mat-hint>

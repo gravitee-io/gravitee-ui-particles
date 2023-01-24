@@ -50,3 +50,5 @@ export * from './gio-top-bar';
 export * from './gio-avatar';
 
 export * from './gio-breadcrumb';
+
+export * from './gio-mat-config';
