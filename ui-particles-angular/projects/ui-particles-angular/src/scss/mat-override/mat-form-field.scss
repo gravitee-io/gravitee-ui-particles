@@ -17,6 +17,8 @@
 
 @use '../gio-mat-theme-variable' as theme;
 
+@use '../gio-mat-palettes' as palettes;
+
 @mixin mat-form-field() {
   .mat-form-field {
     // Increase default padding to have space for two lines of hint & error bellow the input
@@ -30,5 +32,20 @@
 
   .mat-form-field-disabled * {
     cursor: not-allowed !important;
+  }
+
+  .mat-form-field-prefix {
+    // Apply same margin as the one on the left of the prefix
+    margin-right: 0.75em;
+    color: mat.get-color-from-palette(palettes.$mat-space-palette, 'lighter30');
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-prefix,
+  .mat-form-field-appearance-outline .mat-form-field-suffix {
+    place-self: center;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding-top: 0.8em;
   }
 }
