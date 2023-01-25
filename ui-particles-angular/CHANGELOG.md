@@ -1,3 +1,10 @@
+# [5.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.1.4...v5.2.0) (2023-01-25)
+
+
+### Features
+
+* add gio-config module with form field appearance ([87161da](https://github.com/gravitee-io/gravitee-ui-particles/commit/87161da5e7eaffb7df81f738aa655ac0437c252a))
+
 ## [5.1.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.1.3...v5.1.4) (2023-01-24)
 
 
