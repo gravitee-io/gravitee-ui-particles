@@ -191,6 +191,7 @@ const icons = [
   'more-horizontal',
   'more-vertical',
   'move',
+  'mqtt',
   'multi-bubble',
   'multi-window',
   'nav-arrow-down',
