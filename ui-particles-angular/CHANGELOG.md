@@ -1,3 +1,10 @@
+# [5.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.2.0...v5.3.0) (2023-01-27)
+
+
+### Features
+
+* **console:** add endpoint icons to particles icons ([aef71dc](https://github.com/gravitee-io/gravitee-ui-particles/commit/aef71dca26798970779df5646a5f5a95cf2e6dfc))
+
 # [5.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.1.4...v5.2.0) (2023-01-25)
 
 
