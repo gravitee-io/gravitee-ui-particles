@@ -52,3 +52,7 @@ export * from './gio-avatar';
 export * from './gio-breadcrumb';
 
 export * from './gio-mat-config';
+
+export * from './gio-form-json-schema/gio-form-json-schema.component';
+export * from './gio-form-json-schema/gio-form-json-schema.module';
+export * from './gio-form-json-schema/model/GioJsonSchema';

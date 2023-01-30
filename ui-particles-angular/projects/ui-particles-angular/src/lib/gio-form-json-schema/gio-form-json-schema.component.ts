@@ -19,7 +19,7 @@ import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { FormlyJsonschema } from '@ngx-formly/core/json-schema';
 import { isObject } from 'lodash';
 
-import { FormlyJSONSchema7 } from './model/FormlyJSONSchema7';
+import { GioJsonSchema } from './model/GioJsonSchema';
 
 @Component({
   selector: 'gio-form-json-schema',
@@ -27,7 +27,7 @@ import { FormlyJSONSchema7 } from './model/FormlyJSONSchema7';
 })
 export class GioFormJsonSchemaComponent {
   @Input()
-  public set jsonSchema(jsonSchema: FormlyJSONSchema7) {
+  public set jsonSchema(jsonSchema: GioJsonSchema) {
     if (isObject(jsonSchema)) {
       this.fields = [this.toFormlyFieldConfig(jsonSchema)];
     }
@@ -42,7 +42,7 @@ export class GioFormJsonSchemaComponent {
 
   constructor(private readonly formlyJsonschema: FormlyJsonschema) {}
 
-  private toFormlyFieldConfig(jsonSchema: FormlyJSONSchema7): FormlyFieldConfig {
+  private toFormlyFieldConfig(jsonSchema: GioJsonSchema): FormlyFieldConfig {
     return this.formlyJsonschema.toFieldConfig(jsonSchema);
   }
 }
