@@ -1,13 +1,13 @@
 <!--
 
     Copyright (C) 2023 The Gravitee team (http://gravitee.io)
-    
+
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
-    
+
             http://www.apache.org/licenses/LICENSE-2.0
-    
+
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -38,7 +38,12 @@
 
     <mat-card-content>
       <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
-        <gio-form-json-schema [jsonSchema]="jsonSchema" [options]="options" [formGroup]="form"></gio-form-json-schema>
+        <gio-form-json-schema
+          [jsonSchema]="jsonSchema"
+          [options]="options"
+          [formGroup]="form"
+          [initialValue]="initialValue"
+        ></gio-form-json-schema>
 
         --- <br />
         <button type="submit">Submit</button><br />

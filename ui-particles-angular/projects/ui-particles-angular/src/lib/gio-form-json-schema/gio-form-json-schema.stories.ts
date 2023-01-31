@@ -71,6 +71,14 @@ export const Mixed: Story = {
   }),
 };
 
+export const MixedWithValue: Story = {
+  name: 'Mixed with value',
+  render: () => ({
+    template: `<gio-demo [jsonSchema]="jsonSchema" [form]="formGroup" [initialValue]="initialValue"></gio-demo>`,
+    props: { jsonSchema: fakeMixed, initialValue: { body: '<xml></xml>' } },
+  }),
+};
+
 export const Entrypoints: Story = {
   name: 'Gio - V4 Entrypoints',
   render: () => ({

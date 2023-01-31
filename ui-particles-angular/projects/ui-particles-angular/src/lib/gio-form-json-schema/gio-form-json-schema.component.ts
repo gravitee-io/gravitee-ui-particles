@@ -17,13 +17,13 @@ import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { FormlyJsonschema } from '@ngx-formly/core/json-schema';
-import { isObject } from 'lodash';
+import { cloneDeep, isObject } from 'lodash';
 
 import { GioJsonSchema } from './model/GioJsonSchema';
 
 @Component({
   selector: 'gio-form-json-schema',
-  template: `<formly-form [fields]="fields" [options]="options" [form]="formGroup"></formly-form>`,
+  template: `<formly-form [fields]="fields" [options]="options" [form]="formGroup" [model]="model"></formly-form>`,
 })
 export class GioFormJsonSchemaComponent {
   @Input()
@@ -37,6 +37,15 @@ export class GioFormJsonSchemaComponent {
 
   @Input()
   public options: FormlyFormOptions = {};
+
+  public model = {};
+
+  @Input()
+  public set initialValue(initialValue: object) {
+    if (initialValue) {
+      this.model = cloneDeep(initialValue);
+    }
+  }
 
   public fields: FormlyFieldConfig[] = [];
 

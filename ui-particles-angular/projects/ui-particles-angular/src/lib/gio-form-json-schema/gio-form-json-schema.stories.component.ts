@@ -28,6 +28,9 @@ export class DemoComponent implements OnChanges {
   @Input()
   public jsonSchema: FormlyJSONSchema7 = {};
 
+  @Input()
+  public initialValue = {};
+
   public form?: FormGroup;
   public options: FormlyFormOptions = {};
 
