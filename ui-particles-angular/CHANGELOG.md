@@ -1,3 +1,10 @@
+# [5.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.4.0...v5.5.0) (2023-02-01)
+
+
+### Features
+
+* add endpoints Story for form-json-schema ([3753790](https://github.com/gravitee-io/gravitee-ui-particles/commit/3753790ff67f337578e200dce36635bcfebf494d))
+
 # [5.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.3.0...v5.4.0) (2023-02-01)
 
 
