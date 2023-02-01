@@ -1,3 +1,11 @@
+# [5.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.3.0...v5.4.0) (2023-02-01)
+
+
+### Features
+
+* export gio-form-json-schema component ([1d331d5](https://github.com/gravitee-io/gravitee-ui-particles/commit/1d331d579807be8f86f50395eaf95805878bec3c))
+* **gio-form-json-schema:** add initial value input ([2643176](https://github.com/gravitee-io/gravitee-ui-particles/commit/2643176bafd9a340ffa78339335dee337f1d9888))
+
 # [5.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.2.0...v5.3.0) (2023-01-27)
 
 
