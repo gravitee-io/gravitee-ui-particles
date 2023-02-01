@@ -30,6 +30,7 @@ import { fakeInteger } from './testing-json-schema/integer';
 import { fakeString } from './testing-json-schema/string';
 import { fakeMixed } from './testing-json-schema/mixed';
 import { entrypointsGetResponse, getEntrypointConnectorSchema } from './testing-json-schema/entrypoints';
+import { endpointsGetResponse, getEndpointConnectorSchema } from './testing-json-schema/endpoints';
 
 @NgModule({
   declarations: [DemoComponent],
@@ -90,5 +91,19 @@ export const Entrypoints: Story = {
     </mat-form-field>
     <gio-demo *ngIf="jsonSchema" [jsonSchema]="jsonSchema"></gio-demo>`,
     props: { jsonSchema: undefined, entrypoints: entrypointsGetResponse, getEntrypointConnectorSchema },
+  }),
+};
+
+export const Endpoints: Story = {
+  name: 'Gio - V4 Endpoints',
+  render: () => ({
+    template: `<mat-form-field appearance="fill" style="width:100%">
+    <mat-label>--Please choose an endpoint--</mat-label>
+      <mat-select (selectionChange)="jsonSchema = getEndpointConnectorSchema($event.value)" >
+          <mat-option *ngFor="let endpoint of endpoints" [value]="endpoint.id">{{ endpoint.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <gio-demo *ngIf="jsonSchema" [jsonSchema]="jsonSchema"></gio-demo>`,
+    props: { jsonSchema: undefined, endpoints: endpointsGetResponse, getEndpointConnectorSchema },
   }),
 };
