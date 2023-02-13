@@ -22,6 +22,7 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { action } from '@storybook/addon-actions';
+import { MatSelectModule } from '@angular/material/select';
 
 import { Tags } from '../../lib/gio-form-tags-input/gio-form-tags-input.component';
 import { GioFormTagsInputModule, GioIconsModule } from '../../public-api';
@@ -37,6 +38,7 @@ export default {
         MatDatepickerModule,
         MatNativeDateModule,
         GioFormTagsInputModule,
+        MatSelectModule,
         BrowserAnimationsModule,
         ReactiveFormsModule,
         FormsModule,
@@ -114,6 +116,15 @@ export const MatInput: Story = {
             <mat-icon svgIcon="gio:search" matPrefix></mat-icon>
             <input matInput #input>
             <mat-icon svgIcon="gio:cancel" matSuffix (click)="input.value = ''"></mat-icon>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Select input</mat-label>
+            <mat-select>
+                <mat-option value="option1">Option 1</mat-option>
+                <mat-option value="option2">Option 2</mat-option>
+                <mat-option value="option3">Option 3</mat-option>
+            </mat-select>
           </mat-form-field>
 
           <mat-form-field appearance="fill">
