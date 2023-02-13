@@ -1,3 +1,10 @@
+# [5.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.5.0...v5.6.0) (2023-02-13)
+
+
+### Features
+
+* add select in input story ([4d7ec93](https://github.com/gravitee-io/gravitee-ui-particles/commit/4d7ec93622e1c05c5adac5e1a63b42e71044e3a0))
+
 # [5.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.4.0...v5.5.0) (2023-02-01)
 
 
