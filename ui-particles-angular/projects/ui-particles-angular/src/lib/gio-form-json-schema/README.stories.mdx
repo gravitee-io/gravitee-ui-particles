@@ -16,4 +16,28 @@ To use this component you need to add optional dependencies to your project:
 yarn add @ngx-formly/core @ngx-formly/material
 ```
 
+## Usage
+
+To create a form based on a json schema, you can include this component like this.
+
+```html
+<gio-form-json-schema
+  [jsonSchema]="jsonSchema"
+  [options]="options"
+  [formGroup]="form"
+  [initialValue]="initialValue"
+></gio-form-json-schema>
+```
+
+## JSON schema
+
+The jsonSchema object passed to the component is of type `GioJsonSchema`, which is an extension of [JsonSchema7](https://jsonforms.io/api/core/interfaces/jsonschema7.html) type, plus some Gravitee specific options.
+
+### Banner
+
+In some case, we want to display some guidance to the user that would not fit in the `mat-hint` field in `mat-form-field`. For such cases, we can use banners like follows.
+
+<Story id="components-form-json-schema--field-with-banner" />
+
+
 🚧 **Note**: This component is in development.

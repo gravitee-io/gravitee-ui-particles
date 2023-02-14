@@ -13,18 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { JSONSchema7 } from 'json-schema';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 
-export interface GioJsonSchema extends JSONSchema7 {
-  gioConfig?: {
-    banner?:
-      | {
-          title: string;
-          text: string;
-        }
-      | {
-          text: string;
-        };
-  };
-  properties?: { [key: string]: GioJsonSchema };
+export function bannerExtension(field: FormlyFieldConfig) {
+  if (!field.props || (field.wrappers && field.wrappers.indexOf('gio-with-banner') !== -1)) {
+    return;
+  }
+
+  if (field.props.bannerTitle || field.props.bannerText) {
+    // WARNING: 'gio-with-banner' must be placed before field wrappers in order to put banner before mat-form-field if exists
+    field.wrappers = ['gio-with-banner', ...(field.wrappers || [])];
+  }
 }
