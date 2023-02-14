@@ -5,10 +5,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { FormlyFieldConfig } from '@ngx-formly/core';
-import { FormlyJsonschema } from '@ngx-formly/core/json-schema';
 
 import { GioFormJsonSchemaModule } from './gio-form-json-schema.module';
+import { GioJsonSchema } from './model/GioJsonSchema';
 
 /*
  * Copyright (C) 2015 The Gravitee team (http://gravitee.io)
@@ -29,29 +28,14 @@ describe('GioFormJsonSchema', () => {
   @Component({
     template: `
       <form [formGroup]="form" (ngSubmit)="onSubmit(model)">
-        <formly-form [form]="form" [fields]="fields"></formly-form>
+        <gio-form-json-schema [formGroup]="form" [jsonSchema]="jsonSchema"></gio-form-json-schema>
         <button type="submit">Submit</button>
       </form>
     `,
   })
   class TestComponent {
     public form = new FormGroup({});
-    public fields: FormlyFieldConfig[] = [];
-
-    constructor(private readonly formlyJsonschema: FormlyJsonschema) {
-      this.fields = [
-        this.formlyJsonschema.toFieldConfig({
-          type: 'object',
-          properties: {
-            simpleString: {
-              title: 'Simple String',
-              description: 'Simple string without validation',
-              type: 'string',
-            },
-          },
-        }),
-      ];
-    }
+    public jsonSchema: GioJsonSchema = {};
   }
 
   describe('GioFormJsonSchemaModule', () => {
@@ -70,14 +54,52 @@ describe('GioFormJsonSchema', () => {
     });
 
     it('should complete form field and submit', async () => {
+      fixture.componentInstance.jsonSchema = {
+        type: 'object',
+        properties: {
+          simpleString: {
+            title: 'Simple String',
+            description: 'Simple string without validation',
+            type: 'string',
+          },
+        },
+      };
       fixture.detectChanges();
 
       const simpleStringInput = await loader.getHarness(MatInputHarness.with({ selector: '[id*="simpleString"]' }));
       await simpleStringInput.setValue('What the fox say?');
-
       expect(testComponent.form.getRawValue()).toEqual({
         simpleString: 'What the fox say?',
       });
+
+      // No banner on simple elements
+      const banner = fixture.nativeElement.querySelector('.banner');
+      expect(banner).toBeNull();
+    });
+
+    it('should show banner', async () => {
+      fixture.componentInstance.jsonSchema = {
+        type: 'object',
+        properties: {
+          stringWithBanner: {
+            title: 'String with banner',
+            description: 'Simple string with banner',
+            type: 'string',
+            gioConfig: {
+              banner: {
+                title: 'banner title',
+                text: 'banner text',
+              },
+            },
+          },
+        },
+      };
+
+      fixture.detectChanges();
+      const banner = fixture.nativeElement.querySelector('.banner');
+      expect(banner).toBeDefined();
+      expect(banner.textContent).toContain('banner title');
+      expect(banner.textContent).toContain('banner text');
     });
   });
 });

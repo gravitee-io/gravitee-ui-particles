@@ -19,6 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 
+import { GioIconsModule } from '../gio-icons/gio-icons.module';
+
 import { GioFjsNullTypeComponent } from './type-component/null-type.component';
 import { GioFjsObjectTypeComponent } from './type-component/object-type.component';
 import { GioFjsArrayTypeComponent } from './type-component/array-type.component';
@@ -36,9 +38,17 @@ import {
   constValidationMessage,
 } from './util/validation-message.util';
 import { GioFormJsonSchemaComponent } from './gio-form-json-schema.component';
+import { GioFormFieldWrapperComponent } from './wrappers/gio-form-field-wrapper.component';
+import { bannerExtension } from './wrappers/gio-banner-extension';
 
 @NgModule({
-  declarations: [GioFormJsonSchemaComponent, GioFjsNullTypeComponent, GioFjsObjectTypeComponent, GioFjsArrayTypeComponent],
+  declarations: [
+    GioFormJsonSchemaComponent,
+    GioFjsNullTypeComponent,
+    GioFjsObjectTypeComponent,
+    GioFjsArrayTypeComponent,
+    GioFormFieldWrapperComponent,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -58,13 +68,16 @@ import { GioFormJsonSchemaComponent } from './gio-form-json-schema.component';
         { name: 'uniqueItems', message: 'Should NOT have duplicate items' },
         { name: 'const', message: constValidationMessage },
       ],
+      wrappers: [{ name: 'gio-with-banner', component: GioFormFieldWrapperComponent }],
       types: [
         { name: 'null', component: GioFjsNullTypeComponent, wrappers: ['form-field'] },
         { name: 'array', component: GioFjsArrayTypeComponent },
         { name: 'object', component: GioFjsObjectTypeComponent },
       ],
+      extensions: [{ name: 'banner', extension: { onPopulate: bannerExtension } }],
     }),
     FormlyMaterialModule,
+    GioIconsModule,
   ],
   exports: [GioFormJsonSchemaComponent, FormlyModule],
 })

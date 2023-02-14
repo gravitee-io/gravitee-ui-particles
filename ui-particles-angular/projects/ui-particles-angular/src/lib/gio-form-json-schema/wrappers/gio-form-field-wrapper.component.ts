@@ -13,18 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { JSONSchema7 } from 'json-schema';
+import { FieldWrapper } from '@ngx-formly/core';
+import { Component } from '@angular/core';
 
-export interface GioJsonSchema extends JSONSchema7 {
-  gioConfig?: {
-    banner?:
-      | {
-          title: string;
-          text: string;
-        }
-      | {
-          text: string;
-        };
-  };
-  properties?: { [key: string]: GioJsonSchema };
-}
+@Component({
+  selector: 'gio-form-field-wrapper',
+  templateUrl: 'gio-form-field-wrapper.component.html',
+  styleUrls: ['gio-form-field-wrapper.component.scss'],
+})
+export class GioFormFieldWrapperComponent extends FieldWrapper {}

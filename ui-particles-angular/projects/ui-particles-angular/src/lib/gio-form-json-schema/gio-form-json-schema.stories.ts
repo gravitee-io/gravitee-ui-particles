@@ -75,8 +75,34 @@ export const Mixed: Story = {
 export const MixedWithValue: Story = {
   name: 'Mixed with value',
   render: () => ({
-    template: `<gio-demo [jsonSchema]="jsonSchema" [form]="formGroup" [initialValue]="initialValue"></gio-demo>`,
+    template: `<gio-demo [jsonSchema]="jsonSchema" [initialValue]="initialValue"></gio-demo>`,
     props: { jsonSchema: fakeMixed, initialValue: { body: '<xml></xml>' } },
+  }),
+};
+
+export const FieldWithBanner: Story = {
+  name: 'Field with banner',
+  render: () => ({
+    template: `<gio-demo [jsonSchema]="jsonSchema" [initialValue]="initialValue"></gio-demo>`,
+    props: {
+      jsonSchema: {
+        type: 'object',
+        properties: {
+          sample: {
+            title: 'Sample property',
+            description: 'Additional hint',
+            type: 'string',
+            gioConfig: {
+              banner: {
+                title: 'Complex property',
+                text: 'This is a quite long description of what the field is, that would not fit into the hint field',
+              },
+            },
+          },
+        },
+      },
+      initialValue: { sample: 'sample value' },
+    },
   }),
 };
 

@@ -15,9 +15,10 @@
  */
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
+import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { FormlyJsonschema } from '@ngx-formly/core/json-schema';
 import { cloneDeep, isObject } from 'lodash';
+import { JSONSchema7 } from 'json-schema';
 
 import { GioJsonSchema } from './model/GioJsonSchema';
 
@@ -52,6 +53,23 @@ export class GioFormJsonSchemaComponent {
   constructor(private readonly formlyJsonschema: FormlyJsonschema) {}
 
   private toFormlyFieldConfig(jsonSchema: GioJsonSchema): FormlyFieldConfig {
-    return this.formlyJsonschema.toFieldConfig(jsonSchema);
+    return this.formlyJsonschema.toFieldConfig(jsonSchema, {
+      map: (mappedField: FormlyFieldConfig, mapSource: JSONSchema7) => {
+        // Casting fields into our specific type
+        const gioMapSource = mapSource as GioJsonSchema;
+        mappedField.props = {
+          ...mappedField.props,
+          ...(gioMapSource.gioConfig?.banner ? this.getBannerProperties(gioMapSource.gioConfig.banner) : {}),
+        };
+        return mappedField;
+      },
+    });
+  }
+
+  private getBannerProperties(banner: { title: string; text: string } | { text: string }) {
+    return {
+      bannerText: banner.text,
+      bannerTitle: 'title' in banner ? banner.title : undefined,
+    };
   }
 }
