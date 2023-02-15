@@ -1,3 +1,15 @@
+# [5.7.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.6.0...v5.7.0) (2023-02-15)
+
+
+### Bug Fixes
+
+* **gio-form-json:** rename selector for null type ([89d927d](https://github.com/gravitee-io/gravitee-ui-particles/commit/89d927da5fa880a0b1e8758022828cd00fafabc2))
+
+
+### Features
+
+* **gio-form-json:** add banner info for fields with long description ([be99e15](https://github.com/gravitee-io/gravitee-ui-particles/commit/be99e15285332390581746a5b5527e4cac61b59b))
+
 # [5.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.5.0...v5.6.0) (2023-02-13)
 
 
