@@ -65,6 +65,11 @@ $palettes: (
     space__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-space-palette, #{$colorName}-contrast);
   }
 
+  @each $colorName in (darker80, darker70, darker60, darker50, darker40, darker30, darker20, darker10, default) {
+    dove__#{$colorName}: mat.get-color-from-palette(gio.$mat-dove-palette, $colorName);
+    dove__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-dove-palette, #{$colorName}-contrast);
+  }
+
   @each $colorName in (lighter80, lighter60, lighter40, lighter20, default) {
     cyan__#{$colorName}: mat.get-color-from-palette(gio.$mat-cyan-palette, $colorName);
     cyan__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-cyan-palette, #{$colorName}-contrast);
