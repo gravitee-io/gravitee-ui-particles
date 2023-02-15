@@ -19,8 +19,8 @@
   <div class="banner">
     <div class="banner__icon"><mat-icon svgIcon="gio:info"></mat-icon></div>
     <div>
-      <div class="banner__title">{{ props.bannerTitle }}</div>
-      <div class="banner__text">{{ props.bannerText }}</div>
+      <div class="banner__title" [innerHTML]="props.bannerTitle"></div>
+      <div class="banner__text" [innerHTML]="props.bannerText"></div>
     </div>
   </div>
   <ng-container #fieldComponent></ng-container>
