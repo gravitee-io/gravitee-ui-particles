@@ -1,3 +1,10 @@
+## [5.7.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.7.0...v5.7.1) (2023-02-16)
+
+
+### Bug Fixes
+
+* **gio-form-json:** enable writing html in banner title or text ([2bb87f4](https://github.com/gravitee-io/gravitee-ui-particles/commit/2bb87f478152b54239a09e72af4ad181be4dd6ff))
+
 # [5.7.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.6.0...v5.7.0) (2023-02-15)
 
 
