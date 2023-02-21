@@ -40,12 +40,14 @@ import {
 import { GioFormJsonSchemaComponent } from './gio-form-json-schema.component';
 import { GioFormFieldWrapperComponent } from './wrappers/gio-form-field-wrapper.component';
 import { bannerExtension } from './wrappers/gio-banner-extension';
+import { GioFjsMultiSchemaTypeComponent } from './type-component/multischema-type.component';
 
 @NgModule({
   declarations: [
     GioFormJsonSchemaComponent,
     GioFjsNullTypeComponent,
     GioFjsObjectTypeComponent,
+    GioFjsMultiSchemaTypeComponent,
     GioFjsArrayTypeComponent,
     GioFormFieldWrapperComponent,
   ],
@@ -73,6 +75,7 @@ import { bannerExtension } from './wrappers/gio-banner-extension';
         { name: 'null', component: GioFjsNullTypeComponent, wrappers: ['form-field'] },
         { name: 'array', component: GioFjsArrayTypeComponent },
         { name: 'object', component: GioFjsObjectTypeComponent },
+        { name: 'multischema', component: GioFjsMultiSchemaTypeComponent },
       ],
       extensions: [{ name: 'banner', extension: { onPopulate: bannerExtension } }],
     }),
