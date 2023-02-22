@@ -120,11 +120,24 @@ export const Custom: StoryObj<GioConfirmAndValidateDialogData> = {
   },
 };
 Custom.args = {
-  title: 'Are you sure you want to remove all cats ?',
+  title: 'Are you sure you want to remove all cats?',
   warning: 'This action is irreversible',
   content: '🙀😿 Are you sure? You can’t undo this action afterwards.',
   validationMessage: 'Type "remove" to confirm',
   validationValue: 'remove',
   confirmButton: 'Yes, I want',
   cancelButton: 'Nope',
+};
+
+export const WithMultipleSpaces: StoryObj<GioConfirmAndValidateDialogData> = {
+  play: context => {
+    const button = context.canvasElement.querySelector('#open-confirm-dialog') as HTMLButtonElement;
+    button.click();
+  },
+};
+WithMultipleSpaces.args = {
+  ...Custom.args,
+  title: 'Are you sure you want to remove a `Specific   Cat`?',
+  content: '🙀😿 Are you sure? Removing a <code>Specific   Cat</code> can’t be undone afterwards.',
+  validationMessage: 'Type <code>Specific   Cat</code> to confirm',
 };
