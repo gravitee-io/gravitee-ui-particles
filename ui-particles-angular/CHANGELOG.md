@@ -1,3 +1,10 @@
+## [5.7.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.7.2...v5.7.3) (2023-02-22)
+
+
+### Bug Fixes
+
+* add mutltischema type component for GioFormJsonSchemaModule ([f6d4ec1](https://github.com/gravitee-io/gravitee-ui-particles/commit/f6d4ec1601db0653a596b55d7cb46f5bda791f08))
+
 ## [5.7.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.7.1...v5.7.2) (2023-02-22)
 
 
