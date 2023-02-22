@@ -19,13 +19,19 @@
 @use '../../scss' as gio;
 
 .confirm-dialog {
+  &__title {
+    white-space: pre-wrap;
+  }
+
   &__body {
     &__content {
       color: mat.get-color-from-palette(gio.$mat-content-palette);
+      white-space: pre-wrap;
     }
 
     &__validate-message {
       margin-bottom: 8px;
+      white-space: pre-wrap;
     }
 
     &__validate-input {
