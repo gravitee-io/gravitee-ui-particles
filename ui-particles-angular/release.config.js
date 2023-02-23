@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 module.exports = {
-  branches: ['main'],
+  branches: ['main', '4.x'],
   plugins: [
     '@semantic-release/commit-analyzer',
     '@semantic-release/release-notes-generator',

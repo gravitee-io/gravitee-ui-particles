@@ -212,11 +212,14 @@ jobs:
 workflows:
   version: 2.1
   validate_build_branch:
-    # Trigger on all branches except `main`
+    # Trigger on all branches except `main` and support branches
     when:
       and:
         - not:
             equal: [main, << pipeline.git.branch >>]
+    # FIXME: Find a way to use regex here instead of hardcoding the support branches
+        - not:
+            equal: [4.x, << pipeline.git.branch >>]
     jobs:
       - lint-test:
           name: Lint & Test
@@ -301,12 +304,12 @@ workflows:
                 var-name: CHROMATIC_PROJECT_TOKEN
 
   release:
-    # Trigger only for `main` branch
+    # Trigger only for `main` or support branches
     when:
       or:
         - equal: [main, << pipeline.git.branch >>]
-        # TODO: Remove me. Used to test release
-        - equal: [circleci, << pipeline.git.branch >>]
+    # FIXME: Find a way to use regex here instead of hardcoding the support branches
+        - equal: [4.x, << pipeline.git.branch >>]
     jobs:
       - build:
           name: Build Angular
