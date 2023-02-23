@@ -13,22 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
+import { set } from 'lodash';
 
 @Component({
   selector: 'gio-fjs-multi-schema-type',
   template: `
-    <div class="card mb-3">
-      <div class="card-body">
-        <legend *ngIf="props.label">{{ props.label }}</legend>
-        <p *ngIf="props.description">{{ props.description }}</p>
-        <div class="alert alert-danger" role="alert" *ngIf="showError && formControl.errors">
-          <formly-validation-message [field]="field"></formly-validation-message>
-        </div>
-        <formly-field *ngFor="let f of field.fieldGroup" [field]="f"></formly-field>
+    <div class="wrapper">
+      <div class="wrapper__title" *ngIf="props.label">{{ props.label }}</div>
+      <p *ngIf="props.description">{{ props.description }}</p>
+      <div role="alert" *ngIf="showError && formControl.errors">
+        <formly-validation-message [field]="field"></formly-validation-message>
       </div>
+      <formly-field *ngFor="let f of field.fieldGroup" [field]="f"></formly-field>
     </div>
   `,
+  styleUrls: ['./multischema-type.component.scss'],
 })
-export class GioFjsMultiSchemaTypeComponent extends FieldType {}
+export class GioFjsMultiSchemaTypeComponent extends FieldType implements OnInit {
+  public ngOnInit(): void {
+    set(this.field, 'fieldGroup[0].props.appearance', 'fill');
+  }
+}

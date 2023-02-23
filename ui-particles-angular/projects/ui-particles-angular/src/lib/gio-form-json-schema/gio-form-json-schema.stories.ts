@@ -29,8 +29,13 @@ import { GioFormJsonSchemaModule } from './gio-form-json-schema.module';
 import { fakeInteger } from './testing-json-schema/integer';
 import { fakeString } from './testing-json-schema/string';
 import { fakeMixed } from './testing-json-schema/mixed';
+import { fakeOneOf } from './testing-json-schema/oneOf';
 import { entrypointsGetResponse, getEntrypointConnectorSchema } from './testing-json-schema/entrypoints';
 import { endpointsGetResponse, getEndpointConnectorSchema } from './testing-json-schema/endpoints';
+import { fakeEnum } from './testing-json-schema/enum';
+import { fakeReferences } from './testing-json-schema/references';
+import { fakeAllOf } from './testing-json-schema/allOf';
+import { fakeSecurityConfig } from './testing-json-schema/securityConfig';
 
 @NgModule({
   declarations: [DemoComponent],
@@ -103,6 +108,46 @@ export const FieldWithBanner: Story = {
       },
       initialValue: { sample: 'sample value' },
     },
+  }),
+};
+
+export const oneOf: Story = {
+  name: 'OneOf',
+  render: () => ({
+    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
+    props: { jsonSchema: fakeOneOf },
+  }),
+};
+
+export const allOf: Story = {
+  name: 'AllOf',
+  render: () => ({
+    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
+    props: { jsonSchema: fakeAllOf },
+  }),
+};
+
+export const enumStory: Story = {
+  name: 'Enum',
+  render: () => ({
+    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
+    props: { jsonSchema: fakeEnum },
+  }),
+};
+
+export const references: Story = {
+  name: 'References',
+  render: () => ({
+    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
+    props: { jsonSchema: fakeReferences },
+  }),
+};
+
+export const securityConfig: Story = {
+  name: 'Security config',
+  render: () => ({
+    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
+    props: { jsonSchema: fakeSecurityConfig },
   }),
 };
 
