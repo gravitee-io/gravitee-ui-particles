@@ -1,3 +1,11 @@
+## [4.13.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.13.0...v4.13.1) (2023-02-23)
+
+
+### Bug Fixes
+
+* **gio-badge:** remove `white-space` attribute to allow user to define it ([ad5307b](https://github.com/gravitee-io/gravitee-ui-particles/commit/ad5307bd857f08cf66433c9d71cefdd16c66f6a4))
+* **gio-confirm-dialog:** allow display of multiple white-spaces ([f0ffc25](https://github.com/gravitee-io/gravitee-ui-particles/commit/f0ffc25c112d35b69dc35ab11659e821300d910f))
+
 # [4.13.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v4.12.0...v4.13.0) (2023-01-11)
 
 
