@@ -38,16 +38,14 @@
 
     <mat-card-content>
       <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
-        <gio-form-json-schema
-          [jsonSchema]="jsonSchema"
-          [options]="options"
-          [formGroup]="form"
-          [initialValue]="initialValue"
-        ></gio-form-json-schema>
+        <gio-form-json-schema [jsonSchema]="jsonSchema" [options]="options" formControlName="schemaValue"></gio-form-json-schema>
 
         --- <br />
         <button type="submit">Submit</button><br />
         --- <br />
+        <pre>{{ form.status }}</pre>
+        <pre>{{ form.dirty ? 'DIRTY' : 'PRISTINE' }}</pre>
+        <pre>{{ form.touched ? 'TOUCHED' : 'UNTOUCHED' }}</pre>
         <pre>{{ formValue | json }}</pre>
       </form>
     </mat-card-content>

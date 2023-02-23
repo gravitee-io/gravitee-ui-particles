@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 import { ChangeDetectorRef, Component, Input, OnChanges } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { FormlyFormOptions } from '@ngx-formly/core';
+import { startWith } from 'rxjs/operators';
 
 import { FormlyJSONSchema7 } from './model/FormlyJSONSchema7';
 
@@ -39,8 +40,10 @@ export class DemoComponent implements OnChanges {
   constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
   public ngOnChanges(): void {
-    this.form = new FormGroup({});
-    this.form.valueChanges.subscribe(value => {
+    this.form = new FormGroup({
+      schemaValue: new FormControl(this.initialValue),
+    });
+    this.form.valueChanges.pipe(startWith(this.form.value)).subscribe(value => {
       this.formValue = value;
       this.changeDetectorRef.detectChanges();
     });
