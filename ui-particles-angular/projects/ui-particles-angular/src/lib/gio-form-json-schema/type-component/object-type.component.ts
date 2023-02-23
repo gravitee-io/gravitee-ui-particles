@@ -19,8 +19,8 @@ import { FieldType } from '@ngx-formly/core';
 @Component({
   selector: 'gio-fjs-object-type',
   template: `
-    <div>
-      <legend *ngIf="to.label">{{ to.label }}</legend>
+    <div class="wrapper">
+      <div class="wrapper__title" *ngIf="to.label">{{ to.label }}</div>
       <p *ngIf="to.description">{{ to.description }}</p>
       <div class="alert alert-danger" role="alert" *ngIf="showError && formControl.errors">
         <formly-validation-message [field]="field"></formly-validation-message>
@@ -28,6 +28,7 @@ import { FieldType } from '@ngx-formly/core';
       <formly-field *ngFor="let f of field.fieldGroup" [field]="f"></formly-field>
     </div>
   `,
+  styleUrls: ['./object-type.component.scss'],
 })
 export class GioFjsObjectTypeComponent extends FieldType {
   public defaultOptions = {

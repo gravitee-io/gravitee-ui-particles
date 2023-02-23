@@ -19,8 +19,8 @@ import { FieldArrayType } from '@ngx-formly/core';
 @Component({
   selector: 'gio-fjs-array-type',
   template: `
-    <div>
-      <legend *ngIf="to.label">{{ to.label }}</legend>
+    <div class="wrapper">
+      <div class="wrapper__title" *ngIf="to.label">{{ to.label }}</div>
       <p *ngIf="to.description">{{ to.description }}</p>
 
       <div class="alert alert-danger" role="alert" *ngIf="showError && formControl.errors">
@@ -39,5 +39,6 @@ import { FieldArrayType } from '@ngx-formly/core';
       </div>
     </div>
   `,
+  styleUrls: ['./array-type.component.scss'],
 })
 export class GioFjsArrayTypeComponent extends FieldArrayType {}
