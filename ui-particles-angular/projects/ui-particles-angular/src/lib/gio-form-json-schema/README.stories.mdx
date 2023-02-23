@@ -18,14 +18,13 @@ yarn add @ngx-formly/core @ngx-formly/material
 
 ## Usage
 
-To create a form based on a json schema, you can include this component like this.
+To create a form based on a json schema, you can include this component like this. With ReactiveForm
 
 ```html
 <gio-form-json-schema
   [jsonSchema]="jsonSchema"
   [options]="options"
-  [formGroup]="form"
-  [initialValue]="initialValue"
+  formControlName="formControl"
 ></gio-form-json-schema>
 ```
 

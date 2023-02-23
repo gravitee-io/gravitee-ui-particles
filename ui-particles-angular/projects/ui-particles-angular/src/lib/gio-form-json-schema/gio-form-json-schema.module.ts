@@ -18,6 +18,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
+import { A11yModule } from '@angular/cdk/a11y';
 
 import { GioIconsModule } from '../gio-icons/gio-icons.module';
 
@@ -53,6 +54,7 @@ import { GioFjsMultiSchemaTypeComponent } from './type-component/multischema-typ
   ],
   imports: [
     CommonModule,
+    A11yModule,
     ReactiveFormsModule,
     FormlyModule.forRoot({
       validationMessages: [
@@ -78,6 +80,9 @@ import { GioFjsMultiSchemaTypeComponent } from './type-component/multischema-typ
         { name: 'multischema', component: GioFjsMultiSchemaTypeComponent },
       ],
       extensions: [{ name: 'banner', extension: { onPopulate: bannerExtension } }],
+      extras: {
+        checkExpressionOn: 'changeDetectionCheck',
+      },
     }),
     FormlyMaterialModule,
     GioIconsModule,

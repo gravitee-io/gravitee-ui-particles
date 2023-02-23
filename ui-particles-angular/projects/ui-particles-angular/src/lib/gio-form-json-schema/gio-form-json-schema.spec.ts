@@ -1,8 +1,9 @@
+import { InteractivityChecker } from '@angular/cdk/a11y';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -28,13 +29,15 @@ describe('GioFormJsonSchema', () => {
   @Component({
     template: `
       <form [formGroup]="form" (ngSubmit)="onSubmit(model)">
-        <gio-form-json-schema [formGroup]="form" [jsonSchema]="jsonSchema"></gio-form-json-schema>
+        <gio-form-json-schema formControlName="config" [jsonSchema]="jsonSchema"></gio-form-json-schema>
         <button type="submit">Submit</button>
       </form>
     `,
   })
   class TestComponent {
-    public form = new FormGroup({});
+    public form = new FormGroup({
+      config: new FormControl(),
+    });
     public jsonSchema: GioJsonSchema = {};
   }
 
@@ -47,6 +50,10 @@ describe('GioFormJsonSchema', () => {
       TestBed.configureTestingModule({
         declarations: [TestComponent],
         imports: [NoopAnimationsModule, ReactiveFormsModule, GioFormJsonSchemaModule],
+      }).overrideProvider(InteractivityChecker, {
+        useValue: {
+          isFocusable: () => true, // This checks focus trap, set it to true to  avoid the warning
+        },
       });
       fixture = TestBed.createComponent(TestComponent);
       loader = TestbedHarnessEnvironment.loader(fixture);
@@ -65,12 +72,17 @@ describe('GioFormJsonSchema', () => {
         },
       };
       fixture.detectChanges();
+      expect(testComponent.form.touched).toEqual(false);
+      expect(testComponent.form.dirty).toEqual(false);
 
       const simpleStringInput = await loader.getHarness(MatInputHarness.with({ selector: '[id*="simpleString"]' }));
       await simpleStringInput.setValue('What the fox say?');
-      expect(testComponent.form.getRawValue()).toEqual({
+
+      expect(testComponent.form.get('config')?.value).toEqual({
         simpleString: 'What the fox say?',
       });
+      expect(testComponent.form.touched).toEqual(true);
+      expect(testComponent.form.dirty).toEqual(true);
 
       // No banner on simple elements
       const banner = fixture.nativeElement.querySelector('.banner');
