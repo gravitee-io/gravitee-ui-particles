@@ -16,8 +16,11 @@
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 interface PeriodicElement {
   name: string;
@@ -43,13 +46,13 @@ export default {
   title: 'Material Override',
   decorators: [
     moduleMetadata({
-      imports: [BrowserAnimationsModule, ReactiveFormsModule, MatTableModule],
+      imports: [BrowserAnimationsModule, FormsModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule],
     }),
   ],
   render: () => ({}),
 } as Meta;
 
-export const MatTable: Story = {
+export const MatTableRowsHover: Story = {
   render: () => ({
     template: `
       <p>
@@ -97,6 +100,95 @@ export const MatTable: Story = {
     props: {
       displayedColumns: ['position', 'name', 'weight', 'symbol'],
       dataSource: ELEMENT_DATA,
+    },
+  }),
+};
+
+export const MatTableWithMatFormField: Story = {
+  render: () => ({
+    template: `<p>Keep or remove padding-bottom for mat-form-field in table td</p>
+
+    <table mat-table [dataSource]="dataSource" matSort style="width: 100%">
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+        <td mat-cell *matCellDef="let element">{{element.position}}</td>
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-form-field [appearance]="element.position === 4 ? 'standard': 'outline'">
+            <mat-label *ngIf="element.position === 1">Name</mat-label>
+            <input
+              matInput
+              [ngModel]="element.name"
+              [minlength]="element.position === 3 ? 42 : 1"
+              [errorStateMatcher]="errorStateMatcher"
+            />
+            <mat-hint *ngIf="element.position === 2"
+              >Keep padding for hint</mat-hint
+            >
+            <mat-error *ngIf="element.position === 3"
+              >Keep padding for error</mat-error
+            >
+          </mat-form-field>
+        </td>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="weight">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Weight</th>
+        <td mat-cell *matCellDef="let element">{{element.weight}}</td>
+      </ng-container>
+    
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="symbol">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Symbol</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-form-field [appearance]="element.position === 4 ? 'standard': 'outline'">
+            <mat-label *ngIf="element.position === 1">Name</mat-label>
+            <mat-select
+              [ngModel]="element.position === 3 ? null : element.symbol"
+              [required]="element.position === 3 ? 42 : 1"
+              [errorStateMatcher]="errorStateMatcher"
+            >
+              <mat-option value="H">H</mat-option>
+              <mat-option value="He">He</mat-option>
+              <mat-option value="Li">Li</mat-option>
+              <mat-option value="Be">Be</mat-option>
+              <mat-option value="B">B</mat-option>
+              <mat-option value="C">C</mat-option>
+              <mat-option value="N">N</mat-option>
+            </mat-select>
+            <mat-hint *ngIf="element.position === 2"
+              >Keep padding for hint</mat-hint
+            >
+            <mat-error *ngIf="element.position === 3"
+              >Keep padding for error</mat-error
+            >
+          </mat-form-field>
+        </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" [attr.colspan]="displayedColumns.length">No Data</td>
+      </tr>
+    </table>
+    `,
+    props: {
+      displayedColumns: ['position', 'name', 'weight', 'symbol'],
+      dataSource: ELEMENT_DATA,
+      errorStateMatcher: {
+        // Invalid form immediately if invalid
+        isErrorState(control: FormControl | null): boolean {
+          return !!(control && control.invalid);
+        },
+      },
     },
   }),
 };
