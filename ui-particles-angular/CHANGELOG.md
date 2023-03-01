@@ -1,3 +1,10 @@
+# [5.9.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.8.0...v5.9.0) (2023-03-01)
+
+
+### Features
+
+* impl ControlValueAccessor for GioFormJsonSchemaComponent ([ca6fa92](https://github.com/gravitee-io/gravitee-ui-particles/commit/ca6fa92d9b0797570cde1664cf5ada78d4f7853e))
+
 # [5.8.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.7.3...v5.8.0) (2023-03-01)
 
 
