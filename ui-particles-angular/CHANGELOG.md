@@ -1,3 +1,10 @@
+# [5.8.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.7.3...v5.8.0) (2023-03-01)
+
+
+### Features
+
+* improve use of mat-form-field inside table ([aeb025b](https://github.com/gravitee-io/gravitee-ui-particles/commit/aeb025b3943ac5c214e6ab1607475edabd5e7234))
+
 ## [5.7.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.7.2...v5.7.3) (2023-02-22)
 
 
