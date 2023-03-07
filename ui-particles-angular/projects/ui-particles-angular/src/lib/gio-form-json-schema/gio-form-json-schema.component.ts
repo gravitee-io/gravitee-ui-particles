@@ -24,6 +24,7 @@ import { Subject } from 'rxjs';
 import { FocusMonitor } from '@angular/cdk/a11y';
 
 import { GioJsonSchema } from './model/GioJsonSchema';
+import { GioFormlyJsonSchemaService } from './gio-formly-json-schema.service';
 
 @Component({
   selector: 'gio-form-json-schema',
@@ -36,7 +37,7 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
   @Input()
   public set jsonSchema(jsonSchema: GioJsonSchema) {
     if (isObject(jsonSchema)) {
-      this.fields = [this.toFormlyFieldConfig(jsonSchema)];
+      this.fields = [this.gioFormlyJsonSchema.toFormlyFieldConfig(jsonSchema)];
     }
   }
 
@@ -56,7 +57,7 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
   private touched = false;
 
   constructor(
-    private readonly formlyJsonschema: FormlyJsonschema,
+    private readonly gioFormlyJsonSchema: GioFormlyJsonSchemaService,
     private readonly elRef: ElementRef,
     private readonly fm: FocusMonitor,
     @Host() @Optional() public readonly ngControl?: NgControl,
@@ -122,26 +123,5 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
   // From ControlValueAccessor
   public setDisabledState?(_isDisabled: boolean): void {
     throw new Error('Method not implemented.');
-  }
-
-  private toFormlyFieldConfig(jsonSchema: GioJsonSchema): FormlyFieldConfig {
-    return this.formlyJsonschema.toFieldConfig(jsonSchema, {
-      map: (mappedField: FormlyFieldConfig, mapSource: JSONSchema7) => {
-        // Casting fields into our specific type
-        const gioMapSource = mapSource as GioJsonSchema;
-        mappedField.props = {
-          ...mappedField.props,
-          ...(gioMapSource.gioConfig?.banner ? this.getBannerProperties(gioMapSource.gioConfig.banner) : {}),
-        };
-        return mappedField;
-      },
-    });
-  }
-
-  private getBannerProperties(banner: { title: string; text: string } | { text: string }) {
-    return {
-      bannerText: banner.text,
-      bannerTitle: 'title' in banner ? banner.title : undefined,
-    };
   }
 }

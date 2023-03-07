@@ -42,6 +42,7 @@ import { GioFormJsonSchemaComponent } from './gio-form-json-schema.component';
 import { GioFormFieldWrapperComponent } from './wrappers/gio-form-field-wrapper.component';
 import { bannerExtension } from './wrappers/gio-banner-extension';
 import { GioFjsMultiSchemaTypeComponent } from './type-component/multischema-type.component';
+import { GioFormlyJsonSchemaService } from './gio-formly-json-schema.service';
 
 @NgModule({
   declarations: [
@@ -88,5 +89,6 @@ import { GioFjsMultiSchemaTypeComponent } from './type-component/multischema-typ
     GioIconsModule,
   ],
   exports: [GioFormJsonSchemaComponent, FormlyModule],
+  providers: [GioFormlyJsonSchemaService],
 })
 export class GioFormJsonSchemaModule {}
