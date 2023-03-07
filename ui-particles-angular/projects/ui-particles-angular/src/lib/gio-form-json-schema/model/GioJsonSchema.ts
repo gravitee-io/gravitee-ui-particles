@@ -13,18 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/**
+ * Override the JSONSchema7 interface to add gioConfig
+ * Use this way because the JSONSchema7 interface is recursive
+ * And export with new name `GioJsonSchema` to make it more clear
+ */
+
+declare module 'json-schema' {
+  export interface JSONSchema7 {
+    gioConfig?: {
+      banner?: GioBannerConfig;
+      uiType?: GioUiTypeConfig;
+    };
+  }
+
+  type GioBannerConfig =
+    | {
+        title: string;
+        text: string;
+      }
+    | {
+        text: string;
+      };
+
+  type GioUiTypeConfig = 'gio-string-array';
+}
+
 import { JSONSchema7 } from 'json-schema';
 
-export interface GioJsonSchema extends JSONSchema7 {
-  gioConfig?: {
-    banner?:
-      | {
-          title: string;
-          text: string;
-        }
-      | {
-          text: string;
-        };
-  };
-  properties?: { [key: string]: GioJsonSchema };
-}
+export type GioJsonSchema = JSONSchema7;
