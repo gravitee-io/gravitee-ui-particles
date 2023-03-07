@@ -20,25 +20,40 @@ import { FieldArrayType } from '@ngx-formly/core';
   selector: 'gio-fjs-array-type',
   template: `
     <div class="wrapper">
-      <div class="wrapper__title" *ngIf="to.label">{{ to.label }}</div>
-      <p *ngIf="to.description">{{ to.description }}</p>
-
-      <div class="alert alert-danger" role="alert" *ngIf="showError && formControl.errors">
-        <formly-validation-message [field]="field"></formly-validation-message>
-      </div>
-
-      <div *ngFor="let field of field.fieldGroup; let i = index" class="row">
-        <formly-field [field]="field"></formly-field>
-        <div>
-          <button class="btn btn-danger" type="button" (click)="remove(i)">-</button>
+      <div class="wrapper__header">
+        <div class="wrapper__header__title">
+          <div class="wrapper__title" *ngIf="to.label">{{ to.label }}</div>
+          <p *ngIf="to.description">{{ to.description }}</p>
+        </div>
+        <div class="wrapper__header__collapse">
+          <button type="button" mat-icon-button aria-label="Collapse" (click)="collapse = !collapse">
+            <mat-icon [class.collapse-open]="collapse" [class.collapse-close]="!collapse" svgIcon="gio:nav-arrow-down"></mat-icon>
+          </button>
         </div>
       </div>
 
-      <div>
-        <button class="btn btn-primary" type="button" (click)="add()">+</button>
+      <div class="wrapper__error" *ngIf="showError && formControl.errors">
+        <formly-validation-message [field]="field"></formly-validation-message>
+      </div>
+
+      <div *ngIf="!collapse" class="wrapper__rows" [class.collapse-open]="collapse" [class.collapse-close]="!collapse">
+        <div *ngFor="let field of field.fieldGroup; let i = index" class="wrapper__rows__row">
+          <formly-field class="wrapper__rows__row__field" [field]="field"></formly-field>
+          <div class="wrapper__rows__row__remove">
+            <button type="button" mat-icon-button aria-label="Remove" (click)="remove(i)">
+              <mat-icon svgIcon="gio:cancel"></mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <button type="button" mat-stroked-button aria-label="Add" (click)="add()"><mat-icon svgIcon="gio:plus"></mat-icon> Add</button>
+        </div>
       </div>
     </div>
   `,
   styleUrls: ['./array-type.component.scss'],
 })
-export class GioFjsArrayTypeComponent extends FieldArrayType {}
+export class GioFjsArrayTypeComponent extends FieldArrayType {
+  public collapse = false;
+}

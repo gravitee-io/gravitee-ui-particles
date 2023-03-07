@@ -46,6 +46,7 @@ import { GioFormlyJsonSchemaService } from './gio-formly-json-schema.service';
 import { GioFjsToggleTypeComponent } from './type-component/toggle-type.component';
 import { GioFormSlideToggleModule } from '../public-api';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     CommonModule,
     A11yModule,
     ReactiveFormsModule,
+
     FormlyModule.forRoot({
       validationMessages: [
         { name: 'required', message: 'This field is required' },
@@ -99,6 +101,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     GioFormSlideToggleModule,
 
     MatSlideToggleModule,
+    MatButtonModule,
   ],
   exports: [GioFormJsonSchemaComponent, FormlyModule],
   providers: [GioFormlyJsonSchemaService],
