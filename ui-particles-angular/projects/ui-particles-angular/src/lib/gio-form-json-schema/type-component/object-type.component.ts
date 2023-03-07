@@ -22,10 +22,12 @@ import { FieldType } from '@ngx-formly/core';
     <div class="wrapper">
       <div class="wrapper__title" *ngIf="to.label">{{ to.label }}</div>
       <p *ngIf="to.description">{{ to.description }}</p>
-      <div class="alert alert-danger" role="alert" *ngIf="showError && formControl.errors">
+      <div class="wrapper__error" *ngIf="showError && formControl.errors">
         <formly-validation-message [field]="field"></formly-validation-message>
       </div>
-      <formly-field *ngFor="let f of field.fieldGroup" [field]="f"></formly-field>
+      <div class="wrapper__fields">
+        <formly-field *ngFor="let f of field.fieldGroup" class="wrapper__fields__field" [field]="f"></formly-field>
+      </div>
     </div>
   `,
   styleUrls: ['./object-type.component.scss'],

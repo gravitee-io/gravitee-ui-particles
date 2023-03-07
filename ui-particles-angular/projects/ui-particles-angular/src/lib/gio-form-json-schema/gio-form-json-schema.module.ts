@@ -19,8 +19,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyMaterialModule } from '@ngx-formly/material';
 import { A11yModule } from '@angular/cdk/a11y';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatButtonModule } from '@angular/material/button';
 
 import { GioIconsModule } from '../gio-icons/gio-icons.module';
+import { GioFormSlideToggleModule } from '../public-api';
 
 import { GioFjsNullTypeComponent } from './type-component/null-type.component';
 import { GioFjsObjectTypeComponent } from './type-component/object-type.component';
@@ -44,9 +47,6 @@ import { bannerExtension } from './wrappers/gio-banner-extension';
 import { GioFjsMultiSchemaTypeComponent } from './type-component/multischema-type.component';
 import { GioFormlyJsonSchemaService } from './gio-formly-json-schema.service';
 import { GioFjsToggleTypeComponent } from './type-component/toggle-type.component';
-import { GioFormSlideToggleModule } from '../public-api';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [

@@ -13,12 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ChangeDetectionStrategy, Component, ElementRef, Host, Input, OnDestroy, OnInit, Optional } from '@angular/core';
+import { Component, ElementRef, Host, Input, OnDestroy, OnInit, Optional } from '@angular/core';
 import { ControlValueAccessor, FormGroup, NgControl } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
-import { FormlyJsonschema } from '@ngx-formly/core/json-schema';
 import { cloneDeep, isObject } from 'lodash';
-import { JSONSchema7 } from 'json-schema';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FocusMonitor } from '@angular/cdk/a11y';
@@ -29,7 +27,7 @@ import { GioFormlyJsonSchemaService } from './gio-formly-json-schema.service';
 @Component({
   selector: 'gio-form-json-schema',
   template: `<formly-form *ngIf="formGroup" [fields]="fields" [options]="options" [form]="formGroup" [model]="model"></formly-form>`,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./gio-form-json-schema.component.scss'],
 })
 export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>();
