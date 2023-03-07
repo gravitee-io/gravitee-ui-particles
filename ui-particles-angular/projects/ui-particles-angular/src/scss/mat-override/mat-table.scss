@@ -29,8 +29,8 @@ $background: map.get(theme.$mat-theme, background);
     // Remove bottom padding on mat-form-field inside mat-cell
     // Note: In Angular 15, we should be able to use SubscriptSizing option for that
     .mat-cell {
-      // appearance=fill
-      .mat-form-field.mat-form-field-appearance-outline:not(.ng-invalid, :has(mat-hint)) {
+      // appearance=outline
+      .mat-form-field.mat-form-field-appearance-outline:not(:has(mat-hint), :has(mat-error)) {
         padding-bottom: 0;
 
         .mat-form-field-wrapper {
@@ -39,7 +39,7 @@ $background: map.get(theme.$mat-theme, background);
       }
 
       // appearance=standard
-      .mat-form-field.mat-form-field-appearance-standard:not(.ng-invalid, :has(mat-hint)) {
+      .mat-form-field.mat-form-field-appearance-standard:not(:has(mat-hint), :has(mat-error)) {
         padding-bottom: 0;
 
         .mat-form-field-wrapper {
