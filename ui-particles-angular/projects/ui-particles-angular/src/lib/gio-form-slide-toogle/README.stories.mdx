@@ -1,0 +1,31 @@
+import { Meta, Story } from '@storybook/addon-docs';
+
+<Meta title="Components / Form Slide Toggle / README" />
+
+# Form Slide Toggle
+
+Form slide toggle is a component to wrap the [MatSlideToggle](https://material.angular.io/components/slide-toggle/overview) component and add label to the right.
+This component is similar to MatFormFieldModule, but it is used to wrap the MatSlideToggle component.
+
+## Demo
+
+<Story id="components-form-slide-toggle--with-label-1-and-label-2"/>
+
+## Usage
+
+**Directive**
+ - `gioFormSlideToggle`: Directive to add to the MatSlideToggle component.
+ - `<gio-form-label></gio-form-label>`: Directive to add to the label 1 (title).
+ - Text content of the component: Automatically added to the label 2 (description).
+ - `gioFormPrefix`: Directive to add to the icon that appears before the slide toggle. Like matPrefix for MatFormField.
+
+Example:
+
+```html
+<gio-form-slide-toggle>
+  <mat-icon gioFormPrefix>lock</mat-icon>
+  <gio-form-label>Label 1</gio-form-label>
+  Label 2 - Description
+  <mat-slide-toggle gioFormSlideToggle></mat-slide-toggle>
+</gio-form-slide-toggle>
+```
