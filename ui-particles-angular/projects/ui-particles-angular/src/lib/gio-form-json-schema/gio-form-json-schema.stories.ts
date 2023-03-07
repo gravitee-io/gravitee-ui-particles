@@ -37,6 +37,7 @@ import { fakeReferences } from './testing-json-schema/references';
 import { fakeAllOf } from './testing-json-schema/allOf';
 import { fakeSecurityConfig } from './testing-json-schema/securityConfig';
 import { fakeBoolean } from './testing-json-schema/boolean';
+import { fakeArray } from './testing-json-schema/array';
 
 @NgModule({
   declarations: [DemoComponent],
@@ -75,6 +76,14 @@ export const Boolean: Story = {
   render: () => ({
     template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
     props: { jsonSchema: fakeBoolean },
+  }),
+};
+
+export const Array: Story = {
+  name: 'Array',
+  render: () => ({
+    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
+    props: { jsonSchema: fakeArray },
   }),
 };
 
