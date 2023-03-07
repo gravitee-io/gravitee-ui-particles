@@ -43,6 +43,9 @@ import { GioFormFieldWrapperComponent } from './wrappers/gio-form-field-wrapper.
 import { bannerExtension } from './wrappers/gio-banner-extension';
 import { GioFjsMultiSchemaTypeComponent } from './type-component/multischema-type.component';
 import { GioFormlyJsonSchemaService } from './gio-formly-json-schema.service';
+import { GioFjsToggleTypeComponent } from './type-component/toggle-type.component';
+import { GioFormSlideToggleModule } from '../public-api';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,7 @@ import { GioFormlyJsonSchemaService } from './gio-formly-json-schema.service';
     GioFjsObjectTypeComponent,
     GioFjsMultiSchemaTypeComponent,
     GioFjsArrayTypeComponent,
+    GioFjsToggleTypeComponent,
     GioFormFieldWrapperComponent,
   ],
   imports: [
@@ -79,6 +83,10 @@ import { GioFormlyJsonSchemaService } from './gio-formly-json-schema.service';
         { name: 'array', component: GioFjsArrayTypeComponent },
         { name: 'object', component: GioFjsObjectTypeComponent },
         { name: 'multischema', component: GioFjsMultiSchemaTypeComponent },
+        {
+          name: 'toggle',
+          component: GioFjsToggleTypeComponent,
+        },
       ],
       extensions: [{ name: 'banner', extension: { onPopulate: bannerExtension } }],
       extras: {
@@ -86,7 +94,11 @@ import { GioFormlyJsonSchemaService } from './gio-formly-json-schema.service';
       },
     }),
     FormlyMaterialModule,
+
     GioIconsModule,
+    GioFormSlideToggleModule,
+
+    MatSlideToggleModule,
   ],
   exports: [GioFormJsonSchemaComponent, FormlyModule],
   providers: [GioFormlyJsonSchemaService],
