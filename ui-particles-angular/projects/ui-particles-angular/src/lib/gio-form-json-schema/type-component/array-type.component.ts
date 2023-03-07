@@ -21,8 +21,8 @@ import { FieldArrayType } from '@ngx-formly/core';
   template: `
     <div class="wrapper">
       <div class="wrapper__header">
-        <div class="wrapper__header__title">
-          <div class="wrapper__title" *ngIf="to.label">{{ to.label }}</div>
+        <div class="wrapper__header__text">
+          <div class="wrapper__header__text__title" *ngIf="to.label">{{ to.label }}</div>
           <p *ngIf="to.description">{{ to.description }}</p>
         </div>
         <div class="wrapper__header__collapse">

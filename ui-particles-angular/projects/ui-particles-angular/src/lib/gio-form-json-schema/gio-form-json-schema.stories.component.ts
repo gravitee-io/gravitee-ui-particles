@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ChangeDetectorRef, Component, Input, OnChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormlyFormOptions } from '@ngx-formly/core';
-import { startWith } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { startWith, takeUntil } from 'rxjs/operators';
 
 import { FormlyJSONSchema7 } from './model/FormlyJSONSchema7';
 
@@ -25,7 +26,9 @@ import { FormlyJSONSchema7 } from './model/FormlyJSONSchema7';
   templateUrl: './gio-form-json-schema.stories.component.html',
   styleUrls: ['./gio-form-json-schema.stories.component.scss'],
 })
-export class DemoComponent implements OnChanges {
+export class DemoComponent implements OnChanges, OnDestroy {
+  private unsubscribe$: Subject<void> = new Subject<void>();
+
   @Input()
   public jsonSchema: FormlyJSONSchema7 = {};
 
@@ -43,10 +46,15 @@ export class DemoComponent implements OnChanges {
     this.form = new FormGroup({
       schemaValue: new FormControl(this.initialValue),
     });
-    this.form.valueChanges.pipe(startWith(this.form.value)).subscribe(value => {
+    this.form.valueChanges.pipe(takeUntil(this.unsubscribe$), startWith(this.form.value)).subscribe(value => {
       this.formValue = value;
       this.changeDetectorRef.detectChanges();
     });
+  }
+
+  public ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.unsubscribe();
   }
 
   public jsonSchemaChange(jsonSchema: string): void {

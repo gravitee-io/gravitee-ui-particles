@@ -23,12 +23,9 @@ $typography: map.get(gio.$mat-theme, typography);
 .wrapper {
   display: flex;
   flex-direction: column;
-  padding: 8px;
-  border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, 'darker20');
-  border-radius: 8px;
 
   &__title {
-    @include mat.typography-level($typography, 'subheading-1');
+    @include mat.typography-level($typography, 'subheading-2');
 
     margin-bottom: 16px;
   }
@@ -37,8 +34,29 @@ $typography: map.get(gio.$mat-theme, typography);
     display: none;
   }
 
-  // Add margin between fields
-  formly-field + formly-field {
-    margin-top: 8px;
+  &__error {
+    @include mat.typography-level($typography, 'caption');
+
+    color: mat.get-color-from-palette(gio.$mat-error-palette, 'default');
+  }
+
+  &__fields {
+    padding: 8px;
+    border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, 'darker20');
+    border-radius: 8px;
+
+    &:empty {
+      display: none;
+    }
+
+    &__field:empty {
+      display: none;
+    }
+
+    // Add margin between fields
+    &__field + &__field:not(:empty) {
+      display: block;
+      margin-top: 8px;
+    }
   }
 }

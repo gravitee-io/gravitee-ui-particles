@@ -20,20 +20,6 @@
 
 $typography: map.get(gio.$mat-theme, typography);
 
-::ng-deep {
-  gio-fjs-multi-schema-type {
-    div.wrapper {
-      // Remove padding from the first mat-form-field
-      // This select is automatically added by formly to select sub-schema
-      formly-field:first-child {
-        mat-form-field {
-          padding-bottom: 0;
-        }
-      }
-    }
-  }
-}
-
 .wrapper {
   padding: 8px;
   border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, 'darker20');
@@ -41,11 +27,18 @@ $typography: map.get(gio.$mat-theme, typography);
 
   &__title {
     @include gio.subtitle-typography;
+    @include mat.typography-level($typography, body-2);
 
     margin-bottom: 4px;
   }
 
   &:empty {
     display: none;
+  }
+
+  &__error {
+    @include mat.typography-level($typography, 'caption');
+
+    color: mat.get-color-from-palette(gio.$mat-error-palette, 'default');
   }
 }
