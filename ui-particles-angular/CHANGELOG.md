@@ -1,3 +1,10 @@
+# [5.10.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.9.0...v5.10.0) (2023-03-07)
+
+
+### Features
+
+* add gio-form-slide-toggle from apim ([62ca298](https://github.com/gravitee-io/gravitee-ui-particles/commit/62ca2988679248f49b0b67abe9a0a10b25e9899d))
+
 # [5.9.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.8.0...v5.9.0) (2023-03-01)
 
 
