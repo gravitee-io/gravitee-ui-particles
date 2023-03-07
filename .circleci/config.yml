@@ -293,16 +293,12 @@ workflows:
           package_name: ui-particles-angular
           requires:
             - Build Angular
-      - trigger-chromatic:
-          type: approval
-          requires:
-            - Build Angular Storybook
       - chromatic-deployment:
           name: Chromatic deployment for Angular
           context: cicd-orchestrator
           package_name: ui-particles-angular
           requires:
-            - trigger-chromatic
+            - Build Angular Storybook
           pre-steps:
             - keeper/env-export:
                 secret-url: keeper://TIlcGPFq4rN5GvgnZb9hng/field/password
