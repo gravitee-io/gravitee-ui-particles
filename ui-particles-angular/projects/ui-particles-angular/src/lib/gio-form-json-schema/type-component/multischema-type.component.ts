@@ -23,7 +23,7 @@ import { set } from 'lodash';
     <div class="wrapper">
       <div class="wrapper__title" *ngIf="props.label">{{ props.label }}</div>
       <p *ngIf="props.description">{{ props.description }}</p>
-      <div class="wrapper__error" *ngIf="showError && formControl.errors">
+      <div class="wrapper__error gio-ng-invalid" *ngIf="showError && formControl.errors">
         <formly-validation-message [field]="field"></formly-validation-message>
       </div>
       <formly-field *ngFor="let f of field.fieldGroup" [field]="f"></formly-field>

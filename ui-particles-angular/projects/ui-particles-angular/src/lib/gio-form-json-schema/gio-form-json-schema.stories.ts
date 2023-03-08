@@ -24,6 +24,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 
+import { GioFormFocusInvalidModule } from '../gio-form-focus-first-invalid/gio-form-focus-first-invalid.module';
+
 import { DemoComponent } from './gio-form-json-schema.stories.component';
 import { GioFormJsonSchemaModule } from './gio-form-json-schema.module';
 import { fakeInteger } from './testing-json-schema/integer';
@@ -41,7 +43,16 @@ import { fakeArray } from './testing-json-schema/array';
 
 @NgModule({
   declarations: [DemoComponent],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatCardModule, MatInputModule, MatFormFieldModule, GioFormJsonSchemaModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
+    GioFormJsonSchemaModule,
+    GioFormFocusInvalidModule,
+  ],
   exports: [DemoComponent, GioFormJsonSchemaModule],
 })
 export class GioFJSStoryModule {}

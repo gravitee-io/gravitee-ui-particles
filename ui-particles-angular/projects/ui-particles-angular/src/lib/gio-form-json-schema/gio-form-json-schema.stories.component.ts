@@ -62,6 +62,7 @@ export class DemoComponent implements OnChanges, OnDestroy {
   }
 
   public onSubmit(): void {
-    alert(JSON.stringify(this.form?.getRawValue(), null, 4));
+    // eslint-disable-next-line no-console
+    console.log('onSubmit output:', this.form?.getRawValue().schemaValue);
   }
 }

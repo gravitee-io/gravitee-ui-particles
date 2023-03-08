@@ -37,7 +37,7 @@
     <mat-card-title>Preview</mat-card-title>
 
     <mat-card-content>
-      <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()" gioFormFocusInvalid>
         <gio-form-json-schema [jsonSchema]="jsonSchema" [options]="options" formControlName="schemaValue"></gio-form-json-schema>
 
         --- <br />
