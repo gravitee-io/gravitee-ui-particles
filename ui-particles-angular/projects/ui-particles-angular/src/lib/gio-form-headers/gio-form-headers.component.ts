@@ -15,13 +15,16 @@
  */
 
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { Component, ElementRef, forwardRef, HostBinding, OnInit } from '@angular/core';
+import { Component, ElementRef, forwardRef, HostBinding, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormArray, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { dropRight, isEmpty } from 'lodash';
 import { map, startWith, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
 export type Header = { key: string; value: string };
+
+export type FormHeaderAdaptOutputFn<H> = (headers: Header[] | null) => H;
+
 const HEADER_NAMES = [
   'Accept',
   'Accept-Charset',
@@ -109,6 +112,9 @@ const HEADER_NAMES = [
   ],
 })
 export class GioFormHeadersComponent implements OnInit, ControlValueAccessor {
+  @Input()
+  public adaptOutputFn?: FormHeaderAdaptOutputFn<unknown>;
+
   public mainForm: FormGroup;
   public headersFormArray = new FormArray([
     new FormGroup({
@@ -145,7 +151,13 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor {
   }
 
   // From ControlValueAccessor interface
-  public registerOnChange(fn: (headers: Header[] | null) => void): void {
+  public registerOnChange(fn: (headers: unknown) => void): void {
+    const adaptOutputFn = this.adaptOutputFn;
+
+    if (adaptOutputFn) {
+      this._onChange = (headers: Header[] | null) => fn(adaptOutputFn(headers));
+      return;
+    }
     this._onChange = fn;
   }
 

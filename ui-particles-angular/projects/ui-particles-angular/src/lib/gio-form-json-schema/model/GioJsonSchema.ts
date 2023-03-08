@@ -37,7 +37,7 @@ declare module 'json-schema' {
         text: string;
       };
 
-  type GioUiTypeConfig = 'gio-string-array';
+  type GioUiTypeConfig = 'gio-headers-array';
 }
 
 import { JSONSchema7 } from 'json-schema';
