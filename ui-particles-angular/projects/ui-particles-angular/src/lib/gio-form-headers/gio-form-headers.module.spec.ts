@@ -21,14 +21,16 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
+import { Header } from './gio-form-headers.component';
 import { GioFormHeadersHarness } from './gio-form-headers.harness';
 import { GioFormHeadersModule } from './gio-form-headers.module';
 
 @Component({
-  template: `<gio-form-headers [formControl]="headersControl"></gio-form-headers> `,
+  template: `<gio-form-headers [formControl]="headersControl" [adaptOutputFn]="adaptOutputFn"></gio-form-headers> `,
 })
 class TestComponent {
   public headersControl = new FormControl([]);
+  public adaptOutputFn: unknown = undefined;
 }
 
 describe('GioFormHeadersModule', () => {
@@ -230,5 +232,20 @@ describe('GioFormHeadersModule', () => {
       })),
     );
     expect(headers).toEqual(HEADERS);
+  });
+
+  it('should change output with `adaptOutputFn`', async () => {
+    testComponent.adaptOutputFn = (headers: Header[]) => headers.map(header => ({ name: header.key, value: header.value }));
+
+    const formHeaders = await loader.getHarness(GioFormHeadersHarness);
+
+    expect((await formHeaders.getHeaderRows()).length).toEqual(1);
+
+    // Add header on last header row
+    const emptyLastHeaderRow = await formHeaders.getLastHeaderRow();
+    await emptyLastHeaderRow.keyInput.setValue('host');
+    await emptyLastHeaderRow.valueInput.setValue('api.gravitee.io');
+
+    expect(testComponent.headersControl.value).toEqual([{ name: 'host', value: 'api.gravitee.io' }]);
   });
 });

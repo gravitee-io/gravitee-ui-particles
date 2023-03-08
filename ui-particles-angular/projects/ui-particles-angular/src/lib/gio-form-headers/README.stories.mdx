@@ -4,14 +4,31 @@ import { Meta, Story } from '@storybook/addon-docs';
 
 # Form Headers
 
-🚧
+Form Header is a dedicated component for HTTP Headers in the form of key-value pairs. 
+Key autocomplete is provided for common headers.
 
 ## Demo
 
-🚧
+<Story id="components-form-headers--reactive-form"/>
 
 ## Usage
 
 **Inputs**
+- Work with ReactiveFormsModule
+- `adaptOutputFn` (optional): A function to adapt the output of the component to the desired format. e.g. `(headers) => headers.map(({ key, value }) => ({ name: key, value }))`
 
-🚧
+**Output**
+
+Default output is an array of objects with `key` and `value` properties :
+```ts
+{
+  key: string;
+  value: string;
+}[]
+```
+
+Example:
+
+```html
+<gio-form-headers [formControl]="headersControl"></gio-form-headers>
+```

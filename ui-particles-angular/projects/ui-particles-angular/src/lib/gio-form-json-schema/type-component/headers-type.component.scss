@@ -1,0 +1,63 @@
+/*
+ * Copyright (C) 2015 The Gravitee team (http://gravitee.io)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@use '../../../scss' as gio;
+
+$typography: map.get(gio.$mat-theme, typography);
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, 'darker20');
+  border-radius: 8px;
+
+  &__header {
+    display: flex;
+
+    &__text {
+      flex: 1 1 auto;
+
+      &__title {
+        @include mat.typography-level($typography, 'subheading-1');
+
+        margin-bottom: 8px;
+      }
+    }
+
+    &__collapse {
+      flex: 0 0 auto;
+
+      .collapse-open {
+        transform: rotate(180deg);
+        transition: transform 225ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .collapse-close {
+        transform: rotate(0deg);
+        transition: transform 225ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    }
+  }
+
+  &__error {
+    @include mat.typography-level($typography, 'caption');
+
+    color: mat.get-color-from-palette(gio.$mat-error-palette, 'default');
+  }
+}

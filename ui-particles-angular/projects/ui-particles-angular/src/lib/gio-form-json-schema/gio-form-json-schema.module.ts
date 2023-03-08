@@ -23,7 +23,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
 
 import { GioIconsModule } from '../gio-icons/gio-icons.module';
-import { GioFormSlideToggleModule } from '../public-api';
+import { GioFormSlideToggleModule } from '../gio-form-slide-toogle/gio-form-slide-toggle.module';
+import { GioFormHeadersModule } from '../gio-form-headers/gio-form-headers.module';
 
 import { GioFjsNullTypeComponent } from './type-component/null-type.component';
 import { GioFjsObjectTypeComponent } from './type-component/object-type.component';
@@ -47,6 +48,7 @@ import { bannerExtension } from './wrappers/gio-banner-extension';
 import { GioFjsMultiSchemaTypeComponent } from './type-component/multischema-type.component';
 import { GioFormlyJsonSchemaService } from './gio-formly-json-schema.service';
 import { GioFjsToggleTypeComponent } from './type-component/toggle-type.component';
+import { GioFjsHeadersTypeComponent } from './type-component/headers-type.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import { GioFjsToggleTypeComponent } from './type-component/toggle-type.componen
     GioFjsMultiSchemaTypeComponent,
     GioFjsArrayTypeComponent,
     GioFjsToggleTypeComponent,
+    GioFjsHeadersTypeComponent,
     GioFormFieldWrapperComponent,
   ],
   imports: [
@@ -89,6 +92,10 @@ import { GioFjsToggleTypeComponent } from './type-component/toggle-type.componen
           name: 'toggle',
           component: GioFjsToggleTypeComponent,
         },
+        {
+          name: 'gio-headers-array',
+          component: GioFjsHeadersTypeComponent,
+        },
       ],
       extensions: [{ name: 'banner', extension: { onPopulate: bannerExtension } }],
       extras: {
@@ -99,6 +106,7 @@ import { GioFjsToggleTypeComponent } from './type-component/toggle-type.componen
 
     GioIconsModule,
     GioFormSlideToggleModule,
+    GioFormHeadersModule,
 
     MatSlideToggleModule,
     MatButtonModule,

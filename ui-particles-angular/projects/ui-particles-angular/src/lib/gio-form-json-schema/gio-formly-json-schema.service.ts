@@ -27,12 +27,17 @@ export class GioFormlyJsonSchemaService {
   public toFormlyFieldConfig(jsonSchema: GioJsonSchema): FormlyFieldConfig {
     return this.formlyJsonschema.toFieldConfig(jsonSchema, {
       map: (mappedField: FormlyFieldConfig, mapSource: JSONSchema7) => {
+        mappedField = this.uiTypeMap(mappedField, mapSource);
         mappedField = this.bannerMap(mappedField, mapSource);
         mappedField = this.toggleMap(mappedField, mapSource);
-
         return mappedField;
       },
     });
+  }
+
+  private uiTypeMap(mappedField: FormlyFieldConfig, mapSource: JSONSchema7): FormlyFieldConfig {
+    mappedField.type = mapSource.gioConfig?.uiType ?? mappedField.type;
+    return mappedField;
   }
 
   private bannerMap(mappedField: FormlyFieldConfig, mapSource: JSONSchema7): FormlyFieldConfig {
