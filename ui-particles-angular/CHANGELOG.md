@@ -1,3 +1,13 @@
+# [5.11.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.10.0...v5.11.0) (2023-03-08)
+
+
+### Features
+
+* improve global json schema form style ([5311074](https://github.com/gravitee-io/gravitee-ui-particles/commit/531107452842428d3fd417d7b166a12c9c238c35))
+* json-schema - add special headers type component ([965b08a](https://github.com/gravitee-io/gravitee-ui-particles/commit/965b08a62a77d09049147f08faa3c0579ea485d2))
+* json-schema - improve style for array type ([223bd12](https://github.com/gravitee-io/gravitee-ui-particles/commit/223bd12c9ad01a46b38fd52b206841cf4426f380))
+* use gio-form-slide-toggle to display boolean type ([405cc86](https://github.com/gravitee-io/gravitee-ui-particles/commit/405cc86449be5257c41597d3b487e24839e77c4a))
+
 # [5.10.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.9.0...v5.10.0) (2023-03-07)
 
 
