@@ -25,6 +25,10 @@ $typography: map.get(gio.$mat-theme, typography);
   border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, 'darker20');
   border-radius: 8px;
 
+  &.error {
+    border-color: mat.get-color-from-palette(gio.$mat-error-palette, 'default');
+  }
+
   &:empty {
     display: none;
   }

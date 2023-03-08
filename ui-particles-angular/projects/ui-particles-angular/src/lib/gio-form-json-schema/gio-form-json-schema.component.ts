@@ -17,7 +17,7 @@ import { Component, ElementRef, Host, Input, OnDestroy, OnInit, Optional } from 
 import { ControlValueAccessor, FormGroup, NgControl } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { cloneDeep, isObject } from 'lodash';
-import { filter, takeUntil } from 'rxjs/operators';
+import { filter, map, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FocusMonitor } from '@angular/cdk/a11y';
 
@@ -76,6 +76,17 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
   }
 
   public ngOnInit(): void {
+    // When the parent form is touched, mark all the sub formGroup as touched
+    const parentControl = this.ngControl?.control?.parent;
+    parentControl?.statusChanges
+      ?.pipe(
+        takeUntil(this.unsubscribe$),
+        map(() => parentControl?.touched),
+        filter(touched => touched === true),
+        tap(() => this.formGroup.markAllAsTouched()),
+      )
+      .subscribe();
+
     this.formGroup.statusChanges.pipe(takeUntil(this.unsubscribe$)).subscribe(status => {
       if (status === 'VALID') {
         this.ngControl?.control?.setErrors(null);

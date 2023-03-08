@@ -22,7 +22,7 @@ import { FieldType } from '@ngx-formly/core';
     <div class="wrapper">
       <div class="wrapper__title" *ngIf="to.label">{{ to.label }}</div>
       <p *ngIf="to.description">{{ to.description }}</p>
-      <div class="wrapper__error" *ngIf="showError && formControl.errors">
+      <div class="wrapper__error gio-ng-invalid" *ngIf="showError && formControl.errors">
         <formly-validation-message [field]="field"></formly-validation-message>
       </div>
       <div class="wrapper__fields">

@@ -19,7 +19,7 @@ import { FieldArrayType } from '@ngx-formly/core';
 @Component({
   selector: 'gio-fjs-array-type',
   template: `
-    <div class="wrapper">
+    <div class="wrapper" [class.error]="formControl.touched && formControl.invalid">
       <div class="wrapper__header">
         <div class="wrapper__header__text">
           <div class="wrapper__header__text__title" *ngIf="to.label">{{ to.label }}</div>
@@ -32,11 +32,11 @@ import { FieldArrayType } from '@ngx-formly/core';
         </div>
       </div>
 
-      <div class="wrapper__error" *ngIf="showError && formControl.errors">
+      <div class="wrapper__error gio-ng-invalid" *ngIf="showError && formControl.errors">
         <formly-validation-message [field]="field"></formly-validation-message>
       </div>
 
-      <div *ngIf="!collapse" class="wrapper__rows" [class.collapse-open]="collapse" [class.collapse-close]="!collapse">
+      <div [hidden]="collapse" class="wrapper__rows" [class.collapse-open]="collapse" [class.collapse-close]="!collapse">
         <div *ngFor="let field of field.fieldGroup; let i = index" class="wrapper__rows__row">
           <formly-field class="wrapper__rows__row__field" [field]="field"></formly-field>
           <div class="wrapper__rows__row__remove">
