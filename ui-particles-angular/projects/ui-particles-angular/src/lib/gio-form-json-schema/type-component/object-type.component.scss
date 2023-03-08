@@ -45,7 +45,8 @@ $typography: map.get(gio.$mat-theme, typography);
     border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, 'darker20');
     border-radius: 8px;
 
-    &:empty {
+    // Hide fields if there is only one empty field
+    &:has(> .wrapper__fields__field:only-child):has(> .wrapper__fields__field:empty) {
       display: none;
     }
 

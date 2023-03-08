@@ -38,6 +38,7 @@ import { fakeAllOf } from './testing-json-schema/allOf';
 import { fakeSecurityConfig } from './testing-json-schema/securityConfig';
 import { fakeBoolean } from './testing-json-schema/boolean';
 import { fakeArray } from './testing-json-schema/array';
+import { fakeKafkaAdvanced } from './testing-json-schema/kafka-advanced';
 
 @NgModule({
   declarations: [DemoComponent],
@@ -166,6 +167,14 @@ export const securityConfig: Story = {
   render: () => ({
     template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
     props: { jsonSchema: fakeSecurityConfig },
+  }),
+};
+
+export const kafkaAdvanced: Story = {
+  name: 'Kafka Advanced',
+  render: () => ({
+    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
+    props: { jsonSchema: fakeKafkaAdvanced },
   }),
 };
 
