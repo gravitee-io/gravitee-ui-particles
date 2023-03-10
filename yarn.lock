@@ -20148,6 +20148,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"monaco-editor@npm:^0.36.1":
+  version: 0.36.1
+  resolution: "monaco-editor@npm:0.36.1"
+  checksum: 75e7cfbe03b4cb964e550c8021d6b2cc4f5265ee17703ddda7a63a26492a95fdbfaf34aa3e50004930ff8afb1422ae2b1dc0b9d3f122d558bdf1a335403937fd
+  languageName: node
+  linkType: hard
+
 "move-concurrently@npm:^1.0.1":
   version: 1.0.1
   resolution: "move-concurrently@npm:1.0.1"
@@ -27110,6 +27117,7 @@ __metadata:
     jest-preset-angular: 12.2.3
     json-schema: ^0.4.0
     lodash: ^4.17.21
+    monaco-editor: ^0.36.1
     ng-packagr: 13.3.1
     ngx-file-helpers: 7.0.0
     prettier: 2.8.2

@@ -1,0 +1,69 @@
+import { Meta, Story } from '@storybook/addon-docs';
+
+<Meta title="Components / Monaco editor / README" />
+
+# Monaco editor
+
+Code editor component based on [Monaco editor](https://microsoft.github.io/monaco-editor/).
+
+This component need specific configuration to work. See [Usage](#usage) for more information.
+
+## Demo
+
+<Story id="components-monaco-editor--default" />
+
+## Usage
+
+### Install
+Add monaco-editor to your project
+
+```bash
+npm install monaco-editor --save
+yarn add monaco-editor
+```
+
+Add monaco-editor assets to `angular.json`
+
+```json
+...
+// projects > [your project name] > architect > build >
+"assets": [
+    ...
+        {
+            "glob": "**/*",
+            "input": "node_modules/monaco-editor",
+            "output": "assets/monaco-editor"
+        }
+     ...
+    ]
+...
+```
+
+### Config module (optional)
+
+Change theme : (default: `vs`)
+
+```typescript
+GioMonacoEditorModule.forRoot({
+    theme: 'vs-dark',
+}),
+```
+
+### Use component
+
+**Inputs**
+
+- `formControl` - form control to bind to. Work with ReactiveFormsModule.
+- `languageConfig`: `object` - language configuration of the editor.
+- `options`: `IStandaloneEditorConstructionOptions` - options of the editor.
+
+Example:
+
+```html
+<gio-monaco-editor [formControl]="control" [languageConfig]="languageConfig"></gio-monaco-editor>
+```
+
+## Testing
+
+You can use `GioMonacoEditorHarness` to interact with a fake monaco editor in your tests.
+The fake component use inside a simple input to simulate the editor. So don't ask it too much or you'll have to add it in the fake component.

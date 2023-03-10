@@ -15,29 +15,34 @@
  */
 
 /**
+ * GioConfig is used to add some custom configuration to the JSONSchema7
+ * ⚠️ Keep updated with the GioJsonSchema.json to have the same interface ⚠️
+ */
+export interface GioConfig {
+  banner?: GioBannerConfig;
+  uiType?: GioUiTypeConfig;
+}
+
+type GioBannerConfig =
+  | {
+      title: string;
+      text: string;
+    }
+  | {
+      text: string;
+    };
+
+type GioUiTypeConfig = 'gio-headers-array';
+
+/**
  * Override the JSONSchema7 interface to add gioConfig
  * Use this way because the JSONSchema7 interface is recursive
  * And export with new name `GioJsonSchema` to make it more clear
  */
-
 declare module 'json-schema' {
   export interface JSONSchema7 {
-    gioConfig?: {
-      banner?: GioBannerConfig;
-      uiType?: GioUiTypeConfig;
-    };
+    gioConfig?: GioConfig;
   }
-
-  type GioBannerConfig =
-    | {
-        title: string;
-        text: string;
-      }
-    | {
-        text: string;
-      };
-
-  type GioUiTypeConfig = 'gio-headers-array';
 }
 
 import { JSONSchema7 } from 'json-schema';

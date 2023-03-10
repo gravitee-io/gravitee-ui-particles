@@ -22,6 +22,7 @@ module.exports = {
   },
   staticDirs: [
     { from: '../../node_modules/@gravitee/ui-components/assets', to: '/' },
-    { from: '../projects/ui-particles-angular/assets', to: '/assets' },
+    { from: '../projects/ui-particles-angular/assets/gio-icons.svg', to: '/assets/gio-icons.svg' },
+    { from: '../../node_modules/monaco-editor', to: '/assets/monaco-editor' },
   ],
 };
