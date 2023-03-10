@@ -22,7 +22,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
-import { GioBannerModule } from '../public-api';
+import { GioBannerModule } from '../gio-banner/gio-banner.module';
 
 import { GioConfirmAndValidateDialogComponent } from './gio-confirm-and-validate-dialog.component';
 
