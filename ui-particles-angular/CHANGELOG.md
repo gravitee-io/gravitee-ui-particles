@@ -1,3 +1,10 @@
+# [5.12.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.11.0...v5.12.0) (2023-03-13)
+
+
+### Features
+
+* add form focus invalid directive ([05bf29f](https://github.com/gravitee-io/gravitee-ui-particles/commit/05bf29fa268111d5201eac324bc09aeb0cc886fa))
+
 # [5.11.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.10.0...v5.11.0) (2023-03-08)
 
 
