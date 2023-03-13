@@ -108,18 +108,18 @@ jobs:
               exit 0
             fi
             export PR_BODY_PRERELEASE_SECTION="
-            <!-- Prerelease placeholder -->
+            <!-- Prerelease placeholder << parameters.angular_package_name >> -->
             ---
-            #### 🧪&nbsp;&nbsp;Gravitee.io Automatic Prerelease
+            #### 🧪&nbsp;&nbsp;Gravitee.io Automatic Prerelease @gravitee/<< parameters.angular_package_name >>
             \`\`\`
             npm install @gravitee/<< parameters.angular_package_name >>@${VERSION_TAG}
             \`\`\`
             \`\`\`
             yarn add @gravitee/<< parameters.angular_package_name >>@${VERSION_TAG}
             \`\`\`
-            <!-- Prerelease placeholder end -->
+            <!-- Prerelease placeholder << parameters.angular_package_name >> end -->
             "
-            export CLEAN_BODY=$(gh pr view --json body --jq .body | sed '/Prerelease placeholder -->/,/Prerelease placeholder end -->/d')
+            export CLEAN_BODY=$(gh pr view --json body --jq .body | sed '/Prerelease placeholder << parameters.angular_package_name >> -->/,/Prerelease placeholder << parameters.angular_package_name >> end -->/d')
             gh pr edit --body "$CLEAN_BODY$PR_BODY_PRERELEASE_SECTION"
   release:
     parameters:
