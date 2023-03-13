@@ -1,3 +1,10 @@
+# [5.13.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.12.0...v5.13.0) (2023-03-13)
+
+
+### Features
+
+* add kafka-advanced schema form ([599010a](https://github.com/gravitee-io/gravitee-ui-particles/commit/599010a01249319939c399a781f562d785d30273))
+
 # [5.12.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.11.0...v5.12.0) (2023-03-13)
 
 
