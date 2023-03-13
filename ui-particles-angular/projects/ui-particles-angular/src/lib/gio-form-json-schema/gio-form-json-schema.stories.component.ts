@@ -16,11 +16,14 @@
 import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormlyFormOptions } from '@ngx-formly/core';
-import { Subject } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { combineLatest, Subject } from 'rxjs';
+import { debounceTime, startWith, takeUntil, tap } from 'rxjs/operators';
+import Ajv from 'ajv';
 
+import GioJsonSchema from './model/GioJsonSchema.json';
 import { FormlyJSONSchema7 } from './model/FormlyJSONSchema7';
 
+const ajv = new Ajv({ strict: false });
 @Component({
   selector: 'gio-demo',
   templateUrl: './gio-form-json-schema.stories.component.html',
@@ -37,19 +40,60 @@ export class DemoComponent implements OnChanges, OnDestroy {
 
   public form?: FormGroup;
   public options: FormlyFormOptions = {};
-
   public formValue: unknown;
+  public formValueError?: string;
+
+  public inputValueControl?: FormControl;
+  public jsonSchemaControl?: FormControl;
+
+  public monacoEditorJsonSchemaLanguage = {
+    language: 'json',
+    schemas: [
+      {
+        uri: 'http://myserver/foo-schema.json',
+        schema: GioJsonSchema,
+      },
+    ],
+  };
+  public monacoEditorJsonLanguage = {
+    language: 'json',
+  };
+
+  public monacoEditorReadonlyOptions = {
+    readOnly: true,
+  };
 
   constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
   public ngOnChanges(): void {
-    this.form = new FormGroup({
-      schemaValue: new FormControl(this.initialValue),
-    });
-    this.form.valueChanges.pipe(takeUntil(this.unsubscribe$), startWith(this.form.value)).subscribe(value => {
-      this.formValue = value;
-      this.changeDetectorRef.detectChanges();
-    });
+    this.jsonSchemaControl = new FormControl(JSON.stringify(this.jsonSchema, null, 2));
+    this.inputValueControl = new FormControl(JSON.stringify(this.initialValue, null, 2));
+
+    combineLatest([
+      this.jsonSchemaControl.valueChanges.pipe(startWith(this.jsonSchemaControl.value)),
+      this.inputValueControl.valueChanges.pipe(startWith(this.inputValueControl.value)),
+    ])
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        tap(() => {
+          // Clear variable, wait, and re-init. To force sub components to re-render.
+          this.form = undefined;
+          this.formValue = undefined;
+        }),
+        debounceTime(500),
+      )
+      .subscribe(([jsonSchemaValue, inputValue]) => {
+        try {
+          this.jsonSchema = JSON.parse(jsonSchemaValue);
+          this.initialValue = JSON.parse(inputValue);
+
+          this.resetUiPreview();
+          this.changeDetectorRef.detectChanges();
+        } catch (e) {
+          // Ignore if not valid JSON
+          return;
+        }
+      });
   }
 
   public ngOnDestroy() {
@@ -57,8 +101,24 @@ export class DemoComponent implements OnChanges, OnDestroy {
     this.unsubscribe$.unsubscribe();
   }
 
-  public jsonSchemaChange(jsonSchema: string): void {
-    this.jsonSchema = JSON.parse(jsonSchema);
+  private resetUiPreview() {
+    this.form = new FormGroup({
+      schemaValue: new FormControl(this.initialValue),
+    });
+    this.changeDetectorRef.detectChanges();
+    this.form.valueChanges.pipe(takeUntil(this.unsubscribe$), startWith(this.form.value)).subscribe(value => {
+      this.formValue = value.schemaValue;
+      this.validateSchema();
+      this.changeDetectorRef.detectChanges();
+    });
+  }
+
+  public validateSchema(): void {
+    const schema = this.jsonSchema;
+    const validate = ajv.compile(schema);
+    validate(this.formValue);
+
+    this.formValueError = JSON.stringify(validate.errors, null, 2);
   }
 
   public onSubmit(): void {

@@ -17,7 +17,7 @@ import { Component, ElementRef, Host, Input, OnDestroy, OnInit, Optional } from 
 import { ControlValueAccessor, FormGroup, NgControl } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { cloneDeep, isObject } from 'lodash';
-import { filter, map, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, filter, map, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FocusMonitor } from '@angular/cdk/a11y';
 
@@ -47,6 +47,8 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
   public model: unknown = {};
 
   public fields: FormlyFieldConfig[] = [];
+
+  public loading = true;
 
   public _onChange: (value: unknown | null) => void = () => ({});
 
@@ -101,6 +103,8 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
     this.formGroup.valueChanges
       .pipe(
         takeUntil(this.unsubscribe$),
+        // Group all valueChanges events emit by formly in a single one
+        debounceTime(200),
         filter(() => this.touched),
       )
       .subscribe(value => {

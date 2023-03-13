@@ -21,9 +21,12 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 
+import { GioMonacoEditorModule } from '../gio-monaco-editor/gio-monaco-editor.module';
 import { GioFormFocusInvalidModule } from '../gio-form-focus-first-invalid/gio-form-focus-first-invalid.module';
 
 import { DemoComponent } from './gio-form-json-schema.stories.component';
@@ -53,6 +56,10 @@ import { fakeKafkaAdvanced } from './testing-json-schema/kafka-advanced';
     MatFormFieldModule,
     GioFormJsonSchemaModule,
     GioFormFocusInvalidModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    GioFormJsonSchemaModule,
+    GioMonacoEditorModule.forRoot({ theme: 'vs-dark' }),
   ],
   exports: [DemoComponent, GioFormJsonSchemaModule],
 })
@@ -65,6 +72,12 @@ export default {
       imports: [BrowserAnimationsModule, CommonModule, MatSelectModule, GioFJSStoryModule],
     }),
   ],
+  parameters: {
+    a11y: {
+      // Disable to avoid freeze with monaco editor
+      disable: true,
+    },
+  },
 } as Meta;
 
 export const String: Story = {
