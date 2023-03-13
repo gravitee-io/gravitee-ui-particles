@@ -1,3 +1,15 @@
+# [5.14.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.13.0...v5.14.0) (2023-03-13)
+
+
+### Bug Fixes
+
+* hide objects fields if is empty ([396751b](https://github.com/gravitee-io/gravitee-ui-particles/commit/396751bc2dd5d59410fff79dc607873794f26435))
+
+
+### Features
+
+* add monaco-editor component to have code editor ([8961aa2](https://github.com/gravitee-io/gravitee-ui-particles/commit/8961aa2d9de6f8cda7a6210ec5b7b758b06af234))
+
 # [5.13.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.12.0...v5.13.0) (2023-03-13)
 
 
