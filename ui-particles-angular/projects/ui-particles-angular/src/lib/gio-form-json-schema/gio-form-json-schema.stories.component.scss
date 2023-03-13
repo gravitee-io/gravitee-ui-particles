@@ -16,24 +16,63 @@
 @use '../../../index.scss' as gio;
 
 .json-schema-story {
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
+  .row {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 16px;
+    gap: 16px;
+  }
 
-  &__json-schema {
+  &__json-schema,
+  &__preview,
+  &__value,
+  &__output {
+    display: flex;
+    max-width: 50%;
+    height: 500px;
     flex: 1 1 50%;
+    flex-direction: column;
+  }
 
-    mat-form-field {
-      width: 100%;
-      @include gio.code-typography;
-    }
+  mat-card-title {
+    font-size: 2em;
   }
 
   &__preview {
-    flex: 1 1 50%;
+    overflow: auto;
 
-    mat-card-content {
-      padding-top: 12px;
+    mat-card-actions {
+      position: sticky;
+      bottom: -16px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 0;
+      background-color: white;
     }
   }
+
+  &__json-schema,
+  &__value {
+    mat-card-content {
+      height: 100%;
+    }
+  }
+
+  &__output {
+    mat-button-toggle-group {
+      display: inline-flex;
+      height: 42px;
+      align-items: center;
+    }
+
+    mat-card-content {
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+    }
+  }
+}
+
+pre {
+  margin: 4px 0;
 }

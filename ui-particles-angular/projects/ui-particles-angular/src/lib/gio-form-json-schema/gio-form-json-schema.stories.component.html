@@ -16,38 +16,69 @@
 
 -->
 <div class="json-schema-story">
-  <mat-card class="json-schema-story__json-schema">
-    <mat-card-title>Json Schema</mat-card-title>
+  <div class="row">
+    <mat-card class="json-schema-story__json-schema">
+      <mat-card-title>Json Schema</mat-card-title>
 
-    <mat-card-content>
-      <mat-form-field>
-        <textarea
-          matInput
-          cdkTextareaAutosize
-          cdkAutosizeMinRows="10"
-          cdkAutosizeMaxRows="48"
-          [ngModel]="jsonSchema | json"
-          (ngModelChange)="jsonSchemaChange($event)"
-        ></textarea>
-      </mat-form-field>
-    </mat-card-content>
-  </mat-card>
+      <mat-card-content>
+        <gio-monaco-editor [formControl]="jsonSchemaControl" [languageConfig]="monacoEditorJsonSchemaLanguage"></gio-monaco-editor>
+      </mat-card-content>
+    </mat-card>
 
-  <mat-card class="json-schema-story__preview">
-    <mat-card-title>Preview</mat-card-title>
+    <mat-card class="json-schema-story__preview">
+      <form *ngIf="form; else loading" (ngSubmit)="onSubmit()" [formGroup]="form" gioFormFocusInvalid>
+        <mat-card-title>UI Preview</mat-card-title>
 
-    <mat-card-content>
-      <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()" gioFormFocusInvalid>
-        <gio-form-json-schema [jsonSchema]="jsonSchema" [options]="options" formControlName="schemaValue"></gio-form-json-schema>
+        <mat-card-content>
+          <gio-form-json-schema [jsonSchema]="jsonSchema" [options]="options" formControlName="schemaValue"></gio-form-json-schema>
+        </mat-card-content>
 
-        --- <br />
-        <button type="submit">Submit</button><br />
-        --- <br />
-        <pre>{{ form.status }}</pre>
-        <pre>{{ form.dirty ? 'DIRTY' : 'PRISTINE' }}</pre>
-        <pre>{{ form.touched ? 'TOUCHED' : 'UNTOUCHED' }}</pre>
-        <pre>{{ formValue | json }}</pre>
+        <mat-card-actions align="end">
+          <pre>{{ form.status }} | {{ form.dirty ? 'DIRTY' : 'PRISTINE' }} | {{ form.touched ? 'TOUCHED' : 'UNTOUCHED' }}</pre>
+
+          <button mat-button type="reset">Reset</button>
+          <button mat-stroked-button type="submit">Submit</button>
+        </mat-card-actions>
       </form>
-    </mat-card-content>
-  </mat-card>
+    </mat-card>
+  </div>
+  <div class="row">
+    <mat-card class="json-schema-story__value">
+      <mat-card-title>Input Value</mat-card-title>
+      <mat-card-content>
+        <gio-monaco-editor [formControl]="inputValueControl" [languageConfig]="monacoEditorJsonLanguage"></gio-monaco-editor>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="json-schema-story__output">
+      <mat-card-title
+        >Output
+
+        <mat-button-toggle-group #outputMode="matButtonToggleGroup" value="json">
+          <mat-button-toggle value="json">Json</mat-button-toggle>
+          <mat-button-toggle value="error">Errors</mat-button-toggle>
+        </mat-button-toggle-group>
+      </mat-card-title>
+
+      <mat-card-content *ngIf="form; else loading">
+        <ng-container *ngIf="outputMode.value === 'json'">
+          <gio-monaco-editor
+            [ngModel]="formValue | json"
+            [languageConfig]="monacoEditorJsonLanguage"
+            [disabled]="'true'"
+          ></gio-monaco-editor>
+        </ng-container>
+        <ng-container *ngIf="outputMode.value === 'error'">
+          <p>
+            Validate Input with JsonSchema validator (<a href="https://ajv.js.org/">AJV</a>). Allows to simulate rest-api error feedback
+            even if it's not exactly the same validator lib (nodejs vs java)
+          </p>
+
+          <gio-monaco-editor [ngModel]="formValueError" [languageConfig]="monacoEditorJsonLanguage" [disabled]="'true'"></gio-monaco-editor>
+        </ng-container>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
+
+<ng-template #loading> Loading... </ng-template>

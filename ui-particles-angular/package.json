@@ -37,6 +37,7 @@
     "@highcharts/map-collection": "^1.1.4",
     "@ngx-formly/core": "6.0.4",
     "@ngx-formly/material": "6.0.4",
+    "ajv": "^8.12.0",
     "asciidoctor": "^2.2.5",
     "asciidoctor-highlight.js": "^0.4.0",
     "highcharts": "^9.3.2",
