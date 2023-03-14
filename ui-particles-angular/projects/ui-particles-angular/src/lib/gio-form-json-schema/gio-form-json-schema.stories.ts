@@ -43,6 +43,7 @@ import { fakeAllOf } from './testing-json-schema/allOf';
 import { fakeBoolean } from './testing-json-schema/boolean';
 import { fakeArray } from './testing-json-schema/array';
 import { fakeKafkaAdvanced } from './testing-json-schema/kafka-advanced';
+import { fakeMqttAdvanced } from './testing-json-schema/mqtt-advanced';
 
 @NgModule({
   declarations: [DemoComponent],
@@ -190,6 +191,14 @@ export const kafkaAdvanced: Story = {
   render: () => ({
     template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
     props: { jsonSchema: fakeKafkaAdvanced },
+  }),
+};
+
+export const mqttAdvanced: Story = {
+  name: 'MQTT Advanced',
+  render: () => ({
+    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
+    props: { jsonSchema: fakeMqttAdvanced },
   }),
 };
 
