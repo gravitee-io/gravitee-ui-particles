@@ -21,10 +21,6 @@
 $typography: map.get(gio.$mat-theme, typography);
 
 .wrapper {
-  padding: 8px;
-  border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, 'darker20');
-  border-radius: 8px;
-
   &__title {
     @include gio.subtitle-typography;
     @include mat.typography-level($typography, body-2);
