@@ -40,7 +40,6 @@ import { endpointsGetResponse, getEndpointConnectorSchema } from './testing-json
 import { fakeEnum } from './testing-json-schema/enum';
 import { fakeReferences } from './testing-json-schema/references';
 import { fakeAllOf } from './testing-json-schema/allOf';
-import { fakeSecurityConfig } from './testing-json-schema/securityConfig';
 import { fakeBoolean } from './testing-json-schema/boolean';
 import { fakeArray } from './testing-json-schema/array';
 import { fakeKafkaAdvanced } from './testing-json-schema/kafka-advanced';
@@ -183,14 +182,6 @@ export const references: Story = {
   render: () => ({
     template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
     props: { jsonSchema: fakeReferences },
-  }),
-};
-
-export const securityConfig: Story = {
-  name: 'Security config',
-  render: () => ({
-    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
-    props: { jsonSchema: fakeSecurityConfig },
   }),
 };
 
