@@ -1,3 +1,16 @@
+# [5.15.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.14.0...v5.15.0) (2023-03-15)
+
+
+### Bug Fixes
+
+* fix validation and _onChange call ([75ca949](https://github.com/gravitee-io/gravitee-ui-particles/commit/75ca949400821369675415d9e7a7400e0add5f4b))
+* remove padding and border for multischema type ([728fff5](https://github.com/gravitee-io/gravitee-ui-particles/commit/728fff5a2ff45a85fcc626494a77a6023605847f))
+
+
+### Features
+
+* handle textarea & password with JsonSchema format ([00146f0](https://github.com/gravitee-io/gravitee-ui-particles/commit/00146f0f4f91d7c3f5cf2adf2de80bf9b3e2f669))
+
 # [5.14.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.13.0...v5.14.0) (2023-03-13)
 
 
