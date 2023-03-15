@@ -44,6 +44,7 @@ import { fakeBoolean } from './testing-json-schema/boolean';
 import { fakeArray } from './testing-json-schema/array';
 import { fakeKafkaAdvanced } from './testing-json-schema/kafka-advanced';
 import { fakeMqttAdvanced } from './testing-json-schema/mqtt-advanced';
+import { fakeHttpProxy } from './testing-json-schema/http-proxy';
 
 @NgModule({
   declarations: [DemoComponent],
@@ -199,6 +200,14 @@ export const mqttAdvanced: Story = {
   render: () => ({
     template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
     props: { jsonSchema: fakeMqttAdvanced },
+  }),
+};
+
+export const httpProxy: Story = {
+  name: 'Http Proxy',
+  render: () => ({
+    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
+    props: { jsonSchema: fakeHttpProxy },
   }),
 };
 
