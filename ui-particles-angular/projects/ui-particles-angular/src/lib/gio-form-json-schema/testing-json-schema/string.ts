@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { FormlyJSONSchema7 } from '../model/FormlyJSONSchema7';
+import { GioJsonSchema } from '../model/GioJsonSchema';
 
-export const fakeString: FormlyJSONSchema7 = {
+export const fakeString: GioJsonSchema = {
   type: 'object',
   properties: {
     simpleString: {
@@ -23,17 +23,11 @@ export const fakeString: FormlyJSONSchema7 = {
       description: 'Simple string without validation',
       type: 'string',
     },
-    appearanceString: {
-      title: 'Fill appearance',
-      description: 'Simple string with fill appearance',
+    textareaString: {
+      title: 'Format text (textarea)',
+      description: 'Simple string with textarea input',
       type: 'string',
-      widget: {
-        formlyConfig: {
-          props: {
-            appearance: 'fill',
-          },
-        },
-      },
+      format: 'text',
     },
     requiredString: {
       title: 'Required Type String',
@@ -52,19 +46,11 @@ export const fakeString: FormlyJSONSchema7 = {
       type: 'string',
       readOnly: true,
     },
-    readonlyFill: {
-      title: 'Readonly/Disabled field with fill appearance',
-      default: 'Should not edit my value',
-      description: 'Example for readonly with fill appearance',
+    password: {
+      title: 'Format password',
+      description: 'Simple string with password format',
       type: 'string',
-      readOnly: true,
-      widget: {
-        formlyConfig: {
-          props: {
-            appearance: 'fill',
-          },
-        },
-      },
+      format: 'password',
     },
   },
   required: ['requiredString'],

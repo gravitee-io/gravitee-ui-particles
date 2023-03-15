@@ -49,6 +49,7 @@ import { GioFjsMultiSchemaTypeComponent } from './type-component/multischema-typ
 import { GioFormlyJsonSchemaService } from './gio-formly-json-schema.service';
 import { GioFjsToggleTypeComponent } from './type-component/toggle-type.component';
 import { GioFjsHeadersTypeComponent } from './type-component/headers-type.component';
+import { GioPasswordEyeWrapperComponent, passwordEyeExtension } from './wrappers/gio-password-eye.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { GioFjsHeadersTypeComponent } from './type-component/headers-type.compon
     GioFjsToggleTypeComponent,
     GioFjsHeadersTypeComponent,
     GioFormFieldWrapperComponent,
+    GioPasswordEyeWrapperComponent,
   ],
   imports: [
     CommonModule,
@@ -82,7 +84,10 @@ import { GioFjsHeadersTypeComponent } from './type-component/headers-type.compon
         { name: 'uniqueItems', message: 'Should NOT have duplicate items' },
         { name: 'const', message: constValidationMessage },
       ],
-      wrappers: [{ name: 'gio-with-banner', component: GioFormFieldWrapperComponent }],
+      wrappers: [
+        { name: 'gio-with-banner', component: GioFormFieldWrapperComponent },
+        { name: 'gio-password-eye', component: GioPasswordEyeWrapperComponent },
+      ],
       types: [
         { name: 'null', component: GioFjsNullTypeComponent, wrappers: ['form-field'] },
         { name: 'array', component: GioFjsArrayTypeComponent },
@@ -97,7 +102,10 @@ import { GioFjsHeadersTypeComponent } from './type-component/headers-type.compon
           component: GioFjsHeadersTypeComponent,
         },
       ],
-      extensions: [{ name: 'banner', extension: { onPopulate: bannerExtension } }],
+      extensions: [
+        { name: 'banner', extension: { onPopulate: bannerExtension } },
+        { name: 'password-eye', extension: { onPopulate: passwordEyeExtension } },
+      ],
       extras: {
         checkExpressionOn: 'changeDetectionCheck',
       },

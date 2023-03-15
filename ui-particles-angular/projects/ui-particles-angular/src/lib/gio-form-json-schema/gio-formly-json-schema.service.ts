@@ -28,6 +28,7 @@ export class GioFormlyJsonSchemaService {
     return this.formlyJsonschema.toFieldConfig(jsonSchema, {
       map: (mappedField: FormlyFieldConfig, mapSource: JSONSchema7) => {
         mappedField = this.uiTypeMap(mappedField, mapSource);
+        mappedField = this.formatMap(mappedField, mapSource);
         mappedField = this.bannerMap(mappedField, mapSource);
         mappedField = this.toggleMap(mappedField, mapSource);
         return mappedField;
@@ -37,6 +38,23 @@ export class GioFormlyJsonSchemaService {
 
   private uiTypeMap(mappedField: FormlyFieldConfig, mapSource: JSONSchema7): FormlyFieldConfig {
     mappedField.type = mapSource.gioConfig?.uiType ?? mappedField.type;
+    return mappedField;
+  }
+
+  private formatMap(mappedField: FormlyFieldConfig, mapSource: JSONSchema7): FormlyFieldConfig {
+    if (mapSource.type === 'string' && mapSource.format === 'text') {
+      mappedField.type = 'textarea';
+      mappedField.props = {
+        ...mappedField.props,
+        autosize: true,
+      };
+    } else if (mapSource.type === 'string' && mapSource.format === 'password') {
+      mappedField.props = {
+        ...mappedField.props,
+        type: 'password',
+      };
+    }
+
     return mappedField;
   }
 
