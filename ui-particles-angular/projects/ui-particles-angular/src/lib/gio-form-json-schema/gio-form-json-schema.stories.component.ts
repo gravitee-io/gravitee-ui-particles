@@ -42,6 +42,7 @@ export class DemoComponent implements OnChanges, OnDestroy {
   public options: FormlyFormOptions = {};
   public formValue: unknown;
   public formValueError?: string;
+  public formValueErrorNumber?: number;
 
   public inputValueControl?: FormControl;
   public jsonSchemaControl?: FormControl;
@@ -118,7 +119,8 @@ export class DemoComponent implements OnChanges, OnDestroy {
     const validate = ajv.compile(schema);
     validate(this.formValue);
 
-    this.formValueError = JSON.stringify(validate.errors, null, 2);
+    this.formValueError = JSON.stringify(validate.errors, null, 2) || undefined;
+    this.formValueErrorNumber = validate.errors?.length || undefined;
   }
 
   public onSubmit(): void {
