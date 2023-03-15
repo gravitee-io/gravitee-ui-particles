@@ -17,8 +17,8 @@ import { Component, ElementRef, Host, Input, OnDestroy, OnInit, Optional } from 
 import { ControlValueAccessor, FormGroup, NgControl } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { cloneDeep, isObject } from 'lodash';
-import { debounceTime, filter, map, takeUntil, tap } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, takeUntil } from 'rxjs/operators';
+import { combineLatest, Subject } from 'rxjs';
 import { FocusMonitor } from '@angular/cdk/a11y';
 
 import { GioJsonSchema } from './model/GioJsonSchema';
@@ -56,6 +56,8 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
 
   private touched = false;
 
+  private stateChanges$ = new Subject<void>();
+
   constructor(
     private readonly gioFormlyJsonSchema: GioFormlyJsonSchemaService,
     private readonly elRef: ElementRef,
@@ -78,38 +80,50 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
   }
 
   public ngOnInit(): void {
-    // When the parent form is touched, mark all the sub formGroup as touched
+    // When the parent form is touched, mark all the sub formGroup as touched ony once
     const parentControl = this.ngControl?.control?.parent;
     parentControl?.statusChanges
       ?.pipe(
         takeUntil(this.unsubscribe$),
         map(() => parentControl?.touched),
         filter(touched => touched === true),
-        tap(() => this.formGroup.markAllAsTouched()),
+        distinctUntilChanged(),
       )
-      .subscribe();
-
-    this.formGroup.statusChanges.pipe(takeUntil(this.unsubscribe$)).subscribe(status => {
-      if (status === 'VALID') {
-        this.ngControl?.control?.setErrors(null);
-      }
-      if (status === 'INVALID') {
-        this.ngControl?.control?.setErrors({ invalid: true });
-      }
-    });
+      .subscribe(() => {
+        this.formGroup.markAllAsTouched();
+        this.stateChanges$.next();
+      });
 
     // To simulate the behavior of classic form controls, emit value only when the form is touched
     // Allow to keep the formControl pristine until the user interact with it
-    this.formGroup.valueChanges
+    combineLatest([this.formGroup.statusChanges, this.formGroup.valueChanges])
       .pipe(
         takeUntil(this.unsubscribe$),
         // Group all valueChanges events emit by formly in a single one
-        debounceTime(200),
-        filter(() => this.touched),
+        debounceTime(100),
       )
-      .subscribe(value => {
-        this._onChange(value);
+      .subscribe(() => {
+        this.stateChanges$.next();
       });
+
+    this.stateChanges$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
+      const { status, value, touched } = this.formGroup;
+      if (touched) {
+        this._onTouched();
+        this.touched = true;
+      }
+
+      if (this.touched) {
+        this._onChange(value);
+
+        if (status === 'VALID') {
+          this.ngControl?.control?.setErrors(null);
+        }
+        if (status === 'INVALID') {
+          this.ngControl?.control?.setErrors({ invalid: true });
+        }
+      }
+    });
   }
 
   public ngOnDestroy() {

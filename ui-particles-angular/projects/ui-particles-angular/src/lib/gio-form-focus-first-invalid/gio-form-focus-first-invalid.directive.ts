@@ -26,6 +26,12 @@ export class GioFormFocusInvalidDirective {
   public onFormSubmit() {
     const selector = '.ng-invalid[formControlName],input.ng-invalid,mat-select.ng-invalid,textarea.ng-invalid,.gio-ng-invalid';
     try {
+      // Mark all controls as touched to display errors
+      if (this.formGroupDirective) {
+        this.formGroupDirective.control.markAllAsTouched();
+        this.formGroupDirective.control.updateValueAndValidity();
+      }
+
       let invalidControl = this.renderer.selectRootElement(selector, true);
 
       // If the form is a GioFormJsonSchema, we need to focus the first invalid control inside
@@ -34,12 +40,6 @@ export class GioFormFocusInvalidDirective {
       }
 
       if (invalidControl) {
-        // Mark all controls as touched to display errors
-        if (this.formGroupDirective) {
-          this.formGroupDirective.control.markAllAsTouched();
-          this.formGroupDirective.control.updateValueAndValidity();
-        }
-
         invalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
         invalidControl.focus({ preventScroll: true });
       }
