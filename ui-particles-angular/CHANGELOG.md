@@ -1,3 +1,10 @@
+# [5.16.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.15.0...v5.16.0) (2023-03-15)
+
+
+### Features
+
+* add http-proxy schema form ([f019d6f](https://github.com/gravitee-io/gravitee-ui-particles/commit/f019d6f7b9ee20446a75ad895698bd068334b7e8))
+
 # [5.15.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.14.0...v5.15.0) (2023-03-15)
 
 
