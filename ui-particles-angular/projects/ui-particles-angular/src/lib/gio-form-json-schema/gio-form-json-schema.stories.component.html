@@ -56,7 +56,7 @@
 
         <mat-button-toggle-group #outputMode="matButtonToggleGroup" value="json">
           <mat-button-toggle value="json">Json</mat-button-toggle>
-          <mat-button-toggle value="error">Errors</mat-button-toggle>
+          <mat-button-toggle value="error"> ({{ formValueErrorNumber ? formValueErrorNumber : 'No' }}) Errors</mat-button-toggle>
         </mat-button-toggle-group>
       </mat-card-title>
 
