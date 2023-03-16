@@ -45,6 +45,7 @@ import { fakeArray } from './testing-json-schema/array';
 import { fakeKafkaAdvanced } from './testing-json-schema/kafka-advanced';
 import { fakeMqttAdvanced } from './testing-json-schema/mqtt-advanced';
 import { fakeHttpProxy } from './testing-json-schema/http-proxy';
+import { fakeWebhookAdvanced } from './testing-json-schema/webhook-advanced';
 
 @NgModule({
   declarations: [DemoComponent],
@@ -208,6 +209,14 @@ export const httpProxy: Story = {
   render: () => ({
     template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
     props: { jsonSchema: fakeHttpProxy },
+  }),
+};
+
+export const webhookAdvanced: Story = {
+  name: 'Webhook Advanced',
+  render: () => ({
+    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
+    props: { jsonSchema: fakeWebhookAdvanced },
   }),
 };
 
