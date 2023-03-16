@@ -26,14 +26,12 @@ import { FieldType } from '@ngx-formly/core';
         <formly-validation-message [field]="field"></formly-validation-message>
       </div>
       <div class="wrapper__fields">
-        <formly-field *ngFor="let f of field.fieldGroup" class="wrapper__fields__field" [field]="f"></formly-field>
+        <ng-container *ngFor="let f of field.fieldGroup">
+          <formly-field *ngIf="f.type" class="wrapper__fields__field" [field]="f"></formly-field>
+        </ng-container>
       </div>
     </div>
   `,
   styleUrls: ['./object-type.component.scss'],
 })
-export class GioFjsObjectTypeComponent extends FieldType {
-  public defaultOptions = {
-    defaultValue: {},
-  };
-}
+export class GioFjsObjectTypeComponent extends FieldType {}
