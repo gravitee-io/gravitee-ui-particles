@@ -74,7 +74,7 @@ export const fakeKafkaAdvanced: GioJsonSchema = {
             },
           },
           additionalProperties: false,
-          required: ['sasl'],
+          required: ['sasl', 'ssl'],
         },
         {
           title: 'Protocol SSL',
@@ -85,8 +85,9 @@ export const fakeKafkaAdvanced: GioJsonSchema = {
             ssl: {
               $ref: '#/definitions/securityProtocolSsl',
             },
-            additionalProperties: false,
           },
+          additionalProperties: false,
+          required: ['ssl'],
         },
       ],
     },
@@ -134,6 +135,7 @@ export const fakeKafkaAdvanced: GioJsonSchema = {
                 },
               },
               additionalProperties: false,
+              required: ['location'],
             },
             {
               title: 'PEM with certificates',
@@ -141,11 +143,12 @@ export const fakeKafkaAdvanced: GioJsonSchema = {
                 type: {
                   const: 'PEM',
                 },
-                certificate: {
-                  $ref: '#/definitions/sslTrustStoreCertificate',
+                certificates: {
+                  $ref: '#/definitions/sslTrustStoreCertificates',
                 },
               },
               additionalProperties: false,
+              required: ['certificates'],
             },
             {
               title: 'JKS with location',
@@ -161,7 +164,7 @@ export const fakeKafkaAdvanced: GioJsonSchema = {
                 },
               },
               additionalProperties: false,
-              required: ['password'],
+              required: ['location', 'password'],
             },
             {
               title: 'JKS with certificates',
@@ -169,15 +172,15 @@ export const fakeKafkaAdvanced: GioJsonSchema = {
                 type: {
                   const: 'JKS',
                 },
-                certificate: {
-                  $ref: '#/definitions/sslTrustStoreCertificate',
+                certificates: {
+                  $ref: '#/definitions/sslTrustStoreCertificates',
                 },
                 password: {
                   $ref: '#/definitions/sslTrustStorePassword',
                 },
               },
               additionalProperties: false,
-              required: ['password'],
+              required: ['certificates', 'password'],
             },
             {
               title: 'PKCS12 with location',
@@ -193,7 +196,7 @@ export const fakeKafkaAdvanced: GioJsonSchema = {
                 },
               },
               additionalProperties: false,
-              required: ['password'],
+              required: ['location', 'password'],
             },
             {
               title: 'PKCS12 with certificates',
@@ -201,15 +204,15 @@ export const fakeKafkaAdvanced: GioJsonSchema = {
                 type: {
                   const: 'PKCS12',
                 },
-                certificate: {
-                  $ref: '#/definitions/sslTrustStoreCertificate',
+                certificates: {
+                  $ref: '#/definitions/sslTrustStoreCertificates',
                 },
                 password: {
                   $ref: '#/definitions/sslTrustStorePassword',
                 },
               },
               additionalProperties: false,
-              required: ['password'],
+              required: ['certificates', 'password'],
             },
           ],
           required: ['type'],
@@ -225,20 +228,14 @@ export const fakeKafkaAdvanced: GioJsonSchema = {
                   const: 'PEM',
                 },
                 certificateChain: {
-                  title: 'Certificate chain (ssl.keystore.certificate.chain)',
-                  type: 'string',
-                  gioConfig: {
-                    banner: {
-                      title: 'SSL keystore certificate chain',
-                      text: "Certificate chain in the format specified by 'ssl.keystore.type'. Default SSL engine factory supports only PEM format with a list of X.509 certificates.",
-                    },
-                  },
+                  $ref: '#/definitions/sslKeyStoreCertificateChain',
                 },
                 location: {
                   $ref: '#/definitions/sslKeyStoreLocation',
                 },
               },
               additionalProperties: false,
+              required: ['certificateChain'],
             },
             {
               title: 'PEM with Key',
@@ -247,14 +244,7 @@ export const fakeKafkaAdvanced: GioJsonSchema = {
                   const: 'PEM',
                 },
                 certificateChain: {
-                  title: 'Certificate chain (ssl.keystore.certificate.chain)',
-                  type: 'string',
-                  gioConfig: {
-                    banner: {
-                      title: 'SSL keystore certificate chain',
-                      text: "Certificate chain in the format specified by 'ssl.keystore.type'. Default SSL engine factory supports only PEM format with a list of X.509 certificates.",
-                    },
-                  },
+                  $ref: '#/definitions/sslKeyStoreCertificateChain',
                 },
                 key: {
                   $ref: '#/definitions/sslKeyStoreKey',
@@ -264,6 +254,7 @@ export const fakeKafkaAdvanced: GioJsonSchema = {
                 },
               },
               additionalProperties: false,
+              required: ['certificateChain', 'key', 'keyPassword'],
             },
             {
               title: 'JKS with Location',
@@ -279,7 +270,7 @@ export const fakeKafkaAdvanced: GioJsonSchema = {
                 },
               },
               additionalProperties: false,
-              required: ['password'],
+              required: ['location', 'password'],
             },
             {
               title: 'JKS with Key',
@@ -298,6 +289,7 @@ export const fakeKafkaAdvanced: GioJsonSchema = {
                 },
               },
               additionalProperties: false,
+              required: ['key', 'keyPassword', 'password'],
             },
             {
               title: 'PKCS12 with Location',
@@ -313,7 +305,7 @@ export const fakeKafkaAdvanced: GioJsonSchema = {
                 },
               },
               additionalProperties: false,
-              required: ['password'],
+              required: ['location', 'password'],
             },
             {
               title: 'PKCS12 with Key',
@@ -332,6 +324,7 @@ export const fakeKafkaAdvanced: GioJsonSchema = {
                 },
               },
               additionalProperties: false,
+              required: ['key', 'keyPassword', 'password'],
             },
           ],
           required: ['type'],
@@ -340,9 +333,10 @@ export const fakeKafkaAdvanced: GioJsonSchema = {
       required: ['trustStore'],
     },
 
-    sslTrustStoreCertificate: {
+    sslTrustStoreCertificates: {
       title: 'Certificates (ssl.trustStore.certificates)',
       type: 'string',
+      format: 'text',
       gioConfig: {
         banner: {
           title: 'SSL truststore certificated',
@@ -358,6 +352,7 @@ export const fakeKafkaAdvanced: GioJsonSchema = {
     sslTrustStorePassword: {
       title: 'Password (ssl.trustStore.password)',
       type: 'string',
+      format: 'password',
       gioConfig: {
         banner: {
           title: 'SSL truststore password',
@@ -366,6 +361,16 @@ export const fakeKafkaAdvanced: GioJsonSchema = {
       },
     },
 
+    sslKeyStoreCertificateChain: {
+      title: 'Certificate chain (ssl.keystore.certificate.chain)',
+      type: 'string',
+      gioConfig: {
+        banner: {
+          title: 'SSL keystore certificate chain',
+          text: "Certificate chain in the format specified by 'ssl.keystore.type'. Default SSL engine factory supports only PEM format with a list of X.509 certificates.",
+        },
+      },
+    },
     sslKeyStoreLocation: {
       title: 'Location (ssl.keystore.location)',
       description: 'The location of the key store file. This is optional for client and can be used for two-way authentication for client.',
@@ -374,6 +379,7 @@ export const fakeKafkaAdvanced: GioJsonSchema = {
     sslKeyStoreKey: {
       title: 'Key (ssl.keystore.key)',
       type: 'string',
+      format: 'text',
       gioConfig: {
         banner: {
           title: 'SSL keystore private key',
@@ -385,18 +391,16 @@ export const fakeKafkaAdvanced: GioJsonSchema = {
       title: 'Key password (ssl.key.password)',
       description: 'The password of the private key in the key store file. This is optional for client.',
       type: 'string',
+      format: 'password',
     },
     sslKeyStorePassword: {
-      properties: {
-        password: {
-          title: 'Password (ssl.keystore.password)',
-          type: 'string',
-          gioConfig: {
-            banner: {
-              title: 'SSL keystore password',
-              text: 'The store password for the key store file. This is optional for client and only needed if ssl.keystore.location is configured. Key store password is not supported for PEM format',
-            },
-          },
+      title: 'Password (ssl.keystore.password)',
+      type: 'string',
+      format: 'password',
+      gioConfig: {
+        banner: {
+          title: 'SSL keystore password',
+          text: 'The store password for the key store file. This is optional for client and only needed if ssl.keystore.location is configured. Key store password is not supported for PEM format',
         },
       },
     },
