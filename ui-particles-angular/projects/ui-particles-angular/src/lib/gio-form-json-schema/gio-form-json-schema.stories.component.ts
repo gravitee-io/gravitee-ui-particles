@@ -23,7 +23,7 @@ import Ajv from 'ajv';
 import GioJsonSchema from './model/GioJsonSchema.json';
 import { FormlyJSONSchema7 } from './model/FormlyJSONSchema7';
 
-const ajv = new Ajv({ strict: false });
+const ajv = new Ajv({ strict: false, logger: false });
 @Component({
   selector: 'gio-demo',
   templateUrl: './gio-form-json-schema.stories.component.html',
