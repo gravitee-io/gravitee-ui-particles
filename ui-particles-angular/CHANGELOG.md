@@ -1,3 +1,10 @@
+## [5.17.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.17.0...v5.17.1) (2023-03-16)
+
+
+### Bug Fixes
+
+* field without type to avoid unnecessary border ([2787c75](https://github.com/gravitee-io/gravitee-ui-particles/commit/2787c751963cf3976eaf4d76d5f5cd41ae2ba669))
+
 # [5.17.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.16.0...v5.17.0) (2023-03-16)
 
 
