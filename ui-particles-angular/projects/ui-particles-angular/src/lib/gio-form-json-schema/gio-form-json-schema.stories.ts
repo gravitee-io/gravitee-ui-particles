@@ -15,6 +15,7 @@
  */
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
+import isChromatic from 'chromatic/isChromatic';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -31,21 +32,21 @@ import { GioFormFocusInvalidModule } from '../gio-form-focus-first-invalid/gio-f
 
 import { DemoComponent } from './gio-form-json-schema.stories.component';
 import { GioFormJsonSchemaModule } from './gio-form-json-schema.module';
-import { fakeInteger } from './testing-json-schema/integer';
-import { fakeString } from './testing-json-schema/string';
-import { fakeMixed } from './testing-json-schema/mixed';
-import { fakeOneOf } from './testing-json-schema/oneOf';
-import { entrypointsGetResponse, getEntrypointConnectorSchema } from './testing-json-schema/entrypoints';
-import { endpointsGetResponse, getEndpointConnectorSchema } from './testing-json-schema/endpoints';
-import { fakeEnum } from './testing-json-schema/enum';
-import { fakeReferences } from './testing-json-schema/references';
-import { fakeAllOf } from './testing-json-schema/allOf';
-import { fakeBoolean } from './testing-json-schema/boolean';
-import { fakeArray } from './testing-json-schema/array';
-import { fakeKafkaAdvanced } from './testing-json-schema/kafka-advanced';
-import { fakeMqttAdvanced } from './testing-json-schema/mqtt-advanced';
-import { fakeHttpProxy } from './testing-json-schema/http-proxy';
-import { fakeWebhookAdvanced } from './testing-json-schema/webhook-advanced';
+import { integerExample } from './json-schema-example/integer';
+import { stringExample } from './json-schema-example/string';
+import { mixedExample } from './json-schema-example/mixed';
+import { oneOfExample } from './json-schema-example/oneOf';
+import { entrypointsGetResponse, getEntrypointConnectorSchema } from './json-schema-example/entrypoints';
+import { endpointsGetResponse, getEndpointConnectorSchema } from './json-schema-example/endpoints';
+import { enumExample } from './json-schema-example/enum';
+import { referencesExample } from './json-schema-example/references';
+import { allOfExample } from './json-schema-example/allOf';
+import { booleanExample } from './json-schema-example/boolean';
+import { arrayExample } from './json-schema-example/array';
+import { kafkaAdvancedExample } from './json-schema-example/kafka-advanced';
+import { mqttAdvancedExample } from './json-schema-example/mqtt-advanced';
+import { httpProxyExample } from './json-schema-example/http-proxy';
+import { webhookAdvancedExample } from './json-schema-example/webhook-advanced';
 
 @NgModule({
   declarations: [DemoComponent],
@@ -80,144 +81,134 @@ export default {
       disable: true,
     },
   },
+  render: ({ jsonSchema, initialValue }) => ({
+    template: `<gio-demo [jsonSchema]="jsonSchema" [initialValue]="initialValue" [isChromatic]="isChromatic()" ></gio-demo>`,
+    props: { jsonSchema, initialValue, isChromatic },
+  }),
 } as Meta;
 
 export const String: Story = {
   name: 'String',
-  render: () => ({
-    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
-    props: { jsonSchema: fakeString },
-  }),
+  args: {
+    jsonSchema: stringExample,
+  },
 };
 
 export const Number: Story = {
   name: 'Number',
-  render: () => ({
-    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
-    props: { jsonSchema: fakeInteger },
-  }),
+  args: {
+    jsonSchema: integerExample,
+  },
 };
 
 export const Boolean: Story = {
   name: 'Boolean',
-  render: () => ({
-    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
-    props: { jsonSchema: fakeBoolean },
-  }),
+  args: {
+    jsonSchema: booleanExample,
+  },
 };
 
 export const Array: Story = {
   name: 'Array',
-  render: () => ({
-    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
-    props: { jsonSchema: fakeArray },
-  }),
+  args: {
+    jsonSchema: arrayExample,
+  },
 };
 
 export const Mixed: Story = {
   name: 'Mixed',
-  render: () => ({
-    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
-    props: { jsonSchema: fakeMixed },
-  }),
+  args: {
+    jsonSchema: mixedExample,
+  },
 };
 
 export const MixedWithValue: Story = {
   name: 'Mixed with value',
-  render: () => ({
-    template: `<gio-demo [jsonSchema]="jsonSchema" [initialValue]="initialValue"></gio-demo>`,
-    props: { jsonSchema: fakeMixed, initialValue: { body: '<xml></xml>' } },
-  }),
+  args: {
+    jsonSchema: mixedExample,
+    initialValue: {
+      body: '<xml></xml>',
+    },
+  },
 };
 
-export const FieldWithBanner: Story = {
-  name: 'Field with banner',
-  render: () => ({
-    template: `<gio-demo [jsonSchema]="jsonSchema" [initialValue]="initialValue"></gio-demo>`,
-    props: {
-      jsonSchema: {
-        type: 'object',
-        properties: {
-          sample: {
-            title: 'Sample property',
-            description: 'Additional hint',
-            type: 'string',
-            gioConfig: {
-              banner: {
-                title: 'Complex property',
-                text: 'This is a quite long description of what the field is, that would not fit into the hint field',
-              },
+export const WithBanner: Story = {
+  name: 'With banner',
+  args: {
+    jsonSchema: {
+      type: 'object',
+      properties: {
+        sample: {
+          title: 'Sample property',
+          description: 'Additional hint',
+          type: 'string',
+          gioConfig: {
+            banner: {
+              title: 'Complex property',
+              text: 'This is a quite long description of what the field is, that would not fit into the hint field',
             },
           },
         },
       },
-      initialValue: { sample: 'sample value' },
     },
-  }),
+    initialValue: { sample: 'sample value' },
+  },
 };
 
 export const oneOf: Story = {
   name: 'OneOf',
-  render: () => ({
-    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
-    props: { jsonSchema: fakeOneOf },
-  }),
+  args: {
+    jsonSchema: oneOfExample,
+  },
 };
 
 export const allOf: Story = {
   name: 'AllOf',
-  render: () => ({
-    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
-    props: { jsonSchema: fakeAllOf },
-  }),
+  args: {
+    jsonSchema: allOfExample,
+  },
 };
 
 export const enumStory: Story = {
   name: 'Enum',
-  render: () => ({
-    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
-    props: { jsonSchema: fakeEnum },
-  }),
+  args: {
+    jsonSchema: enumExample,
+  },
 };
 
 export const references: Story = {
   name: 'References',
-  render: () => ({
-    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
-    props: { jsonSchema: fakeReferences },
-  }),
+  args: {
+    jsonSchema: referencesExample,
+  },
 };
 
 export const kafkaAdvanced: Story = {
   name: 'Kafka Advanced',
-  render: () => ({
-    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
-    props: { jsonSchema: fakeKafkaAdvanced },
-  }),
+  args: {
+    jsonSchema: kafkaAdvancedExample,
+  },
 };
 
 export const mqttAdvanced: Story = {
   name: 'MQTT Advanced',
-  render: () => ({
-    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
-    props: { jsonSchema: fakeMqttAdvanced },
-  }),
+  args: {
+    jsonSchema: mqttAdvancedExample,
+  },
 };
 
 export const httpProxy: Story = {
   name: 'Http Proxy',
-  render: () => ({
-    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
-    props: { jsonSchema: fakeHttpProxy },
-  }),
+  args: {
+    jsonSchema: httpProxyExample,
+  },
 };
 
 export const webhookAdvanced: Story = {
   name: 'Webhook Advanced',
-  render: () => ({
-    template: `<gio-demo [jsonSchema]="jsonSchema"></gio-demo>`,
-    props: { jsonSchema: fakeWebhookAdvanced },
-  }),
+  args: {
+    jsonSchema: webhookAdvancedExample,
+  },
 };
 
 export const Entrypoints: Story = {
@@ -229,8 +220,8 @@ export const Entrypoints: Story = {
           <mat-option *ngFor="let entrypoint of entrypoints" [value]="entrypoint.id">{{ entrypoint.name }}</mat-option>
       </mat-select>
     </mat-form-field>
-    <gio-demo *ngIf="jsonSchema" [jsonSchema]="jsonSchema"></gio-demo>`,
-    props: { jsonSchema: undefined, entrypoints: entrypointsGetResponse, getEntrypointConnectorSchema },
+    <gio-demo *ngIf="jsonSchema" [jsonSchema]="jsonSchema" [isChromatic]="isChromatic()"></gio-demo>`,
+    props: { jsonSchema: undefined, entrypoints: entrypointsGetResponse, getEntrypointConnectorSchema, isChromatic },
   }),
 };
 
@@ -243,7 +234,7 @@ export const Endpoints: Story = {
           <mat-option *ngFor="let endpoint of endpoints" [value]="endpoint.id">{{ endpoint.name }}</mat-option>
       </mat-select>
     </mat-form-field>
-    <gio-demo *ngIf="jsonSchema" [jsonSchema]="jsonSchema"></gio-demo>`,
-    props: { jsonSchema: undefined, endpoints: endpointsGetResponse, getEndpointConnectorSchema },
+    <gio-demo *ngIf="jsonSchema" [jsonSchema]="jsonSchema" [isChromatic]="isChromatic()"></gio-demo>`,
+    props: { jsonSchema: undefined, endpoints: endpointsGetResponse, getEndpointConnectorSchema, isChromatic },
   }),
 };

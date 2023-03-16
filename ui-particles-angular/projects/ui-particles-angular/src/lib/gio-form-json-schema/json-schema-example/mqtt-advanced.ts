@@ -16,7 +16,7 @@
 
 import { GioJsonSchema } from '../model/GioJsonSchema';
 
-export const fakeMqttAdvanced: GioJsonSchema = {
+export const mqttAdvancedExample: GioJsonSchema = {
   $schema: 'http://json-schema.org/draft-07/schema#',
   type: 'object',
   definitions: {

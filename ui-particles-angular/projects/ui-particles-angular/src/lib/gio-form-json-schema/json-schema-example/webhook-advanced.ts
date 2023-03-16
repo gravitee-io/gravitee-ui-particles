@@ -16,7 +16,7 @@
 
 import { GioJsonSchema } from '../model/GioJsonSchema';
 
-export const fakeWebhookAdvanced: GioJsonSchema = {
+export const webhookAdvancedExample: GioJsonSchema = {
   $schema: 'http://json-schema.org/draft-07/schema#',
   type: 'object',
   definitions: {

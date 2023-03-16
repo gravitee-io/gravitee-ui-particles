@@ -15,7 +15,7 @@
  */
 import { GioJsonSchema } from '../model/GioJsonSchema';
 
-export const fakeInteger: GioJsonSchema = {
+export const integerExample: GioJsonSchema = {
   type: 'object',
   properties: {
     simpleString: {

@@ -38,6 +38,9 @@ export class DemoComponent implements OnChanges, OnDestroy {
   @Input()
   public initialValue = {};
 
+  @Input()
+  public isChromatic = false;
+
   public form?: FormGroup;
   public options: FormlyFormOptions = {};
   public formValue: unknown;

@@ -16,7 +16,7 @@
 
 import { GioJsonSchema } from '../model/GioJsonSchema';
 
-export const fakeKafkaAdvanced: GioJsonSchema = {
+export const kafkaAdvancedExample: GioJsonSchema = {
   $schema: 'http://json-schema.org/draft-07/schema#',
   type: 'object',
 
