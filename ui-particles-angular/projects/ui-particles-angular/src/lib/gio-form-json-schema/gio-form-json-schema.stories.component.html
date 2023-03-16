@@ -17,7 +17,7 @@
 -->
 <div class="json-schema-story">
   <div class="row">
-    <mat-card class="json-schema-story__json-schema">
+    <mat-card *ngIf="!isChromatic" class="json-schema-story__json-schema">
       <mat-card-title>Json Schema</mat-card-title>
 
       <mat-card-content>
@@ -25,7 +25,7 @@
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="json-schema-story__preview">
+    <mat-card class="json-schema-story__preview" [class.isChromatic]="isChromatic">
       <form *ngIf="form; else loading" (ngSubmit)="onSubmit()" [formGroup]="form" gioFormFocusInvalid>
         <mat-card-title>UI Preview</mat-card-title>
 
@@ -42,7 +42,7 @@
       </form>
     </mat-card>
   </div>
-  <div class="row">
+  <div *ngIf="!isChromatic" class="row">
     <mat-card class="json-schema-story__value">
       <mat-card-title>Input Value</mat-card-title>
       <mat-card-content>

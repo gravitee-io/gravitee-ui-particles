@@ -15,7 +15,7 @@
  */
 import { GioJsonSchema } from '../model/GioJsonSchema';
 
-export const fakeEnum: GioJsonSchema = {
+export const enumExample: GioJsonSchema = {
   type: 'object',
   additionalProperties: false,
 

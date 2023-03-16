@@ -15,7 +15,7 @@
  */
 import { GioJsonSchema } from '../model/GioJsonSchema';
 
-export const fakeBoolean: GioJsonSchema = {
+export const booleanExample: GioJsonSchema = {
   type: 'object',
   additionalProperties: false,
 

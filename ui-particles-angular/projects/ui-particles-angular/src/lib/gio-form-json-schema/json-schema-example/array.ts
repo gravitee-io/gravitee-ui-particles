@@ -15,7 +15,7 @@
  */
 import { GioJsonSchema } from '../model/GioJsonSchema';
 
-export const fakeArray: GioJsonSchema = {
+export const arrayExample: GioJsonSchema = {
   type: 'object',
   additionalProperties: false,
 

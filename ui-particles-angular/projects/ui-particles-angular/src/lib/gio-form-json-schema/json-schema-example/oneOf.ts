@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { FormlyJSONSchema7 } from '../model/FormlyJSONSchema7';
 
-export const fakeOneOf: FormlyJSONSchema7 = {
+import { GioJsonSchema } from '../model/GioJsonSchema';
+
+export const oneOfExample: GioJsonSchema = {
   type: 'object',
   title: 'One of merge with properties',
   properties: {
