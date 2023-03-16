@@ -1,3 +1,10 @@
+# [5.17.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.16.0...v5.17.0) (2023-03-16)
+
+
+### Features
+
+* add webhook-advanced schema form ([18450e2](https://github.com/gravitee-io/gravitee-ui-particles/commit/18450e2f6a85fa1d10aba9047d36e16ca8f9b383))
+
 # [5.16.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.15.0...v5.16.0) (2023-03-15)
 
 
