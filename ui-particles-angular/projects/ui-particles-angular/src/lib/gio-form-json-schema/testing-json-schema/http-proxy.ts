@@ -185,6 +185,9 @@ export const fakeHttpProxy: GioJsonSchema = {
         },
         required: ['name', 'value'],
       },
+      gioConfig: {
+        uiType: 'gio-headers-array',
+      },
     },
 
     proxy: {
