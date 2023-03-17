@@ -7,6 +7,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
+import { GioFormJsonSchemaComponent } from './gio-form-json-schema.component';
 import { GioFormJsonSchemaModule } from './gio-form-json-schema.module';
 import { GioJsonSchema } from './model/GioJsonSchema';
 
@@ -112,6 +113,50 @@ describe('GioFormJsonSchema', () => {
       expect(banner).toBeDefined();
       expect(banner.textContent).toContain('banner title');
       expect(banner.textContent).toContain('banner text');
+    });
+  });
+
+  describe('GioFormJsonSchemaComponentisDisplayable', () => {
+    it('should return true if schema has properties', () => {
+      const schema: GioJsonSchema = {
+        type: 'object',
+        properties: {
+          simpleString: {
+            title: 'Simple String',
+            description: 'Simple string without validation',
+            type: 'string',
+          },
+        },
+      };
+      expect(GioFormJsonSchemaComponent.isDisplayable(schema)).toEqual(true);
+    });
+
+    it('should return true if schema has oneOf', () => {
+      const schema: GioJsonSchema = {
+        type: 'object',
+        oneOf: [
+          {
+            type: 'object',
+            properties: {
+              simpleString: {
+                title: 'Simple String',
+                description: 'Simple string without validation',
+                type: 'string',
+              },
+            },
+          },
+        ],
+      };
+      expect(GioFormJsonSchemaComponent.isDisplayable(schema)).toEqual(true);
+    });
+
+    it('should return false if schema has no properties or oneOf', () => {
+      const schema: GioJsonSchema = {
+        type: 'object',
+        properties: {},
+        oneOf: [],
+      };
+      expect(GioFormJsonSchemaComponent.isDisplayable(schema)).toEqual(false);
     });
   });
 });
