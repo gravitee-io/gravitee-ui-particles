@@ -16,7 +16,7 @@
 import { Component, ElementRef, Host, Input, OnDestroy, OnInit, Optional } from '@angular/core';
 import { ControlValueAccessor, FormGroup, NgControl } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
-import { cloneDeep, isObject } from 'lodash';
+import { cloneDeep, isEmpty, isObject } from 'lodash';
 import { debounceTime, distinctUntilChanged, filter, map, takeUntil } from 'rxjs/operators';
 import { combineLatest, Subject } from 'rxjs';
 import { FocusMonitor } from '@angular/cdk/a11y';
@@ -30,6 +30,11 @@ import { GioFormlyJsonSchemaService } from './gio-formly-json-schema.service';
   styleUrls: ['./gio-form-json-schema.component.scss'],
 })
 export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit, OnDestroy {
+  public static isDisplayable(jsonSchema: GioJsonSchema): boolean {
+    const properties = ['properties', 'oneOf', 'anyOf', 'allOf', '$ref', 'items'] as const;
+
+    return isObject(jsonSchema) && properties.some(property => !isEmpty(jsonSchema[property]));
+  }
   private unsubscribe$: Subject<void> = new Subject<void>();
 
   @Input()
