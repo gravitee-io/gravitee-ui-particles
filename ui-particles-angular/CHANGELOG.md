@@ -1,3 +1,10 @@
+# [5.18.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.17.1...v5.18.0) (2023-03-17)
+
+
+### Features
+
+* add static isDisplayable to be able to hide non displayable JsonSchema ([bd890b8](https://github.com/gravitee-io/gravitee-ui-particles/commit/bd890b8f589280e338149e1bb26b108cafc14193))
+
 ## [5.17.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.17.0...v5.17.1) (2023-03-16)
 
 
