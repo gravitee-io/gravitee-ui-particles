@@ -1,3 +1,10 @@
+# [5.19.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.18.0...v5.19.0) (2023-03-22)
+
+
+### Features
+
+* new item gio-loader ([9b8ceaf](https://github.com/gravitee-io/gravitee-ui-particles/commit/9b8ceaffebe2ffa358f46d7d484c023ded54477e))
+
 # [5.18.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.17.1...v5.18.0) (2023-03-17)
 
 
