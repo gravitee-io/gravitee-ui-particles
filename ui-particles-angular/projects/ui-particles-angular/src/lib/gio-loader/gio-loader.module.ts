@@ -15,7 +15,8 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GioIconsModule } from 'ui-particles-angular';
+
+import { GioIconsModule } from '../gio-icons/gio-icons.module';
 
 import { GioLoaderComponent } from './gio-loader.component';
 
