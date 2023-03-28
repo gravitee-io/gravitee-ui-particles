@@ -1,3 +1,10 @@
+## [5.19.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.19.0...v5.19.1) (2023-03-28)
+
+
+### Bug Fixes
+
+* **loader:** export gio-loader in public api ([98aa612](https://github.com/gravitee-io/gravitee-ui-particles/commit/98aa612464b422d239def52caaca4ef917e92f92))
+
 # [5.19.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.18.0...v5.19.0) (2023-03-22)
 
 
