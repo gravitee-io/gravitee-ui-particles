@@ -67,3 +67,6 @@ export * from './gio-form-focus-first-invalid/gio-form-focus-first-invalid.modul
 export * from './gio-monaco-editor/gio-monaco-editor.component';
 export * from './gio-monaco-editor/gio-monaco-editor.module';
 export * from './gio-monaco-editor/gio-monaco-editor.harness';
+
+export * from './gio-loader/gio-loader.module';
+export * from './gio-loader/gio-loader.component';
