@@ -8,7 +8,8 @@ Try to scroll and focus on the first invalid field of a form.
 
 ## Usage
 
-Add this directive to the form element.
+### On submit form
+Add this directive to the form element. When the form is submitted, the first invalid field will be focused.
 
 Example :
 
@@ -19,3 +20,15 @@ Example :
   <input type="submit" />
 </form>
 ```
+
+### On click button
+Add this directive to the button element. When the button is clicked, the first invalid field will be focused.
+
+Example :
+
+```html
+<form>
+  <input type="text" name="name" required />
+  <input type="email" name="email" required />
+  <button type="button" gioFormFocusInvalid>Go to first form error</button>
+</form>

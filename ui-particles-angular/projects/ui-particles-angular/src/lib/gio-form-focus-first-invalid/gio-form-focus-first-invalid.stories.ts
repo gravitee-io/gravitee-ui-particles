@@ -20,16 +20,17 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 
 import { GioSaveBarModule } from '../gio-save-bar/gio-save-bar.module';
 import { GioFormTagsInputModule } from '../gio-form-tags-input/gio-form-tags-input.module';
 
-import { GioFormFocusInvalidDirective } from './gio-form-focus-first-invalid.directive';
+import { GioFormFocusInvalidFormDirective } from './gio-form-focus-first-invalid.directive';
 import { GioFormFocusInvalidModule } from './gio-form-focus-first-invalid.module';
 
 export default {
   title: 'Components / Form Focus invalid',
-  component: GioFormFocusInvalidDirective,
+  component: GioFormFocusInvalidFormDirective,
   decorators: [
     moduleMetadata({
       imports: [
@@ -40,6 +41,7 @@ export default {
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
+        MatButtonModule,
         GioFormTagsInputModule,
       ],
     }),
@@ -104,10 +106,18 @@ export const Demo: Story = {
         <br *ngFor="let item of [].constructor(30)">
 
       </div>
+      <p>Focusing the 1st input in error when form is submitted</p>
       <gio-save-bar
         [creationMode]="true"
         [form]="form">
       </gio-save-bar>
+
+      <p>Focusing the 1st input in error with simple button</p>
+      <button
+        type="button"
+        gioFormFocusInvalid
+        mat-raised-button
+        >Go to first form error</button>
     </form>
     `,
       props: {

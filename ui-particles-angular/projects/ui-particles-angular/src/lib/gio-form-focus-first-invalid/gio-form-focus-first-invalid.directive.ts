@@ -16,14 +16,10 @@
 import { Directive, HostListener, Renderer2, Optional } from '@angular/core';
 import { FormGroupDirective } from '@angular/forms';
 
-@Directive({
-  selector: 'form[gioFormFocusInvalid]',
-})
-export class GioFormFocusInvalidDirective {
+@Directive()
+export class GioBaseFormFocusInvalidDirective {
   constructor(private readonly renderer: Renderer2, @Optional() protected readonly formGroupDirective: FormGroupDirective) {}
-
-  @HostListener('submit')
-  public onFormSubmit() {
+  protected focusOnFirstInvalid() {
     const selector = '.ng-invalid[formControlName],input.ng-invalid,mat-select.ng-invalid,textarea.ng-invalid,.gio-ng-invalid';
     try {
       // Mark all controls as touched to display errors
@@ -47,5 +43,25 @@ export class GioFormFocusInvalidDirective {
       // Best effort. If the focus doesn't work it's not very important
       // 🧪 Useful to avoid som error in tests
     }
+  }
+}
+
+@Directive({
+  selector: 'form[gioFormFocusInvalid]',
+})
+export class GioFormFocusInvalidFormDirective extends GioBaseFormFocusInvalidDirective {
+  @HostListener('submit')
+  public onFormSubmit() {
+    this.focusOnFirstInvalid();
+  }
+}
+
+@Directive({
+  selector: 'button[gioFormFocusInvalid]',
+})
+export class GioButtonFocusInvalidButtonDirective extends GioBaseFormFocusInvalidDirective {
+  @HostListener('click')
+  public onClick() {
+    this.focusOnFirstInvalid();
   }
 }
