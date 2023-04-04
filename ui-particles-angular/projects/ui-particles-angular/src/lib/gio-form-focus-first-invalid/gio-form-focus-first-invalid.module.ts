@@ -15,10 +15,10 @@
  */
 import { NgModule } from '@angular/core';
 
-import { GioFormFocusInvalidDirective } from './gio-form-focus-first-invalid.directive';
+import { GioFormFocusInvalidFormDirective, GioButtonFocusInvalidButtonDirective } from './gio-form-focus-first-invalid.directive';
 
 @NgModule({
-  declarations: [GioFormFocusInvalidDirective],
-  exports: [GioFormFocusInvalidDirective],
+  declarations: [GioFormFocusInvalidFormDirective, GioButtonFocusInvalidButtonDirective],
+  exports: [GioFormFocusInvalidFormDirective, GioButtonFocusInvalidButtonDirective],
 })
 export class GioFormFocusInvalidModule {}
