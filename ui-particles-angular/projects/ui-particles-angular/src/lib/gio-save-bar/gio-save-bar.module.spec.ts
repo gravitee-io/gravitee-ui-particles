@@ -37,6 +37,8 @@ describe('GioSaveBarModule', () => {
           <gio-save-bar
             [opened]="opened"
             [invalidState]="invalidState"
+            [hideSubmitButton]="hideSubmitButton"
+            [hideDiscardButton]="hideDiscardButton"
             (resetClicked)="onReset($event)"
             (submitted)="onSubmit($event)"
             (submittedInvalidState)="onSubmitInvalidState($event)"
@@ -47,6 +49,8 @@ describe('GioSaveBarModule', () => {
     class TestComponent {
       public opened = false;
       public invalidState = false;
+      public hideSubmitButton = false;
+      public hideDiscardButton = false;
       public onReset = onResetMock;
       public onSubmit = onSubmitMock;
       public onSubmitInvalidState = onSubmitInvalidStateMock;
@@ -113,6 +117,19 @@ describe('GioSaveBarModule', () => {
       await saveBar.clickSubmit();
       expect(onSubmitMock).not.toHaveBeenCalled();
       expect(onSubmitInvalidStateMock).toHaveBeenCalled();
+    });
+
+    it('should hide submit & discard button', async () => {
+      fixture.detectChanges();
+
+      const saveBar = await loader.getHarness(GioSaveBarHarness);
+      component.opened = true;
+      component.hideSubmitButton = true;
+      component.hideDiscardButton = true;
+      fixture.detectChanges();
+      expect(await saveBar.isVisible()).toEqual(true);
+      expect(await saveBar.isSubmitButtonVisible()).toEqual(false);
+      expect(await saveBar.isResetButtonVisible()).toEqual(false);
     });
   });
 
@@ -241,11 +258,12 @@ describe('GioSaveBarModule', () => {
       template: `
         <div>
           <input />
-          <gio-save-bar creationMode="true" (submitted)="onSubmit($event)"></gio-save-bar>
+          <gio-save-bar creationMode="true" [hideSubmitButton]="hideSubmitButton" (submitted)="onSubmit($event)"></gio-save-bar>
         </div>
       `,
     })
     class TestComponent {
+      public hideSubmitButton = false;
       public onSubmit = onSubmitMock;
     }
 
@@ -279,6 +297,16 @@ describe('GioSaveBarModule', () => {
 
       await saveBar.clickSubmit();
       expect(onSubmitMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('should hide submit button', async () => {
+      fixture.detectChanges();
+
+      const saveBar = await loader.getHarness(GioSaveBarHarness);
+      fixture.componentInstance.hideSubmitButton = true;
+      fixture.detectChanges();
+      expect(await saveBar.isSubmitButtonVisible()).toEqual(false);
+      expect(await saveBar.isResetButtonVisible()).toEqual(false);
     });
   });
 });

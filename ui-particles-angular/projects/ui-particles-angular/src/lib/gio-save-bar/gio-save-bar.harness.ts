@@ -19,15 +19,16 @@ import { ComponentHarness } from '@angular/cdk/testing';
 export class GioSaveBarHarness extends ComponentHarness {
   public static hostSelector = 'gio-save-bar';
 
-  private readonly resetButtonSelector = '.save-bar__content__reset-button';
-  private readonly submitButtonSelector = '.save-bar__content__submit-button';
+  private readonly cardSelector = '.save-bar__content';
+  private readonly resetButtonSelector = '.save-bar__content__actions__reset-button';
+  private readonly submitButtonSelector = '.save-bar__content__actions__submit-button';
 
   protected getSubmitButton = this.locatorFor(this.submitButtonSelector);
   protected getResetButton = this.locatorFor(this.resetButtonSelector);
 
   public async isVisible(): Promise<boolean> {
-    const submitButton = await this.locatorForOptional(this.submitButtonSelector)();
-    return submitButton !== null;
+    const card = await this.locatorForOptional(this.cardSelector)();
+    return card !== null;
   }
 
   public async clickSubmit(): Promise<void> {
@@ -40,6 +41,11 @@ export class GioSaveBarHarness extends ComponentHarness {
   public async isSubmitButtonInvalid(): Promise<boolean> {
     const submitButton = await this.getSubmitButton();
     return submitButton.hasClass('invalid');
+  }
+
+  public async isSubmitButtonVisible(): Promise<boolean> {
+    const submitButton = await this.locatorForOptional(this.submitButtonSelector)();
+    return submitButton !== null;
   }
 
   public async isResetButtonVisible(): Promise<boolean> {

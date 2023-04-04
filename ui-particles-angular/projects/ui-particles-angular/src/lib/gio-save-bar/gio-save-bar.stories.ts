@@ -18,6 +18,7 @@ import { Story } from '@storybook/angular/types-7-0';
 import { action } from '@storybook/addon-actions';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 import { GioSaveBarComponent } from './gio-save-bar.component';
 import { GioSaveBarModule } from './gio-save-bar.module';
@@ -27,7 +28,7 @@ export default {
   component: GioSaveBarComponent,
   decorators: [
     moduleMetadata({
-      imports: [FormsModule, GioSaveBarModule, BrowserAnimationsModule, ReactiveFormsModule],
+      imports: [FormsModule, MatButtonModule, GioSaveBarModule, BrowserAnimationsModule, ReactiveFormsModule],
     }),
   ],
 } as Meta;
@@ -118,6 +119,40 @@ export const SimpleUsageInCreationMode: Story = {
        <gio-save-bar
         [creationMode]="true"
         [opened]="true">
+      </gio-save-bar>
+    </div>
+    `,
+  }),
+};
+
+export const CustomInnerButtonInCreationMode: Story = {
+  name: 'Creation Mode / Custom Inner Button',
+  render: () => ({
+    template: `
+    <div style="padding: 16px">
+       <gio-save-bar
+        [creationMode]="true"
+        [hideSubmitButton]="true"
+        >
+        <button mat-flat-button color="primary">Next</button>
+      </gio-save-bar>
+    </div>
+    `,
+  }),
+};
+
+export const CustomInnerButtonInUpdateMode: Story = {
+  name: 'Update Mode / Custom Inner Button',
+  render: () => ({
+    template: `
+    <div style="padding: 16px">
+       <gio-save-bar
+        [creationMode]="false"
+        [opened]="true"
+        [hideSubmitButton]="true"
+        [hideDiscardButton]="true"
+        >
+        <button mat-flat-button color="primary">Next</button>
       </gio-save-bar>
     </div>
     `,
