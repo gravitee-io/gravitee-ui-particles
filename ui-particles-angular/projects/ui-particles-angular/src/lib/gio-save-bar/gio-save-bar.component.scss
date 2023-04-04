@@ -50,18 +50,19 @@ $typography: map.get(gio.$mat-theme, typography);
     @include mat.typography-level($typography, body-1);
   }
 
-  &__reset-button {
-    margin-right: 16px;
-  }
+  &__actions {
+    display: flex;
+    gap: 16px;
 
-  &__submit-button {
-    &.invalid {
-      background-color: mat.get-color-from-palette(gio.$mat-primary-palette, 'lighter');
-      color: mat.get-color-from-palette(gio.$mat-primary-palette, 'lighter-contrast');
+    &__submit-button {
+      &.invalid {
+        background-color: mat.get-color-from-palette(gio.$mat-primary-palette, 'lighter');
+        color: mat.get-color-from-palette(gio.$mat-primary-palette, 'lighter-contrast');
 
-      &:hover:enabled {
-        background-color: mat.get-color-from-palette(gio.$mat-primary-palette, 'default');
-        color: mat.get-color-from-palette(gio.$mat-primary-palette, 'default-contrast');
+        &:hover:enabled {
+          background-color: mat.get-color-from-palette(gio.$mat-primary-palette, 'default');
+          color: mat.get-color-from-palette(gio.$mat-primary-palette, 'default-contrast');
+        }
       }
     }
   }

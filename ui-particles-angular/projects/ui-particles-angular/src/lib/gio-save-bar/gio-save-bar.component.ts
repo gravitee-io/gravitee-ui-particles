@@ -64,6 +64,12 @@ export class GioSaveBarComponent {
   @Input()
   public formInitialValues?: unknown;
 
+  @Input()
+  public hideSubmitButton = false;
+
+  @Input()
+  public hideDiscardButton = false;
+
   @Output()
   public resetClicked = new EventEmitter<void>();
 

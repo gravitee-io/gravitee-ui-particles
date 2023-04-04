@@ -19,12 +19,20 @@
 <div *ngIf="isOpen" [@slideUpDown] [@.disabled]="creationMode">
   <mat-card class="save-bar__content" [class.mat-elevation-z3]="creationMode" [class.mat-elevation-z6]="!creationMode">
     <div class="save-bar__content__label">{{ creationMode ? '' : 'You have unsaved changes' }}</div>
-    <div>
-      <button *ngIf="!creationMode" class="save-bar__content__reset-button" mat-button type="button" (click)="onResetClicked()">
+    <div class="save-bar__content__actions">
+      <button
+        *ngIf="!creationMode && !hideDiscardButton"
+        class="save-bar__content__actions__reset-button"
+        mat-button
+        type="button"
+        (click)="onResetClicked()"
+      >
         Discard
       </button>
+      <ng-content></ng-content>
       <button
-        class="save-bar__content__submit-button"
+        *ngIf="!hideSubmitButton"
+        class="save-bar__content__actions__submit-button"
         [class.invalid]="(form && form.invalid) || invalidState"
         mat-flat-button
         color="primary"
