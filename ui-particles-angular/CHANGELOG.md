@@ -1,3 +1,12 @@
+# [5.20.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.19.1...v5.20.0) (2023-04-05)
+
+
+### Features
+
+* add an ignore directive for the focus-on-first-invalid directive ([44274ef](https://github.com/gravitee-io/gravitee-ui-particles/commit/44274efe1d77357d06887309589d4ceaccbadc19))
+* add simple button to focus on first invalide field in form ([1651f62](https://github.com/gravitee-io/gravitee-ui-particles/commit/1651f623534957a10415c5ff536a8ac9b6470ee8))
+* allow to add inner content like button inside save-bar ([5ec437b](https://github.com/gravitee-io/gravitee-ui-particles/commit/5ec437b29eb32867195eccfadf3c550ba214df63))
+
 ## [5.19.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.19.0...v5.19.1) (2023-03-28)
 
 
