@@ -67,7 +67,7 @@ export const Demo: Story = {
 
         <mat-form-field>
           <mat-label>Input</mat-label>
-          <input matInput required formControlName="anInput">
+          <input gioFormFocusInvalidIgnore matInput required formControlName="anInput">
         </mat-form-field>
 
         <br *ngFor="let item of [].constructor(30)">

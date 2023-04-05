@@ -62,6 +62,7 @@ export * from './gio-form-slide-toogle/gio-form-slide-toggle.module';
 export * from './gio-form-slide-toogle/gio-form-label.directive';
 
 export * from './gio-form-focus-first-invalid/gio-form-focus-first-invalid.directive';
+export * from './gio-form-focus-first-invalid/gio-form-focus-first-invalid-ignore.directive';
 export * from './gio-form-focus-first-invalid/gio-form-focus-first-invalid.module';
 
 export * from './gio-monaco-editor/gio-monaco-editor.component';
