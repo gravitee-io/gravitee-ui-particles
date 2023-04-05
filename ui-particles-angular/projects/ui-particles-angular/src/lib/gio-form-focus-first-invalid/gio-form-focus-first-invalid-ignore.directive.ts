@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { NgModule } from '@angular/core';
+import { Directive } from '@angular/core';
 
-import { GioFormFocusInvalidIgnoreDirective } from './gio-form-focus-first-invalid-ignore.directive';
-import { GioFormFocusInvalidFormDirective, GioButtonFocusInvalidButtonDirective } from './gio-form-focus-first-invalid.directive';
+export const GIO_FORM_FOCUS_INVALID_IGNORE_SELECTOR = 'gioFormFocusInvalidIgnore';
 
-@NgModule({
-  declarations: [GioFormFocusInvalidFormDirective, GioButtonFocusInvalidButtonDirective, GioFormFocusInvalidIgnoreDirective],
-  exports: [GioFormFocusInvalidFormDirective, GioButtonFocusInvalidButtonDirective, GioFormFocusInvalidIgnoreDirective],
+@Directive({
+  // eslint-disable-next-line @angular-eslint/directive-selector
+  selector: `[${GIO_FORM_FOCUS_INVALID_IGNORE_SELECTOR}]`,
 })
-export class GioFormFocusInvalidModule {}
+export class GioFormFocusInvalidIgnoreDirective {}

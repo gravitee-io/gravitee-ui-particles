@@ -13,13 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, ElementRef, Host, Input, OnDestroy, OnInit, Optional } from '@angular/core';
+import { Component, ElementRef, Host, HostBinding, Input, OnDestroy, OnInit, Optional } from '@angular/core';
 import { ControlValueAccessor, FormGroup, NgControl } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { cloneDeep, isEmpty, isObject } from 'lodash';
 import { debounceTime, distinctUntilChanged, filter, map, takeUntil } from 'rxjs/operators';
 import { combineLatest, Subject } from 'rxjs';
 import { FocusMonitor } from '@angular/cdk/a11y';
+
+import { GIO_FORM_FOCUS_INVALID_IGNORE_SELECTOR } from '../gio-form-focus-first-invalid/gio-form-focus-first-invalid-ignore.directive';
 
 import { GioJsonSchema } from './model/GioJsonSchema';
 import { GioFormlyJsonSchemaService } from './gio-formly-json-schema.service';
@@ -36,6 +38,9 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
     return isObject(jsonSchema) && properties.some(property => !isEmpty(jsonSchema[property]));
   }
   private unsubscribe$: Subject<void> = new Subject<void>();
+
+  @HostBinding(`attr.${GIO_FORM_FOCUS_INVALID_IGNORE_SELECTOR}`)
+  private gioFormFocusInvalidIgnore = true;
 
   @Input()
   public set jsonSchema(jsonSchema: GioJsonSchema) {

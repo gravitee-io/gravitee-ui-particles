@@ -13,14 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Directive, HostListener, Renderer2, Optional } from '@angular/core';
+import { Directive, HostListener, Optional, ElementRef } from '@angular/core';
 import { FormGroupDirective } from '@angular/forms';
+
+import { GIO_FORM_FOCUS_INVALID_IGNORE_SELECTOR } from './gio-form-focus-first-invalid-ignore.directive';
 
 @Directive()
 export class GioBaseFormFocusInvalidDirective {
-  constructor(private readonly renderer: Renderer2, @Optional() protected readonly formGroupDirective: FormGroupDirective) {}
+  constructor(private readonly hostElement: ElementRef, @Optional() protected readonly formGroupDirective: FormGroupDirective) {}
+
   protected focusOnFirstInvalid() {
     const selector = '.ng-invalid[formControlName],input.ng-invalid,mat-select.ng-invalid,textarea.ng-invalid,.gio-ng-invalid';
+
     try {
       // Mark all controls as touched to display errors
       if (this.formGroupDirective) {
@@ -28,12 +32,9 @@ export class GioBaseFormFocusInvalidDirective {
         this.formGroupDirective.control.updateValueAndValidity();
       }
 
-      let invalidControl = this.renderer.selectRootElement(selector, true);
-
-      // If the form is a GioFormJsonSchema, we need to focus the first invalid control inside
-      if (invalidControl.tagName === 'GIO-FORM-JSON-SCHEMA') {
-        invalidControl = invalidControl.querySelector(selector);
-      }
+      const parentForm = (this.hostElement.nativeElement as Element).closest('form');
+      const invalidFieldElements = parentForm?.querySelectorAll<HTMLElement>(selector);
+      const invalidControl = this.getFirstInvalidControl(invalidFieldElements);
 
       if (invalidControl) {
         invalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -43,6 +44,15 @@ export class GioBaseFormFocusInvalidDirective {
       // Best effort. If the focus doesn't work it's not very important
       // 🧪 Useful to avoid som error in tests
     }
+  }
+
+  private getFirstInvalidControl(invalidFieldElements: NodeListOf<HTMLElement> | undefined, index = 0): HTMLElement | undefined {
+    let invalidControl = invalidFieldElements?.item(index);
+    const hasIgnoreAttribute = (invalidControl as HTMLInputElement)?.attributes?.getNamedItem(GIO_FORM_FOCUS_INVALID_IGNORE_SELECTOR);
+    if (hasIgnoreAttribute) {
+      invalidControl = this.getFirstInvalidControl(invalidFieldElements, index + 1);
+    }
+    return invalidControl;
   }
 }
 
