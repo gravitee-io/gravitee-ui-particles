@@ -1,7 +1,7 @@
 import { InteractivityChecker } from '@angular/cdk/a11y';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatInputHarness } from '@angular/material/input/testing';
@@ -34,6 +34,7 @@ describe('GioFormJsonSchema', () => {
         <button type="submit">Submit</button>
       </form>
     `,
+    changeDetection: ChangeDetectionStrategy.OnPush,
   })
   class TestComponent {
     public form = new FormGroup({
@@ -75,6 +76,7 @@ describe('GioFormJsonSchema', () => {
       fixture.detectChanges();
       expect(testComponent.form.touched).toEqual(false);
       expect(testComponent.form.dirty).toEqual(false);
+      expect(testComponent.form.invalid).toEqual(false);
 
       const simpleStringInput = await loader.getHarness(MatInputHarness.with({ selector: '[id*="simpleString"]' }));
       await simpleStringInput.setValue('What the fox say?');
@@ -84,10 +86,29 @@ describe('GioFormJsonSchema', () => {
       });
       expect(testComponent.form.touched).toEqual(true);
       expect(testComponent.form.dirty).toEqual(true);
+      expect(testComponent.form.invalid).toEqual(false);
 
       // No banner on simple elements
       const banner = fixture.nativeElement.querySelector('.banner');
       expect(banner).toBeNull();
+    });
+
+    it('should init invalid form', async () => {
+      fixture.componentInstance.jsonSchema = {
+        type: 'object',
+        properties: {
+          simpleString: {
+            title: 'Simple String',
+            description: 'Simple string without validation',
+            type: 'string',
+          },
+        },
+        required: ['simpleString'],
+      };
+      fixture.detectChanges();
+      expect(testComponent.form.touched).toEqual(false);
+      expect(testComponent.form.dirty).toEqual(false);
+      expect(testComponent.form.invalid).toEqual(true);
     });
 
     it('should show banner', async () => {
@@ -116,7 +137,7 @@ describe('GioFormJsonSchema', () => {
     });
   });
 
-  describe('GioFormJsonSchemaComponentisDisplayable', () => {
+  describe('GioFormJsonSchemaComponent.isDisplayable', () => {
     it('should return true if schema has properties', () => {
       const schema: GioJsonSchema = {
         type: 'object',
