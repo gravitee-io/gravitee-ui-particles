@@ -4,7 +4,8 @@ import { Meta, Story } from '@storybook/addon-docs';
 
 # Form Focus invalid
 
-Try to scroll and focus on the first invalid field of a form.
+Try to scroll and focus on the first invalid field of a form. 
+The FormFocusInvalid get all invalid fields in parent form and find the first one to focus on.
 
 ## Usage
 
@@ -32,3 +33,24 @@ Example :
   <input type="email" name="email" required />
   <button type="button" gioFormFocusInvalid>Go to first form error</button>
 </form>
+```
+
+### Ignore fields
+Add this directive `gioFormFocusInvalidIgnore` to the field to ignore it.
+As the FormFocusInvalid get all invalid fields in parent form this directive will ignore the field to allow to focus on the next one.
+
+You can also add this attribute to host component (like custom form control) always to ignore it. If the component itself contains form elements it allows to focus on them.
+
+```ts 
+import {GIO_FORM_FOCUS_INVALID_IGNORE_SELECTOR} from "@gravitee/ui-particles-angular";
+
+...
+
+@Component(...)
+export class CustomFormComponent implements ControlValueAccessor {
+  ...
+  @HostBinding(`attr.${GIO_FORM_FOCUS_INVALID_IGNORE_SELECTOR}`)
+  private gioFormFocusInvalidIgnore = true;
+  ...
+}
+```
