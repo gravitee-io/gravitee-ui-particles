@@ -13,12 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, ElementRef, Host, HostBinding, Input, OnDestroy, OnInit, Optional } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Host,
+  HostBinding,
+  Input,
+  OnDestroy,
+  OnInit,
+  Optional,
+} from '@angular/core';
 import { ControlValueAccessor, FormGroup, NgControl } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { cloneDeep, isEmpty, isObject } from 'lodash';
 import { debounceTime, distinctUntilChanged, filter, map, takeUntil } from 'rxjs/operators';
-import { combineLatest, Subject } from 'rxjs';
+import { merge, Subject } from 'rxjs';
 import { FocusMonitor } from '@angular/cdk/a11y';
 
 import { GIO_FORM_FOCUS_INVALID_IGNORE_SELECTOR } from '../gio-form-focus-first-invalid/gio-form-focus-first-invalid-ignore.directive';
@@ -31,7 +42,7 @@ import { GioFormlyJsonSchemaService } from './gio-formly-json-schema.service';
   template: `<formly-form *ngIf="formGroup" [fields]="fields" [options]="options" [form]="formGroup" [model]="model"></formly-form>`,
   styleUrls: ['./gio-form-json-schema.component.scss'],
 })
-export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
   public static isDisplayable(jsonSchema: GioJsonSchema): boolean {
     const properties = ['properties', 'oneOf', 'anyOf', 'allOf', '$ref', 'items'] as const;
 
@@ -72,6 +83,7 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
     private readonly gioFormlyJsonSchema: GioFormlyJsonSchemaService,
     private readonly elRef: ElementRef,
     private readonly fm: FocusMonitor,
+    private readonly changeDetectorRef: ChangeDetectorRef,
     @Host() @Optional() public readonly ngControl?: NgControl,
   ) {
     if (ngControl) {
@@ -90,7 +102,29 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
   }
 
   public ngOnInit(): void {
-    // When the parent form is touched, mark all the sub formGroup as touched ony once
+    // Subscribe to state changes to manage touches, status and value
+    this.stateChanges$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
+      const { status, value, touched } = this.formGroup;
+
+      if (touched) {
+        this._onTouched();
+        this.touched = true;
+      }
+
+      if (this.touched) {
+        this._onChange(value);
+      }
+
+      if (status === 'VALID') {
+        this.ngControl?.control?.setErrors(null);
+      }
+      if (status === 'INVALID') {
+        this.ngControl?.control?.setErrors({ invalid: true });
+      }
+      this.changeDetectorRef.detectChanges();
+    });
+
+    // When the parent form is touched, mark all the sub formGroup as touched if not already touched
     const parentControl = this.ngControl?.control?.parent;
     parentControl?.statusChanges
       ?.pipe(
@@ -104,36 +138,16 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
         this.stateChanges$.next();
       });
 
-    // To simulate the behavior of classic form controls, emit value only when the form is touched
-    // Allow to keep the formControl pristine until the user interact with it
-    combineLatest([this.formGroup.statusChanges, this.formGroup.valueChanges])
-      .pipe(
-        takeUntil(this.unsubscribe$),
-        // Group all valueChanges events emit by formly in a single one
-        debounceTime(100),
-      )
+    // Group all valueChanges events emit by formly in a single one
+    merge(this.formGroup.statusChanges, this.formGroup.valueChanges)
+      .pipe(takeUntil(this.unsubscribe$), debounceTime(100))
       .subscribe(() => {
         this.stateChanges$.next();
       });
+  }
 
-    this.stateChanges$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
-      const { status, value, touched } = this.formGroup;
-      if (touched) {
-        this._onTouched();
-        this.touched = true;
-      }
-
-      if (this.touched) {
-        this._onChange(value);
-
-        if (status === 'VALID') {
-          this.ngControl?.control?.setErrors(null);
-        }
-        if (status === 'INVALID') {
-          this.ngControl?.control?.setErrors({ invalid: true });
-        }
-      }
-    });
+  public ngAfterViewInit(): void {
+    this.stateChanges$.next();
   }
 
   public ngOnDestroy() {
