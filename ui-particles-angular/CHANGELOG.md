@@ -1,3 +1,10 @@
+## [5.20.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.20.0...v5.20.1) (2023-04-11)
+
+
+### Bug Fixes
+
+* invalid form-json-schema control on init if needed ([de0f6de](https://github.com/gravitee-io/gravitee-ui-particles/commit/de0f6de470eb8dc16cd782616ba1be7d681fa024))
+
 # [5.20.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.19.1...v5.20.0) (2023-04-05)
 
 
