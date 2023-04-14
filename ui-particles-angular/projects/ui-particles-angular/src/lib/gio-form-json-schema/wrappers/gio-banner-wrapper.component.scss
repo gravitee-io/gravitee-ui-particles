@@ -19,6 +19,14 @@
 
 $typography: map.get(gio.$mat-theme, typography);
 
+::ng-deep {
+  gio-banner-wrapper {
+    ul {
+      padding-inline-start: 16px;
+    }
+  }
+}
+
 .wrapper {
   padding: 8px 0;
 }
