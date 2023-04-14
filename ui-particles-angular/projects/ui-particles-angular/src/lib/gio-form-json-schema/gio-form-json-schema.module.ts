@@ -45,7 +45,7 @@ import {
   constValidationMessage,
 } from './util/validation-message.util';
 import { GioFormJsonSchemaComponent } from './gio-form-json-schema.component';
-import { GioFormFieldWrapperComponent } from './wrappers/gio-form-field-wrapper.component';
+import { GioBannerWrapperComponent as GioBannerWrapperComponent } from './wrappers/gio-banner-wrapper.component';
 import { bannerExtension } from './wrappers/gio-banner-extension';
 import { GioFjsMultiSchemaTypeComponent } from './type-component/multischema-type.component';
 import { GioFormlyJsonSchemaService } from './gio-formly-json-schema.service';
@@ -64,7 +64,7 @@ import { GioFjsCodeEditorTypeComponent } from './type-component/code-editor-type
     GioFjsToggleTypeComponent,
     GioFjsHeadersTypeComponent,
     GioFjsCodeEditorTypeComponent,
-    GioFormFieldWrapperComponent,
+    GioBannerWrapperComponent,
     GioPasswordEyeWrapperComponent,
   ],
   imports: [
@@ -89,7 +89,7 @@ import { GioFjsCodeEditorTypeComponent } from './type-component/code-editor-type
         { name: 'const', message: constValidationMessage },
       ],
       wrappers: [
-        { name: 'gio-with-banner', component: GioFormFieldWrapperComponent },
+        { name: 'gio-with-banner', component: GioBannerWrapperComponent },
         { name: 'gio-password-eye', component: GioPasswordEyeWrapperComponent },
       ],
       types: [

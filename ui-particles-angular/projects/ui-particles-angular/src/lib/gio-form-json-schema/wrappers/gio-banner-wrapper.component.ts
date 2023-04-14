@@ -17,8 +17,8 @@ import { FieldWrapper } from '@ngx-formly/core';
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'gio-form-field-wrapper',
-  templateUrl: 'gio-form-field-wrapper.component.html',
-  styleUrls: ['gio-form-field-wrapper.component.scss'],
+  selector: 'gio-banner-wrapper',
+  templateUrl: 'gio-banner-wrapper.component.html',
+  styleUrls: ['gio-banner-wrapper.component.scss'],
 })
-export class GioFormFieldWrapperComponent extends FieldWrapper {}
+export class GioBannerWrapperComponent extends FieldWrapper {}
