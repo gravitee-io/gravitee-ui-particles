@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, forwardRef } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component } from '@angular/core';
 
 import { GioMonacoEditorComponent } from './gio-monaco-editor.component';
 
@@ -25,13 +24,6 @@ import { GioMonacoEditorComponent } from './gio-monaco-editor.component';
 @Component({
   selector: 'gio-monaco-editor',
   template: '<input type="text" [value]="getValue" (input)="changeValue($any($event).target?.value)" />',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => GioMonacoEditorTestingComponent),
-      multi: true,
-    },
-  ],
 })
 export class GioMonacoEditorTestingComponent extends GioMonacoEditorComponent {
   public get getValue(): string {

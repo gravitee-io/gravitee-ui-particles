@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, forwardRef, Inject, Input, NgZone, OnDestroy } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, Input, NgZone, OnDestroy, Optional, Self } from '@angular/core';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { uniqueId } from 'lodash';
 import Monaco, { editor } from 'monaco-editor';
-import { Subject } from 'rxjs';
+import { ReplaySubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { GioMonacoEditorConfig, GIO_MONACO_EDITOR_CONFIG } from './models/GioMonacoEditorConfig';
@@ -31,15 +31,8 @@ export type MonacoEditorLanguageConfig = {
 
 @Component({
   selector: 'gio-monaco-editor',
-  template: ` <div *ngIf="loading">Loading...</div>`,
+  template: ` <div *ngIf="loaded$ | async">Loading...</div>`,
   styleUrls: ['./gio-monaco-editor.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => GioMonacoEditorComponent),
-      multi: true,
-    },
-  ],
 })
 export class GioMonacoEditorComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
   @Input()
@@ -48,9 +41,7 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
   @Input()
   public options: editor.IStandaloneEditorConstructionOptions = {};
 
-  public id = uniqueId('gio-monaco-editor-');
-
-  public loading = true;
+  public loaded$ = new ReplaySubject<boolean>(1);
 
   private defaultOptions: editor.IStandaloneEditorConstructionOptions = {
     contextmenu: false,
@@ -61,9 +52,9 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
     scrollBeyondLastLine: false,
   };
 
-  protected value = '';
+  public value = '';
   protected readOnly = false;
-  private standaloneCodeEditor?: editor.IStandaloneCodeEditor;
+  public standaloneCodeEditor?: editor.IStandaloneCodeEditor;
   private textModel?: editor.ITextModel;
 
   protected _onChange: (_value: string | null) => void = () => ({});
@@ -72,13 +63,19 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
   private unsubscribe$ = new Subject<void>();
 
   constructor(
+    public readonly hostElement: ElementRef,
     @Inject(GIO_MONACO_EDITOR_CONFIG) private readonly config: GioMonacoEditorConfig,
     private readonly monacoEditorService: GioMonacoEditorService,
     private readonly languageJsonService: GioLanguageJsonService,
-    private readonly hostElement: ElementRef,
     private readonly changeDetectorRef: ChangeDetectorRef,
     private readonly ngZone: NgZone,
+    @Optional() @Self() public readonly ngControl: NgControl,
   ) {
+    if (this.ngControl) {
+      // Set the value accessor directly (instead of providing
+      // NG_VALUE_ACCESSOR) to avoid running into a circular import
+      this.ngControl.valueAccessor = this;
+    }
     this.monacoEditorService.loadEditor();
   }
 
@@ -87,7 +84,7 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
     this.monacoEditorService.loaded$.pipe(takeUntil(this.unsubscribe$)).subscribe(({ monaco }) => {
       this.setupEditor(monaco);
 
-      this.loading = false;
+      this.loaded$.next(false);
       this.changeDetectorRef.detectChanges();
     });
   }
@@ -160,7 +157,8 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
     this.textModel?.onDidChangeContent(() => {
       const newValue = this.textModel?.getValue();
       this.ngZone.run(() => {
-        newValue && this._onChange(newValue);
+        this.value = newValue ?? '';
+        this._onChange(newValue ?? '');
         this._onTouched();
       });
     });

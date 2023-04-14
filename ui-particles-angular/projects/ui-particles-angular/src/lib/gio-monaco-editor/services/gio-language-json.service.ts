@@ -28,7 +28,7 @@ export class GioLanguageJsonService implements OnDestroy {
   private unsubscribe$ = new Subject<void>();
   private monaco?: typeof Monaco;
 
-  constructor(codeEditorService: GioMonacoEditorService) {
+  constructor(private readonly codeEditorService: GioMonacoEditorService) {
     codeEditorService.loaded$.pipe(takeUntil(this.unsubscribe$)).subscribe(event => {
       this.setup(event.monaco);
     });

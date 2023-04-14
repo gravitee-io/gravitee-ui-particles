@@ -18,13 +18,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { GioMonacoEditorFormFieldDirective } from './gio-monaco-editor-form-field.directive';
 import { GioMonacoEditorComponent } from './gio-monaco-editor.component';
 import { GioMonacoEditorConfig, GIO_MONACO_EDITOR_CONFIG } from './models/GioMonacoEditorConfig';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, ReactiveFormsModule],
-  declarations: [GioMonacoEditorComponent],
-  exports: [GioMonacoEditorComponent],
+  declarations: [GioMonacoEditorComponent, GioMonacoEditorFormFieldDirective],
+  exports: [GioMonacoEditorComponent, GioMonacoEditorFormFieldDirective],
   providers: [
     {
       provide: GIO_MONACO_EDITOR_CONFIG,

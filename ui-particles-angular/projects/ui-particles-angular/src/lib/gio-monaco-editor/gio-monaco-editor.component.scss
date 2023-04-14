@@ -17,4 +17,9 @@
   display: block;
   height: 100%;
   min-height: 150px;
+  transition: opacity 0.2s ease-out;
+}
+
+:host-context(.hidden) {
+  opacity: 0;
 }

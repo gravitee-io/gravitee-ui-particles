@@ -31,8 +31,10 @@ type GioBannerConfig =
   | {
       text: string;
     };
-
-type GioUiTypeConfig = 'gio-headers-array';
+/**
+ * Used to override the default formly type. It's useful when we want to use a custom component.
+ */
+type GioUiTypeConfig = 'gio-headers-array' | string;
 
 /**
  * Override the JSONSchema7 interface to add gioConfig

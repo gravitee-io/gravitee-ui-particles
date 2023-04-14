@@ -17,7 +17,8 @@ import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
 import { action } from '@storybook/addon-actions';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import GioJsonSchema from '../gio-form-json-schema/model/GioJsonSchema.json';
 
@@ -29,7 +30,7 @@ export default {
   component: GioMonacoEditorComponent,
   decorators: [
     moduleMetadata({
-      imports: [BrowserAnimationsModule, GioMonacoEditorModule, ReactiveFormsModule],
+      imports: [BrowserAnimationsModule, GioMonacoEditorModule, ReactiveFormsModule, MatFormFieldModule],
     }),
   ],
   parameters: {
@@ -109,4 +110,36 @@ export const WithValue: Story = {
       },
     }`,
   },
+};
+
+export const InsideMatFormField: Story = {
+  render: ({ value, disabled, languageConfig }) => {
+    const control = new FormControl({ value, disabled }, Validators.required);
+    control.valueChanges.subscribe(value => {
+      action('valueChanges')(value);
+    });
+    control.statusChanges.subscribe(status => {
+      action('statusChanges')(status);
+    });
+
+    return {
+      template: `
+      <mat-form-field style="width:100%;">
+        <mat-label>Monaco editor</mat-label>
+        <gio-monaco-editor gioMonacoEditorFormField [formControl]="control" [languageConfig]="languageConfig"></gio-monaco-editor>
+        <mat-error *ngIf="control.hasError('required')">This field is required</mat-error>
+      </mat-form-field>
+      <br>
+      <pre>{{ control.status }}</pre>
+      <pre>{{ control.dirty ? 'DIRTY' : 'PRISTINE' }}</pre>
+      <pre>{{ control.touched ? 'TOUCHED' : 'UNTOUCHED' }}</pre>
+      <pre>{{ control.value?.length < 1000 ? (control.value | json) : '...TL;TR...' }}</pre>
+      `,
+      props: {
+        control,
+        languageConfig,
+      },
+    };
+  },
+  args: {},
 };
