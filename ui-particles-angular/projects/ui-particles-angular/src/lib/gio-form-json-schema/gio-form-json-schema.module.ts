@@ -21,10 +21,12 @@ import { FormlyMaterialModule } from '@ngx-formly/material';
 import { A11yModule } from '@angular/cdk/a11y';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 import { GioIconsModule } from '../gio-icons/gio-icons.module';
 import { GioFormSlideToggleModule } from '../gio-form-slide-toogle/gio-form-slide-toggle.module';
 import { GioFormHeadersModule } from '../gio-form-headers/gio-form-headers.module';
+import { GioMonacoEditorModule } from '../gio-monaco-editor/gio-monaco-editor.module';
 
 import { GioFjsNullTypeComponent } from './type-component/null-type.component';
 import { GioFjsObjectTypeComponent } from './type-component/object-type.component';
@@ -50,6 +52,7 @@ import { GioFormlyJsonSchemaService } from './gio-formly-json-schema.service';
 import { GioFjsToggleTypeComponent } from './type-component/toggle-type.component';
 import { GioFjsHeadersTypeComponent } from './type-component/headers-type.component';
 import { GioPasswordEyeWrapperComponent, passwordEyeExtension } from './wrappers/gio-password-eye.component';
+import { GioFjsCodeEditorTypeComponent } from './type-component/code-editor-type.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +63,7 @@ import { GioPasswordEyeWrapperComponent, passwordEyeExtension } from './wrappers
     GioFjsArrayTypeComponent,
     GioFjsToggleTypeComponent,
     GioFjsHeadersTypeComponent,
+    GioFjsCodeEditorTypeComponent,
     GioFormFieldWrapperComponent,
     GioPasswordEyeWrapperComponent,
   ],
@@ -98,6 +102,11 @@ import { GioPasswordEyeWrapperComponent, passwordEyeExtension } from './wrappers
           component: GioFjsToggleTypeComponent,
         },
         {
+          name: 'gio-code-editor',
+          component: GioFjsCodeEditorTypeComponent,
+          wrappers: ['form-field'],
+        },
+        {
           name: 'gio-headers-array',
           component: GioFjsHeadersTypeComponent,
         },
@@ -112,9 +121,11 @@ import { GioPasswordEyeWrapperComponent, passwordEyeExtension } from './wrappers
     }),
     FormlyMaterialModule,
 
+    MatInputModule,
     GioIconsModule,
     GioFormSlideToggleModule,
     GioFormHeadersModule,
+    GioMonacoEditorModule,
 
     MatSlideToggleModule,
     MatButtonModule,
