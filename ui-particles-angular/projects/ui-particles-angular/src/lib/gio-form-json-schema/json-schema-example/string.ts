@@ -16,6 +16,7 @@
 import { GioJsonSchema } from '../model/GioJsonSchema';
 
 export const stringExample: GioJsonSchema = {
+  $schema: 'http://json-schema.org/draft-07/schema#',
   type: 'object',
   properties: {
     simpleString: {
@@ -51,6 +52,12 @@ export const stringExample: GioJsonSchema = {
       description: 'Simple string with password format',
       type: 'string',
       format: 'password',
+    },
+    codeEditor: {
+      title: 'Code editor',
+      description: 'String with monaco editor',
+      type: 'string',
+      format: 'gio-code-editor',
     },
   },
   required: ['requiredString'],

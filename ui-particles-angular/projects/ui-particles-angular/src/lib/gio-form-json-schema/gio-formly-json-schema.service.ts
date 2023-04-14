@@ -53,6 +53,8 @@ export class GioFormlyJsonSchemaService {
         ...mappedField.props,
         type: 'password',
       };
+    } else if (mapSource.type === 'string' && mapSource.format === 'gio-code-editor') {
+      mappedField.type = 'gio-code-editor';
     }
 
     return mappedField;

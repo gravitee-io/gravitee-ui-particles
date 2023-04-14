@@ -16,6 +16,7 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
+  ChangeDetectorRef,
   Directive,
   DoCheck,
   ElementRef,
@@ -124,10 +125,13 @@ export class GioMonacoEditorFormFieldDirective implements OnInit, DoCheck, MatFo
     private readonly elementRef: ElementRef,
     private readonly focusMonitor: FocusMonitor,
     private readonly renderer: Renderer2,
+    private readonly changeDetectorRef: ChangeDetectorRef,
     @Host() @Self() @Optional() public readonly hostGioMonacoEditorComponent: GioMonacoEditorComponent,
   ) {}
 
   public ngOnInit(): void {
+    this.stateChanges.pipe(takeUntil(this.unsubscribe$)).subscribe(() => this.changeDetectorRef.markForCheck());
+
     this.focusMonitor
       .monitor(this.elementRef.nativeElement, true)
       .pipe(takeUntil(this.unsubscribe$))
@@ -147,6 +151,7 @@ export class GioMonacoEditorFormFieldDirective implements OnInit, DoCheck, MatFo
         this.renderer.setStyle(this.elementRef.nativeElement, 'height', `${height}px`);
 
         this.hostGioMonacoEditorComponent.standaloneCodeEditor?.layout();
+        this.stateChanges.next();
       });
     });
   }

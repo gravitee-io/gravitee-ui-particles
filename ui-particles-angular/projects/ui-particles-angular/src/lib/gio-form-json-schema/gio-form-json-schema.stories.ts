@@ -47,6 +47,7 @@ import { kafkaAdvancedExample } from './json-schema-example/kafka-advanced';
 import { mqttAdvancedExample } from './json-schema-example/mqtt-advanced';
 import { httpProxyExample } from './json-schema-example/http-proxy';
 import { webhookAdvancedExample } from './json-schema-example/webhook-advanced';
+import { codeEditorExample } from './json-schema-example/code-editor';
 
 @NgModule({
   declarations: [DemoComponent],
@@ -180,6 +181,13 @@ export const references: Story = {
   name: 'References',
   args: {
     jsonSchema: referencesExample,
+  },
+};
+
+export const codeEditor: Story = {
+  name: 'Code Editor',
+  args: {
+    jsonSchema: codeEditorExample,
   },
 };
 

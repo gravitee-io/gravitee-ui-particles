@@ -13,7 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, Input, NgZone, OnDestroy, Optional, Self } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Inject,
+  Input,
+  NgZone,
+  OnDestroy,
+  Optional,
+  Self,
+} from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { uniqueId } from 'lodash';
 import Monaco, { editor } from 'monaco-editor';
@@ -33,6 +45,7 @@ export type MonacoEditorLanguageConfig = {
   selector: 'gio-monaco-editor',
   template: ` <div *ngIf="loaded$ | async">Loading...</div>`,
   styleUrls: ['./gio-monaco-editor.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GioMonacoEditorComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
   @Input()

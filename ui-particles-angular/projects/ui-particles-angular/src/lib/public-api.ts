@@ -66,6 +66,7 @@ export * from './gio-form-focus-first-invalid/gio-form-focus-first-invalid-ignor
 export * from './gio-form-focus-first-invalid/gio-form-focus-first-invalid.module';
 
 export * from './gio-monaco-editor/gio-monaco-editor.component';
+export * from './gio-monaco-editor/gio-monaco-editor-form-field.directive';
 export * from './gio-monaco-editor/gio-monaco-editor.module';
 export * from './gio-monaco-editor/gio-monaco-editor.harness';
 
