@@ -1,3 +1,13 @@
+# [5.21.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.20.1...v5.21.0) (2023-04-18)
+
+
+### Features
+
+* add new icons: compare, connection, folder-move, message, and rocket ([d9f808a](https://github.com/gravitee-io/gravitee-ui-particles/commit/d9f808ad35572541afac61280257fcb7d946606a))
+* improve banner with ui + li element ([e4b2f47](https://github.com/gravitee-io/gravitee-ui-particles/commit/e4b2f473fc12839580bf9b106b8b2c755231e485))
+* make monaco editor work with mat-form-field ([8d077d1](https://github.com/gravitee-io/gravitee-ui-particles/commit/8d077d17fb6fcf0a7fbea1cf4ba3c64838b5461c))
+* support code editor with json-format ([0abda79](https://github.com/gravitee-io/gravitee-ui-particles/commit/0abda79b4d77cbfe0350a5f1386fef9030806c9b))
+
 ## [5.20.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.20.0...v5.20.1) (2023-04-11)
 
 
