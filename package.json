@@ -38,7 +38,7 @@
     "husky": "8.0.3",
     "license-check-and-add": "4.0.5",
     "lint-staged": "13.1.0",
-    "prettier": "2.8.2",
+    "prettier": "2.8.8",
     "sort-package-json": "2.1.0",
     "storybook-addon-designs": "6.2.1",
     "svg-parser": "2.0.4"
