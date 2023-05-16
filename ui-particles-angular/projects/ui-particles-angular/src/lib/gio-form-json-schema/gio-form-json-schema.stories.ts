@@ -82,11 +82,19 @@ export default {
       disable: true,
     },
   },
-  render: ({ jsonSchema, initialValue }) => ({
-    template: `<gio-demo [jsonSchema]="jsonSchema" [initialValue]="initialValue" [isChromatic]="isChromatic()" ></gio-demo>`,
-    props: { jsonSchema, initialValue, isChromatic },
+  render: ({ jsonSchema, initialValue, disabled }) => ({
+    template: `<gio-demo [jsonSchema]="jsonSchema" [initialValue]="initialValue" [isChromatic]="isChromatic()" [disabled]="disabled"></gio-demo>`,
+    props: { jsonSchema, initialValue, isChromatic, disabled },
   }),
 } as Meta;
+
+export const StringDisabled: Story = {
+  name: 'Disabled',
+  args: {
+    jsonSchema: stringExample,
+    disabled: true,
+  },
+};
 
 export const String: Story = {
   name: 'String',

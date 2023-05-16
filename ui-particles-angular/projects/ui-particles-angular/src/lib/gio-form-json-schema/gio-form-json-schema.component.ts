@@ -71,6 +71,8 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
 
   public loading = true;
 
+  public isDisabled = false;
+
   public _onChange: (value: unknown | null) => void = () => ({});
 
   public _onTouched: () => void = () => ({});
@@ -96,6 +98,9 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
     fm.monitor(elRef.nativeElement, true)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
+        if (this.isDisabled) {
+          return;
+        }
         this._onTouched();
         this.touched = true;
       });
@@ -105,6 +110,9 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
     // Subscribe to state changes to manage touches, status and value
     this.stateChanges$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
       const { status, value, touched } = this.formGroup;
+      if (this.isDisabled) {
+        return;
+      }
 
       if (touched) {
         this._onTouched();
@@ -134,6 +142,9 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
         distinctUntilChanged(),
       )
       .subscribe(() => {
+        if (this.isDisabled) {
+          return;
+        }
         this.formGroup.markAllAsTouched();
         this.stateChanges$.next();
       });
@@ -172,7 +183,23 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
   }
 
   // From ControlValueAccessor
-  public setDisabledState?(_isDisabled: boolean): void {
-    throw new Error('Method not implemented.');
+  public setDisabledState?(isDisabled: boolean): void {
+    if (this.isDisabled === isDisabled) {
+      return;
+    }
+
+    this.isDisabled = isDisabled;
+
+    this.options = {
+      ...this.options,
+      formState: {
+        ...this.options.formState,
+        disabled: isDisabled,
+      },
+    };
+
+    isDisabled ? this.formGroup.disable() : this.formGroup.enable();
+
+    this.stateChanges$.next();
   }
 }

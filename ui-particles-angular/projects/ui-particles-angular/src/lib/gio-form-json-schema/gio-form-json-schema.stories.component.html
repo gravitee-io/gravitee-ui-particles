@@ -36,8 +36,8 @@
         <mat-card-actions align="end">
           <pre>{{ form.status }} | {{ form.dirty ? 'DIRTY' : 'PRISTINE' }} | {{ form.touched ? 'TOUCHED' : 'UNTOUCHED' }}</pre>
 
-          <button mat-button type="reset">Reset</button>
-          <button mat-stroked-button type="submit">Submit</button>
+          <button mat-button type="reset" [disabled]="disabled">Reset</button>
+          <button mat-stroked-button type="submit" [disabled]="disabled">Submit</button>
         </mat-card-actions>
       </form>
     </mat-card>
