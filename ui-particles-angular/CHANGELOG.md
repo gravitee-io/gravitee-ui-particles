@@ -1,3 +1,10 @@
+# [5.22.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.21.0...v5.22.0) (2023-05-16)
+
+
+### Features
+
+* impl setDisabledState for form-json-schema component ([1dfde12](https://github.com/gravitee-io/gravitee-ui-particles/commit/1dfde1296d59f6cc9f40e0f9381b19d11d8aa73d))
+
 # [5.21.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.20.1...v5.21.0) (2023-04-18)
 
 
