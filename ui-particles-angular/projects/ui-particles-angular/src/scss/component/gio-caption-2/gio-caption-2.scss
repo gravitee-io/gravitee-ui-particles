@@ -13,19 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@use './component/gio-badge/gio-badge';
-@use './component/gio-method-badge/gio-method-badge';
-@use './component/gio-code/gio-code';
-@use './component/gio-table-light/gio-table-light';
-@use './component/gio-link/gio-link';
-@use './component/gio-caption-2/gio-caption-2';
+@use '../../theme/typography/gio-typography' as typo;
 
-// All Gravitee.io SCSS components
-@mixin all-components() {
-  @include gio-badge.theme;
-  @include gio-method-badge.theme;
-  @include gio-code.theme;
-  @include gio-table-light.theme;
-  @include gio-link.theme;
-  @include gio-caption-2.theme;
+@mixin theme() {
+  .gio-caption-2,
+  .gio-caption-strong {
+    @include typo.caption-2;
+  }
 }
