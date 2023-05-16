@@ -31,6 +31,8 @@ export class GioFormlyJsonSchemaService {
         mappedField = this.formatMap(mappedField, mapSource);
         mappedField = this.bannerMap(mappedField, mapSource);
         mappedField = this.toggleMap(mappedField, mapSource);
+        mappedField = this.disabledMap(mappedField, mapSource);
+
         return mappedField;
       },
     });
@@ -74,6 +76,14 @@ export class GioFormlyJsonSchemaService {
       mappedField.type = 'toggle';
     }
 
+    return mappedField;
+  }
+
+  private disabledMap(mappedField: FormlyFieldConfig, _mapSource: JSONSchema7): FormlyFieldConfig {
+    mappedField.expressions = {
+      ...mappedField.expressions,
+      'props.disabled': field => field.options?.formState.disabled === true || field.props?.disabled === true,
+    };
     return mappedField;
   }
 }

@@ -41,6 +41,9 @@ export class DemoComponent implements OnChanges, OnDestroy {
   @Input()
   public isChromatic = false;
 
+  @Input()
+  public disabled = false;
+
   public form?: FormGroup;
   public options: FormlyFormOptions = {};
   public formValue: unknown;
@@ -107,7 +110,10 @@ export class DemoComponent implements OnChanges, OnDestroy {
 
   private resetUiPreview() {
     this.form = new FormGroup({
-      schemaValue: new FormControl(this.initialValue),
+      schemaValue: new FormControl({
+        value: this.initialValue,
+        disabled: this.disabled ?? false,
+      }),
     });
     this.changeDetectorRef.detectChanges();
     this.form.valueChanges.pipe(takeUntil(this.unsubscribe$), startWith(this.form.value)).subscribe(value => {
