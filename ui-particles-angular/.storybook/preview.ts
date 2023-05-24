@@ -16,6 +16,19 @@ export const parameters = {
       includeName: true,
     },
   },
+  backgrounds: {
+    default: 'default',
+    values: [
+      {
+        name: 'default',
+        value: 'transparent',
+      },
+      {
+        name: 'white',
+        value: 'white',
+      },
+    ],
+  },
 };
 
 export const decorators = [moduleMetadata({ imports: [GioMatConfigModule] })];
