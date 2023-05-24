@@ -13,6 +13,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './ConfigurationSchema.fixture';
-export * from './OrganizationFlowConfiguration.fixture';
-export * from './PlatformFlowSchema.fixture';
+export {};

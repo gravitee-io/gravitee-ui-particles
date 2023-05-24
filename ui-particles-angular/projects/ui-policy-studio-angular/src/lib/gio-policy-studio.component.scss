@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-.policy-studio-wrapper {
-  background-color: white;
-}
 
-gv-policy-studio {
-  overflow: hidden;
-  margin: 2rem 0 1rem 1rem;
+@use '@angular/material' as mat;
+@use '@gravitee/ui-particles-angular' as gio;
+
+:host {
+  background-color: mat.get-color-from-palette(gio.$mat-basic-palette, white);
+  display: block;
+  padding: 8px;
 }
