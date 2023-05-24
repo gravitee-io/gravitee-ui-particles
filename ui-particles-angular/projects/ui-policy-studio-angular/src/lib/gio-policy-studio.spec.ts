@@ -13,44 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { apimPolicies } from '../testing/stories-resources';
 
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
 import { GioPolicyStudioModule } from './gio-policy-studio.module';
-import { PolicyListItem } from './models';
 
-describe('UiPolicyStudioComponent', () => {
+describe('GioPolicyStudioModule', () => {
   let component: GioPolicyStudioComponent;
   let fixture: ComponentFixture<GioPolicyStudioComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GioPolicyStudioModule.forSpecs()],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [GioPolicyStudioModule],
     }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GioPolicyStudioComponent);
     component = fixture.componentInstance;
-    component.policies = apimPolicies.data as PolicyListItem[];
     fixture.detectChanges();
   });
 
-  it('should display policies in right column', () => {
+  it('should work', () => {
     expect(component).toBeTruthy();
-
-    const policiesGroupsIds = [
-      ...fixture.nativeElement
-        .querySelector('gv-policy-studio')
-        .shadowRoot.querySelector('#design > gv-policy-studio-menu')
-        .shadowRoot.querySelectorAll('div.box > div.content.expandable')
-        .values(),
-    ].map(el => el.id);
-
-    expect(policiesGroupsIds).toEqual(['security', 'performance', 'transformation', 'others']);
   });
 });

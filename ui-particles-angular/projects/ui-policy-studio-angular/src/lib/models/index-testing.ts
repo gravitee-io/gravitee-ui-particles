@@ -13,7 +13,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './flow/index-testing';
-export * from './policy/index-testing';
-export * from './resource/index-testing';
-export * from './spel/index-testing';

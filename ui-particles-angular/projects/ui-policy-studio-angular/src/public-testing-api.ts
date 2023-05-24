@@ -14,5 +14,4 @@
  * limitations under the License.
  */
 export * from './lib/models/index-testing';
-export * from './lib/services/index-testing';
 export * from './testing';

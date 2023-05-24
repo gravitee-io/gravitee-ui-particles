@@ -17,6 +17,5 @@
  * Public API Surface of ui-policy-studio-angular
  */
 export * from './lib/models';
-export * from './lib/services';
 export * from './lib/gio-policy-studio.module';
 export * from './lib/gio-policy-studio.component';

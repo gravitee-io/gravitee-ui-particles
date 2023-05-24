@@ -13,42 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
-import { FlowService } from './services/flow.service.fixture';
-import { PolicyService } from './services/policy.service.fixture';
-import { ResourceService } from './services/resource.service.fixture';
-import { SpelService } from './services/spel.service.fixture';
 
 @NgModule({
   declarations: [GioPolicyStudioComponent],
   imports: [],
   exports: [GioPolicyStudioComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class GioPolicyStudioModule {
-  public static forSpecs(): GioPolicyStudioModule {
-    return {
-      ngModule: GioPolicyStudioModule,
-      providers: [
-        {
-          provide: 'FlowService',
-          useClass: FlowService,
-        },
-        {
-          provide: 'PolicyService',
-          useClass: PolicyService,
-        },
-        {
-          provide: 'ResourceService',
-          useClass: ResourceService,
-        },
-        {
-          provide: 'SpelService',
-          useClass: SpelService,
-        },
-      ],
-    };
-  }
-}
+export class GioPolicyStudioModule {}
