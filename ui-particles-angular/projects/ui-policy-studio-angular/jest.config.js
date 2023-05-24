@@ -23,4 +23,7 @@ module.exports = {
   transformIgnorePatterns: [
     '/node_modules/(?!(.*\\.mjs$)|(@gravitee/ui-components/.*?\\.js)|lit|@lit/reactive-element|(lit-element/.*?\\.js)|(lit-html/.*?\\.js)|(resize-observer-polyfill/.*?\\.js)|(date-fns/.*?\\.js)$)',
   ],
+  moduleNameMapper: {
+    '@gravitee/ui-particles-angular': __dirname + '/../ui-particles-angular/src/public-api.ts',
+  },
 };

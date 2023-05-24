@@ -3,7 +3,7 @@
   "dest": "../../dist/ui-policy-studio-angular",
   "lib": {
     "entryFile": "src/public-api.ts",
-    "styleIncludePaths": ["../../../node_modules"]
+    "styleIncludePaths": ["../../../node_modules", "../../.storybook/projects-style-link"]
   },
   "assets": ["index.scss", "LICENSE.txt"]
 }
