@@ -1,3 +1,10 @@
+# [5.23.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.22.0...v5.23.0) (2023-05-24)
+
+
+### Features
+
+* add `caption-2` font ([6bd177b](https://github.com/gravitee-io/gravitee-ui-particles/commit/6bd177b5705dd075cc582335664659c061329fc6))
+
 # [5.22.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.21.0...v5.22.0) (2023-05-16)
 
 
