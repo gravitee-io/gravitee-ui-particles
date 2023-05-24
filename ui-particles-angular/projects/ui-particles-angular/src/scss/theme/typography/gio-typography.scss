@@ -41,3 +41,9 @@
     color: mat.get-color-from-palette(palettes.$mat-primary-palette, 'darker20');
   }
 }
+
+@mixin caption-2() {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+}
