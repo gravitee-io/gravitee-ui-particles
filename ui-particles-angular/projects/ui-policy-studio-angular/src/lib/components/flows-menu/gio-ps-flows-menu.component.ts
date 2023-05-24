@@ -13,4 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './Flow.fixture';
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'gio-ps-flows-menu',
+  templateUrl: './gio-ps-flows-menu.component.html',
+  styleUrls: ['./gio-ps-flows-menu.component.scss'],
+})
+export class GioPolicyStudioFlowsMenuComponent {}

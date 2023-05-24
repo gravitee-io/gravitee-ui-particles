@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'gio-policy-studio',
   templateUrl: './gio-policy-studio.component.html',
   styleUrls: ['./gio-policy-studio.component.scss'],
 })
-export class GioPolicyStudioComponent implements OnInit {
-  ngOnInit(): void {}
-}
+export class GioPolicyStudioComponent {}

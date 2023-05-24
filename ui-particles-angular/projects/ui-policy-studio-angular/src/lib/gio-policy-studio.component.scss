@@ -18,7 +18,38 @@
 @use '@gravitee/ui-particles-angular' as gio;
 
 :host {
-  background-color: mat.get-color-from-palette(gio.$mat-basic-palette, white);
   display: block;
   padding: 8px;
+  background-color: mat.get-color-from-palette(gio.$mat-basic-palette, white);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding-bottom: 16px;
+
+  &__apiName {
+    flex: 1 1 auto;
+  }
+}
+
+.wrapper {
+  display: flex;
+  height: 100%;
+  flex-direction: row;
+  gap: 16px;
+
+  &__flowsMenu {
+    flex: 0 1 400px;
+    padding: 16px;
+    border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
+    border-radius: 8px;
+  }
+
+  &__flowDetails {
+    flex: 1 1 auto;
+    padding: 16px;
+    border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
+    border-radius: 8px;
+  }
 }

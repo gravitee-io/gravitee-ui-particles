@@ -14,12 +14,16 @@
  * limitations under the License.
  */
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { GioIconsModule } from '@gravitee/ui-particles-angular';
 
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
+import { GioPolicyStudioFlowsMenuComponent } from './components/flows-menu/gio-ps-flows-menu.component';
+import { GioPolicyStudioDetailsMenuComponent } from './components/flow-details/gio-ps-flow-details.component';
 
 @NgModule({
-  declarations: [GioPolicyStudioComponent],
-  imports: [],
+  declarations: [GioPolicyStudioComponent, GioPolicyStudioFlowsMenuComponent, GioPolicyStudioDetailsMenuComponent],
+  imports: [MatButtonModule, GioIconsModule],
   exports: [GioPolicyStudioComponent],
 })
 export class GioPolicyStudioModule {}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Gravitee team (http://gravitee.io)
+ * Copyright (C) 2023 The Gravitee team (http://gravitee.io)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,4 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './Flow.fixture';
+import { Selector } from './Selector';
+import { Step } from './Step';
+
+export interface Flow {
+  /**
+   * Flow's name.
+   */
+  name?: string;
+  /**
+   * Is the flow enabled.
+   */
+  enabled?: boolean;
+  selectors?: Selector[];
+  request?: Step[];
+  response?: Step[];
+  subscribe?: Step[];
+  publish?: Step[];
+  /**
+   * Flow's tags.
+   */
+  tags?: string[];
+}
