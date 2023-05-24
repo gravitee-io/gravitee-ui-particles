@@ -5,5 +5,8 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true
+  },
+  "paths": {
+    "@gravitee/ui-particles-angular": ["../projects/ui-particles-angular/src/public-api.ts"]
   }
 }

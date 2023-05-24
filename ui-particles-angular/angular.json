@@ -125,14 +125,20 @@
           "options": {
             "styles": [".storybook/index.scss"],
             "compodoc": false,
-            "port": 9008
+            "port": 9008,
+            "stylePreprocessorOptions": {
+              "includePaths": [".storybook/projects-style-link"]
+            }
           }
         },
         "build": {
           "builder": "@storybook/angular:build-storybook",
           "options": {
             "styles": [".storybook/index.scss"],
-            "compodoc": false
+            "compodoc": false,
+            "stylePreprocessorOptions": {
+              "includePaths": [".storybook/projects-style-link"]
+            }
           }
         }
       }
