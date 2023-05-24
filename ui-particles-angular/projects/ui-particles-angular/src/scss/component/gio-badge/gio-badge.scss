@@ -79,8 +79,8 @@
   .gio-badge-neutral {
     @extend %gio-badge-base;
 
-    background-color: mat.get-color-from-palette(palettes.$mat-neutral-palette, lighter);
-    color: mat.get-color-from-palette(palettes.$mat-neutral-palette, lighter-contrast);
+    background-color: mat.get-color-from-palette(palettes.$mat-neutral-palette, default);
+    color: mat.get-color-from-palette(palettes.$mat-neutral-palette, default-contrast);
   }
 
   .gio-badge-success {
