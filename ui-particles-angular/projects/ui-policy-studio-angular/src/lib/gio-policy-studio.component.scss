@@ -23,12 +23,18 @@
   background-color: mat.get-color-from-palette(gio.$mat-basic-palette, white);
 }
 
+::ng-deep {
+  .gio-policy-studio__tooltip-line-break {
+    white-space: pre-line;
+  }
+}
+
 .header {
   display: flex;
   align-items: center;
   padding-bottom: 16px;
 
-  &__apiName {
+  &__apiInfo {
     flex: 1 1 auto;
   }
 }

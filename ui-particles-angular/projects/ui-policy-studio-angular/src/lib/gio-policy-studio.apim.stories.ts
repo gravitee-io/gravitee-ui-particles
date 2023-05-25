@@ -18,6 +18,7 @@ import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
 
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
 import { GioPolicyStudioModule } from './gio-policy-studio.module';
+import { fakeChannelFlow } from './models/index-testing';
 
 export default {
   title: 'Policy Studio / APIM',
@@ -29,11 +30,58 @@ export default {
   ],
 } as Meta;
 
-export const Default: Story = {
+export const MessageWithoutFlows: Story = {
+  name: 'Message API without flows',
   render: props => ({
-    template: `<gio-policy-studio>
+    template: `<gio-policy-studio
+    [apiType]="'MESSAGE'"
+    [entrypointsInfo]="entrypointsInfo"
+    [endpointsInfo]="endpointsInfo"
+    >
     </gio-policy-studio>`,
     props,
   }),
-  args: {},
+  args: {
+    entrypointsInfo: [
+      {
+        type: 'webhook',
+        icon: 'gio:webhook',
+      },
+    ],
+    endpointsInfo: [
+      {
+        type: 'kafka',
+        icon: 'gio:kafka',
+      },
+    ],
+  },
+};
+
+export const MessageWithFlows: Story = {
+  name: 'Message API with flow',
+  render: props => ({
+    template: `<gio-policy-studio
+    [apiType]="'MESSAGE'"
+    [entrypointsInfo]="entrypointsInfo"
+    [endpointsInfo]="endpointsInfo"
+    [flows]="flows"
+    >
+    </gio-policy-studio>`,
+    props,
+  }),
+  args: {
+    entrypointsInfo: [
+      {
+        type: 'webhook',
+        icon: 'gio:webhook',
+      },
+    ],
+    endpointsInfo: [
+      {
+        type: 'kafka',
+        icon: 'gio:kafka',
+      },
+    ],
+    flows: [fakeChannelFlow()],
+  },
 };

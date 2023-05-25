@@ -13,11 +13,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { capitalize } from 'lodash';
+
+import { ApiType, Flow } from './models';
+
+export interface ConnectorsInfo {
+  type: string;
+  icon: string;
+}
 
 @Component({
   selector: 'gio-policy-studio',
   templateUrl: './gio-policy-studio.component.html',
   styleUrls: ['./gio-policy-studio.component.scss'],
 })
-export class GioPolicyStudioComponent {}
+export class GioPolicyStudioComponent implements OnChanges {
+  @Input()
+  public apiType!: ApiType;
+
+  /**
+   * List of entrypoints to display
+   */
+  @Input()
+  public entrypointsInfo: ConnectorsInfo[] = [];
+
+  /**
+   * List of endpoints to display
+   */
+  @Input()
+  public endpointsInfo: ConnectorsInfo[] = [];
+
+  @Input()
+  public flows: Flow[] = [];
+
+  public connectorsTooltip = '';
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.entrypointsInfo || changes.endpointsInfo) {
+      this.connectorsTooltip = `Entrypoints: ${this.entrypointsInfo
+        .map(e => capitalize(e.type))
+        .join(', ')}\nEndpoints: ${this.endpointsInfo.map(e => capitalize(e.type)).join(', ')}`;
+    }
+  }
+}

@@ -17,8 +17,19 @@
 -->
 
 <div class="header">
-  <div class="header__apiName">
-    <span class="mat-h4">My API name</span><span class="gio-badge-neutral"><mat-icon class="gio-left" svgIcon="gio:lock"></mat-icon></span>
+  <div class="header__apiInfo">
+    <span class="gio-badge-primary">
+      {{ apiType | titlecase }}
+    </span>
+    <span
+      class="gio-badge-neutral"
+      [matTooltip]="connectorsTooltip"
+      matTooltipPosition="right"
+      matTooltipClass="gio-policy-studio__tooltip-line-break"
+    >
+      <mat-icon *ngFor="let entrypoint of entrypointsInfo" class="gio-left" [svgIcon]="entrypoint.icon"></mat-icon>
+      <mat-icon *ngFor="let endpoint of endpointsInfo" class="gio-left" [svgIcon]="endpoint.icon"></mat-icon>
+    </span>
   </div>
 
   <div class="header__btn">
