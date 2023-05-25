@@ -16,6 +16,8 @@
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { GioIconsModule } from '@gravitee/ui-particles-angular';
+import { CommonModule } from '@angular/common';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
 import { GioPolicyStudioFlowsMenuComponent } from './components/flows-menu/gio-ps-flows-menu.component';
@@ -23,7 +25,7 @@ import { GioPolicyStudioDetailsMenuComponent } from './components/flow-details/g
 
 @NgModule({
   declarations: [GioPolicyStudioComponent, GioPolicyStudioFlowsMenuComponent, GioPolicyStudioDetailsMenuComponent],
-  imports: [MatButtonModule, GioIconsModule],
+  imports: [CommonModule, MatButtonModule, MatTooltipModule, GioIconsModule],
   exports: [GioPolicyStudioComponent],
 })
 export class GioPolicyStudioModule {}
