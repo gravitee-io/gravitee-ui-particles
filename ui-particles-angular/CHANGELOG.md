@@ -1,3 +1,32 @@
+# [7.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v6.1.0...v7.0.0) (2023-05-25)
+
+
+### Code Refactoring
+
+* remove deprecated colors ([148bbe5](https://github.com/gravitee-io/gravitee-ui-particles/commit/148bbe5d095e0b77d7294e3cf80e47bcdfe0f6f8))
+
+
+### BREAKING CHANGES
+
+* removes deprecated colors. To migrate use the following correspondence:
+
+## Neutral color
+$mat-neutral-palette (default) -> $mat-dove-palette (darker10)
+$mat-neutral-palette (darker) -> $mat-dove-palette (darker70)
+$mat-neutral-palette (lighter) -> $mat-dove-palette (default)
+
+## Content color
+$mat-content-palette (default) -> $mat-space-palette (lighter40)
+$mat-content-palette (darker) -> $mat-space-palette (default),
+$mat-content-palette (disabled): $mat-basic-palette (disabled)
+$mat-content-palette (lighter) -> $mat-basic-palette (white)
+
+## Decorative color
+$mat-decorative-palette (background) -> $mat-dove-palette (default)
+$mat-decorative-palette (lighter-background) -> $mat-dove-palette (default)
+$mat-decorative-palette (surface) -> $mat-basic-palette (white)
+$mat-decorative-palette (divider) -> $mat-dove-palette (darker10)
+
 # [6.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v6.0.0...v6.1.0) (2023-05-25)
 
 
