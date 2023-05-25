@@ -1,3 +1,18 @@
+# [6.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.23.0...v6.0.0) (2023-05-25)
+
+
+### Features
+
+* clean and re init new gio-policy-studio component ([981f4f0](https://github.com/gravitee-io/gravitee-ui-particles/commit/981f4f0519e93eaec8cbde3e95dd7f6cb58bb4d7))
+* init first component & models with empty policy studio ([0621a67](https://github.com/gravitee-io/gravitee-ui-particles/commit/0621a6798d9f623cd573b6de6c9f25137e9bfd49))
+
+
+### BREAKING CHANGES
+
+* The old component for API V1/V2 is removed.
+The new one is intended for the API V4. No impact on APIM as all supported
+versions have been updated to not use this component anymore.
+
 # [5.23.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.22.0...v5.23.0) (2023-05-24)
 
 
