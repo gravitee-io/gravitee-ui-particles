@@ -165,10 +165,15 @@ $mat-basic-palette: mat.define-palette(
   (
     black: #000,
     white: #fff,
-    contrast: (
-      black: #fff,
-      white: #000,
-    ),
+    disabled: rgb(0 0 0 / 12%),
+    // Same color as the disabled color of material
+    contrast:
+      (
+        black: #fff,
+        white: #000,
+        disabled: rgb(0 0 0 / 26%),
+        // Same color as the disabled color of material
+      ),
   ),
   black,
   white,
@@ -275,71 +280,12 @@ $mat-blue-palette: mat.define-palette(
   default
 );
 
-/////////////////
-// DEPRECATED //
-/////////////////
-
-// DEPRECATED - Neutral color
-$mat-neutral-palette: mat.define-palette(
-  (
-    darker: mat.get-color-from-palette($mat-dove-palette, darker70),
-    default: mat.get-color-from-palette($mat-dove-palette, darker10),
-    lighter: mat.get-color-from-palette($mat-dove-palette, default),
-    contrast: (
-      darker: mat.get-color-from-palette($mat-basic-palette, white),
-      default: mat.get-color-from-palette($mat-space-palette, default),
-      lighter: mat.get-color-from-palette($mat-space-palette, default),
-    ),
-  ),
-  default,
-  lighter,
-  darker
-);
-
-// DEPRECATED - Content color
-$mat-content-palette: mat.define-palette(
-  (
-    darker: mat.get-color-from-palette($mat-space-palette, default),
-    default: mat.get-color-from-palette($mat-space-palette, lighter40),
-    disabled: #e0e0e0,
-    lighter: mat.get-color-from-palette($mat-basic-palette, white),
-    contrast: (
-      darker: mat.get-color-from-palette($mat-basic-palette, white),
-      default: mat.get-color-from-palette($mat-basic-palette, white),
-      disabled: #a6a6a6,
-      lighter: mat.get-color-from-palette($mat-basic-palette, black),
-    ),
-  ),
-  default,
-  lighter,
-  darker
-);
-
-// DEPRECATED - Decorative color
-$mat-decorative-palette: mat.define-palette(
-  (
-    background: mat.get-color-from-palette($mat-dove-palette, default),
-    lighter-background: mat.get-color-from-palette($mat-dove-palette, default),
-    surface: mat.get-color-from-palette($mat-basic-palette, white),
-    divider: mat.get-color-from-palette($mat-dove-palette, darker10),
-    contrast: (
-      background: mat.get-color-from-palette($mat-basic-palette, black),
-      lighter-background: mat.get-color-from-palette($mat-basic-palette, black),
-      surface: mat.get-color-from-palette($mat-basic-palette, black),
-      divider: mat.get-color-from-palette($mat-basic-palette, black),
-    ),
-  ),
-  surface,
-  surface,
-  surface
-);
-
-// DEPRECATED - Method color
+// Method color
 $mat-method-palette: mat.define-palette(
   (
     patch: mat.get-color-from-palette($mat-accent-palette, lighter80),
     post: mat.get-color-from-palette($mat-warning-palette, lighter80),
-    put: mat.get-color-from-palette($mat-neutral-palette, default),
+    put: mat.get-color-from-palette($mat-dove-palette, darker10),
     get: mat.get-color-from-palette($mat-primary-palette, lighter80),
     delete: mat.get-color-from-palette($mat-error-palette, lighter80),
     option: mat.get-color-from-palette($mat-success-palette, lighter80),
@@ -348,7 +294,7 @@ $mat-method-palette: mat.define-palette(
     contrast: (
       patch: mat.get-color-from-palette($mat-accent-palette, darker40),
       post: mat.get-color-from-palette($mat-warning-palette, darker20),
-      put: mat.get-color-from-palette($mat-neutral-palette, lighter70),
+      put: mat.get-color-from-palette($mat-dove-palette, lighter70),
       get: mat.get-color-from-palette($mat-primary-palette, darker60),
       delete: mat.get-color-from-palette($mat-error-palette, darker20),
       option: mat.get-color-from-palette($mat-success-palette, darker60),

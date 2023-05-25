@@ -68,7 +68,7 @@ $mat-foreground: map.get($mat-theme-default, foreground);
 $gio-background: map.merge(
   $mat-background,
   (
-    background: mat.get-color-from-palette(palettes.$mat-decorative-palette, lighter-background),
+    background: mat.get-color-from-palette(palettes.$mat-dove-palette, default),
     tooltip: mat.get-color-from-palette(palettes.$mat-space-palette, default),
   )
 );
@@ -77,8 +77,8 @@ $gio-background: map.merge(
 $gio-foreground: map.merge(
   $mat-foreground,
   (
-    text: mat.get-color-from-palette(palettes.$mat-content-palette, darker),
-    slider-min: mat.get-color-from-palette(palettes.$mat-content-palette, darker),
+    text: mat.get-color-from-palette(palettes.$mat-space-palette, default),
+    slider-min: mat.get-color-from-palette(palettes.$mat-space-palette, default),
   )
 );
 $gio-background-foreground: (

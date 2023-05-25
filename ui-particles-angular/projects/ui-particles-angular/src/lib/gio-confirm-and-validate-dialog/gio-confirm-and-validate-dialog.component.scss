@@ -25,7 +25,7 @@
 
   &__body {
     &__content {
-      color: mat.get-color-from-palette(gio.$mat-content-palette);
+      color: mat.get-color-from-palette(gio.$mat-space-palette, 'lighter40');
       white-space: pre-wrap;
     }
 
