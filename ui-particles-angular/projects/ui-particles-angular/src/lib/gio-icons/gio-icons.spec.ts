@@ -308,6 +308,7 @@ const icons = [
   'x-square',
   'zap',
   'zap-off',
+  'universe',
 ];
 
 const data = fs.readFileSync(`${__dirname}/../../../assets/gio-icons.svg`, { encoding: 'utf8', flag: 'r' });
