@@ -106,7 +106,7 @@ $typography: map.get(gio.$mat-theme, typography);
     }
 
     &.disabled {
-      border: 2px solid mat.get-color-from-palette(gio.$mat-basic-palette, 'disabled');
+      border: 2px solid mat.get-color-from-palette(gio.$mat-basic-palette, disabled);
     }
   }
 
