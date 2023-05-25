@@ -21,7 +21,6 @@ $colorNames: lighter, lighter60, lighter40, lighter20, default, darker20, darker
 $palettes: (
   primary: gio.$mat-primary-palette,
   accent: gio.$mat-accent-palette,
-  neutral: gio.$mat-neutral-palette,
   success: gio.$mat-success-palette,
   warning: gio.$mat-warning-palette,
   error: gio.$mat-error-palette,
@@ -40,22 +39,12 @@ $palettes: (
 
   // Special palettes
 
-  @each $colorName in (darker, default, disabled, lighter) {
-    content__#{$colorName}: mat.get-color-from-palette(gio.$mat-content-palette, $colorName);
-    content__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-content-palette, #{$colorName}-contrast);
-  }
-
-  @each $colorName in (background, lighter-background, surface, divider) {
-    decorative__#{$colorName}: mat.get-color-from-palette(gio.$mat-decorative-palette, $colorName);
-    decorative__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-decorative-palette, #{$colorName}-contrast);
-  }
-
   @each $colorName in (patch, post, put, get, delete, option, trace, head) {
     method__#{$colorName}: mat.get-color-from-palette(gio.$mat-method-palette, $colorName);
     method__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-method-palette, #{$colorName}-contrast);
   }
 
-  @each $colorName in (white, black) {
+  @each $colorName in (white, black, disabled) {
     basic__#{$colorName}: mat.get-color-from-palette(gio.$mat-basic-palette, $colorName);
     basic__#{$colorName}-contrast: mat.get-color-from-palette(gio.$mat-basic-palette, #{$colorName}-contrast);
   }

@@ -18,7 +18,7 @@
 
 @use '../../scss' as gio;
 
-$background: map.get(gio.$mat-content-palette, darker);
+$background: map.get(gio.$mat-space-palette, default);
 $textLight: map.get(gio.$mat-basic-palette, white);
 
 :host {

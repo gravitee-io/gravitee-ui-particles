@@ -51,7 +51,7 @@
         &__field:focus-within {
           z-index: 100;
           height: auto;
-          background-color: mat.get-color-from-palette(gio.$mat-content-palette, 'lighter');
+          background-color: mat.get-color-from-palette(gio.$mat-basic-palette, 'white');
 
           * {
             max-height: none;
@@ -76,7 +76,7 @@
     &__header-row:hover .gio-form-headers__table__header-row__td-value__button {
       z-index: 110;
       display: block;
-      background-color: mat.get-color-from-palette(gio.$mat-content-palette, 'lighter');
+      background-color: mat.get-color-from-palette(gio.$mat-basic-palette, 'white');
       opacity: 0.9;
     }
   }

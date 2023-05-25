@@ -38,7 +38,7 @@ $typography: map.get(theme.$mat-theme, typography);
     thead {
       @include mat.typography-level($typography, 'body-2');
 
-      background-color: mat.get-color-from-palette(palettes.$mat-decorative-palette, lighter-background);
+      background-color: mat.get-color-from-palette(palettes.$mat-dove-palette, default);
       text-align: left;
       text-transform: uppercase;
     }
@@ -46,7 +46,7 @@ $typography: map.get(theme.$mat-theme, typography);
     tbody {
       @include mat.typography-level($typography, 'body-1');
 
-      background-color: mat.get-color-from-palette(palettes.$mat-content-palette, lighter);
+      background-color: mat.get-color-from-palette(palettes.$mat-basic-palette, white);
     }
   }
 }
