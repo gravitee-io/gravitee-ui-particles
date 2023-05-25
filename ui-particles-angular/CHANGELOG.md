@@ -1,3 +1,10 @@
+# [6.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v6.0.0...v6.1.0) (2023-05-25)
+
+
+### Features
+
+* add universe icon ([a19c6a3](https://github.com/gravitee-io/gravitee-ui-particles/commit/a19c6a3648a49a14be4424901192833ad1dd71e7))
+
 # [6.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v5.23.0...v6.0.0) (2023-05-25)
 
 
