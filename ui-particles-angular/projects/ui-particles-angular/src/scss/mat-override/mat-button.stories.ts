@@ -310,6 +310,26 @@ export const MatButton: Story = {
                   </div>
               </div>
               
+              <div>
+                  <h4>Stroked icon without text</h4>
+                  <div class="button-container">
+                      <button mat-stroked-button mat-icon-button aria-label="Example icon button with a settings icon">
+                          <mat-icon svgIcon="gio:settings"></mat-icon>
+                      </button>
+                      <button mat-stroked-button mat-icon-button color="primary" aria-label="Example icon button with a settings icon">
+                          <mat-icon svgIcon="gio:settings"></mat-icon>
+                      </button>
+                      <button mat-stroked-button mat-icon-button color="accent" aria-label="Example icon button with a settings icon">
+                          <mat-icon svgIcon="gio:settings"></mat-icon>
+                      </button>
+                      <button mat-stroked-button mat-icon-button color="warn" aria-label="Example icon button with a settings icon">
+                          <mat-icon svgIcon="gio:settings"></mat-icon>
+                      </button>
+                      <button mat-stroked-button mat-icon-button disabled aria-label="Example icon button with a settings icon">
+                          <mat-icon svgIcon="gio:settings"></mat-icon>
+                      </button>
+                  </div>
+              </div>
           </div>
         </div>
         `,

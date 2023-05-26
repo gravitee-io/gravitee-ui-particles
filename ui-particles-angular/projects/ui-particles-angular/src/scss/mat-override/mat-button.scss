@@ -42,4 +42,17 @@
       line-height: 18px;
     }
   }
+
+  .mat-stroked-button.mat-icon-button {
+    width: 36px;
+    height: 36px;
+    line-height: 18px;
+
+    .mat-icon {
+      width: 18px;
+      height: 18px;
+      margin-right: 0;
+      line-height: 18px;
+    }
+  }
 }
