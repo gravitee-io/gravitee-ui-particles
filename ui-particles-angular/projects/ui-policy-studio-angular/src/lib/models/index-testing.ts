@@ -14,3 +14,4 @@
  * limitations under the License.
  */
 export * from './flow/index-testing';
+export * from './plan/index-testing';

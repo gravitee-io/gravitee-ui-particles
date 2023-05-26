@@ -15,12 +15,15 @@
     limitations under the License.
 
 -->
-<ng-container *ngIf="flows.length; else emptyFlows">
+<ng-container *ngIf="flow; else emptyFlows">
   <div class="header">
     <div class="mat-h4">Flow details</div>
   </div>
 
-  <div class="content">🚧 Work in progress 🚧</div>
+  <div class="content">
+    🚧 Work in progress 🚧 <br />
+    {{ flow | json }}
+  </div>
 </ng-container>
 
 <ng-template #emptyFlows>

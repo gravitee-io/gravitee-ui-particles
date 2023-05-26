@@ -39,10 +39,10 @@
 
 <div class="wrapper">
   <div class="wrapper__flowsMenu">
-    <gio-ps-flows-menu [flows]="flows"></gio-ps-flows-menu>
+    <gio-ps-flows-menu [flowsGroups]="flowsGroups" [(selectedFlow)]="selectedFlow"></gio-ps-flows-menu>
   </div>
 
   <div class="wrapper__flowDetails">
-    <gio-ps-flow-details></gio-ps-flow-details>
+    <gio-ps-flow-details [flow]="selectedFlow"></gio-ps-flow-details>
   </div>
 </div>

@@ -43,13 +43,13 @@
 
 .wrapper {
   display: flex;
-  height: 100%;
+  min-height: 0;
   flex-direction: row;
   gap: 16px;
 
   &__flowsMenu {
+    max-width: 400px;
     flex: 0 1 400px;
-    padding: 16px;
     border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
     border-radius: 8px;
   }

@@ -14,14 +14,10 @@
  * limitations under the License.
  */
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { capitalize } from 'lodash';
+import { capitalize, uniqueId } from 'lodash';
 
-import { ApiType, Flow } from './models';
-
-export interface ConnectorsInfo {
-  type: string;
-  icon: string;
-}
+import { ApiType, ConnectorsInfo, Flow, Plan } from './models';
+import { FlowGroupVM, FlowVM } from './gio-policy-studio.model';
 
 @Component({
   selector: 'gio-policy-studio',
@@ -45,15 +41,51 @@ export class GioPolicyStudioComponent implements OnChanges {
   public endpointsInfo: ConnectorsInfo[] = [];
 
   @Input()
-  public flows: Flow[] = [];
+  public commonFlows: Flow[] = [];
+
+  @Input()
+  public plans: Plan[] = [];
 
   public connectorsTooltip = '';
 
+  public selectedFlow?: FlowVM = undefined;
+
+  public flowsGroups: FlowGroupVM[] = [];
+
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.entrypointsInfo || changes.endpointsInfo) {
-      this.connectorsTooltip = `Entrypoints: ${this.entrypointsInfo
+      this.connectorsTooltip = `Entrypoints: ${(this.entrypointsInfo ?? []).map(e => capitalize(e.type)).join(', ')}\nEndpoints: ${(
+        this.endpointsInfo ?? []
+      )
         .map(e => capitalize(e.type))
-        .join(', ')}\nEndpoints: ${this.endpointsInfo.map(e => capitalize(e.type)).join(', ')}`;
+        .join(', ')}`;
+    }
+
+    if (changes.commonFlows || changes.plans) {
+      this.flowsGroups = getFlowsGroups(this.commonFlows, this.plans);
+
+      // Select first flow by default on first load
+      if (changes.commonFlows?.isFirstChange() || changes.plans?.isFirstChange()) {
+        this.selectedFlow = this.flowsGroups[0].flows[0];
+      }
     }
   }
 }
+
+const getFlowsGroups = (commonFlows: Flow[] = [], plans: Plan[] = []): FlowGroupVM[] => {
+  const commFlowsGroup: FlowGroupVM = {
+    _id: 'flowsGroup_commonFlow',
+    name: 'Common flows',
+    flows: commonFlows.map(flow => ({ ...flow, _id: uniqueId('flow_') })),
+  };
+
+  return [
+    ...plans.map(plan => ({
+      _id: uniqueId('flowsGroup_'),
+      name: plan.name,
+      icon: 'gio:shield',
+      flows: plan.flows.map(flow => ({ ...flow, _id: uniqueId('flow_') })),
+    })),
+    commFlowsGroup,
+  ];
+};

@@ -14,3 +14,5 @@
  * limitations under the License.
  */
 export * from './flow';
+export * from './ConnectorsInfo';
+export * from './plan';

@@ -13,16 +13,54 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 
-import { Flow } from '../../models';
+import { FlowGroupVM, FlowVM } from '../../gio-policy-studio.model';
+
+interface FlowGroupMenuVM extends FlowGroupVM {
+  flows: FlowMenuVM[];
+}
+
+interface FlowMenuVM extends FlowVM {
+  selected: boolean;
+  mouseOver: boolean;
+}
 
 @Component({
   selector: 'gio-ps-flows-menu',
   templateUrl: './gio-ps-flows-menu.component.html',
   styleUrls: ['./gio-ps-flows-menu.component.scss'],
 })
-export class GioPolicyStudioFlowsMenuComponent {
+export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
   @Input()
-  public flows: Flow[] = [];
+  public flowsGroups: FlowGroupVM[] = [];
+
+  @Input()
+  public selectedFlow?: FlowVM = undefined;
+
+  @Output()
+  public selectedFlowChange = new EventEmitter<FlowVM>();
+
+  public flowGroupVMSelected: FlowGroupMenuVM[] = [];
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.flowsGroups || changes.selectedFlow) {
+      this.flowGroupVMSelected = this.flowsGroups.map(flowGroup => {
+        return {
+          ...flowGroup,
+          flows: flowGroup.flows.map(flow => {
+            return {
+              ...flow,
+              selected: this.selectedFlow?._id === flow._id,
+              mouseOver: false,
+            };
+          }),
+        };
+      });
+    }
+  }
+
+  public selectFlow(flow: FlowVM): void {
+    this.selectedFlowChange.emit(flow);
+  }
 }
