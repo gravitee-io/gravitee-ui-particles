@@ -1,3 +1,17 @@
+# [7.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.0.0...v7.1.0) (2023-05-26)
+
+
+### Bug Fixes
+
+* remove quote because it doesn't seem to work for some words ([53aa48a](https://github.com/gravitee-io/gravitee-ui-particles/commit/53aa48a8550510b63419b0bba8ffcb56ae289bef))
+
+
+### Features
+
+* handle empty flow display ([4ae7e78](https://github.com/gravitee-io/gravitee-ui-particles/commit/4ae7e7886bc0d2b51c4b25a1e48e772ef7190062))
+* impl connector info ([4856ad5](https://github.com/gravitee-io/gravitee-ui-particles/commit/4856ad560c83d0c76b55aa01511912d20d3b900e))
+* support stroked icon button without text ([cfc85e5](https://github.com/gravitee-io/gravitee-ui-particles/commit/cfc85e53c95f2f7bca7e010fa015f8552210b130))
+
 # [7.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v6.1.0...v7.0.0) (2023-05-25)
 
 
