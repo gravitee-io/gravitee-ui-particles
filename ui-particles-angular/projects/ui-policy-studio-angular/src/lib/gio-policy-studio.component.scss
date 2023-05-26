@@ -18,7 +18,9 @@
 @use '@gravitee/ui-particles-angular' as gio;
 
 :host {
-  display: block;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
   padding: 8px;
   background-color: mat.get-color-from-palette(gio.$mat-basic-palette, white);
 }

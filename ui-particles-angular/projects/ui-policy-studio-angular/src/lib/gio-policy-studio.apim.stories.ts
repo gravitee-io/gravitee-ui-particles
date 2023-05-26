@@ -28,19 +28,21 @@ export default {
       imports: [GioPolicyStudioModule],
     }),
   ],
+
+  render: props => ({
+    template: `<div style="height:calc(100vh - 2rem);"><gio-policy-studio
+    [apiType]="'MESSAGE'"
+    [entrypointsInfo]="entrypointsInfo"
+    [endpointsInfo]="endpointsInfo"
+    [flows]="flows"
+    >
+    </gio-policy-studio></div>`,
+    props,
+  }),
 } as Meta;
 
 export const MessageWithoutFlows: Story = {
   name: 'Message API without flows',
-  render: props => ({
-    template: `<gio-policy-studio
-    [apiType]="'MESSAGE'"
-    [entrypointsInfo]="entrypointsInfo"
-    [endpointsInfo]="endpointsInfo"
-    >
-    </gio-policy-studio>`,
-    props,
-  }),
   args: {
     entrypointsInfo: [
       {
@@ -59,16 +61,6 @@ export const MessageWithoutFlows: Story = {
 
 export const MessageWithFlows: Story = {
   name: 'Message API with flow',
-  render: props => ({
-    template: `<gio-policy-studio
-    [apiType]="'MESSAGE'"
-    [entrypointsInfo]="entrypointsInfo"
-    [endpointsInfo]="endpointsInfo"
-    [flows]="flows"
-    >
-    </gio-policy-studio>`,
-    props,
-  }),
   args: {
     entrypointsInfo: [
       {

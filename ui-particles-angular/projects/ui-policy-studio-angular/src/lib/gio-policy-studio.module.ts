@@ -21,10 +21,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
 import { GioPolicyStudioFlowsMenuComponent } from './components/flows-menu/gio-ps-flows-menu.component';
-import { GioPolicyStudioDetailsMenuComponent } from './components/flow-details/gio-ps-flow-details.component';
+import { GioPolicyStudioDetailsComponent } from './components/flow-details/gio-ps-flow-details.component';
 
 @NgModule({
-  declarations: [GioPolicyStudioComponent, GioPolicyStudioFlowsMenuComponent, GioPolicyStudioDetailsMenuComponent],
+  declarations: [GioPolicyStudioComponent, GioPolicyStudioFlowsMenuComponent, GioPolicyStudioDetailsComponent],
   imports: [CommonModule, MatButtonModule, MatTooltipModule, GioIconsModule],
   exports: [GioPolicyStudioComponent],
 })

@@ -13,16 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Input } from '@angular/core';
 
-import { Flow } from '../../models';
+import { ComponentHarness } from '@angular/cdk/testing';
 
-@Component({
-  selector: 'gio-ps-flow-details',
-  templateUrl: './gio-ps-flow-details.component.html',
-  styleUrls: ['./gio-ps-flow-details.component.scss'],
-})
-export class GioPolicyStudioDetailsComponent {
-  @Input()
-  public flows: Flow[] = [];
+export class GioPolicyStudioDetailsHarness extends ComponentHarness {
+  public static hostSelector = 'gio-ps-flow-details';
+
+  public async isDisplayEmptyFlow(): Promise<boolean> {
+    const hostText = await (await this.host()).text();
+    return hostText.includes('No flows yet');
+  }
 }
