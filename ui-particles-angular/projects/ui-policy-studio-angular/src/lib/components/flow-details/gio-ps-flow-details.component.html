@@ -15,9 +15,17 @@
     limitations under the License.
 
 -->
+<ng-container *ngIf="flows.length; else emptyFlows">
+  <div class="header">
+    <div class="mat-h4">Flow details</div>
+  </div>
 
-<div class="header">
-  <div class="mat-h4">Flow details</div>
-</div>
+  <div class="content">🚧 Work in progress 🚧</div>
+</ng-container>
 
-<div class="content">🚧 Work in progress 🚧</div>
+<ng-template #emptyFlows>
+  <div class="emptyFlows">
+    <h2>No flows yet</h2>
+    <p class="mat-body-1">Flows allow you to customize the behavior of your API event phases through configurable policies</p>
+  </div>
+</ng-template>

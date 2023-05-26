@@ -22,6 +22,8 @@ import { SimpleChange } from '@angular/core';
 
 import { GioPolicyStudioModule } from './gio-policy-studio.module';
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
+import { GioPolicyStudioDetailsHarness } from './components/flow-details/gio-ps-flow-details.harness';
+import { GioPolicyStudioFlowsMenuHarness } from './components/flows-menu/gio-ps-flows-menu.harness';
 
 describe('GioPolicyStudioModule', () => {
   let loader: HarnessLoader;
@@ -67,5 +69,19 @@ describe('GioPolicyStudioModule', () => {
     );
     await tooltip.show();
     expect(await tooltip.getTooltipText()).toEqual(`Entrypoints: Webhook\nEndpoints: Kafka`);
+  });
+
+  it('should display empty flow', async () => {
+    const detailsHarness = await loader.getHarness(GioPolicyStudioDetailsHarness);
+
+    const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
+
+    expect(await detailsHarness.isDisplayEmptyFlow()).toEqual(true);
+
+    expect(await flowsMenuHarness.getAllFlowsGroups()).toEqual([
+      {
+        name: 'Common flows',
+      },
+    ]);
   });
 });

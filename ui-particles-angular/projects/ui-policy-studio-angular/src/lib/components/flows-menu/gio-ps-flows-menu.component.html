@@ -17,7 +17,21 @@
 -->
 
 <div class="header">
-  <div class="mat-h4">Flows</div>
+  <div class="header__label">
+    Flows <mat-icon svgIcon="gio:info" matTooltip="Flows allow you to apply different policies on your API event phases"></mat-icon>
+  </div>
+  <div class="header__configBtn">
+    <button mat-stroked-button mat-icon-button><mat-icon svgIcon="gio:settings"></mat-icon></button>
+  </div>
 </div>
 
-<div class="content">🚧 Work in progress 🚧</div>
+<div class="list">
+  <div class="list__flowsGroup">
+    <div class="list__flowsGroup__header">
+      <div class="list__flowsGroup__header__label">Common flows</div>
+      <div class="list__flowsGroup__header__addBtn">
+        <button mat-icon-button><mat-icon svgIcon="gio:plus" matTooltip="New flow"></mat-icon></button>
+      </div>
+    </div>
+  </div>
+</div>

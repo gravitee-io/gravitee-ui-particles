@@ -13,11 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { Flow } from '../../models';
 
 @Component({
   selector: 'gio-ps-flows-menu',
   templateUrl: './gio-ps-flows-menu.component.html',
   styleUrls: ['./gio-ps-flows-menu.component.scss'],
 })
-export class GioPolicyStudioFlowsMenuComponent {}
+export class GioPolicyStudioFlowsMenuComponent {
+  @Input()
+  public flows: Flow[] = [];
+}
