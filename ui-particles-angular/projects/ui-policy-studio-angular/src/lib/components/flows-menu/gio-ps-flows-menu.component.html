@@ -26,11 +26,33 @@
 </div>
 
 <div class="list">
-  <div class="list__flowsGroup">
+  <div *ngFor="let flowGroups of flowGroupVMSelected" class="list__flowsGroup">
     <div class="list__flowsGroup__header">
-      <div class="list__flowsGroup__header__label">Common flows</div>
+      <div class="list__flowsGroup__header__label">
+        <mat-icon *ngIf="flowGroups.icon" [svgIcon]="flowGroups.icon"></mat-icon>
+        <span>{{ flowGroups.name }}</span>
+      </div>
       <div class="list__flowsGroup__header__addBtn">
         <button mat-icon-button><mat-icon svgIcon="gio:plus" matTooltip="New flow"></mat-icon></button>
+      </div>
+    </div>
+
+    <div
+      *ngFor="let flow of flowGroups.flows"
+      class="list__flowsGroup__flow"
+      [class.selected]="flow.selected"
+      (click)="selectFlow(flow)"
+      (mouseout)="flow.mouseOver = false"
+      (mouseover)="flow.mouseOver = true"
+    >
+      <div *ngIf="flow.name" class="list__flowsGroup__flow__name" [attr.title]="flow.name">
+        {{ flow.name }}
+      </div>
+      <div class="list__flowsGroup__flow__infos">
+        <div class="list__flowsGroup__flow__infos__badges">
+          <span [ngClass]="flow.mouseOver || flow.selected ? 'gio-badge-white' : 'gio-badge-neutral'">SUB</span>
+        </div>
+        <div class="list__flowsGroup__flow__infos__channelName">My channel</div>
       </div>
     </div>
   </div>

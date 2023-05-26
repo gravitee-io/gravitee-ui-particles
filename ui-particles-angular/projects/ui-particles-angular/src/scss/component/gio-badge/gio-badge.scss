@@ -83,6 +83,13 @@
     color: mat.get-color-from-palette(palettes.$mat-dove-palette, darker10-contrast);
   }
 
+  .gio-badge-white {
+    @extend %gio-badge-base;
+
+    background-color: mat.get-color-from-palette(palettes.$mat-basic-palette, white);
+    color: mat.get-color-from-palette(palettes.$mat-basic-palette, white-contrast);
+  }
+
   .gio-badge-success {
     @extend %gio-badge-base;
 

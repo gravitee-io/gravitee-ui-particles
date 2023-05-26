@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Gravitee team (http://gravitee.io)
+ * Copyright (C) 2023 The Gravitee team (http://gravitee.io)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,16 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Input } from '@angular/core';
+import { isFunction } from 'lodash';
 
-import { FlowVM } from '../../gio-policy-studio.model';
+import { Plan } from './Plan';
 
-@Component({
-  selector: 'gio-ps-flow-details',
-  templateUrl: './gio-ps-flow-details.component.html',
-  styleUrls: ['./gio-ps-flow-details.component.scss'],
-})
-export class GioPolicyStudioDetailsComponent {
-  @Input()
-  public flow?: FlowVM = undefined;
+export function fakePlan(modifier?: Partial<Plan> | ((base: Plan) => Plan)): Plan {
+  const base: Plan = {
+    name: 'Keyless plan',
+    flows: [],
+  };
+
+  if (isFunction(modifier)) {
+    return modifier(base);
+  }
+
+  return {
+    ...base,
+    ...modifier,
+  };
 }

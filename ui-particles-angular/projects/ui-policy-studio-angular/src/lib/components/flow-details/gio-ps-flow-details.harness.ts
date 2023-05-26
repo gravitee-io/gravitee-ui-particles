@@ -23,4 +23,9 @@ export class GioPolicyStudioDetailsHarness extends ComponentHarness {
     const hostText = await (await this.host()).text();
     return hostText.includes('No flows yet');
   }
+
+  public async getFlowName(): Promise<string> {
+    const hostText = await (await this.host()).text();
+    return hostText.match(/"name": "(.*)"/)?.[1] ?? '';
+  }
 }

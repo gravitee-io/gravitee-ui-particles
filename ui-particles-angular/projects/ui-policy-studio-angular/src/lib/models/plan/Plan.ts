@@ -13,16 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Input } from '@angular/core';
 
-import { FlowVM } from '../../gio-policy-studio.model';
+import { Flow } from '../flow';
 
-@Component({
-  selector: 'gio-ps-flow-details',
-  templateUrl: './gio-ps-flow-details.component.html',
-  styleUrls: ['./gio-ps-flow-details.component.scss'],
-})
-export class GioPolicyStudioDetailsComponent {
-  @Input()
-  public flow?: FlowVM = undefined;
+export interface Plan {
+  name: string;
+  flows: Flow[];
 }

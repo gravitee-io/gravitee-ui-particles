@@ -13,9 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { AsyncFactoryFn, BaseHarnessFilters, ComponentHarness, HarnessPredicate, HarnessQuery } from '@angular/cdk/testing';
+import { AsyncFactoryFn, BaseHarnessFilters, ComponentHarness, HarnessPredicate, HarnessQuery, TestElement } from '@angular/cdk/testing';
 
-export type DivHarnessFilters = BaseHarnessFilters;
+export type DivHarnessFilters = BaseHarnessFilters & {
+  /** Filters based on the text */
+  text?: string | RegExp;
+};
 
 export class DivHarness extends ComponentHarness {
   public static hostSelector = 'div';
@@ -27,7 +30,9 @@ export class DivHarness extends ComponentHarness {
    * @return a `HarnessPredicate` configured with the given options.
    */
   public static with(options: DivHarnessFilters = {}): HarnessPredicate<DivHarness> {
-    return new HarnessPredicate(DivHarness, options);
+    return new HarnessPredicate(DivHarness, options).addOption('text', options.text, (harness, text) =>
+      HarnessPredicate.stringMatches(harness.getText(), text),
+    );
   }
 
   public childLocatorFor<T extends ComponentHarness>(query: HarnessQuery<T>): AsyncFactoryFn<T> {
@@ -38,8 +43,12 @@ export class DivHarness extends ComponentHarness {
     return this.locatorForAll(query);
   }
 
-  public async getText(): Promise<string> {
-    const hostText = await (await this.host()).text();
-    return hostText;
+  public async getText(option?: { childSelector?: string }): Promise<string | null> {
+    let element: TestElement | null = await this.host();
+    if (option?.childSelector) {
+      element = await this.locatorForOptional(option.childSelector)();
+    }
+
+    return element ? element.text() : null;
   }
 }
