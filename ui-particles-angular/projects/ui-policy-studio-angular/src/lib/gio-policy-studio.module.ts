@@ -18,14 +18,37 @@ import { MatButtonModule } from '@angular/material/button';
 import { GioIconsModule } from '@gravitee/ui-particles-angular';
 import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
 
-import { GioPolicyStudioComponent } from './gio-policy-studio.component';
-import { GioPolicyStudioFlowsMenuComponent } from './components/flows-menu/gio-ps-flows-menu.component';
+import { GioPolicyStudioFlowFormDialogComponent } from './components/flow-form-dialog/gio-ps-flow-form-dialog.component';
 import { GioPolicyStudioDetailsComponent } from './components/flow-details/gio-ps-flow-details.component';
+import { GioPolicyStudioFlowsMenuComponent } from './components/flows-menu/gio-ps-flows-menu.component';
+import { GioPolicyStudioComponent } from './gio-policy-studio.component';
 
 @NgModule({
-  declarations: [GioPolicyStudioComponent, GioPolicyStudioFlowsMenuComponent, GioPolicyStudioDetailsComponent],
-  imports: [CommonModule, MatButtonModule, MatTooltipModule, GioIconsModule],
+  declarations: [
+    GioPolicyStudioComponent,
+    GioPolicyStudioFlowsMenuComponent,
+    GioPolicyStudioDetailsComponent,
+    GioPolicyStudioFlowFormDialogComponent,
+  ],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+
+    MatButtonModule,
+    MatTooltipModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDialogModule,
+
+    GioIconsModule,
+  ],
   exports: [GioPolicyStudioComponent],
 })
 export class GioPolicyStudioModule {}
