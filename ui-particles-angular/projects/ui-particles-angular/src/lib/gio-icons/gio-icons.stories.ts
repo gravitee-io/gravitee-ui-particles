@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
+import { MatButtonModule } from '@angular/material/button';
 
 import { GioBannerModule } from '../gio-banner/gio-banner.module';
 
@@ -30,7 +31,16 @@ export default {
   title: 'Components / Icons',
   decorators: [
     moduleMetadata({
-      imports: [NoopAnimationsModule, FormsModule, GioIconsModule, MatIconModule, MatFormFieldModule, MatInputModule, GioBannerModule],
+      imports: [
+        NoopAnimationsModule,
+        FormsModule,
+        GioIconsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        GioBannerModule,
+      ],
       declarations: [SbGetIconsListPipe],
     }),
   ],
@@ -51,8 +61,9 @@ export const All: Story = {
     </mat-form-field>
 
     <gio-banner-info *ngIf="selectedIconId" class="sb-demo">
-      <h4>{{ selectedIconId }}</h4>
-      Example of use: <code>{{ '&lt;mat-icon svgIcon="gio:' + selectedIconId + '"&gt;&lt;/mat-icon&gt;' }}</code>
+      <span>gio:{{ selectedIconId }}</span>
+      <span gioBannerBody><code>{{ '&lt;mat-icon svgIcon="gio:' + selectedIconId + '"&gt;&lt;/mat-icon&gt;' }}</code></span>
+      
     </gio-banner-info>
      
     <span *ngFor="let iconId of [] | sbGetIconsList:search " class="sb-icons">
