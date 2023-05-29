@@ -1,3 +1,10 @@
+# [7.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.1.0...v7.2.0) (2023-05-29)
+
+
+### Features
+
+* impl flows menu with selection ([2e397f1](https://github.com/gravitee-io/gravitee-ui-particles/commit/2e397f199251f5ed297630c5b91b80b179996fc1))
+
 # [7.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.0.0...v7.1.0) (2023-05-26)
 
 
