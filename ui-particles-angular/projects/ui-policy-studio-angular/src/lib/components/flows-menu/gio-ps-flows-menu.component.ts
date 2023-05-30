@@ -14,7 +14,15 @@
  * limitations under the License.
  */
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { tap } from 'rxjs/operators';
+import { cloneDeep } from 'lodash';
 
+import {
+  GioPolicyStudioFlowFormDialogComponent,
+  GioPolicyStudioFlowFormDialogData,
+  GioPolicyStudioFlowFormDialogResult,
+} from '../flow-form-dialog/gio-ps-flow-form-dialog.component';
 import { FlowGroupVM, FlowVM } from '../../gio-policy-studio.model';
 import { ChannelSelector, HttpSelector, Operation } from '../../models';
 
@@ -47,11 +55,16 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
   @Output()
   public selectedFlowChange = new EventEmitter<FlowVM>();
 
-  public flowGroupVMSelected: FlowGroupMenuVM[] = [];
+  @Output()
+  public flowsGroupsChange = new EventEmitter<FlowGroupVM[]>();
+
+  public flowsGroupsVMSelected: FlowGroupMenuVM[] = [];
+
+  constructor(private readonly matDialog: MatDialog) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.flowsGroups || changes.selectedFlow) {
-      this.flowGroupVMSelected = this.flowsGroups.map(flowGroup => {
+      this.flowsGroupsVMSelected = this.flowsGroups.map(flowGroup => {
         return {
           ...flowGroup,
           flows: flowGroup.flows.map(flow => {
@@ -63,7 +76,7 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
                 PUBLISH: 'PUB',
                 SUBSCRIBE: 'SUB',
               };
-              const operationBadges = channelSelector.operations?.map(operation => ({
+              const operationBadges = (channelSelector.operations ?? []).map(operation => ({
                 label: operationToBadge[operation],
                 class: 'gio-badge-neutral',
               }));
@@ -109,5 +122,39 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
 
   public selectFlow(flow: FlowVM): void {
     this.selectedFlowChange.emit(flow);
+  }
+
+  public onAddFlow(flowGroup: FlowGroupVM): void {
+    this.matDialog
+      .open<GioPolicyStudioFlowFormDialogComponent, GioPolicyStudioFlowFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+        GioPolicyStudioFlowFormDialogComponent,
+        {
+          data: {
+            flow: undefined,
+            entrypoints: [],
+          },
+          role: 'alertdialog',
+          id: 'gioPsFlowFormDialog',
+        },
+      )
+      .afterClosed()
+      .pipe(
+        tap(createdOrEdited => {
+          if (!createdOrEdited) {
+            return;
+          }
+          const editedFlowsGroups = cloneDeep(this.flowsGroups);
+
+          const flowsGroupToEdit = editedFlowsGroups.find(fg => fg._id === flowGroup._id);
+          if (!flowsGroupToEdit) {
+            throw new Error(`Flow group ${flowGroup._id} not found`);
+          }
+          flowsGroupToEdit.flows.push(createdOrEdited);
+
+          this.flowsGroupsChange.emit(editedFlowsGroups);
+          this.selectedFlowChange.emit(createdOrEdited);
+        }),
+      )
+      .subscribe();
   }
 }

@@ -26,6 +26,8 @@ export type GioPolicyStudioFlowFormDialogData = {
   entrypoints?: string[];
 };
 
+export type GioPolicyStudioFlowFormDialogResult = FlowVM | false;
+
 @Component({
   selector: 'gio-ps-flow-form-dialog',
   templateUrl: './gio-ps-flow-form-dialog.component.html',
@@ -39,7 +41,7 @@ export class GioPolicyStudioFlowFormDialogComponent {
   public mode: 'create' | 'edit' = 'create';
 
   constructor(
-    public dialogRef: MatDialogRef<GioPolicyStudioFlowFormDialogComponent, FlowVM | false>,
+    public dialogRef: MatDialogRef<GioPolicyStudioFlowFormDialogComponent, GioPolicyStudioFlowFormDialogResult>,
     @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioFlowFormDialogData,
   ) {
     this.entrypoints = flowDialogData?.entrypoints ?? [];
@@ -54,8 +56,8 @@ export class GioPolicyStudioFlowFormDialogComponent {
       name: new FormControl(flowDialogData?.flow?.name ?? ''),
       channelOperator: new FormControl(channelSelector?.channelOperator ?? ''),
       channel: new FormControl(channelSelector?.channel ?? ''),
-      operations: new FormControl(channelSelector?.operations ?? ''),
-      entrypoints: new FormControl(channelSelector?.entrypoints ?? ''),
+      operations: new FormControl(channelSelector?.operations ?? []),
+      entrypoints: new FormControl(channelSelector?.entrypoints ?? []),
       condition: new FormControl(conditionSelector?.condition ?? ''),
     });
   }

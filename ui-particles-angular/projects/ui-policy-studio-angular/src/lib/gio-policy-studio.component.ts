@@ -70,6 +70,10 @@ export class GioPolicyStudioComponent implements OnChanges {
       }
     }
   }
+
+  public onFlowsGroupsChange(flowsGroups: FlowGroupVM[]): void {
+    this.flowsGroups = flowsGroups;
+  }
 }
 
 const getFlowsGroups = (commonFlows: Flow[] = [], plans: Plan[] = []): FlowGroupVM[] => {
