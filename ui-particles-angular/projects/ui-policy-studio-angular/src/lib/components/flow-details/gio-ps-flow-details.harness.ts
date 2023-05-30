@@ -30,6 +30,11 @@ export class GioPolicyStudioDetailsHarness extends ComponentHarness {
     return hostText.match(/"name": "(.*)"/)?.[1] ?? '';
   }
 
+  public async matchText(matcher: RegExp): Promise<boolean> {
+    const hostText = await (await this.host()).text();
+    return matcher.test(hostText);
+  }
+
   public async clickEditFlowBtn(): Promise<void> {
     const editFlowBtn = await this.locatorFor(MatButtonHarness.with({ selector: '.header__configBtn__edit' }))();
     await editFlowBtn.click();

@@ -52,6 +52,9 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
   @Input()
   public selectedFlow?: FlowVM = undefined;
 
+  @Input()
+  public entrypoints: string[] = [];
+
   @Output()
   public selectedFlowChange = new EventEmitter<FlowVM>();
 
@@ -133,7 +136,7 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
         {
           data: {
             flow: undefined,
-            entrypoints: [],
+            entrypoints: this.entrypoints,
           },
           role: 'alertdialog',
           id: 'gioPsFlowFormDialog',

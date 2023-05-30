@@ -41,6 +41,7 @@
   <div class="wrapper__flowsMenu">
     <gio-ps-flows-menu
       [flowsGroups]="flowsGroups"
+      [entrypoints]="entrypointsType"
       (flowsGroupsChange)="onFlowsGroupsChange($event)"
       [(selectedFlow)]="selectedFlow"
     ></gio-ps-flows-menu>
@@ -49,6 +50,7 @@
   <div class="wrapper__flowDetails">
     <gio-ps-flow-details
       [flow]="selectedFlow"
+      [entrypoints]="entrypointsType"
       (flowChange)="onSelectedFlowChange($event)"
       (deleteFlow)="onDeleteSelectedFlow($event)"
     ></gio-ps-flow-details>

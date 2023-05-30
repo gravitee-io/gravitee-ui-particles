@@ -129,13 +129,14 @@ export const MessageWithFlowsAndPlans: Story = {
         name: 'Second plan',
         flows: [
           fakeChannelFlow({
-            name: 'Flow 1',
+            name: 'Flow 1 with webhook entrypoints',
             selectors: [
               {
                 type: 'CHANNEL',
                 channel: 'channel1',
                 channelOperator: 'EQUALS',
                 operations: ['PUBLISH', 'SUBSCRIBE'],
+                entrypoints: ['webhook'],
               },
             ],
           }),

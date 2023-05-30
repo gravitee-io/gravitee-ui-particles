@@ -370,8 +370,14 @@ describe('GioPolicyStudioModule', () => {
     const planFooFlows = [fakeChannelFlow({ name: 'Foo flow 1' }), fakeChannelFlow({ name: 'Foo flow 2' })];
     const plans = [fakePlan({ name: 'Foo plan', flows: planFooFlows }), fakePlan({ name: 'Bar plan', flows: [] })];
     component.plans = plans;
-
+    component.entrypointsInfo = [
+      {
+        type: 'webhook',
+        icon: 'gio:webhook',
+      },
+    ];
     component.ngOnChanges({
+      entrypointsInfo: new SimpleChange(null, null, true),
       plans: new SimpleChange(null, null, true),
     });
 
@@ -382,7 +388,7 @@ describe('GioPolicyStudioModule', () => {
     await detailsHarness.clickEditFlowBtn();
 
     const flowFormDialog = await rootLoader.getHarness(GioPolicyStudioFlowFormDialogHarness);
-    await flowFormDialog.setFlowFormValues({ name: 'Edited flow name' });
+    await flowFormDialog.setFlowFormValues({ name: 'Edited flow name', entrypoints: ['webhook'] });
     await flowFormDialog.save();
 
     const flowsGroupsUpdated = await flowsMenuHarness.getAllFlowsGroups();
@@ -404,6 +410,8 @@ describe('GioPolicyStudioModule', () => {
       { name: 'Bar plan', flows: [] },
       { name: 'Common flows', flows: [] },
     ]);
+
+    expect(await detailsHarness.matchText(/webhook/)).toEqual(true);
   });
 
   it('should delete flow into plan', async () => {

@@ -33,6 +33,9 @@ export class GioPolicyStudioDetailsComponent {
   @Input()
   public flow?: FlowVM = undefined;
 
+  @Input()
+  public entrypoints: string[] = [];
+
   @Output()
   public flowChange = new EventEmitter<FlowVM>();
 
@@ -48,7 +51,7 @@ export class GioPolicyStudioDetailsComponent {
         {
           data: {
             flow: this.flow,
-            entrypoints: [],
+            entrypoints: this.entrypoints,
           },
           role: 'alertdialog',
           id: 'gioPsFlowFormDialog',
