@@ -76,10 +76,12 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
                 PUBLISH: 'PUB',
                 SUBSCRIBE: 'SUB',
               };
-              const operationBadges = (channelSelector.operations ?? []).map(operation => ({
-                label: operationToBadge[operation],
-                class: 'gio-badge-neutral',
-              }));
+              const operationBadges = (channelSelector.operations ?? [])
+                .map(operation => ({
+                  label: operationToBadge[operation],
+                  class: 'gio-badge-neutral',
+                }))
+                .sort((a, b) => a.label.localeCompare(b.label));
               operationBadges && badges.push(...operationBadges);
               pathOrChannelLabel = `${channelSelector.channel}${channelSelector.channelOperator === 'STARTS_WITH' ? '**' : ''}`;
             }

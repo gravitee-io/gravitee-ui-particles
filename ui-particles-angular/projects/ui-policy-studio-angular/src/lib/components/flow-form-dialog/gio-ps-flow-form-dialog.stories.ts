@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { Component, Input } from '@angular/core';
@@ -67,7 +67,7 @@ export default {
   decorators: [
     moduleMetadata({
       declarations: [GioPolicyStudioFlowFormDialogStoryComponent],
-      imports: [GioPolicyStudioModule, MatDialogModule, BrowserAnimationsModule],
+      imports: [GioPolicyStudioModule, MatDialogModule, NoopAnimationsModule],
     }),
   ],
   argTypes: {},

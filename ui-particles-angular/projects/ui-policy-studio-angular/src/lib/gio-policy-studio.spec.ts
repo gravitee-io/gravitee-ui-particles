@@ -19,6 +19,7 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { SimpleChange } from '@angular/core';
+import { InteractivityChecker } from '@angular/cdk/a11y';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { fakeChannelFlow, fakeHttpFlow, fakePlan } from '../public-testing-api';
@@ -38,7 +39,13 @@ describe('GioPolicyStudioModule', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [NoopAnimationsModule, GioPolicyStudioModule, MatIconTestingModule],
-    }).compileComponents();
+    })
+      .overrideProvider(InteractivityChecker, {
+        useValue: {
+          isFocusable: () => true, // This checks focus trap, set it to true to  avoid the warning
+        },
+      })
+      .compileComponents();
   });
 
   beforeEach(() => {

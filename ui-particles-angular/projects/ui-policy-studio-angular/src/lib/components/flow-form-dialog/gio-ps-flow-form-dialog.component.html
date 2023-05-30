@@ -18,7 +18,7 @@
 <h2 mat-dialog-title class="title">
   {{ mode === 'create' ? 'Create a new flow' : 'Edit flow' }}
 
-  <button class="title__closeBtn" mat-icon-button aria-label="Close dialog" [mat-dialog-close]="true">
+  <button class="title__closeBtn" mat-icon-button aria-label="Close dialog" [mat-dialog-close]="false">
     <mat-icon svgIcon="gio:cancel"></mat-icon>
   </button>
 </h2>
@@ -29,7 +29,7 @@
   <div class="content__row">
     <mat-form-field>
       <mat-label>Flow name</mat-label>
-      <input matInput formControlName="name" />
+      <input matInput formControlName="name" cdkFocusInitial />
       <mat-hint>Names will be automatically generated with channel and operation if left blank</mat-hint>
     </mat-form-field>
   </div>
@@ -64,8 +64,8 @@
     <mat-form-field>
       <mat-label>Entrypoints supported operations</mat-label>
       <mat-select multiple formControlName="operations">
-        <mat-option value="SUBSCRIBE">Subscribe</mat-option>
         <mat-option value="PUBLISH">Publish</mat-option>
+        <mat-option value="SUBSCRIBE">Subscribe</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
@@ -81,7 +81,7 @@
 
 <mat-dialog-actions class="actions">
   <button class="actions__cancelBtn" mat-flat-button [mat-dialog-close]="false">Cancel</button>
-  <button class="actions__saveBtn" color="primary" mat-stroked-button (click)="onSubmit()">
+  <button class="actions__saveBtn" color="primary" mat-stroked-button role="dialog" (click)="onSubmit()">
     {{ mode === 'create' ? 'Create' : 'Save' }}
   </button>
 </mat-dialog-actions>
