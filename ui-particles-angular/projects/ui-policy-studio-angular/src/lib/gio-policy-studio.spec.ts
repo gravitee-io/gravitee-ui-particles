@@ -20,7 +20,7 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { SimpleChange } from '@angular/core';
 
-import { fakeChannelFlow, fakePlan } from '../public-testing-api';
+import { fakeChannelFlow, fakeHttpFlow, fakePlan } from '../public-testing-api';
 
 import { GioPolicyStudioModule } from './gio-policy-studio.module';
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
@@ -204,5 +204,123 @@ describe('GioPolicyStudioModule', () => {
     await flowsMenuHarness.selectFlow(/Common flow/);
     expect(await flowsMenuHarness.getSelectedFlow()).toEqual({ name: 'Common flow' });
     expect(await detailsHarness.getFlowName()).toEqual('Common flow');
+  });
+
+  it('should display flow with ChannelSelector', async () => {
+    const commonFlows = [
+      fakeChannelFlow({
+        name: 'Flow 1',
+        selectors: [
+          {
+            type: 'CHANNEL',
+            channel: 'channel1',
+            channelOperator: 'EQUALS',
+            operations: ['PUBLISH', 'SUBSCRIBE'],
+          },
+        ],
+      }),
+      fakeChannelFlow({
+        name: 'Flow 2',
+        selectors: [
+          {
+            type: 'CHANNEL',
+            channel: 'channel2',
+            channelOperator: 'STARTS_WITH',
+            operations: ['SUBSCRIBE'],
+          },
+        ],
+      }),
+    ];
+    component.commonFlows = commonFlows;
+    component.ngOnChanges({
+      commonFlows: new SimpleChange(null, null, true),
+    });
+
+    const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
+
+    expect(await flowsMenuHarness.getAllFlowsGroups()).toEqual([
+      {
+        name: 'Common flows',
+        flows: [
+          {
+            name: 'Flow 1',
+            isSelected: true,
+            infos: 'PUBSUBchannel1',
+          },
+          {
+            name: 'Flow 2',
+            isSelected: false,
+            infos: 'SUBchannel2**',
+          },
+        ],
+      },
+    ]);
+  });
+
+  it('should display flow with HttpSelector', async () => {
+    const commonFlows = [
+      fakeHttpFlow({
+        name: 'Flow 1',
+        selectors: [
+          {
+            type: 'HTTP',
+            methods: ['GET'],
+            path: '/path1',
+            pathOperator: 'EQUALS',
+          },
+        ],
+      }),
+      fakeHttpFlow({
+        name: 'Flow 2',
+        selectors: [
+          {
+            type: 'HTTP',
+            methods: ['GET', 'POST', 'PUT', 'DELETE'],
+            path: '/path2',
+            pathOperator: 'STARTS_WITH',
+          },
+        ],
+      }),
+      fakeHttpFlow({
+        name: 'Flow 3',
+        selectors: [
+          {
+            type: 'HTTP',
+            methods: [],
+            path: '/path3',
+            pathOperator: 'EQUALS',
+          },
+        ],
+      }),
+    ];
+    component.commonFlows = commonFlows;
+    component.ngOnChanges({
+      commonFlows: new SimpleChange(null, null, true),
+    });
+
+    const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
+
+    expect(await flowsMenuHarness.getAllFlowsGroups()).toEqual([
+      {
+        name: 'Common flows',
+        flows: [
+          {
+            name: 'Flow 1',
+            isSelected: true,
+            infos: 'GET/path1',
+          },
+          {
+            name: 'Flow 2',
+            isSelected: false,
+            infos: 'GETPOST+2/path2/**',
+          },
+          {
+            name: 'Flow 3',
+            isSelected: false,
+            infos: 'ALL/path3',
+          },
+        ],
+      },
+    ]);
   });
 });

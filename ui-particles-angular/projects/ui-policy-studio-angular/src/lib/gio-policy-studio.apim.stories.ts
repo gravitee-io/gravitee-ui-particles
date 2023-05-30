@@ -18,7 +18,7 @@ import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
 
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
 import { GioPolicyStudioModule } from './gio-policy-studio.module';
-import { fakeChannelFlow, fakePlan } from './models/index-testing';
+import { fakeChannelFlow, fakeHttpFlow, fakePlan } from './models/index-testing';
 
 export default {
   title: 'Policy Studio / APIM',
@@ -129,10 +129,104 @@ export const MessageWithFlowsAndPlans: Story = {
         flows: [
           fakeChannelFlow({
             name: 'Flow 1',
+            selectors: [
+              {
+                type: 'CHANNEL',
+                channel: 'channel1',
+                channelOperator: 'EQUALS',
+                operations: ['PUBLISH', 'SUBSCRIBE'],
+              },
+            ],
           }),
-
           fakeChannelFlow({
             name: 'Flow 2',
+            selectors: [
+              {
+                type: 'CHANNEL',
+                channel: 'channel2',
+                channelOperator: 'STARTS_WITH',
+                operations: ['SUBSCRIBE'],
+              },
+            ],
+          }),
+        ],
+      }),
+    ],
+  },
+};
+
+export const ProxyWithFlowsAndPlans: Story = {
+  name: 'Proxy API with flows & plans',
+  args: {
+    entrypointsInfo: [
+      {
+        type: 'webhook',
+        icon: 'gio:webhook',
+      },
+    ],
+    endpointsInfo: [
+      {
+        type: 'kafka',
+        icon: 'gio:kafka',
+      },
+    ],
+    commonFlows: [
+      fakeHttpFlow(),
+      fakeHttpFlow({
+        name: 'Extra long flow name to test overflow Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      }),
+      fakeHttpFlow({
+        name: '',
+      }),
+    ],
+    plans: [
+      fakePlan({
+        name: 'Plan without flow and with a very long name to test overflow Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        flows: [
+          fakeHttpFlow({
+            name: '',
+          }),
+
+          fakeHttpFlow({
+            name: 'plan flow 1',
+          }),
+        ],
+      }),
+      fakePlan({
+        name: 'Second plan',
+        flows: [
+          fakeHttpFlow({
+            name: 'Flow 1',
+            selectors: [
+              {
+                type: 'HTTP',
+                methods: ['GET'],
+                path: '/path1',
+                pathOperator: 'EQUALS',
+              },
+            ],
+          }),
+          fakeHttpFlow({
+            name: 'Flow 2',
+            selectors: [
+              {
+                type: 'HTTP',
+                methods: ['GET', 'PUT', 'POST', 'DELETE'],
+                path: '/path1',
+                pathOperator: 'STARTS_WITH',
+              },
+            ],
+          }),
+          fakeHttpFlow({
+            name: 'Flow 3',
+            selectors: [
+              {
+                type: 'HTTP',
+                methods: [],
+                path: '/path3',
+                pathOperator: 'EQUALS',
+              },
+            ],
           }),
         ],
       }),
