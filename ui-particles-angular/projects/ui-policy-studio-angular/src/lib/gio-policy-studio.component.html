@@ -33,7 +33,7 @@
   </div>
 
   <div class="header__btn">
-    <button mat-stroked-button color="primary">Save</button>
+    <button mat-stroked-button color="primary" [disabled]="disableSaveButton" (click)="onSave()">Save</button>
   </div>
 </div>
 

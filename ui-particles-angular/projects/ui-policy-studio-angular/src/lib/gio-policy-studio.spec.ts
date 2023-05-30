@@ -21,6 +21,7 @@ import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { SimpleChange } from '@angular/core';
 import { InteractivityChecker } from '@angular/cdk/a11y';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonHarness } from '@angular/material/button/testing';
 
 import { fakeChannelFlow, fakeHttpFlow, fakePlan } from '../public-testing-api';
 
@@ -29,6 +30,7 @@ import { GioPolicyStudioComponent } from './gio-policy-studio.component';
 import { GioPolicyStudioDetailsHarness } from './components/flow-details/gio-ps-flow-details.harness';
 import { GioPolicyStudioFlowsMenuHarness } from './components/flows-menu/gio-ps-flows-menu.harness';
 import { GioPolicyStudioFlowFormDialogHarness } from './components/flow-form-dialog/gio-ps-flow-form-dialog.harness';
+import { Flow, Plan } from './models';
 
 describe('GioPolicyStudioModule', () => {
   let loader: HarnessLoader;
@@ -443,6 +445,108 @@ describe('GioPolicyStudioModule', () => {
       },
       { name: 'Bar plan', flows: [] },
       { name: 'Common flows', flows: [] },
+    ]);
+  });
+
+  it('should send commonFlowsChange on save', async () => {
+    const commonFlows = [fakeChannelFlow({ name: '' }), fakeChannelFlow({ name: 'Flow 2' })];
+    component.commonFlows = commonFlows;
+    component.ngOnChanges({
+      commonFlows: new SimpleChange(null, null, true),
+    });
+
+    const detailsHarness = await loader.getHarness(GioPolicyStudioDetailsHarness);
+    const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
+
+    // Edit first selected flow
+    await detailsHarness.clickEditFlowBtn();
+    const flowFormDialog = await rootLoader.getHarness(GioPolicyStudioFlowFormDialogHarness);
+    await flowFormDialog.setFlowFormValues({ name: 'Edited flow name' });
+    await flowFormDialog.save();
+
+    // Select second flow and delete it
+    await flowsMenuHarness.selectFlow(/Flow 2/);
+    await detailsHarness.clickDeleteFlowBtn();
+
+    let commonFlowChangeToExpect: Flow[] | undefined;
+    let plansToUpdateToExpect: Plan[] | undefined;
+    component.commonFlowsChange.subscribe(value => (commonFlowChangeToExpect = value));
+    component.plansToUpdate.subscribe(value => (plansToUpdateToExpect = value));
+
+    await (await loader.getHarness(MatButtonHarness.with({ text: /Save/ }))).click();
+
+    // Strict expect
+    expect(commonFlowChangeToExpect).toStrictEqual([
+      fakeChannelFlow({
+        name: 'Edited flow name',
+      }),
+    ]);
+    expect(plansToUpdateToExpect).toStrictEqual(undefined);
+  });
+
+  it('should send plansToUpdate on save', async () => {
+    const planFooFlows = [fakeChannelFlow({ name: 'Foo flow 1' }), fakeChannelFlow({ name: 'Foo flow 2' })];
+    const plans = [fakePlan({ name: 'Foo plan', flows: planFooFlows }), fakePlan({ name: 'Bar plan', flows: [] })];
+    component.plans = plans;
+    component.ngOnChanges({
+      plans: new SimpleChange(null, null, true),
+    });
+
+    const detailsHarness = await loader.getHarness(GioPolicyStudioDetailsHarness);
+    const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
+
+    // Edit first selected flow
+    await detailsHarness.clickEditFlowBtn();
+    const flowFormEditDialog = await rootLoader.getHarness(GioPolicyStudioFlowFormDialogHarness);
+    await flowFormEditDialog.setFlowFormValues({ name: 'Edited flow' });
+    await flowFormEditDialog.save();
+
+    // Add new flow into Bar plan
+    await (await flowsMenuHarness.getAllFlowsGroups()).find(group => group.name === 'Bar plan')?.clickAddFlowBtn();
+
+    const flowFormNewDialog = await rootLoader.getHarness(GioPolicyStudioFlowFormDialogHarness);
+    await flowFormNewDialog.setFlowFormValues({ name: 'New flow' });
+    await flowFormNewDialog.save();
+
+    let commonFlowChangeToExpect: Flow[] | undefined;
+    let plansToUpdateToExpect: Plan[] | undefined;
+    component.commonFlowsChange.subscribe(value => (commonFlowChangeToExpect = value));
+    component.plansToUpdate.subscribe(value => (plansToUpdateToExpect = value));
+
+    await (await loader.getHarness(MatButtonHarness.with({ text: /Save/ }))).click();
+
+    // Strict expect
+    expect(commonFlowChangeToExpect).toStrictEqual(undefined);
+    expect(plansToUpdateToExpect).toStrictEqual([
+      fakePlan({
+        name: 'Foo plan',
+        flows: [
+          fakeChannelFlow({
+            name: 'Edited flow',
+          }),
+          fakeChannelFlow({
+            name: 'Foo flow 2',
+          }),
+        ],
+      }),
+      fakePlan({
+        name: 'Bar plan',
+        flows: [
+          {
+            name: 'New flow',
+            enabled: true,
+            selectors: [
+              {
+                type: 'CHANNEL',
+                channel: '',
+                channelOperator: 'EQUALS',
+                entrypoints: [],
+                operations: [],
+              },
+            ],
+          },
+        ],
+      }),
     ]);
   });
 });

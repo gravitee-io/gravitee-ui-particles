@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { capitalize, flatten, uniqueId } from 'lodash';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { capitalize, flatten, omit, uniqueId } from 'lodash';
 
 import { ApiType, ConnectorsInfo, Flow, Plan } from './models';
 import { FlowGroupVM, FlowVM } from './gio-policy-studio.model';
@@ -46,6 +46,18 @@ export class GioPolicyStudioComponent implements OnChanges {
   @Input()
   public plans: Plan[] = [];
 
+  /**
+   * Return common flows if they have been updated.
+   */
+  @Output()
+  public commonFlowsChange = new EventEmitter<Flow[]>();
+
+  /**
+   * Return the list of plans with updated flows. Plans with no updated flows are not returned.
+   **/
+  @Output()
+  public plansToUpdate = new EventEmitter<Plan[]>();
+
   public connectorsTooltip = '';
 
   public selectedFlow?: FlowVM = undefined;
@@ -53,6 +65,8 @@ export class GioPolicyStudioComponent implements OnChanges {
   public flowsGroups: FlowGroupVM[] = [];
 
   public entrypointsType: string[] = [];
+
+  public disableSaveButton = true;
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.entrypointsInfo || changes.endpointsInfo) {
@@ -66,6 +80,7 @@ export class GioPolicyStudioComponent implements OnChanges {
     }
 
     if (changes.commonFlows || changes.plans) {
+      this.disableSaveButton = true;
       this.flowsGroups = getFlowsGroups(this.commonFlows, this.plans);
 
       // Select first flow by default on first load
@@ -77,6 +92,7 @@ export class GioPolicyStudioComponent implements OnChanges {
 
   public onFlowsGroupsChange(flowsGroups: FlowGroupVM[]): void {
     this.flowsGroups = flowsGroups;
+    this.disableSaveButton = false;
   }
 
   public onSelectedFlowChange(flow: FlowVM): void {
@@ -85,6 +101,7 @@ export class GioPolicyStudioComponent implements OnChanges {
       flows: flowGroup.flows.map(f => (f._id === flow._id ? flow : f)),
     }));
     this.selectedFlow = flow;
+    this.disableSaveButton = false;
   }
 
   public onDeleteSelectedFlow(flow: FlowVM): void {
@@ -99,6 +116,21 @@ export class GioPolicyStudioComponent implements OnChanges {
     this.selectedFlow = this.flowsGroups
       .find(flowGroup => flowGroup.flows.some(f => f._id === nextSelectedFlow))
       ?.flows.find(f => f._id === nextSelectedFlow);
+
+    this.disableSaveButton = false;
+  }
+
+  public onSave(): void {
+    // Emit common flows only if they have been updated
+    const commonFlows = getCommonFlowsOutput(this.flowsGroups);
+    if (commonFlows != null) {
+      this.commonFlowsChange.emit(commonFlows);
+    }
+    // Emit plans only if they have been updated
+    const plans = getPlansChangeOutput(this.flowsGroups);
+    if (plans != null) {
+      this.plansToUpdate.emit(plans);
+    }
   }
 }
 
@@ -106,16 +138,34 @@ const getFlowsGroups = (commonFlows: Flow[] = [], plans: Plan[] = []): FlowGroup
   const commFlowsGroup: FlowGroupVM = {
     _id: 'flowsGroup_commonFlow',
     name: 'Common flows',
-    flows: commonFlows.map(flow => ({ ...flow, _id: uniqueId('flow_') })),
+    flows: commonFlows.map(flow => ({ ...flow, _id: uniqueId('flow_'), _hasChanged: false })),
   };
 
   return [
     ...plans.map(plan => ({
       _id: uniqueId('flowsGroup_'),
+      _icon: 'gio:shield',
       name: plan.name,
-      icon: 'gio:shield',
-      flows: plan.flows.map(flow => ({ ...flow, _id: uniqueId('flow_') })),
+      flows: plan.flows.map(flow => ({ ...flow, _id: uniqueId('flow_'), _hasChanged: false })),
     })),
     commFlowsGroup,
   ];
+};
+
+const getCommonFlowsOutput = (flowsGroups: FlowGroupVM[]): Flow[] | null => {
+  const commonFlowsGroup = flowsGroups.find(flowGroup => flowGroup._id === 'flowsGroup_commonFlow');
+  const hasChanged = commonFlowsGroup?.flows.some(flow => flow._hasChanged);
+
+  return hasChanged ? (commonFlowsGroup?.flows ?? []).map(flow => omit(flow, '_id', '_hasChanged')) : null;
+};
+
+const getPlansChangeOutput = (flowsGroups: FlowGroupVM[]): Plan[] | null => {
+  const plans = flowsGroups.filter(flowGroup => flowGroup._id !== 'flowsGroup_commonFlow');
+  const plansWithChangedFlows = plans.filter(plan => plan.flows.some(flow => flow._hasChanged));
+  const plansWithChangedFlowsOutput = plansWithChangedFlows.map(plan => ({
+    ...omit(plan, '_id', '_icon'),
+    flows: plan.flows.map(flow => omit(flow, '_id', '_hasChanged')),
+  }));
+
+  return plansWithChangedFlowsOutput.length > 0 ? plansWithChangedFlowsOutput : null;
 };

@@ -16,13 +16,14 @@
 
 import { Flow } from './models';
 
-// Internal view model
+// Model used internally by the component and it's children
 export interface FlowVM extends Flow {
   _id: string;
+  _hasChanged: boolean;
 }
 export interface FlowGroupVM {
   _id: string;
+  _icon?: string;
   name: string;
-  icon?: string;
   flows: FlowVM[];
 }

@@ -54,7 +54,7 @@ export class GioPolicyStudioFlowFormDialogComponent {
 
     this.flowFormGroup = new FormGroup({
       name: new FormControl(flowDialogData?.flow?.name ?? ''),
-      channelOperator: new FormControl(channelSelector?.channelOperator ?? ''),
+      channelOperator: new FormControl(channelSelector?.channelOperator ?? 'EQUALS'),
       channel: new FormControl(channelSelector?.channel ?? ''),
       operations: new FormControl(channelSelector?.operations ?? []),
       entrypoints: new FormControl(channelSelector?.entrypoints ?? []),
@@ -84,6 +84,9 @@ export class GioPolicyStudioFlowFormDialogComponent {
       _id: uniqueId('flow_'),
       // If existing flow, keep root props
       ...this.existingFlow,
+      // Mark as changed
+      _hasChanged: true,
+      // Add changes
       name: this.flowFormGroup?.get('name')?.value,
       selectors: conditionSelectorToSave ? [chanelSelectorToSave, conditionSelectorToSave] : [chanelSelectorToSave],
       enabled: true,
