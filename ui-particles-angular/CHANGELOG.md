@@ -1,3 +1,10 @@
+# [7.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.2.0...v7.3.0) (2023-05-30)
+
+
+### Features
+
+* impl infos for path or channel into left menu ([65c8627](https://github.com/gravitee-io/gravitee-ui-particles/commit/65c86271a71939280a36eb297afc665915d02ed5))
+
 # [7.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.1.0...v7.2.0) (2023-05-29)
 
 
