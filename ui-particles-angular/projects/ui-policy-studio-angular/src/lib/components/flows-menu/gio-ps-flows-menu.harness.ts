@@ -61,7 +61,7 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
           name: flowsGroupName,
           flows: await flowsInfos,
           clickAddFlowBtn: async () =>
-            (await this.locatorFor(MatButtonHarness.with({ ancestor: '.list__flowsGroup__header__addBtn' }))()).click(),
+            (await flowsGroup.childLocatorFor(MatButtonHarness.with({ ancestor: '.list__flowsGroup__header__addBtn' }))()).click(),
         };
       }),
     );

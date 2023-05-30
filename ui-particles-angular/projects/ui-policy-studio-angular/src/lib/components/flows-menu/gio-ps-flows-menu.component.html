@@ -29,7 +29,7 @@
   <div *ngFor="let flowsGroup of flowsGroupsVMSelected" class="list__flowsGroup">
     <div class="list__flowsGroup__header">
       <div class="list__flowsGroup__header__label">
-        <mat-icon *ngIf="flowsGroup.icon" [svgIcon]="flowsGroup.icon"></mat-icon>
+        <mat-icon *ngIf="flowsGroup._icon" [svgIcon]="flowsGroup._icon"></mat-icon>
         <span>{{ flowsGroup.name }}</span>
       </div>
       <div class="list__flowsGroup__header__addBtn">

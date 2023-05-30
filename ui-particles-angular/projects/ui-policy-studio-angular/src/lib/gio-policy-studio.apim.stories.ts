@@ -16,10 +16,12 @@
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { action } from '@storybook/addon-actions';
 
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
 import { GioPolicyStudioModule } from './gio-policy-studio.module';
 import { fakeChannelFlow, fakeHttpFlow, fakePlan } from './models/index-testing';
+import { Flow, Plan } from './models';
 
 export default {
   title: 'Policy Studio / APIM',
@@ -37,9 +39,21 @@ export default {
     [endpointsInfo]="endpointsInfo"
     [commonFlows]="commonFlows"
     [plans]="plans"
+    (commonFlowsChange)="commonFlowsChange($event)"
+    (plansToUpdate)="plansToUpdate($event)"
     >
     </gio-policy-studio></div>`,
-    props,
+    props: {
+      ...props,
+      commonFlowsChange: (event: Flow[]) => {
+        console.info('commonFlowsChange', event);
+        action('commonFlowsChange')(event);
+      },
+      plansToUpdate: (event: Plan[]) => {
+        console.info('plansToUpdate', event);
+        action('plansToUpdate')(event);
+      },
+    },
   }),
 } as Meta;
 

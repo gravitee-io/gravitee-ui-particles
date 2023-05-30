@@ -90,6 +90,7 @@ describe('GioPolicyStudioFlowFormDialogComponent', () => {
   it('should return false on cancel', async () => {
     component.flow = {
       _id: 'test-id',
+      _hasChanged: false,
       ...fakeChannelFlow(),
     };
     await componentTestingOpenDialog();
@@ -103,6 +104,7 @@ describe('GioPolicyStudioFlowFormDialogComponent', () => {
 
     expect(component.flow).toEqual({
       _id: 'test-id',
+      _hasChanged: false,
       ...fakeChannelFlow(),
     });
   });
@@ -122,6 +124,7 @@ describe('GioPolicyStudioFlowFormDialogComponent', () => {
 
     expect(component.flow).toEqual({
       _id: expect.any(String),
+      _hasChanged: true,
       name: 'Test name',
       enabled: true,
       selectors: [
@@ -152,6 +155,7 @@ describe('GioPolicyStudioFlowFormDialogComponent', () => {
 
     expect(component.flow).toEqual({
       _id: expect.any(String),
+      _hasChanged: true,
       name: 'Test name',
       enabled: true,
       selectors: [
@@ -173,6 +177,7 @@ describe('GioPolicyStudioFlowFormDialogComponent', () => {
   it('should edit flow without any changes', async () => {
     component.flowToEdit = {
       _id: 'test-id',
+      _hasChanged: false,
       ...fakeChannelFlow(),
     };
     await componentTestingOpenDialog();
@@ -182,6 +187,7 @@ describe('GioPolicyStudioFlowFormDialogComponent', () => {
 
     expect(component.flow).toEqual({
       _id: 'test-id',
+      _hasChanged: true,
       ...fakeChannelFlow(),
     });
   });
@@ -189,6 +195,7 @@ describe('GioPolicyStudioFlowFormDialogComponent', () => {
   it('should edit flow with full changes', async () => {
     component.flowToEdit = {
       _id: 'test-id',
+      _hasChanged: false,
       ...fakeChannelFlow(),
     };
     await componentTestingOpenDialog();
@@ -207,6 +214,7 @@ describe('GioPolicyStudioFlowFormDialogComponent', () => {
 
     expect(component.flow).toEqual({
       _id: 'test-id',
+      _hasChanged: true,
       ...fakeChannelFlow(),
       name: 'Test name',
       enabled: true,
