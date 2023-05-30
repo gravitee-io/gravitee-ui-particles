@@ -36,6 +36,9 @@ export class GioPolicyStudioDetailsComponent {
   @Output()
   public flowChange = new EventEmitter<FlowVM>();
 
+  @Output()
+  public deleteFlow = new EventEmitter<FlowVM>();
+
   constructor(private readonly matDialog: MatDialog) {}
 
   public onEditFlow(): void {
@@ -62,5 +65,9 @@ export class GioPolicyStudioDetailsComponent {
         }),
       )
       .subscribe();
+  }
+
+  public onDeleteFlow(): void {
+    this.deleteFlow.emit(this.flow);
   }
 }
