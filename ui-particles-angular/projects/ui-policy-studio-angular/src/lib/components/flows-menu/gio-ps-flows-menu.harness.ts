@@ -15,6 +15,7 @@
  */
 
 import { ComponentHarness, parallel } from '@angular/cdk/testing';
+import { MatButtonHarness } from '@angular/material/button/testing';
 
 import { DivHarness } from '../../../testing';
 
@@ -35,6 +36,7 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
         isSelected: boolean;
         infos: string | null;
       }[];
+      clickAddFlowBtn: () => Promise<void>;
     }[]
   > {
     const flowsGroups = await this.locateFlowsGroups();
@@ -58,6 +60,8 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
         return {
           name: flowsGroupName,
           flows: await flowsInfos,
+          clickAddFlowBtn: async () =>
+            (await this.locatorFor(MatButtonHarness.with({ ancestor: '.list__flowsGroup__header__addBtn' }))()).click(),
         };
       }),
     );

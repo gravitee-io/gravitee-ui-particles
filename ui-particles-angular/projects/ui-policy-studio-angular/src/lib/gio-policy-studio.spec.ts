@@ -19,6 +19,7 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { SimpleChange } from '@angular/core';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { fakeChannelFlow, fakeHttpFlow, fakePlan } from '../public-testing-api';
 
@@ -26,15 +27,17 @@ import { GioPolicyStudioModule } from './gio-policy-studio.module';
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
 import { GioPolicyStudioDetailsHarness } from './components/flow-details/gio-ps-flow-details.harness';
 import { GioPolicyStudioFlowsMenuHarness } from './components/flows-menu/gio-ps-flows-menu.harness';
+import { GioPolicyStudioFlowFormDialogHarness } from './components/flow-form-dialog/gio-ps-flow-form-dialog.harness';
 
 describe('GioPolicyStudioModule', () => {
   let loader: HarnessLoader;
+  let rootLoader: HarnessLoader;
   let component: GioPolicyStudioComponent;
   let fixture: ComponentFixture<GioPolicyStudioComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GioPolicyStudioModule, MatIconTestingModule],
+      imports: [NoopAnimationsModule, GioPolicyStudioModule, MatIconTestingModule],
     }).compileComponents();
   });
 
@@ -42,6 +45,7 @@ describe('GioPolicyStudioModule', () => {
     fixture = TestBed.createComponent(GioPolicyStudioComponent);
     component = fixture.componentInstance;
     loader = TestbedHarnessEnvironment.loader(fixture);
+    rootLoader = TestbedHarnessEnvironment.documentRootLoader(fixture);
 
     component.apiType = 'MESSAGE';
     fixture.detectChanges();
@@ -83,7 +87,7 @@ describe('GioPolicyStudioModule', () => {
 
     expect(await detailsHarness.isDisplayEmptyFlow()).toEqual(true);
 
-    expect(await flowsMenuHarness.getAllFlowsGroups()).toEqual([
+    expect(await flowsMenuHarness.getAllFlowsGroups()).toMatchObject([
       {
         name: 'Common flows',
         flows: [],
@@ -238,7 +242,7 @@ describe('GioPolicyStudioModule', () => {
 
     const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
 
-    expect(await flowsMenuHarness.getAllFlowsGroups()).toEqual([
+    expect(await flowsMenuHarness.getAllFlowsGroups()).toMatchObject([
       {
         name: 'Common flows',
         flows: [
@@ -300,7 +304,7 @@ describe('GioPolicyStudioModule', () => {
 
     const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
 
-    expect(await flowsMenuHarness.getAllFlowsGroups()).toEqual([
+    expect(await flowsMenuHarness.getAllFlowsGroups()).toMatchObject([
       {
         name: 'Common flows',
         flows: [
@@ -320,6 +324,37 @@ describe('GioPolicyStudioModule', () => {
             infos: 'ALL/path3',
           },
         ],
+      },
+    ]);
+  });
+
+  it('should add flow into common flows', async () => {
+    component.commonFlows = [];
+    component.ngOnChanges({
+      commonFlows: new SimpleChange(null, null, true),
+    });
+
+    const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
+
+    const flowsGroups = await flowsMenuHarness.getAllFlowsGroups();
+
+    await flowsGroups[0].clickAddFlowBtn();
+
+    const flowFormDialog = await rootLoader.getHarness(GioPolicyStudioFlowFormDialogHarness);
+    await flowFormDialog.setFlowFormValues({ name: 'New flow' });
+    await flowFormDialog.save();
+
+    const flowsGroupsUpdated = await flowsMenuHarness.getAllFlowsGroups();
+
+    expect(flowsGroupsUpdated).toMatchObject([
+      {
+        flows: [
+          {
+            isSelected: true,
+            name: 'New flow',
+          },
+        ],
+        name: 'Common flows',
       },
     ]);
   });

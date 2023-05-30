@@ -24,7 +24,11 @@ import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
 import { FlowVM } from '../../gio-policy-studio.model';
 import { fakeChannelFlow } from '../../models/index-testing';
 
-import { GioPolicyStudioFlowFormDialogComponent, GioPolicyStudioFlowFormDialogData } from './gio-ps-flow-form-dialog.component';
+import {
+  GioPolicyStudioFlowFormDialogComponent,
+  GioPolicyStudioFlowFormDialogData,
+  GioPolicyStudioFlowFormDialogResult,
+} from './gio-ps-flow-form-dialog.component';
 
 @Component({
   selector: 'gio-ps-flow-form-dialog-story',
@@ -36,7 +40,7 @@ class GioPolicyStudioFlowFormDialogStoryComponent {
 
   public openDialog() {
     this.matDialog
-      .open<GioPolicyStudioFlowFormDialogComponent, GioPolicyStudioFlowFormDialogData, FlowVM | false>(
+      .open<GioPolicyStudioFlowFormDialogComponent, GioPolicyStudioFlowFormDialogData, GioPolicyStudioFlowFormDialogResult>(
         GioPolicyStudioFlowFormDialogComponent,
         {
           data: {

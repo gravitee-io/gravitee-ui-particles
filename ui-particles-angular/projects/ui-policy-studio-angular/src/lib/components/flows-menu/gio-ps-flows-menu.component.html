@@ -26,19 +26,19 @@
 </div>
 
 <div class="list">
-  <div *ngFor="let flowGroups of flowGroupVMSelected" class="list__flowsGroup">
+  <div *ngFor="let flowsGroup of flowsGroupsVMSelected" class="list__flowsGroup">
     <div class="list__flowsGroup__header">
       <div class="list__flowsGroup__header__label">
-        <mat-icon *ngIf="flowGroups.icon" [svgIcon]="flowGroups.icon"></mat-icon>
-        <span>{{ flowGroups.name }}</span>
+        <mat-icon *ngIf="flowsGroup.icon" [svgIcon]="flowsGroup.icon"></mat-icon>
+        <span>{{ flowsGroup.name }}</span>
       </div>
       <div class="list__flowsGroup__header__addBtn">
-        <button mat-icon-button><mat-icon svgIcon="gio:plus" matTooltip="New flow"></mat-icon></button>
+        <button mat-icon-button (click)="onAddFlow(flowsGroup)"><mat-icon svgIcon="gio:plus" matTooltip="New flow"></mat-icon></button>
       </div>
     </div>
 
     <div
-      *ngFor="let flow of flowGroups.flows"
+      *ngFor="let flow of flowsGroup.flows"
       class="list__flowsGroup__flow"
       [class.selected]="flow.selected"
       (click)="selectFlow(flow)"

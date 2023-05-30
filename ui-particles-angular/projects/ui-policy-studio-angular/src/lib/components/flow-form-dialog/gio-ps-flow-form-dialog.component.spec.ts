@@ -27,7 +27,11 @@ import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
 import { fakeChannelFlow } from '../../models/index-testing';
 import { FlowVM } from '../../gio-policy-studio.model';
 
-import { GioPolicyStudioFlowFormDialogComponent, GioPolicyStudioFlowFormDialogData } from './gio-ps-flow-form-dialog.component';
+import {
+  GioPolicyStudioFlowFormDialogComponent,
+  GioPolicyStudioFlowFormDialogData,
+  GioPolicyStudioFlowFormDialogResult,
+} from './gio-ps-flow-form-dialog.component';
 import { GioPolicyStudioFlowFormDialogHarness } from './gio-ps-flow-form-dialog.harness';
 
 @Component({
@@ -42,7 +46,7 @@ class TestComponent {
 
   public openDialog() {
     this.matDialog
-      .open<GioPolicyStudioFlowFormDialogComponent, GioPolicyStudioFlowFormDialogData, FlowVM | false>(
+      .open<GioPolicyStudioFlowFormDialogComponent, GioPolicyStudioFlowFormDialogData, GioPolicyStudioFlowFormDialogResult>(
         GioPolicyStudioFlowFormDialogComponent,
         {
           data: {

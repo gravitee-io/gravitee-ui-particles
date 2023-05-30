@@ -15,6 +15,7 @@
  */
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
 import { GioPolicyStudioModule } from './gio-policy-studio.module';
@@ -25,7 +26,7 @@ export default {
   component: GioPolicyStudioComponent,
   decorators: [
     moduleMetadata({
-      imports: [GioPolicyStudioModule],
+      imports: [BrowserAnimationsModule, GioPolicyStudioModule],
     }),
   ],
 
