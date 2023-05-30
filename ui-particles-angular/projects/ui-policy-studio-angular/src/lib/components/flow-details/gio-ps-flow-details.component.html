@@ -17,7 +17,13 @@
 -->
 <ng-container *ngIf="flow; else emptyFlows">
   <div class="header">
-    <div class="mat-h4">Flow details</div>
+    <div class="header__label">Flow details</div>
+    <div class="header__configBtn">
+      <button class="header__configBtn__edit" mat-stroked-button mat-icon-button (click)="onEditFlow()">
+        <mat-icon svgIcon="gio:edit-pencil"></mat-icon>
+      </button>
+      <button class="header__configBtn__remove" mat-stroked-button mat-icon-button><mat-icon svgIcon="gio:trash"></mat-icon></button>
+    </div>
   </div>
 
   <div class="content">

@@ -13,6 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '@gravitee/ui-particles-angular' as gio;
+
+$typography: map.get(gio.$mat-theme, typography);
+
 .emptyFlows {
   display: flex;
   width: 500px;
@@ -21,4 +27,27 @@
   justify-content: center;
   margin: auto;
   text-align: center;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+
+  &__label {
+    @include mat.typography-level($typography, subheading-1);
+
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    margin-bottom: 0;
+    gap: 8px;
+  }
+
+  &__configBtn {
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 }
