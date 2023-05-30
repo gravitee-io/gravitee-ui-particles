@@ -52,6 +52,8 @@ export class GioPolicyStudioComponent implements OnChanges {
 
   public flowsGroups: FlowGroupVM[] = [];
 
+  public entrypointsType: string[] = [];
+
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.entrypointsInfo || changes.endpointsInfo) {
       this.connectorsTooltip = `Entrypoints: ${(this.entrypointsInfo ?? []).map(e => capitalize(e.type)).join(', ')}\nEndpoints: ${(
@@ -59,6 +61,8 @@ export class GioPolicyStudioComponent implements OnChanges {
       )
         .map(e => capitalize(e.type))
         .join(', ')}`;
+
+      this.entrypointsType = (this.entrypointsInfo ?? []).map(e => e.type);
     }
 
     if (changes.commonFlows || changes.plans) {
