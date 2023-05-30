@@ -15,7 +15,7 @@
  */
 import { HttpMethod } from './HttpMethod';
 
-export type Operations = 'PUBLISH' | 'SUBSCRIBE';
+export type Operation = 'PUBLISH' | 'SUBSCRIBE';
 export type Operator = 'EQUALS' | 'STARTS_WITH';
 export type BaseSelectorTypeEnum = 'HTTP' | 'CHANNEL' | 'CONDITION';
 
@@ -39,7 +39,7 @@ export interface ChannelSelector extends BaseSelector {
   /**
    * The list of operations associated with this channel selector.
    */
-  operations?: Operations[];
+  operations?: Operation[];
   /**
    * The channel of the selector
    */

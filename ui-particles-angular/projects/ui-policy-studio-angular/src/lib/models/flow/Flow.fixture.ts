@@ -16,7 +16,7 @@
 import { isFunction } from 'lodash';
 
 import { Flow } from './Flow';
-import { ChannelSelector } from './Selector';
+import { ChannelSelector, HttpSelector } from './Selector';
 
 export function fakeChannelFlow(modifier?: Partial<Flow> | ((baseApi: Flow) => Flow)): Flow {
   const channelSelector: ChannelSelector = {
@@ -30,6 +30,34 @@ export function fakeChannelFlow(modifier?: Partial<Flow> | ((baseApi: Flow) => F
   const base: Flow = {
     name: 'Flow name',
     selectors: [channelSelector],
+    request: [],
+    response: [],
+    subscribe: [],
+    publish: [],
+    enabled: true,
+  };
+
+  if (isFunction(modifier)) {
+    return modifier(base);
+  }
+
+  return {
+    ...base,
+    ...modifier,
+  };
+}
+
+export function fakeHttpFlow(modifier?: Partial<Flow> | ((baseApi: Flow) => Flow)): Flow {
+  const httpSelector: HttpSelector = {
+    type: 'HTTP',
+    path: '/path',
+    pathOperator: 'EQUALS',
+    methods: ['GET'],
+  };
+
+  const base: Flow = {
+    name: 'Flow name',
+    selectors: [httpSelector],
     request: [],
     response: [],
     subscribe: [],

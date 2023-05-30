@@ -50,9 +50,11 @@
       </div>
       <div class="list__flowsGroup__flow__infos">
         <div class="list__flowsGroup__flow__infos__badges">
-          <span [ngClass]="flow.mouseOver || flow.selected ? 'gio-badge-white' : 'gio-badge-neutral'">SUB</span>
+          <span *ngFor="let badge of flow.badges" class="list__flowsGroup__flow__infos__badges__badge" [ngClass]="badge.class">{{
+            badge.label
+          }}</span>
         </div>
-        <div class="list__flowsGroup__flow__infos__channelName">My channel</div>
+        <div class="list__flowsGroup__flow__infos__pathOrChannelLabel">{{ flow.pathOrChannelLabel }}</div>
       </div>
     </div>
   </div>

@@ -16,6 +16,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 
 import { FlowGroupVM, FlowVM } from '../../gio-policy-studio.model';
+import { ChannelSelector, HttpSelector, Operation } from '../../models';
 
 interface FlowGroupMenuVM extends FlowGroupVM {
   flows: FlowMenuVM[];
@@ -24,6 +25,11 @@ interface FlowGroupMenuVM extends FlowGroupVM {
 interface FlowMenuVM extends FlowVM {
   selected: boolean;
   mouseOver: boolean;
+  badges: {
+    label: string;
+    class: string;
+  }[];
+  pathOrChannelLabel: string;
 }
 
 @Component({
@@ -49,10 +55,51 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
         return {
           ...flowGroup,
           flows: flowGroup.flows.map(flow => {
+            const badges: FlowMenuVM['badges'] = [];
+            let pathOrChannelLabel = '';
+            const channelSelector = flow.selectors?.find(s => s.type === 'CHANNEL') as ChannelSelector;
+            if (channelSelector) {
+              const operationToBadge: Record<Operation, string> = {
+                PUBLISH: 'PUB',
+                SUBSCRIBE: 'SUB',
+              };
+              const operationBadges = channelSelector.operations?.map(operation => ({
+                label: operationToBadge[operation],
+                class: 'gio-badge-neutral',
+              }));
+              operationBadges && badges.push(...operationBadges);
+              pathOrChannelLabel = `${channelSelector.channel}${channelSelector.channelOperator === 'STARTS_WITH' ? '**' : ''}`;
+            }
+
+            const httpSelector = flow.selectors?.find(s => s.type === 'HTTP') as HttpSelector;
+            if (httpSelector) {
+              // Keep only 2 first http methods and add +X badge if there are more
+              const httpMethodsToKeep = httpSelector.methods?.slice(0, 2);
+              const httpMethodsLength = httpSelector.methods?.length;
+              httpMethodsToKeep &&
+                badges.push(...httpMethodsToKeep.map(method => ({ label: method, class: `gio-method-badge-${method.toLowerCase()}` })));
+              if (httpMethodsLength && httpMethodsLength > 2) {
+                badges?.push({
+                  label: `+${httpMethodsLength - 2}`,
+                  class: 'gio-badge-neutral',
+                });
+              }
+              if (httpMethodsLength === 0) {
+                badges?.push({
+                  label: 'ALL',
+                  class: 'gio-badge-neutral',
+                });
+              }
+
+              pathOrChannelLabel = `${httpSelector.path}${httpSelector.pathOperator === 'STARTS_WITH' ? '/**' : ''}`;
+            }
+
             return {
               ...flow,
               selected: this.selectedFlow?._id === flow._id,
               mouseOver: false,
+              badges,
+              pathOrChannelLabel,
             };
           }),
         };

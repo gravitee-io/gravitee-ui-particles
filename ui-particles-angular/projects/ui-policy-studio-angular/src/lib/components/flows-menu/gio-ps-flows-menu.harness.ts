@@ -33,6 +33,7 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
       flows: {
         name: string | null;
         isSelected: boolean;
+        infos: string | null;
       }[];
     }[]
   > {
@@ -48,6 +49,7 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
           flowsDiv.map(async flowDiv => {
             return {
               name: await flowDiv.getText({ childSelector: '.list__flowsGroup__flow__name' }),
+              infos: await flowDiv.getText({ childSelector: '.list__flowsGroup__flow__infos' }),
               isSelected: await flowDiv.host().then(host => host.hasClass('selected')),
             };
           }),
