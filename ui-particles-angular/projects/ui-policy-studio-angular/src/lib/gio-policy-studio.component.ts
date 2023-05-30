@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { capitalize, uniqueId } from 'lodash';
+import { capitalize, flatten, uniqueId } from 'lodash';
 
 import { ApiType, ConnectorsInfo, Flow, Plan } from './models';
 import { FlowGroupVM, FlowVM } from './gio-policy-studio.model';
@@ -81,6 +81,20 @@ export class GioPolicyStudioComponent implements OnChanges {
       flows: flowGroup.flows.map(f => (f._id === flow._id ? flow : f)),
     }));
     this.selectedFlow = flow;
+  }
+
+  public onDeleteSelectedFlow(flow: FlowVM): void {
+    // Define next selected flow and remove flow from flowsGroups
+    const allFLowsId = flatten(this.flowsGroups.map(flowGroup => flowGroup.flows)).map(f => f._id);
+    const flowToDeleteIndex = allFLowsId.indexOf(flow._id);
+    const nextSelectedFlow = allFLowsId[flowToDeleteIndex + 1] ?? allFLowsId[flowToDeleteIndex - 1];
+    this.flowsGroups = this.flowsGroups.map(flowGroup => ({
+      ...flowGroup,
+      flows: flowGroup.flows.filter(f => f._id !== flow._id),
+    }));
+    this.selectedFlow = this.flowsGroups
+      .find(flowGroup => flowGroup.flows.some(f => f._id === nextSelectedFlow))
+      ?.flows.find(f => f._id === nextSelectedFlow);
   }
 }
 

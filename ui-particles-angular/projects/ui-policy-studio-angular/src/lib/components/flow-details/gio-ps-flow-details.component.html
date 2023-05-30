@@ -22,7 +22,9 @@
       <button class="header__configBtn__edit" mat-stroked-button mat-icon-button (click)="onEditFlow()">
         <mat-icon svgIcon="gio:edit-pencil"></mat-icon>
       </button>
-      <button class="header__configBtn__remove" mat-stroked-button mat-icon-button><mat-icon svgIcon="gio:trash"></mat-icon></button>
+      <button class="header__configBtn__delete" mat-stroked-button mat-icon-button (click)="onDeleteFlow()">
+        <mat-icon svgIcon="gio:trash"></mat-icon>
+      </button>
     </div>
   </div>
 

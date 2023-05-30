@@ -398,4 +398,36 @@ describe('GioPolicyStudioModule', () => {
       { name: 'Common flows', flows: [] },
     ]);
   });
+
+  it('should delete flow into plan', async () => {
+    const planFooFlows = [fakeChannelFlow({ name: 'Foo flow 1' }), fakeChannelFlow({ name: 'Foo flow 2' })];
+    const plans = [fakePlan({ name: 'Foo plan', flows: planFooFlows }), fakePlan({ name: 'Bar plan', flows: [] })];
+    component.plans = plans;
+
+    component.ngOnChanges({
+      plans: new SimpleChange(null, null, true),
+    });
+
+    const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
+    const detailsHarness = await loader.getHarness(GioPolicyStudioDetailsHarness);
+
+    // Delete first selected flow
+    await detailsHarness.clickDeleteFlowBtn();
+
+    const flowsGroupsUpdated = await flowsMenuHarness.getAllFlowsGroups();
+
+    expect(flowsGroupsUpdated).toMatchObject([
+      {
+        flows: [
+          {
+            isSelected: true,
+            name: 'Foo flow 2',
+          },
+        ],
+        name: 'Foo plan',
+      },
+      { name: 'Bar plan', flows: [] },
+      { name: 'Common flows', flows: [] },
+    ]);
+  });
 });

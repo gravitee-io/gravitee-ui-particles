@@ -45,9 +45,9 @@ $typography: map.get(gio.$mat-theme, typography);
   }
 
   &__configBtn {
-    margin-left: 8px;
     display: flex;
     align-items: center;
+    margin-left: 8px;
     gap: 8px;
   }
 }

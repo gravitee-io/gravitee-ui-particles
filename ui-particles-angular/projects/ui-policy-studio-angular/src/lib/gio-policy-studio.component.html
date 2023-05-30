@@ -47,6 +47,10 @@
   </div>
 
   <div class="wrapper__flowDetails">
-    <gio-ps-flow-details [flow]="selectedFlow" (flowChange)="onSelectedFlowChange($event)"></gio-ps-flow-details>
+    <gio-ps-flow-details
+      [flow]="selectedFlow"
+      (flowChange)="onSelectedFlowChange($event)"
+      (deleteFlow)="onDeleteSelectedFlow($event)"
+    ></gio-ps-flow-details>
   </div>
 </div>

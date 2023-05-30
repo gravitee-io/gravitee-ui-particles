@@ -34,4 +34,9 @@ export class GioPolicyStudioDetailsHarness extends ComponentHarness {
     const editFlowBtn = await this.locatorFor(MatButtonHarness.with({ selector: '.header__configBtn__edit' }))();
     await editFlowBtn.click();
   }
+
+  public async clickDeleteFlowBtn(): Promise<void> {
+    const deleteFlowBtn = await this.locatorFor(MatButtonHarness.with({ selector: '.header__configBtn__delete' }))();
+    await deleteFlowBtn.click();
+  }
 }
