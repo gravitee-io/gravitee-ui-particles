@@ -74,6 +74,14 @@ export class GioPolicyStudioComponent implements OnChanges {
   public onFlowsGroupsChange(flowsGroups: FlowGroupVM[]): void {
     this.flowsGroups = flowsGroups;
   }
+
+  public onSelectedFlowChange(flow: FlowVM): void {
+    this.flowsGroups = this.flowsGroups.map(flowGroup => ({
+      ...flowGroup,
+      flows: flowGroup.flows.map(f => (f._id === flow._id ? flow : f)),
+    }));
+    this.selectedFlow = flow;
+  }
 }
 
 const getFlowsGroups = (commonFlows: Flow[] = [], plans: Plan[] = []): FlowGroupVM[] => {

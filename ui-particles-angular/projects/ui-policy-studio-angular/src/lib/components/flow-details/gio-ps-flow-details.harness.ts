@@ -15,6 +15,7 @@
  */
 
 import { ComponentHarness } from '@angular/cdk/testing';
+import { MatButtonHarness } from '@angular/material/button/testing';
 
 export class GioPolicyStudioDetailsHarness extends ComponentHarness {
   public static hostSelector = 'gio-ps-flow-details';
@@ -27,5 +28,10 @@ export class GioPolicyStudioDetailsHarness extends ComponentHarness {
   public async getFlowName(): Promise<string> {
     const hostText = await (await this.host()).text();
     return hostText.match(/"name": "(.*)"/)?.[1] ?? '';
+  }
+
+  public async clickEditFlowBtn(): Promise<void> {
+    const editFlowBtn = await this.locatorFor(MatButtonHarness.with({ selector: '.header__configBtn__edit' }))();
+    await editFlowBtn.click();
   }
 }

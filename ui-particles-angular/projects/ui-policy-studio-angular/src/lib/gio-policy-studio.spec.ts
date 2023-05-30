@@ -358,4 +358,44 @@ describe('GioPolicyStudioModule', () => {
       },
     ]);
   });
+
+  it('should edit flow into plan', async () => {
+    const planFooFlows = [fakeChannelFlow({ name: 'Foo flow 1' }), fakeChannelFlow({ name: 'Foo flow 2' })];
+    const plans = [fakePlan({ name: 'Foo plan', flows: planFooFlows }), fakePlan({ name: 'Bar plan', flows: [] })];
+    component.plans = plans;
+
+    component.ngOnChanges({
+      plans: new SimpleChange(null, null, true),
+    });
+
+    const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
+    const detailsHarness = await loader.getHarness(GioPolicyStudioDetailsHarness);
+
+    // Edit first selected flow
+    await detailsHarness.clickEditFlowBtn();
+
+    const flowFormDialog = await rootLoader.getHarness(GioPolicyStudioFlowFormDialogHarness);
+    await flowFormDialog.setFlowFormValues({ name: 'Edited flow name' });
+    await flowFormDialog.save();
+
+    const flowsGroupsUpdated = await flowsMenuHarness.getAllFlowsGroups();
+
+    expect(flowsGroupsUpdated).toMatchObject([
+      {
+        flows: [
+          {
+            isSelected: true,
+            name: 'Edited flow name',
+          },
+          {
+            isSelected: false,
+            name: 'Foo flow 2',
+          },
+        ],
+        name: 'Foo plan',
+      },
+      { name: 'Bar plan', flows: [] },
+      { name: 'Common flows', flows: [] },
+    ]);
+  });
 });

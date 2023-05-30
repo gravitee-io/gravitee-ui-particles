@@ -13,9 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { tap } from 'rxjs/operators';
 
 import { FlowVM } from '../../gio-policy-studio.model';
+import {
+  GioPolicyStudioFlowFormDialogComponent,
+  GioPolicyStudioFlowFormDialogData,
+  GioPolicyStudioFlowFormDialogResult,
+} from '../flow-form-dialog/gio-ps-flow-form-dialog.component';
 
 @Component({
   selector: 'gio-ps-flow-details',
@@ -25,4 +32,35 @@ import { FlowVM } from '../../gio-policy-studio.model';
 export class GioPolicyStudioDetailsComponent {
   @Input()
   public flow?: FlowVM = undefined;
+
+  @Output()
+  public flowChange = new EventEmitter<FlowVM>();
+
+  constructor(private readonly matDialog: MatDialog) {}
+
+  public onEditFlow(): void {
+    this.matDialog
+      .open<GioPolicyStudioFlowFormDialogComponent, GioPolicyStudioFlowFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+        GioPolicyStudioFlowFormDialogComponent,
+        {
+          data: {
+            flow: this.flow,
+            entrypoints: [],
+          },
+          role: 'alertdialog',
+          id: 'gioPsFlowFormDialog',
+        },
+      )
+      .afterClosed()
+      .pipe(
+        tap(createdOrEdited => {
+          if (!createdOrEdited) {
+            return;
+          }
+
+          this.flowChange.emit(createdOrEdited);
+        }),
+      )
+      .subscribe();
+  }
 }

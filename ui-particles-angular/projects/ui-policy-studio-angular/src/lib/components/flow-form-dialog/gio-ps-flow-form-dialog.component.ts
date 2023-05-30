@@ -16,7 +16,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
-import { uniqueId } from 'lodash';
+import { cloneDeep, uniqueId } from 'lodash';
 
 import { FlowVM } from '../../gio-policy-studio.model';
 import { ChannelSelector, ConditionSelector } from '../../models';
@@ -46,7 +46,7 @@ export class GioPolicyStudioFlowFormDialogComponent {
   ) {
     this.entrypoints = flowDialogData?.entrypoints ?? [];
 
-    this.existingFlow = flowDialogData?.flow;
+    this.existingFlow = cloneDeep(flowDialogData?.flow);
     this.mode = this.existingFlow ? 'edit' : 'create';
 
     const channelSelector = flowDialogData?.flow?.selectors?.find(s => s.type === 'CHANNEL') as ChannelSelector;
