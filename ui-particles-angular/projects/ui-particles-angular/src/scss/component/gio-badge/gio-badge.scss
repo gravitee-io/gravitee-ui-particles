@@ -45,7 +45,8 @@
       max-width: 16px;
       height: inherit;
 
-      // Set max height and width when using SVG icons (i.e. not coming from a web font) otherwise they are just HUGE
+      // Set max height & height and width when using SVG icons (i.e. not coming from a web font) otherwise they are just HUGE
+      height: 16px;
       max-height: 16px;
       font-size: inherit;
       line-height: inherit;
