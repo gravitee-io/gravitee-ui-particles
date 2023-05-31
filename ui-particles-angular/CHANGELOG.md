@@ -1,3 +1,20 @@
+# [7.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.3.0...v7.4.0) (2023-05-31)
+
+
+### Bug Fixes
+
+* keep maximum height even when menu is empty ([250def5](https://github.com/gravitee-io/gravitee-ui-particles/commit/250def5a7aefb53e46ca506bc4eae9927c649bcb))
+
+
+### Features
+
+* add PolicyStudio FlowForm dialog ([90c17d0](https://github.com/gravitee-io/gravitee-ui-particles/commit/90c17d0b7b35ab36497e3b2b292d342b463f0d00))
+* impl add flow button into group ([565d179](https://github.com/gravitee-io/gravitee-ui-particles/commit/565d179cea627999a600b59eb0236e38839bc13f))
+* impl delete flow button ([eec5000](https://github.com/gravitee-io/gravitee-ui-particles/commit/eec50008ba2e79147d564f76e8d0cb4a344a33c6))
+* impl edit flow button ([862b473](https://github.com/gravitee-io/gravitee-ui-particles/commit/862b47393dfd725973c377be8ca8bee12e74c27c))
+* impl entrypoints input into flow form dialog ([0c36010](https://github.com/gravitee-io/gravitee-ui-particles/commit/0c3601096e9cb3e49697c95122605e6be41e62f6))
+* small improvement ([ed1f116](https://github.com/gravitee-io/gravitee-ui-particles/commit/ed1f116ef6cd571d3ab6682ac2cd5e3214bc8d4c))
+
 # [7.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.2.0...v7.3.0) (2023-05-30)
 
 
