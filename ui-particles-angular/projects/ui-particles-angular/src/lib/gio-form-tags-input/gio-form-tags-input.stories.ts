@@ -210,3 +210,53 @@ export const WithAutocomplete: Story = {
     placeholder: 'Add a tag',
   },
 };
+
+const httpMethods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS', 'TRACE', 'CONNECT'];
+export const WithAutocompleteOnly: Story = {
+  render: ({ tags, placeholder, required, disabled, tagValidationHook, autocompleteOptions }) => {
+    const tagsControl = new FormControl({ value: tags, disabled });
+
+    tagsControl.valueChanges.subscribe(value => {
+      action('Tags')(value);
+    });
+
+    return {
+      template: `
+      <mat-form-field appearance="fill" style="width:100%">
+        <mat-label>Http methods</mat-label>
+        <gio-form-tags-input
+          [required]="required" 
+          [placeholder]="placeholder" 
+          [formControl]="tagsControl"
+          [tagValidationHook]="tagValidationHook"
+          [autocompleteOptions]="autocompleteOptions"
+        >
+        </gio-form-tags-input>
+      </mat-form-field>
+      `,
+      props: {
+        tags,
+        placeholder,
+        required,
+        disabled,
+        tagsControl,
+        tagValidationHook,
+        autocompleteOptions,
+      },
+    };
+  },
+  args: {
+    tags: ['GET'],
+    disabled: false,
+    placeholder: 'Add http method',
+    autocompleteOptions: httpMethods,
+    tagValidationHook: (tag: string, validationCb: (shouldAddTag: boolean) => void) => {
+      validationCb(httpMethods.includes(tag.toUpperCase()));
+    },
+  },
+  argTypes: {
+    tagValidationHook: {
+      control: { type: 'function' },
+    },
+  },
+};
