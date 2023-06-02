@@ -17,6 +17,7 @@
 import { Flow } from '../flow';
 
 export interface Plan {
+  id: string;
   name: string;
   flows: Flow[];
 }

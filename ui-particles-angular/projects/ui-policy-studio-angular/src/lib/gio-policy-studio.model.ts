@@ -24,6 +24,7 @@ export interface FlowVM extends Flow {
 export interface FlowGroupVM {
   _id: string;
   _icon?: string;
+  _planId?: string;
   name: string;
   flows: FlowVM[];
 }
