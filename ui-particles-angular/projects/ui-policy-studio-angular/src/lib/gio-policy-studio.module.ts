@@ -29,6 +29,9 @@ import { GioPolicyStudioDetailsComponent } from './components/flow-details/gio-p
 import { GioPolicyStudioFlowsMenuComponent } from './components/flows-menu/gio-ps-flows-menu.component';
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
 import { GioPolicyStudioFlowProxyFormDialogComponent } from './components/flow-form-dialog/flow-proxy-form-dialog/gio-ps-flow-proxy-form-dialog.component';
+import { GioPolicyStudioDetailsInfoBarComponent } from './components/flow-details-info-bar/gio-ps-flow-details-info-bar.component';
+import { GioPolicyStudioDetailsPhasePolicyComponent } from './components/flow-details-phase-policy/gio-ps-flow-details-phase-policy.component';
+import { GioPolicyStudioDetailsPhaseComponent } from './components/flow-details-phase/gio-ps-flow-details-phase.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { GioPolicyStudioFlowProxyFormDialogComponent } from './components/flow-f
     GioPolicyStudioDetailsComponent,
     GioPolicyStudioFlowMessageFormDialogComponent,
     GioPolicyStudioFlowProxyFormDialogComponent,
+    GioPolicyStudioDetailsInfoBarComponent,
+    GioPolicyStudioDetailsPhaseComponent,
+    GioPolicyStudioDetailsPhasePolicyComponent,
   ],
   imports: [
     CommonModule,
