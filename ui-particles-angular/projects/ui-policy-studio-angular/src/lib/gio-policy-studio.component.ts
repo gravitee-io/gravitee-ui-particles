@@ -106,16 +106,15 @@ export class GioPolicyStudioComponent implements OnChanges {
 
   public onDeleteSelectedFlow(flow: FlowVM): void {
     // Define next selected flow and remove flow from flowsGroups
-    const allFLowsId = flatten(this.flowsGroups.map(flowGroup => flowGroup.flows)).map(f => f._id);
-    const flowToDeleteIndex = allFLowsId.indexOf(flow._id);
-    const nextSelectedFlow = allFLowsId[flowToDeleteIndex + 1] ?? allFLowsId[flowToDeleteIndex - 1];
+    const allFlowsId = flatten(this.flowsGroups.map(flowGroup => flowGroup.flows)).map(f => f._id);
+    const flowToDeleteIndex = allFlowsId.indexOf(flow._id);
+    const nextSelectedFlow = allFlowsId[flowToDeleteIndex + 1] ?? allFlowsId[flowToDeleteIndex - 1];
     this.flowsGroups = this.flowsGroups.map(flowGroup => ({
       ...flowGroup,
       flows: flowGroup.flows.filter(f => f._id !== flow._id),
     }));
-    this.selectedFlow = this.flowsGroups
-      .find(flowGroup => flowGroup.flows.some(f => f._id === nextSelectedFlow))
-      ?.flows.find(f => f._id === nextSelectedFlow);
+
+    this.selectedFlow = flatten(this.flowsGroups.map(flowGroup => flowGroup.flows)).find(f => f._id === nextSelectedFlow);
 
     this.disableSaveButton = false;
   }
