@@ -14,3 +14,4 @@
  * limitations under the License.
  */
 export * from './div.harness';
+export * from './span.harness';

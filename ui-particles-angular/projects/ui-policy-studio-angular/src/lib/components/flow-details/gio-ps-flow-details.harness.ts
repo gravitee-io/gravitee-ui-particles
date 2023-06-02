@@ -17,6 +17,8 @@
 import { ComponentHarness } from '@angular/cdk/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 
+import { GioPolicyStudioDetailsInfoBarHarness } from '../flow-details-info-bar/gio-ps-flow-details-info-bar.harness';
+
 export class GioPolicyStudioDetailsHarness extends ComponentHarness {
   public static hostSelector = 'gio-ps-flow-details';
 
@@ -25,9 +27,8 @@ export class GioPolicyStudioDetailsHarness extends ComponentHarness {
     return hostText.includes('No flows yet');
   }
 
-  public async getFlowName(): Promise<string> {
-    const hostText = await (await this.host()).text();
-    return hostText.match(/"name": "(.*)"/)?.[1] ?? '';
+  public async getFlowInfos(): Promise<Record<string, (string | null)[]>> {
+    return await (await this.locatorFor(GioPolicyStudioDetailsInfoBarHarness)()).getInfos();
   }
 
   public async matchText(matcher: RegExp): Promise<boolean> {

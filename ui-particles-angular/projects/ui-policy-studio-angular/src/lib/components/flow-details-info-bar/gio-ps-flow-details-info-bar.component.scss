@@ -16,3 +16,27 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 @use '@gravitee/ui-particles-angular' as gio;
+
+$typography: map.get(gio.$mat-theme, typography);
+
+:host {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 16px;
+  gap: 12px;
+}
+
+.info {
+  &__label {
+    @include mat.typography-level($typography, body-1);
+
+    color: mat.get-color-from-palette(gio.$mat-space-palette, lighter40);
+  }
+
+  &__value {
+    &.strong {
+      padding-left: 8px;
+      @include mat.typography-level($typography, body-2);
+    }
+  }
+}

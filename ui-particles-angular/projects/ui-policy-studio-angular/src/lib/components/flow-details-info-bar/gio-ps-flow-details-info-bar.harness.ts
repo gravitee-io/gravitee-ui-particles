@@ -14,8 +14,29 @@
  * limitations under the License.
  */
 
-import { ComponentHarness } from '@angular/cdk/testing';
+import { ComponentHarness, parallel } from '@angular/cdk/testing';
+
+import { DivHarness, SpanHarness } from '../../../testing';
 
 export class GioPolicyStudioDetailsInfoBarHarness extends ComponentHarness {
   public static hostSelector = 'gio-ps-flow-details-info-bar';
+
+  public async getInfos(): Promise<Record<string, (string | null)[]>> {
+    const infosDiv = await this.locatorForAll(DivHarness.with({ selector: '.info' }))();
+
+    const allKeyValue = await parallel(() =>
+      infosDiv.map(async info => {
+        const label = await info.childLocatorFor(SpanHarness.with({ selector: '.info__label' }))();
+        const value = await info.childLocatorForAll(SpanHarness.with({ selector: '.info__value' }))();
+        return { label: await label.getText(), value: await parallel(() => value.map(v => v.getText())) };
+      }),
+    );
+
+    return allKeyValue.reduce((acc, curr) => {
+      if (curr.label) {
+        return { ...acc, [curr.label]: curr.value };
+      }
+      return acc;
+    }, {} as Record<string, (string | null)[]>);
+  }
 }
