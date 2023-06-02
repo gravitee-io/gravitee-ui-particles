@@ -65,6 +65,9 @@ $typography: map.get(gio.$mat-theme, typography);
 
 .content {
   flex: 1 1 auto;
-  padding: 16px;
   background-color: mat.get-color-from-palette(gio.$mat-dove-palette, default);
+
+  &__phase {
+    margin: 16px 16px 0;
+  }
 }
