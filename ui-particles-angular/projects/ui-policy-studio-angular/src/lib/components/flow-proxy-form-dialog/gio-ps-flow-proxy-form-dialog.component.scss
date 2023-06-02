@@ -13,6 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@use 'sass:map';
+@use '@angular/material' as mat;
 
-export const HttpMethods = ['CONNECT', 'DELETE', 'GET', 'HEAD', 'OPTIONS', 'PATCH', 'POST', 'PUT', 'TRACE', 'OTHER'] as const;
-export type HttpMethod = (typeof HttpMethods)[number];
+.title {
+  &__closeBtn {
+    top: -20px;
+    right: -20px;
+    float: right;
+  }
+}
+
+.content {
+  &__row {
+    display: flex;
+    gap: 16px;
+
+    mat-form-field {
+      flex: 1 1 auto;
+    }
+  }
+}

@@ -15,7 +15,7 @@
  */
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { GioIconsModule } from '@gravitee/ui-particles-angular';
+import { GioFormTagsInputModule, GioIconsModule } from '@gravitee/ui-particles-angular';
 import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -28,6 +28,7 @@ import { GioPolicyStudioFlowMessageFormDialogComponent } from './components/flow
 import { GioPolicyStudioDetailsComponent } from './components/flow-details/gio-ps-flow-details.component';
 import { GioPolicyStudioFlowsMenuComponent } from './components/flows-menu/gio-ps-flows-menu.component';
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
+import { GioPolicyStudioFlowProxyFormDialogComponent } from './components/flow-proxy-form-dialog/gio-ps-flow-proxy-form-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { GioPolicyStudioComponent } from './gio-policy-studio.component';
     GioPolicyStudioFlowsMenuComponent,
     GioPolicyStudioDetailsComponent,
     GioPolicyStudioFlowMessageFormDialogComponent,
+    GioPolicyStudioFlowProxyFormDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +50,7 @@ import { GioPolicyStudioComponent } from './gio-policy-studio.component';
     MatDialogModule,
 
     GioIconsModule,
+    GioFormTagsInputModule,
   ],
   exports: [GioPolicyStudioComponent],
 })
