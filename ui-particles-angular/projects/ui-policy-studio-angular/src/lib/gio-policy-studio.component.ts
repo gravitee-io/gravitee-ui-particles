@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { capitalize, flatten, omit, uniqueId } from 'lodash';
+import { capitalize, cloneDeep, differenceBy, flatten, omit, unionBy, uniqueId } from 'lodash';
 
 import { ApiType, ConnectorsInfo, Flow, Plan } from './models';
 import { FlowGroupVM, FlowVM } from './gio-policy-studio.model';
@@ -68,6 +68,9 @@ export class GioPolicyStudioComponent implements OnChanges {
 
   public disableSaveButton = true;
 
+  // Used to keep track of initial flows groups to know if there are deleted flows
+  private initialFlowsGroups: FlowGroupVM[] = [];
+
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.entrypointsInfo || changes.endpointsInfo) {
       this.connectorsTooltip = `Entrypoints: ${(this.entrypointsInfo ?? []).map(e => capitalize(e.type)).join(', ')}\nEndpoints: ${(
@@ -82,6 +85,7 @@ export class GioPolicyStudioComponent implements OnChanges {
     if (changes.commonFlows || changes.plans) {
       this.disableSaveButton = true;
       this.flowsGroups = getFlowsGroups(this.commonFlows, this.plans);
+      this.initialFlowsGroups = cloneDeep(this.flowsGroups);
 
       // Select first flow by default on first load
       if (changes.commonFlows?.isFirstChange() || changes.plans?.isFirstChange()) {
@@ -121,12 +125,12 @@ export class GioPolicyStudioComponent implements OnChanges {
 
   public onSave(): void {
     // Emit common flows only if they have been updated
-    const commonFlows = getCommonFlowsOutput(this.flowsGroups);
+    const commonFlows = getCommonFlowsOutput(this.flowsGroups, this.initialFlowsGroups);
     if (commonFlows != null) {
       this.commonFlowsChange.emit(commonFlows);
     }
     // Emit plans only if they have been updated
-    const plans = getPlansChangeOutput(this.flowsGroups);
+    const plans = getPlansChangeOutput(this.flowsGroups, this.initialFlowsGroups);
     if (plans != null) {
       this.plansToUpdate.emit(plans);
     }
@@ -152,17 +156,39 @@ const getFlowsGroups = (commonFlows: Flow[] = [], plans: Plan[] = []): FlowGroup
   ];
 };
 
-const getCommonFlowsOutput = (flowsGroups: FlowGroupVM[]): Flow[] | null => {
+const getCommonFlowsOutput = (flowsGroups: FlowGroupVM[], initialFlowsGroups: FlowGroupVM[]): Flow[] | null => {
   const commonFlowsGroup = flowsGroups.find(flowGroup => flowGroup._id === 'flowsGroup_commonFlow');
+  const initialCommonFlowsGroup = initialFlowsGroups.find(flowGroup => flowGroup._id === 'flowsGroup_commonFlow');
+  // Check if common flows have been updated
   const hasChanged = commonFlowsGroup?.flows.some(flow => flow._hasChanged);
 
-  return hasChanged ? (commonFlowsGroup?.flows ?? []).map(flow => omit(flow, '_id', '_hasChanged')) : null;
+  // Check if common flows have been deleted
+  const hasDeletedFlow = differenceBy(initialCommonFlowsGroup?.flows ?? [], commonFlowsGroup?.flows ?? [], '_id').length > 0;
+
+  return hasChanged || hasDeletedFlow ? (commonFlowsGroup?.flows ?? []).map(flow => omit(flow, '_id', '_hasChanged')) : null;
 };
 
-const getPlansChangeOutput = (flowsGroups: FlowGroupVM[]): Plan[] | null => {
+const getPlansChangeOutput = (flowsGroups: FlowGroupVM[], initialFlowsGroups: FlowGroupVM[]): Plan[] | null => {
   const plansGroups = flowsGroups.filter(flowGroup => flowGroup._id !== 'flowsGroup_commonFlow');
+  const initialPlansGroups = initialFlowsGroups.filter(flowGroup => flowGroup._id !== 'flowsGroup_commonFlow');
+
+  // Get plans with changed flows
   const plansGroupsWithChangedFlows = plansGroups.filter(plan => plan.flows.some(flow => flow._hasChanged));
-  const plansWithChangedFlowsOutput = plansGroupsWithChangedFlows.map(plan => ({
+
+  // Get plans with deleted flows
+  const plansGroupsWithDeletedFlows: FlowGroupVM[] = [];
+
+  // Check if there are deleted flows in initial initialPlansGroups
+  initialPlansGroups.forEach(plan => {
+    const planGroupToCompare = plansGroups.find(p => p._planId === plan._planId);
+    if (planGroupToCompare && differenceBy(plan.flows, planGroupToCompare?.flows ?? [], '_id').length > 0) {
+      // If there are deleted flows, we need to return the complete plan with the new flows
+      plansGroupsWithDeletedFlows.push(planGroupToCompare);
+    }
+  });
+
+  // Merge plans with changed flows and plans with deleted flows
+  const plansWithChangedFlowsOutput = unionBy([...plansGroupsWithChangedFlows, ...plansGroupsWithDeletedFlows], '_planId').map(plan => ({
     ...omit(plan, '_id', '_icon', '_planId'),
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- planId is always defined
     id: plan._planId!,
