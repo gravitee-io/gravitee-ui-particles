@@ -24,7 +24,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { GioPolicyStudioFlowFormDialogComponent } from './components/flow-form-dialog/gio-ps-flow-form-dialog.component';
+import { GioPolicyStudioFlowMessageFormDialogComponent } from './components/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
 import { GioPolicyStudioDetailsComponent } from './components/flow-details/gio-ps-flow-details.component';
 import { GioPolicyStudioFlowsMenuComponent } from './components/flows-menu/gio-ps-flows-menu.component';
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
@@ -34,7 +34,7 @@ import { GioPolicyStudioComponent } from './gio-policy-studio.component';
     GioPolicyStudioComponent,
     GioPolicyStudioFlowsMenuComponent,
     GioPolicyStudioDetailsComponent,
-    GioPolicyStudioFlowFormDialogComponent,
+    GioPolicyStudioFlowMessageFormDialogComponent,
   ],
   imports: [
     CommonModule,

@@ -19,10 +19,10 @@ import { tap } from 'rxjs/operators';
 
 import { FlowVM } from '../../gio-policy-studio.model';
 import {
-  GioPolicyStudioFlowFormDialogComponent,
-  GioPolicyStudioFlowFormDialogData,
-  GioPolicyStudioFlowFormDialogResult,
-} from '../flow-form-dialog/gio-ps-flow-form-dialog.component';
+  GioPolicyStudioFlowMessageFormDialogComponent,
+  GioPolicyStudioFlowMessageFormDialogData,
+  GioPolicyStudioFlowMessageFormDialogResult,
+} from '../flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
 
 @Component({
   selector: 'gio-ps-flow-details',
@@ -46,17 +46,18 @@ export class GioPolicyStudioDetailsComponent {
 
   public onEditFlow(): void {
     this.matDialog
-      .open<GioPolicyStudioFlowFormDialogComponent, GioPolicyStudioFlowFormDialogData, GioPolicyStudioFlowFormDialogResult>(
-        GioPolicyStudioFlowFormDialogComponent,
-        {
-          data: {
-            flow: this.flow,
-            entrypoints: this.entrypoints,
-          },
-          role: 'alertdialog',
-          id: 'gioPsFlowFormDialog',
+      .open<
+        GioPolicyStudioFlowMessageFormDialogComponent,
+        GioPolicyStudioFlowMessageFormDialogData,
+        GioPolicyStudioFlowMessageFormDialogResult
+      >(GioPolicyStudioFlowMessageFormDialogComponent, {
+        data: {
+          flow: this.flow,
+          entrypoints: this.entrypoints,
         },
-      )
+        role: 'alertdialog',
+        id: 'gioPsFlowFormDialog',
+      })
       .afterClosed()
       .pipe(
         tap(createdOrEdited => {

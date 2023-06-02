@@ -28,11 +28,11 @@ import { fakeChannelFlow } from '../../models/index-testing';
 import { FlowVM } from '../../gio-policy-studio.model';
 
 import {
-  GioPolicyStudioFlowFormDialogComponent,
-  GioPolicyStudioFlowFormDialogData,
-  GioPolicyStudioFlowFormDialogResult,
-} from './gio-ps-flow-form-dialog.component';
-import { GioPolicyStudioFlowFormDialogHarness } from './gio-ps-flow-form-dialog.harness';
+  GioPolicyStudioFlowMessageFormDialogComponent,
+  GioPolicyStudioFlowMessageFormDialogData,
+  GioPolicyStudioFlowMessageFormDialogResult,
+} from './gio-ps-flow-message-form-dialog.component';
+import { GioPolicyStudioFlowMessageFormDialogHarness } from './gio-ps-flow-message-form-dialog.harness';
 
 @Component({
   selector: 'gio-dialog-test',
@@ -46,17 +46,18 @@ class TestComponent {
 
   public openDialog() {
     this.matDialog
-      .open<GioPolicyStudioFlowFormDialogComponent, GioPolicyStudioFlowFormDialogData, GioPolicyStudioFlowFormDialogResult>(
-        GioPolicyStudioFlowFormDialogComponent,
-        {
-          data: {
-            entrypoints: this.entrypoints,
-            flow: this.flowToEdit,
-          },
-          role: 'alertdialog',
-          id: 'testDialog',
+      .open<
+        GioPolicyStudioFlowMessageFormDialogComponent,
+        GioPolicyStudioFlowMessageFormDialogData,
+        GioPolicyStudioFlowMessageFormDialogResult
+      >(GioPolicyStudioFlowMessageFormDialogComponent, {
+        data: {
+          entrypoints: this.entrypoints,
+          flow: this.flowToEdit,
         },
-      )
+        role: 'alertdialog',
+        id: 'testDialog',
+      })
       .afterClosed()
       .subscribe(flow => {
         if (flow) {
@@ -66,7 +67,7 @@ class TestComponent {
   }
 }
 
-describe('GioPolicyStudioFlowFormDialogComponent', () => {
+describe('GioPolicyStudioFlowMessageFormDialogComponent', () => {
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
   let loader: HarnessLoader;
@@ -95,7 +96,7 @@ describe('GioPolicyStudioFlowFormDialogComponent', () => {
     };
     await componentTestingOpenDialog();
 
-    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowFormDialogHarness);
+    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
     await flowFormDialogHarness.setFlowFormValues({
       name: 'Test name',
       condition: 'Test condition',
@@ -112,7 +113,7 @@ describe('GioPolicyStudioFlowFormDialogComponent', () => {
   it('should create flow', async () => {
     await componentTestingOpenDialog();
 
-    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowFormDialogHarness);
+    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
     await flowFormDialogHarness.setFlowFormValues({
       name: 'Test name',
       channelOperator: 'EQUALS',
@@ -142,7 +143,7 @@ describe('GioPolicyStudioFlowFormDialogComponent', () => {
   it('should create flow with condition', async () => {
     await componentTestingOpenDialog();
 
-    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowFormDialogHarness);
+    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
     await flowFormDialogHarness.setFlowFormValues({
       name: 'Test name',
       channelOperator: 'EQUALS',
@@ -182,7 +183,7 @@ describe('GioPolicyStudioFlowFormDialogComponent', () => {
     };
     await componentTestingOpenDialog();
 
-    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowFormDialogHarness);
+    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
     await flowFormDialogHarness.save();
 
     expect(component.flow).toEqual({
@@ -200,7 +201,7 @@ describe('GioPolicyStudioFlowFormDialogComponent', () => {
     };
     await componentTestingOpenDialog();
 
-    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowFormDialogHarness);
+    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
 
     await flowFormDialogHarness.setFlowFormValues({
       name: 'Test name',

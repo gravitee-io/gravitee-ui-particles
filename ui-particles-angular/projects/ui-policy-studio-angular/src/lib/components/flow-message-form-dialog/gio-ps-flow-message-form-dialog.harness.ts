@@ -18,8 +18,8 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { MatSelectHarness } from '@angular/material/select/testing';
 
-export class GioPolicyStudioFlowFormDialogHarness extends ComponentHarness {
-  public static hostSelector = 'gio-ps-flow-form-dialog';
+export class GioPolicyStudioFlowMessageFormDialogHarness extends ComponentHarness {
+  public static hostSelector = 'gio-ps-flow-message-form-dialog';
 
   private getSaveBtn = this.locatorFor(MatButtonHarness.with({ selector: '.actions__saveBtn' }));
   private getCancelBtn = this.locatorFor(MatButtonHarness.with({ selector: '.actions__cancelBtn' }));

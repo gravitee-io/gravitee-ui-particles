@@ -29,7 +29,7 @@ import { GioPolicyStudioModule } from './gio-policy-studio.module';
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
 import { GioPolicyStudioDetailsHarness } from './components/flow-details/gio-ps-flow-details.harness';
 import { GioPolicyStudioFlowsMenuHarness } from './components/flows-menu/gio-ps-flows-menu.harness';
-import { GioPolicyStudioFlowFormDialogHarness } from './components/flow-form-dialog/gio-ps-flow-form-dialog.harness';
+import { GioPolicyStudioFlowMessageFormDialogHarness } from './components/flow-message-form-dialog/gio-ps-flow-message-form-dialog.harness';
 import { Flow, Plan } from './models';
 
 describe('GioPolicyStudioModule', () => {
@@ -349,7 +349,7 @@ describe('GioPolicyStudioModule', () => {
 
     await flowsGroups[0].clickAddFlowBtn();
 
-    const flowFormDialog = await rootLoader.getHarness(GioPolicyStudioFlowFormDialogHarness);
+    const flowFormDialog = await rootLoader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
     await flowFormDialog.setFlowFormValues({ name: 'New flow' });
     await flowFormDialog.save();
 
@@ -389,7 +389,7 @@ describe('GioPolicyStudioModule', () => {
     // Edit first selected flow
     await detailsHarness.clickEditFlowBtn();
 
-    const flowFormDialog = await rootLoader.getHarness(GioPolicyStudioFlowFormDialogHarness);
+    const flowFormDialog = await rootLoader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
     await flowFormDialog.setFlowFormValues({ name: 'Edited flow name', entrypoints: ['webhook'] });
     await flowFormDialog.save();
 
@@ -460,7 +460,7 @@ describe('GioPolicyStudioModule', () => {
 
     // Edit first selected flow
     await detailsHarness.clickEditFlowBtn();
-    const flowFormDialog = await rootLoader.getHarness(GioPolicyStudioFlowFormDialogHarness);
+    const flowFormDialog = await rootLoader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
     await flowFormDialog.setFlowFormValues({ name: 'Edited flow name' });
     await flowFormDialog.save();
 
@@ -497,14 +497,14 @@ describe('GioPolicyStudioModule', () => {
 
     // Edit first selected flow
     await detailsHarness.clickEditFlowBtn();
-    const flowFormEditDialog = await rootLoader.getHarness(GioPolicyStudioFlowFormDialogHarness);
+    const flowFormEditDialog = await rootLoader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
     await flowFormEditDialog.setFlowFormValues({ name: 'Edited flow' });
     await flowFormEditDialog.save();
 
     // Add new flow into Bar plan
     await (await flowsMenuHarness.getAllFlowsGroups()).find(group => group.name === 'Bar plan')?.clickAddFlowBtn();
 
-    const flowFormNewDialog = await rootLoader.getHarness(GioPolicyStudioFlowFormDialogHarness);
+    const flowFormNewDialog = await rootLoader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
     await flowFormNewDialog.setFlowFormValues({ name: 'New flow' });
     await flowFormNewDialog.save();
 
