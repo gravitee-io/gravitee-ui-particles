@@ -23,6 +23,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { GioPolicyStudioFlowMessageFormDialogComponent } from './components/flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
 import { GioPolicyStudioDetailsComponent } from './components/flow-details/gio-ps-flow-details.component';
@@ -54,6 +55,7 @@ import { GioPolicyStudioDetailsPhaseComponent } from './components/flow-details-
     MatInputModule,
     MatSelectModule,
     MatDialogModule,
+    MatTabsModule,
 
     GioIconsModule,
     GioFormTagsInputModule,
