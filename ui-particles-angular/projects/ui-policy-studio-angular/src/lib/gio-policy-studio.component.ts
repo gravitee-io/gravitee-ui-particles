@@ -144,6 +144,7 @@ const getFlowsGroups = (commonFlows: Flow[] = [], plans: Plan[] = []): FlowGroup
     ...plans.map(plan => ({
       _id: uniqueId('flowsGroup_'),
       _icon: 'gio:shield',
+      _planId: plan.id,
       name: plan.name,
       flows: plan.flows.map(flow => ({ ...flow, _id: uniqueId('flow_'), _hasChanged: false })),
     })),
@@ -159,10 +160,12 @@ const getCommonFlowsOutput = (flowsGroups: FlowGroupVM[]): Flow[] | null => {
 };
 
 const getPlansChangeOutput = (flowsGroups: FlowGroupVM[]): Plan[] | null => {
-  const plans = flowsGroups.filter(flowGroup => flowGroup._id !== 'flowsGroup_commonFlow');
-  const plansWithChangedFlows = plans.filter(plan => plan.flows.some(flow => flow._hasChanged));
-  const plansWithChangedFlowsOutput = plansWithChangedFlows.map(plan => ({
-    ...omit(plan, '_id', '_icon'),
+  const plansGroups = flowsGroups.filter(flowGroup => flowGroup._id !== 'flowsGroup_commonFlow');
+  const plansGroupsWithChangedFlows = plansGroups.filter(plan => plan.flows.some(flow => flow._hasChanged));
+  const plansWithChangedFlowsOutput = plansGroupsWithChangedFlows.map(plan => ({
+    ...omit(plan, '_id', '_icon', '_planId'),
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- planId is always defined
+    id: plan._planId!,
     flows: plan.flows.map(flow => omit(flow, '_id', '_hasChanged')),
   }));
 

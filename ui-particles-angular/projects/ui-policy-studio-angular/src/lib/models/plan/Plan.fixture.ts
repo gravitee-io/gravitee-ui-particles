@@ -19,6 +19,7 @@ import { Plan } from './Plan';
 
 export function fakePlan(modifier?: Partial<Plan> | ((base: Plan) => Plan)): Plan {
   const base: Plan = {
+    id: 'plan-id',
     name: 'Keyless plan',
     flows: [],
   };
