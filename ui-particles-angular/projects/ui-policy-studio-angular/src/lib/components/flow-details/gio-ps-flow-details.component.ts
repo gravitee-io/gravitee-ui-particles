@@ -22,7 +22,7 @@ import {
   GioPolicyStudioFlowMessageFormDialogComponent,
   GioPolicyStudioFlowMessageFormDialogData,
 } from '../flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
-import { ApiType } from '../../models';
+import { ApiType, ConnectorsInfo } from '../../models';
 import {
   GioPolicyStudioFlowProxyFormDialogComponent,
   GioPolicyStudioFlowProxyFormDialogData,
@@ -42,7 +42,7 @@ export class GioPolicyStudioDetailsComponent {
   public flow?: FlowVM = undefined;
 
   @Input()
-  public entrypoints: string[] = [];
+  public entrypointsInfo: ConnectorsInfo[] = [];
 
   @Output()
   public flowChange = new EventEmitter<FlowVM>();
@@ -63,7 +63,7 @@ export class GioPolicyStudioDetailsComponent {
             >(GioPolicyStudioFlowMessageFormDialogComponent, {
               data: {
                 flow: this.flow,
-                entrypoints: this.entrypoints,
+                entrypoints: (this.entrypointsInfo ?? []).map(e => e.type),
               },
               role: 'alertdialog',
               id: 'gioPsFlowMessageFormDialog',

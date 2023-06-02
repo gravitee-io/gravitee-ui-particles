@@ -15,9 +15,35 @@
     limitations under the License.
 
 -->
-<div class="infos">
-  <div class="info">
-    <span class="info_label">Name</span>
-    <span class="info_value">{{ flow.name }}</span>
-  </div>
+<div *ngIf="flow.name" class="info">
+  <span class="info__label">Name</span>
+  <span class="info__value strong">{{ flow.name }}</span>
+</div>
+
+<div *ngIf="entrypointsInfo" class="info">
+  <span class="info__label">Entrypoints</span>
+  <span *ngFor="let entrypoint of entrypointsInfo" class="info__value gio-badge-neutral">
+    <mat-icon [svgIcon]="entrypoint.icon"></mat-icon>
+    {{ entrypoint.type }}</span
+  >
+</div>
+
+<div *ngIf="operations" class="info">
+  <span class="info__label">Operations</span>
+  <span *ngFor="let operation of operations" class="info__value gio-badge-neutral"> {{ operation }}</span>
+</div>
+
+<div *ngIf="channel" class="info">
+  <span class="info__label">Channel</span>
+  <span class="info__value strong">{{ channel }}</span>
+</div>
+
+<div *ngIf="channelOperator" class="info">
+  <span class="info__label">Channel Operator</span>
+  <span class="info__value gio-badge-neutral">{{ channelOperator }}</span>
+</div>
+
+<div *ngIf="condition" class="info">
+  <span class="info__label">Condition</span>
+  <span class="info__value gio-badge-neutral">{{ condition }}</span>
 </div>

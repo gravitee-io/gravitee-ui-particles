@@ -19,6 +19,12 @@
 
 $typography: map.get(gio.$mat-theme, typography);
 
+:host {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
 .emptyFlows {
   display: flex;
   width: 500px;
@@ -32,7 +38,8 @@ $typography: map.get(gio.$mat-theme, typography);
 .header {
   display: flex;
   align-items: center;
-  margin-bottom: 16px;
+  padding: 16px;
+  border-bottom: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
 
   &__label {
     @include mat.typography-level($typography, subheading-1);
@@ -50,4 +57,14 @@ $typography: map.get(gio.$mat-theme, typography);
     margin-left: 8px;
     gap: 8px;
   }
+}
+
+.infoBar {
+  border-bottom: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
+}
+
+.content {
+  flex: 1 1 auto;
+  padding: 16px;
+  background-color: mat.get-color-from-palette(gio.$mat-dove-palette, default);
 }

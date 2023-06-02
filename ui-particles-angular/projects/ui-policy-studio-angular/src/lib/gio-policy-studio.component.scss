@@ -49,15 +49,16 @@
   gap: 16px;
 
   &__flowsMenu {
+    overflow: hidden;
     max-width: 400px;
-    flex: 0 1 400px;
+    flex: 1 1 33%;
     border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
     border-radius: 8px;
   }
 
   &__flowDetails {
-    flex: 1 1 auto;
-    padding: 16px;
+    overflow: hidden;
+    flex: 1 1 66%;
     border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
     border-radius: 8px;
   }

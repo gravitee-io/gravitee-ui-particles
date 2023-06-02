@@ -16,6 +16,7 @@
 import { Component, Input } from '@angular/core';
 
 import { FlowVM } from '../../gio-policy-studio.model';
+import { ChannelSelector, ConditionSelector, ConnectorsInfo, Operation } from '../../models';
 
 @Component({
   selector: 'gio-ps-flow-details-info-bar',
@@ -24,5 +25,44 @@ import { FlowVM } from '../../gio-policy-studio.model';
 })
 export class GioPolicyStudioDetailsInfoBarComponent {
   @Input()
-  public flow?: FlowVM[] = undefined;
+  public flow?: FlowVM = undefined;
+
+  @Input()
+  public entrypointsInfo: ConnectorsInfo[] = [];
+
+  public get operations(): string[] | undefined {
+    if (!this.flow) {
+      return [];
+    }
+    const operationToBadge: Record<Operation, string> = {
+      PUBLISH: 'PUB',
+      SUBSCRIBE: 'SUB',
+    };
+    const channelSelector = this.flow.selectors?.find(s => s.type === 'CHANNEL') as ChannelSelector;
+    return channelSelector?.operations?.map(o => operationToBadge[o]).sort();
+  }
+
+  public get channel(): string | undefined {
+    if (!this.flow) {
+      return undefined;
+    }
+    const channelSelector = this.flow.selectors?.find(s => s.type === 'CHANNEL') as ChannelSelector;
+    return channelSelector?.channel;
+  }
+
+  public get channelOperator(): string | undefined {
+    if (!this.flow) {
+      return undefined;
+    }
+    const channelSelector = this.flow.selectors?.find(s => s.type === 'CHANNEL') as ChannelSelector;
+    return channelSelector?.channelOperator;
+  }
+
+  public get condition(): string | undefined {
+    if (!this.flow) {
+      return undefined;
+    }
+    const conditionSelector = this.flow.selectors?.find(s => s.type === 'CONDITION') as ConditionSelector;
+    return conditionSelector?.condition;
+  }
 }

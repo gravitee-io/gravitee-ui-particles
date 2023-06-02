@@ -213,11 +213,11 @@ describe('GioPolicyStudioModule', () => {
     const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
 
     expect(await flowsMenuHarness.getSelectedFlow()).toEqual({ name: 'Foo flow 1' });
-    expect(await detailsHarness.getFlowName()).toEqual('Foo flow 1');
+    expect((await detailsHarness.getFlowInfos()).Name).toEqual(['Foo flow 1']);
 
     await flowsMenuHarness.selectFlow(/Common flow/);
     expect(await flowsMenuHarness.getSelectedFlow()).toEqual({ name: 'Common flow' });
-    expect(await detailsHarness.getFlowName()).toEqual('Common flow');
+    expect((await detailsHarness.getFlowInfos()).Name).toEqual(['Common flow']);
   });
 
   it('should display flow with ChannelSelector', async () => {
