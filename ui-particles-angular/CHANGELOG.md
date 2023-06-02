@@ -1,3 +1,15 @@
+# [7.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.4.0...v7.5.0) (2023-06-02)
+
+
+### Bug Fixes
+
+* fix height when using SVG icons ([a7e5a95](https://github.com/gravitee-io/gravitee-ui-particles/commit/a7e5a9543a526a9b7e39d448ba25907844fe0796))
+
+
+### Features
+
+* impl global save button ([6ab35bf](https://github.com/gravitee-io/gravitee-ui-particles/commit/6ab35bf675475c3c25f8586736b5d9eeb4dd80cb))
+
 # [7.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.3.0...v7.4.0) (2023-05-31)
 
 
