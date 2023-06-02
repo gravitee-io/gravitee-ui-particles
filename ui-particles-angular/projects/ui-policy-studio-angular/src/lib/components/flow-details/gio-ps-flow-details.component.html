@@ -32,18 +32,42 @@
   <div class="content">
     <mat-tab-group *ngIf="apiType === 'MESSAGE'">
       <mat-tab label="Initial connection">
-        <gio-ps-flow-details-phase class="content__phase"></gio-ps-flow-details-phase>
-        <gio-ps-flow-details-phase class="content__phase"></gio-ps-flow-details-phase>
+        <gio-ps-flow-details-phase
+          class="content__phase"
+          name="Request phase"
+          description="Policies will be applied during the connection establishment"
+        ></gio-ps-flow-details-phase>
+        <gio-ps-flow-details-phase
+          class="content__phase"
+          name="Response phase"
+          description="Policies will be applied during the connection termination"
+        ></gio-ps-flow-details-phase>
       </mat-tab>
       <mat-tab label="Event messages">
-        <gio-ps-flow-details-phase class="content__phase"></gio-ps-flow-details-phase>
-        <gio-ps-flow-details-phase class="content__phase"></gio-ps-flow-details-phase>
+        <gio-ps-flow-details-phase
+          class="content__phase"
+          name="Publish phase"
+          description="Policies will be applied on messages sent to the endpoint"
+        ></gio-ps-flow-details-phase>
+        <gio-ps-flow-details-phase
+          class="content__phase"
+          name="Subscribe phase"
+          description="Policies will be applied on messages received by the entrypoint"
+        ></gio-ps-flow-details-phase>
       </mat-tab>
     </mat-tab-group>
 
     <div *ngIf="apiType === 'PROXY'">
-      <gio-ps-flow-details-phase class="content__phase"></gio-ps-flow-details-phase>
-      <gio-ps-flow-details-phase class="content__phase"></gio-ps-flow-details-phase>
+      <gio-ps-flow-details-phase
+        class="content__phase"
+        name="Request phase"
+        description="Policies will be applied during the connection establishment"
+      ></gio-ps-flow-details-phase>
+      <gio-ps-flow-details-phase
+        class="content__phase"
+        name="Response phase"
+        description="Policies will be applied during the connection termination"
+      ></gio-ps-flow-details-phase>
     </div>
   </div>
 </ng-container>
