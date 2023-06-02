@@ -21,19 +21,19 @@ import { cloneDeep, uniqueId } from 'lodash';
 import { FlowVM } from '../../gio-policy-studio.model';
 import { ChannelSelector, ConditionSelector } from '../../models';
 
-export type GioPolicyStudioFlowFormDialogData = {
+export type GioPolicyStudioFlowMessageFormDialogData = {
   flow?: FlowVM;
   entrypoints?: string[];
 };
 
-export type GioPolicyStudioFlowFormDialogResult = FlowVM | false;
+export type GioPolicyStudioFlowMessageFormDialogResult = FlowVM | false;
 
 @Component({
-  selector: 'gio-ps-flow-form-dialog',
-  templateUrl: './gio-ps-flow-form-dialog.component.html',
-  styleUrls: ['./gio-ps-flow-form-dialog.component.scss'],
+  selector: 'gio-ps-flow-message-form-dialog',
+  templateUrl: './gio-ps-flow-message-form-dialog.component.html',
+  styleUrls: ['./gio-ps-flow-message-form-dialog.component.scss'],
 })
-export class GioPolicyStudioFlowFormDialogComponent {
+export class GioPolicyStudioFlowMessageFormDialogComponent {
   public entrypoints: string[] = [];
   public flowFormGroup?: FormGroup;
 
@@ -41,8 +41,8 @@ export class GioPolicyStudioFlowFormDialogComponent {
   public mode: 'create' | 'edit' = 'create';
 
   constructor(
-    public dialogRef: MatDialogRef<GioPolicyStudioFlowFormDialogComponent, GioPolicyStudioFlowFormDialogResult>,
-    @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioFlowFormDialogData,
+    public dialogRef: MatDialogRef<GioPolicyStudioFlowMessageFormDialogComponent, GioPolicyStudioFlowMessageFormDialogResult>,
+    @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioFlowMessageFormDialogData,
   ) {
     this.entrypoints = flowDialogData?.entrypoints ?? [];
 

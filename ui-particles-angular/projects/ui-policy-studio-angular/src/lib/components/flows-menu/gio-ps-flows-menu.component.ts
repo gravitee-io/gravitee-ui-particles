@@ -19,10 +19,10 @@ import { tap } from 'rxjs/operators';
 import { cloneDeep } from 'lodash';
 
 import {
-  GioPolicyStudioFlowFormDialogComponent,
-  GioPolicyStudioFlowFormDialogData,
-  GioPolicyStudioFlowFormDialogResult,
-} from '../flow-form-dialog/gio-ps-flow-form-dialog.component';
+  GioPolicyStudioFlowMessageFormDialogComponent,
+  GioPolicyStudioFlowMessageFormDialogData,
+  GioPolicyStudioFlowMessageFormDialogResult,
+} from '../flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
 import { FlowGroupVM, FlowVM } from '../../gio-policy-studio.model';
 import { ChannelSelector, HttpSelector, Operation } from '../../models';
 
@@ -131,17 +131,18 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
 
   public onAddFlow(flowGroup: FlowGroupVM): void {
     this.matDialog
-      .open<GioPolicyStudioFlowFormDialogComponent, GioPolicyStudioFlowFormDialogData, GioPolicyStudioFlowFormDialogResult>(
-        GioPolicyStudioFlowFormDialogComponent,
-        {
-          data: {
-            flow: undefined,
-            entrypoints: this.entrypoints,
-          },
-          role: 'alertdialog',
-          id: 'gioPsFlowFormDialog',
+      .open<
+        GioPolicyStudioFlowMessageFormDialogComponent,
+        GioPolicyStudioFlowMessageFormDialogData,
+        GioPolicyStudioFlowMessageFormDialogResult
+      >(GioPolicyStudioFlowMessageFormDialogComponent, {
+        data: {
+          flow: undefined,
+          entrypoints: this.entrypoints,
         },
-      )
+        role: 'alertdialog',
+        id: 'gioPsFlowFormDialog',
+      })
       .afterClosed()
       .pipe(
         tap(createdOrEdited => {

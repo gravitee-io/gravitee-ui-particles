@@ -25,32 +25,33 @@ import { FlowVM } from '../../gio-policy-studio.model';
 import { fakeChannelFlow } from '../../models/index-testing';
 
 import {
-  GioPolicyStudioFlowFormDialogComponent,
-  GioPolicyStudioFlowFormDialogData,
-  GioPolicyStudioFlowFormDialogResult,
-} from './gio-ps-flow-form-dialog.component';
+  GioPolicyStudioFlowMessageFormDialogComponent,
+  GioPolicyStudioFlowMessageFormDialogData,
+  GioPolicyStudioFlowMessageFormDialogResult,
+} from './gio-ps-flow-message-form-dialog.component';
 
 @Component({
-  selector: 'gio-ps-flow-form-dialog-story',
+  selector: 'gio-ps-flow-message-form-dialog-story',
   template: `<button id="open-dialog" (click)="openDialog()">Open dialog</button>`,
 })
-class GioPolicyStudioFlowFormDialogStoryComponent {
+class GioPolicyStudioFlowMessageFormDialogStoryComponent {
   @Input() public flow?: FlowVM = undefined;
   constructor(private readonly matDialog: MatDialog) {}
 
   public openDialog() {
     this.matDialog
-      .open<GioPolicyStudioFlowFormDialogComponent, GioPolicyStudioFlowFormDialogData, GioPolicyStudioFlowFormDialogResult>(
-        GioPolicyStudioFlowFormDialogComponent,
-        {
-          data: {
-            flow: this.flow,
-            entrypoints: ['entrypoint1', 'entrypoint2'],
-          },
-          role: 'alertdialog',
-          id: 'gioPsFlowFormDialog',
+      .open<
+        GioPolicyStudioFlowMessageFormDialogComponent,
+        GioPolicyStudioFlowMessageFormDialogData,
+        GioPolicyStudioFlowMessageFormDialogResult
+      >(GioPolicyStudioFlowMessageFormDialogComponent, {
+        data: {
+          flow: this.flow,
+          entrypoints: ['entrypoint1', 'entrypoint2'],
         },
-      )
+        role: 'alertdialog',
+        id: 'gioPsFlowFormDialog',
+      })
       .afterClosed()
       .pipe(
         tap(createdOrEdited => {
@@ -62,17 +63,17 @@ class GioPolicyStudioFlowFormDialogStoryComponent {
 }
 
 export default {
-  title: 'Policy Studio / components / Flow form dialog',
-  component: GioPolicyStudioFlowFormDialogStoryComponent,
+  title: 'Policy Studio / components / Flow message form dialog',
+  component: GioPolicyStudioFlowMessageFormDialogStoryComponent,
   decorators: [
     moduleMetadata({
-      declarations: [GioPolicyStudioFlowFormDialogStoryComponent],
+      declarations: [GioPolicyStudioFlowMessageFormDialogStoryComponent],
       imports: [GioPolicyStudioModule, MatDialogModule, NoopAnimationsModule],
     }),
   ],
   argTypes: {},
   render: args => ({
-    component: GioPolicyStudioFlowFormDialogStoryComponent,
+    component: GioPolicyStudioFlowMessageFormDialogStoryComponent,
     props: { ...args },
   }),
   parameters: {
