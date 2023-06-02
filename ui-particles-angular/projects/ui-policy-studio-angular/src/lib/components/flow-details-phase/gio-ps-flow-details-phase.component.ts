@@ -25,4 +25,10 @@ import { Step } from '../../models';
 export class GioPolicyStudioDetailsPhaseComponent {
   @Input()
   public steps?: Step[] = undefined;
+
+  @Input()
+  public name!: string;
+
+  @Input()
+  public description!: string;
 }
