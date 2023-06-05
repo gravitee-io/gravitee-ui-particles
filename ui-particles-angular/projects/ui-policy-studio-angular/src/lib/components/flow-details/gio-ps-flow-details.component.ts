@@ -44,6 +44,9 @@ export class GioPolicyStudioDetailsComponent {
   @Input()
   public entrypointsInfo: ConnectorsInfo[] = [];
 
+  @Input()
+  public endpointsInfo: ConnectorsInfo[] = [];
+
   @Output()
   public flowChange = new EventEmitter<FlowVM>();
 

@@ -24,4 +24,29 @@
     {{ description }}
   </span>
 </div>
-🚧 Work in progress 🚧
+
+<div class="wrapper">
+  <div class="content">
+    <span class="gio-badge-white content__connectorBadge">
+      <ng-container *ngFor="let entrypoint of entrypointsInfo">
+        <mat-icon [svgIcon]="entrypoint.icon"></mat-icon>
+        {{ entrypoint.type }}</ng-container
+      >
+    </span>
+
+    <mat-icon class="content__rightArrow" svgIcon="gio:arrow-right"></mat-icon>
+
+    <button mat-icon-button>
+      <mat-icon svgIcon="gio:plus"></mat-icon>
+    </button>
+
+    <mat-icon class="content__rightArrow" svgIcon="gio:arrow-right"></mat-icon>
+
+    <span class="gio-badge-white content__connectorBadge">
+      <ng-container *ngFor="let endpoint of endpointsInfo">
+        <mat-icon [svgIcon]="endpoint.icon"></mat-icon>
+        {{ endpoint.type }}</ng-container
+      >
+    </span>
+  </div>
+</div>
