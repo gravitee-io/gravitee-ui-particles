@@ -16,7 +16,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { capitalize, cloneDeep, differenceBy, flatten, omit, unionBy, uniqueId } from 'lodash';
 
-import { ApiType, ConnectorsInfo, Flow, Plan } from './models';
+import { ApiType, ConnectorsInfo, Flow, Plan, SaveOutput } from './models';
 import { FlowGroupVM, FlowVM } from './gio-policy-studio.model';
 
 @Component({
@@ -47,16 +47,10 @@ export class GioPolicyStudioComponent implements OnChanges {
   public plans: Plan[] = [];
 
   /**
-   * Return common flows if they have been updated.
-   */
-  @Output()
-  public commonFlowsChange = new EventEmitter<Flow[]>();
-
-  /**
-   * Return the list of plans with updated flows. Plans with no updated flows are not returned.
+   * Return what is needed to save.
    **/
   @Output()
-  public plansToUpdate = new EventEmitter<Plan[]>();
+  public save = new EventEmitter<SaveOutput>();
 
   public connectorsTooltip = '';
 
@@ -126,14 +120,14 @@ export class GioPolicyStudioComponent implements OnChanges {
   public onSave(): void {
     // Emit common flows only if they have been updated
     const commonFlows = getCommonFlowsOutput(this.flowsGroups, this.initialFlowsGroups);
-    if (commonFlows != null) {
-      this.commonFlowsChange.emit(commonFlows);
-    }
+
     // Emit plans only if they have been updated
-    const plans = getPlansChangeOutput(this.flowsGroups, this.initialFlowsGroups);
-    if (plans != null) {
-      this.plansToUpdate.emit(plans);
-    }
+    const plansToUpdate = getPlansChangeOutput(this.flowsGroups, this.initialFlowsGroups);
+
+    this.save.emit({
+      ...(commonFlows ? { commonFlows } : {}),
+      ...(plansToUpdate ? { plansToUpdate } : {}),
+    });
   }
 }
 
