@@ -15,8 +15,7 @@
  */
 
 import { ComponentHarness, parallel } from '@angular/cdk/testing';
-
-import { DivHarness, SpanHarness } from '../../../testing';
+import { DivHarness, SpanHarness } from '@gravitee/ui-particles-angular/testing';
 
 export class GioPolicyStudioDetailsInfoBarHarness extends ComponentHarness {
   public static hostSelector = 'gio-ps-flow-details-info-bar';

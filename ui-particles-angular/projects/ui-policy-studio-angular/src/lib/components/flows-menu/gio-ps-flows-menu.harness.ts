@@ -16,8 +16,7 @@
 
 import { ComponentHarness, parallel } from '@angular/cdk/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
-
-import { DivHarness } from '../../../testing';
+import { DivHarness } from '@gravitee/ui-particles-angular/testing';
 
 export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
   public static hostSelector = 'gio-ps-flows-menu';
