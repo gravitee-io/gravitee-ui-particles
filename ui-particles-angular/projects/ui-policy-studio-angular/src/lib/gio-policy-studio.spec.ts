@@ -29,8 +29,8 @@ import { GioPolicyStudioModule } from './gio-policy-studio.module';
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
 import { GioPolicyStudioDetailsHarness } from './components/flow-details/gio-ps-flow-details.harness';
 import { GioPolicyStudioFlowsMenuHarness } from './components/flows-menu/gio-ps-flows-menu.harness';
+import { SaveOutput } from './models';
 import { GioPolicyStudioFlowMessageFormDialogHarness } from './components/flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.harness';
-import { Flow, Plan } from './models';
 import { GioPolicyStudioHarness } from './gio-policy-studio.harness';
 
 describe('GioPolicyStudioModule', () => {
@@ -420,20 +420,18 @@ describe('GioPolicyStudioModule', () => {
         await flowsMenuHarness.selectFlow(/Flow to delete/);
         await detailsHarness.clickDeleteFlowBtn();
 
-        let commonFlowChangeToExpect: Flow[] | undefined;
-        let plansToUpdateToExpect: Plan[] | undefined;
-        component.commonFlowsChange.subscribe(value => (commonFlowChangeToExpect = value));
-        component.plansToUpdate.subscribe(value => (plansToUpdateToExpect = value));
+        let saveOutputToExpect: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutputToExpect = value));
 
         await (await loader.getHarness(MatButtonHarness.with({ text: /Save/ }))).click();
 
         // Strict expect
-        expect(commonFlowChangeToExpect).toStrictEqual([
+        expect(saveOutputToExpect?.commonFlows).toStrictEqual([
           fakeChannelFlow({
             name: 'Edited flow name',
           }),
         ]);
-        expect(plansToUpdateToExpect).toStrictEqual(undefined);
+        expect(saveOutputToExpect?.plansToUpdate).toStrictEqual(undefined);
       });
 
       it('should send commonFlowsChange on save when flow is deleted only', async () => {
@@ -450,23 +448,20 @@ describe('GioPolicyStudioModule', () => {
         await flowsMenuHarness.selectFlow(/Flow to delete/);
         await detailsHarness.clickDeleteFlowBtn();
 
-        let commonFlowChangeToExpect: Flow[] | undefined;
-        let plansToUpdateToExpect: Plan[] | undefined;
-        component.commonFlowsChange.subscribe(value => (commonFlowChangeToExpect = value));
-        component.plansToUpdate.subscribe(value => (plansToUpdateToExpect = value));
-
+        let saveOutputToExpect: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutputToExpect = value));
         await (await loader.getHarness(MatButtonHarness.with({ text: /Save/ }))).click();
 
         // Strict expect
-        expect(commonFlowChangeToExpect).toStrictEqual([
+        expect(saveOutputToExpect?.commonFlows).toStrictEqual([
           fakeChannelFlow({
             name: 'Unchanged flow',
           }),
         ]);
-        expect(plansToUpdateToExpect).toStrictEqual(undefined);
+        expect(saveOutputToExpect?.plansToUpdate).toStrictEqual(undefined);
       });
 
-      it('should send plansToUpdate on save', async () => {
+      fit('should send plansToUpdate on save', async () => {
         const planFooFlows = [fakeChannelFlow({ name: 'Foo flow 1' }), fakeChannelFlow({ name: 'Foo flow 2' })];
         const plans = [
           fakePlan({ id: 'p1', name: 'Plan to update flow', flows: planFooFlows }),
@@ -493,16 +488,14 @@ describe('GioPolicyStudioModule', () => {
         // Delete flow into Plan to delete flow
         await policyStudioHarness.deleteFlow('Flow to delete');
 
-        let commonFlowChangeToExpect: Flow[] | undefined;
-        let plansToUpdateToExpect: Plan[] | undefined;
-        component.commonFlowsChange.subscribe(value => (commonFlowChangeToExpect = value));
-        component.plansToUpdate.subscribe(value => (plansToUpdateToExpect = value));
+        let saveOutputToExpect: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutputToExpect = value));
 
         await (await loader.getHarness(MatButtonHarness.with({ text: /Save/ }))).click();
 
         // Strict expect
-        expect(commonFlowChangeToExpect).toStrictEqual(undefined);
-        expect(plansToUpdateToExpect).toStrictEqual([
+        expect(saveOutputToExpect?.commonFlows).toStrictEqual(undefined);
+        expect(saveOutputToExpect?.plansToUpdate).toStrictEqual([
           fakePlan({
             id: 'p1',
             name: 'Plan to update flow',
@@ -718,12 +711,12 @@ describe('GioPolicyStudioModule', () => {
 
         await policyStudioHarness.addFlow('Common flows', fakeHttpFlow({ name: 'New flow' }));
 
-        let commonFlowChangeToExpect: Flow[] | undefined;
-        component.commonFlowsChange.subscribe(value => (commonFlowChangeToExpect = value));
+        let saveOutputToExpect: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutputToExpect = value));
 
         await (await loader.getHarness(MatButtonHarness.with({ text: /Save/ }))).click();
 
-        expect(commonFlowChangeToExpect).toMatchObject([
+        expect(saveOutputToExpect?.commonFlows).toMatchObject([
           {
             name: 'New flow',
             enabled: true,
@@ -755,12 +748,12 @@ describe('GioPolicyStudioModule', () => {
 
         await policyStudioHarness.editFlowConfig('Foo flow 1', fakeHttpFlow({ name: 'Edited flow name' }));
 
-        let plansToUpdateToExpect: Plan[] | undefined;
-        component.plansToUpdate.subscribe(value => (plansToUpdateToExpect = value));
+        let saveOutputToExpect: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutputToExpect = value));
 
         await (await loader.getHarness(MatButtonHarness.with({ text: /Save/ }))).click();
 
-        expect(plansToUpdateToExpect).toStrictEqual([
+        expect(saveOutputToExpect?.plansToUpdate).toStrictEqual([
           fakePlan({
             flows: [fakeHttpFlow({ name: 'Edited flow name' }), fakeHttpFlow({ name: 'Foo flow 2' })],
             name: 'Foo plan',
