@@ -40,6 +40,7 @@
 <div class="wrapper">
   <div class="wrapper__flowsMenu">
     <gio-ps-flows-menu
+      [apiType]="apiType"
       [flowsGroups]="flowsGroups"
       [entrypoints]="entrypointsType"
       (flowsGroupsChange)="onFlowsGroupsChange($event)"
@@ -49,6 +50,7 @@
 
   <div class="wrapper__flowDetails">
     <gio-ps-flow-details
+      [apiType]="apiType"
       [flow]="selectedFlow"
       [entrypoints]="entrypointsType"
       (flowChange)="onSelectedFlowChange($event)"

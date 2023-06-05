@@ -20,38 +20,36 @@ import { Component, Input } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { action } from '@storybook/addon-actions';
 
-import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
-import { FlowVM } from '../../gio-policy-studio.model';
-import { fakeChannelFlow } from '../../models/index-testing';
+import { GioPolicyStudioModule } from '../../../gio-policy-studio.module';
+import { FlowVM } from '../../../gio-policy-studio.model';
+import { GioPolicyStudioFlowFormDialogResult } from '../gio-ps-flow-form-dialog-result.model';
+import { fakeHttpFlow } from '../../../models/flow/Flow.fixture';
 
 import {
-  GioPolicyStudioFlowMessageFormDialogComponent,
-  GioPolicyStudioFlowMessageFormDialogData,
-  GioPolicyStudioFlowMessageFormDialogResult,
-} from './gio-ps-flow-message-form-dialog.component';
+  GioPolicyStudioFlowProxyFormDialogComponent,
+  GioPolicyStudioFlowProxyFormDialogData,
+} from './gio-ps-flow-proxy-form-dialog.component';
 
 @Component({
-  selector: 'gio-ps-flow-message-form-dialog-story',
+  selector: 'gio-ps-flow-proxy-form-dialog-story',
   template: `<button id="open-dialog" (click)="openDialog()">Open dialog</button>`,
 })
-class GioPolicyStudioFlowMessageFormDialogStoryComponent {
+class GioPolicyStudioFlowProxyFormDialogStoryComponent {
   @Input() public flow?: FlowVM = undefined;
   constructor(private readonly matDialog: MatDialog) {}
 
   public openDialog() {
     this.matDialog
-      .open<
-        GioPolicyStudioFlowMessageFormDialogComponent,
-        GioPolicyStudioFlowMessageFormDialogData,
-        GioPolicyStudioFlowMessageFormDialogResult
-      >(GioPolicyStudioFlowMessageFormDialogComponent, {
-        data: {
-          flow: this.flow,
-          entrypoints: ['entrypoint1', 'entrypoint2'],
+      .open<GioPolicyStudioFlowProxyFormDialogComponent, GioPolicyStudioFlowProxyFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+        GioPolicyStudioFlowProxyFormDialogComponent,
+        {
+          data: {
+            flow: this.flow,
+          },
+          role: 'alertdialog',
+          id: 'gioPsFlowFormDialog',
         },
-        role: 'alertdialog',
-        id: 'gioPsFlowFormDialog',
-      })
+      )
       .afterClosed()
       .pipe(
         tap(createdOrEdited => {
@@ -63,17 +61,17 @@ class GioPolicyStudioFlowMessageFormDialogStoryComponent {
 }
 
 export default {
-  title: 'Policy Studio / components / Flow message form dialog',
-  component: GioPolicyStudioFlowMessageFormDialogStoryComponent,
+  title: 'Policy Studio / components / Flow proxy form dialog',
+  component: GioPolicyStudioFlowProxyFormDialogStoryComponent,
   decorators: [
     moduleMetadata({
-      declarations: [GioPolicyStudioFlowMessageFormDialogStoryComponent],
+      declarations: [GioPolicyStudioFlowProxyFormDialogStoryComponent],
       imports: [GioPolicyStudioModule, MatDialogModule, NoopAnimationsModule],
     }),
   ],
   argTypes: {},
   render: args => ({
-    component: GioPolicyStudioFlowMessageFormDialogStoryComponent,
+    component: GioPolicyStudioFlowProxyFormDialogStoryComponent,
     props: { ...args },
   }),
   parameters: {
@@ -95,15 +93,14 @@ export const Edit: StoryObj = {
   },
   args: {
     flow: {
-      ...fakeChannelFlow({
+      ...fakeHttpFlow({
         name: 'Flow name',
         selectors: [
           {
-            type: 'CHANNEL',
-            channel: 'channel1',
-            channelOperator: 'EQUALS',
-            operations: ['PUBLISH'],
-            entrypoints: ['entrypoint1', 'entrypoint2'],
+            type: 'HTTP',
+            path: '/path',
+            pathOperator: 'EQUALS',
+            methods: ['GET'],
           },
           {
             type: 'CONDITION',

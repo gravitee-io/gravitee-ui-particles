@@ -23,16 +23,16 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { InteractivityChecker } from '@angular/cdk/a11y';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 
-import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
-import { fakeChannelFlow } from '../../models/index-testing';
-import { FlowVM } from '../../gio-policy-studio.model';
+import { GioPolicyStudioModule } from '../../../gio-policy-studio.module';
+import { fakeChannelFlow, fakeHttpFlow } from '../../../models/index-testing';
+import { FlowVM } from '../../../gio-policy-studio.model';
+import { GioPolicyStudioFlowFormDialogResult } from '../gio-ps-flow-form-dialog-result.model';
 
 import {
-  GioPolicyStudioFlowMessageFormDialogComponent,
-  GioPolicyStudioFlowMessageFormDialogData,
-  GioPolicyStudioFlowMessageFormDialogResult,
-} from './gio-ps-flow-message-form-dialog.component';
-import { GioPolicyStudioFlowMessageFormDialogHarness } from './gio-ps-flow-message-form-dialog.harness';
+  GioPolicyStudioFlowProxyFormDialogComponent,
+  GioPolicyStudioFlowProxyFormDialogData,
+} from './gio-ps-flow-proxy-form-dialog.component';
+import { GioPolicyStudioFlowProxyFormDialogHarness } from './gio-ps-flow-proxy-form-dialog.harness';
 
 @Component({
   selector: 'gio-dialog-test',
@@ -41,23 +41,20 @@ import { GioPolicyStudioFlowMessageFormDialogHarness } from './gio-ps-flow-messa
 class TestComponent {
   public flow?: FlowVM;
   public flowToEdit?: FlowVM;
-  public entrypoints = ['entrypoint1', 'entrypoint2'];
   constructor(private readonly matDialog: MatDialog) {}
 
   public openDialog() {
     this.matDialog
-      .open<
-        GioPolicyStudioFlowMessageFormDialogComponent,
-        GioPolicyStudioFlowMessageFormDialogData,
-        GioPolicyStudioFlowMessageFormDialogResult
-      >(GioPolicyStudioFlowMessageFormDialogComponent, {
-        data: {
-          entrypoints: this.entrypoints,
-          flow: this.flowToEdit,
+      .open<GioPolicyStudioFlowProxyFormDialogComponent, GioPolicyStudioFlowProxyFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+        GioPolicyStudioFlowProxyFormDialogComponent,
+        {
+          data: {
+            flow: this.flowToEdit,
+          },
+          role: 'alertdialog',
+          id: 'testDialog',
         },
-        role: 'alertdialog',
-        id: 'testDialog',
-      })
+      )
       .afterClosed()
       .subscribe(flow => {
         if (flow) {
@@ -67,7 +64,7 @@ class TestComponent {
   }
 }
 
-describe('GioPolicyStudioFlowMessageFormDialogComponent', () => {
+describe('GioPolicyStudioFlowProxyFormDialogComponent', () => {
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
   let loader: HarnessLoader;
@@ -96,7 +93,7 @@ describe('GioPolicyStudioFlowMessageFormDialogComponent', () => {
     };
     await componentTestingOpenDialog();
 
-    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
+    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowProxyFormDialogHarness);
     await flowFormDialogHarness.setFlowFormValues({
       name: 'Test name',
       condition: 'Test condition',
@@ -113,13 +110,12 @@ describe('GioPolicyStudioFlowMessageFormDialogComponent', () => {
   it('should create flow', async () => {
     await componentTestingOpenDialog();
 
-    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
+    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowProxyFormDialogHarness);
     await flowFormDialogHarness.setFlowFormValues({
       name: 'Test name',
-      channelOperator: 'EQUALS',
-      channel: 'test-channel',
-      operations: ['SUBSCRIBE'],
-      entrypoints: ['entrypoint1', 'entrypoint2'],
+      pathOperator: 'EQUALS',
+      path: 'test-path',
+      methods: ['GET'],
     });
     await flowFormDialogHarness.save();
 
@@ -130,11 +126,67 @@ describe('GioPolicyStudioFlowMessageFormDialogComponent', () => {
       enabled: true,
       selectors: [
         {
-          type: 'CHANNEL',
-          channelOperator: 'EQUALS',
-          channel: 'test-channel',
-          operations: ['SUBSCRIBE'],
-          entrypoints: ['entrypoint1', 'entrypoint2'],
+          type: 'HTTP',
+          pathOperator: 'EQUALS',
+          path: 'test-path',
+          methods: ['GET'],
+        },
+      ],
+    });
+  });
+
+  it('should create flow with all methods', async () => {
+    await componentTestingOpenDialog();
+
+    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowProxyFormDialogHarness);
+    await flowFormDialogHarness.setFlowFormValues({
+      name: 'Test name',
+      pathOperator: 'EQUALS',
+      path: 'test-path',
+      methods: ['ALL'],
+    });
+    await flowFormDialogHarness.save();
+
+    expect(component.flow).toEqual({
+      _id: expect.any(String),
+      _hasChanged: true,
+      name: 'Test name',
+      enabled: true,
+      selectors: [
+        {
+          type: 'HTTP',
+          pathOperator: 'EQUALS',
+          path: 'test-path',
+          methods: [],
+        },
+      ],
+    });
+  });
+
+  it('should not add invalid methods', async () => {
+    await componentTestingOpenDialog();
+
+    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowProxyFormDialogHarness);
+    await flowFormDialogHarness.setFlowFormValues({
+      name: 'Test name',
+      pathOperator: 'EQUALS',
+      path: 'test-path',
+      methods: ['POST', 'blabla'],
+    });
+
+    await flowFormDialogHarness.save();
+
+    expect(component.flow).toEqual({
+      _id: expect.any(String),
+      _hasChanged: true,
+      name: 'Test name',
+      enabled: true,
+      selectors: [
+        {
+          type: 'HTTP',
+          pathOperator: 'EQUALS',
+          path: 'test-path',
+          methods: ['POST'],
         },
       ],
     });
@@ -143,13 +195,12 @@ describe('GioPolicyStudioFlowMessageFormDialogComponent', () => {
   it('should create flow with condition', async () => {
     await componentTestingOpenDialog();
 
-    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
+    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowProxyFormDialogHarness);
     await flowFormDialogHarness.setFlowFormValues({
       name: 'Test name',
-      channelOperator: 'EQUALS',
-      channel: 'test-channel',
-      operations: ['SUBSCRIBE'],
-      entrypoints: ['entrypoint1', 'entrypoint2'],
+      pathOperator: 'EQUALS',
+      path: 'test-path',
+      methods: ['GET'],
       condition: 'Test condition',
     });
     await flowFormDialogHarness.save();
@@ -161,11 +212,10 @@ describe('GioPolicyStudioFlowMessageFormDialogComponent', () => {
       enabled: true,
       selectors: [
         {
-          type: 'CHANNEL',
-          channelOperator: 'EQUALS',
-          channel: 'test-channel',
-          operations: ['SUBSCRIBE'],
-          entrypoints: ['entrypoint1', 'entrypoint2'],
+          type: 'HTTP',
+          pathOperator: 'EQUALS',
+          path: 'test-path',
+          methods: ['GET'],
         },
         {
           type: 'CONDITION',
@@ -179,17 +229,17 @@ describe('GioPolicyStudioFlowMessageFormDialogComponent', () => {
     component.flowToEdit = {
       _id: 'test-id',
       _hasChanged: false,
-      ...fakeChannelFlow(),
+      ...fakeHttpFlow(),
     };
     await componentTestingOpenDialog();
 
-    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
+    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowProxyFormDialogHarness);
     await flowFormDialogHarness.save();
 
     expect(component.flow).toEqual({
       _id: 'test-id',
       _hasChanged: true,
-      ...fakeChannelFlow(),
+      ...fakeHttpFlow(),
     });
   });
 
@@ -197,18 +247,17 @@ describe('GioPolicyStudioFlowMessageFormDialogComponent', () => {
     component.flowToEdit = {
       _id: 'test-id',
       _hasChanged: false,
-      ...fakeChannelFlow(),
+      ...fakeHttpFlow(),
     };
     await componentTestingOpenDialog();
 
-    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
+    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowProxyFormDialogHarness);
 
     await flowFormDialogHarness.setFlowFormValues({
       name: 'Test name',
-      channelOperator: 'EQUALS',
-      channel: 'test-channel',
-      operations: ['SUBSCRIBE'],
-      entrypoints: ['entrypoint1', 'entrypoint2'],
+      pathOperator: 'EQUALS',
+      path: 'test-path',
+      methods: ['GET'],
       condition: 'Test condition',
     });
     await flowFormDialogHarness.save();
@@ -216,16 +265,15 @@ describe('GioPolicyStudioFlowMessageFormDialogComponent', () => {
     expect(component.flow).toEqual({
       _id: 'test-id',
       _hasChanged: true,
-      ...fakeChannelFlow(),
+      ...fakeHttpFlow(),
       name: 'Test name',
       enabled: true,
       selectors: [
         {
-          type: 'CHANNEL',
-          channelOperator: 'EQUALS',
-          channel: 'test-channel',
-          operations: ['PUBLISH', 'SUBSCRIBE'],
-          entrypoints: ['entrypoint1', 'entrypoint2'],
+          type: 'HTTP',
+          pathOperator: 'EQUALS',
+          path: 'test-path',
+          methods: ['GET'],
         },
         {
           type: 'CONDITION',

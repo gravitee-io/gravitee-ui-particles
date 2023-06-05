@@ -29,8 +29,9 @@ import { GioPolicyStudioModule } from './gio-policy-studio.module';
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
 import { GioPolicyStudioDetailsHarness } from './components/flow-details/gio-ps-flow-details.harness';
 import { GioPolicyStudioFlowsMenuHarness } from './components/flows-menu/gio-ps-flows-menu.harness';
-import { GioPolicyStudioFlowMessageFormDialogHarness } from './components/flow-message-form-dialog/gio-ps-flow-message-form-dialog.harness';
+import { GioPolicyStudioFlowMessageFormDialogHarness } from './components/flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.harness';
 import { Flow, Plan } from './models';
+import { GioPolicyStudioFlowProxyFormDialogHarness } from './components/flow-form-dialog/flow-proxy-form-dialog/gio-ps-flow-proxy-form-dialog.harness';
 
 describe('GioPolicyStudioModule', () => {
   let loader: HarnessLoader;
@@ -337,8 +338,9 @@ describe('GioPolicyStudioModule', () => {
     ]);
   });
 
-  it('should add flow into common flows', async () => {
+  it('should add flow into common flows for message API', async () => {
     component.commonFlows = [];
+    component.apiType = 'MESSAGE';
     component.ngOnChanges({
       commonFlows: new SimpleChange(null, null, true),
     });
@@ -368,10 +370,43 @@ describe('GioPolicyStudioModule', () => {
     ]);
   });
 
-  it('should edit flow into plan', async () => {
+  it('should add flow into common flows for proxy API', async () => {
+    component.commonFlows = [];
+    component.apiType = 'PROXY';
+    component.ngOnChanges({
+      commonFlows: new SimpleChange(null, null, true),
+    });
+
+    const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
+
+    const flowsGroups = await flowsMenuHarness.getAllFlowsGroups();
+
+    await flowsGroups[0].clickAddFlowBtn();
+
+    const flowFormDialog = await rootLoader.getHarness(GioPolicyStudioFlowProxyFormDialogHarness);
+    await flowFormDialog.setFlowFormValues({ name: 'New flow' });
+    await flowFormDialog.save();
+
+    const flowsGroupsUpdated = await flowsMenuHarness.getAllFlowsGroups();
+
+    expect(flowsGroupsUpdated).toMatchObject([
+      {
+        flows: [
+          {
+            isSelected: true,
+            name: 'New flow',
+          },
+        ],
+        name: 'Common flows',
+      },
+    ]);
+  });
+
+  it('should edit flow into plan for message API', async () => {
     const planFooFlows = [fakeChannelFlow({ name: 'Foo flow 1' }), fakeChannelFlow({ name: 'Foo flow 2' })];
     const plans = [fakePlan({ name: 'Foo plan', flows: planFooFlows }), fakePlan({ name: 'Bar plan', flows: [] })];
     component.plans = plans;
+    component.apiType = 'MESSAGE';
     component.entrypointsInfo = [
       {
         type: 'webhook',
@@ -414,6 +449,49 @@ describe('GioPolicyStudioModule', () => {
     ]);
 
     expect(await detailsHarness.matchText(/webhook/)).toEqual(true);
+  });
+
+  it('should edit flow into plan for proxy API', async () => {
+    const planFooFlows = [fakeHttpFlow({ name: 'Foo flow 1' }), fakeHttpFlow({ name: 'Foo flow 2' })];
+    const plans = [fakePlan({ name: 'Foo plan', flows: planFooFlows }), fakePlan({ name: 'Bar plan', flows: [] })];
+    component.plans = plans;
+    component.apiType = 'PROXY';
+    component.ngOnChanges({
+      entrypointsInfo: new SimpleChange(null, null, true),
+      plans: new SimpleChange(null, null, true),
+    });
+
+    const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
+    const detailsHarness = await loader.getHarness(GioPolicyStudioDetailsHarness);
+
+    // Edit first selected flow
+    await detailsHarness.clickEditFlowBtn();
+
+    const flowFormDialog = await rootLoader.getHarness(GioPolicyStudioFlowProxyFormDialogHarness);
+    await flowFormDialog.setFlowFormValues({ name: 'Edited flow name' });
+    await flowFormDialog.save();
+
+    const flowsGroupsUpdated = await flowsMenuHarness.getAllFlowsGroups();
+
+    expect(flowsGroupsUpdated).toMatchObject([
+      {
+        flows: [
+          {
+            isSelected: true,
+            name: 'Edited flow name',
+          },
+          {
+            isSelected: false,
+            name: 'Foo flow 2',
+          },
+        ],
+        name: 'Foo plan',
+      },
+      { name: 'Bar plan', flows: [] },
+      { name: 'Common flows', flows: [] },
+    ]);
+
+    expect(await detailsHarness.matchText(/HTTP/)).toEqual(true);
   });
 
   it('should delete flow into plan', async () => {
