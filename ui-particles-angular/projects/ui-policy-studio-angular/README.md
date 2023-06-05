@@ -1,14 +1,13 @@
 # Gravitee.io UI Policy Studio Angular
 
-⚠️ Current version of this package is compatible with Angular 12.
 
 ## Overview
 
-This package is the Angular version of the Gravitee UI Policy Studio.
+Policy Studio is a tool to create and edit policies for Gravitee.io API Management. This Policy Studio is dedicated for Gravitee.io API Event Native (V4).
 
 ## Usage
 
-To use it in your project just run:
+Install the npm package:
 
 ```bash
 npm install @gravitee/ui-policy-studio-angular
