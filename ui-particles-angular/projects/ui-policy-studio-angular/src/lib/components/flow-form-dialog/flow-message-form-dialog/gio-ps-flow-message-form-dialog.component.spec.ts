@@ -223,7 +223,7 @@ describe('GioPolicyStudioFlowMessageFormDialogComponent', () => {
           type: 'CHANNEL',
           channelOperator: 'EQUALS',
           channel: 'test-channel',
-          operations: ['PUBLISH', 'SUBSCRIBE'],
+          operations: ['SUBSCRIBE'],
           entrypoints: ['entrypoint1', 'entrypoint2'],
         },
         {

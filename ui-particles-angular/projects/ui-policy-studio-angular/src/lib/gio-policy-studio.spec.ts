@@ -31,13 +31,14 @@ import { GioPolicyStudioDetailsHarness } from './components/flow-details/gio-ps-
 import { GioPolicyStudioFlowsMenuHarness } from './components/flows-menu/gio-ps-flows-menu.harness';
 import { GioPolicyStudioFlowMessageFormDialogHarness } from './components/flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.harness';
 import { Flow, Plan } from './models';
-import { GioPolicyStudioFlowProxyFormDialogHarness } from './components/flow-form-dialog/flow-proxy-form-dialog/gio-ps-flow-proxy-form-dialog.harness';
+import { GioPolicyStudioHarness } from './gio-policy-studio.harness';
 
 describe('GioPolicyStudioModule', () => {
   let loader: HarnessLoader;
   let rootLoader: HarnessLoader;
   let component: GioPolicyStudioComponent;
   let fixture: ComponentFixture<GioPolicyStudioComponent>;
+  let policyStudioHarness: GioPolicyStudioHarness;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -52,6 +53,8 @@ describe('GioPolicyStudioModule', () => {
     fixture = TestBed.createComponent(GioPolicyStudioComponent);
     component = fixture.componentInstance;
     loader = TestbedHarnessEnvironment.loader(fixture);
+    policyStudioHarness = await TestbedHarnessEnvironment.harnessForFixture(fixture, GioPolicyStudioHarness);
+
     rootLoader = TestbedHarnessEnvironment.documentRootLoader(fixture);
   });
 
@@ -215,15 +218,14 @@ describe('GioPolicyStudioModule', () => {
           plans: new SimpleChange(null, null, true),
         });
 
-        const detailsHarness = await loader.getHarness(GioPolicyStudioDetailsHarness);
         const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
 
         expect(await flowsMenuHarness.getSelectedFlow()).toEqual({ name: 'Foo flow 1' });
-        expect((await detailsHarness.getFlowInfos()).Name).toEqual(['Foo flow 1']);
+        expect((await policyStudioHarness.getSelectedFlowInfos()).Name).toEqual(['Foo flow 1']);
 
-        await flowsMenuHarness.selectFlow(/Common flow/);
+        await policyStudioHarness.selectFlowInMenu('Common flow');
         expect(await flowsMenuHarness.getSelectedFlow()).toEqual({ name: 'Common flow' });
-        expect((await detailsHarness.getFlowInfos()).Name).toEqual(['Common flow']);
+        expect((await policyStudioHarness.getSelectedFlowInfos()).Name).toEqual(['Common flow']);
       });
 
       it('should display flow with ChannelSelector', async () => {
@@ -285,13 +287,19 @@ describe('GioPolicyStudioModule', () => {
 
         const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
 
-        const flowsGroups = await flowsMenuHarness.getAllFlowsGroups();
-
-        await flowsGroups[0].clickAddFlowBtn();
-
-        const flowFormDialog = await rootLoader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
-        await flowFormDialog.setFlowFormValues({ name: 'New flow' });
-        await flowFormDialog.save();
+        await policyStudioHarness.addFlow(
+          'Common flows',
+          fakeChannelFlow({
+            name: 'New flow',
+            selectors: [
+              {
+                type: 'CHANNEL',
+                channel: 'channel',
+                channelOperator: 'STARTS_WITH',
+              },
+            ],
+          }),
+        );
 
         const flowsGroupsUpdated = await flowsMenuHarness.getAllFlowsGroups();
 
@@ -323,7 +331,19 @@ describe('GioPolicyStudioModule', () => {
         await detailsHarness.clickEditFlowBtn();
 
         const flowFormDialog = await rootLoader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
-        await flowFormDialog.setFlowFormValues({ name: 'Edited flow name', entrypoints: ['webhook'] });
+        await flowFormDialog.setFlowFormValues(
+          fakeChannelFlow({
+            name: 'Edited flow name',
+            selectors: [
+              {
+                type: 'CHANNEL',
+                channel: 'channel',
+                channelOperator: 'STARTS_WITH',
+                entrypoints: ['webhook'],
+              },
+            ],
+          }),
+        );
         await flowFormDialog.save();
 
         const flowsGroupsUpdated = await flowsMenuHarness.getAllFlowsGroups();
@@ -358,13 +378,12 @@ describe('GioPolicyStudioModule', () => {
           plans: new SimpleChange(null, null, true),
         });
 
-        const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
         const detailsHarness = await loader.getHarness(GioPolicyStudioDetailsHarness);
 
         // Delete first selected flow
         await detailsHarness.clickDeleteFlowBtn();
 
-        const flowsGroupsUpdated = await flowsMenuHarness.getAllFlowsGroups();
+        const flowsGroupsUpdated = await policyStudioHarness.getFlowsMenu();
 
         expect(flowsGroupsUpdated).toMatchObject([
           {
@@ -460,24 +479,19 @@ describe('GioPolicyStudioModule', () => {
           plans: new SimpleChange(null, null, true),
         });
 
-        const detailsHarness = await loader.getHarness(GioPolicyStudioDetailsHarness);
-        const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
+        // Edit flow into Plan to update flow
+        await policyStudioHarness.editFlowConfig('Foo flow 1', fakeChannelFlow({ name: 'Edited flow' }));
 
-        // Edit first selected flow = Plan to update flow
-        await detailsHarness.clickEditFlowBtn();
-        const flowFormEditDialog = await rootLoader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
-        await flowFormEditDialog.setFlowFormValues({ name: 'Edited flow' });
-        await flowFormEditDialog.save();
-
-        // Add new flow into Bar plan
-        await (await flowsMenuHarness.getAllFlowsGroups()).find(group => group.name === 'Plan to add flow')?.clickAddFlowBtn();
-        const flowFormNewDialog = await rootLoader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
-        await flowFormNewDialog.setFlowFormValues({ name: 'New flow' });
-        await flowFormNewDialog.save();
+        // Add new flow into Plan to add flow
+        await policyStudioHarness.addFlow(
+          'Plan to add flow',
+          fakeChannelFlow({
+            name: 'New flow',
+          }),
+        );
 
         // Delete flow into Plan to delete flow
-        await flowsMenuHarness.selectFlow(/Flow to delete/);
-        await detailsHarness.clickDeleteFlowBtn();
+        await policyStudioHarness.deleteFlow('Flow to delete');
 
         let commonFlowChangeToExpect: Flow[] | undefined;
         let plansToUpdateToExpect: Plan[] | undefined;
@@ -511,10 +525,10 @@ describe('GioPolicyStudioModule', () => {
                 selectors: [
                   {
                     type: 'CHANNEL',
-                    channel: '',
+                    channel: 'channel',
                     channelOperator: 'EQUALS',
-                    entrypoints: [],
-                    operations: [],
+                    entrypoints: ['webhook'],
+                    operations: ['PUBLISH'],
                   },
                 ],
               },
@@ -551,9 +565,7 @@ describe('GioPolicyStudioModule', () => {
           commonFlows: new SimpleChange(null, null, true),
         });
 
-        const detailsHarness = await loader.getHarness(GioPolicyStudioDetailsHarness);
-
-        expect(await detailsHarness.getFlowInfos()).toEqual({
+        expect(await policyStudioHarness.getSelectedFlowInfos()).toEqual({
           Name: ['Flow 1'],
           Channel: ['channel1'],
           'Channel Operator': ['EQUALS'],
@@ -643,9 +655,7 @@ describe('GioPolicyStudioModule', () => {
           commonFlows: new SimpleChange(null, null, true),
         });
 
-        const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
-
-        expect(await flowsMenuHarness.getAllFlowsGroups()).toMatchObject([
+        expect(await policyStudioHarness.getFlowsMenu()).toMatchObject([
           {
             name: 'Common flows',
             flows: [
@@ -706,27 +716,25 @@ describe('GioPolicyStudioModule', () => {
           commonFlows: new SimpleChange(null, null, true),
         });
 
-        const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
+        await policyStudioHarness.addFlow('Common flows', fakeHttpFlow({ name: 'New flow' }));
 
-        const flowsGroups = await flowsMenuHarness.getAllFlowsGroups();
+        let commonFlowChangeToExpect: Flow[] | undefined;
+        component.commonFlowsChange.subscribe(value => (commonFlowChangeToExpect = value));
 
-        await flowsGroups[0].clickAddFlowBtn();
+        await (await loader.getHarness(MatButtonHarness.with({ text: /Save/ }))).click();
 
-        const flowFormDialog = await rootLoader.getHarness(GioPolicyStudioFlowProxyFormDialogHarness);
-        await flowFormDialog.setFlowFormValues({ name: 'New flow' });
-        await flowFormDialog.save();
-
-        const flowsGroupsUpdated = await flowsMenuHarness.getAllFlowsGroups();
-
-        expect(flowsGroupsUpdated).toMatchObject([
+        expect(commonFlowChangeToExpect).toMatchObject([
           {
-            flows: [
+            name: 'New flow',
+            enabled: true,
+            selectors: [
               {
-                isSelected: true,
-                name: 'New flow',
+                type: 'HTTP',
+                methods: ['GET'],
+                path: '/path',
+                pathOperator: 'EQUALS',
               },
             ],
-            name: 'Common flows',
           },
         ]);
       });
@@ -741,34 +749,22 @@ describe('GioPolicyStudioModule', () => {
           plans: new SimpleChange(null, null, true),
         });
 
-        const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
         const detailsHarness = await loader.getHarness(GioPolicyStudioDetailsHarness);
 
         // Edit first selected flow
-        await detailsHarness.clickEditFlowBtn();
 
-        const flowFormDialog = await rootLoader.getHarness(GioPolicyStudioFlowProxyFormDialogHarness);
-        await flowFormDialog.setFlowFormValues({ name: 'Edited flow name' });
-        await flowFormDialog.save();
+        await policyStudioHarness.editFlowConfig('Foo flow 1', fakeHttpFlow({ name: 'Edited flow name' }));
 
-        const flowsGroupsUpdated = await flowsMenuHarness.getAllFlowsGroups();
+        let plansToUpdateToExpect: Plan[] | undefined;
+        component.plansToUpdate.subscribe(value => (plansToUpdateToExpect = value));
 
-        expect(flowsGroupsUpdated).toMatchObject([
-          {
-            flows: [
-              {
-                isSelected: true,
-                name: 'Edited flow name',
-              },
-              {
-                isSelected: false,
-                name: 'Foo flow 2',
-              },
-            ],
+        await (await loader.getHarness(MatButtonHarness.with({ text: /Save/ }))).click();
+
+        expect(plansToUpdateToExpect).toStrictEqual([
+          fakePlan({
+            flows: [fakeHttpFlow({ name: 'Edited flow name' }), fakeHttpFlow({ name: 'Foo flow 2' })],
             name: 'Foo plan',
-          },
-          { name: 'Bar plan', flows: [] },
-          { name: 'Common flows', flows: [] },
+          }),
         ]);
 
         expect(await detailsHarness.matchText(/HTTP/)).toEqual(true);

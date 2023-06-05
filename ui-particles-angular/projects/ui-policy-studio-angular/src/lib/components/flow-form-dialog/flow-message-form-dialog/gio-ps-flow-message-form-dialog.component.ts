@@ -62,7 +62,7 @@ export class GioPolicyStudioFlowMessageFormDialogComponent {
   }
 
   public onSubmit(): void {
-    const chanelSelectorToSave: ChannelSelector = {
+    const channelSelectorToSave: ChannelSelector = {
       type: 'CHANNEL',
       channel: this.flowFormGroup?.get('channel')?.value,
       channelOperator: this.flowFormGroup?.get('channelOperator')?.value,
@@ -87,7 +87,7 @@ export class GioPolicyStudioFlowMessageFormDialogComponent {
       _hasChanged: true,
       // Add changes
       name: this.flowFormGroup?.get('name')?.value,
-      selectors: conditionSelectorToSave ? [chanelSelectorToSave, conditionSelectorToSave] : [chanelSelectorToSave],
+      selectors: conditionSelectorToSave ? [channelSelectorToSave, conditionSelectorToSave] : [channelSelectorToSave],
       enabled: true,
     };
 

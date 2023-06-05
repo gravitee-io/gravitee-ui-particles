@@ -15,3 +15,5 @@
  */
 export * from './lib/models/index-testing';
 export * from './testing';
+
+export * from './lib/gio-policy-studio.harness';

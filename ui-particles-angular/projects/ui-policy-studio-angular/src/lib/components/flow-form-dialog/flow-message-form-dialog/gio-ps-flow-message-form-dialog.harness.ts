@@ -44,6 +44,12 @@ export class GioPolicyStudioFlowMessageFormDialogHarness extends ComponentHarnes
     }
     if (flow.channelOperator) {
       await channelOperatorInput.open();
+      // Unselect all options before selecting the new one
+      for (const option of await entrypointsInput.getOptions()) {
+        if (await option.isSelected()) {
+          await option.click();
+        }
+      }
       await channelOperatorInput.clickOptions({ text: new RegExp(flow.channelOperator, 'i') });
     }
     if (flow.channel) {
@@ -53,14 +59,26 @@ export class GioPolicyStudioFlowMessageFormDialogHarness extends ComponentHarnes
       await parallel(() =>
         (flow.operations ?? []).map(async operation => {
           await operationsInput.open();
+          // Unselect all options before selecting the new one
+          for (const option of await operationsInput.getOptions()) {
+            if (await option.isSelected()) {
+              await option.click();
+            }
+          }
           await operationsInput.clickOptions({ text: new RegExp(operation, 'i') });
         }),
       );
     }
     if (flow.entrypoints) {
+      await entrypointsInput.open();
+      // Unselect all options before selecting the new one
+      for (const option of await entrypointsInput.getOptions()) {
+        if (await option.isSelected()) {
+          await option.click();
+        }
+      }
       await parallel(() =>
         (flow.entrypoints ?? []).map(async entrypoint => {
-          await entrypointsInput.open();
           await entrypointsInput.clickOptions({ text: new RegExp(entrypoint, 'i') });
         }),
       );
