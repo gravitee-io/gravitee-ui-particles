@@ -20,15 +20,18 @@
 $typography: map.get(gio.$mat-theme, typography);
 
 :host {
-  display: block;
-  padding: 16px;
+  display: flex;
+  overflow: hidden;
+  min-height: 199px; // 200px - 1px border
+  flex-direction: column;
+  padding-top: 16px;
   border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
   border-radius: 8px;
   background-color: mat.get-color-from-palette(gio.$mat-basic-palette, white);
 }
 
 .header {
-  padding-bottom: 16px;
+  padding: 0 16px;
 
   &__name {
     @include mat.typography-level($typography, body-2);
@@ -39,5 +42,29 @@ $typography: map.get(gio.$mat-theme, typography);
     @include mat.typography-level($typography, body-1);
 
     color: mat.get-color-from-palette(gio.$mat-space-palette, lighter40);
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex: 1 1 auto;
+  padding: 0 16px;
+  overflow-y: auto;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+
+  &__connectorBadge {
+    border: 1px solid mat.get-color-from-palette(gio.$mat-accent-palette, default);
+    border-radius: 16px;
+  }
+
+  &__rightArrow {
+    width: 16px;
+    height: 16px;
+    margin: 0 8px;
+    color: mat.get-color-from-palette(gio.$mat-dove-palette, darker30);
   }
 }

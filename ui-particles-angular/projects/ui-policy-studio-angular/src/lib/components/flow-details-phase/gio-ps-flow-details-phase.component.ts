@@ -15,7 +15,7 @@
  */
 import { Component, Input } from '@angular/core';
 
-import { Step } from '../../models';
+import { ConnectorsInfo, Step } from '../../models';
 
 @Component({
   selector: 'gio-ps-flow-details-phase',
@@ -31,4 +31,10 @@ export class GioPolicyStudioDetailsPhaseComponent {
 
   @Input()
   public description!: string;
+
+  @Input()
+  public entrypointsInfo: ConnectorsInfo[] = [];
+
+  @Input()
+  public endpointsInfo: ConnectorsInfo[] = [];
 }
