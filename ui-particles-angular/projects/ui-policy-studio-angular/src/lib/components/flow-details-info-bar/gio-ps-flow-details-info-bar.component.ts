@@ -16,7 +16,7 @@
 import { Component, Input } from '@angular/core';
 
 import { FlowVM } from '../../gio-policy-studio.model';
-import { ChannelSelector, ConditionSelector, ConnectorsInfo, Operation } from '../../models';
+import { ChannelSelector, ConditionSelector, ConnectorsInfo, HttpSelector, Operation } from '../../models';
 
 @Component({
   selector: 'gio-ps-flow-details-info-bar',
@@ -30,39 +30,67 @@ export class GioPolicyStudioDetailsInfoBarComponent {
   @Input()
   public entrypointsInfo: ConnectorsInfo[] = [];
 
+  public get condition(): string | undefined {
+    const conditionSelector = this.flow?.selectors?.find(s => s.type === 'CONDITION') as ConditionSelector;
+    if (!conditionSelector) {
+      return undefined;
+    }
+    return conditionSelector?.condition;
+  }
+
+  // MESSAGE API type
+
   public get operations(): string[] | undefined {
-    if (!this.flow) {
-      return [];
+    const channelSelector = this.flow?.selectors?.find(s => s.type === 'CHANNEL') as ChannelSelector;
+    if (!channelSelector) {
+      return undefined;
     }
     const operationToBadge: Record<Operation, string> = {
       PUBLISH: 'PUB',
       SUBSCRIBE: 'SUB',
     };
-    const channelSelector = this.flow.selectors?.find(s => s.type === 'CHANNEL') as ChannelSelector;
     return channelSelector?.operations?.map(o => operationToBadge[o]).sort();
   }
 
   public get channel(): string | undefined {
-    if (!this.flow) {
+    const channelSelector = this.flow?.selectors?.find(s => s.type === 'CHANNEL') as ChannelSelector;
+    if (!channelSelector) {
       return undefined;
     }
-    const channelSelector = this.flow.selectors?.find(s => s.type === 'CHANNEL') as ChannelSelector;
     return channelSelector?.channel;
   }
 
   public get channelOperator(): string | undefined {
-    if (!this.flow) {
+    const channelSelector = this.flow?.selectors?.find(s => s.type === 'CHANNEL') as ChannelSelector;
+    if (!channelSelector) {
       return undefined;
     }
-    const channelSelector = this.flow.selectors?.find(s => s.type === 'CHANNEL') as ChannelSelector;
     return channelSelector?.channelOperator;
   }
 
-  public get condition(): string | undefined {
-    if (!this.flow) {
+  // PROXY API type
+
+  public get path(): string | undefined {
+    const httpSelector = this.flow?.selectors?.find(s => s.type === 'HTTP') as HttpSelector;
+    if (!httpSelector) {
       return undefined;
     }
-    const conditionSelector = this.flow.selectors?.find(s => s.type === 'CONDITION') as ConditionSelector;
-    return conditionSelector?.condition;
+    return httpSelector?.path;
+  }
+
+  public get pathOperator(): string | undefined {
+    const httpSelector = this.flow?.selectors?.find(s => s.type === 'HTTP') as HttpSelector;
+    if (!httpSelector) {
+      return undefined;
+    }
+    return httpSelector?.pathOperator;
+  }
+
+  public get methods(): string[] | undefined {
+    const httpSelector = this.flow?.selectors?.find(s => s.type === 'HTTP') as HttpSelector;
+    if (!httpSelector) {
+      return undefined;
+    }
+    return httpSelector?.methods?.length ? httpSelector?.methods : ['ALL'];
   }
 }

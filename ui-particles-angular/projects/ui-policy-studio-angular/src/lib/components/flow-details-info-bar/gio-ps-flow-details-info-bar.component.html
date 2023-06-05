@@ -28,6 +28,8 @@
   >
 </div>
 
+<!-- MESSAGE API type -->
+
 <div *ngIf="operations" class="info">
   <span class="info__label">Operations</span>
   <span *ngFor="let operation of operations" class="info__value gio-badge-neutral"> {{ operation }}</span>
@@ -42,6 +44,25 @@
   <span class="info__label">Channel Operator</span>
   <span class="info__value gio-badge-neutral">{{ channelOperator }}</span>
 </div>
+
+<!-- PROXY API type -->
+
+<div *ngIf="path" class="info">
+  <span class="info__label">Path</span>
+  <span class="info__value strong">{{ path }}</span>
+</div>
+
+<div *ngIf="pathOperator" class="info">
+  <span class="info__label">Path Operator</span>
+  <span class="info__value gio-badge-neutral">{{ pathOperator }}</span>
+</div>
+
+<div *ngIf="methods" class="info">
+  <span class="info__label">HTTP methods</span>
+  <span *ngFor="let method of methods" class="info__value gio-badge-neutral"> {{ method }}</span>
+</div>
+
+<!-- Condition -->
 
 <div *ngIf="condition" class="info">
   <span class="info__label">Condition</span>
