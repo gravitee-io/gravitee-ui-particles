@@ -34,7 +34,7 @@ export default {
 
   render: props => ({
     template: `<div style="height:calc(100vh - 2rem);"><gio-policy-studio
-    [apiType]="'MESSAGE'"
+    [apiType]="apiType"
     [entrypointsInfo]="entrypointsInfo"
     [endpointsInfo]="endpointsInfo"
     [commonFlows]="commonFlows"
@@ -60,6 +60,7 @@ export default {
 export const MessageWithoutFlows: Story = {
   name: 'Message API without flows',
   args: {
+    apiType: 'MESSAGE',
     entrypointsInfo: [
       {
         type: 'webhook',
@@ -78,6 +79,7 @@ export const MessageWithoutFlows: Story = {
 export const MessageWithFlows: Story = {
   name: 'Message API with flows',
   args: {
+    apiType: 'MESSAGE',
     entrypointsInfo: [
       {
         type: 'webhook',
@@ -105,6 +107,7 @@ export const MessageWithFlows: Story = {
 export const MessageWithFlowsAndPlans: Story = {
   name: 'Message API with flows & plans',
   args: {
+    apiType: 'MESSAGE',
     entrypointsInfo: [
       {
         type: 'webhook',
@@ -174,16 +177,17 @@ export const MessageWithFlowsAndPlans: Story = {
 export const ProxyWithFlowsAndPlans: Story = {
   name: 'Proxy API with flows & plans',
   args: {
+    apiType: 'PROXY',
     entrypointsInfo: [
       {
-        type: 'webhook',
-        icon: 'gio:webhook',
+        type: 'http-proxy',
+        icon: 'gio:language',
       },
     ],
     endpointsInfo: [
       {
-        type: 'kafka',
-        icon: 'gio:kafka',
+        type: 'http-proxy',
+        icon: 'gio:language',
       },
     ],
     commonFlows: [
