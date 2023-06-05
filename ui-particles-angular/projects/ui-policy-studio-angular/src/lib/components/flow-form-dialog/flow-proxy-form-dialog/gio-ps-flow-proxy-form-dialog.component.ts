@@ -18,57 +18,55 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
 import { cloneDeep, uniqueId } from 'lodash';
 
-import { FlowVM } from '../../gio-policy-studio.model';
-import { ChannelSelector, ConditionSelector } from '../../models';
+import { FlowVM } from '../../../gio-policy-studio.model';
+import { ConditionSelector, HttpMethod, HttpMethods, HttpSelector } from '../../../models';
+import { GioPolicyStudioFlowFormDialogResult } from '../gio-ps-flow-form-dialog-result.model';
 
-export type GioPolicyStudioFlowMessageFormDialogData = {
+export type GioPolicyStudioFlowProxyFormDialogData = {
   flow?: FlowVM;
-  entrypoints?: string[];
 };
 
-export type GioPolicyStudioFlowMessageFormDialogResult = FlowVM | false;
+type HttpMethodVM = HttpMethod | 'ALL';
+
+const METHODS_AUTOCOMPLETE: HttpMethodVM[] = ['ALL', ...HttpMethods];
 
 @Component({
-  selector: 'gio-ps-flow-message-form-dialog',
-  templateUrl: './gio-ps-flow-message-form-dialog.component.html',
-  styleUrls: ['./gio-ps-flow-message-form-dialog.component.scss'],
+  selector: 'gio-ps-flow-proxy-form-dialog',
+  templateUrl: './gio-ps-flow-proxy-form-dialog.component.html',
+  styleUrls: ['./gio-ps-flow-proxy-form-dialog.component.scss'],
 })
-export class GioPolicyStudioFlowMessageFormDialogComponent {
-  public entrypoints: string[] = [];
+export class GioPolicyStudioFlowProxyFormDialogComponent {
   public flowFormGroup?: FormGroup;
 
   public existingFlow?: FlowVM;
   public mode: 'create' | 'edit' = 'create';
+  public methods = METHODS_AUTOCOMPLETE;
 
   constructor(
-    public dialogRef: MatDialogRef<GioPolicyStudioFlowMessageFormDialogComponent, GioPolicyStudioFlowMessageFormDialogResult>,
-    @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioFlowMessageFormDialogData,
+    public dialogRef: MatDialogRef<GioPolicyStudioFlowProxyFormDialogComponent, GioPolicyStudioFlowFormDialogResult>,
+    @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioFlowProxyFormDialogData,
   ) {
-    this.entrypoints = flowDialogData?.entrypoints ?? [];
-
     this.existingFlow = cloneDeep(flowDialogData?.flow);
     this.mode = this.existingFlow ? 'edit' : 'create';
 
-    const channelSelector = flowDialogData?.flow?.selectors?.find(s => s.type === 'CHANNEL') as ChannelSelector;
+    const httpSelector = flowDialogData?.flow?.selectors?.find(s => s.type === 'HTTP') as HttpSelector;
     const conditionSelector = flowDialogData?.flow?.selectors?.find(s => s.type === 'CONDITION') as ConditionSelector;
 
     this.flowFormGroup = new FormGroup({
       name: new FormControl(flowDialogData?.flow?.name ?? ''),
-      channelOperator: new FormControl(channelSelector?.channelOperator ?? 'EQUALS'),
-      channel: new FormControl(channelSelector?.channel ?? ''),
-      operations: new FormControl(channelSelector?.operations ?? []),
-      entrypoints: new FormControl(channelSelector?.entrypoints ?? []),
+      pathOperator: new FormControl(httpSelector?.pathOperator ?? 'EQUALS'),
+      path: new FormControl(httpSelector?.path ?? ''),
+      methods: new FormControl(sanitizeMethodFormValue(httpSelector?.methods)),
       condition: new FormControl(conditionSelector?.condition ?? ''),
     });
   }
 
   public onSubmit(): void {
-    const chanelSelectorToSave: ChannelSelector = {
-      type: 'CHANNEL',
-      channel: this.flowFormGroup?.get('channel')?.value,
-      channelOperator: this.flowFormGroup?.get('channelOperator')?.value,
-      operations: this.flowFormGroup?.get('operations')?.value,
-      entrypoints: this.flowFormGroup?.get('entrypoints')?.value,
+    const httpSelectorToSave: HttpSelector = {
+      type: 'HTTP',
+      path: this.flowFormGroup?.get('path')?.value,
+      pathOperator: this.flowFormGroup?.get('pathOperator')?.value,
+      methods: sanitizeMethods(this.flowFormGroup?.get('methods')?.value),
     };
 
     const conditionValue: string = this.flowFormGroup?.get('condition')?.value;
@@ -88,7 +86,7 @@ export class GioPolicyStudioFlowMessageFormDialogComponent {
       _hasChanged: true,
       // Add changes
       name: this.flowFormGroup?.get('name')?.value,
-      selectors: conditionSelectorToSave ? [chanelSelectorToSave, conditionSelectorToSave] : [chanelSelectorToSave],
+      selectors: conditionSelectorToSave ? [httpSelectorToSave, conditionSelectorToSave] : [httpSelectorToSave],
       enabled: true,
     };
 
@@ -96,4 +94,18 @@ export class GioPolicyStudioFlowMessageFormDialogComponent {
       ...flowToSave,
     });
   }
+
+  public tagValidationHook(tag: string, validationCb: (shouldAddTag: boolean) => void) {
+    validationCb(METHODS_AUTOCOMPLETE.map(m => `${m}`).includes(tag.toUpperCase()));
+  }
 }
+
+const sanitizeMethods: (value: HttpMethodVM[]) => HttpMethod[] = (value?: HttpMethodVM[]) => {
+  if (!value || value.find(m => m === 'ALL')) return [];
+  return value as HttpMethod[];
+};
+
+const sanitizeMethodFormValue: (methods?: HttpMethod[]) => HttpMethodVM[] = (methods?: HttpMethod[]) => {
+  if (!methods || methods.length === 0) return ['ALL'];
+  return methods;
+};

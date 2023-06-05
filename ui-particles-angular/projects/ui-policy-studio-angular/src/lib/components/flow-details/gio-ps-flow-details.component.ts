@@ -21,8 +21,13 @@ import { FlowVM } from '../../gio-policy-studio.model';
 import {
   GioPolicyStudioFlowMessageFormDialogComponent,
   GioPolicyStudioFlowMessageFormDialogData,
-  GioPolicyStudioFlowMessageFormDialogResult,
-} from '../flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
+} from '../flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
+import { ApiType } from '../../models';
+import {
+  GioPolicyStudioFlowProxyFormDialogComponent,
+  GioPolicyStudioFlowProxyFormDialogData,
+} from '../flow-form-dialog/flow-proxy-form-dialog/gio-ps-flow-proxy-form-dialog.component';
+import { GioPolicyStudioFlowFormDialogResult } from '../flow-form-dialog/gio-ps-flow-form-dialog-result.model';
 
 @Component({
   selector: 'gio-ps-flow-details',
@@ -30,6 +35,9 @@ import {
   styleUrls: ['./gio-ps-flow-details.component.scss'],
 })
 export class GioPolicyStudioDetailsComponent {
+  @Input()
+  public apiType!: ApiType;
+
   @Input()
   public flow?: FlowVM = undefined;
 
@@ -45,20 +53,36 @@ export class GioPolicyStudioDetailsComponent {
   constructor(private readonly matDialog: MatDialog) {}
 
   public onEditFlow(): void {
-    this.matDialog
-      .open<
-        GioPolicyStudioFlowMessageFormDialogComponent,
-        GioPolicyStudioFlowMessageFormDialogData,
-        GioPolicyStudioFlowMessageFormDialogResult
-      >(GioPolicyStudioFlowMessageFormDialogComponent, {
-        data: {
-          flow: this.flow,
-          entrypoints: this.entrypoints,
-        },
-        role: 'alertdialog',
-        id: 'gioPsFlowFormDialog',
-      })
-      .afterClosed()
+    const dialogResult =
+      this.apiType === 'MESSAGE'
+        ? this.matDialog
+            .open<
+              GioPolicyStudioFlowMessageFormDialogComponent,
+              GioPolicyStudioFlowMessageFormDialogData,
+              GioPolicyStudioFlowFormDialogResult
+            >(GioPolicyStudioFlowMessageFormDialogComponent, {
+              data: {
+                flow: this.flow,
+                entrypoints: this.entrypoints,
+              },
+              role: 'alertdialog',
+              id: 'gioPsFlowMessageFormDialog',
+            })
+            .afterClosed()
+        : this.matDialog
+            .open<GioPolicyStudioFlowProxyFormDialogComponent, GioPolicyStudioFlowProxyFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+              GioPolicyStudioFlowProxyFormDialogComponent,
+              {
+                data: {
+                  flow: this.flow,
+                },
+                role: 'alertdialog',
+                id: 'gioPsFlowProxyFormDialog',
+              },
+            )
+            .afterClosed();
+
+    dialogResult
       .pipe(
         tap(createdOrEdited => {
           if (!createdOrEdited) {
