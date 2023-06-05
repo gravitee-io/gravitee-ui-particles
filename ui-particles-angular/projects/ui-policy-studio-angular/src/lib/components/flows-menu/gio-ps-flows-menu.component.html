@@ -41,7 +41,7 @@
       *ngFor="let flow of flowsGroup.flows"
       class="list__flowsGroup__flow"
       [class.selected]="flow.selected"
-      (click)="selectFlow(flow)"
+      (click)="selectFlow(flowsGroup._id, flow._id)"
       (mouseout)="flow.mouseOver = false"
       (mouseover)="flow.mouseOver = true"
     >

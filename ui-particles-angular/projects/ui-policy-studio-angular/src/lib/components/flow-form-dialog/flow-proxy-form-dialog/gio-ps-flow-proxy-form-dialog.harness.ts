@@ -43,6 +43,13 @@ export class GioPolicyStudioFlowProxyFormDialogHarness extends ComponentHarness 
     }
     if (flow.pathOperator) {
       await pathOperatorInput.open();
+
+      // Unselect all options before selecting the new one
+      for (const option of await pathOperatorInput.getOptions()) {
+        if (await option.isSelected()) {
+          await option.click();
+        }
+      }
       await pathOperatorInput.clickOptions({ text: new RegExp(flow.pathOperator, 'i') });
     }
     if (flow.path) {

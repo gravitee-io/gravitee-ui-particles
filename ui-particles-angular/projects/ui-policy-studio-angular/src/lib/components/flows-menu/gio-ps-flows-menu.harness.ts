@@ -26,6 +26,8 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
   private locateFlowByText = (text: string | RegExp) =>
     this.locatorForOptional(DivHarness.with({ selector: '.list__flowsGroup__flow', text }));
 
+  public locateGroupByText = (text: string | RegExp) => this.locatorForOptional(DivHarness.with({ selector: '.list__flowsGroup', text }));
+
   private locateSelectedFlow = this.locatorForOptional(DivHarness.with({ selector: '.list__flowsGroup__flow.selected' }));
 
   public async getAllFlowsGroups(): Promise<
@@ -36,7 +38,6 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
         isSelected: boolean;
         infos: string | null;
       }[];
-      clickAddFlowBtn: () => Promise<void>;
     }[]
   > {
     const flowsGroups = await this.locateFlowsGroups();
@@ -60,8 +61,6 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
         return {
           name: flowsGroupName,
           flows: await flowsInfos,
-          clickAddFlowBtn: async () =>
-            (await flowsGroup.childLocatorFor(MatButtonHarness.with({ ancestor: '.list__flowsGroup__header__addBtn' }))()).click(),
         };
       }),
     );
@@ -81,6 +80,14 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
 
     if (flowsGroups) {
       await flowsGroups.host().then(host => host.click());
+    }
+  }
+
+  public async addFlow(groupName: string | RegExp): Promise<void> {
+    const flowsGroups = await this.locateGroupByText(groupName)();
+
+    if (flowsGroups) {
+      await (await flowsGroups.childLocatorFor(MatButtonHarness.with({ ancestor: '.list__flowsGroup__header__addBtn' }))()).click();
     }
   }
 }

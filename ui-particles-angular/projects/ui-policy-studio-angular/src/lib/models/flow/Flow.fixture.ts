@@ -23,7 +23,7 @@ export function fakeChannelFlow(modifier?: Partial<Flow> | ((baseApi: Flow) => F
     type: 'CHANNEL',
     channel: 'channel',
     channelOperator: 'EQUALS',
-    entrypoints: ['entrypoint'],
+    entrypoints: ['webhook'],
     operations: ['PUBLISH'],
   };
 

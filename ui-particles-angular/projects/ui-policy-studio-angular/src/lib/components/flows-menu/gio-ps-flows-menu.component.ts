@@ -74,7 +74,7 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.flowsGroups || changes.selectedFlow) {
-      this.flowsGroupsVMSelected = this.flowsGroups.map(flowGroup => {
+      this.flowsGroupsVMSelected = cloneDeep(this.flowsGroups).map(flowGroup => {
         return {
           ...flowGroup,
           flows: flowGroup.flows.map(flow => {
@@ -132,8 +132,11 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
     }
   }
 
-  public selectFlow(flow: FlowVM): void {
-    this.selectedFlowChange.emit(flow);
+  public selectFlow(groupId: string, flowId: string): void {
+    const flow = this.flowsGroups.find(fg => fg._id === groupId)?.flows.find(f => f._id === flowId);
+    if (flow) {
+      this.selectedFlowChange.emit(flow);
+    }
   }
 
   public onAddFlow(flowGroup: FlowGroupVM): void {
