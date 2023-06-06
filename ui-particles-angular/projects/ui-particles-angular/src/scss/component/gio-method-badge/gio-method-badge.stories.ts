@@ -36,6 +36,8 @@ const classByNames = {
   Option: 'gio-method-badge-option',
   Trace: 'gio-method-badge-trace',
   Head: 'gio-method-badge-head',
+  Connect: 'gio-method-badge-connect',
+  Other: 'gio-method-badge-other',
 };
 
 export const All: Story = {
