@@ -1,3 +1,23 @@
+# [7.7.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.6.0...v7.7.0) (2023-06-06)
+
+
+### Bug Fixes
+
+* expose gio.caption-2() ([130f43e](https://github.com/gravitee-io/gravitee-ui-particles/commit/130f43e7d18f3d7f4a6db85495e8bac0a199e19f))
+* return plansToUpdate or commonFlow change if some deletion happen ([052a533](https://github.com/gravitee-io/gravitee-ui-particles/commit/052a533cc3bb80e24728b1117316023dd8bbe746))
+
+
+### Features
+
+* add one output to group them all ([26fe9ec](https://github.com/gravitee-io/gravitee-ui-particles/commit/26fe9eceea3b5ff31e68e3eb53b5c39e92d780a5))
+* add phase name and description ([344ffdc](https://github.com/gravitee-io/gravitee-ui-particles/commit/344ffdcecfba6c6a8f7820debee1ec0a89845779))
+* add planId into Plan ([b330bfc](https://github.com/gravitee-io/gravitee-ui-particles/commit/b330bfc9c291d7641dcfd3bf6ecdfea9dd524abc))
+* add WIP banner ([e44373f](https://github.com/gravitee-io/gravitee-ui-particles/commit/e44373fcb2067eebfdebe33eb5802e07bef0eabf))
+* continue impl phase component ([f1c5b98](https://github.com/gravitee-io/gravitee-ui-particles/commit/f1c5b9859ea763beca4734db755c82fb8498e831))
+* impl flow details info bar ([6e1ef71](https://github.com/gravitee-io/gravitee-ui-particles/commit/6e1ef710b46cf0392f5636455d97f9c3f468ad1d))
+* init some empty component ([4323ef6](https://github.com/gravitee-io/gravitee-ui-particles/commit/4323ef6409509629953af61fa39c9189b57417bd))
+* start impl phase for MESSAGE and PROXY api type ([684c667](https://github.com/gravitee-io/gravitee-ui-particles/commit/684c667326f9682728c50dd8623f3aeb2eac0fb4))
+
 # [7.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.5.0...v7.6.0) (2023-06-06)
 
 
