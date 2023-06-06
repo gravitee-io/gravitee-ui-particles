@@ -101,4 +101,18 @@
     background-color: mat.get-color-from-palette(palettes.$mat-method-palette, head);
     color: mat.get-color-from-palette(palettes.$mat-method-palette, head-contrast);
   }
+
+  .gio-method-badge-connect {
+    @extend %gio-method-badge-base;
+
+    background-color: mat.get-color-from-palette(palettes.$mat-method-palette, connect);
+    color: mat.get-color-from-palette(palettes.$mat-method-palette, connect-contrast);
+  }
+
+  .gio-method-badge-other {
+    @extend %gio-method-badge-base;
+
+    background-color: mat.get-color-from-palette(palettes.$mat-method-palette, other);
+    color: mat.get-color-from-palette(palettes.$mat-method-palette, other-contrast);
+  }
 }

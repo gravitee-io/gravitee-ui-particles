@@ -291,6 +291,8 @@ $mat-method-palette: mat.define-palette(
     option: mat.get-color-from-palette($mat-success-palette, lighter80),
     trace: mat.get-color-from-palette($mat-cyan-palette, lighter80),
     head: mat.get-color-from-palette($mat-blue-palette, lighter80),
+    connect: mat.get-color-from-palette($mat-blue-palette, lighter80),
+    other: mat.get-color-from-palette($mat-blue-palette, lighter80),
     contrast: (
       patch: mat.get-color-from-palette($mat-accent-palette, darker40),
       post: mat.get-color-from-palette($mat-warning-palette, darker20),
@@ -300,6 +302,8 @@ $mat-method-palette: mat.define-palette(
       option: mat.get-color-from-palette($mat-success-palette, darker60),
       trace: mat.get-color-from-palette($mat-cyan-palette, default),
       head: mat.get-color-from-palette($mat-blue-palette, default),
+      connect: mat.get-color-from-palette($mat-blue-palette, default),
+      other: mat.get-color-from-palette($mat-blue-palette, default),
     ),
   ),
   patch,
