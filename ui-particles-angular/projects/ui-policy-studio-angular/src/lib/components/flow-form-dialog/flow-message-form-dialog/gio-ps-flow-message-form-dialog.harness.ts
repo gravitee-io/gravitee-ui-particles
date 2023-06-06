@@ -18,11 +18,26 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { MatSelectHarness } from '@angular/material/select/testing';
 
+export type GioPolicyStudioFlowMessageHarnessData = {
+  name: string;
+  channelOperator: string;
+  channel: string;
+  entrypoints: string[];
+  operations: string[];
+  condition: string;
+};
+
 export class GioPolicyStudioFlowMessageFormDialogHarness extends ComponentHarness {
   public static hostSelector = 'gio-ps-flow-message-form-dialog';
 
   private getSaveBtn = this.locatorFor(MatButtonHarness.with({ selector: '.actions__saveBtn' }));
   private getCancelBtn = this.locatorFor(MatButtonHarness.with({ selector: '.actions__cancelBtn' }));
+  private nameInput = this.locatorFor(MatInputHarness.with({ selector: '[formControlName="name"]' }));
+  private channelOperatorInput = this.locatorFor(MatSelectHarness.with({ selector: '[formControlName="channelOperator"]' }));
+  private channelInput = this.locatorFor(MatInputHarness.with({ selector: '[formControlName="channel"]' }));
+  private operationsInput = this.locatorFor(MatSelectHarness.with({ selector: '[formControlName="operations"]' }));
+  private entrypointsInput = this.locatorFor(MatSelectHarness.with({ selector: '[formControlName="entrypoints"]' }));
+  private conditionInput = this.locatorFor(MatInputHarness.with({ selector: '[formControlName="condition"]' }));
 
   public async setFlowFormValues(flow: {
     name?: string;
@@ -32,17 +47,13 @@ export class GioPolicyStudioFlowMessageFormDialogHarness extends ComponentHarnes
     entrypoints?: string[];
     condition?: string;
   }): Promise<void> {
-    const nameInput = await this.locatorFor(MatInputHarness.with({ selector: '[formControlName="name"]' }))();
-    const channelOperatorInput = await this.locatorFor(MatSelectHarness.with({ selector: '[formControlName="channelOperator"]' }))();
-    const channelInput = await this.locatorFor(MatInputHarness.with({ selector: '[formControlName="channel"]' }))();
-    const operationsInput = await this.locatorFor(MatSelectHarness.with({ selector: '[formControlName="operations"]' }))();
-    const entrypointsInput = await this.locatorFor(MatSelectHarness.with({ selector: '[formControlName="entrypoints"]' }))();
-    const conditionInput = await this.locatorFor(MatInputHarness.with({ selector: '[formControlName="condition"]' }))();
-
     if (flow.name) {
+      const nameInput = await this.nameInput();
       await nameInput.setValue(flow.name);
     }
     if (flow.channelOperator) {
+      const channelOperatorInput = await this.channelOperatorInput();
+      const entrypointsInput = await this.entrypointsInput();
       await channelOperatorInput.open();
       // Unselect all options before selecting the new one
       for (const option of await entrypointsInput.getOptions()) {
@@ -53,9 +64,11 @@ export class GioPolicyStudioFlowMessageFormDialogHarness extends ComponentHarnes
       await channelOperatorInput.clickOptions({ text: new RegExp(flow.channelOperator, 'i') });
     }
     if (flow.channel) {
+      const channelInput = await this.channelInput();
       await channelInput.setValue(flow.channel);
     }
     if (flow.operations) {
+      const operationsInput = await this.operationsInput();
       await parallel(() =>
         (flow.operations ?? []).map(async operation => {
           await operationsInput.open();
@@ -70,6 +83,7 @@ export class GioPolicyStudioFlowMessageFormDialogHarness extends ComponentHarnes
       );
     }
     if (flow.entrypoints) {
+      const entrypointsInput = await this.entrypointsInput();
       await entrypointsInput.open();
       // Unselect all options before selecting the new one
       for (const option of await entrypointsInput.getOptions()) {
@@ -84,8 +98,33 @@ export class GioPolicyStudioFlowMessageFormDialogHarness extends ComponentHarnes
       );
     }
     if (flow.condition) {
+      const conditionInput = await this.conditionInput();
       await conditionInput.setValue(flow.condition);
     }
+  }
+
+  public async getName(): Promise<string> {
+    return this.nameInput().then(input => input.getValue());
+  }
+
+  public async getChannelOperator(): Promise<string> {
+    return this.channelOperatorInput().then(input => input.getValueText());
+  }
+
+  public async getChannel(): Promise<string> {
+    return this.channelInput().then(input => input.getValue());
+  }
+
+  public async getOperations(): Promise<string> {
+    return this.operationsInput().then(input => input.getValueText());
+  }
+
+  public async getEntrypoints(): Promise<string> {
+    return this.entrypointsInput().then(input => input.getValueText());
+  }
+
+  public async getCondition(): Promise<string> {
+    return this.conditionInput().then(input => input.getValue());
   }
 
   public async save(): Promise<void> {
@@ -96,5 +135,22 @@ export class GioPolicyStudioFlowMessageFormDialogHarness extends ComponentHarnes
   public async cancel(): Promise<void> {
     const button = await this.getCancelBtn();
     await button.click();
+  }
+
+  public async getFormValues(): Promise<GioPolicyStudioFlowMessageHarnessData> {
+    const name = await this.getName();
+    const channelOperator = await this.getChannelOperator();
+    const channel = await this.getChannel();
+    const entrypoints = (await this.getEntrypoints()).split(',');
+    const operations = (await this.getOperations()).split(',');
+    const condition = await this.getCondition();
+    return {
+      name,
+      channel,
+      channelOperator,
+      entrypoints,
+      operations,
+      condition,
+    };
   }
 }

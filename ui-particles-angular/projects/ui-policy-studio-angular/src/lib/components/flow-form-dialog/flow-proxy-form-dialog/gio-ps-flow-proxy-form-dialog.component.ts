@@ -110,7 +110,7 @@ const sanitizeMethodFormValue: (methods?: HttpMethod[]) => HttpMethodVM[] = (met
   return methods;
 };
 
-const sanitizePath = (path: string) => {
+export const sanitizePath = (path: string) => {
   if (!path || !path.startsWith('/')) {
     return `/${path}`;
   }

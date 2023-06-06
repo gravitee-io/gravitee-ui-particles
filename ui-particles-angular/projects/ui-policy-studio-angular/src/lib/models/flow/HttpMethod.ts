@@ -16,3 +16,30 @@
 
 export const HttpMethods = ['CONNECT', 'DELETE', 'GET', 'HEAD', 'OPTIONS', 'PATCH', 'POST', 'PUT', 'TRACE', 'OTHER'] as const;
 export type HttpMethod = (typeof HttpMethods)[number];
+
+export const toHttpMethod: (value: string) => HttpMethod | undefined = (value: string) => {
+  switch (value) {
+    case 'CONNECT':
+      return 'CONNECT';
+    case 'DELETE':
+      return 'DELETE';
+    case 'GET':
+      return 'GET';
+    case 'HEAD':
+      return 'HEAD';
+    case 'OPTIONS':
+      return 'OPTIONS';
+    case 'PATCH':
+      return 'PATCH';
+    case 'POST':
+      return 'POST';
+    case 'PUT':
+      return 'PUT';
+    case 'TRACE':
+      return 'TRACE';
+    case 'OTHER':
+      return 'OTHER';
+    default:
+      return undefined;
+  }
+};

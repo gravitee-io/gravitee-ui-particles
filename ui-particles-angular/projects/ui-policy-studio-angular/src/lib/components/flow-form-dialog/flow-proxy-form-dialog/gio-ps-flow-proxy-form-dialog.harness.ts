@@ -19,6 +19,14 @@ import { MatInputHarness } from '@angular/material/input/testing';
 import { MatSelectHarness } from '@angular/material/select/testing';
 import { GioFormTagsInputHarness } from '@gravitee/ui-particles-angular';
 
+export type GioPolicyStudioFlowProxyHarnessData = {
+  name: string;
+  pathOperator: string;
+  path: string;
+  methods: string[];
+  condition: string;
+};
+
 export class GioPolicyStudioFlowProxyFormDialogHarness extends ComponentHarness {
   public static hostSelector = 'gio-ps-flow-proxy-form-dialog';
 
@@ -70,6 +78,16 @@ export class GioPolicyStudioFlowProxyFormDialogHarness extends ComponentHarness 
     }
   }
 
+  public async getFlowFormValues(): Promise<GioPolicyStudioFlowProxyHarnessData> {
+    return {
+      name: await this.getFlowName(),
+      pathOperator: await this.getPathOperator(),
+      path: await this.getFlowPath(),
+      methods: await this.getMethods(),
+      condition: await this.getCondition(),
+    };
+  }
+
   public async getFlowName(): Promise<string> {
     return this.nameInput().then(input => input.getValue());
   }
@@ -84,6 +102,10 @@ export class GioPolicyStudioFlowProxyFormDialogHarness extends ComponentHarness 
 
   public async getMethods(): Promise<string[]> {
     return this.methodsInput().then(input => input.getTags());
+  }
+
+  public async getCondition(): Promise<string> {
+    return this.conditionInput().then(input => input.getValue());
   }
 
   public async save(): Promise<void> {

@@ -27,12 +27,14 @@ import { GioPolicyStudioModule } from '../../../gio-policy-studio.module';
 import { fakeChannelFlow, fakeHttpFlow } from '../../../models/index-testing';
 import { FlowVM } from '../../../gio-policy-studio.model';
 import { GioPolicyStudioFlowFormDialogResult } from '../gio-ps-flow-form-dialog-result.model';
+import { Flow, HttpMethod, Operator, toHttpMethod } from '../../../models';
 
 import {
   GioPolicyStudioFlowProxyFormDialogComponent,
   GioPolicyStudioFlowProxyFormDialogData,
+  sanitizePath,
 } from './gio-ps-flow-proxy-form-dialog.component';
-import { GioPolicyStudioFlowProxyFormDialogHarness } from './gio-ps-flow-proxy-form-dialog.harness';
+import { GioPolicyStudioFlowProxyHarnessData, GioPolicyStudioFlowProxyFormDialogHarness } from './gio-ps-flow-proxy-form-dialog.harness';
 
 @Component({
   selector: 'gio-dialog-test',
@@ -86,18 +88,22 @@ describe('GioPolicyStudioFlowProxyFormDialogComponent', () => {
   });
 
   it('should display value from initial flow', async () => {
+    const flow = fakeHttpFlow({
+      name: 'FlO1',
+      selectors: [
+        { type: 'HTTP', path: '/path', pathOperator: 'EQUALS', methods: [] },
+        { type: 'CONDITION', condition: 'condition' },
+      ],
+    });
     component.flowToEdit = {
       _id: 'test-id',
       _hasChanged: false,
-      ...fakeHttpFlow({ name: 'FlO1', selectors: [{ type: 'HTTP', path: '/path', pathOperator: 'EQUALS', methods: [] }] }),
+      ...flow,
     };
     await componentTestingOpenDialog();
 
     const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowProxyFormDialogHarness);
-    expect(await flowFormDialogHarness.getFlowPath()).toEqual('path');
-    expect(await flowFormDialogHarness.getFlowName()).toEqual('FlO1');
-    expect(await flowFormDialogHarness.getPathOperator()).toEqual('Equals');
-    expect(await flowFormDialogHarness.getMethods()).toEqual(['ALL']);
+    expect(toFlow(await flowFormDialogHarness.getFlowFormValues())).toEqual(flow);
   });
 
   it('should return false on cancel', async () => {
@@ -304,3 +310,37 @@ describe('GioPolicyStudioFlowProxyFormDialogComponent', () => {
     fixture.detectChanges();
   }
 });
+
+const toMethods: (methods: string[]) => HttpMethod[] = (methods: string[]) => {
+  if (methods.includes('ALL')) {
+    return [];
+  }
+  return methods.map(method => toHttpMethod(method)).filter(v => v !== undefined) as HttpMethod[];
+};
+
+const toPathOperator: (pathOperator: string) => Operator = (pathOperator: string) => {
+  if (pathOperator === 'Equals') {
+    return 'EQUALS';
+  }
+  return 'STARTS_WITH';
+};
+
+const toFlow: (formValue: GioPolicyStudioFlowProxyHarnessData) => Flow = (formValue: GioPolicyStudioFlowProxyHarnessData) => {
+  return {
+    name: formValue.name,
+    enabled: true,
+    publish: [],
+    subscribe: [],
+    request: [],
+    response: [],
+    selectors: [
+      {
+        type: 'HTTP',
+        pathOperator: toPathOperator(formValue.pathOperator),
+        path: sanitizePath(formValue.path),
+        methods: toMethods(formValue.methods),
+      },
+      { type: 'CONDITION', condition: formValue.condition },
+    ],
+  };
+};
