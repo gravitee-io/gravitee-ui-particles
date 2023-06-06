@@ -55,7 +55,7 @@ export class GioPolicyStudioFlowProxyFormDialogComponent {
     this.flowFormGroup = new FormGroup({
       name: new FormControl(flowDialogData?.flow?.name ?? ''),
       pathOperator: new FormControl(httpSelector?.pathOperator ?? 'EQUALS'),
-      path: new FormControl(httpSelector?.path ?? ''),
+      path: new FormControl(sanitizePathFormValue(httpSelector?.path)),
       methods: new FormControl(sanitizeMethodFormValue(httpSelector?.methods)),
       condition: new FormControl(conditionSelector?.condition ?? ''),
     });
@@ -64,7 +64,7 @@ export class GioPolicyStudioFlowProxyFormDialogComponent {
   public onSubmit(): void {
     const httpSelectorToSave: HttpSelector = {
       type: 'HTTP',
-      path: this.flowFormGroup?.get('path')?.value,
+      path: sanitizePath(this.flowFormGroup?.get('path')?.value),
       pathOperator: this.flowFormGroup?.get('pathOperator')?.value,
       methods: sanitizeMethods(this.flowFormGroup?.get('methods')?.value),
     };
@@ -108,4 +108,18 @@ const sanitizeMethods: (value: HttpMethodVM[]) => HttpMethod[] = (value?: HttpMe
 const sanitizeMethodFormValue: (methods?: HttpMethod[]) => HttpMethodVM[] = (methods?: HttpMethod[]) => {
   if (!methods || methods.length === 0) return ['ALL'];
   return methods;
+};
+
+const sanitizePath = (path: string) => {
+  if (!path || !path.startsWith('/')) {
+    return `/${path}`;
+  }
+  return path;
+};
+
+const sanitizePathFormValue = (path: string | undefined) => {
+  if (path && path.startsWith('/')) {
+    return path.substring(1);
+  }
+  return path ?? '';
 };
