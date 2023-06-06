@@ -15,7 +15,7 @@
  */
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { GioFormTagsInputModule, GioIconsModule } from '@gravitee/ui-particles-angular';
+import { GioBannerModule, GioFormTagsInputModule, GioIconsModule } from '@gravitee/ui-particles-angular';
 import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -59,6 +59,7 @@ import { GioPolicyStudioDetailsPhaseComponent } from './components/flow-details-
 
     GioIconsModule,
     GioFormTagsInputModule,
+    GioBannerModule,
   ],
   exports: [GioPolicyStudioComponent],
 })
