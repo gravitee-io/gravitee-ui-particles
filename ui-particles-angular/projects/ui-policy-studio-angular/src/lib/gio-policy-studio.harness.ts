@@ -15,6 +15,7 @@
  */
 
 import { ComponentHarness } from '@angular/cdk/testing';
+import { MatButtonHarness } from '@angular/material/button/testing';
 
 import { ChannelSelector, ConditionSelector, Flow, HttpSelector } from './models';
 import { GioPolicyStudioFlowsMenuHarness } from './components/flows-menu/gio-ps-flows-menu.harness';
@@ -78,6 +79,10 @@ export class GioPolicyStudioHarness extends ComponentHarness {
 
   public async getSelectedFlowInfos(): Promise<Record<string, (string | null)[]>> {
     return await (await this.detailsHarness()).getFlowInfos();
+  }
+
+  public async save(): Promise<void> {
+    await (await this.locatorFor(MatButtonHarness.with({ text: /Save/ }))()).click();
   }
 
   private async setFlowFormDialog(flow: Partial<Flow>) {
