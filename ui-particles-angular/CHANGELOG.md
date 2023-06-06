@@ -1,3 +1,16 @@
+# [7.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.5.0...v7.6.0) (2023-06-06)
+
+
+### Bug Fixes
+
+* consolidate data for proxy story ([88f84b4](https://github.com/gravitee-io/gravitee-ui-particles/commit/88f84b4a9fa9f272512500967fdec865c0bb9a3e))
+
+
+### Features
+
+* create component for proxy flow form ([7d4a1cb](https://github.com/gravitee-io/gravitee-ui-particles/commit/7d4a1cbc03df1cf3c5ee3a6f55cdb82c0a5be753))
+* use proxy or message flow edit dialog depending on api type ([fc89559](https://github.com/gravitee-io/gravitee-ui-particles/commit/fc89559e19586fda12d65d52782fb643c3e3d1ff))
+
 # [7.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.4.0...v7.5.0) (2023-06-02)
 
 
