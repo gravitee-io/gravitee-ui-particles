@@ -30,6 +30,8 @@
   <gio-ps-flow-details-info-bar class="infoBar" [flow]="flow" [entrypointsInfo]="entrypointsInfo"></gio-ps-flow-details-info-bar>
 
   <div class="content">
+    <gio-banner-warning>🚧 Work in progress 🚧</gio-banner-warning>
+
     <mat-tab-group *ngIf="apiType === 'MESSAGE'" class="content__tabs">
       <mat-tab label="Initial connection">
         <gio-ps-flow-details-phase
