@@ -24,6 +24,11 @@ export class GioPolicyStudioFlowProxyFormDialogHarness extends ComponentHarness 
 
   private getSaveBtn = this.locatorFor(MatButtonHarness.with({ selector: '.actions__saveBtn' }));
   private getCancelBtn = this.locatorFor(MatButtonHarness.with({ selector: '.actions__cancelBtn' }));
+  private nameInput = this.locatorFor(MatInputHarness.with({ selector: '[formControlName="name"]' }));
+  private pathOperatorInput = this.locatorFor(MatSelectHarness.with({ selector: '[formControlName="pathOperator"]' }));
+  private pathInput = this.locatorFor(MatInputHarness.with({ selector: '[formControlName="path"]' }));
+  private methodsInput = this.locatorFor(GioFormTagsInputHarness.with({ selector: '[formControlName="methods"]' }));
+  private conditionInput = this.locatorFor(MatInputHarness.with({ selector: '[formControlName="condition"]' }));
 
   public async setFlowFormValues(flow: {
     name?: string;
@@ -32,16 +37,12 @@ export class GioPolicyStudioFlowProxyFormDialogHarness extends ComponentHarness 
     methods?: string[];
     condition?: string;
   }): Promise<void> {
-    const nameInput = await this.locatorFor(MatInputHarness.with({ selector: '[formControlName="name"]' }))();
-    const pathOperatorInput = await this.locatorFor(MatSelectHarness.with({ selector: '[formControlName="pathOperator"]' }))();
-    const pathInput = await this.locatorFor(MatInputHarness.with({ selector: '[formControlName="path"]' }))();
-    const methodsInput = await this.locatorFor(GioFormTagsInputHarness.with({ selector: '[formControlName="methods"]' }))();
-    const conditionInput = await this.locatorFor(MatInputHarness.with({ selector: '[formControlName="condition"]' }))();
-
     if (flow.name) {
+      const nameInput = await this.nameInput();
       await nameInput.setValue(flow.name);
     }
     if (flow.pathOperator) {
+      const pathOperatorInput = await this.pathOperatorInput();
       await pathOperatorInput.open();
 
       // Unselect all options before selecting the new one
@@ -53,17 +54,36 @@ export class GioPolicyStudioFlowProxyFormDialogHarness extends ComponentHarness 
       await pathOperatorInput.clickOptions({ text: new RegExp(flow.pathOperator, 'i') });
     }
     if (flow.path) {
-      await pathInput.setValue(flow.path);
+      const input = await this.pathInput();
+      await input.setValue(flow.path);
     }
     if (flow.methods) {
+      const methodsInput = await this.methodsInput();
       await methodsInput.removeTag('ALL');
       for await (const method of flow.methods) {
         await methodsInput.addTag(method);
       }
     }
     if (flow.condition) {
+      const conditionInput = await this.conditionInput();
       await conditionInput.setValue(flow.condition);
     }
+  }
+
+  public async getFlowName(): Promise<string> {
+    return this.nameInput().then(input => input.getValue());
+  }
+
+  public async getFlowPath(): Promise<string> {
+    return this.pathInput().then(input => input.getValue());
+  }
+
+  public async getPathOperator(): Promise<string> {
+    return this.pathOperatorInput().then(input => input.getValueText());
+  }
+
+  public async getMethods(): Promise<string[]> {
+    return this.methodsInput().then(input => input.getTags());
   }
 
   public async save(): Promise<void> {

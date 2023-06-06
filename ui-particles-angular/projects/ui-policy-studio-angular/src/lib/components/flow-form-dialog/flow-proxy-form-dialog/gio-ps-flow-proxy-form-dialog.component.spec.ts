@@ -85,6 +85,21 @@ describe('GioPolicyStudioFlowProxyFormDialogComponent', () => {
     loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
   });
 
+  it('should display value from initial flow', async () => {
+    component.flowToEdit = {
+      _id: 'test-id',
+      _hasChanged: false,
+      ...fakeHttpFlow({ name: 'FlO1', selectors: [{ type: 'HTTP', path: '/path', pathOperator: 'EQUALS', methods: [] }] }),
+    };
+    await componentTestingOpenDialog();
+
+    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowProxyFormDialogHarness);
+    expect(await flowFormDialogHarness.getFlowPath()).toEqual('path');
+    expect(await flowFormDialogHarness.getFlowName()).toEqual('FlO1');
+    expect(await flowFormDialogHarness.getPathOperator()).toEqual('Equals');
+    expect(await flowFormDialogHarness.getMethods()).toEqual(['ALL']);
+  });
+
   it('should return false on cancel', async () => {
     component.flow = {
       _id: 'test-id',
@@ -128,7 +143,7 @@ describe('GioPolicyStudioFlowProxyFormDialogComponent', () => {
         {
           type: 'HTTP',
           pathOperator: 'EQUALS',
-          path: 'test-path',
+          path: '/test-path',
           methods: ['GET'],
         },
       ],
@@ -156,7 +171,7 @@ describe('GioPolicyStudioFlowProxyFormDialogComponent', () => {
         {
           type: 'HTTP',
           pathOperator: 'EQUALS',
-          path: 'test-path',
+          path: '/test-path',
           methods: [],
         },
       ],
@@ -185,7 +200,7 @@ describe('GioPolicyStudioFlowProxyFormDialogComponent', () => {
         {
           type: 'HTTP',
           pathOperator: 'EQUALS',
-          path: 'test-path',
+          path: '/test-path',
           methods: ['POST'],
         },
       ],
@@ -214,7 +229,7 @@ describe('GioPolicyStudioFlowProxyFormDialogComponent', () => {
         {
           type: 'HTTP',
           pathOperator: 'EQUALS',
-          path: 'test-path',
+          path: '/test-path',
           methods: ['GET'],
         },
         {
@@ -272,7 +287,7 @@ describe('GioPolicyStudioFlowProxyFormDialogComponent', () => {
         {
           type: 'HTTP',
           pathOperator: 'EQUALS',
-          path: 'test-path',
+          path: '/test-path',
           methods: ['GET'],
         },
         {
