@@ -27,12 +27,16 @@ import { GioPolicyStudioModule } from '../../../gio-policy-studio.module';
 import { fakeChannelFlow } from '../../../models/index-testing';
 import { FlowVM } from '../../../gio-policy-studio.model';
 import { GioPolicyStudioFlowFormDialogResult } from '../gio-ps-flow-form-dialog-result.model';
+import { Flow, Operation, Operator, Selector } from '../../../models';
 
 import {
   GioPolicyStudioFlowMessageFormDialogComponent,
   GioPolicyStudioFlowMessageFormDialogData,
 } from './gio-ps-flow-message-form-dialog.component';
-import { GioPolicyStudioFlowMessageFormDialogHarness } from './gio-ps-flow-message-form-dialog.harness';
+import {
+  GioPolicyStudioFlowMessageHarnessData,
+  GioPolicyStudioFlowMessageFormDialogHarness,
+} from './gio-ps-flow-message-form-dialog.harness';
 
 @Component({
   selector: 'gio-dialog-test',
@@ -85,6 +89,33 @@ describe('GioPolicyStudioFlowMessageFormDialogComponent', () => {
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
     loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
+  });
+
+  it('should show initial flow values', async () => {
+    component.entrypoints = ['webhook', 'get'];
+    const flow = fakeChannelFlow({
+      name: 'Flow',
+      selectors: [
+        {
+          type: 'CHANNEL',
+          operations: ['PUBLISH'],
+          channelOperator: 'EQUALS',
+          channel: 'channel',
+          entrypoints: ['webhook'],
+        },
+        { type: 'CONDITION', condition: 'condition' },
+      ],
+    });
+    const flowVM: FlowVM = {
+      _id: 'test-id',
+      _hasChanged: false,
+      ...flow,
+    };
+    component.flowToEdit = flowVM;
+    await componentTestingOpenDialog();
+
+    const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
+    expect(dialogDataToFlow(await flowFormDialogHarness.getFormValues())).toEqual(flow);
   });
 
   it('should return false on cancel', async () => {
@@ -240,3 +271,45 @@ describe('GioPolicyStudioFlowMessageFormDialogComponent', () => {
     fixture.detectChanges();
   }
 });
+
+const dialogDataToFlow = (data: GioPolicyStudioFlowMessageHarnessData) => {
+  const selectors: Selector[] = [
+    {
+      type: 'CHANNEL',
+      channelOperator: toChannelOperator(data.channelOperator),
+      channel: data.channel,
+      entrypoints: data.entrypoints,
+      operations: toOperations(data.operations),
+    },
+    {
+      type: 'CONDITION',
+      condition: data.condition,
+    },
+  ];
+  const flow: Flow = {
+    name: data.name,
+    selectors,
+    publish: [],
+    subscribe: [],
+    request: [],
+    response: [],
+    enabled: true,
+  };
+  return flow;
+};
+
+const toChannelOperator: (value: string) => Operator = (value: string) => {
+  if (value === 'Equals') {
+    return 'EQUALS';
+  }
+  return 'STARTS_WITH';
+};
+
+const toOperations: (value: string[]) => Operation[] = (value: string[]) => {
+  return value.map(v => {
+    if (v === 'Publish') {
+      return 'PUBLISH';
+    }
+    return 'SUBSCRIBE';
+  });
+};
