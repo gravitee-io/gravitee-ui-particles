@@ -28,9 +28,6 @@ $background: map.get(gio.$mat-space-palette, lighter10);
   justify-content: flex-start;
   padding: 16px 0 0;
   background: $background;
-  box-shadow: 0 0 0 1px mat.get-color-from-palette(gio.$mat-basic-palette, black, 0.1),
-    0 5px 10px mat.get-color-from-palette(gio.$mat-basic-palette, black, 0.2),
-    0 15px 40px mat.get-color-from-palette(gio.$mat-basic-palette, black, 0.4);
 
   &__reduced {
     width: 76px;
