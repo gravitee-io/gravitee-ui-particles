@@ -14,12 +14,29 @@
  * limitations under the License.
  */
 
-import { BaseHarnessFilters, ComponentHarness, HarnessPredicate } from '@angular/cdk/testing';
+import { BaseHarnessFilters, ComponentHarness, HarnessPredicate, parallel } from '@angular/cdk/testing';
+import { DivHarness, SpanHarness } from '@gravitee/ui-particles-angular/testing';
 
-export type GioPolicyStudioDetailsPhaseHarnessFilters = BaseHarnessFilters;
+import { GioPolicyStudioDetailsPhasePolicyHarness } from '../flow-details-phase-policy/gio-ps-flow-details-phase-policy.harness';
+
+export type PhaseType = 'REQUEST' | 'RESPONSE' | 'PUBLISH' | 'SUBSCRIBE';
+
+export type GioPolicyStudioDetailsPhaseHarnessFilters = BaseHarnessFilters & {
+  type?: PhaseType;
+};
+
+const TYPE_TO_TEXT: Record<PhaseType, string> = {
+  REQUEST: 'Request phase',
+  RESPONSE: 'Response phase',
+  PUBLISH: 'Publish phase',
+  SUBSCRIBE: 'Subscribe phase',
+};
 
 export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
   public static hostSelector = 'gio-ps-flow-details-phase';
+
+  private getHeaderName = () =>
+    this.locatorForOptional(SpanHarness.with({ selector: '.header__name' }))().then(async span => span?.getText() ?? null);
 
   /**
    * Get Harness with the given filter.
@@ -28,6 +45,34 @@ export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
    * @return a `HarnessPredicate` configured with the given options.
    */
   public static with(options: GioPolicyStudioDetailsPhaseHarnessFilters = {}): HarnessPredicate<GioPolicyStudioDetailsPhaseHarness> {
-    return new HarnessPredicate(GioPolicyStudioDetailsPhaseHarness, options);
+    return new HarnessPredicate(GioPolicyStudioDetailsPhaseHarness, options).addOption('type', options.type, async (harness, type) =>
+      HarnessPredicate.stringMatches(harness.getHeaderName(), TYPE_TO_TEXT[type]),
+    );
+  }
+
+  public async getSteps(): Promise<
+    {
+      text: string;
+      type: 'connector' | 'policy';
+    }[]
+  > {
+    const stepsDiv = await this.locatorForAll(DivHarness.with({ selector: '.content__step' }))();
+
+    return await parallel(() =>
+      stepsDiv.map(async stepDiv => {
+        const idConnector = !!(await stepDiv.getText({ childSelector: '.content__step__connectorBadge' }));
+        if (idConnector) {
+          return {
+            text: (await stepDiv.getText()) ?? '',
+            type: 'connector',
+          };
+        }
+
+        return {
+          text: await (await stepDiv.childLocatorFor(GioPolicyStudioDetailsPhasePolicyHarness)()).getName(),
+          type: idConnector ? 'connector' : 'policy',
+        };
+      }),
+    );
   }
 }

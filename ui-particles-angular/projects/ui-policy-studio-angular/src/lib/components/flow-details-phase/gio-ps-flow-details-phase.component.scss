@@ -56,15 +56,30 @@ $typography: map.get(gio.$mat-theme, typography);
   display: flex;
   align-items: center;
 
-  &__connectorBadge {
-    border: 1px solid mat.get-color-from-palette(gio.$mat-accent-palette, default);
-    border-radius: 16px;
-  }
+  &__step {
+    display: flex;
+    width: max-content;
+    align-items: center;
 
-  &__rightArrow {
-    width: 16px;
-    height: 16px;
-    margin: 0 8px;
-    color: mat.get-color-from-palette(gio.$mat-dove-palette, darker30);
+    &__connectorBadge {
+      border: 1px solid mat.get-color-from-palette(gio.$mat-accent-palette, default);
+      border-radius: 16px;
+
+      &__icon {
+        margin-right: 4px;
+      }
+    }
+
+    &__rightArrow {
+      width: 16px;
+      height: 16px;
+      margin: 0 8px;
+      color: mat.get-color-from-palette(gio.$mat-dove-palette, darker30);
+    }
   }
+}
+
+.disabledContent {
+  display: flex;
+  padding: 16px;
 }

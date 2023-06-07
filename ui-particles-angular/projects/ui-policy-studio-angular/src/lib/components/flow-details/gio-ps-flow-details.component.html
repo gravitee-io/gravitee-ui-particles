@@ -38,15 +38,15 @@
           class="content__phase"
           name="Request phase"
           description="Policies will be applied during the connection establishment"
-          [entrypointsInfo]="entrypointsInfo"
-          [endpointsInfo]="endpointsInfo"
+          [startConnector]="entrypointsInfo"
+          [endConnector]="endpointsInfo"
         ></gio-ps-flow-details-phase>
         <gio-ps-flow-details-phase
           class="content__phase"
           name="Response phase"
           description="Policies will be applied during the connection termination"
-          [entrypointsInfo]="entrypointsInfo"
-          [endpointsInfo]="endpointsInfo"
+          [startConnector]="endpointsInfo"
+          [endConnector]="entrypointsInfo"
         ></gio-ps-flow-details-phase>
       </mat-tab>
       <mat-tab label="Event messages">
@@ -54,15 +54,15 @@
           class="content__phase"
           name="Publish phase"
           description="Policies will be applied on messages sent to the endpoint"
-          [entrypointsInfo]="entrypointsInfo"
-          [endpointsInfo]="endpointsInfo"
+          [startConnector]="entrypointsInfo | gioFilterConnectorsByMode : 'PUBLISH'"
+          [endConnector]="endpointsInfo | gioFilterConnectorsByMode : 'PUBLISH'"
         ></gio-ps-flow-details-phase>
         <gio-ps-flow-details-phase
           class="content__phase"
           name="Subscribe phase"
           description="Policies will be applied on messages received by the entrypoint"
-          [entrypointsInfo]="entrypointsInfo"
-          [endpointsInfo]="endpointsInfo"
+          [startConnector]="endpointsInfo | gioFilterConnectorsByMode : 'SUBSCRIBE'"
+          [endConnector]="entrypointsInfo | gioFilterConnectorsByMode : 'SUBSCRIBE'"
         ></gio-ps-flow-details-phase>
       </mat-tab>
     </mat-tab-group>
@@ -72,15 +72,17 @@
         class="content__phase"
         name="Request phase"
         description="Policies will be applied during the connection establishment"
-        [entrypointsInfo]="entrypointsInfo"
-        [endpointsInfo]="endpointsInfo"
+        [startConnector]="entrypointsInfo | gioFilterConnectorsByMode : 'REQUEST_RESPONSE'"
+        [endConnector]="endpointsInfo | gioFilterConnectorsByMode : 'REQUEST_RESPONSE'"
+        [steps]="flow.request"
       ></gio-ps-flow-details-phase>
       <gio-ps-flow-details-phase
         class="content__phase"
         name="Response phase"
         description="Policies will be applied during the connection termination"
-        [entrypointsInfo]="entrypointsInfo"
-        [endpointsInfo]="endpointsInfo"
+        [startConnector]="endpointsInfo | gioFilterConnectorsByMode : 'REQUEST_RESPONSE'"
+        [endConnector]="entrypointsInfo | gioFilterConnectorsByMode : 'REQUEST_RESPONSE'"
+        [steps]="flow.response"
       ></gio-ps-flow-details-phase>
     </div>
   </div>

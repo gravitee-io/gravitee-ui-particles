@@ -23,7 +23,18 @@ import { InteractivityChecker } from '@angular/cdk/a11y';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonHarness } from '@angular/material/button/testing';
 
-import { fakeChannelFlow, fakeDefaultFlowExecution, fakeHttpFlow, fakePlan } from '../public-testing-api';
+import {
+  fakeChannelFlow,
+  fakeDefaultFlowExecution,
+  fakeHTTPProxyEndpoint,
+  fakeHTTPProxyEntrypoint,
+  fakeHttpFlow,
+  fakeKafkaMessageEndpoint,
+  fakeMockPolicyStep,
+  fakePlan,
+  fakeRateLimitStep,
+  fakeWebhookMessageEntrypoint,
+} from '../public-testing-api';
 
 import { GioPolicyStudioModule } from './gio-policy-studio.module';
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
@@ -62,18 +73,8 @@ describe('GioPolicyStudioModule', () => {
 
     describe('with entrypointsInfo & endpointsInfo', () => {
       beforeEach(() => {
-        component.entrypointsInfo = [
-          {
-            type: 'webhook',
-            icon: 'gio:webhook',
-          },
-        ];
-        component.endpointsInfo = [
-          {
-            type: 'kafka',
-            icon: 'gio:kafka',
-          },
-        ];
+        component.entrypointsInfo = [fakeWebhookMessageEntrypoint()];
+        component.endpointsInfo = [fakeKafkaMessageEndpoint()];
         component.ngOnChanges({
           entrypointsInfo: new SimpleChange(null, null, true),
           endpointsInfo: new SimpleChange(null, null, true),
@@ -571,18 +572,8 @@ describe('GioPolicyStudioModule', () => {
 
     describe('with entrypointsInfo & endpointsInfo', () => {
       beforeEach(() => {
-        component.entrypointsInfo = [
-          {
-            type: 'http-proxy',
-            icon: 'gio:http-proxy',
-          },
-        ];
-        component.endpointsInfo = [
-          {
-            type: 'http-proxy',
-            icon: 'gio:http-proxy',
-          },
-        ];
+        component.entrypointsInfo = [fakeHTTPProxyEntrypoint()];
+        component.endpointsInfo = [fakeHTTPProxyEndpoint()];
         component.ngOnChanges({
           entrypointsInfo: new SimpleChange(null, null, true),
           endpointsInfo: new SimpleChange(null, null, true),
@@ -754,6 +745,35 @@ describe('GioPolicyStudioModule', () => {
         ]);
 
         expect(await detailsHarness.matchText(/HTTP/)).toEqual(true);
+      });
+
+      it('should display phases steps', async () => {
+        const commonFlows = [
+          fakeHttpFlow({
+            name: 'Flow 1',
+            request: [fakeRateLimitStep()],
+            response: [fakeMockPolicyStep()],
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        const requestPhaseSteps = await policyStudioHarness.getSelectedFlowSteps('REQUEST');
+        const responsePhaseSteps = await policyStudioHarness.getSelectedFlowSteps('RESPONSE');
+
+        expect(requestPhaseSteps).toStrictEqual([
+          { text: 'HTTP Proxy', type: 'connector' },
+          { text: 'Rate Limit', type: 'policy' },
+          { text: 'HTTP Proxy', type: 'connector' },
+        ]);
+
+        expect(responsePhaseSteps).toStrictEqual([
+          { text: 'HTTP Proxy', type: 'connector' },
+          { text: 'Mock Policy', type: 'policy' },
+          { text: 'HTTP Proxy', type: 'connector' },
+        ]);
       });
     });
   });

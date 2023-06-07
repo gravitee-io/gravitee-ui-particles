@@ -13,7 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export interface ConnectorsInfo {
+export interface ConnectorInfo {
+  name: string;
   type: string;
   icon: string;
+  supportedModes: ConnectorMode[];
 }
+
+export type ConnectorMode = 'SUBSCRIBE' | 'PUBLISH' | 'REQUEST_RESPONSE';

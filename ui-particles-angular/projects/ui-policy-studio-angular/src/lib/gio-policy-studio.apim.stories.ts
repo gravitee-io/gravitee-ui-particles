@@ -19,7 +19,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { action } from '@storybook/addon-actions';
 
 import { GioPolicyStudioModule } from './gio-policy-studio.module';
-import { fakeChannelFlow, fakeHttpFlow, fakePlan } from './models/index-testing';
+import {
+  fakeChannelFlow,
+  fakeHTTPProxyEndpoint,
+  fakeHTTPProxyEntrypoint,
+  fakeHttpFlow,
+  fakeKafkaMessageEndpoint,
+  fakeMockPolicyStep,
+  fakePlan,
+  fakeRateLimitStep,
+  fakeWebhookMessageEntrypoint,
+} from './models/index-testing';
 import { SaveOutput } from './models';
 
 export default {
@@ -59,18 +69,8 @@ export const MessageWithoutFlows: Story = {
       mode: 'BEST_MATCH',
       matchRequired: false,
     },
-    entrypointsInfo: [
-      {
-        type: 'webhook',
-        icon: 'gio:webhook',
-      },
-    ],
-    endpointsInfo: [
-      {
-        type: 'kafka',
-        icon: 'gio:kafka',
-      },
-    ],
+    entrypointsInfo: [fakeWebhookMessageEntrypoint()],
+    endpointsInfo: [fakeKafkaMessageEndpoint()],
   },
 };
 
@@ -82,18 +82,8 @@ export const MessageWithFlows: Story = {
       mode: 'BEST_MATCH',
       matchRequired: false,
     },
-    entrypointsInfo: [
-      {
-        type: 'webhook',
-        icon: 'gio:webhook',
-      },
-    ],
-    endpointsInfo: [
-      {
-        type: 'kafka',
-        icon: 'gio:kafka',
-      },
-    ],
+    entrypointsInfo: [fakeWebhookMessageEntrypoint()],
+    endpointsInfo: [fakeKafkaMessageEndpoint()],
     commonFlows: [
       fakeChannelFlow(),
       fakeChannelFlow({
@@ -114,18 +104,8 @@ export const MessageWithFlowsAndPlans: Story = {
       mode: 'BEST_MATCH',
       matchRequired: false,
     },
-    entrypointsInfo: [
-      {
-        type: 'webhook',
-        icon: 'gio:webhook',
-      },
-    ],
-    endpointsInfo: [
-      {
-        type: 'kafka',
-        icon: 'gio:kafka',
-      },
-    ],
+    entrypointsInfo: [fakeWebhookMessageEntrypoint()],
+    endpointsInfo: [fakeKafkaMessageEndpoint()],
     commonFlows: [
       fakeChannelFlow(),
       fakeChannelFlow({
@@ -188,18 +168,8 @@ export const ProxyWithFlowsAndPlans: Story = {
       mode: 'BEST_MATCH',
       matchRequired: false,
     },
-    entrypointsInfo: [
-      {
-        type: 'http-proxy',
-        icon: 'gio:language',
-      },
-    ],
-    endpointsInfo: [
-      {
-        type: 'http-proxy',
-        icon: 'gio:language',
-      },
-    ],
+    entrypointsInfo: [fakeHTTPProxyEntrypoint()],
+    endpointsInfo: [fakeHTTPProxyEndpoint()],
     commonFlows: [
       fakeHttpFlow(),
       fakeHttpFlow({
@@ -261,5 +231,22 @@ export const ProxyWithFlowsAndPlans: Story = {
         ],
       }),
     ],
+  },
+};
+
+export const ProxyWithFlowSteps: Story = {
+  name: 'Proxy API With Flow steps',
+  args: {
+    apiType: 'PROXY',
+    entrypointsInfo: [fakeHTTPProxyEntrypoint()],
+    endpointsInfo: [fakeHTTPProxyEndpoint()],
+    commonFlows: [
+      fakeHttpFlow({
+        name: 'Flow with steps',
+        request: [fakeRateLimitStep(), fakeRateLimitStep(), fakeRateLimitStep()],
+        response: [fakeMockPolicyStep(), fakeMockPolicyStep(), fakeMockPolicyStep()],
+      }),
+    ],
+    plans: [],
   },
 };
