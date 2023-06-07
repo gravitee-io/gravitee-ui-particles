@@ -23,7 +23,7 @@ import {
   GioPolicyStudioFlowMessageFormDialogData,
 } from '../flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
 import { FlowGroupVM, FlowVM } from '../../gio-policy-studio.model';
-import { ApiType, ChannelSelector, FlowExecution, HttpSelector, Operation } from '../../models';
+import { ApiType, ChannelSelector, ConnectorInfo, FlowExecution, HttpSelector, Operation } from '../../models';
 import {
   GioPolicyStudioFlowProxyFormDialogComponent,
   GioPolicyStudioFlowProxyFormDialogData,
@@ -68,7 +68,7 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
   public selectedFlow?: FlowVM = undefined;
 
   @Input()
-  public entrypoints: string[] = [];
+  public entrypoints: ConnectorInfo[] = [];
 
   @Output()
   public selectedFlowChange = new EventEmitter<FlowVM>();

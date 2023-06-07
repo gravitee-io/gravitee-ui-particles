@@ -54,7 +54,7 @@
     <mat-form-field>
       <mat-label>Entrypoints</mat-label>
       <mat-select multiple formControlName="entrypoints">
-        <mat-option *ngFor="let entrypoint of entrypoints" [value]="entrypoint">{{ entrypoint }}</mat-option>
+        <mat-option *ngFor="let entrypoint of entrypoints" [value]="entrypoint.type">{{ entrypoint.name }}</mat-option>
       </mat-select>
       <mat-hint>Entrypoints where your flow will be executed</mat-hint>
     </mat-form-field>

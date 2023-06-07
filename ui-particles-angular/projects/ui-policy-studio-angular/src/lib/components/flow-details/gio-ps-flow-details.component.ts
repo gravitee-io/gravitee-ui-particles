@@ -66,7 +66,7 @@ export class GioPolicyStudioDetailsComponent {
             >(GioPolicyStudioFlowMessageFormDialogComponent, {
               data: {
                 flow: this.flow,
-                entrypoints: (this.entrypointsInfo ?? []).map(e => e.type),
+                entrypoints: this.entrypointsInfo ?? [],
               },
               role: 'alertdialog',
               id: 'gioPsFlowMessageFormDialog',
