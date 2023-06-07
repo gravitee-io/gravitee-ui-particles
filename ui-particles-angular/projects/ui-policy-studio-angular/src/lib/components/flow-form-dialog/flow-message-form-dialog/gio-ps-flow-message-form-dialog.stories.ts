@@ -22,7 +22,7 @@ import { action } from '@storybook/addon-actions';
 
 import { GioPolicyStudioModule } from '../../../gio-policy-studio.module';
 import { FlowVM } from '../../../gio-policy-studio.model';
-import { fakeChannelFlow } from '../../../models/index-testing';
+import { fakeChannelFlow, fakeHTTPGetMessageEntrypoint, fakeSSEMessageEntrypoint } from '../../../models/index-testing';
 import { GioPolicyStudioFlowFormDialogResult } from '../gio-ps-flow-form-dialog-result.model';
 
 import {
@@ -45,7 +45,16 @@ class GioPolicyStudioFlowMessageFormDialogStoryComponent {
         {
           data: {
             flow: this.flow,
-            entrypoints: ['entrypoint1', 'entrypoint2'],
+            entrypoints: [
+              fakeSSEMessageEntrypoint({
+                name: 'entrypoint1',
+                type: 'entrypoint1',
+              }),
+              fakeHTTPGetMessageEntrypoint({
+                name: 'entrypoint2',
+                type: 'entrypoint2',
+              }),
+            ],
           },
           role: 'alertdialog',
           id: 'gioPsFlowFormDialog',

@@ -19,12 +19,12 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { cloneDeep, uniqueId } from 'lodash';
 
 import { FlowVM } from '../../../gio-policy-studio.model';
-import { ChannelSelector, ConditionSelector } from '../../../models';
+import { ChannelSelector, ConditionSelector, ConnectorInfo } from '../../../models';
 import { GioPolicyStudioFlowFormDialogResult } from '../gio-ps-flow-form-dialog-result.model';
 
 export type GioPolicyStudioFlowMessageFormDialogData = {
   flow?: FlowVM;
-  entrypoints?: string[];
+  entrypoints?: ConnectorInfo[];
 };
 
 @Component({
@@ -33,7 +33,7 @@ export type GioPolicyStudioFlowMessageFormDialogData = {
   styleUrls: ['./gio-ps-flow-message-form-dialog.component.scss'],
 })
 export class GioPolicyStudioFlowMessageFormDialogComponent {
-  public entrypoints: string[] = [];
+  public entrypoints: ConnectorInfo[] = [];
   public flowFormGroup?: FormGroup;
 
   public existingFlow?: FlowVM;

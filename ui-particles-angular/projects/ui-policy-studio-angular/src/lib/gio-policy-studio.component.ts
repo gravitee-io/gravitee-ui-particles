@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { capitalize, cloneDeep, differenceBy, flatten, isEqual, omit, unionBy, uniqueId } from 'lodash';
+import { cloneDeep, differenceBy, flatten, isEqual, omit, unionBy, uniqueId } from 'lodash';
 
 import { ApiType, ConnectorInfo, Flow, Plan, SaveOutput, FlowExecution } from './models';
 import { FlowGroupVM, FlowVM } from './gio-policy-studio.model';
@@ -61,8 +61,6 @@ export class GioPolicyStudioComponent implements OnChanges {
 
   public flowsGroups: FlowGroupVM[] = [];
 
-  public entrypointsType: string[] = [];
-
   public disableSaveButton = true;
 
   // Used to keep track of initial flows groups to know if there are deleted flows
@@ -71,13 +69,11 @@ export class GioPolicyStudioComponent implements OnChanges {
   private hasFlowExecutionChanged = false;
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.entrypointsInfo || changes.endpointsInfo) {
-      this.connectorsTooltip = `Entrypoints: ${(this.entrypointsInfo ?? []).map(e => capitalize(e.type)).join(', ')}\nEndpoints: ${(
+      this.connectorsTooltip = `Entrypoints: ${(this.entrypointsInfo ?? []).map(e => e.name).join(', ')}\nEndpoints: ${(
         this.endpointsInfo ?? []
       )
-        .map(e => capitalize(e.type))
+        .map(e => e.name)
         .join(', ')}`;
-
-      this.entrypointsType = (this.entrypointsInfo ?? []).map(e => e.type);
     }
 
     if (changes.commonFlows || changes.plans) {

@@ -24,7 +24,7 @@ import { InteractivityChecker } from '@angular/cdk/a11y';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 
 import { GioPolicyStudioModule } from '../../../gio-policy-studio.module';
-import { fakeChannelFlow } from '../../../models/index-testing';
+import { fakeChannelFlow, fakeHTTPGetMessageEntrypoint, fakeSSEMessageEntrypoint } from '../../../models/index-testing';
 import { FlowVM } from '../../../gio-policy-studio.model';
 import { GioPolicyStudioFlowFormDialogResult } from '../gio-ps-flow-form-dialog-result.model';
 import { Flow, Operation, Operator, Selector } from '../../../models';
@@ -45,7 +45,16 @@ import {
 class TestComponent {
   public flow?: FlowVM;
   public flowToEdit?: FlowVM;
-  public entrypoints = ['entrypoint1', 'entrypoint2'];
+  public entrypoints = [
+    fakeSSEMessageEntrypoint({
+      name: 'entrypoint1',
+      type: 'entrypoint1',
+    }),
+    fakeHTTPGetMessageEntrypoint({
+      name: 'entrypoint2',
+      type: 'entrypoint2',
+    }),
+  ];
   constructor(private readonly matDialog: MatDialog) {}
 
   public openDialog() {
