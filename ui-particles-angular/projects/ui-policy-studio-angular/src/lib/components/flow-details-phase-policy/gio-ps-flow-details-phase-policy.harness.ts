@@ -32,4 +32,8 @@ export class GioPolicyStudioDetailsPhasePolicyHarness extends ComponentHarness {
   ): HarnessPredicate<GioPolicyStudioDetailsPhasePolicyHarness> {
     return new HarnessPredicate(GioPolicyStudioDetailsPhasePolicyHarness, options);
   }
+
+  public async getName(): Promise<string> {
+    return (await this.host()).text();
+  }
 }

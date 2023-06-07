@@ -13,16 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { isEmpty } from 'lodash';
 
-import { ConnectorsInfo, Step } from '../../models';
+import { ConnectorInfo, Step } from '../../models';
+
+type StepVM =
+  | {
+      type: 'connectors';
+      connectors: {
+        name?: string;
+        icon?: string;
+      }[];
+    }
+  | {
+      type: 'policy';
+      step?: Step;
+    };
 
 @Component({
   selector: 'gio-ps-flow-details-phase',
   templateUrl: './gio-ps-flow-details-phase.component.html',
   styleUrls: ['./gio-ps-flow-details-phase.component.scss'],
 })
-export class GioPolicyStudioDetailsPhaseComponent {
+export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
   @Input()
   public steps?: Step[] = undefined;
 
@@ -33,8 +47,42 @@ export class GioPolicyStudioDetailsPhaseComponent {
   public description!: string;
 
   @Input()
-  public entrypointsInfo: ConnectorsInfo[] = [];
+  public startConnector: ConnectorInfo[] = [];
 
   @Input()
-  public endpointsInfo: ConnectorsInfo[] = [];
+  public endConnector: ConnectorInfo[] = [];
+
+  public stepsVM: StepVM[] = [];
+
+  public isDisabled = false;
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.steps || changes.startConnector || changes.endConnector) {
+      this.stepsVM = [
+        {
+          type: 'connectors',
+          connectors: this.startConnector.map(connector => ({
+            name: connector.name,
+            icon: connector.icon,
+          })),
+        },
+
+        ...(this.steps ?? []).map(step => ({
+          type: 'policy' as const,
+          step: step,
+        })),
+
+        {
+          type: 'connectors',
+          connectors: this.endConnector.map(connector => ({
+            name: connector.name,
+            icon: connector.icon,
+          })),
+        },
+      ];
+
+      // Disable phase if there are not start & end connectors
+      this.isDisabled = this.stepsVM.filter(step => step.type === 'connectors' && !isEmpty(step.connectors)).length < 2;
+    }
+  }
 }

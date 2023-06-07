@@ -16,7 +16,7 @@
 import { Component, Input } from '@angular/core';
 
 import { FlowVM } from '../../gio-policy-studio.model';
-import { ChannelSelector, ConditionSelector, ConnectorsInfo, HttpSelector, Operation } from '../../models';
+import { ChannelSelector, ConditionSelector, ConnectorInfo, HttpSelector, Operation } from '../../models';
 
 @Component({
   selector: 'gio-ps-flow-details-info-bar',
@@ -28,7 +28,7 @@ export class GioPolicyStudioDetailsInfoBarComponent {
   public flow?: FlowVM = undefined;
 
   @Input()
-  public entrypointsInfo: ConnectorsInfo[] = [];
+  public entrypointsInfo: ConnectorInfo[] = [];
 
   public get condition(): string | undefined {
     const conditionSelector = this.flow?.selectors?.find(s => s.type === 'CONDITION') as ConditionSelector;

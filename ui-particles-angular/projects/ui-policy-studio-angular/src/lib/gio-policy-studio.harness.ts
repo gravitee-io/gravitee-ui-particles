@@ -23,6 +23,7 @@ import { GioPolicyStudioDetailsHarness } from './components/flow-details/gio-ps-
 import { GioPolicyStudioFlowProxyFormDialogHarness } from './components/flow-form-dialog/flow-proxy-form-dialog/gio-ps-flow-proxy-form-dialog.harness';
 import { GioPolicyStudioFlowMessageFormDialogHarness } from './components/flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.harness';
 import { GioPolicyStudioFlowExecutionFormDialogHarness } from './components/flow-execution-form-dialog/gio-ps-flow-execution-form-dialog.harness';
+import { GioPolicyStudioDetailsPhaseHarness, PhaseType } from './components/flow-details-phase/gio-ps-flow-details-phase.harness';
 
 export class GioPolicyStudioHarness extends ComponentHarness {
   public static hostSelector = 'gio-policy-studio';
@@ -30,6 +31,8 @@ export class GioPolicyStudioHarness extends ComponentHarness {
   private menuHarness = this.locatorFor(GioPolicyStudioFlowsMenuHarness);
 
   private detailsHarness = this.locatorFor(GioPolicyStudioDetailsHarness);
+
+  private phaseHarness = (phaseType: PhaseType) => this.locatorFor(GioPolicyStudioDetailsPhaseHarness.with({ type: phaseType }))();
 
   /**
    * Add a flow to a plan or to "Common flows"
@@ -56,15 +59,28 @@ export class GioPolicyStudioHarness extends ComponentHarness {
     await this.setFlowFormDialog(flow);
   }
 
+  /**
+   * Delete a flow
+   *
+   * @param flowName Flow name to delete
+   */
   public async deleteFlow(flowName: string): Promise<void> {
     (await this.menuHarness()).selectFlow(new RegExp(flowName, 'i'));
     await (await this.detailsHarness()).clickDeleteFlowBtn();
   }
 
+  /**
+   * Select a flow in the menu
+   *
+   * @param flowName Flow name to select
+   */
   public async selectFlowInMenu(flowName: string): Promise<void> {
     await (await this.menuHarness()).selectFlow(new RegExp(flowName, 'i'));
   }
 
+  /**
+   * Get the list of flows in the menu
+   */
   public async getFlowsMenu(): Promise<
     {
       name: string | null;
@@ -78,10 +94,28 @@ export class GioPolicyStudioHarness extends ComponentHarness {
     return (await this.menuHarness()).getAllFlowsGroups();
   }
 
+  /**
+   * Get selected flow infos
+   */
   public async getSelectedFlowInfos(): Promise<Record<string, (string | null)[]>> {
     return await (await this.detailsHarness()).getFlowInfos();
   }
 
+  /**
+   * Get selected flow steps phase
+   */
+  public async getSelectedFlowSteps(phaseType: PhaseType): Promise<
+    {
+      text: string;
+      type: 'connector' | 'policy';
+    }[]
+  > {
+    return await (await this.phaseHarness(phaseType)).getSteps();
+  }
+
+  /**
+   * Click on the "Save" button
+   */
   public async save(): Promise<void> {
     await (await this.locatorFor(MatButtonHarness.with({ text: /Save/ }))()).click();
   }

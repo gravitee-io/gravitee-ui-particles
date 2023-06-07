@@ -16,7 +16,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { capitalize, cloneDeep, differenceBy, flatten, isEqual, omit, unionBy, uniqueId } from 'lodash';
 
-import { ApiType, ConnectorsInfo, Flow, FlowExecution, Plan, SaveOutput } from './models';
+import { ApiType, ConnectorInfo, Flow, Plan, SaveOutput, FlowExecution } from './models';
 import { FlowGroupVM, FlowVM } from './gio-policy-studio.model';
 
 @Component({
@@ -35,13 +35,13 @@ export class GioPolicyStudioComponent implements OnChanges {
    * List of entrypoints to display
    */
   @Input()
-  public entrypointsInfo: ConnectorsInfo[] = [];
+  public entrypointsInfo: ConnectorInfo[] = [];
 
   /**
    * List of endpoints to display
    */
   @Input()
-  public endpointsInfo: ConnectorsInfo[] = [];
+  public endpointsInfo: ConnectorInfo[] = [];
 
   @Input()
   public commonFlows: Flow[] = [];

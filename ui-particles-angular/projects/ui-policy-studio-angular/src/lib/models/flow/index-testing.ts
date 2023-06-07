@@ -15,3 +15,4 @@
  */
 export * from './Flow.fixture';
 export * from './FlowExecution.fixture';
+export * from './Step.fixture';
