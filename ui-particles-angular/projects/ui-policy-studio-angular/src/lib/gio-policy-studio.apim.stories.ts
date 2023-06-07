@@ -181,6 +181,25 @@ export const MessageWithAllPhases: Story = {
   },
 };
 
+export const MessageWithDisabledPhase: Story = {
+  name: 'Message API with disabled publish phase',
+  args: {
+    apiType: 'MESSAGE',
+    entrypointsInfo: [fakeWebhookMessageEntrypoint()],
+    endpointsInfo: [fakeKafkaMessageEndpoint()],
+    commonFlows: [
+      fakeChannelFlow({
+        name: 'Flow',
+        request: [fakeMockPolicyStep()],
+        response: [fakeMockPolicyStep()],
+        publish: [fakeMockPolicyStep()],
+        subscribe: [fakeMockPolicyStep()],
+      }),
+    ],
+    plans: [],
+  },
+};
+
 export const ProxyWithFlowsAndPlans: Story = {
   name: 'Proxy API with flows & plans',
   args: {
@@ -264,8 +283,22 @@ export const ProxyWithFlowSteps: Story = {
     commonFlows: [
       fakeHttpFlow({
         name: 'Flow with steps',
-        request: [fakeRateLimitStep(), fakeRateLimitStep(), fakeRateLimitStep()],
-        response: [fakeMockPolicyStep(), fakeMockPolicyStep(), fakeMockPolicyStep()],
+        request: [
+          fakeRateLimitStep({
+            description: undefined,
+          }),
+          fakeRateLimitStep(),
+          fakeRateLimitStep(),
+        ],
+        response: [
+          fakeMockPolicyStep({
+            name: 'Policy with very long name to test overflow. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+            description:
+              'Policy with very long name to test overflow. Lorem ipsum dolor sit amet, consectetur adipiscing elit and some more text to test overflow.',
+          }),
+          fakeMockPolicyStep(),
+          fakeMockPolicyStep(),
+        ],
       }),
     ],
     plans: [],

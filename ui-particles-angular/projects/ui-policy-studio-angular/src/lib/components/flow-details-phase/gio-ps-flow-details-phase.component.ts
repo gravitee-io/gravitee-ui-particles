@@ -28,7 +28,7 @@ type StepVM =
     }
   | {
       type: 'policy';
-      step?: Step;
+      step: Step;
     };
 
 @Component({
