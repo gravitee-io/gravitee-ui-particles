@@ -74,6 +74,24 @@ export function fakeHTTPPostMessageEntrypoint(modifier?: Partial<ConnectorInfo> 
   };
 }
 
+export function fakeHTTPGetMessageEntrypoint(modifier?: Partial<ConnectorInfo> | ((base: ConnectorInfo) => ConnectorInfo)): ConnectorInfo {
+  const base: ConnectorInfo = {
+    type: 'http-get',
+    name: 'HTTP Get',
+    supportedModes: ['SUBSCRIBE'],
+    icon: 'gio:language',
+  };
+
+  if (isFunction(modifier)) {
+    return modifier(base);
+  }
+
+  return {
+    ...base,
+    ...modifier,
+  };
+}
+
 export function fakeWebhookMessageEntrypoint(modifier?: Partial<ConnectorInfo> | ((base: ConnectorInfo) => ConnectorInfo)): ConnectorInfo {
   const base: ConnectorInfo = {
     type: 'webhook',
