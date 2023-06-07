@@ -40,6 +40,7 @@
           description="Policies will be applied during the connection establishment"
           [startConnector]="entrypointsInfo"
           [endConnector]="endpointsInfo"
+          [steps]="flow.response"
         ></gio-ps-flow-details-phase>
         <gio-ps-flow-details-phase
           class="content__phase"
@@ -47,6 +48,7 @@
           description="Policies will be applied during the connection termination"
           [startConnector]="endpointsInfo"
           [endConnector]="entrypointsInfo"
+          [steps]="flow.response"
         ></gio-ps-flow-details-phase>
       </mat-tab>
       <mat-tab label="Event messages">
@@ -56,6 +58,7 @@
           description="Policies will be applied on messages sent to the endpoint"
           [startConnector]="entrypointsInfo | gioFilterConnectorsByMode : 'PUBLISH'"
           [endConnector]="endpointsInfo | gioFilterConnectorsByMode : 'PUBLISH'"
+          [steps]="flow.response"
         ></gio-ps-flow-details-phase>
         <gio-ps-flow-details-phase
           class="content__phase"
@@ -63,6 +66,7 @@
           description="Policies will be applied on messages received by the entrypoint"
           [startConnector]="endpointsInfo | gioFilterConnectorsByMode : 'SUBSCRIBE'"
           [endConnector]="entrypointsInfo | gioFilterConnectorsByMode : 'SUBSCRIBE'"
+          [steps]="flow.response"
         ></gio-ps-flow-details-phase>
       </mat-tab>
     </mat-tab-group>

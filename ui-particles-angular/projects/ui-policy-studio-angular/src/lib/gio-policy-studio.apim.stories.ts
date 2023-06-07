@@ -21,6 +21,8 @@ import { action } from '@storybook/addon-actions';
 import { GioPolicyStudioModule } from './gio-policy-studio.module';
 import {
   fakeChannelFlow,
+  fakeHTTPGetMessageEntrypoint,
+  fakeHTTPPostMessageEntrypoint,
   fakeHTTPProxyEndpoint,
   fakeHTTPProxyEntrypoint,
   fakeHttpFlow,
@@ -157,6 +159,25 @@ export const MessageWithFlowsAndPlans: Story = {
         ],
       }),
     ],
+  },
+};
+
+export const MessageWithAllPhases: Story = {
+  name: 'Message API with All phases',
+  args: {
+    apiType: 'MESSAGE',
+    entrypointsInfo: [fakeWebhookMessageEntrypoint(), fakeHTTPPostMessageEntrypoint()],
+    endpointsInfo: [fakeKafkaMessageEndpoint(), fakeHTTPGetMessageEntrypoint()],
+    commonFlows: [
+      fakeChannelFlow({
+        name: 'Flow',
+        request: [fakeMockPolicyStep()],
+        response: [fakeMockPolicyStep()],
+        publish: [fakeMockPolicyStep()],
+        subscribe: [fakeMockPolicyStep()],
+      }),
+    ],
+    plans: [],
   },
 };
 

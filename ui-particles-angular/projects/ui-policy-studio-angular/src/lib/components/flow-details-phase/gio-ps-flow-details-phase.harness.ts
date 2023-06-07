@@ -16,6 +16,7 @@
 
 import { BaseHarnessFilters, ComponentHarness, HarnessPredicate, parallel } from '@angular/cdk/testing';
 import { DivHarness, SpanHarness } from '@gravitee/ui-particles-angular/testing';
+import { isEmpty } from 'lodash';
 
 import { GioPolicyStudioDetailsPhasePolicyHarness } from '../flow-details-phase-policy/gio-ps-flow-details-phase-policy.harness';
 
@@ -51,12 +52,18 @@ export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
   }
 
   public async getSteps(): Promise<
-    {
-      text: string;
-      type: 'connector' | 'policy';
-    }[]
+    | {
+        text: string;
+        type: 'connector' | 'policy';
+      }[]
+    | null
   > {
     const stepsDiv = await this.locatorForAll(DivHarness.with({ selector: '.content__step' }))();
+
+    if (isEmpty(stepsDiv)) {
+      // No step - the phase is disabled
+      return null;
+    }
 
     return await parallel(() =>
       stepsDiv.map(async stepDiv => {

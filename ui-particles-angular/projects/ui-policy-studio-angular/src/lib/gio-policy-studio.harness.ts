@@ -16,6 +16,7 @@
 
 import { ComponentHarness } from '@angular/cdk/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
+import { MatTabGroupHarness } from '@angular/material/tabs/testing';
 
 import { ChannelSelector, ConditionSelector, Flow, FlowExecution, HttpSelector } from './models';
 import { GioPolicyStudioFlowsMenuHarness } from './components/flows-menu/gio-ps-flows-menu.harness';
@@ -103,14 +104,26 @@ export class GioPolicyStudioHarness extends ComponentHarness {
 
   /**
    * Get selected flow steps phase
+   * @param tabLabel Select tabs before try to find phase. Useful to find Event phases for Message API
    */
-  public async getSelectedFlowSteps(phaseType: PhaseType): Promise<
-    {
-      text: string;
-      type: 'connector' | 'policy';
-    }[]
+  public async getSelectedFlowSteps(
+    phaseType: PhaseType,
+    tabLabel?: string,
+  ): Promise<
+    | {
+        text: string;
+        type: 'connector' | 'policy';
+      }[]
+    | 'DISABLED'
   > {
-    return await (await this.phaseHarness(phaseType)).getSteps();
+    if (tabLabel) {
+      const matTabsHarness = await this.locatorFor(MatTabGroupHarness.with({ selector: '.content__tabs' }))();
+      await matTabsHarness.selectTab({ label: tabLabel });
+    }
+
+    const steps = await (await this.phaseHarness(phaseType)).getSteps();
+
+    return steps ? steps : 'DISABLED';
   }
 
   /**

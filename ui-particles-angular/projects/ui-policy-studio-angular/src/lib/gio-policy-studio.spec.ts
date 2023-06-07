@@ -561,6 +561,46 @@ describe('GioPolicyStudioModule', () => {
           Condition: ['condition1'],
         });
       });
+
+      fit('should display phases steps', async () => {
+        const commonFlows = [
+          fakeHttpFlow({
+            name: 'Flow 1',
+            request: [fakeMockPolicyStep()],
+            response: [fakeMockPolicyStep()],
+            publish: [fakeMockPolicyStep()],
+            subscribe: [fakeMockPolicyStep()],
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        const requestPhaseSteps = await policyStudioHarness.getSelectedFlowSteps('REQUEST');
+        const responsePhaseSteps = await policyStudioHarness.getSelectedFlowSteps('RESPONSE');
+        const publishPhaseSteps = await policyStudioHarness.getSelectedFlowSteps('PUBLISH', 'Event messages');
+        const subscribePhaseSteps = await policyStudioHarness.getSelectedFlowSteps('SUBSCRIBE', 'Event messages');
+
+        expect(requestPhaseSteps).toStrictEqual([
+          { text: 'Webhook', type: 'connector' },
+          { text: 'Mock Policy', type: 'policy' },
+          { text: 'Kafka', type: 'connector' },
+        ]);
+
+        expect(responsePhaseSteps).toStrictEqual([
+          { text: 'Kafka', type: 'connector' },
+          { text: 'Mock Policy', type: 'policy' },
+          { text: 'Webhook', type: 'connector' },
+        ]);
+        expect(publishPhaseSteps).toEqual('DISABLED');
+
+        expect(subscribePhaseSteps).toEqual([
+          { text: 'Kafka', type: 'connector' },
+          { text: 'Mock Policy', type: 'policy' },
+          { text: 'Webhook', type: 'connector' },
+        ]);
+      });
     });
   });
 
