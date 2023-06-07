@@ -31,14 +31,17 @@ $typography: map.get(gio.$mat-theme, typography);
 }
 
 .header {
+  display: flex;
   padding: 0 16px;
+  gap: 8px;
 
   &__name {
+    flex: 1 1 auto;
     @include mat.typography-level($typography, body-2);
   }
 
   &__description {
-    padding-left: 8px;
+    flex: 1 1 auto;
     @include mat.typography-level($typography, body-1);
 
     color: mat.get-color-from-palette(gio.$mat-space-palette, lighter40);

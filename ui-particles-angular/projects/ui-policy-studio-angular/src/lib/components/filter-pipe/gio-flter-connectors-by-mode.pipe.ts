@@ -22,7 +22,7 @@ import { ConnectorInfo, ConnectorMode } from '../../models';
   name: 'gioFilterConnectorsByMode',
 })
 export class GioFilterConnectorsByModePipe implements PipeTransform {
-  public transform(items: ConnectorInfo[], mode: ConnectorMode): unknown[] {
+  public transform(items: ConnectorInfo[], mode: ConnectorMode): ConnectorInfo[] {
     if (!items) {
       return [];
     }

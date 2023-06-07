@@ -23,6 +23,10 @@
   <span class="header__description">
     {{ description }}
   </span>
+
+  <span *ngIf="isDisabled" class="header__infoIcon" matTooltip="Policies might not be evaluated" matTooltipPosition="before">
+    <mat-icon svgIcon="gio:info"></mat-icon>
+  </span>
 </div>
 
 <div *ngIf="!isDisabled; else disabledPhaseContent" class="wrapper">
@@ -32,7 +36,7 @@
       <ng-container *ngIf="stepVM.type === 'connectors'">
         <span class="gio-badge-white content__step__connectorBadge">
           <ng-container *ngFor="let connector of stepVM.connectors">
-            <mat-icon [svgIcon]="connector.icon" class="content__step__connectorBadge__icon"></mat-icon>
+            <mat-icon *ngIf="connector.icon" [svgIcon]="connector.icon" class="content__step__connectorBadge__icon"></mat-icon>
             {{ connector.name }}
           </ng-container>
         </span>

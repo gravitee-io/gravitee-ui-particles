@@ -25,6 +25,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { GioPolicyStudioFlowMessageFormDialogComponent } from './components/flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
 import { GioPolicyStudioDetailsComponent } from './components/flow-details/gio-ps-flow-details.component';
@@ -62,6 +63,7 @@ import { GioFilterConnectorsByModePipe } from './components/filter-pipe/gio-flte
     MatSlideToggleModule,
     MatDialogModule,
     MatTabsModule,
+    MatMenuModule,
 
     GioIconsModule,
     GioFormSlideToggleModule,

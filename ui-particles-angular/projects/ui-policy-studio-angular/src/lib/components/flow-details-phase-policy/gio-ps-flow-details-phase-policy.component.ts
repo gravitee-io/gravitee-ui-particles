@@ -24,5 +24,17 @@ import { Step } from '../../models';
 })
 export class GioPolicyStudioDetailsPhasePolicyComponent {
   @Input()
-  public step?: Step = undefined;
+  public step!: Step;
+
+  public onEdit() {
+    throw new Error('Wip');
+  }
+
+  public onDisable() {
+    throw new Error('Wip');
+  }
+
+  public onDelete() {
+    throw new Error('Wip');
+  }
 }

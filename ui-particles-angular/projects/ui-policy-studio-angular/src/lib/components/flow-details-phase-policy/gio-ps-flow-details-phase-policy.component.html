@@ -16,5 +16,31 @@
 
 -->
 
-<mat-icon svgIcon="gio:gift" class="content__policyIcon"></mat-icon>
-{{ step.name }}
+<div class="info">
+  <div class="info__primary">
+    <mat-icon class="info__primary__icon" svgIcon="gio:gift"></mat-icon>
+
+    <span *ngIf="step.name" class="info__primary__name">{{ step.name }}</span>
+  </div>
+
+  <div *ngIf="step.description" class="info__secondary">{{ step.description }}</div>
+</div>
+
+<button class="menuBtn" mat-icon-button [matMenuTriggerFor]="policyMenu"><mat-icon svgIcon="gio:more-vertical"></mat-icon></button>
+
+<mat-menu #policyMenu="matMenu">
+  <button disabled mat-menu-item (click)="onEdit()">
+    <mat-icon svgIcon="gio:edit-pencil"></mat-icon>
+    <span>Edit 🚧</span>
+  </button>
+
+  <button disabled mat-menu-item (click)="onDisable()">
+    <mat-icon svgIcon="gio:prohibition"></mat-icon>
+    <span>Disable 🚧</span>
+  </button>
+
+  <button disabled mat-menu-item (click)="onDelete()">
+    <mat-icon svgIcon="gio:trash"></mat-icon>
+    <span>Delete 🚧</span>
+  </button>
+</mat-menu>
