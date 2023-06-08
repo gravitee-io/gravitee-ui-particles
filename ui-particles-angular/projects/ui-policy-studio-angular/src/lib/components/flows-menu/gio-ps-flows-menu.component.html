@@ -21,7 +21,9 @@
     Flows <mat-icon svgIcon="gio:info" matTooltip="Flows allow you to apply different policies on your API event phases"></mat-icon>
   </div>
   <div class="header__configBtn">
-    <button mat-stroked-button mat-icon-button><mat-icon svgIcon="gio:settings"></mat-icon></button>
+    <button class="header__configBtn_edit" mat-stroked-button mat-icon-button (click)="onConfigureExecution(flowExecution)">
+      <mat-icon svgIcon="gio:settings"></mat-icon>
+    </button>
   </div>
 </div>
 

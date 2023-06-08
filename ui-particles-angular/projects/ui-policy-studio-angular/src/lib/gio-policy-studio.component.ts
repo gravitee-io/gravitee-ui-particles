@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { capitalize, cloneDeep, differenceBy, flatten, omit, unionBy, uniqueId } from 'lodash';
+import { capitalize, cloneDeep, differenceBy, flatten, isEqual, omit, unionBy, uniqueId } from 'lodash';
 
-import { ApiType, ConnectorsInfo, Flow, Plan, SaveOutput } from './models';
+import { ApiType, ConnectorsInfo, Flow, FlowExecution, Plan, SaveOutput } from './models';
 import { FlowGroupVM, FlowVM } from './gio-policy-studio.model';
 
 @Component({
@@ -27,6 +27,9 @@ import { FlowGroupVM, FlowVM } from './gio-policy-studio.model';
 export class GioPolicyStudioComponent implements OnChanges {
   @Input()
   public apiType!: ApiType;
+
+  @Input()
+  public flowExecution!: FlowExecution;
 
   /**
    * List of entrypoints to display
@@ -65,6 +68,7 @@ export class GioPolicyStudioComponent implements OnChanges {
   // Used to keep track of initial flows groups to know if there are deleted flows
   private initialFlowsGroups: FlowGroupVM[] = [];
 
+  private hasFlowExecutionChanged = false;
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.entrypointsInfo || changes.endpointsInfo) {
       this.connectorsTooltip = `Entrypoints: ${(this.entrypointsInfo ?? []).map(e => capitalize(e.type)).join(', ')}\nEndpoints: ${(
@@ -85,6 +89,14 @@ export class GioPolicyStudioComponent implements OnChanges {
       if (changes.commonFlows?.isFirstChange() || changes.plans?.isFirstChange()) {
         this.selectedFlow = this.flowsGroups[0].flows[0];
       }
+    }
+  }
+
+  public onFlowExecutionChange(flowExecution: FlowExecution): void {
+    this.hasFlowExecutionChanged = !isEqual(this.flowExecution, flowExecution);
+    if (this.hasFlowExecutionChanged) {
+      this.disableSaveButton = false;
+      this.flowExecution = flowExecution;
     }
   }
 
@@ -127,6 +139,7 @@ export class GioPolicyStudioComponent implements OnChanges {
     this.save.emit({
       ...(commonFlows ? { commonFlows } : {}),
       ...(plansToUpdate ? { plansToUpdate } : {}),
+      ...(this.hasFlowExecutionChanged ? this.flowExecution : {}),
     });
   }
 }

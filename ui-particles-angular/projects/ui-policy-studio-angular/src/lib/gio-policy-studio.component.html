@@ -41,9 +41,11 @@
   <div class="wrapper__flowsMenu">
     <gio-ps-flows-menu
       [apiType]="apiType"
+      [flowExecution]="flowExecution"
       [flowsGroups]="flowsGroups"
       [entrypoints]="entrypointsType"
       (flowsGroupsChange)="onFlowsGroupsChange($event)"
+      (flowExecutionChange)="onFlowExecutionChange($event)"
       [(selectedFlow)]="selectedFlow"
     ></gio-ps-flows-menu>
   </div>

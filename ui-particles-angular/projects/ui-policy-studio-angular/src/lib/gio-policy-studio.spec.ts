@@ -23,7 +23,7 @@ import { InteractivityChecker } from '@angular/cdk/a11y';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonHarness } from '@angular/material/button/testing';
 
-import { fakeChannelFlow, fakeHttpFlow, fakePlan } from '../public-testing-api';
+import { fakeChannelFlow, fakeDefaultFlowExecution, fakeHttpFlow, fakePlan } from '../public-testing-api';
 
 import { GioPolicyStudioModule } from './gio-policy-studio.module';
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
@@ -754,6 +754,40 @@ describe('GioPolicyStudioModule', () => {
         ]);
 
         expect(await detailsHarness.matchText(/HTTP/)).toEqual(true);
+      });
+    });
+  });
+
+  describe('Flow execution settings', () => {
+    beforeEach(() => {
+      component.flowExecution = fakeDefaultFlowExecution();
+      fixture.detectChanges();
+    });
+
+    it('should not enable save button', async () => {
+      await policyStudioHarness.setFlowExecutionConfig({
+        mode: 'DEFAULT',
+        matchRequired: false,
+      });
+
+      expect(await (await loader.getHarness(MatButtonHarness.with({ text: /Save/ }))).isDisabled()).toEqual(true);
+      component.save.subscribe(value => {
+        expect(value.flowExecution).toBeUndefined();
+      });
+    });
+
+    it('should enable save button', async () => {
+      await policyStudioHarness.setFlowExecutionConfig({
+        mode: 'BEST_MATCH',
+        matchRequired: false,
+      });
+
+      expect(await (await loader.getHarness(MatButtonHarness.with({ text: /Save/ }))).isDisabled()).toEqual(false);
+      component.save.subscribe(value => {
+        expect(value.flowExecution).toEqual({
+          mode: 'BEST_MATCH',
+          matchRequired: false,
+        });
       });
     });
   });

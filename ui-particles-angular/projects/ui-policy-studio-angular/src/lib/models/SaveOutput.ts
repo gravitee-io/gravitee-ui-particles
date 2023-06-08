@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Flow } from './flow';
+import { Flow, FlowExecution } from './flow';
 import { Plan } from './plan';
 
 export type SaveOutput = {
@@ -21,4 +21,6 @@ export type SaveOutput = {
   commonFlows?: Flow[];
   // Return the list of plans with updated flows. Plans with no updated flows are not returned.
   plansToUpdate?: Plan[];
+  // Return the flow execution configuration if it has been updated.
+  flowExecution?: FlowExecution;
 };
