@@ -1,3 +1,10 @@
+## [7.7.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.7.0...v7.7.1) (2023-06-08)
+
+
+### Bug Fixes
+
+* add missing method badge ([b916969](https://github.com/gravitee-io/gravitee-ui-particles/commit/b916969c0253e29e25972d565d6efa4113fbb41a))
+
 # [7.7.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.6.0...v7.7.0) (2023-06-06)
 
 
