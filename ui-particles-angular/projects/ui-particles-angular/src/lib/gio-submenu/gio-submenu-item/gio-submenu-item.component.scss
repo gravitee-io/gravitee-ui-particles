@@ -49,6 +49,13 @@ $textLight: map.get(gio.$mat-basic-palette, white);
     color: $textLight;
     letter-spacing: 0.4px;
   }
+
+  &__icon-right {
+    width: 20px;
+    height: 20px;
+    color: $textLight;
+    float: right;
+  }
 }
 
 :host-context(.gio-submenu-group) .gio-submenu-item {

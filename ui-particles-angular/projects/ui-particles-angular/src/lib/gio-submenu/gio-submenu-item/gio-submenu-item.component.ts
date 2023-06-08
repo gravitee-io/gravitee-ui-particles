@@ -23,6 +23,8 @@ import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/
 export class GioSubmenuItemComponent {
   @Input() public active = false;
 
+  @Input() public iconRight?: string;
+
   @ViewChild('gioSubmenuItem', { static: false })
   private gioSubmenuItem: ElementRef<HTMLDivElement> | undefined;
 

@@ -28,6 +28,7 @@ $text: map.get(gio.$mat-dove-palette, default);
 }
 
 .gio-menu-item {
+  position: relative;
   display: flex;
   width: 192px;
   height: 36px;
@@ -51,10 +52,15 @@ $text: map.get(gio.$mat-dove-palette, default);
     border-radius: 4px;
   }
 
-  &__icon {
+  &__icon,
+  &__icon-right {
     position: absolute;
     width: 20px;
     height: 20px;
+  }
+
+  &__icon-right {
+    right: 18px;
   }
 
   &__title:not(:first-child) {
@@ -68,7 +74,8 @@ $text: map.get(gio.$mat-dove-palette, default);
   padding: 0;
   margin: 8px 0;
 
-  &__title {
+  &__title,
+  &__icon-right {
     display: none;
   }
 }

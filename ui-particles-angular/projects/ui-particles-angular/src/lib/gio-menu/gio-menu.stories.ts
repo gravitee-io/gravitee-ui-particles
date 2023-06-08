@@ -46,7 +46,7 @@ const gioMenuContent = `
               <gio-menu-item tabindex="1" icon="gio:upload-cloud" (click)="onClick('apis')" [active]="isActive('apis')">Apis</gio-menu-item>
               <gio-menu-item tabindex="1" icon="gio:multi-window" (click)="onClick('apps')" [active]="isActive('apps')">Applications</gio-menu-item>
               <gio-menu-item tabindex="1" icon="gio:cloud-server" (click)="onClick('gateways')" [active]="isActive('gateways')">Gateways</gio-menu-item>
-              <gio-menu-item tabindex="1" icon="gio:verified" (click)="onClick('audit')" [active]="isActive('audit')">Audit</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:verified" (click)="onClick('audit')" [active]="isActive('audit')" iconRight="gio:lock">Audit</gio-menu-item>
               <gio-menu-item tabindex="1" icon="gio:message-text" (click)="onClick('messages')" [active]="isActive('messages')">Messages</gio-menu-item>
               <gio-menu-item tabindex="1" icon="gio:settings" (click)="onClick('settings')" [active]="isActive('settings')">Settings</gio-menu-item>
             </gio-menu-list>
@@ -218,7 +218,7 @@ const gioSubmenuContent = `
           <gio-submenu-item tabindex="1" (click)="onClick('path')" [active]="isActive('path')">Path mappings</gio-submenu-item>
           <gio-submenu-item tabindex="1" (click)="onClick('alerts')" [active]="isActive('alerts')">Alerts</gio-submenu-item>
         </gio-submenu-group>
-      <gio-submenu-item tabindex="1" (click)="onClick('audit')" [active]="isActive('audit')">Audit</gio-submenu-item>`;
+      <gio-submenu-item tabindex="1" (click)="onClick('audit')" [active]="isActive('audit')" iconRight="gio:lock">Audit</gio-submenu-item>`;
 
 export const WithSubMenu: Story = {
   render: () => ({
