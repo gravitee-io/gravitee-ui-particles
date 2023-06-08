@@ -89,4 +89,8 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
       await (await flowsGroups.childLocatorFor(MatButtonHarness.with({ ancestor: '.list__flowsGroup__header__addBtn' }))()).click();
     }
   }
+
+  public async openFlowExecutionConfig(): Promise<void> {
+    await (await this.locatorFor(MatButtonHarness.with({ selector: '.header__configBtn_edit' }))())?.click();
+  }
 }

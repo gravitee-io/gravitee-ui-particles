@@ -23,12 +23,17 @@ import {
   GioPolicyStudioFlowMessageFormDialogData,
 } from '../flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
 import { FlowGroupVM, FlowVM } from '../../gio-policy-studio.model';
-import { ApiType, ChannelSelector, HttpSelector, Operation } from '../../models';
+import { ApiType, ChannelSelector, FlowExecution, HttpSelector, Operation } from '../../models';
 import {
   GioPolicyStudioFlowProxyFormDialogComponent,
   GioPolicyStudioFlowProxyFormDialogData,
 } from '../flow-form-dialog/flow-proxy-form-dialog/gio-ps-flow-proxy-form-dialog.component';
 import { GioPolicyStudioFlowFormDialogResult } from '../flow-form-dialog/gio-ps-flow-form-dialog-result.model';
+import {
+  GioPolicyStudioFlowExecutionFormDialogComponent,
+  GioPolicyStudioFlowExecutionFormDialogData,
+} from '../flow-execution-form-dialog/gio-ps-flow-execution-form-dialog.component';
+import { GioPolicyStudioFlowExecutionFormDialogResult } from '../flow-execution-form-dialog/gio-ps-flow-execution-form-dialog-result.model';
 
 interface FlowGroupMenuVM extends FlowGroupVM {
   flows: FlowMenuVM[];
@@ -54,6 +59,9 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
   public apiType!: ApiType;
 
   @Input()
+  public flowExecution!: FlowExecution;
+
+  @Input()
   public flowsGroups: FlowGroupVM[] = [];
 
   @Input()
@@ -67,6 +75,9 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
 
   @Output()
   public flowsGroupsChange = new EventEmitter<FlowGroupVM[]>();
+
+  @Output()
+  public flowExecutionChange = new EventEmitter<FlowExecution>();
 
   public flowsGroupsVMSelected: FlowGroupMenuVM[] = [];
 
@@ -185,6 +196,33 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
 
           this.flowsGroupsChange.emit(editedFlowsGroups);
           this.selectedFlowChange.emit(createdOrEdited);
+        }),
+      )
+      .subscribe();
+  }
+
+  public onConfigureExecution(flowExecution: FlowExecution): void {
+    const dialogResult = this.matDialog
+      .open<
+        GioPolicyStudioFlowExecutionFormDialogComponent,
+        GioPolicyStudioFlowExecutionFormDialogData,
+        GioPolicyStudioFlowExecutionFormDialogResult
+      >(GioPolicyStudioFlowExecutionFormDialogComponent, {
+        data: {
+          flowExecution,
+        },
+        role: 'alertdialog',
+        id: 'gioPsFlowExecutionFormDialog',
+      })
+      .afterClosed();
+
+    dialogResult
+      .pipe(
+        tap(edited => {
+          if (!edited) {
+            return;
+          }
+          this.flowExecutionChange.emit(edited);
         }),
       )
       .subscribe();
