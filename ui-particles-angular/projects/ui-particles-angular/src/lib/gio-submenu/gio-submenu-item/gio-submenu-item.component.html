@@ -17,4 +17,5 @@
 -->
 <div #gioSubmenuItem class="gio-submenu-item" [class.gio-submenu-item__active]="active">
   <span class="gio-submenu-item__title"><ng-content></ng-content></span>
+  <mat-icon *ngIf="iconRight" class="gio-submenu-item__icon-right" [svgIcon]="iconRight"></mat-icon>
 </div>

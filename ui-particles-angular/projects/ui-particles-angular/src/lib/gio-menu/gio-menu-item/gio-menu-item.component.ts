@@ -26,6 +26,7 @@ import { GioMenuService } from '../gio-menu.service';
 })
 export class GioMenuItemComponent implements OnDestroy {
   @Input() public icon = '';
+  @Input() public iconRight?: string;
   @Input() public active = false;
   @Input() public outlined = false;
 
