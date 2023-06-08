@@ -38,8 +38,15 @@
     .mat-icon {
       width: 18px;
       height: 18px;
+      margin-top: -2px; // Center horizontally icon with text. 18 for icon 14 for text so up with -2px
       margin-right: 8px;
       line-height: 18px;
+    }
+  }
+
+  .mat-icon-button {
+    .mat-icon:has(svg) {
+      margin-top: -2px; // Center horizontally icon
     }
   }
 

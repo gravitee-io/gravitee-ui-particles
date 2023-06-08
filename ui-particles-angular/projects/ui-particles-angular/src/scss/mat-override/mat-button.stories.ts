@@ -326,7 +326,7 @@ export const MatButton: Story = {
                           <mat-icon svgIcon="gio:settings"></mat-icon>
                       </button>
                       <button mat-stroked-button mat-icon-button disabled aria-label="Example icon button with a settings icon">
-                          <mat-icon svgIcon="gio:settings"></mat-icon>
+                          <mat-icon svgIcon="gio:plus"></mat-icon>
                       </button>
                   </div>
               </div>
