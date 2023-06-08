@@ -15,7 +15,7 @@
  */
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { GioBannerModule, GioFormTagsInputModule, GioIconsModule } from '@gravitee/ui-particles-angular';
+import { GioBannerModule, GioFormSlideToggleModule, GioFormTagsInputModule, GioIconsModule } from '@gravitee/ui-particles-angular';
 import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -24,6 +24,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { GioPolicyStudioFlowMessageFormDialogComponent } from './components/flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
 import { GioPolicyStudioDetailsComponent } from './components/flow-details/gio-ps-flow-details.component';
@@ -33,12 +34,14 @@ import { GioPolicyStudioFlowProxyFormDialogComponent } from './components/flow-f
 import { GioPolicyStudioDetailsInfoBarComponent } from './components/flow-details-info-bar/gio-ps-flow-details-info-bar.component';
 import { GioPolicyStudioDetailsPhasePolicyComponent } from './components/flow-details-phase-policy/gio-ps-flow-details-phase-policy.component';
 import { GioPolicyStudioDetailsPhaseComponent } from './components/flow-details-phase/gio-ps-flow-details-phase.component';
+import { GioPolicyStudioFlowExecutionFormDialogComponent } from './components/flow-execution-form-dialog/gio-ps-flow-execution-form-dialog.component';
 
 @NgModule({
   declarations: [
     GioPolicyStudioComponent,
     GioPolicyStudioFlowsMenuComponent,
     GioPolicyStudioDetailsComponent,
+    GioPolicyStudioFlowExecutionFormDialogComponent,
     GioPolicyStudioFlowMessageFormDialogComponent,
     GioPolicyStudioFlowProxyFormDialogComponent,
     GioPolicyStudioDetailsInfoBarComponent,
@@ -54,10 +57,12 @@ import { GioPolicyStudioDetailsPhaseComponent } from './components/flow-details-
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatSlideToggleModule,
     MatDialogModule,
     MatTabsModule,
 
     GioIconsModule,
+    GioFormSlideToggleModule,
     GioFormTagsInputModule,
     GioBannerModule,
   ],
