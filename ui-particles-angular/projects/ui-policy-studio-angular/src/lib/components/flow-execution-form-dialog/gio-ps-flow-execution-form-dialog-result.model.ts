@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Gravitee team (http://gravitee.io)
+ * Copyright (C) 2023 The Gravitee team (http://gravitee.io)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,5 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './Flow.fixture';
-export * from './FlowExecution.fixture';
+
+import { FlowExecution } from '../../models';
+
+export type GioPolicyStudioFlowExecutionFormDialogResult = FlowExecution | false;
