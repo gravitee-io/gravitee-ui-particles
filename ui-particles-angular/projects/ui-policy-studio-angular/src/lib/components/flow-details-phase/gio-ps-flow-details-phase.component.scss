@@ -84,5 +84,6 @@ $typography: map.get(gio.$mat-theme, typography);
 
 .disabledContent {
   display: flex;
+  flex-direction: column;
   padding: 16px;
 }
