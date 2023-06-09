@@ -764,30 +764,31 @@ describe('GioPolicyStudioModule', () => {
       fixture.detectChanges();
     });
 
-    it('should not enable save button', async () => {
+    it('should not save modification', async () => {
       await policyStudioHarness.setFlowExecutionConfig({
         mode: 'DEFAULT',
         matchRequired: false,
       });
 
-      expect(await (await loader.getHarness(MatButtonHarness.with({ text: /Save/ }))).isDisabled()).toEqual(true);
-      component.save.subscribe(value => {
-        expect(value.flowExecution).toBeUndefined();
-      });
+      let saveOutputToExpect: SaveOutput | undefined;
+      component.save.subscribe(value => (saveOutputToExpect = value));
+
+      await policyStudioHarness.save();
+      expect(saveOutputToExpect?.flowExecution).toBeUndefined();
     });
 
-    it('should enable save button', async () => {
+    it('should save modification', async () => {
       await policyStudioHarness.setFlowExecutionConfig({
         mode: 'BEST_MATCH',
         matchRequired: false,
       });
+      let saveOutputToExpect: SaveOutput | undefined;
+      component.save.subscribe(value => (saveOutputToExpect = value));
 
-      expect(await (await loader.getHarness(MatButtonHarness.with({ text: /Save/ }))).isDisabled()).toEqual(false);
-      component.save.subscribe(value => {
-        expect(value.flowExecution).toEqual({
-          mode: 'BEST_MATCH',
-          matchRequired: false,
-        });
+      await policyStudioHarness.save();
+      expect(saveOutputToExpect?.flowExecution).toEqual({
+        mode: 'BEST_MATCH',
+        matchRequired: false,
       });
     });
   });

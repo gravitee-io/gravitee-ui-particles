@@ -139,7 +139,7 @@ export class GioPolicyStudioComponent implements OnChanges {
     this.save.emit({
       ...(commonFlows ? { commonFlows } : {}),
       ...(plansToUpdate ? { plansToUpdate } : {}),
-      ...(this.hasFlowExecutionChanged ? this.flowExecution : {}),
+      ...(this.hasFlowExecutionChanged ? { flowExecution: this.flowExecution } : {}),
     });
   }
 }
