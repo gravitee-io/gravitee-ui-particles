@@ -1,3 +1,11 @@
+# [7.9.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.8.0...v7.9.0) (2023-06-09)
+
+
+### Features
+
+* add a new component to configure the flow execution ([54033d0](https://github.com/gravitee-io/gravitee-ui-particles/commit/54033d0321eec70b7b933a15c5b81321e2c2bc33))
+* use flow execution form in policy-studio ([d5bd7e9](https://github.com/gravitee-io/gravitee-ui-particles/commit/d5bd7e9d2568033cb953ab2e206912f8829f7355))
+
 # [7.8.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.7.1...v7.8.0) (2023-06-09)
 
 
