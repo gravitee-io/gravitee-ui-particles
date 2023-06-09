@@ -1,3 +1,10 @@
+## [7.9.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.9.1...v7.9.2) (2023-06-09)
+
+
+### Bug Fixes
+
+* detect changes on chip removal in `gio-form-tags-input` ([4e0b98b](https://github.com/gravitee-io/gravitee-ui-particles/commit/4e0b98b8ec66b9b59c728e0adfe460c11ff1bda3))
+
 ## [7.9.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.9.0...v7.9.1) (2023-06-09)
 
 
