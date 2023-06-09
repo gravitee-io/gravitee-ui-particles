@@ -1,3 +1,21 @@
+# [7.10.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.9.2...v7.10.0) (2023-06-09)
+
+
+### Bug Fixes
+
+* center material button with icon ([7eb21ea](https://github.com/gravitee-io/gravitee-ui-particles/commit/7eb21eafe79bbb37946febefaebbd2098bc5b565))
+* **flow-execution:** fix save output when adding a flow execution configuration ([63f25e4](https://github.com/gravitee-io/gravitee-ui-particles/commit/63f25e44d579fdb248bf0c4925da9fa6520bd894))
+* **flow-execution:** remove useless result type ([976118d](https://github.com/gravitee-io/gravitee-ui-particles/commit/976118d0100239890bc21855e4b65a359848274d))
+
+
+### Features
+
+* display steps into phase - Message focus ([4cca445](https://github.com/gravitee-io/gravitee-ui-particles/commit/4cca445b8b785dcc4773c18a2e4b762d24405291))
+* display steps into phase - Proxy focus ([49507a9](https://github.com/gravitee-io/gravitee-ui-particles/commit/49507a93248331157b97b7cc09af763cabe91040))
+* impl the display for policy component ([be0ce2b](https://github.com/gravitee-io/gravitee-ui-particles/commit/be0ce2b03a92e5ef399aa6cd80e8d8adb9f2f459))
+* increase host padding to 16px ([f2cd0dc](https://github.com/gravitee-io/gravitee-ui-particles/commit/f2cd0dcc185fd4f6f8ddbf7db122a9f1556ea57d))
+* remove menu right shadow ([ffd1e6f](https://github.com/gravitee-io/gravitee-ui-particles/commit/ffd1e6fd60072782a9bbada420ee2a4e0b8241ea))
+
 ## [7.9.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.9.1...v7.9.2) (2023-06-09)
 
 
