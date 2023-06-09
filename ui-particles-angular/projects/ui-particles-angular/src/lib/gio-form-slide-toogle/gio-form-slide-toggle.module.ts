@@ -16,13 +16,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { GioFormLabelComponent, GioFormPrefixDirective } from './gio-form-label.directive';
+import { GioFormLabelComponent, GioFormPrefixDirective, GioFormSlideToggleDirective } from './gio-form-label.directive';
 import { GioFormSlideToggleComponent } from './gio-form-slide-toggle.component';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [GioFormSlideToggleComponent, GioFormLabelComponent, GioFormPrefixDirective],
-  exports: [GioFormSlideToggleComponent, GioFormLabelComponent, GioFormPrefixDirective],
+  declarations: [GioFormSlideToggleComponent, GioFormLabelComponent, GioFormPrefixDirective, GioFormSlideToggleDirective],
+  exports: [GioFormSlideToggleComponent, GioFormLabelComponent, GioFormPrefixDirective, GioFormSlideToggleDirective],
   entryComponents: [GioFormSlideToggleComponent],
 })
 export class GioFormSlideToggleModule {}
