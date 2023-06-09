@@ -1,3 +1,10 @@
+## [7.9.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.9.0...v7.9.1) (2023-06-09)
+
+
+### Bug Fixes
+
+* declare and export GioFormSlideToggleDirective ([48ec04a](https://github.com/gravitee-io/gravitee-ui-particles/commit/48ec04a86b3aa7e3bd45942ae41b6ab8e4ab3486))
+
 # [7.9.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.8.0...v7.9.0) (2023-06-09)
 
 
