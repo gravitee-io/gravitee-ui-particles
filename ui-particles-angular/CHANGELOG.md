@@ -1,3 +1,10 @@
+# [7.8.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.7.1...v7.8.0) (2023-06-09)
+
+
+### Features
+
+* add sync flow prefix for path input ([ea48a83](https://github.com/gravitee-io/gravitee-ui-particles/commit/ea48a83976c0054186b004ac23462188d2c14b1f))
+
 ## [7.7.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.7.0...v7.7.1) (2023-06-08)
 
 
