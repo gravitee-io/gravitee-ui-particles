@@ -38,17 +38,17 @@ $typography: map.get(gio.$mat-theme, typography);
     display: flex;
     align-items: center;
 
+    &__icon {
+      min-width: 24px;
+      flex: 1 1 24px;
+      margin-right: 8px;
+    }
+
     &__name {
       overflow: hidden;
       flex: 1 1 auto;
       text-overflow: ellipsis;
       white-space: nowrap;
-    }
-
-    &__icon {
-      min-width: 24px;
-      flex: 1 1 24px;
-      margin-right: 8px;
     }
   }
 

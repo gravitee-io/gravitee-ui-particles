@@ -15,7 +15,7 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -43,7 +43,7 @@ import { GioPolicyStudioFlowProxyHarnessData, GioPolicyStudioFlowProxyFormDialog
 class TestComponent {
   public flow?: FlowVM;
   public flowToEdit?: FlowVM;
-  constructor(private readonly matDialog: MatDialog) {}
+  constructor(private readonly matDialog: MatDialog, private readonly changeDetectorRef: ChangeDetectorRef) {}
 
   public openDialog() {
     this.matDialog
@@ -61,6 +61,7 @@ class TestComponent {
       .subscribe(flow => {
         if (flow) {
           this.flow = flow;
+          this.changeDetectorRef.markForCheck();
         }
       });
   }

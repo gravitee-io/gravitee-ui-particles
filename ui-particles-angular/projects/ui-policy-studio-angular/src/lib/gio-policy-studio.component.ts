@@ -16,7 +16,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { cloneDeep, differenceBy, flatten, isEqual, omit, unionBy, uniqueId } from 'lodash';
 
-import { ApiType, ConnectorInfo, Flow, Plan, SaveOutput, FlowExecution } from './models';
+import { ApiType, ConnectorInfo, Flow, FlowExecution, Plan, Policy, SaveOutput } from './models';
 import { FlowGroupVM, FlowVM } from './gio-policy-studio.model';
 
 @Component({
@@ -48,6 +48,9 @@ export class GioPolicyStudioComponent implements OnChanges {
 
   @Input()
   public plans: Plan[] = [];
+
+  @Input()
+  public policies: Policy[] = [];
 
   /**
    * Return what is needed to save.
