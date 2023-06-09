@@ -15,5 +15,6 @@
  */
 export * from './flow/index-testing';
 export * from './plan/index-testing';
+export * from './policy/index-testing';
 
 export * from './ConnectorsInfo.fixture';

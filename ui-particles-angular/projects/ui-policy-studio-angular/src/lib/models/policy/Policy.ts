@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 The Gravitee team (http://gravitee.io)
+ * Copyright (C) 2023 The Gravitee team (http://gravitee.io)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,9 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './flow';
-export * from './plan';
-export * from './policy';
+export type ExecutionPhase = 'REQUEST' | 'RESPONSE' | 'MESSAGE_REQUEST' | 'MESSAGE_RESPONSE';
 
-export * from './ConnectorsInfo';
-export * from './SaveOutput';
+export interface Policy {
+  id: string;
+  name: string;
+  icon?: string;
+  description?: string;
+  category?: string;
+  version?: string;
+  proxy?: ExecutionPhase[];
+  message?: ExecutionPhase[];
+}

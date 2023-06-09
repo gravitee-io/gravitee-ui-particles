@@ -13,9 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './flow';
-export * from './plan';
-export * from './policy';
+import { ComponentHarness, parallel } from '@angular/cdk/testing';
 
-export * from './ConnectorsInfo';
-export * from './SaveOutput';
+export class GioPolicyStudioPoliciesCatalogDialogHarness extends ComponentHarness {
+  public static hostSelector = 'gio-ps-policies-catalog-dialog';
+
+  public async getPhase(): Promise<string> {
+    const phase = await this.locatorFor('.title__phase')();
+    return phase.text();
+  }
+
+  public async getPoliciesName(): Promise<string[]> {
+    const policies = await this.locatorForAll('.policiesCatalog__policy__head__name')();
+    return parallel(() => policies.map(policy => policy.text()));
+  }
+}
