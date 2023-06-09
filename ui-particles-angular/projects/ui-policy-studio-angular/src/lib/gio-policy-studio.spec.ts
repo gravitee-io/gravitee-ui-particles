@@ -362,7 +362,7 @@ describe('GioPolicyStudioModule', () => {
           { name: 'Common flows', flows: [] },
         ]);
 
-        expect(await detailsHarness.matchText(/webhook/)).toEqual(true);
+        expect(await detailsHarness.matchText(/Webhook/)).toEqual(true);
       });
 
       it('should delete flow into plan', async () => {
@@ -557,12 +557,12 @@ describe('GioPolicyStudioModule', () => {
           Channel: ['channel1'],
           'Channel Operator': ['EQUALS'],
           Operations: ['PUB', 'SUB'],
-          Entrypoints: ['webhook'],
+          Entrypoints: ['Webhook'],
           Condition: ['condition1'],
         });
       });
 
-      fit('should display phases steps', async () => {
+      it('should display phases steps', async () => {
         const commonFlows = [
           fakeHttpFlow({
             name: 'Flow 1',
@@ -626,7 +626,7 @@ describe('GioPolicyStudioModule', () => {
           MatTooltipHarness.with({ selector: '[mattooltipclass="gio-policy-studio__tooltip-line-break"]' }),
         );
         await tooltip.show();
-        expect(await tooltip.getTooltipText()).toEqual(`Entrypoints: Http-proxy\nEndpoints: Http-proxy`);
+        expect(await tooltip.getTooltipText()).toEqual(`Entrypoints: HTTP Proxy\nEndpoints: HTTP Proxy`);
 
         expect(await (await loader.getHarness(MatButtonHarness.with({ text: /Save/ }))).isDisabled()).toEqual(true);
       });
@@ -719,7 +719,7 @@ describe('GioPolicyStudioModule', () => {
 
         expect(await detailsHarness.getFlowInfos()).toEqual({
           Name: ['Flow 1'],
-          Entrypoints: ['http-proxy'],
+          Entrypoints: ['HTTP Proxy'],
           Path: ['/path1'],
           'Path Operator': ['EQUALS'],
           'HTTP methods': ['ALL'],
