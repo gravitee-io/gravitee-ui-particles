@@ -24,19 +24,20 @@ import { InteractivityChecker } from '@angular/cdk/a11y';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 
 import { GioPolicyStudioModule } from '../../../gio-policy-studio.module';
-import { fakeChannelFlow, fakeHTTPGetMessageEntrypoint, fakeSSEMessageEntrypoint } from '../../../models/index-testing';
+import {
+  fakeChannelFlow,
+  fakeHTTPGetMessageEntrypoint,
+  fakeSSEMessageEntrypoint,
+  fakeWebhookMessageEntrypoint,
+} from '../../../models/index-testing';
 import { FlowVM } from '../../../gio-policy-studio.model';
 import { GioPolicyStudioFlowFormDialogResult } from '../gio-ps-flow-form-dialog-result.model';
-import { Flow, Operation, Operator, Selector } from '../../../models';
 
 import {
   GioPolicyStudioFlowMessageFormDialogComponent,
   GioPolicyStudioFlowMessageFormDialogData,
 } from './gio-ps-flow-message-form-dialog.component';
-import {
-  GioPolicyStudioFlowMessageHarnessData,
-  GioPolicyStudioFlowMessageFormDialogHarness,
-} from './gio-ps-flow-message-form-dialog.harness';
+import { GioPolicyStudioFlowMessageFormDialogHarness } from './gio-ps-flow-message-form-dialog.harness';
 
 @Component({
   selector: 'gio-dialog-test',
@@ -101,7 +102,7 @@ describe('GioPolicyStudioFlowMessageFormDialogComponent', () => {
   });
 
   it('should show initial flow values', async () => {
-    component.entrypoints = ['webhook', 'get'];
+    component.entrypoints = [fakeWebhookMessageEntrypoint(), fakeHTTPGetMessageEntrypoint()];
     const flow = fakeChannelFlow({
       name: 'Flow',
       selectors: [
@@ -124,7 +125,14 @@ describe('GioPolicyStudioFlowMessageFormDialogComponent', () => {
     await componentTestingOpenDialog();
 
     const flowFormDialogHarness = await loader.getHarness(GioPolicyStudioFlowMessageFormDialogHarness);
-    expect(dialogDataToFlow(await flowFormDialogHarness.getFormValues())).toEqual(flow);
+    expect(await flowFormDialogHarness.getFormValues()).toEqual({
+      channel: 'channel',
+      channelOperator: 'Equals',
+      condition: 'condition',
+      entrypoints: ['Webhook'],
+      name: 'Flow',
+      operations: ['Publish'],
+    });
   });
 
   it('should return false on cancel', async () => {
@@ -280,45 +288,3 @@ describe('GioPolicyStudioFlowMessageFormDialogComponent', () => {
     fixture.detectChanges();
   }
 });
-
-const dialogDataToFlow = (data: GioPolicyStudioFlowMessageHarnessData) => {
-  const selectors: Selector[] = [
-    {
-      type: 'CHANNEL',
-      channelOperator: toChannelOperator(data.channelOperator),
-      channel: data.channel,
-      entrypoints: data.entrypoints,
-      operations: toOperations(data.operations),
-    },
-    {
-      type: 'CONDITION',
-      condition: data.condition,
-    },
-  ];
-  const flow: Flow = {
-    name: data.name,
-    selectors,
-    publish: [],
-    subscribe: [],
-    request: [],
-    response: [],
-    enabled: true,
-  };
-  return flow;
-};
-
-const toChannelOperator: (value: string) => Operator = (value: string) => {
-  if (value === 'Equals') {
-    return 'EQUALS';
-  }
-  return 'STARTS_WITH';
-};
-
-const toOperations: (value: string[]) => Operation[] = (value: string[]) => {
-  return value.map(v => {
-    if (v === 'Publish') {
-      return 'PUBLISH';
-    }
-    return 'SUBSCRIBE';
-  });
-};
