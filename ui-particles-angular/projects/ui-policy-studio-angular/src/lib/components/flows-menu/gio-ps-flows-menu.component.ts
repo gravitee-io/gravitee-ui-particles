@@ -33,7 +33,6 @@ import {
   GioPolicyStudioFlowExecutionFormDialogComponent,
   GioPolicyStudioFlowExecutionFormDialogData,
 } from '../flow-execution-form-dialog/gio-ps-flow-execution-form-dialog.component';
-import { GioPolicyStudioFlowExecutionFormDialogResult } from '../flow-execution-form-dialog/gio-ps-flow-execution-form-dialog-result.model';
 
 interface FlowGroupMenuVM extends FlowGroupVM {
   flows: FlowMenuVM[];
@@ -203,17 +202,16 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
 
   public onConfigureExecution(flowExecution: FlowExecution): void {
     const dialogResult = this.matDialog
-      .open<
+      .open<GioPolicyStudioFlowExecutionFormDialogComponent, GioPolicyStudioFlowExecutionFormDialogData, FlowExecution | undefined>(
         GioPolicyStudioFlowExecutionFormDialogComponent,
-        GioPolicyStudioFlowExecutionFormDialogData,
-        GioPolicyStudioFlowExecutionFormDialogResult
-      >(GioPolicyStudioFlowExecutionFormDialogComponent, {
-        data: {
-          flowExecution,
+        {
+          data: {
+            flowExecution,
+          },
+          role: 'alertdialog',
+          id: 'gioPsFlowExecutionFormDialog',
         },
-        role: 'alertdialog',
-        id: 'gioPsFlowExecutionFormDialog',
-      })
+      )
       .afterClosed();
 
     dialogResult

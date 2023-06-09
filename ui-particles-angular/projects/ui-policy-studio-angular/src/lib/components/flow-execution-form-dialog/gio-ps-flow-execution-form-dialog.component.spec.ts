@@ -27,7 +27,6 @@ import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
 import { FlowExecution } from '../../models';
 import { fakeBestMatchFlowExecution, fakeDefaultFlowExecution } from '../../models/flow/FlowExecution.fixture';
 
-import { GioPolicyStudioFlowExecutionFormDialogResult } from './gio-ps-flow-execution-form-dialog-result.model';
 import {
   GioPolicyStudioFlowExecutionFormDialogComponent,
   GioPolicyStudioFlowExecutionFormDialogData,
@@ -44,17 +43,16 @@ class TestComponent {
 
   public openDialog() {
     this.matDialog
-      .open<
+      .open<GioPolicyStudioFlowExecutionFormDialogComponent, GioPolicyStudioFlowExecutionFormDialogData, FlowExecution | undefined>(
         GioPolicyStudioFlowExecutionFormDialogComponent,
-        GioPolicyStudioFlowExecutionFormDialogData,
-        GioPolicyStudioFlowExecutionFormDialogResult
-      >(GioPolicyStudioFlowExecutionFormDialogComponent, {
-        data: {
-          flowExecution: this.flowExecution,
+        {
+          data: {
+            flowExecution: this.flowExecution,
+          },
+          role: 'alertdialog',
+          id: 'testDialog',
         },
-        role: 'alertdialog',
-        id: 'testDialog',
-      })
+      )
       .afterClosed()
       .subscribe(flowExecution => {
         if (flowExecution) {
@@ -85,7 +83,7 @@ describe('GioPolicyStudioFlowExecutionFormDialogComponent', () => {
     loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
   });
 
-  it('should return false on cancel', async () => {
+  it('should not change flow execution configuration with cancel', async () => {
     component.flowExecution = fakeBestMatchFlowExecution();
     await componentTestingOpenDialog();
 

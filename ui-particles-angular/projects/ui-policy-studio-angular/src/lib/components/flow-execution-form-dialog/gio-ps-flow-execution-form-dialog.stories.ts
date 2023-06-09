@@ -28,7 +28,6 @@ import {
   GioPolicyStudioFlowExecutionFormDialogComponent,
   GioPolicyStudioFlowExecutionFormDialogData,
 } from './gio-ps-flow-execution-form-dialog.component';
-import { GioPolicyStudioFlowExecutionFormDialogResult } from './gio-ps-flow-execution-form-dialog-result.model';
 
 @Component({
   selector: 'gio-ps-flow-execution-form-dialog-story',
@@ -40,21 +39,20 @@ class GioPolicyStudioFlowExecutionFormDialogStoryComponent {
 
   public openDialog() {
     this.matDialog
-      .open<
+      .open<GioPolicyStudioFlowExecutionFormDialogComponent, GioPolicyStudioFlowExecutionFormDialogData, FlowExecution | undefined>(
         GioPolicyStudioFlowExecutionFormDialogComponent,
-        GioPolicyStudioFlowExecutionFormDialogData,
-        GioPolicyStudioFlowExecutionFormDialogResult
-      >(GioPolicyStudioFlowExecutionFormDialogComponent, {
-        data: {
-          flowExecution: this.flowExecution,
+        {
+          data: {
+            flowExecution: this.flowExecution,
+          },
+          role: 'alertdialog',
+          id: 'gioPsFlowExecutionFormDialog',
         },
-        role: 'alertdialog',
-        id: 'gioPsFlowExecutionFormDialog',
-      })
+      )
       .afterClosed()
       .pipe(
-        tap(createdOrEdited => {
-          action('createdOrEdited')(createdOrEdited);
+        tap(edited => {
+          action('edited')(edited);
         }),
       )
       .subscribe();

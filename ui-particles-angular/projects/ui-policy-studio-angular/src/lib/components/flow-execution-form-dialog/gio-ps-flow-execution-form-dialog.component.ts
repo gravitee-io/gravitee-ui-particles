@@ -20,8 +20,6 @@ import { cloneDeep } from 'lodash';
 
 import { FlowExecution } from '../../models';
 
-import { GioPolicyStudioFlowExecutionFormDialogResult } from './gio-ps-flow-execution-form-dialog-result.model';
-
 export type GioPolicyStudioFlowExecutionFormDialogData = {
   flowExecution?: FlowExecution;
 };
@@ -37,7 +35,7 @@ export class GioPolicyStudioFlowExecutionFormDialogComponent {
   public existingFlowExecution?: FlowExecution;
 
   constructor(
-    public dialogRef: MatDialogRef<GioPolicyStudioFlowExecutionFormDialogComponent, GioPolicyStudioFlowExecutionFormDialogResult>,
+    public dialogRef: MatDialogRef<GioPolicyStudioFlowExecutionFormDialogComponent, FlowExecution | undefined>,
     @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioFlowExecutionFormDialogData,
   ) {
     this.existingFlowExecution = cloneDeep(flowDialogData?.flowExecution);
