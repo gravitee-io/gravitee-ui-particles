@@ -81,7 +81,7 @@
     color: mat.get-color-from-palette(palettes.$mat-method-palette, delete-contrast);
   }
 
-  .gio-method-badge-option {
+  .gio-method-badge-options {
     @extend %gio-method-badge-base;
 
     background-color: mat.get-color-from-palette(palettes.$mat-method-palette, option);

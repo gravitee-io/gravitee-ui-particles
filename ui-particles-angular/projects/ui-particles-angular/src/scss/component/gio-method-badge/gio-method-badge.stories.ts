@@ -33,7 +33,7 @@ const classByNames = {
   Patch: 'gio-method-badge-patch',
   Put: 'gio-method-badge-put',
   Delete: 'gio-method-badge-delete',
-  Option: 'gio-method-badge-option',
+  Options: 'gio-method-badge-options',
   Trace: 'gio-method-badge-trace',
   Head: 'gio-method-badge-head',
   Connect: 'gio-method-badge-connect',
