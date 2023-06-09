@@ -268,6 +268,7 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
 
   public removeChipToFormControl(tag: string): void {
     this.value = [...(this.value ?? [])].filter(v => v !== tag);
+    this.changeDetectorRef.detectChanges();
   }
 
   public onAutocompleteSelect(event: MatAutocompleteSelectedEvent): void {
