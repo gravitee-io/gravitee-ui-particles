@@ -51,8 +51,8 @@ class GioPolicyStudioPoliciesCatalogDialogStoryComponent {
       })
       .afterClosed()
       .pipe(
-        tap(createdOrEdited => {
-          action('createdOrEdited')(createdOrEdited);
+        tap(dialogResult => {
+          action('dialogResult')(dialogResult);
         }),
       )
       .subscribe();
