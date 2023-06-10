@@ -13,10 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { isEmpty } from 'lodash';
 
-import { ConnectorInfo, Step } from '../../models';
+import { ConnectorInfo, Policy, Step } from '../../models';
+import { MatDialog } from '@angular/material/dialog';
+import {
+  GioPolicyStudioPoliciesCatalogDialogComponent,
+  GioPolicyStudioPoliciesCatalogDialogData,
+  GioPolicyStudioPoliciesCatalogDialogResult,
+} from '../policies-catalog-dialog/gio-ps-policies-catalog-dialog.component';
 
 type StepVM =
   | {
@@ -52,9 +58,17 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
   @Input()
   public endConnector: ConnectorInfo[] = [];
 
+  @Input()
+  public policies: Policy[] = [];
+
+  @Output()
+  public stepsChange = new EventEmitter<Step[]>();
+
   public stepsVM: StepVM[] = [];
 
   public isDisabled = false;
+
+  constructor(private readonly matDialog: MatDialog) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.steps || changes.startConnector || changes.endConnector) {
@@ -84,5 +98,38 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
       // Disable phase if there are not start & end connectors
       this.isDisabled = this.stepsVM.filter(step => step.type === 'connectors' && !isEmpty(step.connectors)).length < 2;
     }
+  }
+
+  public onAddPolicy(index: number): void {
+    this.matDialog
+      .open<
+        GioPolicyStudioPoliciesCatalogDialogComponent,
+        GioPolicyStudioPoliciesCatalogDialogData,
+        GioPolicyStudioPoliciesCatalogDialogResult
+      >(GioPolicyStudioPoliciesCatalogDialogComponent, {
+        data: {
+          policies: this.policies,
+          executionPhase: 'REQUEST',
+        },
+        role: 'alertdialog',
+        id: 'gioPolicyStudioPoliciesCatalogDialog',
+      })
+      .afterClosed()
+      .subscribe(result => {
+        if (!this.steps || !result) {
+          return;
+        }
+
+        //Emit change wit new step
+        this.stepsChange.emit([
+          ...this.steps.slice(0, index),
+          {
+            name: 'Step name',
+            enabled: true,
+            policy: result.id,
+          },
+          ...this.steps.slice(index),
+        ]);
+      });
   }
 }
