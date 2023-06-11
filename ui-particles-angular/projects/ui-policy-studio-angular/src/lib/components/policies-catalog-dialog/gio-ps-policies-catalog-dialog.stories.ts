@@ -20,8 +20,9 @@ import { Component, Input } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { action } from '@storybook/addon-actions';
 
-import { fakeAllPolicies } from '../../models/index-testing';
+import { POLICIES_V4_UNREGISTERED_ICON, fakeAllPolicies } from '../../models/index-testing';
 import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
+import { matIconRegisterProvider } from '../../../storybook-utils/mat-icon-register.provider';
 
 import {
   GioPolicyStudioPoliciesCatalogDialogComponent,
@@ -48,6 +49,7 @@ class GioPolicyStudioPoliciesCatalogDialogStoryComponent {
         data: this.dialogData,
         role: 'alertdialog',
         id: 'gioPsPoliciesCatalogDialog',
+        width: '1000px',
       })
       .afterClosed()
       .pipe(
@@ -66,6 +68,7 @@ export default {
     moduleMetadata({
       declarations: [GioPolicyStudioPoliciesCatalogDialogStoryComponent],
       imports: [GioPolicyStudioModule, MatDialogModule, NoopAnimationsModule],
+      providers: [matIconRegisterProvider(POLICIES_V4_UNREGISTERED_ICON.map(policy => ({ id: policy.id, svg: policy.icon })))],
     }),
   ],
   argTypes: {},
@@ -73,6 +76,7 @@ export default {
     component: GioPolicyStudioPoliciesCatalogDialogStoryComponent,
     props: {
       dialogData: {
+        apiType: args.apiType,
         executionPhase: args.executionPhase,
         policies: fakeAllPolicies(),
       },
@@ -83,12 +87,74 @@ export default {
   },
 } as Meta;
 
-export const ListAll: StoryObj = {
+export const PROXY_REQUEST: StoryObj = {
+  name: 'PROXY / REQUEST',
+  args: {
+    executionPhase: 'REQUEST',
+    apiType: 'PROXY',
+  },
   play: context => {
     const button = context.canvasElement.querySelector('#open-dialog') as HTMLButtonElement;
     button.click();
   },
+};
+
+export const PROXY_RESPONSE: StoryObj = {
+  name: 'PROXY / RESPONSE',
+  args: {
+    executionPhase: 'RESPONSE',
+    apiType: 'PROXY',
+  },
+  play: context => {
+    const button = context.canvasElement.querySelector('#open-dialog') as HTMLButtonElement;
+    button.click();
+  },
+};
+
+export const MESSAGE_REQUEST: StoryObj = {
+  name: 'MESSAGE / REQUEST',
   args: {
     executionPhase: 'REQUEST',
+    apiType: 'MESSAGE',
+  },
+  play: context => {
+    const button = context.canvasElement.querySelector('#open-dialog') as HTMLButtonElement;
+    button.click();
+  },
+};
+
+export const MESSAGE_RESPONSE: StoryObj = {
+  name: 'MESSAGE / RESPONSE',
+  args: {
+    executionPhase: 'RESPONSE',
+    apiType: 'MESSAGE',
+  },
+  play: context => {
+    const button = context.canvasElement.querySelector('#open-dialog') as HTMLButtonElement;
+    button.click();
+  },
+};
+
+export const MESSAGE_MESSAGE_REQUEST: StoryObj = {
+  name: 'MESSAGE / MESSAGE_REQUEST',
+  args: {
+    executionPhase: 'MESSAGE_REQUEST',
+    apiType: 'MESSAGE',
+  },
+  play: context => {
+    const button = context.canvasElement.querySelector('#open-dialog') as HTMLButtonElement;
+    button.click();
+  },
+};
+
+export const MESSAGE_MESSAGE_RESPONSE: StoryObj = {
+  name: 'MESSAGE / MESSAGE_RESPONSE',
+  args: {
+    executionPhase: 'MESSAGE_RESPONSE',
+    apiType: 'MESSAGE',
+  },
+  play: context => {
+    const button = context.canvasElement.querySelector('#open-dialog') as HTMLButtonElement;
+    button.click();
   },
 };

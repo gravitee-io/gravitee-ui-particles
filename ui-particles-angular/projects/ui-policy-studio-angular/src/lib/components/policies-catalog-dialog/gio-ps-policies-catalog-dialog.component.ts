@@ -16,14 +16,15 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { ExecutionPhase, Policy } from '../../models';
+import { ApiType, ExecutionPhase, Policy } from '../../models';
 
 export type GioPolicyStudioPoliciesCatalogDialogData = {
   policies: Policy[];
   executionPhase: ExecutionPhase;
+  apiType: ApiType;
 };
 
-export type GioPolicyStudioPoliciesCatalogDialogResult = undefined;
+export type GioPolicyStudioPoliciesCatalogDialogResult = undefined | Policy;
 
 const executionPhaseLabels: Record<ExecutionPhase, string> = {
   REQUEST: 'Request',
@@ -40,17 +41,28 @@ const executionPhaseLabels: Record<ExecutionPhase, string> = {
 export class GioPolicyStudioPoliciesCatalogDialogComponent {
   public policies: Policy[] = [];
 
-  public executionPhaseLabel = 'Unknown';
+  public executionPhaseLabel!: string;
+
+  private selectedPolicy?: Policy;
 
   constructor(
     public dialogRef: MatDialogRef<GioPolicyStudioPoliciesCatalogDialogComponent, GioPolicyStudioPoliciesCatalogDialogResult>,
     @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioPoliciesCatalogDialogData,
   ) {
-    this.policies = flowDialogData.policies;
+    this.policies = flowDialogData.policies.filter(policy => {
+      if (flowDialogData.apiType === 'PROXY') {
+        return policy.proxy?.includes(flowDialogData.executionPhase);
+      }
+      return policy.message?.includes(flowDialogData.executionPhase);
+    });
     this.executionPhaseLabel = executionPhaseLabels[flowDialogData.executionPhase];
   }
 
+  public onSelectPolicy(policy: Policy) {
+    this.selectedPolicy = policy;
+  }
+
   public onAddPolicy() {
-    throw new Error('🚧 WIP');
+    this.dialogRef.close(this.selectedPolicy);
   }
 }
