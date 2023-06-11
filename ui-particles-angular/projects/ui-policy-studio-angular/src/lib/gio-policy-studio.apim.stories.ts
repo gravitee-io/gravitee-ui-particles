@@ -18,6 +18,8 @@ import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { action } from '@storybook/addon-actions';
 
+import { matIconRegisterProvider } from '../storybook-utils/mat-icon-register.provider';
+
 import { GioPolicyStudioModule } from './gio-policy-studio.module';
 import {
   POLICIES_V4_UNREGISTERED_ICON,
@@ -35,9 +37,6 @@ import {
   fakeWebhookMessageEntrypoint,
 } from './models/index-testing';
 import { SaveOutput } from './models';
-import { APP_INITIALIZER } from '@angular/core';
-import { MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
 
 export default {
   title: 'Policy Studio / APIM',
@@ -45,29 +44,7 @@ export default {
     moduleMetadata({
       imports: [BrowserAnimationsModule, GioPolicyStudioModule],
 
-      providers: [
-        // Register icons. This should be also done by the application using the library
-        {
-          provide: APP_INITIALIZER,
-          deps: [MatIconRegistry, DomSanitizer],
-          useFactory: (matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) => () => {
-            const icons = POLICIES_V4_UNREGISTERED_ICON.map(policy => ({ id: policy.id, svg: policy.icon }));
-            const BASE_64_PREFIX = 'data:image/svg+xml;base64,';
-
-            icons.forEach(({ id, svg: icon }) => {
-              if (icon && icon.startsWith(BASE_64_PREFIX)) {
-                matIconRegistry.addSvgIconLiteralInNamespace(
-                  'gio-literal',
-                  id,
-                  // No Sonar because the bypass is deliberate and should only be used with safe data
-                  domSanitizer.bypassSecurityTrustHtml(atob(icon.replace(BASE_64_PREFIX, ''))), // NOSONAR
-                );
-              }
-            });
-          },
-          multi: true,
-        },
-      ],
+      providers: [matIconRegisterProvider(POLICIES_V4_UNREGISTERED_ICON.map(policy => ({ id: policy.id, svg: policy.icon })))],
     }),
   ],
 

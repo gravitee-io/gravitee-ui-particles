@@ -41,7 +41,10 @@
           [startConnector]="entrypointsInfo"
           [endConnector]="endpointsInfo"
           [steps]="flow.request"
+          [apiType]="apiType"
           [policies]="policies"
+          policyExecutionPhase="REQUEST"
+          (stepsChange)="onStepsChange('request', $event)"
         ></gio-ps-flow-details-phase>
         <gio-ps-flow-details-phase
           class="content__phase"
@@ -50,7 +53,10 @@
           [startConnector]="endpointsInfo"
           [endConnector]="entrypointsInfo"
           [steps]="flow.response"
+          [apiType]="apiType"
           [policies]="policies"
+          policyExecutionPhase="RESPONSE"
+          (stepsChange)="onStepsChange('response', $event)"
         ></gio-ps-flow-details-phase>
       </mat-tab>
       <mat-tab label="Event messages">
@@ -61,7 +67,10 @@
           [startConnector]="entrypointsInfo | gioFilterConnectorsByMode : 'PUBLISH'"
           [endConnector]="endpointsInfo | gioFilterConnectorsByMode : 'PUBLISH'"
           [steps]="flow.publish"
+          [apiType]="apiType"
           [policies]="policies"
+          policyExecutionPhase="MESSAGE_RESPONSE"
+          (stepsChange)="onStepsChange('publish', $event)"
         ></gio-ps-flow-details-phase>
         <gio-ps-flow-details-phase
           class="content__phase"
@@ -70,7 +79,10 @@
           [startConnector]="endpointsInfo | gioFilterConnectorsByMode : 'SUBSCRIBE'"
           [endConnector]="entrypointsInfo | gioFilterConnectorsByMode : 'SUBSCRIBE'"
           [steps]="flow.subscribe"
+          [apiType]="apiType"
           [policies]="policies"
+          policyExecutionPhase="MESSAGE_REQUEST"
+          (stepsChange)="onStepsChange('subscribe', $event)"
         ></gio-ps-flow-details-phase>
       </mat-tab>
     </mat-tab-group>
@@ -83,7 +95,10 @@
         [startConnector]="entrypointsInfo | gioFilterConnectorsByMode : 'REQUEST_RESPONSE'"
         [endConnector]="endpointsInfo | gioFilterConnectorsByMode : 'REQUEST_RESPONSE'"
         [steps]="flow.request"
+        [apiType]="apiType"
         [policies]="policies"
+        policyExecutionPhase="REQUEST"
+        (stepsChange)="onStepsChange('request', $event)"
       ></gio-ps-flow-details-phase>
       <gio-ps-flow-details-phase
         class="content__phase"
@@ -92,7 +107,10 @@
         [startConnector]="endpointsInfo | gioFilterConnectorsByMode : 'REQUEST_RESPONSE'"
         [endConnector]="entrypointsInfo | gioFilterConnectorsByMode : 'REQUEST_RESPONSE'"
         [steps]="flow.response"
+        [apiType]="apiType"
         [policies]="policies"
+        policyExecutionPhase="RESPONSE"
+        (stepsChange)="onStepsChange('response', $event)"
       ></gio-ps-flow-details-phase>
     </div>
   </div>

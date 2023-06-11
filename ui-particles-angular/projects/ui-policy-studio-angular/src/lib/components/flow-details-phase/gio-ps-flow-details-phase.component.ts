@@ -15,9 +15,9 @@
  */
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { isEmpty } from 'lodash';
-
-import { ConnectorInfo, Policy, Step } from '../../models';
 import { MatDialog } from '@angular/material/dialog';
+
+import { ApiType, ConnectorInfo, ExecutionPhase, Policy, Step } from '../../models';
 import {
   GioPolicyStudioPoliciesCatalogDialogComponent,
   GioPolicyStudioPoliciesCatalogDialogData,
@@ -59,7 +59,13 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
   public endConnector: ConnectorInfo[] = [];
 
   @Input()
+  public apiType!: ApiType;
+
+  @Input()
   public policies: Policy[] = [];
+
+  @Input()
+  public policyExecutionPhase!: ExecutionPhase;
 
   @Output()
   public stepsChange = new EventEmitter<Step[]>();
@@ -109,10 +115,12 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
       >(GioPolicyStudioPoliciesCatalogDialogComponent, {
         data: {
           policies: this.policies,
-          executionPhase: 'REQUEST',
+          executionPhase: this.policyExecutionPhase,
+          apiType: this.apiType,
         },
         role: 'alertdialog',
         id: 'gioPolicyStudioPoliciesCatalogDialog',
+        width: '1000px',
       })
       .afterClosed()
       .subscribe(result => {

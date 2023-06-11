@@ -22,7 +22,7 @@ import {
   GioPolicyStudioFlowMessageFormDialogComponent,
   GioPolicyStudioFlowMessageFormDialogData,
 } from '../flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
-import { ApiType, ConnectorInfo, Policy } from '../../models';
+import { ApiType, ConnectorInfo, Policy, Step } from '../../models';
 import {
   GioPolicyStudioFlowProxyFormDialogComponent,
   GioPolicyStudioFlowProxyFormDialogData,
@@ -103,5 +103,16 @@ export class GioPolicyStudioDetailsComponent {
 
   public onDeleteFlow(): void {
     this.deleteFlow.emit(this.flow);
+  }
+
+  public onStepsChange(flowPhase: 'request' | 'response' | 'publish' | 'subscribe', steps: Step[]): void {
+    if (!this.flow) {
+      return;
+    }
+
+    this.flowChange.emit({
+      ...this.flow,
+      [flowPhase]: steps,
+    });
   }
 }

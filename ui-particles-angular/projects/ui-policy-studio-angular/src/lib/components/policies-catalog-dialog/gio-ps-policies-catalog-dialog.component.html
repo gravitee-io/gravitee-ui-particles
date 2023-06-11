@@ -26,14 +26,14 @@
 <mat-dialog-content class="policiesCatalog">
   <div *ngFor="let policy of policies" class="policiesCatalog__policy">
     <div class="policiesCatalog__policy__head">
-      <mat-icon class="policiesCatalog__policy__head__icon" [svgIcon]="policy.icon"></mat-icon>
+      <mat-icon class="policiesCatalog__policy__head__icon" [svgIcon]="policy.icon ?? 'gio:puzzle'"></mat-icon>
 
       <span *ngIf="policy.name" class="policiesCatalog__policy__head__name">{{ policy.name }}</span>
     </div>
 
     <div *ngIf="policy.description" class="policiesCatalog__policy__description">{{ policy.description }}</div>
 
-    <button class="policiesCatalog__policy__selectBtn" mat-stroked-button role="dialog">Select</button>
+    <button class="policiesCatalog__policy__selectBtn" mat-stroked-button role="dialog" (click)="onSelectPolicy(policy)">Select</button>
   </div>
 </mat-dialog-content>
 

@@ -28,13 +28,19 @@ $typography: map.get(gio.$mat-theme, typography);
 }
 
 .policiesCatalog {
+  --grid-layout-gap: 16px;
+  --grid-column-count: 4;
+  --grid-item-min-width: 200px;
+  --gap-count: calc(var(--grid-column-count) - 1);
+  --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
+  --grid-item-max-width: calc((100% - var(--total-gap-width)) / var(--grid-column-count));
+
   display: grid;
-  grid-gap: 16px;
-  grid-template-columns: repeat(3, 1fr);
+  grid-gap: var(--grid-layout-gap);
+  grid-template-columns: repeat(auto-fill, minmax(max(var(--grid-item-min-width), var(--grid-item-max-width)), 1fr));
 
   &__policy {
     display: flex;
-    min-width: 300px;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;

@@ -25,6 +25,7 @@ import { MatIconTestingModule } from '@angular/material/icon/testing';
 
 import { fakeAllPolicies } from '../../models/index-testing';
 import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
+import { ApiType, ExecutionPhase, Policy } from '../../models';
 
 import {
   GioPolicyStudioPoliciesCatalogDialogComponent,
@@ -64,7 +65,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
   let fixture: ComponentFixture<TestComponent>;
   let loader: HarnessLoader;
 
-  beforeEach(() => {
+  const createTestingComponent = (apiType: ApiType, executionPhase: ExecutionPhase) => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
       imports: [GioPolicyStudioModule, MatDialogModule, NoopAnimationsModule, MatIconTestingModule],
@@ -78,20 +79,94 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
     component.dialogData = {
+      apiType,
       policies: fakeAllPolicies(),
-      executionPhase: 'REQUEST',
+      executionPhase,
     };
     loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
+  };
+  describe('When ApiType = MESSAGE and ExecutionPhase = REQUEST', () => {
+    beforeEach(() => {
+      createTestingComponent('MESSAGE', 'REQUEST');
+    });
+
+    it('should policies catalog', async () => {
+      await componentTestingOpenDialog();
+
+      await expectPoliciesCatalogContent('Request', p => p.message?.includes('REQUEST'));
+    });
   });
 
-  it('should display phase and policies catalog', async () => {
-    await componentTestingOpenDialog();
+  describe('When ApiType = MESSAGE and ExecutionPhase = RESPONSE', () => {
+    beforeEach(() => {
+      createTestingComponent('MESSAGE', 'RESPONSE');
+    });
 
+    it('should policies catalog', async () => {
+      await componentTestingOpenDialog();
+
+      await expectPoliciesCatalogContent('Response', p => p.message?.includes('RESPONSE'));
+    });
+  });
+
+  describe('When ApiType = MESSAGE and ExecutionPhase = MESSAGE_REQUEST', () => {
+    beforeEach(() => {
+      createTestingComponent('MESSAGE', 'MESSAGE_REQUEST');
+    });
+
+    it('should policies catalog', async () => {
+      await componentTestingOpenDialog();
+
+      await expectPoliciesCatalogContent('Publish', p => p.message?.includes('MESSAGE_REQUEST'));
+    });
+  });
+
+  describe('When ApiType = MESSAGE and ExecutionPhase = MESSAGE_RESPONSE', () => {
+    beforeEach(() => {
+      createTestingComponent('MESSAGE', 'MESSAGE_RESPONSE');
+    });
+
+    it('should policies catalog', async () => {
+      await componentTestingOpenDialog();
+
+      await expectPoliciesCatalogContent('Subscribe', p => p.message?.includes('MESSAGE_RESPONSE'));
+    });
+  });
+
+  describe('When ApiType = PROXY and ExecutionPhase = REQUEST', () => {
+    beforeEach(() => {
+      createTestingComponent('PROXY', 'REQUEST');
+    });
+
+    it('should policies catalog', async () => {
+      await componentTestingOpenDialog();
+
+      await expectPoliciesCatalogContent('Request', p => p.proxy?.includes('REQUEST'));
+    });
+  });
+
+  describe('When ApiType = PROXY and ExecutionPhase = RESPONSE', () => {
+    beforeEach(() => {
+      createTestingComponent('PROXY', 'RESPONSE');
+    });
+
+    it('should policies catalog', async () => {
+      await componentTestingOpenDialog();
+
+      await expectPoliciesCatalogContent('Response', p => p.proxy?.includes('RESPONSE'));
+    });
+  });
+
+  async function expectPoliciesCatalogContent(phaseLabel: string, policiesFilter: (policy: Policy) => boolean | undefined) {
     const phaseDialog = await loader.getHarness(GioPolicyStudioPoliciesCatalogDialogHarness);
 
-    expect(await phaseDialog.getPhase()).toEqual('Request');
-    expect(await phaseDialog.getPoliciesName()).toEqual(fakeAllPolicies().map(policy => policy.name));
-  });
+    expect(await phaseDialog.getPhase()).toEqual(phaseLabel);
+    expect(await phaseDialog.getPoliciesName()).toEqual(
+      fakeAllPolicies()
+        .filter(policiesFilter)
+        .map(policy => policy.name),
+    );
+  }
 
   async function componentTestingOpenDialog() {
     const openDialogButton = await loader.getHarness(MatButtonHarness);
