@@ -13,35 +13,50 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { Step } from '../../models';
+import { Policy, Step } from '../../models';
 import {
   GioPolicyStudioPolicyFormDialogComponent,
   GioPolicyStudioPolicyFormDialogData,
   GioPolicyStudioPolicyFormDialogResult,
 } from '../policy-form-dialog/gio-ps-policy-form-dialog.component';
-import { fakeTestPolicy } from '../../models/index-testing';
 
 @Component({
   selector: 'gio-ps-flow-details-phase-policy',
   templateUrl: './gio-ps-flow-details-phase-policy.component.html',
   styleUrls: ['./gio-ps-flow-details-phase-policy.component.scss'],
 })
-export class GioPolicyStudioDetailsPhasePolicyComponent {
+export class GioPolicyStudioDetailsPhasePolicyComponent implements OnChanges {
   @Input()
   public step!: Step;
 
+  @Input()
+  public policies: Policy[] = [];
+
+  public policy?: Policy;
+
   constructor(private readonly matDialog: MatDialog) {}
 
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.policies || changes.step) {
+      this.policy = this.policies.find(policy => policy.id === this.step.policy);
+    }
+  }
+
   public onEdit() {
+    if (!this.policy) {
+      // TODO: Handle UseCase when policy is not found. (Like if the plugin is removed from the BackEnd)
+      return;
+    }
+
     this.matDialog
       .open<GioPolicyStudioPolicyFormDialogComponent, GioPolicyStudioPolicyFormDialogData, GioPolicyStudioPolicyFormDialogResult>(
         GioPolicyStudioPolicyFormDialogComponent,
         {
           data: {
-            policy: fakeTestPolicy(),
+            policy: this.policy,
             step: this.step,
           },
           role: 'alertdialog',

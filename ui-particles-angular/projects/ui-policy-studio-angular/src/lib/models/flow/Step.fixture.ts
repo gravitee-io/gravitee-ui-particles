@@ -22,7 +22,7 @@ export function fakeMockPolicyStep(modifier?: Partial<Step> | ((base: Step) => S
     name: 'Mock Policy',
     description: 'Mock Policy description',
     enabled: true,
-    policy: 'mock',
+    policy: 'test-policy',
   };
 
   if (isFunction(modifier)) {
@@ -60,12 +60,12 @@ export function fakeRateLimitStep(modifier?: Partial<Step> | ((base: Step) => St
   };
 }
 
-export function fakeXmlToJsonStep(modifier?: Partial<Step> | ((base: Step) => Step)): Step {
+export function fakeJsonToXmlStep(modifier?: Partial<Step> | ((base: Step) => Step)): Step {
   const base: Step = {
-    name: 'XML to JSON',
-    description: 'XML to JSON',
+    name: 'JSON to XML',
+    description: 'JSON to XML',
     enabled: true,
-    policy: 'xml-json',
+    policy: 'json-xml',
     configuration: {},
   };
 

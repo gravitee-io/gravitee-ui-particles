@@ -18,7 +18,7 @@
 
 <div class="info">
   <div class="info__primary">
-    <mat-icon class="info__primary__icon" svgIcon="gio:gift"></mat-icon>
+    <mat-icon class="info__primary__icon" [svgIcon]="policy?.icon ?? 'gio:puzzle'"></mat-icon>
 
     <span *ngIf="step.name" class="info__primary__name">{{ step.name }}</span>
   </div>

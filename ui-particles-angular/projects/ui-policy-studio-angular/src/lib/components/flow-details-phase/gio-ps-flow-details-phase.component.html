@@ -50,7 +50,11 @@
       </ng-container>
       <!-- Policy -->
       <ng-container *ngIf="stepVM.type === 'policy'">
-        <gio-ps-flow-details-phase-policy class="content__step__policy" [step]="stepVM.step"></gio-ps-flow-details-phase-policy>
+        <gio-ps-flow-details-phase-policy
+          class="content__step__policy"
+          [policies]="policies"
+          [step]="stepVM.step"
+        ></gio-ps-flow-details-phase-policy>
 
         <!-- Add policy button -->
         <mat-icon class="content__step__rightArrow" svgIcon="gio:arrow-right"></mat-icon>
