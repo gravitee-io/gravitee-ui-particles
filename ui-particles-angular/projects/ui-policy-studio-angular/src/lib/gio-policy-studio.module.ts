@@ -38,6 +38,7 @@ import { GioPolicyStudioDetailsPhaseComponent } from './components/flow-details-
 import { GioPolicyStudioFlowExecutionFormDialogComponent } from './components/flow-execution-form-dialog/gio-ps-flow-execution-form-dialog.component';
 import { GioFilterConnectorsByModePipe } from './components/filter-pipe/gio-flter-connectors-by-mode.pipe';
 import { GioPolicyStudioPoliciesCatalogDialogComponent } from './components/policies-catalog-dialog/gio-ps-policies-catalog-dialog.component';
+import { GioPolicyStudioPolicyFormDialogComponent } from './components/policy-form-dialog/gio-ps-policy-form-dialog.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { GioPolicyStudioPoliciesCatalogDialogComponent } from './components/poli
     GioPolicyStudioDetailsPhasePolicyComponent,
     GioFilterConnectorsByModePipe,
     GioPolicyStudioPoliciesCatalogDialogComponent,
+    GioPolicyStudioPolicyFormDialogComponent,
   ],
   imports: [
     CommonModule,
