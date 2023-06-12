@@ -16,6 +16,6 @@
 
 import { ComponentHarness } from '@angular/cdk/testing';
 
-export class GioPolicyStudioPolicyFormHarness extends ComponentHarness {
-  public static hostSelector = 'gio-ps-policy-form';
+export class GioPolicyStudioStepFormHarness extends ComponentHarness {
+  public static hostSelector = 'gio-ps-step-form';
 }
