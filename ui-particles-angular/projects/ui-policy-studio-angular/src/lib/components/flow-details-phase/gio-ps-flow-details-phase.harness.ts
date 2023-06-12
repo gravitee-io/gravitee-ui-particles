@@ -18,7 +18,7 @@ import { BaseHarnessFilters, ComponentHarness, HarnessPredicate, parallel } from
 import { DivHarness, SpanHarness } from '@gravitee/ui-particles-angular/testing';
 import { isEmpty } from 'lodash';
 
-import { GioPolicyStudioDetailsPhasePolicyHarness } from '../flow-details-phase-policy/gio-ps-flow-details-phase-policy.harness';
+import { GioPolicyStudioDetailsPhaseStepHarness } from '../flow-details-phase-step/gio-ps-flow-details-phase-step.harness';
 
 export type PhaseType = 'REQUEST' | 'RESPONSE' | 'PUBLISH' | 'SUBSCRIBE';
 
@@ -54,7 +54,7 @@ export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
   public async getSteps(): Promise<
     | {
         text: string;
-        type: 'connector' | 'policy';
+        type: 'connector' | 'step';
       }[]
     | null
   > {
@@ -76,8 +76,8 @@ export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
         }
 
         return {
-          text: await (await stepDiv.childLocatorFor(GioPolicyStudioDetailsPhasePolicyHarness)()).getName(),
-          type: idConnector ? 'connector' : 'policy',
+          text: await (await stepDiv.childLocatorFor(GioPolicyStudioDetailsPhaseStepHarness)()).getName(),
+          type: idConnector ? 'connector' : 'step',
         };
       }),
     );

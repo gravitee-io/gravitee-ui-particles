@@ -33,7 +33,7 @@ import { GioPolicyStudioFlowsMenuComponent } from './components/flows-menu/gio-p
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
 import { GioPolicyStudioFlowProxyFormDialogComponent } from './components/flow-form-dialog/flow-proxy-form-dialog/gio-ps-flow-proxy-form-dialog.component';
 import { GioPolicyStudioDetailsInfoBarComponent } from './components/flow-details-info-bar/gio-ps-flow-details-info-bar.component';
-import { GioPolicyStudioDetailsPhasePolicyComponent } from './components/flow-details-phase-policy/gio-ps-flow-details-phase-policy.component';
+import { GioPolicyStudioDetailsPhaseStepComponent } from './components/flow-details-phase-step/gio-ps-flow-details-phase-step.component';
 import { GioPolicyStudioDetailsPhaseComponent } from './components/flow-details-phase/gio-ps-flow-details-phase.component';
 import { GioPolicyStudioFlowExecutionFormDialogComponent } from './components/flow-execution-form-dialog/gio-ps-flow-execution-form-dialog.component';
 import { GioFilterConnectorsByModePipe } from './components/filter-pipe/gio-flter-connectors-by-mode.pipe';
@@ -51,7 +51,7 @@ import { GioPolicyStudioPolicyFormComponent } from './components/policy-form/gio
     GioPolicyStudioFlowProxyFormDialogComponent,
     GioPolicyStudioDetailsInfoBarComponent,
     GioPolicyStudioDetailsPhaseComponent,
-    GioPolicyStudioDetailsPhasePolicyComponent,
+    GioPolicyStudioDetailsPhaseStepComponent,
     GioFilterConnectorsByModePipe,
     GioPolicyStudioPoliciesCatalogDialogComponent,
     GioPolicyStudioPolicyFormDialogComponent,

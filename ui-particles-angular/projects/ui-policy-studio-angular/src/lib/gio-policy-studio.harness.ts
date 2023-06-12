@@ -112,7 +112,7 @@ export class GioPolicyStudioHarness extends ComponentHarness {
   ): Promise<
     | {
         text: string;
-        type: 'connector' | 'policy';
+        type: 'connector' | 'step';
       }[]
     | 'DISABLED'
   > {

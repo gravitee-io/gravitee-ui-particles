@@ -34,7 +34,7 @@ $typography: map.get(gio.$mat-theme, typography);
   margin-left: 4px;
   gap: 4px;
 
-  &__primary {
+  &__head {
     display: flex;
     align-items: center;
 
@@ -52,7 +52,7 @@ $typography: map.get(gio.$mat-theme, typography);
     }
   }
 
-  &__secondary {
+  &__description {
     @include mat.typography-level($typography, caption);
 
     display: -webkit-box;
