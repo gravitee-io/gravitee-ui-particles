@@ -1,3 +1,10 @@
+# [7.11.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.10.1...v7.11.0) (2023-06-12)
+
+
+### Features
+
+* **gio-menu:** add optional rigth icon to items ([15f2e8b](https://github.com/gravitee-io/gravitee-ui-particles/commit/15f2e8b361f44bdda8b318188c3450bcda13906b))
+
 ## [7.10.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.10.0...v7.10.1) (2023-06-12)
 
 
