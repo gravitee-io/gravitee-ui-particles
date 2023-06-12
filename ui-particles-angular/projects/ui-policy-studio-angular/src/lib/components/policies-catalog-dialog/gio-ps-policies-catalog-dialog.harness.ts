@@ -14,9 +14,13 @@
  * limitations under the License.
  */
 import { ComponentHarness, parallel } from '@angular/cdk/testing';
+import { MatButtonHarness } from '@angular/material/button/testing';
+import { DivHarness } from '@gravitee/ui-particles-angular/testing';
 
 export class GioPolicyStudioPoliciesCatalogDialogHarness extends ComponentHarness {
   public static hostSelector = 'gio-ps-policies-catalog-dialog';
+
+  private policiesLocator = this.locatorForAll(DivHarness.with({ selector: '.policiesCatalog__policy' }));
 
   public async getPhase(): Promise<string> {
     const phase = await this.locatorFor('.title__phase')();
@@ -26,5 +30,20 @@ export class GioPolicyStudioPoliciesCatalogDialogHarness extends ComponentHarnes
   public async getPoliciesName(): Promise<string[]> {
     const policies = await this.locatorForAll('.policiesCatalog__policy__head__name')();
     return parallel(() => policies.map(policy => policy.text()));
+  }
+
+  public async selectPolicy(policyName: string): Promise<void> {
+    const policies = await this.policiesLocator();
+    const policy = policies.find(async p => (await p.getText({ childSelector: '.policiesCatalog__policy__head__name' })) === policyName);
+    if (!policy) {
+      throw new Error(`Policy ${policyName} not found`);
+    }
+    const selectBtn = await policy.childLocatorFor(MatButtonHarness.with({ selector: '.policiesCatalog__policy__selectBtn' }))();
+    await selectBtn.click();
+  }
+
+  public async getSelectedPolicyName(): Promise<string> {
+    const policy = await this.locatorFor('.policyForm__info__head__name')();
+    return policy.text();
   }
 }

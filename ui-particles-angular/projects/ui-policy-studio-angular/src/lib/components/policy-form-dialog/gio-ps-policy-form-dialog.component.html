@@ -25,9 +25,11 @@
   </button>
 </h2>
 
-<mat-dialog-content class="content"> WIP </mat-dialog-content>
+<mat-dialog-content class="content">
+  <gio-ps-policy-form [policy]="policy" [step]="step"></gio-ps-policy-form>
+</mat-dialog-content>
 
 <mat-dialog-actions class="actions">
   <button class="actions__cancelBtn" mat-flat-button [mat-dialog-close]="">Cancel</button>
-  <button class="actions__addBtn" color="primary" mat-stroked-button role="dialog" (click)="onAddPolicy()">Add policy</button>
+  <button class="actions__saveBtn" color="primary" mat-stroked-button role="dialog" (click)="onSave()">Save</button>
 </mat-dialog-actions>

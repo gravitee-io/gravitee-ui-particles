@@ -16,10 +16,11 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { Policy } from '../../models';
+import { Policy, Step } from '../../models';
 
 export type GioPolicyStudioPolicyFormDialogData = {
   policy: Policy;
+  step: Step;
 };
 
 export type GioPolicyStudioPolicyFormDialogResult = undefined;
@@ -30,12 +31,18 @@ export type GioPolicyStudioPolicyFormDialogResult = undefined;
   styleUrls: ['./gio-ps-policy-form-dialog.component.scss'],
 })
 export class GioPolicyStudioPolicyFormDialogComponent {
-  public policy?: Policy;
+  public policy!: Policy;
+  public step!: Step;
 
   constructor(
     public dialogRef: MatDialogRef<GioPolicyStudioPolicyFormDialogComponent, GioPolicyStudioPolicyFormDialogResult>,
     @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioPolicyFormDialogData,
   ) {
     this.policy = flowDialogData.policy;
+    this.step = flowDialogData.step;
+  }
+
+  public onSave(): void {
+    this.dialogRef.close();
   }
 }

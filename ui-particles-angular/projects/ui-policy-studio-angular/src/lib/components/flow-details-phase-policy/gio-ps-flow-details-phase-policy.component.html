@@ -29,9 +29,9 @@
 <button class="menuBtn" mat-icon-button [matMenuTriggerFor]="policyMenu"><mat-icon svgIcon="gio:more-vertical"></mat-icon></button>
 
 <mat-menu #policyMenu="matMenu">
-  <button disabled mat-menu-item (click)="onEdit()">
+  <button mat-menu-item (click)="onEdit()">
     <mat-icon svgIcon="gio:edit-pencil"></mat-icon>
-    <span>Edit 🚧</span>
+    <span>Edit</span>
   </button>
 
   <button disabled mat-menu-item (click)="onDisable()">

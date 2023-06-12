@@ -87,3 +87,47 @@ $typography: map.get(gio.$mat-theme, typography);
     }
   }
 }
+
+.policyForm {
+  &__goBackBtn {
+    margin: 16px 0;
+  }
+
+  &__info {
+    display: flex;
+    max-width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 16px;
+    gap: 4px;
+
+    &__head {
+      display: flex;
+      align-items: center;
+
+      &__icon {
+        min-width: 24px;
+        flex: 1 1 24px;
+        margin-right: 8px;
+      }
+
+      &__name {
+        flex: 1 1 auto;
+      }
+    }
+
+    &__description {
+      @include mat.typography-level($typography, caption);
+
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      color: mat.get-color-from-palette(gio.$mat-space-palette, lighter40);
+      -webkit-line-clamp: 2;
+
+      &:empty {
+        display: none;
+      }
+    }
+  }
+}
