@@ -18,10 +18,10 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { Policy, Step } from '../../models';
 import {
-  GioPolicyStudioPolicyFormDialogComponent,
-  GioPolicyStudioPolicyFormDialogData,
-  GioPolicyStudioPolicyFormDialogResult,
-} from '../policy-form-dialog/gio-ps-policy-form-dialog.component';
+  GioPolicyStudioStepEditDialogComponent,
+  GioPolicyStudioStepEditDialogData,
+  GioPolicyStudioStepEditDialogResult,
+} from '../step-edit-dialog/gio-ps-step-edit-dialog.component';
 
 @Component({
   selector: 'gio-ps-flow-details-phase-step',
@@ -52,8 +52,8 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
     }
 
     this.matDialog
-      .open<GioPolicyStudioPolicyFormDialogComponent, GioPolicyStudioPolicyFormDialogData, GioPolicyStudioPolicyFormDialogResult>(
-        GioPolicyStudioPolicyFormDialogComponent,
+      .open<GioPolicyStudioStepEditDialogComponent, GioPolicyStudioStepEditDialogData, GioPolicyStudioStepEditDialogResult>(
+        GioPolicyStudioStepEditDialogComponent,
         {
           data: {
             policy: this.policy,

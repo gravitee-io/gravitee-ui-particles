@@ -15,8 +15,8 @@
  */
 import { ComponentHarness } from '@angular/cdk/testing';
 
-export class GioPolicyStudioPolicyFormDialogHarness extends ComponentHarness {
-  public static hostSelector = 'gio-ps-policy-form-dialog';
+export class GioPolicyStudioStepEditDialogHarness extends ComponentHarness {
+  public static hostSelector = 'gio-ps-step-edit-dialog';
 
   public async getStepName(): Promise<string> {
     return (await this.locatorFor('.title__name')()).text();
