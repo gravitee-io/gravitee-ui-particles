@@ -14,8 +14,15 @@
  * limitations under the License.
  */
 import { Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 import { Step } from '../../models';
+import {
+  GioPolicyStudioPolicyFormDialogComponent,
+  GioPolicyStudioPolicyFormDialogData,
+  GioPolicyStudioPolicyFormDialogResult,
+} from '../policy-form-dialog/gio-ps-policy-form-dialog.component';
+import { fakeTestPolicy } from '../../models/index-testing';
 
 @Component({
   selector: 'gio-ps-flow-details-phase-policy',
@@ -26,8 +33,24 @@ export class GioPolicyStudioDetailsPhasePolicyComponent {
   @Input()
   public step!: Step;
 
+  constructor(private readonly matDialog: MatDialog) {}
+
   public onEdit() {
-    throw new Error('Wip');
+    this.matDialog
+      .open<GioPolicyStudioPolicyFormDialogComponent, GioPolicyStudioPolicyFormDialogData, GioPolicyStudioPolicyFormDialogResult>(
+        GioPolicyStudioPolicyFormDialogComponent,
+        {
+          data: {
+            policy: fakeTestPolicy(),
+            step: this.step,
+          },
+          role: 'alertdialog',
+          id: 'gioPolicyStudioPolicyFormDialog',
+          width: '1000px',
+        },
+      )
+      .afterClosed()
+      .subscribe();
   }
 
   public onDisable() {

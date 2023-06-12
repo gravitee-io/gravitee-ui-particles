@@ -23,7 +23,7 @@
   </button>
 </h2>
 
-<mat-dialog-content class="policiesCatalog">
+<mat-dialog-content *ngIf="!selectedPolicy" class="policiesCatalog">
   <div *ngFor="let policy of policies" class="policiesCatalog__policy">
     <div class="policiesCatalog__policy__head">
       <mat-icon class="policiesCatalog__policy__head__icon" [svgIcon]="policy.icon ?? 'gio:puzzle'"></mat-icon>
@@ -37,7 +37,28 @@
   </div>
 </mat-dialog-content>
 
+<mat-dialog-content *ngIf="selectedPolicy" class="policyForm">
+  <button class="policyForm__goBackBtn" mat-stroked-button (click)="onGoBack()">
+    <mat-icon svgIcon="gio:arrow-left"></mat-icon>
+    Go back
+  </button>
+
+  <div class="policyForm__info">
+    <div class="policyForm__info__head">
+      <mat-icon class="policyForm__info__head__icon" [svgIcon]="selectedPolicy.icon ?? 'gio:puzzle'"></mat-icon>
+
+      <span *ngIf="selectedPolicy.name" class="policyForm__info__head__name">{{ selectedPolicy.name }}</span>
+    </div>
+
+    <div *ngIf="selectedPolicy.description" class="policyForm__info__description">{{ selectedPolicy.description }}</div>
+  </div>
+
+  <gio-ps-policy-form [policy]="selectedPolicy"></gio-ps-policy-form>
+</mat-dialog-content>
+
 <mat-dialog-actions class="actions">
   <button class="actions__cancelBtn" mat-flat-button [mat-dialog-close]="">Cancel</button>
-  <button class="actions__addBtn" color="primary" mat-stroked-button role="dialog" (click)="onAddPolicy()">Add policy</button>
+  <button *ngIf="selectedPolicy" class="actions__addBtn" color="primary" mat-stroked-button role="dialog" (click)="onAddPolicy()">
+    Add policy
+  </button>
 </mat-dialog-actions>

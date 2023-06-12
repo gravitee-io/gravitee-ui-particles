@@ -43,7 +43,7 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent {
 
   public executionPhaseLabel!: string;
 
-  private selectedPolicy?: Policy;
+  public selectedPolicy?: Policy;
 
   constructor(
     public dialogRef: MatDialogRef<GioPolicyStudioPoliciesCatalogDialogComponent, GioPolicyStudioPoliciesCatalogDialogResult>,
@@ -64,5 +64,9 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent {
 
   public onAddPolicy() {
     this.dialogRef.close(this.selectedPolicy);
+  }
+
+  public onGoBack() {
+    this.selectedPolicy = undefined;
   }
 }

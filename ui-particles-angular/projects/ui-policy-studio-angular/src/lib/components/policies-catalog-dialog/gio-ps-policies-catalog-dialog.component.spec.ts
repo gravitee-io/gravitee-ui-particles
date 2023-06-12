@@ -90,10 +90,19 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
       createTestingComponent('MESSAGE', 'REQUEST');
     });
 
-    it('should policies catalog', async () => {
+    it('should display policies catalog', async () => {
       await componentTestingOpenDialog();
 
       await expectPoliciesCatalogContent('Request', p => p.message?.includes('REQUEST'));
+    });
+
+    it('should select a policy', async () => {
+      await componentTestingOpenDialog();
+
+      const policiesCatalogDialog = await loader.getHarness(GioPolicyStudioPoliciesCatalogDialogHarness);
+      await policiesCatalogDialog.selectPolicy('Policy to test UI');
+
+      expect(await policiesCatalogDialog.getSelectedPolicyName()).toEqual('Policy to test UI');
     });
   });
 
@@ -102,7 +111,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
       createTestingComponent('MESSAGE', 'RESPONSE');
     });
 
-    it('should policies catalog', async () => {
+    it('should display policies catalog', async () => {
       await componentTestingOpenDialog();
 
       await expectPoliciesCatalogContent('Response', p => p.message?.includes('RESPONSE'));
@@ -114,7 +123,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
       createTestingComponent('MESSAGE', 'MESSAGE_REQUEST');
     });
 
-    it('should policies catalog', async () => {
+    it('should display policies catalog', async () => {
       await componentTestingOpenDialog();
 
       await expectPoliciesCatalogContent('Publish', p => p.message?.includes('MESSAGE_REQUEST'));
@@ -126,7 +135,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
       createTestingComponent('MESSAGE', 'MESSAGE_RESPONSE');
     });
 
-    it('should policies catalog', async () => {
+    it('should display policies catalog', async () => {
       await componentTestingOpenDialog();
 
       await expectPoliciesCatalogContent('Subscribe', p => p.message?.includes('MESSAGE_RESPONSE'));
@@ -138,7 +147,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
       createTestingComponent('PROXY', 'REQUEST');
     });
 
-    it('should policies catalog', async () => {
+    it('should display policies catalog', async () => {
       await componentTestingOpenDialog();
 
       await expectPoliciesCatalogContent('Request', p => p.proxy?.includes('REQUEST'));
@@ -150,7 +159,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
       createTestingComponent('PROXY', 'RESPONSE');
     });
 
-    it('should policies catalog', async () => {
+    it('should display policies catalog', async () => {
       await componentTestingOpenDialog();
 
       await expectPoliciesCatalogContent('Response', p => p.proxy?.includes('RESPONSE'));

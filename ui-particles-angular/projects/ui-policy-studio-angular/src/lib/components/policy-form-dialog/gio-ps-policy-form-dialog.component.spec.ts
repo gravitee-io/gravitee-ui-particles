@@ -23,9 +23,9 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { InteractivityChecker } from '@angular/cdk/a11y';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 
-import { fakeTestPolicy } from '../../models/index-testing';
+import { fakeMockPolicyStep, fakeTestPolicy } from '../../models/index-testing';
 import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
-import { Policy } from '../../models';
+import { Policy, Step } from '../../models';
 
 import {
   GioPolicyStudioPolicyFormDialogComponent,
@@ -64,7 +64,7 @@ describe('GioPolicyStudioPolicyFormDialogComponent', () => {
   let fixture: ComponentFixture<TestComponent>;
   let loader: HarnessLoader;
 
-  const createTestingComponent = (policy: Policy) => {
+  const createTestingComponent = (policy: Policy, step: Step) => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
       imports: [GioPolicyStudioModule, MatDialogModule, NoopAnimationsModule, MatIconTestingModule],
@@ -79,12 +79,13 @@ describe('GioPolicyStudioPolicyFormDialogComponent', () => {
     component = fixture.componentInstance;
     component.dialogData = {
       policy,
+      step,
     };
     loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
   };
 
   it('should policies catalog', async () => {
-    createTestingComponent(fakeTestPolicy());
+    createTestingComponent(fakeTestPolicy(), fakeMockPolicyStep());
 
     await componentTestingOpenDialog();
 
