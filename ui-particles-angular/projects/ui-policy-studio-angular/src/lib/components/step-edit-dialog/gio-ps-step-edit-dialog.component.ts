@@ -18,25 +18,25 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { Policy, Step } from '../../models';
 
-export type GioPolicyStudioPolicyFormDialogData = {
+export type GioPolicyStudioStepEditDialogData = {
   policy: Policy;
   step: Step;
 };
 
-export type GioPolicyStudioPolicyFormDialogResult = undefined | Step;
+export type GioPolicyStudioStepEditDialogResult = undefined | Step;
 
 @Component({
-  selector: 'gio-ps-policy-form-dialog',
-  templateUrl: './gio-ps-policy-form-dialog.component.html',
-  styleUrls: ['./gio-ps-policy-form-dialog.component.scss'],
+  selector: 'gio-ps-step-edit-dialog',
+  templateUrl: './gio-ps-step-edit-dialog.component.html',
+  styleUrls: ['./gio-ps-step-edit-dialog.component.scss'],
 })
-export class GioPolicyStudioPolicyFormDialogComponent {
+export class GioPolicyStudioStepEditDialogComponent {
   public policy!: Policy;
   public step!: Step;
 
   constructor(
-    public dialogRef: MatDialogRef<GioPolicyStudioPolicyFormDialogComponent, GioPolicyStudioPolicyFormDialogResult>,
-    @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioPolicyFormDialogData,
+    public dialogRef: MatDialogRef<GioPolicyStudioStepEditDialogComponent, GioPolicyStudioStepEditDialogResult>,
+    @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioStepEditDialogData,
   ) {
     this.policy = flowDialogData.policy;
     this.step = flowDialogData.step;

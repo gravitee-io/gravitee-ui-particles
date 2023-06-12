@@ -28,24 +28,24 @@ import { GioPolicyStudioService } from '../../gio-policy-studio.service';
 import { fakePolicySchema } from '../../models/policy/PolicySchema.fixture';
 
 import {
-  GioPolicyStudioPolicyFormDialogComponent,
-  GioPolicyStudioPolicyFormDialogData,
-  GioPolicyStudioPolicyFormDialogResult,
-} from './gio-ps-policy-form-dialog.component';
+  GioPolicyStudioStepEditDialogComponent,
+  GioPolicyStudioStepEditDialogData,
+  GioPolicyStudioStepEditDialogResult,
+} from './gio-ps-step-edit-dialog.component';
 
 @Component({
   selector: 'gio-ps-flow-proxy-form-dialog-story',
   template: `<button id="open-dialog" (click)="openDialog()">Open dialog</button>`,
 })
-class GioPolicyStudioPolicyFormDialogStoryComponent {
+class GioPolicyStudioStepEditDialogStoryComponent {
   @Input()
-  public dialogData?: GioPolicyStudioPolicyFormDialogData;
+  public dialogData?: GioPolicyStudioStepEditDialogData;
   constructor(private readonly matDialog: MatDialog) {}
 
   public openDialog() {
     this.matDialog
-      .open<GioPolicyStudioPolicyFormDialogComponent, GioPolicyStudioPolicyFormDialogData, GioPolicyStudioPolicyFormDialogResult>(
-        GioPolicyStudioPolicyFormDialogComponent,
+      .open<GioPolicyStudioStepEditDialogComponent, GioPolicyStudioStepEditDialogData, GioPolicyStudioStepEditDialogResult>(
+        GioPolicyStudioStepEditDialogComponent,
         {
           data: this.dialogData,
           role: 'alertdialog',
@@ -64,11 +64,11 @@ class GioPolicyStudioPolicyFormDialogStoryComponent {
 }
 
 export default {
-  title: 'Policy Studio / components / Policy Form dialog',
-  component: GioPolicyStudioPolicyFormDialogStoryComponent,
+  title: 'Policy Studio / components / Step Edit dialog',
+  component: GioPolicyStudioStepEditDialogStoryComponent,
   decorators: [
     moduleMetadata({
-      declarations: [GioPolicyStudioPolicyFormDialogStoryComponent],
+      declarations: [GioPolicyStudioStepEditDialogStoryComponent],
       imports: [GioPolicyStudioModule, MatDialogModule, NoopAnimationsModule],
       providers: [
         matIconRegisterProvider(POLICIES_V4_UNREGISTERED_ICON.map(policy => ({ id: policy.id, svg: policy.icon }))),
@@ -86,7 +86,7 @@ export default {
   ],
   argTypes: {},
   render: args => ({
-    component: GioPolicyStudioPolicyFormDialogStoryComponent,
+    component: GioPolicyStudioStepEditDialogStoryComponent,
     props: {
       dialogData: {
         policy: args.policy,

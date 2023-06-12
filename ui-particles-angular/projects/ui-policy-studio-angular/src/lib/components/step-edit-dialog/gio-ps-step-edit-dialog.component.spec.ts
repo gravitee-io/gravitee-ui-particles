@@ -31,11 +31,11 @@ import { GioPolicyStudioService } from '../../gio-policy-studio.service';
 import { fakePolicySchema } from '../../models/policy/PolicySchema.fixture';
 
 import {
-  GioPolicyStudioPolicyFormDialogComponent,
-  GioPolicyStudioPolicyFormDialogData,
-  GioPolicyStudioPolicyFormDialogResult,
-} from './gio-ps-policy-form-dialog.component';
-import { GioPolicyStudioPolicyFormDialogHarness } from './gio-ps-policy-form-dialog.harness';
+  GioPolicyStudioStepEditDialogComponent,
+  GioPolicyStudioStepEditDialogData,
+  GioPolicyStudioStepEditDialogResult,
+} from './gio-ps-step-edit-dialog.component';
+import { GioPolicyStudioStepEditDialogHarness } from './gio-ps-step-edit-dialog.harness';
 
 @Component({
   selector: 'gio-dialog-test',
@@ -43,15 +43,15 @@ import { GioPolicyStudioPolicyFormDialogHarness } from './gio-ps-policy-form-dia
 })
 class TestComponent {
   @Input()
-  public dialogData?: GioPolicyStudioPolicyFormDialogData;
+  public dialogData?: GioPolicyStudioStepEditDialogData;
 
-  public dialogResult?: GioPolicyStudioPolicyFormDialogResult;
+  public dialogResult?: GioPolicyStudioStepEditDialogResult;
   constructor(private readonly matDialog: MatDialog) {}
 
   public openDialog() {
     this.matDialog
-      .open<GioPolicyStudioPolicyFormDialogComponent, GioPolicyStudioPolicyFormDialogData, GioPolicyStudioPolicyFormDialogResult>(
-        GioPolicyStudioPolicyFormDialogComponent,
+      .open<GioPolicyStudioStepEditDialogComponent, GioPolicyStudioStepEditDialogData, GioPolicyStudioStepEditDialogResult>(
+        GioPolicyStudioStepEditDialogComponent,
         {
           data: this.dialogData,
           role: 'alertdialog',
@@ -63,7 +63,7 @@ class TestComponent {
   }
 }
 
-describe('GioPolicyStudioPolicyFormDialogComponent', () => {
+describe('GioPolicyStudioStepEditDialogComponent', () => {
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
   let loader: HarnessLoader;
@@ -103,7 +103,7 @@ describe('GioPolicyStudioPolicyFormDialogComponent', () => {
     createTestingComponent(fakeTestPolicy(), fakeMockPolicyStep());
 
     await componentTestingOpenDialog();
-    const policyFormDialog = await loader.getHarness(GioPolicyStudioPolicyFormDialogHarness);
+    const policyFormDialog = await loader.getHarness(GioPolicyStudioStepEditDialogHarness);
 
     expect(await policyFormDialog.getStepName()).toBe('Mock Policy');
     await policyFormDialog.save();
