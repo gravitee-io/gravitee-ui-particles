@@ -19,11 +19,11 @@ import { Policy, Step } from '../../models';
 import { GioPolicyStudioService } from '../../gio-policy-studio.service';
 
 @Component({
-  selector: 'gio-ps-policy-form',
-  templateUrl: './gio-ps-policy-form.component.html',
-  styleUrls: ['./gio-ps-policy-form.component.scss'],
+  selector: 'gio-ps-step-form',
+  templateUrl: './gio-ps-step-form.component.html',
+  styleUrls: ['./gio-ps-step-form.component.scss'],
 })
-export class GioPolicyStudioPolicyFormComponent implements OnChanges {
+export class GioPolicyStudioStepFormComponent implements OnChanges {
   @Input()
   public step?: Step;
 
