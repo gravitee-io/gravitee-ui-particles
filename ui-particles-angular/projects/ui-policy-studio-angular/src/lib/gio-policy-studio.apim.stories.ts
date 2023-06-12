@@ -17,6 +17,7 @@ import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { action } from '@storybook/addon-actions';
+import { of } from 'rxjs';
 
 import { matIconRegisterProvider } from '../storybook-utils/mat-icon-register.provider';
 
@@ -37,7 +38,8 @@ import {
   fakeRateLimitStep,
   fakeWebhookMessageEntrypoint,
 } from './models/index-testing';
-import { SaveOutput } from './models';
+import { Policy, SaveOutput } from './models';
+import { fakePolicySchema } from './models/policy/PolicySchema.fixture';
 
 export default {
   title: 'Policy Studio / APIM',
@@ -58,12 +60,17 @@ export default {
     [commonFlows]="commonFlows"
     [plans]="plans"
     [policies]="policies"
+    [policySchemaFetcher]="policySchemaFetcher"
+    [policyDocumentationFetcher]="policyDocumentationFetcher"
     (save)="onSave($event)"
     >
     </gio-policy-studio></div>`,
     props: {
       ...props,
       policies: fakeAllPolicies(),
+      // Simulate a get policy schema http fetcher.
+      policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)),
+      policyDocumentationFetcher: (policy: Policy) => of(`# Documentation for ${policy.name}`),
       onSave: (event: SaveOutput) => {
         console.info('saveOutput', event);
         action('saveOutput')(event);

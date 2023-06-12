@@ -16,7 +16,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { ApiType, ExecutionPhase, Policy } from '../../models';
+import { ApiType, ExecutionPhase, Policy, Step } from '../../models';
 
 export type GioPolicyStudioPoliciesCatalogDialogData = {
   policies: Policy[];
@@ -24,7 +24,7 @@ export type GioPolicyStudioPoliciesCatalogDialogData = {
   apiType: ApiType;
 };
 
-export type GioPolicyStudioPoliciesCatalogDialogResult = undefined | Policy;
+export type GioPolicyStudioPoliciesCatalogDialogResult = undefined | Step;
 
 const executionPhaseLabels: Record<ExecutionPhase, string> = {
   REQUEST: 'Request',
@@ -63,7 +63,11 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent {
   }
 
   public onAddPolicy() {
-    this.dialogRef.close(this.selectedPolicy);
+    this.dialogRef.close({
+      name: this.selectedPolicy?.name,
+      enabled: true,
+      policy: this.selectedPolicy?.id,
+    });
   }
 
   public onGoBack() {

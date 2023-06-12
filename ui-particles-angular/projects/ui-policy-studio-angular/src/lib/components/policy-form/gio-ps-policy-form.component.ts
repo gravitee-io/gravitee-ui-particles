@@ -13,19 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { Policy, Step } from '../../models';
+import { GioPolicyStudioService } from '../../gio-policy-studio.service';
 
 @Component({
   selector: 'gio-ps-policy-form',
   templateUrl: './gio-ps-policy-form.component.html',
   styleUrls: ['./gio-ps-policy-form.component.scss'],
 })
-export class GioPolicyStudioPolicyFormComponent {
+export class GioPolicyStudioPolicyFormComponent implements OnChanges {
   @Input()
   public step?: Step;
 
   @Input()
   public policy!: Policy;
+
+  public policySchema$?: unknown;
+  public policyDocumentation$?: unknown;
+
+  constructor(private readonly policyStudioService: GioPolicyStudioService) {}
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.policy) {
+      this.policySchema$ = this.policyStudioService.getPolicySchema(this.policy);
+      this.policyDocumentation$ = this.policyStudioService.getPolicyDocumentation(this.policy);
+    }
+  }
 }

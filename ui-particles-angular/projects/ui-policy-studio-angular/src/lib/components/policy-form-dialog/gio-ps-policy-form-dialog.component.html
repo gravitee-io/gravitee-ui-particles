@@ -18,11 +18,15 @@
 <h2 mat-dialog-title class="title">
   <mat-icon class="title__icon" [svgIcon]="policy.icon ?? 'gio:puzzle'"></mat-icon>
 
-  <span *ngIf="policy.name" class="title__name">{{ policy.name }}</span>
+  <span *ngIf="step.name" class="title__name">{{ step.name }}</span>
 
   <button class="title__closeBtn" mat-icon-button aria-label="Close dialog" [mat-dialog-close]="">
     <mat-icon svgIcon="gio:cancel"></mat-icon>
   </button>
+
+  <div class="title__description">
+    {{ policy.description }}
+  </div>
 </h2>
 
 <mat-dialog-content class="content">

@@ -19,10 +19,13 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { Component, Input } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { action } from '@storybook/addon-actions';
+import { of } from 'rxjs';
 
 import { POLICIES_V4_UNREGISTERED_ICON, fakeAllPolicies } from '../../models/index-testing';
 import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
 import { matIconRegisterProvider } from '../../../storybook-utils/mat-icon-register.provider';
+import { GioPolicyStudioService } from '../../gio-policy-studio.service';
+import { fakePolicySchema } from '../../models/policy/PolicySchema.fixture';
 
 import {
   GioPolicyStudioPoliciesCatalogDialogComponent,
@@ -68,7 +71,18 @@ export default {
     moduleMetadata({
       declarations: [GioPolicyStudioPoliciesCatalogDialogStoryComponent],
       imports: [GioPolicyStudioModule, MatDialogModule, NoopAnimationsModule],
-      providers: [matIconRegisterProvider(POLICIES_V4_UNREGISTERED_ICON.map(policy => ({ id: policy.id, svg: policy.icon })))],
+      providers: [
+        matIconRegisterProvider(POLICIES_V4_UNREGISTERED_ICON.map(policy => ({ id: policy.id, svg: policy.icon }))),
+        {
+          provide: GioPolicyStudioService,
+          useFactory: () => {
+            const service = new GioPolicyStudioService();
+            service.setPolicySchemaFetcher(policy => of(fakePolicySchema(policy.id)));
+            service.setPolicyDocumentationFetcher(policy => of(`${policy.id} documentation`));
+            return service;
+          },
+        },
+      ],
     }),
   ],
   argTypes: {},

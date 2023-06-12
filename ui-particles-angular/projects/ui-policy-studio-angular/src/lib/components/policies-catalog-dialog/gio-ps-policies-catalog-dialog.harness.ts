@@ -46,4 +46,9 @@ export class GioPolicyStudioPoliciesCatalogDialogHarness extends ComponentHarnes
     const policy = await this.locatorFor('.policyForm__info__head__name')();
     return policy.text();
   }
+
+  public async clickAddPolicyButton(): Promise<void> {
+    const addBtn = await this.locatorFor(MatButtonHarness.with({ selector: '.actions__addBtn' }))();
+    await addBtn.click();
+  }
 }
