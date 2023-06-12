@@ -33,7 +33,7 @@ type StepVM =
       }[];
     }
   | {
-      type: 'policy';
+      type: 'step';
       step: Step;
     };
 
@@ -88,7 +88,7 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
         },
 
         ...(this.steps ?? []).map(step => ({
-          type: 'policy' as const,
+          type: 'step' as const,
           step: step,
         })),
 

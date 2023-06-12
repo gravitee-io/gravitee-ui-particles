@@ -24,11 +24,11 @@ import {
 } from '../policy-form-dialog/gio-ps-policy-form-dialog.component';
 
 @Component({
-  selector: 'gio-ps-flow-details-phase-policy',
-  templateUrl: './gio-ps-flow-details-phase-policy.component.html',
-  styleUrls: ['./gio-ps-flow-details-phase-policy.component.scss'],
+  selector: 'gio-ps-flow-details-phase-step',
+  templateUrl: './gio-ps-flow-details-phase-step.component.html',
+  styleUrls: ['./gio-ps-flow-details-phase-step.component.scss'],
 })
-export class GioPolicyStudioDetailsPhasePolicyComponent implements OnChanges {
+export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
   @Input()
   public step!: Step;
 

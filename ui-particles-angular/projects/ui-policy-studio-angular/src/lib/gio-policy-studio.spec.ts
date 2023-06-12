@@ -584,20 +584,20 @@ describe('GioPolicyStudioModule', () => {
 
         expect(requestPhaseSteps).toStrictEqual([
           { text: 'Webhook', type: 'connector' },
-          { text: 'Mock Policy', type: 'policy' },
+          { text: 'Mock Policy', type: 'step' },
           { text: 'Kafka', type: 'connector' },
         ]);
 
         expect(responsePhaseSteps).toStrictEqual([
           { text: 'Kafka', type: 'connector' },
-          { text: 'Mock Policy', type: 'policy' },
+          { text: 'Mock Policy', type: 'step' },
           { text: 'Webhook', type: 'connector' },
         ]);
         expect(publishPhaseSteps).toEqual('DISABLED');
 
         expect(subscribePhaseSteps).toEqual([
           { text: 'Kafka', type: 'connector' },
-          { text: 'Mock Policy', type: 'policy' },
+          { text: 'Mock Policy', type: 'step' },
           { text: 'Webhook', type: 'connector' },
         ]);
       });
@@ -805,13 +805,13 @@ describe('GioPolicyStudioModule', () => {
 
         expect(requestPhaseSteps).toStrictEqual([
           { text: 'HTTP Proxy', type: 'connector' },
-          { text: 'Rate Limit', type: 'policy' },
+          { text: 'Rate Limit', type: 'step' },
           { text: 'HTTP Proxy', type: 'connector' },
         ]);
 
         expect(responsePhaseSteps).toStrictEqual([
           { text: 'HTTP Proxy', type: 'connector' },
-          { text: 'Mock Policy', type: 'policy' },
+          { text: 'Mock Policy', type: 'step' },
           { text: 'HTTP Proxy', type: 'connector' },
         ]);
       });

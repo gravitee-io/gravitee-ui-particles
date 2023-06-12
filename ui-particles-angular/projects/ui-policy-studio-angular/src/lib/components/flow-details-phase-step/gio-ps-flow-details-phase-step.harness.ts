@@ -18,10 +18,10 @@ import { BaseHarnessFilters, ComponentHarness, HarnessPredicate } from '@angular
 import { SpanHarness } from '@gravitee/ui-particles-angular/testing';
 import { MatMenuHarness } from '@angular/material/menu/testing';
 
-export type GioPolicyStudioDetailsPhasePolicyHarnessFilters = BaseHarnessFilters;
+export type GioPolicyStudioDetailsPhaseStepHarnessFilters = BaseHarnessFilters;
 
-export class GioPolicyStudioDetailsPhasePolicyHarness extends ComponentHarness {
-  public static hostSelector = 'gio-ps-flow-details-phase-policy';
+export class GioPolicyStudioDetailsPhaseStepHarness extends ComponentHarness {
+  public static hostSelector = 'gio-ps-flow-details-phase-step';
 
   /**
    * Get Harness with the given filter.
@@ -30,13 +30,13 @@ export class GioPolicyStudioDetailsPhasePolicyHarness extends ComponentHarness {
    * @return a `HarnessPredicate` configured with the given options.
    */
   public static with(
-    options: GioPolicyStudioDetailsPhasePolicyHarnessFilters = {},
-  ): HarnessPredicate<GioPolicyStudioDetailsPhasePolicyHarness> {
-    return new HarnessPredicate(GioPolicyStudioDetailsPhasePolicyHarness, options);
+    options: GioPolicyStudioDetailsPhaseStepHarnessFilters = {},
+  ): HarnessPredicate<GioPolicyStudioDetailsPhaseStepHarness> {
+    return new HarnessPredicate(GioPolicyStudioDetailsPhaseStepHarness, options);
   }
 
   public async getName(): Promise<string> {
-    return (await (await this.locatorFor(SpanHarness.with({ selector: '.info__primary__name' }))()).getText()) ?? '';
+    return (await (await this.locatorFor(SpanHarness.with({ selector: '.info__head__name' }))()).getText()) ?? '';
   }
 
   public async clickOnEdit(): Promise<void> {

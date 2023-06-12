@@ -17,13 +17,13 @@
 -->
 
 <div class="info">
-  <div class="info__primary">
-    <mat-icon class="info__primary__icon" [svgIcon]="policy?.icon ?? 'gio:puzzle'"></mat-icon>
+  <div class="info__head">
+    <mat-icon class="info__head__icon" [svgIcon]="policy?.icon ?? 'gio:puzzle'"></mat-icon>
 
-    <span *ngIf="step.name" class="info__primary__name">{{ step.name }}</span>
+    <span *ngIf="step.name" class="info__head__name">{{ step.name }}</span>
   </div>
 
-  <div *ngIf="step.description" class="info__secondary">{{ step.description }}</div>
+  <div *ngIf="step.description" class="info__description">{{ step.description }}</div>
 </div>
 
 <button class="menuBtn" mat-icon-button [matMenuTriggerFor]="policyMenu"><mat-icon svgIcon="gio:more-vertical"></mat-icon></button>
