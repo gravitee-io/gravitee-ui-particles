@@ -23,7 +23,7 @@ export type GioPolicyStudioPolicyFormDialogData = {
   step: Step;
 };
 
-export type GioPolicyStudioPolicyFormDialogResult = undefined;
+export type GioPolicyStudioPolicyFormDialogResult = undefined | Step;
 
 @Component({
   selector: 'gio-ps-policy-form-dialog',
@@ -43,6 +43,8 @@ export class GioPolicyStudioPolicyFormDialogComponent {
   }
 
   public onSave(): void {
-    this.dialogRef.close();
+    this.dialogRef.close({
+      ...this.step,
+    });
   }
 }

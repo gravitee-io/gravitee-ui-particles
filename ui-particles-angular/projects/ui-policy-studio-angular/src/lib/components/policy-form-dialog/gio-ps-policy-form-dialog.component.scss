@@ -20,9 +20,19 @@
 $typography: map.get(gio.$mat-theme, typography);
 
 .title {
+  &__icon {
+    margin-right: 8px;
+  }
+
   &__closeBtn {
     top: -20px;
     right: -20px;
     float: right;
+  }
+
+  &__description {
+    @include mat.typography-level($typography, caption);
+
+    color: mat.get-color-from-palette(gio.$mat-space-palette, lighter40);
   }
 }

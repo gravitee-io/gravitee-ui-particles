@@ -28,7 +28,7 @@ $typography: map.get(gio.$mat-theme, typography);
 
 .settings {
   display: flex;
-  flex: 1 1 auto;
+  flex: 1 1 50%;
   flex-direction: column;
 
   &__header {
@@ -43,7 +43,7 @@ $typography: map.get(gio.$mat-theme, typography);
 
 .documentation {
   display: flex;
-  flex: 1 1 auto;
+  flex: 1 1 50%;
   flex-direction: column;
 
   &__content {

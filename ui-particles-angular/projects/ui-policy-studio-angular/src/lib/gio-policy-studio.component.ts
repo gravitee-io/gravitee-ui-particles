@@ -15,9 +15,21 @@
  */
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { cloneDeep, differenceBy, flatten, isEqual, omit, unionBy, uniqueId } from 'lodash';
+import { EMPTY } from 'rxjs';
 
-import { ApiType, ConnectorInfo, Flow, FlowExecution, Plan, Policy, SaveOutput } from './models';
+import {
+  ApiType,
+  ConnectorInfo,
+  Flow,
+  FlowExecution,
+  Plan,
+  Policy,
+  PolicyDocumentationFetcher,
+  PolicySchemaFetcher,
+  SaveOutput,
+} from './models';
 import { FlowGroupVM, FlowVM } from './gio-policy-studio.model';
+import { GioPolicyStudioService } from './gio-policy-studio.service';
 
 @Component({
   selector: 'gio-policy-studio',
@@ -25,9 +37,15 @@ import { FlowGroupVM, FlowVM } from './gio-policy-studio.model';
   styleUrls: ['./gio-policy-studio.component.scss'],
 })
 export class GioPolicyStudioComponent implements OnChanges {
+  /**
+   * API type (required)
+   */
   @Input()
   public apiType!: ApiType;
 
+  /**
+   * Flow execution config (required)
+   */
   @Input()
   public flowExecution!: FlowExecution;
 
@@ -43,14 +61,37 @@ export class GioPolicyStudioComponent implements OnChanges {
   @Input()
   public endpointsInfo: ConnectorInfo[] = [];
 
+  /**
+   * List of common flows to add to common flows group
+   */
   @Input()
   public commonFlows: Flow[] = [];
 
+  /**
+   * List of plans with their flows
+   */
   @Input()
   public plans: Plan[] = [];
 
+  /**
+   * List of policies usable in the policy studio
+   */
   @Input()
   public policies: Policy[] = [];
+
+  /**
+   * Called when Policy Studio needs to fetch the policy schema
+   * @returns Observable of the policy schema
+   */
+  @Input()
+  public policySchemaFetcher: PolicySchemaFetcher = () => EMPTY;
+
+  /**
+   * Called when Policy Studio needs to fetch the policy documentation
+   * @returns Observable of the policy documentation
+   */
+  @Input()
+  public policyDocumentationFetcher: PolicyDocumentationFetcher = () => EMPTY;
 
   /**
    * Return what is needed to save.
@@ -70,6 +111,9 @@ export class GioPolicyStudioComponent implements OnChanges {
   private initialFlowsGroups: FlowGroupVM[] = [];
 
   private hasFlowExecutionChanged = false;
+
+  constructor(private readonly policyStudioService: GioPolicyStudioService) {}
+
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.entrypointsInfo || changes.endpointsInfo) {
       this.connectorsTooltip = `Entrypoints: ${(this.entrypointsInfo ?? []).map(e => e.name).join(', ')}\nEndpoints: ${(
@@ -88,6 +132,14 @@ export class GioPolicyStudioComponent implements OnChanges {
       if (changes.commonFlows?.isFirstChange() || changes.plans?.isFirstChange()) {
         this.selectedFlow = this.flowsGroups[0].flows[0];
       }
+    }
+
+    if (changes.policySchemaFetcher) {
+      this.policyStudioService.setPolicySchemaFetcher(this.policySchemaFetcher);
+    }
+
+    if (changes.policyDocumentationFetcher) {
+      this.policyStudioService.setPolicyDocumentationFetcher(this.policyDocumentationFetcher);
     }
   }
 

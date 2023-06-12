@@ -19,11 +19,19 @@
 <div class="settings">
   <div class="settings__header">Settings</div>
 
-  <div class="settings__content">🚧 WIP 🚧</div>
+  <div class="settings__content">
+    <ng-container *ngIf="policySchema$">
+      {{ $any(policySchema$) | async | json }}
+    </ng-container>
+  </div>
 </div>
 
 <div class="documentation">
   <div class="documentation__header">Documentation</div>
 
-  <div class="documentation__content">🚧 WIP 🚧</div>
+  <div class="documentation__content">
+    <ng-container *ngIf="policyDocumentation$">
+      {{ $any(policyDocumentation$) | async }}
+    </ng-container>
+  </div>
 </div>

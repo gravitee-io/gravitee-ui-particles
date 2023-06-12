@@ -19,10 +19,13 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { Component, Input } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { action } from '@storybook/addon-actions';
+import { of } from 'rxjs';
 
-import { POLICIES_V4_UNREGISTERED_ICON, fakeTestPolicy } from '../../models/index-testing';
+import { POLICIES_V4_UNREGISTERED_ICON, fakeMockPolicyStep, fakeTestPolicy } from '../../models/index-testing';
 import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
 import { matIconRegisterProvider } from '../../../storybook-utils/mat-icon-register.provider';
+import { GioPolicyStudioService } from '../../gio-policy-studio.service';
+import { fakePolicySchema } from '../../models/policy/PolicySchema.fixture';
 
 import {
   GioPolicyStudioPolicyFormDialogComponent,
@@ -67,7 +70,18 @@ export default {
     moduleMetadata({
       declarations: [GioPolicyStudioPolicyFormDialogStoryComponent],
       imports: [GioPolicyStudioModule, MatDialogModule, NoopAnimationsModule],
-      providers: [matIconRegisterProvider(POLICIES_V4_UNREGISTERED_ICON.map(policy => ({ id: policy.id, svg: policy.icon })))],
+      providers: [
+        matIconRegisterProvider(POLICIES_V4_UNREGISTERED_ICON.map(policy => ({ id: policy.id, svg: policy.icon }))),
+        {
+          provide: GioPolicyStudioService,
+          useFactory: () => {
+            const service = new GioPolicyStudioService();
+            service.setPolicySchemaFetcher(policy => of(fakePolicySchema(policy.id)));
+            service.setPolicyDocumentationFetcher(policy => of(`${policy.id} documentation`));
+            return service;
+          },
+        },
+      ],
     }),
   ],
   argTypes: {},
@@ -76,6 +90,7 @@ export default {
     props: {
       dialogData: {
         policy: args.policy,
+        step: args.step,
       },
     },
   }),
@@ -87,7 +102,10 @@ export default {
 export const Default: StoryObj = {
   name: 'Default',
   args: {
-    policy: fakeTestPolicy(),
+    policy: fakeTestPolicy({
+      description: 'This is a test policy',
+    }),
+    step: fakeMockPolicyStep(),
   },
   play: context => {
     const button = context.canvasElement.querySelector('#open-dialog') as HTMLButtonElement;

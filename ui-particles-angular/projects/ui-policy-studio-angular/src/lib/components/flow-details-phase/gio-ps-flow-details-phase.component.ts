@@ -123,21 +123,13 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
         width: '1000px',
       })
       .afterClosed()
-      .subscribe(result => {
-        if (!this.steps || !result) {
+      .subscribe(stepToAdd => {
+        if (!this.steps || !stepToAdd) {
           return;
         }
 
         //Emit change wit new step
-        this.stepsChange.emit([
-          ...this.steps.slice(0, index),
-          {
-            name: 'Step name',
-            enabled: true,
-            policy: result.id,
-          },
-          ...this.steps.slice(index),
-        ]);
+        this.stepsChange.emit([...this.steps.slice(0, index), stepToAdd, ...this.steps.slice(index)]);
       });
   }
 }

@@ -22,10 +22,13 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { InteractivityChecker } from '@angular/cdk/a11y';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
+import { of } from 'rxjs';
 
 import { fakeMockPolicyStep, fakeTestPolicy } from '../../models/index-testing';
 import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
 import { Policy, Step } from '../../models';
+import { GioPolicyStudioService } from '../../gio-policy-studio.service';
+import { fakePolicySchema } from '../../models/policy/PolicySchema.fixture';
 
 import {
   GioPolicyStudioPolicyFormDialogComponent,
@@ -42,6 +45,7 @@ class TestComponent {
   @Input()
   public dialogData?: GioPolicyStudioPolicyFormDialogData;
 
+  public dialogResult?: GioPolicyStudioPolicyFormDialogResult;
   constructor(private readonly matDialog: MatDialog) {}
 
   public openDialog() {
@@ -55,7 +59,7 @@ class TestComponent {
         },
       )
       .afterClosed()
-      .subscribe();
+      .subscribe(result => (this.dialogResult = result));
   }
 }
 
@@ -68,6 +72,17 @@ describe('GioPolicyStudioPolicyFormDialogComponent', () => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
       imports: [GioPolicyStudioModule, MatDialogModule, NoopAnimationsModule, MatIconTestingModule],
+      providers: [
+        {
+          provide: GioPolicyStudioService,
+          useFactory: () => {
+            const service = new GioPolicyStudioService();
+            service.setPolicySchemaFetcher(policy => of(fakePolicySchema(policy.id)));
+            service.setPolicyDocumentationFetcher(policy => of(`${policy.id} documentation`));
+            return service;
+          },
+        },
+      ],
     }).overrideProvider(InteractivityChecker, {
       useValue: {
         isFocusable: () => true, // This traps focus checks and so avoid warnings when dealing with
@@ -84,14 +99,16 @@ describe('GioPolicyStudioPolicyFormDialogComponent', () => {
     loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
   };
 
-  it('should policies catalog', async () => {
+  it('should edit step policy config', async () => {
     createTestingComponent(fakeTestPolicy(), fakeMockPolicyStep());
 
     await componentTestingOpenDialog();
-
     const policyFormDialog = await loader.getHarness(GioPolicyStudioPolicyFormDialogHarness);
 
-    expect(policyFormDialog).toBeDefined();
+    expect(await policyFormDialog.getStepName()).toBe('Mock Policy');
+    await policyFormDialog.save();
+
+    expect(component.dialogResult).toEqual(fakeMockPolicyStep());
   });
 
   async function componentTestingOpenDialog() {

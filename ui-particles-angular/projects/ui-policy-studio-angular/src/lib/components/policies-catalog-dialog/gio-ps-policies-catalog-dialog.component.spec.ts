@@ -22,10 +22,13 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { InteractivityChecker } from '@angular/cdk/a11y';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
+import { of } from 'rxjs';
 
 import { fakeAllPolicies } from '../../models/index-testing';
 import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
 import { ApiType, ExecutionPhase, Policy } from '../../models';
+import { GioPolicyStudioService } from '../../gio-policy-studio.service';
+import { fakePolicySchema } from '../../models/policy/PolicySchema.fixture';
 
 import {
   GioPolicyStudioPoliciesCatalogDialogComponent,
@@ -41,6 +44,7 @@ import { GioPolicyStudioPoliciesCatalogDialogHarness } from './gio-ps-policies-c
 class TestComponent {
   @Input()
   public dialogData?: GioPolicyStudioPoliciesCatalogDialogData;
+  public dialogResult?: GioPolicyStudioPoliciesCatalogDialogResult;
 
   constructor(private readonly matDialog: MatDialog) {}
 
@@ -56,7 +60,7 @@ class TestComponent {
         id: 'testDialog',
       })
       .afterClosed()
-      .subscribe();
+      .subscribe(result => (this.dialogResult = result));
   }
 }
 
@@ -69,6 +73,17 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
       imports: [GioPolicyStudioModule, MatDialogModule, NoopAnimationsModule, MatIconTestingModule],
+      providers: [
+        {
+          provide: GioPolicyStudioService,
+          useFactory: () => {
+            const service = new GioPolicyStudioService();
+            service.setPolicySchemaFetcher(policy => of(fakePolicySchema(policy.id)));
+            service.setPolicyDocumentationFetcher(policy => of(`${policy.id} documentation`));
+            return service;
+          },
+        },
+      ],
     }).overrideProvider(InteractivityChecker, {
       useValue: {
         isFocusable: () => true, // This traps focus checks and so avoid warnings when dealing with
@@ -85,6 +100,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
     };
     loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
   };
+
   describe('When ApiType = MESSAGE and ExecutionPhase = REQUEST', () => {
     beforeEach(() => {
       createTestingComponent('MESSAGE', 'REQUEST');
@@ -96,13 +112,21 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
       await expectPoliciesCatalogContent('Request', p => p.message?.includes('REQUEST'));
     });
 
-    it('should select a policy', async () => {
+    it('should select a policy and add it', async () => {
       await componentTestingOpenDialog();
 
       const policiesCatalogDialog = await loader.getHarness(GioPolicyStudioPoliciesCatalogDialogHarness);
       await policiesCatalogDialog.selectPolicy('Policy to test UI');
 
       expect(await policiesCatalogDialog.getSelectedPolicyName()).toEqual('Policy to test UI');
+
+      await policiesCatalogDialog.clickAddPolicyButton();
+
+      expect(component.dialogResult).toStrictEqual({
+        enabled: true,
+        name: 'Policy to test UI',
+        policy: 'test-policy',
+      });
     });
   });
 
