@@ -30,6 +30,7 @@ import {
   fakeHTTPProxyEndpoint,
   fakeHTTPProxyEntrypoint,
   fakeHttpFlow,
+  fakeJsonToXmlStep,
   fakeKafkaMessageEndpoint,
   fakeMockPolicyStep,
   fakePlan,
@@ -292,10 +293,10 @@ export const ProxyWithFlowSteps: Story = {
       fakeHttpFlow({
         name: 'Flow with steps',
         request: [
-          fakeRateLimitStep({
+          fakeJsonToXmlStep({
             description: undefined,
           }),
-          fakeRateLimitStep(),
+          fakeJsonToXmlStep(),
           fakeRateLimitStep(),
         ],
         response: [
