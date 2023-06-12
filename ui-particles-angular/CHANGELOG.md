@@ -1,3 +1,10 @@
+## [7.10.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.10.0...v7.10.1) (2023-06-12)
+
+
+### Bug Fixes
+
+* the HTTP verb OPTIONS ends with an S ([8831c68](https://github.com/gravitee-io/gravitee-ui-particles/commit/8831c68beb55099af143efbaf150cbfeb9f4fc1d))
+
 # [7.10.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.9.2...v7.10.0) (2023-06-09)
 
 
