@@ -1,3 +1,14 @@
+# [7.12.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.11.0...v7.12.0) (2023-06-13)
+
+
+### Features
+
+* filter policies catalog with ExecutionPhase ([219e7d0](https://github.com/gravitee-io/gravitee-ui-particles/commit/219e7d02ccbdc434864e8a8bb466510b81a50578))
+* impl add policy button with policy catalog dialog ([d19713d](https://github.com/gravitee-io/gravitee-ui-particles/commit/d19713d6be641896f448e531df46a72adc29e373))
+* init empty policy form dialog ([df8c63d](https://github.com/gravitee-io/gravitee-ui-particles/commit/df8c63d568c3dc4c239d2e158e53c74222f26176))
+* init policy-form component ([b3e95dd](https://github.com/gravitee-io/gravitee-ui-particles/commit/b3e95ddee24dea80eb6d47801784d5fe77e4348b))
+* start to impl policies catalog dialog ([79d91d0](https://github.com/gravitee-io/gravitee-ui-particles/commit/79d91d08feb116a71061bd70529fa96a21a48a53))
+
 # [7.11.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.10.1...v7.11.0) (2023-06-12)
 
 
