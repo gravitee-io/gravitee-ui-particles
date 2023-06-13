@@ -33,7 +33,7 @@ import {
   fakeHttpFlow,
   fakeJsonToXmlStep,
   fakeKafkaMessageEndpoint,
-  fakeMockPolicyStep,
+  fakeTestPolicyStep,
   fakePlan,
   fakeRateLimitStep,
   fakeWebhookMessageEntrypoint,
@@ -187,10 +187,10 @@ export const MessageWithAllPhases: Story = {
     commonFlows: [
       fakeChannelFlow({
         name: 'Flow',
-        request: [fakeMockPolicyStep()],
-        response: [fakeMockPolicyStep()],
-        publish: [fakeMockPolicyStep()],
-        subscribe: [fakeMockPolicyStep()],
+        request: [fakeTestPolicyStep()],
+        response: [fakeTestPolicyStep()],
+        publish: [fakeTestPolicyStep()],
+        subscribe: [fakeTestPolicyStep()],
       }),
     ],
     plans: [],
@@ -206,10 +206,10 @@ export const MessageWithDisabledPhase: Story = {
     commonFlows: [
       fakeChannelFlow({
         name: 'Flow',
-        request: [fakeMockPolicyStep()],
-        response: [fakeMockPolicyStep()],
-        publish: [fakeMockPolicyStep()],
-        subscribe: [fakeMockPolicyStep()],
+        request: [fakeTestPolicyStep()],
+        response: [fakeTestPolicyStep()],
+        publish: [fakeTestPolicyStep()],
+        subscribe: [fakeTestPolicyStep()],
       }),
     ],
     plans: [],
@@ -307,13 +307,13 @@ export const ProxyWithFlowSteps: Story = {
           fakeRateLimitStep(),
         ],
         response: [
-          fakeMockPolicyStep({
+          fakeTestPolicyStep({
             name: 'Policy with very long name to test overflow. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             description:
               'Policy with very long name to test overflow. Lorem ipsum dolor sit amet, consectetur adipiscing elit and some more text to test overflow.',
           }),
-          fakeMockPolicyStep(),
-          fakeMockPolicyStep(),
+          fakeTestPolicyStep(),
+          fakeTestPolicyStep(),
         ],
       }),
     ],

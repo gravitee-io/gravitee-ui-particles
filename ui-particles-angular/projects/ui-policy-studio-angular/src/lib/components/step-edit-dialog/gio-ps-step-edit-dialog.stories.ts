@@ -21,7 +21,7 @@ import { tap } from 'rxjs/operators';
 import { action } from '@storybook/addon-actions';
 import { of } from 'rxjs';
 
-import { POLICIES_V4_UNREGISTERED_ICON, fakeMockPolicyStep, fakeTestPolicy } from '../../models/index-testing';
+import { POLICIES_V4_UNREGISTERED_ICON, fakeTestPolicyStep, fakeTestPolicy } from '../../models/index-testing';
 import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
 import { matIconRegisterProvider } from '../../../storybook-utils/mat-icon-register.provider';
 import { GioPolicyStudioService } from '../../gio-policy-studio.service';
@@ -105,7 +105,7 @@ export const Default: StoryObj = {
     policy: fakeTestPolicy({
       description: 'This is a test policy',
     }),
-    step: fakeMockPolicyStep(),
+    step: fakeTestPolicyStep(),
   },
   play: context => {
     const button = context.canvasElement.querySelector('#open-dialog') as HTMLButtonElement;

@@ -32,7 +32,6 @@ import {
   fakeHTTPProxyEntrypoint,
   fakeHttpFlow,
   fakeKafkaMessageEndpoint,
-  fakeMockPolicyStep,
   fakePlan,
   fakeRateLimitStep,
   fakeTestPolicy,
@@ -581,10 +580,10 @@ describe('GioPolicyStudioModule', () => {
         const commonFlows = [
           fakeChannelFlow({
             name: 'Flow 1',
-            request: [fakeMockPolicyStep()],
-            response: [fakeMockPolicyStep()],
-            publish: [fakeMockPolicyStep()],
-            subscribe: [fakeMockPolicyStep()],
+            request: [fakeTestPolicyStep()],
+            response: [fakeTestPolicyStep()],
+            publish: [fakeTestPolicyStep()],
+            subscribe: [fakeTestPolicyStep()],
           }),
         ];
         component.commonFlows = commonFlows;
@@ -599,13 +598,13 @@ describe('GioPolicyStudioModule', () => {
 
         expect(await requestPhase?.getSteps()).toStrictEqual([
           { text: 'Webhook', type: 'connector' },
-          { text: 'Mock Policy', type: 'step' },
+          { text: 'Policy to test UI', type: 'step' },
           { text: 'Kafka', type: 'connector' },
         ]);
 
         expect(await responsePhase?.getSteps()).toStrictEqual([
           { text: 'Kafka', type: 'connector' },
-          { text: 'Mock Policy', type: 'step' },
+          { text: 'Policy to test UI', type: 'step' },
           { text: 'Webhook', type: 'connector' },
         ]);
 
@@ -613,7 +612,7 @@ describe('GioPolicyStudioModule', () => {
 
         expect(await subscribePhase?.getSteps()).toStrictEqual([
           { text: 'Kafka', type: 'connector' },
-          { text: 'Mock Policy', type: 'step' },
+          { text: 'Policy to test UI', type: 'step' },
           { text: 'Webhook', type: 'connector' },
         ]);
       });
@@ -892,7 +891,7 @@ describe('GioPolicyStudioModule', () => {
           fakeHttpFlow({
             name: 'Flow 1',
             request: [fakeRateLimitStep()],
-            response: [fakeMockPolicyStep()],
+            response: [fakeTestPolicyStep()],
           }),
         ];
         component.commonFlows = commonFlows;
@@ -911,7 +910,7 @@ describe('GioPolicyStudioModule', () => {
 
         expect(await responsePhase?.getSteps()).toStrictEqual([
           { text: 'HTTP Proxy', type: 'connector' },
-          { text: 'Mock Policy', type: 'step' },
+          { text: 'Policy to test UI', type: 'step' },
           { text: 'HTTP Proxy', type: 'connector' },
         ]);
       });

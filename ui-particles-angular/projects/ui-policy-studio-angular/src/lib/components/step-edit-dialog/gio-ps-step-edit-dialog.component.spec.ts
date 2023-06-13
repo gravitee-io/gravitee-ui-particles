@@ -24,7 +24,7 @@ import { InteractivityChecker } from '@angular/cdk/a11y';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { of } from 'rxjs';
 
-import { fakeMockPolicyStep, fakeTestPolicy } from '../../models/index-testing';
+import { fakeTestPolicyStep, fakeTestPolicy } from '../../models/index-testing';
 import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
 import { Policy, Step } from '../../models';
 import { GioPolicyStudioService } from '../../gio-policy-studio.service';
@@ -100,17 +100,17 @@ describe('GioPolicyStudioStepEditDialogComponent', () => {
   };
 
   it('should edit step policy config', async () => {
-    createTestingComponent(fakeTestPolicy(), fakeMockPolicyStep());
+    createTestingComponent(fakeTestPolicy(), fakeTestPolicyStep());
 
     await componentTestingOpenDialog();
     const policyFormDialog = await loader.getHarness(GioPolicyStudioStepEditDialogHarness);
-    expect(await policyFormDialog.getPolicyName()).toEqual('Mock Policy');
+    expect(await policyFormDialog.getPolicyName()).toEqual('Policy to test UI');
 
     const stepForm = await policyFormDialog.getStepForm();
 
     // Check form values
     expect(await stepForm.getStepFormValue()).toEqual({
-      description: 'Mock Policy description',
+      description: 'Test Policy description',
     });
 
     // Edit form values
@@ -123,7 +123,7 @@ describe('GioPolicyStudioStepEditDialogComponent', () => {
 
     // Check dialog result
     expect(component.dialogResult).toEqual(
-      fakeMockPolicyStep({
+      fakeTestPolicyStep({
         description: 'Edited description',
       }),
     );
