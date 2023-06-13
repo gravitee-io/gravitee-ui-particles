@@ -17,6 +17,8 @@ import { ComponentHarness, parallel } from '@angular/cdk/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { DivHarness } from '@gravitee/ui-particles-angular/testing';
 
+import { GioPolicyStudioStepFormHarness } from '../step-form/gio-ps-step-form.harness';
+
 export class GioPolicyStudioPoliciesCatalogDialogHarness extends ComponentHarness {
   public static hostSelector = 'gio-ps-policies-catalog-dialog';
 
@@ -50,5 +52,9 @@ export class GioPolicyStudioPoliciesCatalogDialogHarness extends ComponentHarnes
   public async clickAddPolicyButton(): Promise<void> {
     const addBtn = await this.locatorFor(MatButtonHarness.with({ selector: '.actions__addBtn' }))();
     await addBtn.click();
+  }
+
+  public async getStepForm(): Promise<GioPolicyStudioStepFormHarness> {
+    return await this.locatorFor(GioPolicyStudioStepFormHarness)();
   }
 }

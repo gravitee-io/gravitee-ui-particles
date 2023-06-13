@@ -25,6 +25,7 @@ import { GioPolicyStudioFlowProxyFormDialogHarness } from './components/flow-for
 import { GioPolicyStudioFlowMessageFormDialogHarness } from './components/flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.harness';
 import { GioPolicyStudioFlowExecutionFormDialogHarness } from './components/flow-execution-form-dialog/gio-ps-flow-execution-form-dialog.harness';
 import { GioPolicyStudioDetailsPhaseHarness, PhaseType } from './components/flow-details-phase/gio-ps-flow-details-phase.harness';
+import { GioPolicyStudioPoliciesCatalogDialogHarness } from './components/policies-catalog-dialog/gio-ps-policies-catalog-dialog.harness';
 
 export class GioPolicyStudioHarness extends ComponentHarness {
   public static hostSelector = 'gio-policy-studio';
@@ -103,27 +104,18 @@ export class GioPolicyStudioHarness extends ComponentHarness {
   }
 
   /**
-   * Get selected flow steps phase
+   * Get selected flow phase harness
    * @param tabLabel Select tabs before try to find phase. Useful to find Event phases for Message API
    */
-  public async getSelectedFlowSteps(
-    phaseType: PhaseType,
-    tabLabel?: string,
-  ): Promise<
-    | {
-        text: string;
-        type: 'connector' | 'step';
-      }[]
-    | 'DISABLED'
-  > {
+  public async getSelectedFlowPhase(phaseType: PhaseType, tabLabel?: string): Promise<GioPolicyStudioDetailsPhaseHarness | undefined> {
     if (tabLabel) {
       const matTabsHarness = await this.locatorFor(MatTabGroupHarness.with({ selector: '.content__tabs' }))();
       await matTabsHarness.selectTab({ label: tabLabel });
     }
 
-    const steps = await (await this.phaseHarness(phaseType)).getSteps();
+    const steps = await await this.phaseHarness(phaseType);
 
-    return steps ? steps : 'DISABLED';
+    return steps ? steps : undefined;
   }
 
   /**
@@ -131,6 +123,37 @@ export class GioPolicyStudioHarness extends ComponentHarness {
    */
   public async save(): Promise<void> {
     await (await this.locatorFor(MatButtonHarness.with({ text: /Save/ }))()).click();
+  }
+
+  /**
+   * Add a step to a phase
+   * @param phaseType Phase type where to add the step
+   * @param index Index where to add the step
+   * @param stepConfig Step to add
+   */
+  public async addStepToPhase(
+    phaseType: PhaseType,
+    index: number,
+    stepConfig: {
+      policyName: string;
+      description?: string;
+    },
+  ): Promise<void> {
+    const tabLabel = phaseType === 'PUBLISH' || phaseType === 'SUBSCRIBE' ? 'Event messages' : undefined;
+    const phase = await this.getSelectedFlowPhase(phaseType, tabLabel);
+
+    if (!phase) {
+      throw new Error(`No phase found for type ${phaseType}`);
+    }
+
+    await phase.clickAddStep(index);
+
+    const catalogDialog = await this.documentRootLocatorFactory().locatorFor(GioPolicyStudioPoliciesCatalogDialogHarness)();
+    await catalogDialog.selectPolicy(stepConfig.policyName);
+
+    await (await catalogDialog.getStepForm()).setStepForm(stepConfig);
+
+    await catalogDialog.clickAddPolicyButton();
   }
 
   private async setFlowFormDialog(flow: Partial<Flow>) {
