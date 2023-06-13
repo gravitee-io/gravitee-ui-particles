@@ -665,6 +665,42 @@ describe('GioPolicyStudioModule', () => {
 
         expect(commonFlow?.subscribe).toEqual([fakeTestPolicyStep({ description: 'A' }), fakeTestPolicyStep({ description: 'B' })]);
       });
+
+      it('should edit step into phase', async () => {
+        const commonFlows = [
+          fakeChannelFlow({
+            name: 'Alphabetical policy',
+            request: [fakeTestPolicyStep({ description: 'B' })],
+            subscribe: [fakeTestPolicyStep({ description: 'B' })],
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        // Edit step B into REQUEST phase
+        await policyStudioHarness.editStepConfig('REQUEST', 0, {
+          description: 'A',
+        });
+
+        // Edit step B into SUBSCRIBE phase
+        await policyStudioHarness.editStepConfig('SUBSCRIBE', 0, {
+          description: 'A',
+        });
+
+        // Save
+        let saveOutputToExpect: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutputToExpect = value));
+        await policyStudioHarness.save();
+
+        expect(saveOutputToExpect?.commonFlows).toBeDefined();
+        const commonFlow = saveOutputToExpect?.commonFlows?.[0];
+        expect(commonFlow).toBeDefined();
+        expect(commonFlow?.request).toEqual([fakeTestPolicyStep({ description: 'A' })]);
+
+        expect(commonFlow?.subscribe).toEqual([fakeTestPolicyStep({ description: 'A' })]);
+      });
     });
   });
 
@@ -924,6 +960,42 @@ describe('GioPolicyStudioModule', () => {
         ]);
 
         expect(commonFlow?.response).toEqual([fakeTestPolicyStep({ description: 'A' }), fakeTestPolicyStep({ description: 'B' })]);
+      });
+
+      it('should edit step into phase', async () => {
+        const commonFlows = [
+          fakeHttpFlow({
+            name: 'Alphabetical policy',
+            request: [fakeTestPolicyStep({ description: 'B' })],
+            response: [fakeTestPolicyStep({ description: 'B' })],
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        // Edit step B into REQUEST phase
+        await policyStudioHarness.editStepConfig('REQUEST', 0, {
+          description: 'A',
+        });
+
+        // Edit step B into RESPONSE phase
+        await policyStudioHarness.editStepConfig('RESPONSE', 0, {
+          description: 'A',
+        });
+
+        // Save
+        let saveOutputToExpect: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutputToExpect = value));
+        await policyStudioHarness.save();
+
+        expect(saveOutputToExpect?.commonFlows).toBeDefined();
+        const commonFlow = saveOutputToExpect?.commonFlows?.[0];
+        expect(commonFlow).toBeDefined();
+        expect(commonFlow?.request).toEqual([fakeTestPolicyStep({ description: 'A' })]);
+
+        expect(commonFlow?.response).toEqual([fakeTestPolicyStep({ description: 'A' })]);
       });
     });
   });

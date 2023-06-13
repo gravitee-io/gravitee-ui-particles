@@ -88,6 +88,14 @@ export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
     );
   }
 
+  public async getStep(index: number): Promise<GioPolicyStudioDetailsPhaseStepHarness> {
+    const steps = await this.locatorForAll(GioPolicyStudioDetailsPhaseStepHarness)();
+    if (!steps[index]) {
+      throw new Error(`Step ${index} not found`);
+    }
+    return steps[index];
+  }
+
   public async clickAddStep(index: number): Promise<void> {
     const addStepBtn = await this.locatorForAll(DivHarness.with({ selector: '.content__step' }))().then(divs => divs[index]);
 

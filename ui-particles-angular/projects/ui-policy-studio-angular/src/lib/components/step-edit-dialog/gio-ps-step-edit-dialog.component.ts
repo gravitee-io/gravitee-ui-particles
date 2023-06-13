@@ -34,6 +34,8 @@ export class GioPolicyStudioStepEditDialogComponent {
   public policy!: Policy;
   public step!: Step;
 
+  public isValid = false;
+
   constructor(
     public dialogRef: MatDialogRef<GioPolicyStudioStepEditDialogComponent, GioPolicyStudioStepEditDialogResult>,
     @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioStepEditDialogData,

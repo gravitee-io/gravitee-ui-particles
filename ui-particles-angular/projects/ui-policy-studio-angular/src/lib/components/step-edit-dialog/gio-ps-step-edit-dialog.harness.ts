@@ -15,11 +15,17 @@
  */
 import { ComponentHarness } from '@angular/cdk/testing';
 
+import { GioPolicyStudioStepFormHarness } from '../step-form/gio-ps-step-form.harness';
+
 export class GioPolicyStudioStepEditDialogHarness extends ComponentHarness {
   public static hostSelector = 'gio-ps-step-edit-dialog';
 
-  public async getStepName(): Promise<string> {
+  public async getPolicyName(): Promise<string> {
     return (await this.locatorFor('.title__name')()).text();
+  }
+
+  public async getStepForm(): Promise<GioPolicyStudioStepFormHarness> {
+    return await this.locatorFor(GioPolicyStudioStepFormHarness)();
   }
 
   public async save(): Promise<void> {

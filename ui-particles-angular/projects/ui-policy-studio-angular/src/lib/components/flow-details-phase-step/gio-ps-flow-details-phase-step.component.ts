@@ -35,6 +35,9 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
   @Input()
   public policies: Policy[] = [];
 
+  @Output()
+  public stepChange = new EventEmitter<Step>();
+
   public policy?: Policy;
 
   constructor(private readonly matDialog: MatDialog) {}
@@ -65,7 +68,13 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
         },
       )
       .afterClosed()
-      .subscribe();
+      .subscribe(stepToEdit => {
+        if (!stepToEdit) {
+          return;
+        }
+
+        this.stepChange.emit(stepToEdit);
+      });
   }
 
   public onDisable() {

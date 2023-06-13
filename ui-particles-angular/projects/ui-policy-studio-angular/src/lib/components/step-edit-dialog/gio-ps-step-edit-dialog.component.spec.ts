@@ -104,11 +104,29 @@ describe('GioPolicyStudioStepEditDialogComponent', () => {
 
     await componentTestingOpenDialog();
     const policyFormDialog = await loader.getHarness(GioPolicyStudioStepEditDialogHarness);
+    expect(await policyFormDialog.getPolicyName()).toEqual('Mock Policy');
 
-    expect(await policyFormDialog.getStepName()).toBe('Mock Policy');
+    const stepForm = await policyFormDialog.getStepForm();
+
+    // Check form values
+    expect(await stepForm.getStepFormValue()).toEqual({
+      description: 'Mock Policy description',
+    });
+
+    // Edit form values
+    await stepForm.setStepForm({
+      description: 'Edited description',
+    });
+
+    // Save
     await policyFormDialog.save();
 
-    expect(component.dialogResult).toEqual(fakeMockPolicyStep());
+    // Check dialog result
+    expect(component.dialogResult).toEqual(
+      fakeMockPolicyStep({
+        description: 'Edited description',
+      }),
+    );
   });
 
   async function componentTestingOpenDialog() {

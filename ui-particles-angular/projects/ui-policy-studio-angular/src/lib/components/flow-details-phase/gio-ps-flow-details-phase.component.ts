@@ -133,4 +133,12 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
         this.stepsChange.emit([...this.steps.slice(0, index + 1), stepToAdd, ...this.steps.slice(index + 1)]);
       });
   }
+
+  public onStepChange(index: number, stepToEdit: Step): void {
+    if (!this.steps) {
+      return;
+    }
+    // Replace the step at the given index
+    this.stepsChange.emit([...this.steps.slice(0, index), stepToEdit, ...this.steps.slice(index + 1)]);
+  }
 }
