@@ -26,6 +26,7 @@ import { GioPolicyStudioFlowMessageFormDialogHarness } from './components/flow-f
 import { GioPolicyStudioFlowExecutionFormDialogHarness } from './components/flow-execution-form-dialog/gio-ps-flow-execution-form-dialog.harness';
 import { GioPolicyStudioDetailsPhaseHarness, PhaseType } from './components/flow-details-phase/gio-ps-flow-details-phase.harness';
 import { GioPolicyStudioPoliciesCatalogDialogHarness } from './components/policies-catalog-dialog/gio-ps-policies-catalog-dialog.harness';
+import { GioPolicyStudioStepEditDialogHarness } from './components/step-edit-dialog/gio-ps-step-edit-dialog.harness';
 
 export class GioPolicyStudioHarness extends ComponentHarness {
   public static hostSelector = 'gio-policy-studio';
@@ -128,7 +129,7 @@ export class GioPolicyStudioHarness extends ComponentHarness {
   /**
    * Add a step to a phase
    * @param phaseType Phase type where to add the step
-   * @param index Index where to add the step
+   * @param index Index where to add the step. (Add button index)
    * @param stepConfig Step to add
    */
   public async addStepToPhase(
@@ -154,6 +155,36 @@ export class GioPolicyStudioHarness extends ComponentHarness {
     await (await catalogDialog.getStepForm()).setStepForm(stepConfig);
 
     await catalogDialog.clickAddPolicyButton();
+  }
+
+  /**
+   * Edit a step configuration
+   * @param phaseType Phase type where to edit the step
+   * @param index Index of the policy step to edit
+   * @param stepConfig Step configuration
+   */
+  public async editStepConfig(
+    phaseType: PhaseType,
+    index: number,
+    stepConfig: {
+      description?: string;
+    },
+  ): Promise<void> {
+    const tabLabel = phaseType === 'PUBLISH' || phaseType === 'SUBSCRIBE' ? 'Event messages' : undefined;
+    const phase = await this.getSelectedFlowPhase(phaseType, tabLabel);
+
+    if (!phase) {
+      throw new Error(`No phase found for type ${phaseType}`);
+    }
+
+    const step = await phase.getStep(index);
+
+    await step.clickOnEdit();
+
+    const stepEditDialog = await this.documentRootLocatorFactory().locatorFor(GioPolicyStudioStepEditDialogHarness)();
+    await (await stepEditDialog.getStepForm()).setStepForm(stepConfig);
+
+    await stepEditDialog.save();
   }
 
   private async setFlowFormDialog(flow: Partial<Flow>) {

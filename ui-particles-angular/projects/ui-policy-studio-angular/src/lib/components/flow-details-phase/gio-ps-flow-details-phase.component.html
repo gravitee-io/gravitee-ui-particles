@@ -54,6 +54,7 @@
           class="content__step__step"
           [policies]="policies"
           [step]="stepVM.step"
+          (stepChange)="onStepChange(stepVM.index, $event)"
         ></gio-ps-flow-details-phase-step>
 
         <!-- Add policy button -->
