@@ -22,8 +22,10 @@ import { SimpleChange } from '@angular/core';
 import { InteractivityChecker } from '@angular/cdk/a11y';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonHarness } from '@angular/material/button/testing';
+import { of } from 'rxjs';
 
 import {
+  fakeAllPolicies,
   fakeChannelFlow,
   fakeDefaultFlowExecution,
   fakeHTTPProxyEndpoint,
@@ -33,6 +35,8 @@ import {
   fakeMockPolicyStep,
   fakePlan,
   fakeRateLimitStep,
+  fakeTestPolicy,
+  fakeTestPolicyStep,
   fakeWebhookMessageEntrypoint,
 } from '../public-testing-api';
 
@@ -42,6 +46,7 @@ import { GioPolicyStudioDetailsHarness } from './components/flow-details/gio-ps-
 import { GioPolicyStudioFlowsMenuHarness } from './components/flows-menu/gio-ps-flows-menu.harness';
 import { SaveOutput } from './models';
 import { GioPolicyStudioHarness } from './gio-policy-studio.harness';
+import { fakePolicySchema } from './models/policy/PolicySchema.fixture';
 
 describe('GioPolicyStudioModule', () => {
   let loader: HarnessLoader;
@@ -56,6 +61,7 @@ describe('GioPolicyStudioModule', () => {
       .overrideProvider(InteractivityChecker, {
         useValue: {
           isFocusable: () => true, // This checks focus trap, set it to true to  avoid the warning
+          isTabbable: () => true, // This checks focus trap, set it to true to  avoid the warning
         },
       })
       .compileComponents();
@@ -63,6 +69,15 @@ describe('GioPolicyStudioModule', () => {
     component = fixture.componentInstance;
     loader = TestbedHarnessEnvironment.loader(fixture);
     policyStudioHarness = await TestbedHarnessEnvironment.harnessForFixture(fixture, GioPolicyStudioHarness);
+
+    component.policies = fakeAllPolicies();
+    component.policySchemaFetcher = policy => of(fakePolicySchema(policy.id));
+    component.policyDocumentationFetcher = policy => of(`${policy.id} documentation`);
+    component.ngOnChanges({
+      policies: new SimpleChange(null, null, true),
+      policySchemaFetcher: new SimpleChange(null, null, true),
+      policyDocumentationFetcher: new SimpleChange(null, null, true),
+    });
   });
 
   describe('MESSAGE API type', () => {
@@ -564,7 +579,7 @@ describe('GioPolicyStudioModule', () => {
 
       it('should display phases steps', async () => {
         const commonFlows = [
-          fakeHttpFlow({
+          fakeChannelFlow({
             name: 'Flow 1',
             request: [fakeMockPolicyStep()],
             response: [fakeMockPolicyStep()],
@@ -577,29 +592,78 @@ describe('GioPolicyStudioModule', () => {
           commonFlows: new SimpleChange(null, null, true),
         });
 
-        const requestPhaseSteps = await policyStudioHarness.getSelectedFlowSteps('REQUEST');
-        const responsePhaseSteps = await policyStudioHarness.getSelectedFlowSteps('RESPONSE');
-        const publishPhaseSteps = await policyStudioHarness.getSelectedFlowSteps('PUBLISH', 'Event messages');
-        const subscribePhaseSteps = await policyStudioHarness.getSelectedFlowSteps('SUBSCRIBE', 'Event messages');
+        const requestPhase = await policyStudioHarness.getSelectedFlowPhase('REQUEST');
+        const responsePhase = await policyStudioHarness.getSelectedFlowPhase('RESPONSE');
+        const publishPhase = await policyStudioHarness.getSelectedFlowPhase('PUBLISH', 'Event messages');
+        const subscribePhase = await policyStudioHarness.getSelectedFlowPhase('SUBSCRIBE', 'Event messages');
 
-        expect(requestPhaseSteps).toStrictEqual([
+        expect(await requestPhase?.getSteps()).toStrictEqual([
           { text: 'Webhook', type: 'connector' },
           { text: 'Mock Policy', type: 'step' },
           { text: 'Kafka', type: 'connector' },
         ]);
 
-        expect(responsePhaseSteps).toStrictEqual([
+        expect(await responsePhase?.getSteps()).toStrictEqual([
           { text: 'Kafka', type: 'connector' },
           { text: 'Mock Policy', type: 'step' },
           { text: 'Webhook', type: 'connector' },
         ]);
-        expect(publishPhaseSteps).toEqual('DISABLED');
 
-        expect(subscribePhaseSteps).toEqual([
+        expect(await publishPhase?.getSteps()).toEqual(null);
+
+        expect(await subscribePhase?.getSteps()).toStrictEqual([
           { text: 'Kafka', type: 'connector' },
           { text: 'Mock Policy', type: 'step' },
           { text: 'Webhook', type: 'connector' },
         ]);
+      });
+
+      it('should add step into phase', async () => {
+        const commonFlows = [
+          fakeChannelFlow({
+            name: 'Alphabetical policy',
+            request: [fakeTestPolicyStep({ description: 'B' })],
+            response: [fakeTestPolicyStep({ description: 'B' })],
+            publish: [fakeTestPolicyStep({ description: 'B' })],
+            subscribe: [fakeTestPolicyStep({ description: 'B' })],
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        // Add step A before B and C after B into REQUEST phase
+        await policyStudioHarness.addStepToPhase('REQUEST', 0, {
+          policyName: fakeTestPolicy().name,
+          description: 'A',
+        });
+        await policyStudioHarness.addStepToPhase('REQUEST', 2, {
+          policyName: fakeTestPolicy().name,
+          description: 'C',
+        });
+
+        // Add step A before B into SUBSCRIBE phase
+        await policyStudioHarness.addStepToPhase('SUBSCRIBE', 0, {
+          policyName: fakeTestPolicy().name,
+          description: 'A',
+        });
+
+        // Save
+        let saveOutputToExpect: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutputToExpect = value));
+        await policyStudioHarness.save();
+
+        expect(saveOutputToExpect?.commonFlows).toBeDefined();
+        const commonFlow = saveOutputToExpect?.commonFlows?.[0];
+        expect(commonFlow).toBeDefined();
+        expect(commonFlow?.request).toEqual([
+          fakeTestPolicyStep({ description: 'A' }),
+          fakeTestPolicyStep({ description: 'B' }),
+          fakeTestPolicyStep({ description: 'C' }),
+        ]);
+
+        expect(commonFlow?.subscribe).toEqual([fakeTestPolicyStep({ description: 'A' }), fakeTestPolicyStep({ description: 'B' })]);
       });
     });
   });
@@ -800,20 +864,66 @@ describe('GioPolicyStudioModule', () => {
           commonFlows: new SimpleChange(null, null, true),
         });
 
-        const requestPhaseSteps = await policyStudioHarness.getSelectedFlowSteps('REQUEST');
-        const responsePhaseSteps = await policyStudioHarness.getSelectedFlowSteps('RESPONSE');
+        const requestPhase = await policyStudioHarness.getSelectedFlowPhase('REQUEST');
+        const responsePhase = await policyStudioHarness.getSelectedFlowPhase('RESPONSE');
 
-        expect(requestPhaseSteps).toStrictEqual([
+        expect(await requestPhase?.getSteps()).toStrictEqual([
           { text: 'HTTP Proxy', type: 'connector' },
           { text: 'Rate Limit', type: 'step' },
           { text: 'HTTP Proxy', type: 'connector' },
         ]);
 
-        expect(responsePhaseSteps).toStrictEqual([
+        expect(await responsePhase?.getSteps()).toStrictEqual([
           { text: 'HTTP Proxy', type: 'connector' },
           { text: 'Mock Policy', type: 'step' },
           { text: 'HTTP Proxy', type: 'connector' },
         ]);
+      });
+
+      it('should add step into phase', async () => {
+        const commonFlows = [
+          fakeHttpFlow({
+            name: 'Alphabetical policy',
+            request: [fakeTestPolicyStep({ description: 'B' })],
+            response: [fakeTestPolicyStep({ description: 'B' })],
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        // Add step A before B and C after B into REQUEST phase
+        await policyStudioHarness.addStepToPhase('REQUEST', 0, {
+          policyName: fakeTestPolicy().name,
+          description: 'A',
+        });
+        await policyStudioHarness.addStepToPhase('REQUEST', 2, {
+          policyName: fakeTestPolicy().name,
+          description: 'C',
+        });
+
+        // Add step A before B into RESPONSE phase
+        await policyStudioHarness.addStepToPhase('RESPONSE', 0, {
+          policyName: fakeTestPolicy().name,
+          description: 'A',
+        });
+
+        // Save
+        let saveOutputToExpect: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutputToExpect = value));
+        await policyStudioHarness.save();
+
+        expect(saveOutputToExpect?.commonFlows).toBeDefined();
+        const commonFlow = saveOutputToExpect?.commonFlows?.[0];
+        expect(commonFlow).toBeDefined();
+        expect(commonFlow?.request).toEqual([
+          fakeTestPolicyStep({ description: 'A' }),
+          fakeTestPolicyStep({ description: 'B' }),
+          fakeTestPolicyStep({ description: 'C' }),
+        ]);
+
+        expect(commonFlow?.response).toEqual([fakeTestPolicyStep({ description: 'A' }), fakeTestPolicyStep({ description: 'B' })]);
       });
     });
   });

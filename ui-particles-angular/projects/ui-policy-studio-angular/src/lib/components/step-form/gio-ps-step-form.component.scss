@@ -36,6 +36,8 @@ $typography: map.get(gio.$mat-theme, typography);
   }
 
   &__content {
+    display: flex;
+    flex-direction: column;
     padding: 16px;
     border-right: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
   }

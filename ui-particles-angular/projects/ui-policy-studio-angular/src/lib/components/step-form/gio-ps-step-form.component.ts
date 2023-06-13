@@ -13,26 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { startWith, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
-import { Policy, Step } from '../../models';
 import { GioPolicyStudioService } from '../../gio-policy-studio.service';
+import { Policy, Step } from '../../models';
 
 @Component({
   selector: 'gio-ps-step-form',
   templateUrl: './gio-ps-step-form.component.html',
   styleUrls: ['./gio-ps-step-form.component.scss'],
 })
-export class GioPolicyStudioStepFormComponent implements OnChanges {
+export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDestroy {
   @Input()
   public step?: Step;
 
   @Input()
   public policy!: Policy;
 
+  @Output()
+  public stepChange = new EventEmitter<Step>();
+
+  @Output()
+  public isValid = new EventEmitter<boolean>();
+
   public policySchema$?: unknown;
   public policyDocumentation$?: unknown;
 
+  public stepForm?: FormGroup;
+
+  private unsubscribe$ = new Subject<void>();
   constructor(private readonly policyStudioService: GioPolicyStudioService) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -40,5 +52,35 @@ export class GioPolicyStudioStepFormComponent implements OnChanges {
       this.policySchema$ = this.policyStudioService.getPolicySchema(this.policy);
       this.policyDocumentation$ = this.policyStudioService.getPolicyDocumentation(this.policy);
     }
+
+    if (changes.step && !changes.step.firstChange) {
+      this.initStepForm();
+    }
+  }
+
+  public ngOnInit(): void {
+    this.initStepForm();
+  }
+
+  public ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  private initStepForm(): void {
+    this.stepForm = new FormGroup({
+      description: new FormControl(this.step?.description, [Validators.required]),
+    });
+
+    this.stepForm.valueChanges.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
+      this.stepChange.emit({
+        ...this.step,
+        description: this.stepForm?.get('description')?.value,
+      });
+    });
+
+    this.stepForm.statusChanges.pipe(takeUntil(this.unsubscribe$), startWith(this.stepForm.status)).subscribe(valid => {
+      this.isValid.emit(valid === 'VALID');
+    });
   }
 }

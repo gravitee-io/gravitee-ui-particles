@@ -15,7 +15,27 @@
  */
 
 import { ComponentHarness } from '@angular/cdk/testing';
+import { MatInputHarness } from '@angular/material/input/testing';
 
 export class GioPolicyStudioStepFormHarness extends ComponentHarness {
   public static hostSelector = 'gio-ps-step-form';
+
+  private getDescriptionInput = this.locatorFor(MatInputHarness.with({ selector: '[formControlName="description"]' }));
+
+  public async setStepForm(stepForm: { description?: string }): Promise<void> {
+    if (stepForm.description) {
+      const descriptionInput = await this.getDescriptionInput();
+      await descriptionInput.setValue(stepForm.description);
+    }
+  }
+
+  public async getStepFormValue(): Promise<{
+    description?: string;
+  }> {
+    const descriptionInput = await this.getDescriptionInput();
+
+    return {
+      description: await descriptionInput.getValue(),
+    };
+  }
 }

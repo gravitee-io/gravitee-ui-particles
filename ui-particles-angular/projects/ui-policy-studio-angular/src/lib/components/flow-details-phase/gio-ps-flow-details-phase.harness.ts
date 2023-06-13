@@ -17,6 +17,7 @@
 import { BaseHarnessFilters, ComponentHarness, HarnessPredicate, parallel } from '@angular/cdk/testing';
 import { DivHarness, SpanHarness } from '@gravitee/ui-particles-angular/testing';
 import { isEmpty } from 'lodash';
+import { MatButtonHarness } from '@angular/material/button/testing';
 
 import { GioPolicyStudioDetailsPhaseStepHarness } from '../flow-details-phase-step/gio-ps-flow-details-phase-step.harness';
 
@@ -32,6 +33,16 @@ const TYPE_TO_TEXT: Record<PhaseType, string> = {
   PUBLISH: 'Publish phase',
   SUBSCRIBE: 'Subscribe phase',
 };
+
+export type StepCard =
+  | {
+      text: string;
+      type: 'connector';
+    }
+  | {
+      text: string;
+      type: 'step';
+    };
 
 export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
   public static hostSelector = 'gio-ps-flow-details-phase';
@@ -51,13 +62,7 @@ export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
     );
   }
 
-  public async getSteps(): Promise<
-    | {
-        text: string;
-        type: 'connector' | 'step';
-      }[]
-    | null
-  > {
+  public async getSteps(): Promise<StepCard[] | null> {
     const stepsDiv = await this.locatorForAll(DivHarness.with({ selector: '.content__step' }))();
 
     if (isEmpty(stepsDiv)) {
@@ -77,9 +82,17 @@ export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
 
         return {
           text: await (await stepDiv.childLocatorFor(GioPolicyStudioDetailsPhaseStepHarness)()).getName(),
-          type: idConnector ? 'connector' : 'step',
+          type: 'step',
         };
       }),
     );
+  }
+
+  public async clickAddStep(index: number): Promise<void> {
+    const addStepBtn = await this.locatorForAll(DivHarness.with({ selector: '.content__step' }))().then(divs => divs[index]);
+
+    await addStepBtn
+      .childLocatorFor(MatButtonHarness.with({ selector: '.content__step__addBtn' }))()
+      .then(btn => btn.click());
   }
 }

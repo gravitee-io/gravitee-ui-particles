@@ -45,6 +45,10 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent {
 
   public selectedPolicy?: Policy;
 
+  public stepToAdd?: Step;
+
+  public isValid = false;
+
   constructor(
     public dialogRef: MatDialogRef<GioPolicyStudioPoliciesCatalogDialogComponent, GioPolicyStudioPoliciesCatalogDialogResult>,
     @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioPoliciesCatalogDialogData,
@@ -64,6 +68,7 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent {
 
   public onAddPolicy() {
     this.dialogRef.close({
+      ...this.stepToAdd,
       name: this.selectedPolicy?.name,
       enabled: true,
       policy: this.selectedPolicy?.id,

@@ -35,6 +35,7 @@ type StepVM =
   | {
       type: 'step';
       step: Step;
+      index: number;
     };
 
 @Component({
@@ -87,9 +88,10 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
           })),
         },
 
-        ...(this.steps ?? []).map(step => ({
+        ...(this.steps ?? []).map((step, index) => ({
           type: 'step' as const,
           step: step,
+          index,
         })),
 
         {
@@ -127,9 +129,8 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
         if (!this.steps || !stepToAdd) {
           return;
         }
-
-        //Emit change wit new step
-        this.stepsChange.emit([...this.steps.slice(0, index), stepToAdd, ...this.steps.slice(index)]);
+        // Add Step after the given index
+        this.stepsChange.emit([...this.steps.slice(0, index + 1), stepToAdd, ...this.steps.slice(index + 1)]);
       });
   }
 }

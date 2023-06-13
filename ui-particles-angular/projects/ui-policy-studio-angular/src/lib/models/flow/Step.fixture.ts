@@ -15,12 +15,32 @@
  */
 import { isFunction } from 'lodash';
 
+import { fakeTestPolicy } from '../index-testing';
+
 import { Step } from './Step';
 
 export function fakeMockPolicyStep(modifier?: Partial<Step> | ((base: Step) => Step)): Step {
   const base: Step = {
     name: 'Mock Policy',
     description: 'Mock Policy description',
+    enabled: true,
+    policy: 'test-policy',
+  };
+
+  if (isFunction(modifier)) {
+    return modifier(base);
+  }
+
+  return {
+    ...base,
+    ...modifier,
+  };
+}
+
+export function fakeTestPolicyStep(modifier?: Partial<Step> | ((base: Step) => Step)): Step {
+  const base: Step = {
+    name: fakeTestPolicy().name,
+    description: 'Test Policy description',
     enabled: true,
     policy: 'test-policy',
   };

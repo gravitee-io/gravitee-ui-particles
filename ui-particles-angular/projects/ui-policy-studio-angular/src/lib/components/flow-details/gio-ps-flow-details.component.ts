@@ -113,6 +113,7 @@ export class GioPolicyStudioDetailsComponent {
     this.flowChange.emit({
       ...this.flow,
       [flowPhase]: steps,
+      _hasChanged: true,
     });
   }
 }

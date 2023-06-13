@@ -120,12 +120,18 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
 
       expect(await policiesCatalogDialog.getSelectedPolicyName()).toEqual('Policy to test UI');
 
+      const stepForm = await policiesCatalogDialog.getStepForm();
+      await stepForm.setStepForm({
+        description: 'My step description',
+      });
+
       await policiesCatalogDialog.clickAddPolicyButton();
 
       expect(component.dialogResult).toStrictEqual({
         enabled: true,
         name: 'Policy to test UI',
         policy: 'test-policy',
+        description: 'My step description',
       });
     });
   });
