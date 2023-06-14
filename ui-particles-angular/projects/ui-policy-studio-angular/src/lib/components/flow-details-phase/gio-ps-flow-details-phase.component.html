@@ -34,12 +34,12 @@
     <div *ngFor="let stepVM of stepsVM; first as isFirst" class="content__step">
       <!-- Connector -->
       <ng-container *ngIf="stepVM.type === 'connectors'">
-        <span class="gio-badge-white content__step__connectorBadge">
-          <ng-container *ngFor="let connector of stepVM.connectors">
-            <mat-icon *ngIf="connector.icon" [svgIcon]="connector.icon" class="content__step__connectorBadge__icon"></mat-icon>
+        <div class="content__step__connector">
+          <span *ngFor="let connector of stepVM.connectors" class="gio-badge-white content__step__connector__badge">
+            <mat-icon *ngIf="connector.icon" [svgIcon]="connector.icon" class="content__step__connector__badge__icon"></mat-icon>
             {{ connector.name }}
-          </ng-container>
-        </span>
+          </span>
+        </div>
 
         <!-- Add policy button after first connector -->
         <ng-container *ngIf="isFirst">
@@ -48,6 +48,7 @@
           <mat-icon class="content__step__rightArrow" svgIcon="gio:arrow-right"></mat-icon>
         </ng-container>
       </ng-container>
+
       <!-- Policy -->
       <ng-container *ngIf="stepVM.type === 'step'">
         <gio-ps-flow-details-phase-step

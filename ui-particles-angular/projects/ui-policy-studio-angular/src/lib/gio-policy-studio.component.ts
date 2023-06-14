@@ -129,9 +129,7 @@ export class GioPolicyStudioComponent implements OnChanges {
       this.initialFlowsGroups = cloneDeep(this.flowsGroups);
 
       // Select first flow by default on first load
-      if (changes.commonFlows?.isFirstChange() || changes.plans?.isFirstChange()) {
-        this.selectedFlow = this.flowsGroups[0].flows[0];
-      }
+      this.selectedFlow = this.flowsGroups[0].flows[0];
     }
 
     if (changes.policySchemaFetcher) {

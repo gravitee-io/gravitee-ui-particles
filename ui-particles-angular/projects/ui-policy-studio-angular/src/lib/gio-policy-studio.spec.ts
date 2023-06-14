@@ -624,7 +624,7 @@ describe('GioPolicyStudioModule', () => {
             request: [fakeTestPolicyStep({ description: 'B' })],
             response: [fakeTestPolicyStep({ description: 'B' })],
             publish: [fakeTestPolicyStep({ description: 'B' })],
-            subscribe: [fakeTestPolicyStep({ description: 'B' })],
+            subscribe: undefined,
           }),
         ];
         component.commonFlows = commonFlows;
@@ -642,7 +642,7 @@ describe('GioPolicyStudioModule', () => {
           description: 'C',
         });
 
-        // Add step A before B into SUBSCRIBE phase
+        // Add step A into undefined SUBSCRIBE phase
         await policyStudioHarness.addStepToPhase('SUBSCRIBE', 0, {
           policyName: fakeTestPolicy().name,
           description: 'A',
@@ -662,7 +662,7 @@ describe('GioPolicyStudioModule', () => {
           fakeTestPolicyStep({ description: 'C' }),
         ]);
 
-        expect(commonFlow?.subscribe).toEqual([fakeTestPolicyStep({ description: 'A' }), fakeTestPolicyStep({ description: 'B' })]);
+        expect(commonFlow?.subscribe).toEqual([fakeTestPolicyStep({ description: 'A' })]);
       });
 
       it('should edit step into phase', async () => {

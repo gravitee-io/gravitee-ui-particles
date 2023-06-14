@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
@@ -69,7 +69,7 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
 
   private initStepForm(): void {
     this.stepForm = new FormGroup({
-      description: new FormControl(this.step?.description, [Validators.required]),
+      description: new FormControl(this.step?.description, []),
     });
 
     this.stepForm.valueChanges.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
