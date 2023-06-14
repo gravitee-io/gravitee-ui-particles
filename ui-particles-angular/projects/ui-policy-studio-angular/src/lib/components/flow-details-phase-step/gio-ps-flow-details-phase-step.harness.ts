@@ -17,6 +17,7 @@
 import { BaseHarnessFilters, ComponentHarness, HarnessPredicate } from '@angular/cdk/testing';
 import { SpanHarness } from '@gravitee/ui-particles-angular/testing';
 import { MatMenuHarness } from '@angular/material/menu/testing';
+import { DivHarness } from '@gravitee/ui-particles-angular/testing';
 
 export type GioPolicyStudioDetailsPhaseStepHarnessFilters = BaseHarnessFilters;
 
@@ -37,6 +38,10 @@ export class GioPolicyStudioDetailsPhaseStepHarness extends ComponentHarness {
 
   public async getName(): Promise<string> {
     return (await (await this.locatorFor(SpanHarness.with({ selector: '.info__head__name' }))()).getText()) ?? '';
+  }
+
+  public async getDescription(): Promise<string | undefined> {
+    return (await (await this.locatorForOptional(DivHarness.with({ selector: '.info__description' }))())?.getText()) ?? undefined;
   }
 
   public async clickOnEdit(): Promise<void> {

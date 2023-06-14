@@ -20,6 +20,8 @@ import { isEmpty } from 'lodash';
 import { MatButtonHarness } from '@angular/material/button/testing';
 
 import { GioPolicyStudioDetailsPhaseStepHarness } from '../flow-details-phase-step/gio-ps-flow-details-phase-step.harness';
+import { GioPolicyStudioStepEditDialogHarness } from '../step-edit-dialog/gio-ps-step-edit-dialog.harness';
+import { GioPolicyStudioPoliciesCatalogDialogHarness } from '../policies-catalog-dialog/gio-ps-policies-catalog-dialog.harness';
 
 export type PhaseType = 'REQUEST' | 'RESPONSE' | 'PUBLISH' | 'SUBSCRIBE';
 
@@ -36,11 +38,12 @@ const TYPE_TO_TEXT: Record<PhaseType, string> = {
 
 export type StepCard =
   | {
-      text: string;
+      name: string;
       type: 'connector';
     }
   | {
-      text: string;
+      name: string;
+      description?: string;
       type: 'step';
     };
 
@@ -62,12 +65,16 @@ export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
     );
   }
 
-  public async getSteps(): Promise<StepCard[] | null> {
+  public async getSteps(): Promise<StepCard[] | 'DISABLED'> {
+    if (await this.locatorForOptional('.disabledContent')()) {
+      return 'DISABLED';
+    }
+
     const stepsDiv = await this.locatorForAll(DivHarness.with({ selector: '.content__step' }))();
 
     if (isEmpty(stepsDiv)) {
       // No step - the phase is disabled
-      return null;
+      return [];
     }
 
     return await parallel(() =>
@@ -75,14 +82,17 @@ export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
         const idConnector = !!(await stepDiv.getText({ childSelector: '.content__step__connector__badge' }));
         if (idConnector) {
           return {
-            text: (await stepDiv.getText()) ?? '',
+            name: (await stepDiv.getText()) ?? '',
             type: 'connector',
           };
         }
+        const step = await stepDiv.childLocatorFor(GioPolicyStudioDetailsPhaseStepHarness)();
+        const description = await step.getDescription();
 
         return {
-          text: await (await stepDiv.childLocatorFor(GioPolicyStudioDetailsPhaseStepHarness)()).getName(),
           type: 'step',
+          name: await step.getName(),
+          ...(description ? { description } : {}),
         };
       }),
     );
@@ -102,5 +112,48 @@ export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
     await addStepBtn
       .childLocatorFor(MatButtonHarness.with({ selector: '.content__step__addBtn' }))()
       .then(btn => btn.click());
+  }
+
+  /**
+   * Add a step to a phase
+   * @param index Index where to add the step. (Add button index)
+   * @param stepConfig Step to add
+   */
+  public async addStep(
+    index: number,
+    stepConfig: {
+      policyName: string;
+      description?: string;
+    },
+  ): Promise<void> {
+    await this.clickAddStep(index);
+
+    const catalogDialog = await this.documentRootLocatorFactory().locatorFor(GioPolicyStudioPoliciesCatalogDialogHarness)();
+    await catalogDialog.selectPolicy(stepConfig.policyName);
+
+    await (await catalogDialog.getStepForm()).setStepForm(stepConfig);
+
+    await catalogDialog.clickAddPolicyButton();
+  }
+
+  /**
+   * Edit a step configuration
+   * @param index Index of the policy step to edit
+   * @param stepConfig Step configuration
+   */
+  public async editStep(
+    index: number,
+    stepConfig: {
+      description?: string;
+    },
+  ): Promise<void> {
+    const step = await this.getStep(index);
+
+    await step.clickOnEdit();
+
+    const stepEditDialog = await this.documentRootLocatorFactory().locatorFor(GioPolicyStudioStepEditDialogHarness)();
+    await (await stepEditDialog.getStepForm()).setStepForm(stepConfig);
+
+    await stepEditDialog.save();
   }
 }
