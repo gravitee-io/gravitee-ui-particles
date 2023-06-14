@@ -19,6 +19,7 @@
 @use '../../scss' as gio;
 
 $background: map.get(gio.$mat-space-palette, default);
+$backgroundLight: map.get(gio.$mat-accent-palette, darker40);
 $textLight: map.get(gio.$mat-basic-palette, white);
 
 :host {
@@ -35,6 +36,10 @@ $textLight: map.get(gio.$mat-basic-palette, white);
   justify-content: flex-start;
   padding: 16px;
   background: $background;
+
+  &__light {
+    background: $backgroundLight;
+  }
 
   &__reduced {
     position: absolute;
