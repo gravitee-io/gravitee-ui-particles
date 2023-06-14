@@ -1,3 +1,18 @@
+# [7.13.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.12.0...v7.13.0) (2023-06-14)
+
+
+### Bug Fixes
+
+* make add policy into undefined phase work and improve Ui ([4d234ef](https://github.com/gravitee-io/gravitee-ui-particles/commit/4d234ef6ea4ed87d5ffad0b34df47864bf21bccb))
+
+
+### Features
+
+* display step policy icon ([396be91](https://github.com/gravitee-io/gravitee-ui-particles/commit/396be912dc4a88684336ac2f32bd456f99b08a93))
+* impl "add step" into flow phase ([668f6aa](https://github.com/gravitee-io/gravitee-ui-particles/commit/668f6aa9680cbdc661385e70553be513a1877a35))
+* impl edit step config with step-edit-dialog ([8939d11](https://github.com/gravitee-io/gravitee-ui-particles/commit/8939d11aa533e3648244ce00cec74577321bf0cd))
+* start impl Add and Edit step policy ([ab64c90](https://github.com/gravitee-io/gravitee-ui-particles/commit/ab64c90e3ceb0ba894924da60ebec0f28cd3ebb9))
+
 # [7.12.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.11.0...v7.12.0) (2023-06-13)
 
 
