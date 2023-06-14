@@ -49,27 +49,35 @@ $typography: map.get(gio.$mat-theme, typography);
 }
 
 .wrapper {
-  display: flex;
+  position: relative;
   flex: 1 1 auto;
   padding: 0 16px;
   overflow-y: auto;
 }
 
 .content {
+  position: absolute;
   display: flex;
+  width: max-content;
+  height: 100%;
   align-items: center;
 
   &__step {
     display: flex;
-    width: max-content;
     align-items: center;
 
-    &__connectorBadge {
-      border: 1px solid mat.get-color-from-palette(gio.$mat-accent-palette, default);
-      border-radius: 16px;
+    &__connector {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
 
-      &__icon {
-        margin-right: 4px;
+      &__badge {
+        border: 1px solid mat.get-color-from-palette(gio.$mat-accent-palette, default);
+        border-radius: 16px;
+
+        &__icon {
+          margin-right: 4px;
+        }
       }
     }
 

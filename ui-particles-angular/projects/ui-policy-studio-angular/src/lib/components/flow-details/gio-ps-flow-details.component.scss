@@ -27,7 +27,7 @@ $typography: map.get(gio.$mat-theme, typography);
 
 .emptyFlows {
   display: flex;
-  width: 500px;
+  max-width: 500px;
   height: 100%;
   flex-direction: column;
   justify-content: center;

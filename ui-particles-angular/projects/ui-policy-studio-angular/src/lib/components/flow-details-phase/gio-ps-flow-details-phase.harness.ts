@@ -72,7 +72,7 @@ export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
 
     return await parallel(() =>
       stepsDiv.map(async stepDiv => {
-        const idConnector = !!(await stepDiv.getText({ childSelector: '.content__step__connectorBadge' }));
+        const idConnector = !!(await stepDiv.getText({ childSelector: '.content__step__connector__badge' }));
         if (idConnector) {
           return {
             text: (await stepDiv.getText()) ?? '',
