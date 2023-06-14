@@ -25,8 +25,6 @@ import { GioPolicyStudioFlowProxyFormDialogHarness } from './components/flow-for
 import { GioPolicyStudioFlowMessageFormDialogHarness } from './components/flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.harness';
 import { GioPolicyStudioFlowExecutionFormDialogHarness } from './components/flow-execution-form-dialog/gio-ps-flow-execution-form-dialog.harness';
 import { GioPolicyStudioDetailsPhaseHarness, PhaseType } from './components/flow-details-phase/gio-ps-flow-details-phase.harness';
-import { GioPolicyStudioPoliciesCatalogDialogHarness } from './components/policies-catalog-dialog/gio-ps-policies-catalog-dialog.harness';
-import { GioPolicyStudioStepEditDialogHarness } from './components/step-edit-dialog/gio-ps-step-edit-dialog.harness';
 
 export class GioPolicyStudioHarness extends ComponentHarness {
   public static hostSelector = 'gio-policy-studio';
@@ -106,12 +104,12 @@ export class GioPolicyStudioHarness extends ComponentHarness {
 
   /**
    * Get selected flow phase harness
-   * @param tabLabel Select tabs before try to find phase. Useful to find Event phases for Message API
+   * @param phaseType Phase type to get
    */
-  public async getSelectedFlowPhase(phaseType: PhaseType, tabLabel?: string): Promise<GioPolicyStudioDetailsPhaseHarness | undefined> {
-    if (tabLabel) {
+  public async getSelectedFlowPhase(phaseType: PhaseType): Promise<GioPolicyStudioDetailsPhaseHarness | undefined> {
+    if (phaseType === 'PUBLISH' || phaseType === 'SUBSCRIBE') {
       const matTabsHarness = await this.locatorFor(MatTabGroupHarness.with({ selector: '.content__tabs' }))();
-      await matTabsHarness.selectTab({ label: tabLabel });
+      await matTabsHarness.selectTab({ label: 'Event messages' });
     }
 
     const steps = await await this.phaseHarness(phaseType);
@@ -124,67 +122,6 @@ export class GioPolicyStudioHarness extends ComponentHarness {
    */
   public async save(): Promise<void> {
     await (await this.locatorFor(MatButtonHarness.with({ text: /Save/ }))()).click();
-  }
-
-  /**
-   * Add a step to a phase
-   * @param phaseType Phase type where to add the step
-   * @param index Index where to add the step. (Add button index)
-   * @param stepConfig Step to add
-   */
-  public async addStepToPhase(
-    phaseType: PhaseType,
-    index: number,
-    stepConfig: {
-      policyName: string;
-      description?: string;
-    },
-  ): Promise<void> {
-    const tabLabel = phaseType === 'PUBLISH' || phaseType === 'SUBSCRIBE' ? 'Event messages' : undefined;
-    const phase = await this.getSelectedFlowPhase(phaseType, tabLabel);
-
-    if (!phase) {
-      throw new Error(`No phase found for type ${phaseType}`);
-    }
-
-    await phase.clickAddStep(index);
-
-    const catalogDialog = await this.documentRootLocatorFactory().locatorFor(GioPolicyStudioPoliciesCatalogDialogHarness)();
-    await catalogDialog.selectPolicy(stepConfig.policyName);
-
-    await (await catalogDialog.getStepForm()).setStepForm(stepConfig);
-
-    await catalogDialog.clickAddPolicyButton();
-  }
-
-  /**
-   * Edit a step configuration
-   * @param phaseType Phase type where to edit the step
-   * @param index Index of the policy step to edit
-   * @param stepConfig Step configuration
-   */
-  public async editStepConfig(
-    phaseType: PhaseType,
-    index: number,
-    stepConfig: {
-      description?: string;
-    },
-  ): Promise<void> {
-    const tabLabel = phaseType === 'PUBLISH' || phaseType === 'SUBSCRIBE' ? 'Event messages' : undefined;
-    const phase = await this.getSelectedFlowPhase(phaseType, tabLabel);
-
-    if (!phase) {
-      throw new Error(`No phase found for type ${phaseType}`);
-    }
-
-    const step = await phase.getStep(index);
-
-    await step.clickOnEdit();
-
-    const stepEditDialog = await this.documentRootLocatorFactory().locatorFor(GioPolicyStudioStepEditDialogHarness)();
-    await (await stepEditDialog.getStepForm()).setStepForm(stepConfig);
-
-    await stepEditDialog.save();
   }
 
   private async setFlowFormDialog(flow: Partial<Flow>) {

@@ -593,27 +593,27 @@ describe('GioPolicyStudioModule', () => {
 
         const requestPhase = await policyStudioHarness.getSelectedFlowPhase('REQUEST');
         const responsePhase = await policyStudioHarness.getSelectedFlowPhase('RESPONSE');
-        const publishPhase = await policyStudioHarness.getSelectedFlowPhase('PUBLISH', 'Event messages');
-        const subscribePhase = await policyStudioHarness.getSelectedFlowPhase('SUBSCRIBE', 'Event messages');
+        const publishPhase = await policyStudioHarness.getSelectedFlowPhase('PUBLISH');
+        const subscribePhase = await policyStudioHarness.getSelectedFlowPhase('SUBSCRIBE');
 
         expect(await requestPhase?.getSteps()).toStrictEqual([
-          { text: 'Webhook', type: 'connector' },
-          { text: 'Policy to test UI', type: 'step' },
-          { text: 'Kafka', type: 'connector' },
+          { name: 'Webhook', type: 'connector' },
+          { name: 'Policy to test UI', description: 'Test Policy description', type: 'step' },
+          { name: 'Kafka', type: 'connector' },
         ]);
 
         expect(await responsePhase?.getSteps()).toStrictEqual([
-          { text: 'Kafka', type: 'connector' },
-          { text: 'Policy to test UI', type: 'step' },
-          { text: 'Webhook', type: 'connector' },
+          { name: 'Kafka', type: 'connector' },
+          { name: 'Policy to test UI', description: 'Test Policy description', type: 'step' },
+          { name: 'Webhook', type: 'connector' },
         ]);
 
-        expect(await publishPhase?.getSteps()).toEqual(null);
+        expect(await publishPhase?.getSteps()).toEqual('DISABLED');
 
         expect(await subscribePhase?.getSteps()).toStrictEqual([
-          { text: 'Kafka', type: 'connector' },
-          { text: 'Policy to test UI', type: 'step' },
-          { text: 'Webhook', type: 'connector' },
+          { name: 'Kafka', type: 'connector' },
+          { name: 'Policy to test UI', description: 'Test Policy description', type: 'step' },
+          { name: 'Webhook', type: 'connector' },
         ]);
       });
 
@@ -633,17 +633,19 @@ describe('GioPolicyStudioModule', () => {
         });
 
         // Add step A before B and C after B into REQUEST phase
-        await policyStudioHarness.addStepToPhase('REQUEST', 0, {
+        const requestPhase = await policyStudioHarness.getSelectedFlowPhase('REQUEST');
+        await requestPhase?.addStep(0, {
           policyName: fakeTestPolicy().name,
           description: 'A',
         });
-        await policyStudioHarness.addStepToPhase('REQUEST', 2, {
+        await requestPhase?.addStep(2, {
           policyName: fakeTestPolicy().name,
           description: 'C',
         });
 
         // Add step A into undefined SUBSCRIBE phase
-        await policyStudioHarness.addStepToPhase('SUBSCRIBE', 0, {
+        const subscribePhase = await policyStudioHarness.getSelectedFlowPhase('SUBSCRIBE');
+        await subscribePhase?.addStep(0, {
           policyName: fakeTestPolicy().name,
           description: 'A',
         });
@@ -679,12 +681,14 @@ describe('GioPolicyStudioModule', () => {
         });
 
         // Edit step B into REQUEST phase
-        await policyStudioHarness.editStepConfig('REQUEST', 0, {
+        const requestPhase = await policyStudioHarness.getSelectedFlowPhase('REQUEST');
+        await requestPhase?.editStep(0, {
           description: 'A',
         });
 
         // Edit step B into SUBSCRIBE phase
-        await policyStudioHarness.editStepConfig('SUBSCRIBE', 0, {
+        const subscribePhase = await policyStudioHarness.getSelectedFlowPhase('SUBSCRIBE');
+        await subscribePhase?.editStep(0, {
           description: 'A',
         });
 
@@ -903,15 +907,15 @@ describe('GioPolicyStudioModule', () => {
         const responsePhase = await policyStudioHarness.getSelectedFlowPhase('RESPONSE');
 
         expect(await requestPhase?.getSteps()).toStrictEqual([
-          { text: 'HTTP Proxy', type: 'connector' },
-          { text: 'Rate Limit', type: 'step' },
-          { text: 'HTTP Proxy', type: 'connector' },
+          { name: 'HTTP Proxy', type: 'connector' },
+          { name: 'Rate Limit', description: 'Step description', type: 'step' },
+          { name: 'HTTP Proxy', type: 'connector' },
         ]);
 
         expect(await responsePhase?.getSteps()).toStrictEqual([
-          { text: 'HTTP Proxy', type: 'connector' },
-          { text: 'Policy to test UI', type: 'step' },
-          { text: 'HTTP Proxy', type: 'connector' },
+          { name: 'HTTP Proxy', type: 'connector' },
+          { name: 'Policy to test UI', description: 'Test Policy description', type: 'step' },
+          { name: 'HTTP Proxy', type: 'connector' },
         ]);
       });
 
@@ -929,17 +933,19 @@ describe('GioPolicyStudioModule', () => {
         });
 
         // Add step A before B and C after B into REQUEST phase
-        await policyStudioHarness.addStepToPhase('REQUEST', 0, {
+        const requestPhase = await policyStudioHarness.getSelectedFlowPhase('REQUEST');
+        await requestPhase?.addStep(0, {
           policyName: fakeTestPolicy().name,
           description: 'A',
         });
-        await policyStudioHarness.addStepToPhase('REQUEST', 2, {
+        await requestPhase?.addStep(2, {
           policyName: fakeTestPolicy().name,
           description: 'C',
         });
 
         // Add step A before B into RESPONSE phase
-        await policyStudioHarness.addStepToPhase('RESPONSE', 0, {
+        const responsePhase = await policyStudioHarness.getSelectedFlowPhase('RESPONSE');
+        await responsePhase?.addStep(0, {
           policyName: fakeTestPolicy().name,
           description: 'A',
         });
@@ -975,12 +981,14 @@ describe('GioPolicyStudioModule', () => {
         });
 
         // Edit step B into REQUEST phase
-        await policyStudioHarness.editStepConfig('REQUEST', 0, {
+        const requestPhase = await policyStudioHarness.getSelectedFlowPhase('REQUEST');
+        await requestPhase?.editStep(0, {
           description: 'A',
         });
 
         // Edit step B into RESPONSE phase
-        await policyStudioHarness.editStepConfig('RESPONSE', 0, {
+        const responsePhase = await policyStudioHarness.getSelectedFlowPhase('RESPONSE');
+        await responsePhase?.editStep(0, {
           description: 'A',
         });
 
