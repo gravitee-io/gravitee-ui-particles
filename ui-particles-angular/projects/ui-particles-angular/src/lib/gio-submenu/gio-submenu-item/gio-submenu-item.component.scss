@@ -20,6 +20,8 @@
 
 $activeBackground: map.get(gio.$mat-space-palette, lighter30);
 $hoverBackground: map.get(gio.$mat-space-palette, lighter20);
+$activeBackgroundLight: map.get(gio.$mat-accent-palette, default);
+$hoverBackgroundLight: map.get(gio.$mat-accent-palette, darker20);
 $textLight: map.get(gio.$mat-basic-palette, white);
 
 :host {
@@ -62,6 +64,14 @@ $textLight: map.get(gio.$mat-basic-palette, white);
   padding: 8px 20px;
 }
 
+:host-context(.gio-submenu__light) .gio-submenu-item__active {
+  background: $activeBackgroundLight;
+}
+
 .gio-submenu-item:hover:not(.gio-submenu-item__active) {
   background: $hoverBackground;
+}
+
+:host-context(.gio-submenu__light) .gio-submenu-item:hover:not(.gio-submenu-item__active) {
+  background: $hoverBackgroundLight;
 }

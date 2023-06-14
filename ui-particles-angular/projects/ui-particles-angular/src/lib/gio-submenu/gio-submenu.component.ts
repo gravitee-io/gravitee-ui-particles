@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { AfterViewInit, Component, Directive, ElementRef, HostListener, OnDestroy, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Directive, ElementRef, HostListener, Input, OnDestroy, ViewChild } from '@angular/core';
 import { of, Subject } from 'rxjs';
 import { delay, filter, switchMap, takeUntil, tap } from 'rxjs/operators';
 
@@ -24,12 +24,17 @@ import { GioMenuService, OverlayOptions } from '../gio-menu/gio-menu.service';
 })
 export class GioSubmenuTitleDirective {}
 
+export type GioSubmenuTheme = 'dark' | 'light';
+
 @Component({
   selector: 'gio-submenu',
   templateUrl: './gio-submenu.component.html',
   styleUrls: ['./gio-submenu.component.scss'],
 })
 export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
+  @Input()
+  public theme: GioSubmenuTheme = 'dark';
+
   public reduced = false;
   public loaded = false;
   public overlayOptions: OverlayOptions = { open: false };
