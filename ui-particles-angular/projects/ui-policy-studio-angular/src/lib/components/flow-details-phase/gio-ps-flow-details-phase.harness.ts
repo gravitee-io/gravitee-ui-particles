@@ -156,4 +156,14 @@ export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
 
     await stepEditDialog.save();
   }
+
+  /**
+   * Delete a step
+   * @param index Index of the policy step to delete
+   */
+  public async deleteStep(index: number): Promise<void> {
+    const step = await this.getStep(index);
+
+    await step.clickOnDelete();
+  }
 }
