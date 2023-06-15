@@ -33,6 +33,15 @@ import {
 @Component({
   selector: 'gio-ps-flow-proxy-form-dialog-story',
   template: `<button id="open-dialog" (click)="openDialog()">Open dialog</button>`,
+  styles: [
+    `
+      :host {
+        display: block;
+        height: 100vh;
+        width: 100vh;
+      }
+    `,
+  ],
 })
 class GioPolicyStudioFlowProxyFormDialogStoryComponent {
   @Input() public flow?: FlowVM = undefined;

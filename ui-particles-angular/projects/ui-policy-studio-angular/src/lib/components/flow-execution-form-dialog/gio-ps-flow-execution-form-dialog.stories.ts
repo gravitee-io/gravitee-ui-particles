@@ -32,6 +32,15 @@ import {
 @Component({
   selector: 'gio-ps-flow-execution-form-dialog-story',
   template: `<button id="open-dialog" (click)="openDialog()">Open dialog</button>`,
+  styles: [
+    `
+      :host {
+        display: block;
+        height: 100vh;
+        width: 100vh;
+      }
+    `,
+  ],
 })
 class GioPolicyStudioFlowExecutionFormDialogStoryComponent {
   @Input() public flowExecution?: FlowExecution = undefined;
