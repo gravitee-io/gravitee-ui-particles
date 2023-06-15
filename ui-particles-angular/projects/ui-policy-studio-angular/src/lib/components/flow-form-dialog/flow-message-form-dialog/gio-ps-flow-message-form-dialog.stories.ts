@@ -33,6 +33,15 @@ import {
 @Component({
   selector: 'gio-ps-flow-message-form-dialog-story',
   template: `<button id="open-dialog" (click)="openDialog()">Open dialog</button>`,
+  styles: [
+    `
+      :host {
+        display: block;
+        height: 100vh;
+        width: 100vh;
+      }
+    `,
+  ],
 })
 class GioPolicyStudioFlowMessageFormDialogStoryComponent {
   @Input() public flow?: FlowVM = undefined;
