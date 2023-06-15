@@ -48,4 +48,9 @@ export class GioPolicyStudioDetailsPhaseStepHarness extends ComponentHarness {
     const matMenu = await this.locatorFor(MatMenuHarness)();
     await matMenu.clickItem({ text: 'Edit' });
   }
+
+  public async clickOnDelete(): Promise<void> {
+    const matMenu = await this.locatorFor(MatMenuHarness)();
+    await matMenu.clickItem({ text: 'Delete' });
+  }
 }

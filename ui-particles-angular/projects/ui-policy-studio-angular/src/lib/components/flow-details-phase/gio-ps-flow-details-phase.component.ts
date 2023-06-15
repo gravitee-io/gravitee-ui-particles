@@ -141,4 +141,11 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
     // Replace the step at the given index
     this.stepsChange.emit([...this.steps.slice(0, index), stepToEdit, ...this.steps.slice(index + 1)]);
   }
+
+  public onStepDeleted(index: number): void {
+    if (!this.steps) {
+      return;
+    }
+    this.stepsChange.emit([...this.steps.slice(0, index), ...this.steps.slice(index + 1)]);
+  }
 }

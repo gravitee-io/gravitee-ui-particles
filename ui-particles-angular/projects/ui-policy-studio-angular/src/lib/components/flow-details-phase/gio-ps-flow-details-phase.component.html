@@ -56,6 +56,7 @@
           [policies]="policies"
           [step]="stepVM.step"
           (stepChange)="onStepChange(stepVM.index, $event)"
+          (deleted)="onStepDeleted(stepVM.index)"
         ></gio-ps-flow-details-phase-step>
 
         <!-- Add policy button -->
