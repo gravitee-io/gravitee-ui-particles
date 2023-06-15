@@ -1,3 +1,10 @@
+# [7.14.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.13.0...v7.14.0) (2023-06-15)
+
+
+### Features
+
+* delete a policy from a flow in policy studio ([2c96724](https://github.com/gravitee-io/gravitee-ui-particles/commit/2c96724acf3fa4629759aa651d7fc180236042cc))
+
 # [7.13.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.12.0...v7.13.0) (2023-06-14)
 
 
