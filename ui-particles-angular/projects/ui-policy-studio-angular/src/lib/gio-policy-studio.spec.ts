@@ -340,8 +340,6 @@ describe('GioPolicyStudioModule', () => {
         const detailsHarness = await loader.getHarness(GioPolicyStudioDetailsHarness);
 
         // Edit first selected flow
-        await detailsHarness.clickEditFlowBtn();
-
         await policyStudioHarness.editFlowConfig(
           'Foo flow 1',
           fakeChannelFlow({
@@ -922,7 +920,6 @@ describe('GioPolicyStudioModule', () => {
         const detailsHarness = await loader.getHarness(GioPolicyStudioDetailsHarness);
 
         // Edit first selected flow
-
         await policyStudioHarness.editFlowConfig('Foo flow 1', fakeHttpFlow({ name: 'Edited flow name' }));
 
         let saveOutputToExpect: SaveOutput | undefined;
