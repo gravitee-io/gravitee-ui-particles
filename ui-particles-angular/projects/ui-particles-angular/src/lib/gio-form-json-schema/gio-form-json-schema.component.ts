@@ -28,8 +28,8 @@ import {
 import { ControlValueAccessor, FormGroup, NgControl } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { cloneDeep, isEmpty, isObject } from 'lodash';
-import { debounceTime, distinctUntilChanged, filter, map, takeUntil } from 'rxjs/operators';
-import { merge, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, take, takeUntil } from 'rxjs/operators';
+import { merge, ReplaySubject, Subject } from 'rxjs';
 import { FocusMonitor } from '@angular/cdk/a11y';
 
 import { GIO_FORM_FOCUS_INVALID_IGNORE_SELECTOR } from '../gio-form-focus-first-invalid/gio-form-focus-first-invalid-ignore.directive';
@@ -79,6 +79,8 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
 
   private touched = false;
 
+  private isValid$ = new ReplaySubject(1); // Wait JsonSchema to be loaded to check if it's valid
+
   private stateChanges$ = new Subject<void>();
 
   constructor(
@@ -107,14 +109,33 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
   }
 
   public ngOnInit(): void {
+    // Invalid by default.
+    this.ngControl?.control?.addAsyncValidators(() => {
+      return this.isValid$.pipe(
+        takeUntil(this.unsubscribe$),
+        take(1),
+        map(isValid => (isValid ? null : { invalid: true })),
+      );
+    });
+    this.ngControl?.control?.updateValueAndValidity({ emitEvent: false });
+
     // Subscribe to state changes to manage touches, status and value
-    this.stateChanges$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
+    this.stateChanges$.pipe(takeUntil(this.unsubscribe$), debounceTime(100)).subscribe(() => {
       const { status, value, touched } = this.formGroup;
       if (this.isDisabled) {
         return;
       }
 
-      if (touched) {
+      if (status === 'VALID') {
+        this.isValid$.next(true);
+        this.ngControl?.control?.setErrors(null);
+      }
+      if (status === 'INVALID') {
+        this.isValid$.next(false);
+        this.ngControl?.control?.setErrors({ invalid: true });
+      }
+
+      if (touched && !this.touched) {
         this._onTouched();
         this.touched = true;
       }
@@ -123,12 +144,7 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
         this._onChange(value);
       }
 
-      if (status === 'VALID') {
-        this.ngControl?.control?.setErrors(null);
-      }
-      if (status === 'INVALID') {
-        this.ngControl?.control?.setErrors({ invalid: true });
-      }
+      this.ngControl?.control?.updateValueAndValidity({ emitEvent: false });
       this.changeDetectorRef.detectChanges();
     });
 
@@ -151,7 +167,7 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
 
     // Group all valueChanges events emit by formly in a single one
     merge(this.formGroup.statusChanges, this.formGroup.valueChanges)
-      .pipe(takeUntil(this.unsubscribe$), debounceTime(100))
+      .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => {
         this.stateChanges$.next();
       });

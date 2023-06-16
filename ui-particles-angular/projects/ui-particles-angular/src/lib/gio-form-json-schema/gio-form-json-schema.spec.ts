@@ -76,7 +76,10 @@ describe('GioFormJsonSchema', () => {
       fixture.detectChanges();
       expect(testComponent.form.touched).toEqual(false);
       expect(testComponent.form.dirty).toEqual(false);
-      expect(testComponent.form.invalid).toEqual(false);
+      expect(testComponent.form.status).toEqual('PENDING'); // PENDING because json schema is not initialized
+      // Wait initialization of json schema
+      await fixture.whenStable();
+      expect(testComponent.form.invalid).toEqual(false); // Valid after initialization
 
       const simpleStringInput = await loader.getHarness(MatInputHarness.with({ selector: '[id*="simpleString"]' }));
       await simpleStringInput.setValue('What the fox say?');
@@ -106,8 +109,38 @@ describe('GioFormJsonSchema', () => {
         required: ['simpleString'],
       };
       fixture.detectChanges();
+      await fixture.whenStable();
       expect(testComponent.form.touched).toEqual(false);
       expect(testComponent.form.dirty).toEqual(false);
+      expect(testComponent.form.invalid).toEqual(true);
+    });
+
+    it('should switch between valid and invalid state', async () => {
+      fixture.componentInstance.jsonSchema = {
+        type: 'object',
+        properties: {
+          simpleString: {
+            title: 'Simple String',
+            description: 'Simple string without validation',
+            type: 'string',
+          },
+        },
+        required: ['simpleString'],
+      };
+      fixture.detectChanges();
+      await fixture.whenStable();
+      expect(testComponent.form.touched).toEqual(false);
+      expect(testComponent.form.dirty).toEqual(false);
+      expect(testComponent.form.invalid).toEqual(true);
+
+      const simpleStringInput = await loader.getHarness(MatInputHarness.with({ selector: '[id*="simpleString"]' }));
+      await simpleStringInput.setValue('a');
+
+      expect(testComponent.form.touched).toEqual(true);
+      expect(testComponent.form.dirty).toEqual(true);
+      expect(testComponent.form.invalid).toEqual(false);
+
+      await simpleStringInput.setValue('');
       expect(testComponent.form.invalid).toEqual(true);
     });
 
