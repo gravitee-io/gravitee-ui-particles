@@ -23,6 +23,7 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { InteractivityChecker } from '@angular/cdk/a11y';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { of } from 'rxjs';
+import { MatInputHarness } from '@angular/material/input/testing';
 
 import { fakeAllPolicies } from '../../models/index-testing';
 import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
@@ -123,6 +124,11 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
       const stepForm = await policiesCatalogDialog.getStepForm();
       await stepForm.setStepForm({
         description: 'My step description',
+        async waitForPolicyFormCompletionCb() {
+          // "Policy to test UI" have required configuration fields. We need to fill them to be able to add the step.
+          const testPolicyConfigurationInput = await loader.getHarness(MatInputHarness.with({ selector: '[id*="test"]' }));
+          await testPolicyConfigurationInput.setValue('🦊');
+        },
       });
 
       await policiesCatalogDialog.clickAddPolicyButton();
@@ -132,6 +138,9 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
         name: 'Policy to test UI',
         policy: 'test-policy',
         description: 'My step description',
+        configuration: {
+          test: '🦊',
+        },
       });
     });
   });

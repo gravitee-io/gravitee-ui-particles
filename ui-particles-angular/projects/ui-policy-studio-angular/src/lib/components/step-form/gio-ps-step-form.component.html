@@ -19,17 +19,17 @@
 <div class="settings">
   <div class="settings__header">Settings</div>
 
-  <div *ngIf="stepForm" class="settings__content" [formGroup]="stepForm">
-    <mat-form-field>
-      <mat-label>Description</mat-label>
-      <input matInput formControlName="description" cdkFocusInitial />
-      <mat-hint>Describe how your policy works.</mat-hint>
-    </mat-form-field>
+  <ng-container *ngIf="policySchema$ | async as policySchema">
+    <div *ngIf="stepForm" class="settings__content" [formGroup]="stepForm">
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="description" cdkFocusInitial />
+        <mat-hint>Describe how your policy works.</mat-hint>
+      </mat-form-field>
 
-    <ng-container *ngIf="policySchema$">
-      {{ $any(policySchema$) | async | json }}
-    </ng-container>
-  </div>
+      <gio-form-json-schema [jsonSchema]="$any(policySchema)" formControlName="configuration"></gio-form-json-schema>
+    </div>
+  </ng-container>
 </div>
 
 <div class="documentation">

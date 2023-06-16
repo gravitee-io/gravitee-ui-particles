@@ -14,18 +14,26 @@
  * limitations under the License.
  */
 
-import { ComponentHarness } from '@angular/cdk/testing';
+import { ComponentHarness, LocatorFactory } from '@angular/cdk/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 
+export type StepForm = {
+  description?: string;
+  // Callback to allow to fill the fields of the jsonSchemaForm specific to each policy, if necessary. Useful if some are required.
+  waitForPolicyFormCompletionCb?: (locator: LocatorFactory) => Promise<void>;
+};
 export class GioPolicyStudioStepFormHarness extends ComponentHarness {
   public static hostSelector = 'gio-ps-step-form';
 
   private getDescriptionInput = this.locatorFor(MatInputHarness.with({ selector: '[formControlName="description"]' }));
 
-  public async setStepForm(stepForm: { description?: string }): Promise<void> {
+  public async setStepForm(stepForm: StepForm): Promise<void> {
     if (stepForm.description) {
       const descriptionInput = await this.getDescriptionInput();
       await descriptionInput.setValue(stepForm.description);
+    }
+    if (stepForm.waitForPolicyFormCompletionCb) {
+      await stepForm.waitForPolicyFormCompletionCb(this.locatorFactory);
     }
   }
 

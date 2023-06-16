@@ -53,7 +53,7 @@
     <div *ngIf="selectedPolicy.description" class="policyForm__info__description">{{ selectedPolicy.description }}</div>
   </div>
 
-  <gio-ps-step-form [policy]="selectedPolicy" [(step)]="stepToAdd" (isValid)="isValid = $event"></gio-ps-step-form>
+  <gio-ps-step-form [policy]="selectedPolicy" (stepChange)="onStepChange($event)" (isValid)="onIsValid($event)"></gio-ps-step-form>
 </mat-dialog-content>
 
 <mat-dialog-actions class="actions">

@@ -15,7 +15,13 @@
  */
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { GioBannerModule, GioFormSlideToggleModule, GioFormTagsInputModule, GioIconsModule } from '@gravitee/ui-particles-angular';
+import {
+  GioBannerModule,
+  GioFormJsonSchemaModule,
+  GioFormSlideToggleModule,
+  GioFormTagsInputModule,
+  GioIconsModule,
+} from '@gravitee/ui-particles-angular';
 import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -76,6 +82,7 @@ import { GioPolicyStudioService } from './gio-policy-studio.service';
     GioFormSlideToggleModule,
     GioFormTagsInputModule,
     GioBannerModule,
+    GioFormJsonSchemaModule,
   ],
   exports: [GioPolicyStudioComponent],
   providers: [GioPolicyStudioService],
