@@ -15,8 +15,8 @@
  */
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { startWith, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 
 import { GioPolicyStudioService } from '../../gio-policy-studio.service';
 import { Policy, Step } from '../../models';
@@ -39,7 +39,7 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
   @Output()
   public isValid = new EventEmitter<boolean>();
 
-  public policySchema$?: unknown;
+  public policySchema$?: Observable<unknown>;
   public policyDocumentation$?: unknown;
 
   public stepForm?: FormGroup;
@@ -51,10 +51,6 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
     if (changes.policy) {
       this.policySchema$ = this.policyStudioService.getPolicySchema(this.policy);
       this.policyDocumentation$ = this.policyStudioService.getPolicyDocumentation(this.policy);
-    }
-
-    if (changes.step && !changes.step.firstChange) {
-      this.initStepForm();
     }
   }
 
@@ -69,17 +65,19 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
 
   private initStepForm(): void {
     this.stepForm = new FormGroup({
-      description: new FormControl(this.step?.description, []),
+      description: new FormControl(this.step?.description),
+      configuration: new FormControl(this.step?.configuration ?? {}),
     });
 
     this.stepForm.valueChanges.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
       this.stepChange.emit({
         ...this.step,
         description: this.stepForm?.get('description')?.value,
+        configuration: this.stepForm?.get('configuration')?.value,
       });
     });
 
-    this.stepForm.statusChanges.pipe(takeUntil(this.unsubscribe$), startWith(this.stepForm.status)).subscribe(valid => {
+    this.stepForm.statusChanges.pipe(takeUntil(this.unsubscribe$)).subscribe(valid => {
       this.isValid.emit(valid === 'VALID');
     });
   }

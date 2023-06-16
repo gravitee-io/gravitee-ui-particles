@@ -23,6 +23,7 @@ import { InteractivityChecker } from '@angular/cdk/a11y';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { of } from 'rxjs';
+import { MatInputHarness } from '@angular/material/input/testing';
 
 import {
   fakeAllPolicies,
@@ -637,10 +638,20 @@ describe('GioPolicyStudioModule', () => {
         await requestPhase?.addStep(0, {
           policyName: fakeTestPolicy().name,
           description: 'A',
+          async waitForPolicyFormCompletionCb(locator) {
+            // "Policy to test UI" have required configuration fields. We need to fill them to be able to add the step.
+            const testPolicyConfigurationInput = await locator.locatorFor(MatInputHarness.with({ selector: '[id*="test"]' }))();
+            await testPolicyConfigurationInput.setValue('🦊');
+          },
         });
         await requestPhase?.addStep(2, {
           policyName: fakeTestPolicy().name,
           description: 'C',
+          async waitForPolicyFormCompletionCb(locator) {
+            // "Policy to test UI" have required configuration fields. We need to fill them to be able to add the step.
+            const testPolicyConfigurationInput = await locator.locatorFor(MatInputHarness.with({ selector: '[id*="test"]' }))();
+            await testPolicyConfigurationInput.setValue('🦊');
+          },
         });
 
         // Add step A into undefined SUBSCRIBE phase
@@ -648,6 +659,11 @@ describe('GioPolicyStudioModule', () => {
         await subscribePhase?.addStep(0, {
           policyName: fakeTestPolicy().name,
           description: 'A',
+          async waitForPolicyFormCompletionCb(locator) {
+            // "Policy to test UI" have required configuration fields. We need to fill them to be able to add the step.
+            const testPolicyConfigurationInput = await locator.locatorFor(MatInputHarness.with({ selector: '[id*="test"]' }))();
+            await testPolicyConfigurationInput.setValue('🦊');
+          },
         });
 
         // Save
@@ -659,12 +675,12 @@ describe('GioPolicyStudioModule', () => {
         const commonFlow = saveOutputToExpect?.commonFlows?.[0];
         expect(commonFlow).toBeDefined();
         expect(commonFlow?.request).toEqual([
-          fakeTestPolicyStep({ description: 'A' }),
+          fakeTestPolicyStep({ description: 'A', configuration: { test: '🦊' } }),
           fakeTestPolicyStep({ description: 'B' }),
-          fakeTestPolicyStep({ description: 'C' }),
+          fakeTestPolicyStep({ description: 'C', configuration: { test: '🦊' } }),
         ]);
 
-        expect(commonFlow?.subscribe).toEqual([fakeTestPolicyStep({ description: 'A' })]);
+        expect(commonFlow?.subscribe).toEqual([fakeTestPolicyStep({ description: 'A', configuration: { test: '🦊' } })]);
       });
 
       it('should edit step into phase', async () => {
@@ -971,10 +987,20 @@ describe('GioPolicyStudioModule', () => {
         await requestPhase?.addStep(0, {
           policyName: fakeTestPolicy().name,
           description: 'A',
+          async waitForPolicyFormCompletionCb(locator) {
+            // "Policy to test UI" have required configuration fields. We need to fill them to be able to add the step.
+            const testPolicyConfigurationInput = await locator.locatorFor(MatInputHarness.with({ selector: '[id*="test"]' }))();
+            await testPolicyConfigurationInput.setValue('🦊');
+          },
         });
         await requestPhase?.addStep(2, {
           policyName: fakeTestPolicy().name,
           description: 'C',
+          async waitForPolicyFormCompletionCb(locator) {
+            // "Policy to test UI" have required configuration fields. We need to fill them to be able to add the step.
+            const testPolicyConfigurationInput = await locator.locatorFor(MatInputHarness.with({ selector: '[id*="test"]' }))();
+            await testPolicyConfigurationInput.setValue('🦊');
+          },
         });
 
         // Add step A before B into RESPONSE phase
@@ -982,6 +1008,11 @@ describe('GioPolicyStudioModule', () => {
         await responsePhase?.addStep(0, {
           policyName: fakeTestPolicy().name,
           description: 'A',
+          async waitForPolicyFormCompletionCb(locator) {
+            // "Policy to test UI" have required configuration fields. We need to fill them to be able to add the step.
+            const testPolicyConfigurationInput = await locator.locatorFor(MatInputHarness.with({ selector: '[id*="test"]' }))();
+            await testPolicyConfigurationInput.setValue('🦊');
+          },
         });
 
         // Save
@@ -993,12 +1024,15 @@ describe('GioPolicyStudioModule', () => {
         const commonFlow = saveOutputToExpect?.commonFlows?.[0];
         expect(commonFlow).toBeDefined();
         expect(commonFlow?.request).toEqual([
-          fakeTestPolicyStep({ description: 'A' }),
+          fakeTestPolicyStep({ description: 'A', configuration: { test: '🦊' } }),
           fakeTestPolicyStep({ description: 'B' }),
-          fakeTestPolicyStep({ description: 'C' }),
+          fakeTestPolicyStep({ description: 'C', configuration: { test: '🦊' } }),
         ]);
 
-        expect(commonFlow?.response).toEqual([fakeTestPolicyStep({ description: 'A' }), fakeTestPolicyStep({ description: 'B' })]);
+        expect(commonFlow?.response).toEqual([
+          fakeTestPolicyStep({ description: 'A', configuration: { test: '🦊' } }),
+          fakeTestPolicyStep({ description: 'B' }),
+        ]);
       });
 
       it('should edit step into phase', async () => {

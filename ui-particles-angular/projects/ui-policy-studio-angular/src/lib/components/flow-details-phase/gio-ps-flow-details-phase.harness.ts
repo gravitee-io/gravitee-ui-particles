@@ -22,6 +22,7 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { GioPolicyStudioDetailsPhaseStepHarness } from '../flow-details-phase-step/gio-ps-flow-details-phase-step.harness';
 import { GioPolicyStudioStepEditDialogHarness } from '../step-edit-dialog/gio-ps-step-edit-dialog.harness';
 import { GioPolicyStudioPoliciesCatalogDialogHarness } from '../policies-catalog-dialog/gio-ps-policies-catalog-dialog.harness';
+import { StepForm } from '../step-form/gio-ps-step-form.harness';
 
 export type PhaseType = 'REQUEST' | 'RESPONSE' | 'PUBLISH' | 'SUBSCRIBE';
 
@@ -123,8 +124,7 @@ export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
     index: number,
     stepConfig: {
       policyName: string;
-      description?: string;
-    },
+    } & StepForm,
   ): Promise<void> {
     await this.clickAddStep(index);
 
@@ -141,12 +141,7 @@ export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
    * @param index Index of the policy step to edit
    * @param stepConfig Step configuration
    */
-  public async editStep(
-    index: number,
-    stepConfig: {
-      description?: string;
-    },
-  ): Promise<void> {
+  public async editStep(index: number, stepConfig: StepForm): Promise<void> {
     const step = await this.getStep(index);
 
     await step.clickOnEdit();

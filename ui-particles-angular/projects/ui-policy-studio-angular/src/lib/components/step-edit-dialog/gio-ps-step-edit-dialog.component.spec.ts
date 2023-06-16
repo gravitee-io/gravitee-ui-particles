@@ -23,6 +23,7 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { InteractivityChecker } from '@angular/cdk/a11y';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { of } from 'rxjs';
+import { MatInputHarness } from '@angular/material/input/testing';
 
 import { fakeTestPolicyStep, fakeTestPolicy } from '../../models/index-testing';
 import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
@@ -112,11 +113,15 @@ describe('GioPolicyStudioStepEditDialogComponent', () => {
     expect(await stepForm.getStepFormValue()).toEqual({
       description: 'Test Policy description',
     });
+    // Check policy configuration
+    const testPolicyConfigurationInput = await loader.getHarness(MatInputHarness.with({ selector: '[id*="test"]' }));
+    expect(await testPolicyConfigurationInput.getValue()).toEqual('test');
 
     // Edit form values
     await stepForm.setStepForm({
       description: 'Edited description',
     });
+    await testPolicyConfigurationInput.setValue('edited');
 
     // Save
     await policyFormDialog.save();
@@ -125,6 +130,9 @@ describe('GioPolicyStudioStepEditDialogComponent', () => {
     expect(component.dialogResult).toEqual(
       fakeTestPolicyStep({
         description: 'Edited description',
+        configuration: {
+          test: 'edited',
+        },
       }),
     );
   });

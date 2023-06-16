@@ -66,6 +66,14 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent {
     this.selectedPolicy = policy;
   }
 
+  public onStepChange(step: Step) {
+    this.stepToAdd = step;
+  }
+
+  public onIsValid(isValid: boolean) {
+    this.isValid = isValid;
+  }
+
   public onAddPolicy() {
     this.dialogRef.close({
       ...this.stepToAdd,

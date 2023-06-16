@@ -15,7 +15,7 @@
  */
 import { isFunction } from 'lodash';
 
-import { fakeTestPolicy } from '../index-testing';
+import { fakeTestPolicy } from '../policy/Policy.fixture';
 
 import { Step } from './Step';
 
@@ -25,6 +25,9 @@ export function fakeTestPolicyStep(modifier?: Partial<Step> | ((base: Step) => S
     description: 'Test Policy description',
     enabled: true,
     policy: 'test-policy',
+    configuration: {
+      test: 'test',
+    },
   };
 
   if (isFunction(modifier)) {
