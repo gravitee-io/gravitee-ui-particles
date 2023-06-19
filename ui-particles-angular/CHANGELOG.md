@@ -1,3 +1,15 @@
+# [7.15.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.14.0...v7.15.0) (2023-06-19)
+
+
+### Bug Fixes
+
+* improve some behaviour when ChangeDetectionStrategy is not OnPush ([24f9d03](https://github.com/gravitee-io/gravitee-ui-particles/commit/24f9d0365c14b4126260a9b001ae8abfe28b3ce8))
+
+
+### Features
+
+* add policy configuration with json schema form ([38ae43c](https://github.com/gravitee-io/gravitee-ui-particles/commit/38ae43ca95e472a9172f3a22ec9ccd0307180c66))
+
 # [7.14.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.13.0...v7.14.0) (2023-06-15)
 
 
