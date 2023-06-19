@@ -24,15 +24,15 @@ $typography: map.get(theme.$mat-theme, typography);
 
 @mixin theme() {
   table.gio-table-light {
-    border-collapse: collapse;
+    border: 1px solid map.get(palettes.$mat-dove-palette, darker10);
+    border-radius: 4px;
+    border-collapse: inherit;
     border-spacing: 0;
 
     th,
     td {
       padding: 8px;
-
-      // FIXME: add color to palette ? replace/keep ?
-      border: 1px solid #e6e7e8;
+      border-bottom: 1px solid map.get(palettes.$mat-dove-palette, darker10);
     }
 
     thead {
@@ -47,6 +47,10 @@ $typography: map.get(theme.$mat-theme, typography);
       @include mat.typography-level($typography, 'body-1');
 
       background-color: mat.get-color-from-palette(palettes.$mat-basic-palette, white);
+
+      & > tr:last-child > td {
+        border-bottom: 0;
+      }
     }
   }
 }
