@@ -1,3 +1,10 @@
+# [7.17.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.16.1...v7.17.0) (2023-06-20)
+
+
+### Features
+
+* update gio-table-light style ([47e11ae](https://github.com/gravitee-io/gravitee-ui-particles/commit/47e11ae2e54312535300c3801515b66dbeb51118))
+
 ## [7.16.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.16.0...v7.16.1) (2023-06-20)
 
 
