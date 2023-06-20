@@ -109,16 +109,6 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
   }
 
   public ngOnInit(): void {
-    // Invalid by default.
-    this.ngControl?.control?.addAsyncValidators(() => {
-      return this.isValid$.pipe(
-        takeUntil(this.unsubscribe$),
-        take(1),
-        map(isValid => (isValid ? null : { invalid: true })),
-      );
-    });
-    this.ngControl?.control?.updateValueAndValidity({ emitEvent: false });
-
     // When the parent form is touched, mark all the sub formGroup as touched if not already touched
     const parentControl = this.ngControl?.control?.parent;
     parentControl?.statusChanges
@@ -145,6 +135,16 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
   }
 
   public ngAfterViewInit(): void {
+    // Add async validator to the parent
+    this.ngControl?.control?.addAsyncValidators(() => {
+      return this.isValid$.pipe(
+        takeUntil(this.unsubscribe$),
+        take(1),
+        map(isValid => (isValid ? null : { invalid: true })),
+      );
+    });
+    this.ngControl?.control?.updateValueAndValidity({ emitEvent: false });
+
     // Subscribe to state changes to manage touches, status and value
     this.stateChanges$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
       const { status, value, touched } = this.formGroup;
