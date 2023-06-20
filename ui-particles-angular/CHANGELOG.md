@@ -1,3 +1,10 @@
+# [7.16.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.15.0...v7.16.0) (2023-06-20)
+
+
+### Features
+
+* add theme light to gio-submenu ([c0de755](https://github.com/gravitee-io/gravitee-ui-particles/commit/c0de7550089f8db825be851d53c3aec7d2a8e43e))
+
 # [7.15.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.14.0...v7.15.0) (2023-06-19)
 
 
