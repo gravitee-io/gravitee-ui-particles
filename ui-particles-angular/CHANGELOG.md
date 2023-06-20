@@ -1,3 +1,10 @@
+## [7.17.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.17.1...v7.17.2) (2023-06-20)
+
+
+### Bug Fixes
+
+* **json-schema:** move add validator into ngAfterViewInit ([b575b2d](https://github.com/gravitee-io/gravitee-ui-particles/commit/b575b2dfb2a0a11a64dbfa30cee9ca49010b1422))
+
 ## [7.17.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.17.0...v7.17.1) (2023-06-20)
 
 
