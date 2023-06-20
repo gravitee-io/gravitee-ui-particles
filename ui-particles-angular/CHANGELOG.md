@@ -1,3 +1,10 @@
+## [7.17.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.17.0...v7.17.1) (2023-06-20)
+
+
+### Bug Fixes
+
+* **json-schema:** move stateChanges subscribe into ngAfterViewInit ([14b4dc2](https://github.com/gravitee-io/gravitee-ui-particles/commit/14b4dc2a956e64afb488c74d9b5a094a832fc407))
+
 # [7.17.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.16.1...v7.17.0) (2023-06-20)
 
 
