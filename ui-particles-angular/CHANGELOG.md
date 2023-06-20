@@ -1,3 +1,10 @@
+## [7.16.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.16.0...v7.16.1) (2023-06-20)
+
+
+### Bug Fixes
+
+* **gio-submenu:** add detectChanges after observables ([a838c42](https://github.com/gravitee-io/gravitee-ui-particles/commit/a838c42f8c84dcdbdb31d5728418aac285982431))
+
 # [7.16.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.15.0...v7.16.0) (2023-06-20)
 
 
