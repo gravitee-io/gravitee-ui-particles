@@ -76,9 +76,8 @@ describe('GioFormJsonSchema', () => {
       fixture.detectChanges();
       expect(testComponent.form.touched).toEqual(false);
       expect(testComponent.form.dirty).toEqual(false);
-      expect(testComponent.form.status).toEqual('PENDING'); // PENDING because json schema is not initialized
-      // Wait initialization of json schema
-      await fixture.whenStable();
+      expect(testComponent.form.valid).toEqual(true);
+      expect(testComponent.form.status).toEqual('VALID');
       expect(testComponent.form.invalid).toEqual(false); // Valid after initialization
 
       const simpleStringInput = await loader.getHarness(MatInputHarness.with({ selector: '[id*="simpleString"]' }));
@@ -128,9 +127,9 @@ describe('GioFormJsonSchema', () => {
         required: ['simpleString'],
       };
       fixture.detectChanges();
-      await fixture.whenStable();
       expect(testComponent.form.touched).toEqual(false);
       expect(testComponent.form.dirty).toEqual(false);
+      expect(testComponent.form.status).toEqual('INVALID');
       expect(testComponent.form.invalid).toEqual(true);
 
       const simpleStringInput = await loader.getHarness(MatInputHarness.with({ selector: '[id*="simpleString"]' }));

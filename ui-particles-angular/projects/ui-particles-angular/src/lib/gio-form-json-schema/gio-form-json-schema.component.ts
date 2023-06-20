@@ -119,8 +119,34 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
     });
     this.ngControl?.control?.updateValueAndValidity({ emitEvent: false });
 
+    // When the parent form is touched, mark all the sub formGroup as touched if not already touched
+    const parentControl = this.ngControl?.control?.parent;
+    parentControl?.statusChanges
+      ?.pipe(
+        takeUntil(this.unsubscribe$),
+        map(() => parentControl?.touched),
+        filter(touched => touched === true),
+        distinctUntilChanged(),
+      )
+      .subscribe(() => {
+        if (this.isDisabled) {
+          return;
+        }
+        this.formGroup.markAllAsTouched();
+        this.stateChanges$.next();
+      });
+
+    // Group all valueChanges events emit by formly in a single one
+    merge(this.formGroup.statusChanges, this.formGroup.valueChanges)
+      .pipe(takeUntil(this.unsubscribe$), debounceTime(100))
+      .subscribe(() => {
+        this.stateChanges$.next();
+      });
+  }
+
+  public ngAfterViewInit(): void {
     // Subscribe to state changes to manage touches, status and value
-    this.stateChanges$.pipe(takeUntil(this.unsubscribe$), debounceTime(100)).subscribe(() => {
+    this.stateChanges$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
       const { status, value, touched } = this.formGroup;
       if (this.isDisabled) {
         return;
@@ -148,32 +174,6 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
       this.changeDetectorRef.detectChanges();
     });
 
-    // When the parent form is touched, mark all the sub formGroup as touched if not already touched
-    const parentControl = this.ngControl?.control?.parent;
-    parentControl?.statusChanges
-      ?.pipe(
-        takeUntil(this.unsubscribe$),
-        map(() => parentControl?.touched),
-        filter(touched => touched === true),
-        distinctUntilChanged(),
-      )
-      .subscribe(() => {
-        if (this.isDisabled) {
-          return;
-        }
-        this.formGroup.markAllAsTouched();
-        this.stateChanges$.next();
-      });
-
-    // Group all valueChanges events emit by formly in a single one
-    merge(this.formGroup.statusChanges, this.formGroup.valueChanges)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => {
-        this.stateChanges$.next();
-      });
-  }
-
-  public ngAfterViewInit(): void {
     this.stateChanges$.next();
   }
 
