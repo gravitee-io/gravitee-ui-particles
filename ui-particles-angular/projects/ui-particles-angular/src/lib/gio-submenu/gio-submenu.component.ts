@@ -13,7 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { AfterViewInit, Component, Directive, ElementRef, HostListener, Input, OnDestroy, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  Directive,
+  ElementRef,
+  HostListener,
+  Input,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { of, Subject } from 'rxjs';
 import { delay, filter, switchMap, takeUntil, tap } from 'rxjs/operators';
 
@@ -43,7 +53,7 @@ export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
   private gioSubmenu!: ElementRef<HTMLDivElement>;
   private unsubscribe$ = new Subject();
 
-  constructor(private readonly gioMenuService: GioMenuService) {}
+  constructor(private readonly gioMenuService: GioMenuService, private readonly changeDetectorRef: ChangeDetectorRef) {}
 
   public ngAfterViewInit(): void {
     this.gioMenuService.reduce
@@ -70,7 +80,9 @@ export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
         filter(submenuItems => submenuItems.length > 0),
         tap(submenuItems => submenuItems[0].focus()),
       )
-      .subscribe();
+      .subscribe(() => {
+        this.changeDetectorRef.detectChanges();
+      });
 
     this.gioMenuService.reduce
       .pipe(
@@ -83,7 +95,9 @@ export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
           this.gioSubmenu.nativeElement.style.maxHeight = 'none';
         }),
       )
-      .subscribe();
+      .subscribe(() => {
+        this.changeDetectorRef.detectChanges();
+      });
   }
 
   public ngOnDestroy(): void {
