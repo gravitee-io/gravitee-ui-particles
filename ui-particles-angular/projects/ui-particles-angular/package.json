@@ -22,13 +22,21 @@
     "@angular/material": "^13.3.0",
     "@ngx-formly/core": "^6.1.1",
     "@ngx-formly/material": "^6.1.1",
-    "ngx-file-helpers": "^7.0.0"
+    "asciidoctor": "^2.2.6",
+    "ngx-file-helpers": "^7.0.0",
+    "prismjs": "^1.29.0"
   },
   "peerDependenciesMeta": {
     "@ngx-formly/core": {
       "optional": true
     },
     "@ngx-formly/material": {
+      "optional": true
+    },
+    "asciidoctor": {
+      "optional": true
+    },
+    "prismjs": {
       "optional": true
     }
   },
