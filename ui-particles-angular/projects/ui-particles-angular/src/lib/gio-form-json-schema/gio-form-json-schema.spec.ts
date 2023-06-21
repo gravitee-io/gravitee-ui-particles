@@ -127,6 +127,7 @@ describe('GioFormJsonSchema', () => {
         required: ['simpleString'],
       };
       fixture.detectChanges();
+      await fixture.whenStable();
       expect(testComponent.form.touched).toEqual(false);
       expect(testComponent.form.dirty).toEqual(false);
       expect(testComponent.form.status).toEqual('INVALID');
