@@ -25,7 +25,7 @@ export default {
 export const All: Story = {
   render: () => ({
     template: `
-      <p><a>Link</a></p>
+      <p><a href="#">Link</a></p>
     `,
   }),
 };
