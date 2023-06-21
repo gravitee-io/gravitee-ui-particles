@@ -18,4 +18,4 @@ import { Observable } from 'rxjs';
 import { Policy } from './policy/Policy';
 
 export type PolicySchemaFetcher = (policy: Policy) => Observable<unknown>;
-export type PolicyDocumentationFetcher = (policy: Policy) => Observable<unknown>;
+export type PolicyDocumentationFetcher = (policy: Policy) => Observable<string>;

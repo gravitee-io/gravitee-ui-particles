@@ -39,7 +39,7 @@ import {
   fakeWebhookMessageEntrypoint,
 } from './models/index-testing';
 import { Policy, SaveOutput } from './models';
-import { fakePolicySchema } from './models/policy/PolicySchema.fixture';
+import { fakePolicyDocumentation, fakePolicySchema } from './models/policy/PolicySchema.fixture';
 
 export default {
   title: 'Policy Studio / APIM',
@@ -70,7 +70,7 @@ export default {
       policies: fakeAllPolicies(),
       // Simulate a get policy schema http fetcher.
       policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)),
-      policyDocumentationFetcher: (policy: Policy) => of(`# Documentation for ${policy.name}`),
+      policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)),
       onSave: (event: SaveOutput) => {
         console.info('saveOutput', event);
         action('saveOutput')(event);

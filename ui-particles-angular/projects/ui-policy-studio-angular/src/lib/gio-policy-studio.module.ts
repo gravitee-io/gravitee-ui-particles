@@ -32,6 +32,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatMenuModule } from '@angular/material/menu';
+import { GioAsciidoctorModule } from '@gravitee/ui-particles-angular';
 
 import { GioPolicyStudioFlowMessageFormDialogComponent } from './components/flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
 import { GioPolicyStudioDetailsComponent } from './components/flow-details/gio-ps-flow-details.component';
@@ -83,6 +84,7 @@ import { GioPolicyStudioService } from './gio-policy-studio.service';
     GioFormTagsInputModule,
     GioBannerModule,
     GioFormJsonSchemaModule,
+    GioAsciidoctorModule,
   ],
   exports: [GioPolicyStudioComponent],
   providers: [GioPolicyStudioService],

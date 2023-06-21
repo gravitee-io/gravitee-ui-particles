@@ -29,7 +29,7 @@ import { fakeTestPolicyStep, fakeTestPolicy } from '../../models/index-testing';
 import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
 import { Policy, Step } from '../../models';
 import { GioPolicyStudioService } from '../../gio-policy-studio.service';
-import { fakePolicySchema } from '../../models/policy/PolicySchema.fixture';
+import { fakePolicyDocumentation, fakePolicySchema } from '../../models/policy/PolicySchema.fixture';
 
 import {
   GioPolicyStudioStepEditDialogComponent,
@@ -79,7 +79,7 @@ describe('GioPolicyStudioStepEditDialogComponent', () => {
           useFactory: () => {
             const service = new GioPolicyStudioService();
             service.setPolicySchemaFetcher(policy => of(fakePolicySchema(policy.id)));
-            service.setPolicyDocumentationFetcher(policy => of(`${policy.id} documentation`));
+            service.setPolicyDocumentationFetcher(policy => of(fakePolicyDocumentation(policy.id)));
             return service;
           },
         },
@@ -135,6 +135,18 @@ describe('GioPolicyStudioStepEditDialogComponent', () => {
         },
       }),
     );
+  });
+
+  it('should display policy documentation', async () => {
+    createTestingComponent(fakeTestPolicy(), fakeTestPolicyStep());
+
+    await componentTestingOpenDialog();
+    const policyFormDialog = await loader.getHarness(GioPolicyStudioStepEditDialogHarness);
+    expect(await policyFormDialog.getPolicyName()).toEqual('Policy to test UI');
+
+    const stepForm = await policyFormDialog.getStepForm();
+
+    expect(await stepForm.getDocumentation()).toContain('= Test Policy documentation');
   });
 
   async function componentTestingOpenDialog() {

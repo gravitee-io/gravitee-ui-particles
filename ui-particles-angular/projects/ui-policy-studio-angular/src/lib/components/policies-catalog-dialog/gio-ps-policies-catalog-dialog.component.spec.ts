@@ -29,7 +29,7 @@ import { fakeAllPolicies } from '../../models/index-testing';
 import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
 import { ApiType, ExecutionPhase, Policy } from '../../models';
 import { GioPolicyStudioService } from '../../gio-policy-studio.service';
-import { fakePolicySchema } from '../../models/policy/PolicySchema.fixture';
+import { fakePolicyDocumentation, fakePolicySchema } from '../../models/policy/PolicySchema.fixture';
 
 import {
   GioPolicyStudioPoliciesCatalogDialogComponent,
@@ -80,7 +80,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
           useFactory: () => {
             const service = new GioPolicyStudioService();
             service.setPolicySchemaFetcher(policy => of(fakePolicySchema(policy.id)));
-            service.setPolicyDocumentationFetcher(policy => of(`${policy.id} documentation`));
+            service.setPolicyDocumentationFetcher(policy => of(fakePolicyDocumentation(policy.id)));
             return service;
           },
         },
@@ -142,6 +142,17 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
           test: '🦊',
         },
       });
+    });
+
+    it('should display policy documentation', async () => {
+      await componentTestingOpenDialog();
+
+      const policiesCatalogDialog = await loader.getHarness(GioPolicyStudioPoliciesCatalogDialogHarness);
+      await policiesCatalogDialog.selectPolicy('Policy to test UI');
+
+      const stepForm = await policiesCatalogDialog.getStepForm();
+
+      expect(await stepForm.getDocumentation()).toContain('= Test Policy documentation');
     });
   });
 

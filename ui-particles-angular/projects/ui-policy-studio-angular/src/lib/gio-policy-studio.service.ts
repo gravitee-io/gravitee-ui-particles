@@ -18,21 +18,21 @@ import { Inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 
-import { Policy, PolicySchemaFetcher } from './models';
+import { Policy, PolicyDocumentationFetcher, PolicySchemaFetcher } from './models';
 
 @Inject({})
 export class GioPolicyStudioService {
   private schemasCache: Record<string, unknown> = {};
-  private documentationsCache: Record<string, unknown> = {};
+  private documentationsCache: Record<string, string> = {};
 
   private policySchemaFetcher?: PolicySchemaFetcher;
-  private policyDocumentationFetcher?: PolicySchemaFetcher;
+  private policyDocumentationFetcher?: PolicyDocumentationFetcher;
 
   public setPolicySchemaFetcher(policySchemaFetcher: PolicySchemaFetcher) {
     this.policySchemaFetcher = policySchemaFetcher;
   }
 
-  public setPolicyDocumentationFetcher(policyDocumentationFetcher: PolicySchemaFetcher) {
+  public setPolicyDocumentationFetcher(policyDocumentationFetcher: PolicyDocumentationFetcher) {
     this.policyDocumentationFetcher = policyDocumentationFetcher;
   }
 
@@ -60,7 +60,7 @@ export class GioPolicyStudioService {
    * @param policy to get the documentation for
    * @returns the documentation for the policy
    */
-  public getPolicyDocumentation(policy: Policy): Observable<unknown> {
+  public getPolicyDocumentation(policy: Policy): Observable<string> {
     if (!this.policyDocumentationFetcher) throw new Error('PolicyDocumentationFetcher not defined!');
 
     if (this.documentationsCache[policy.id]) {

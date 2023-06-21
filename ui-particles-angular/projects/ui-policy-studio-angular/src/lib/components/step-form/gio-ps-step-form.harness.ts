@@ -46,4 +46,9 @@ export class GioPolicyStudioStepFormHarness extends ComponentHarness {
       description: await descriptionInput.getValue(),
     };
   }
+
+  public async getDocumentation(): Promise<string | null> {
+    const documentation = await this.locatorFor('.documentation__content > gio-asciidoctor')();
+    return documentation.getAttribute('ng-reflect-content');
+  }
 }

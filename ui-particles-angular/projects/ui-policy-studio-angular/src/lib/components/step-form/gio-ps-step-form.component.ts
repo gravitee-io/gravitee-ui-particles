@@ -40,7 +40,7 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
   public isValid = new EventEmitter<boolean>();
 
   public policySchema$?: Observable<unknown>;
-  public policyDocumentation$?: unknown;
+  public policyDocumentation$?: Observable<string>;
 
   public stepForm?: FormGroup;
 

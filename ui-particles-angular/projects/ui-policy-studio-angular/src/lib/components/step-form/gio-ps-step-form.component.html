@@ -35,9 +35,7 @@
 <div class="documentation">
   <div class="documentation__header">Documentation</div>
 
-  <div class="documentation__content">
-    <ng-container *ngIf="policyDocumentation$">
-      {{ $any(policyDocumentation$) | async }}
-    </ng-container>
+  <div class="documentation__content" *ngIf="policyDocumentation$ | async as policyDocumentation">
+    <gio-asciidoctor [content]="policyDocumentation"></gio-asciidoctor>
   </div>
 </div>

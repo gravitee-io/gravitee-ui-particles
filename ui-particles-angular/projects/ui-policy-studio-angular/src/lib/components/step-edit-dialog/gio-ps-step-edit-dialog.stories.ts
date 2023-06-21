@@ -25,7 +25,7 @@ import { POLICIES_V4_UNREGISTERED_ICON, fakeTestPolicyStep, fakeTestPolicy } fro
 import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
 import { matIconRegisterProvider } from '../../../storybook-utils/mat-icon-register.provider';
 import { GioPolicyStudioService } from '../../gio-policy-studio.service';
-import { fakePolicySchema } from '../../models/policy/PolicySchema.fixture';
+import { fakePolicyDocumentation, fakePolicySchema } from '../../models/policy/PolicySchema.fixture';
 
 import {
   GioPolicyStudioStepEditDialogComponent,
@@ -86,7 +86,7 @@ export default {
           useFactory: () => {
             const service = new GioPolicyStudioService();
             service.setPolicySchemaFetcher(policy => of(fakePolicySchema(policy.id)));
-            service.setPolicyDocumentationFetcher(policy => of(`${policy.id} documentation`));
+            service.setPolicyDocumentationFetcher(policy => of(fakePolicyDocumentation(policy.id)));
             return service;
           },
         },
