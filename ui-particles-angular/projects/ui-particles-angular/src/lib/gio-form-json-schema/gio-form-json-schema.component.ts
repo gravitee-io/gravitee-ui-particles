@@ -28,7 +28,7 @@ import {
 import { ControlValueAccessor, FormGroup, NgControl } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { cloneDeep, isEmpty, isObject } from 'lodash';
-import { debounceTime, distinctUntilChanged, filter, map, take, takeUntil } from 'rxjs/operators';
+import { debounceTime, delay, distinctUntilChanged, filter, map, take, takeUntil, tap } from 'rxjs/operators';
 import { merge, ReplaySubject, Subject } from 'rxjs';
 import { FocusMonitor } from '@angular/cdk/a11y';
 
@@ -126,15 +126,6 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
         this.stateChanges$.next();
       });
 
-    // Group all valueChanges events emit by formly in a single one
-    merge(this.formGroup.statusChanges, this.formGroup.valueChanges)
-      .pipe(takeUntil(this.unsubscribe$), debounceTime(100))
-      .subscribe(() => {
-        this.stateChanges$.next();
-      });
-  }
-
-  public ngAfterViewInit(): void {
     // Add async validator to the parent
     this.ngControl?.control?.addAsyncValidators(() => {
       return this.isValid$.pipe(
@@ -143,37 +134,50 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
         map(isValid => (isValid ? null : { invalid: true })),
       );
     });
-    this.ngControl?.control?.updateValueAndValidity({ emitEvent: false });
 
     // Subscribe to state changes to manage touches, status and value
-    this.stateChanges$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
-      const { status, value, touched } = this.formGroup;
-      if (this.isDisabled) {
-        return;
-      }
+    this.stateChanges$
+      .pipe(
+        tap(() => {
+          const { status, value, touched } = this.formGroup;
+          if (this.isDisabled) {
+            return;
+          }
 
-      if (status === 'VALID') {
-        this.isValid$.next(true);
-        this.ngControl?.control?.setErrors(null);
-      }
-      if (status === 'INVALID') {
-        this.isValid$.next(false);
-        this.ngControl?.control?.setErrors({ invalid: true });
-      }
+          if (status === 'VALID') {
+            this.isValid$.next(true);
+          }
+          if (status === 'INVALID') {
+            this.isValid$.next(false);
+          }
 
-      if (touched && !this.touched) {
-        this._onTouched();
-        this.touched = true;
-      }
+          if (touched && !this.touched) {
+            this._onTouched();
+            this.touched = true;
+          }
 
-      if (this.touched) {
-        this._onChange(value);
-      }
+          if (this.touched) {
+            this._onChange(value);
+          }
+        }),
+        delay(0),
+        // Keep at the end
+        takeUntil(this.unsubscribe$),
+      )
+      .subscribe(() => {
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
+        this.ngControl?.control?.updateValueAndValidity();
+      });
+  }
 
-      this.ngControl?.control?.updateValueAndValidity({ emitEvent: false });
-      this.changeDetectorRef.detectChanges();
-    });
-
+  public ngAfterViewInit(): void {
+    // Group all valueChanges events emit by formly in a single one
+    merge(this.formGroup.statusChanges, this.formGroup.valueChanges)
+      .pipe(takeUntil(this.unsubscribe$), debounceTime(100))
+      .subscribe(() => {
+        this.stateChanges$.next();
+      });
     this.stateChanges$.next();
   }
 
