@@ -1,3 +1,10 @@
+## [7.17.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.17.2...v7.17.3) (2023-06-21)
+
+
+### Bug Fixes
+
+* **json-schema:** json-schema reorder code on init ([c2763b5](https://github.com/gravitee-io/gravitee-ui-particles/commit/c2763b56bf9bf47d14e3ad9c1fa366c0eb98cb35))
+
 ## [7.17.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.17.1...v7.17.2) (2023-06-20)
 
 
