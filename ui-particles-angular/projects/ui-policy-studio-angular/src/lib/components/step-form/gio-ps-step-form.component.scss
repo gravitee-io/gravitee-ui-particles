@@ -28,7 +28,7 @@ $typography: map.get(gio.$mat-theme, typography);
 
 .settings {
   display: flex;
-  flex: 1 1 50%;
+  flex: 0 0 50%;
   flex-direction: column;
 
   &__header {
@@ -37,6 +37,7 @@ $typography: map.get(gio.$mat-theme, typography);
 
   &__content {
     display: flex;
+    flex: 1 1 auto;
     flex-direction: column;
     padding: 16px;
     border-right: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
@@ -45,10 +46,12 @@ $typography: map.get(gio.$mat-theme, typography);
 
 .documentation {
   display: flex;
-  flex: 1 1 50%;
+  overflow: auto;
+  flex: 0 0 50%;
   flex-direction: column;
 
   &__content {
+    flex: 1 1 auto;
     padding: 16px;
   }
 }

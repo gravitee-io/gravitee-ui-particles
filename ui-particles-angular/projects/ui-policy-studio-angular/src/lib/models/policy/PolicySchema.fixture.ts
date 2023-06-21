@@ -390,3 +390,33 @@ const POLICIES_SCHEMA: Record<string, unknown> = {
 export function fakePolicySchema(policyId: string): unknown {
   return POLICIES_SCHEMA[policyId] ?? {};
 }
+
+export function fakePolicyDocumentation(policyId: string): string {
+  const POLICIES_DOC: Record<string, string> = {
+    'test-policy': `
+= Test Policy documentation
+
+This policy is used to test the policy editor.
+
+== Configuration
+
+
+[source, json]
+. Test Policy Configuration
+----
+{
+  "test": "test"
+  "test2": "test2"
+}
+----
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl quis tincidunt ultricies, 
+nunc nisl aliquam nunc, sed aliquam nisl nunc eget nunc. Sed euismod, nisl quis tincidunt ultricies, 
+nunc nisl aliquam nunc, sed aliquam nisl nunc eget nunc. Sed euismod, nisl quis tincidunt ultricies, 
+nunc nisl aliquam nunc, sed aliquam nisl nunc eget nunc. Sed euismod, nisl quis tincidunt ultricies, 
+nunc nisl aliquam nunc, sed aliquam nisl nunc eget nunc.
+`,
+  };
+
+  return POLICIES_DOC[policyId] ?? '';
+}
