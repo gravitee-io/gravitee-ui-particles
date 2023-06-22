@@ -1,3 +1,17 @@
+# [7.19.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.18.0...v7.19.0) (2023-06-22)
+
+
+### Bug Fixes
+
+* improve display with long naming ([2865518](https://github.com/gravitee-io/gravitee-ui-particles/commit/2865518543e0348a5397b4f4e7176e4ea13dced7))
+
+
+### Features
+
+* add loading mode for policy studio ([bbb3ce0](https://github.com/gravitee-io/gravitee-ui-particles/commit/bbb3ce0da8e37f7397132f1dcb570b0568798470))
+* add message when no polices into catalog ([ee45e5b](https://github.com/gravitee-io/gravitee-ui-particles/commit/ee45e5be3c9f1246da501126aed56e4800c66d35))
+* small css improvement ([3a8d71e](https://github.com/gravitee-io/gravitee-ui-particles/commit/3a8d71e4aa90a957add740497fc7f0361b52c621))
+
 # [7.18.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.17.3...v7.18.0) (2023-06-22)
 
 
