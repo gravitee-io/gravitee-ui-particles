@@ -51,7 +51,6 @@ $typography: map.get(gio.$mat-theme, typography);
 .wrapper {
   position: relative;
   flex: 1 1 auto;
-  padding: 0 16px;
   overflow-y: auto;
 }
 
@@ -61,6 +60,7 @@ $typography: map.get(gio.$mat-theme, typography);
   width: max-content;
   height: 100%;
   align-items: center;
+  padding: 0 16px;
 
   &__step {
     display: flex;
