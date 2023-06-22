@@ -51,6 +51,7 @@ $typography: map.get(gio.$mat-theme, typography);
   flex-direction: column;
 
   &__content {
+    overflow: auto;
     flex: 1 1 auto;
     padding: 16px;
   }

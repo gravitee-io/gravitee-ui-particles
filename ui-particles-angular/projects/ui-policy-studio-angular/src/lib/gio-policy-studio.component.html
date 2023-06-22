@@ -17,7 +17,7 @@
 -->
 
 <div class="header">
-  <div class="header__apiInfo">
+  <div class="header__apiInfo" *ngIf="!loading; else loadingApiInfo">
     <span class="gio-badge-primary">
       {{ apiType | titlecase }}
     </span>
@@ -31,15 +31,22 @@
       <mat-icon *ngFor="let endpoint of endpointsInfo" class="gio-left" [svgIcon]="endpoint.icon"></mat-icon>
     </span>
   </div>
+  <ng-template #loadingApiInfo>
+    <div class="header__apiInfo">
+      <span class="gio-badge-primary">&nbsp;</span>
+      <span class="gio-badge-neutral">&nbsp;</span>
+    </div>
+  </ng-template>
 
   <div class="header__btn">
-    <button mat-stroked-button color="primary" [disabled]="disableSaveButton" (click)="onSave()">Save</button>
+    <button mat-stroked-button color="primary" [disabled]="loading || disableSaveButton" (click)="onSave()">Save</button>
   </div>
 </div>
 
 <div class="wrapper">
   <div class="wrapper__flowsMenu">
     <gio-ps-flows-menu
+      [loading]="loading"
       [apiType]="apiType"
       [flowExecution]="flowExecution"
       [flowsGroups]="flowsGroups"
@@ -52,6 +59,7 @@
 
   <div class="wrapper__flowDetails">
     <gio-ps-flow-details
+      [loading]="loading"
       [apiType]="apiType"
       [flow]="selectedFlow"
       [entrypointsInfo]="entrypointsInfo"

@@ -53,6 +53,7 @@ export default {
 
   render: props => ({
     template: `<div style="height:calc(100vh - 2rem);"><gio-policy-studio
+    [loading]="loading"
     [apiType]="apiType"
     [flowExecution]="flowExecution"
     [entrypointsInfo]="entrypointsInfo"
@@ -78,6 +79,20 @@ export default {
     },
   }),
 } as Meta;
+
+export const Loading: Story = {
+  name: 'Loading',
+  args: {
+    loading: true,
+    apiType: 'MESSAGE',
+    flowExecution: {
+      mode: 'BEST_MATCH',
+      matchRequired: false,
+    },
+    entrypointsInfo: [fakeWebhookMessageEntrypoint()],
+    endpointsInfo: [fakeKafkaMessageEndpoint()],
+  },
+};
 
 export const MessageWithoutFlows: Story = {
   name: 'Message API without flows',

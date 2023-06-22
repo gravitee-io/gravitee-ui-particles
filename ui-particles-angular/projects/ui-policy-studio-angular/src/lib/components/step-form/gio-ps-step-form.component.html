@@ -19,23 +19,31 @@
 <div class="settings">
   <div class="settings__header">Settings</div>
 
-  <ng-container *ngIf="policySchema$ | async as policySchema">
-    <div *ngIf="stepForm" class="settings__content" [formGroup]="stepForm">
-      <mat-form-field>
-        <mat-label>Description</mat-label>
-        <input matInput formControlName="description" cdkFocusInitial />
-        <mat-hint>Describe how your policy works.</mat-hint>
-      </mat-form-field>
+  <div class="settings__content">
+    <ng-container *ngIf="policySchema$ | async as policySchema; else loadingTmpl">
+      <ng-container *ngIf="stepForm" [formGroup]="stepForm">
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <input matInput formControlName="description" cdkFocusInitial />
+          <mat-hint>Describe how your policy works.</mat-hint>
+        </mat-form-field>
 
-      <gio-form-json-schema [jsonSchema]="$any(policySchema)" formControlName="configuration"></gio-form-json-schema>
-    </div>
-  </ng-container>
+        <gio-form-json-schema [jsonSchema]="$any(policySchema)" formControlName="configuration"></gio-form-json-schema>
+      </ng-container>
+    </ng-container>
+  </div>
 </div>
 
 <div class="documentation">
   <div class="documentation__header">Documentation</div>
 
-  <div class="documentation__content" *ngIf="policyDocumentation$ | async as policyDocumentation">
-    <gio-asciidoctor [content]="policyDocumentation"></gio-asciidoctor>
+  <div class="documentation__content">
+    <ng-container *ngIf="policyDocumentation$ | async as policyDocumentation; else loadingTmpl">
+      <gio-asciidoctor [content]="policyDocumentation"></gio-asciidoctor>
+    </ng-container>
   </div>
 </div>
+
+<ng-template #loadingTmpl>
+  <gio-loader></gio-loader>
+</ng-template>

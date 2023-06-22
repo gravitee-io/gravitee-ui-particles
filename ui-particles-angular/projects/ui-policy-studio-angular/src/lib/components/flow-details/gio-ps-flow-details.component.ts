@@ -36,6 +36,9 @@ import { GioPolicyStudioFlowFormDialogResult } from '../flow-form-dialog/gio-ps-
 })
 export class GioPolicyStudioDetailsComponent {
   @Input()
+  public loading = false;
+
+  @Input()
   public apiType!: ApiType;
 
   @Input()

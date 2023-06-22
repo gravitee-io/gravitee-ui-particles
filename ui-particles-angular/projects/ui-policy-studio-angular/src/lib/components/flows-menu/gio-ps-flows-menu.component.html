@@ -21,13 +21,19 @@
     Flows <mat-icon svgIcon="gio:info" matTooltip="Flows allow you to apply different policies on your API event phases"></mat-icon>
   </div>
   <div class="header__configBtn">
-    <button class="header__configBtn_edit" mat-stroked-button mat-icon-button (click)="onConfigureExecution(flowExecution)">
+    <button
+      class="header__configBtn_edit"
+      mat-stroked-button
+      mat-icon-button
+      [disabled]="loading"
+      (click)="onConfigureExecution(flowExecution)"
+    >
       <mat-icon svgIcon="gio:settings"></mat-icon>
     </button>
   </div>
 </div>
 
-<div class="list">
+<div class="list" *ngIf="!loading; else loadingList">
   <div *ngFor="let flowsGroup of flowGroupMenuItems" class="list__flowsGroup">
     <div class="list__flowsGroup__header">
       <div class="list__flowsGroup__header__label">
@@ -61,3 +67,9 @@
     </div>
   </div>
 </div>
+
+<ng-template #loadingList>
+  <div class="loadingList">
+    <gio-loader></gio-loader>
+  </div>
+</ng-template>

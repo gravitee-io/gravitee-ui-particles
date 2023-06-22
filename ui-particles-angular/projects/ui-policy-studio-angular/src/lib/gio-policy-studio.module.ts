@@ -21,6 +21,7 @@ import {
   GioFormSlideToggleModule,
   GioFormTagsInputModule,
   GioIconsModule,
+  GioLoaderModule,
 } from '@gravitee/ui-particles-angular';
 import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -85,6 +86,7 @@ import { GioPolicyStudioService } from './gio-policy-studio.service';
     GioBannerModule,
     GioFormJsonSchemaModule,
     GioAsciidoctorModule,
+    GioLoaderModule,
   ],
   exports: [GioPolicyStudioComponent],
   providers: [GioPolicyStudioService],
