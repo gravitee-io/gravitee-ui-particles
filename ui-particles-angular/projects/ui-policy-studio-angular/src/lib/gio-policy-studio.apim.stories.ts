@@ -335,3 +335,53 @@ export const ProxyWithFlowSteps: Story = {
     plans: [],
   },
 };
+
+export const LongWorld: Story = {
+  name: 'Long World',
+  args: {
+    apiType: 'PROXY',
+    entrypointsInfo: [fakeHTTPProxyEntrypoint()],
+    endpointsInfo: [fakeHTTPProxyEndpoint()],
+    commonFlows: [
+      fakeHttpFlow({
+        name: 'FlowNameWithVeryLongNameToTestOverflowLoremIpsumDolorSitAmetConsecteturAdipiscingElit',
+        selectors: [
+          {
+            type: 'HTTP',
+            methods: ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS', 'TRACE'],
+            path: '/FlowNameWithVeryLongNameToTestOverflowLoremIpsumDolorSitAmetConsecteturAdipiscing/Elit',
+            pathOperator: 'EQUALS',
+          },
+        ],
+        request: [
+          fakeJsonToXmlStep({
+            name: 'VeryLongWorldToTestOverflowLoremIpsumDolorSitAmetConsecteturAdipiscingElit',
+            description:
+              'VeryLongWorldToTestOverflowLoremIpsumDolorSitAmetConsecteturAdipiscingElitVeryLongWorldToTestOverflowLoremIpsumDolorSitAmetConsecteturAdipiscingElit',
+          }),
+          fakeRateLimitStep(),
+        ],
+        response: [],
+      }),
+    ],
+    plans: [
+      fakePlan({
+        name: 'PlanNameWithVeryLongNameToTestOverflowLoremIpsumDolorSitAmetConsecteturAdipiscingElit',
+        flows: [
+          fakeChannelFlow({
+            name: 'FlowNameWithVeryLongNameToTestOverflowLoremIpsumDolorSitAmetConsecteturAdipiscingElit',
+            selectors: [
+              {
+                type: 'CHANNEL',
+                channel: '/FlowNameWithVeryLongNameToTestOverflowLoremIpsumDolorSitAmetConsecteturAdipiscing/Elit',
+                channelOperator: 'EQUALS',
+                operations: ['PUBLISH', 'SUBSCRIBE'],
+                entrypoints: ['webhook'],
+              },
+            ],
+          }),
+        ],
+      }),
+    ],
+  },
+};
