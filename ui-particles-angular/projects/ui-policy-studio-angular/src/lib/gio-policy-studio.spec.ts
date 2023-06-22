@@ -127,8 +127,9 @@ describe('GioPolicyStudioModule', () => {
       });
 
       it('should display common flows', async () => {
-        const commonFlows = [fakeChannelFlow({ name: '' }), fakeChannelFlow({ name: 'flow2' })];
+        const commonFlows = [fakeChannelFlow({ name: 'flow1' }), fakeChannelFlow({ name: '' })];
         component.commonFlows = commonFlows;
+        component.plans = [fakePlan({ name: 'Foo plan', flows: [] })];
         component.ngOnChanges({
           commonFlows: new SimpleChange(null, null, true),
         });
@@ -137,17 +138,23 @@ describe('GioPolicyStudioModule', () => {
 
         const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
 
+        expect(await flowsMenuHarness.getSelectedFlow()).toEqual({ name: 'flow1' });
+
         expect(await detailsHarness.isDisplayEmptyFlow()).toEqual(false);
 
         expect(await flowsMenuHarness.getAllFlowsGroups()).toMatchObject([
           {
+            name: 'Foo plan',
+            flows: [],
+          },
+          {
             name: 'Common flows',
             flows: [
               {
-                name: null,
+                name: 'flow1',
               },
               {
-                name: 'flow2',
+                name: null,
               },
             ],
           },
