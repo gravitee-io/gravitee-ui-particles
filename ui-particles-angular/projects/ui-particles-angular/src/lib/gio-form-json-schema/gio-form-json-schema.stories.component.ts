@@ -81,13 +81,13 @@ export class DemoComponent implements OnChanges, OnDestroy {
       this.inputValueControl.valueChanges.pipe(startWith(this.inputValueControl.value)),
     ])
       .pipe(
-        takeUntil(this.unsubscribe$),
         tap(() => {
           // Clear variable, wait, and re-init. To force sub components to re-render.
           this.form = undefined;
           this.formValue = undefined;
         }),
         debounceTime(500),
+        takeUntil(this.unsubscribe$),
       )
       .subscribe(([jsonSchemaValue, inputValue]) => {
         try {
@@ -116,7 +116,7 @@ export class DemoComponent implements OnChanges, OnDestroy {
       }),
     });
     this.changeDetectorRef.detectChanges();
-    this.form.valueChanges.pipe(takeUntil(this.unsubscribe$), startWith(this.form.value)).subscribe(value => {
+    this.form.valueChanges.pipe(startWith(this.form.value), takeUntil(this.unsubscribe$)).subscribe(value => {
       this.formValue = value.schemaValue;
       this.validateSchema();
       this.changeDetectorRef.detectChanges();

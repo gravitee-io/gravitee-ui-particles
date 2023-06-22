@@ -113,10 +113,10 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
     const parentControl = this.ngControl?.control?.parent;
     parentControl?.statusChanges
       ?.pipe(
-        takeUntil(this.unsubscribe$),
         map(() => parentControl?.touched),
         filter(touched => touched === true),
         distinctUntilChanged(),
+        takeUntil(this.unsubscribe$),
       )
       .subscribe(() => {
         if (this.isDisabled) {
@@ -129,9 +129,9 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
     // Add async validator to the parent
     this.ngControl?.control?.addAsyncValidators(() => {
       return this.isValid$.pipe(
-        takeUntil(this.unsubscribe$),
         take(1),
         map(isValid => (isValid ? null : { invalid: true })),
+        takeUntil(this.unsubscribe$),
       );
     });
 
@@ -174,7 +174,7 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
   public ngAfterViewInit(): void {
     // Group all valueChanges events emit by formly in a single one
     merge(this.formGroup.statusChanges, this.formGroup.valueChanges)
-      .pipe(takeUntil(this.unsubscribe$), debounceTime(100))
+      .pipe(debounceTime(100), takeUntil(this.unsubscribe$))
       .subscribe(() => {
         this.stateChanges$.next();
       });

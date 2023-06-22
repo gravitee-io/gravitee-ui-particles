@@ -1,11 +1,13 @@
 module.exports = {
   root: true,
   ignorePatterns: ['projects/**/*'],
-  plugins: ['eslint-plugin-import'],
+  plugins: ['eslint-plugin-import', 'rxjs'],
   overrides: [
     {
       files: ['*.ts'],
+      parser: '@typescript-eslint/parser',
       parserOptions: {
+        ecmaVersion: 2019,
         tsconfigRootDir: __dirname,
         project: ['./tsconfig.json'],
         createDefaultProgram: true,
@@ -16,6 +18,7 @@ module.exports = {
         'plugin:@angular-eslint/recommended',
         'plugin:@angular-eslint/template/process-inline-templates',
         'plugin:import/typescript',
+        'plugin:rxjs/recommended',
         'prettier',
         'plugin:prettier/recommended',
       ],
@@ -41,6 +44,8 @@ module.exports = {
             'newlines-between': 'always',
           },
         ],
+        'rxjs/no-sharereplay': ['off'],
+        'rxjs/no-subject-unsubscribe': ['off'],
       },
     },
     {

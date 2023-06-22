@@ -56,9 +56,9 @@ export class GioMenuItemComponent implements OnDestroy {
   public onClick($event: MouseEvent): void {
     of(true)
       .pipe(
-        takeUntil(this.unsubscribe$),
         delay(0),
         tap(() => this.onMouseEnter($event)),
+        takeUntil(this.unsubscribe$),
       )
       .subscribe();
   }
@@ -67,7 +67,6 @@ export class GioMenuItemComponent implements OnDestroy {
   public onKeydownHandler($event: KeyboardEvent): void {
     of($event.key === 'Enter' && $event.target)
       .pipe(
-        takeUntil(this.unsubscribe$),
         filter(enterKey => !!enterKey),
         switchMap(() => of($event.target as HTMLElement)),
         tap(menuItem => {
@@ -78,6 +77,7 @@ export class GioMenuItemComponent implements OnDestroy {
             menuItem.click();
           }
         }),
+        takeUntil(this.unsubscribe$),
       )
       .subscribe();
   }
