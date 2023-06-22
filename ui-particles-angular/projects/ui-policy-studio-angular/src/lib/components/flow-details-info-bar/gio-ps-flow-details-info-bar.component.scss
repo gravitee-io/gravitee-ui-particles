@@ -42,5 +42,11 @@ $typography: map.get(gio.$mat-theme, typography);
     &.gio-method-badge {
       width: auto;
     }
+
+    &.gio-badge {
+      mat-icon {
+        margin-right: 4px;
+      }
+    }
   }
 }
