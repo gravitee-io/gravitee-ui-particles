@@ -110,6 +110,18 @@ export default {
   },
 } as Meta;
 
+export const NoPolicies: StoryObj = {
+  name: 'No policies',
+  args: {
+    executionPhase: 'UNKNOWN',
+    apiType: 'PROXY',
+  },
+  play: context => {
+    const button = context.canvasElement.querySelector('#open-dialog') as HTMLButtonElement;
+    button.click();
+  },
+};
+
 export const PROXY_REQUEST: StoryObj = {
   name: 'PROXY / REQUEST',
   args: {
