@@ -70,6 +70,7 @@ $typography: map.get(gio.$mat-theme, typography);
         @include mat.typography-level($typography, body-2);
 
         display: flex;
+        overflow: hidden;
         flex: 1 1 auto;
         align-items: center;
         gap: 8px;
@@ -131,7 +132,19 @@ $typography: map.get(gio.$mat-theme, typography);
         }
 
         &__pathOrChannelLabel {
+          overflow: hidden;
           flex: 1 1 auto;
+          direction: rtl;
+          text-align: left;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+
+          span {
+            direction: ltr;
+
+            // Hack to have ellipsis on the left with special characters like /
+            unicode-bidi: bidi-override;
+          }
         }
       }
     }

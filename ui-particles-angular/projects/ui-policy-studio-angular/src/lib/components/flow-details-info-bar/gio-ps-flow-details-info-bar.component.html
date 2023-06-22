@@ -59,7 +59,9 @@
 
 <div *ngIf="methods" class="info">
   <span class="info__label">HTTP methods</span>
-  <span *ngFor="let method of methods" class="info__value gio-badge-neutral"> {{ method }}</span>
+  <span *ngFor="let method of methods" class="info__value gio-method-badge" [ngClass]="'gio-method-badge-' + (method | lowercase)">
+    {{ method }}</span
+  >
 </div>
 
 <!-- Condition -->

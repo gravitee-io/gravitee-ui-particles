@@ -38,5 +38,9 @@ $typography: map.get(gio.$mat-theme, typography);
       padding-left: 8px;
       @include mat.typography-level($typography, body-2);
     }
+
+    &.gio-method-badge {
+      width: auto;
+    }
   }
 }
