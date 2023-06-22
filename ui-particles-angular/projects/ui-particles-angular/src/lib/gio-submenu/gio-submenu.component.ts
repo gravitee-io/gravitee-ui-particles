@@ -58,7 +58,6 @@ export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
   public ngAfterViewInit(): void {
     this.gioMenuService.reduce
       .pipe(
-        takeUntil(this.unsubscribe$),
         filter(reduced => reduced),
         tap(() => {
           this.reduced = true;
@@ -79,6 +78,7 @@ export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
         switchMap(() => of(this.gioSubmenu.nativeElement.querySelectorAll<HTMLElement>('gio-submenu-item'))),
         filter(submenuItems => submenuItems.length > 0),
         tap(submenuItems => submenuItems[0].focus()),
+        takeUntil(this.unsubscribe$),
       )
       .subscribe(() => {
         this.changeDetectorRef.detectChanges();
@@ -86,7 +86,6 @@ export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
 
     this.gioMenuService.reduce
       .pipe(
-        takeUntil(this.unsubscribe$),
         filter(reduced => !reduced),
         tap(() => {
           this.reduced = false;
@@ -94,6 +93,7 @@ export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
           this.gioSubmenu.nativeElement.style.height = '100%';
           this.gioSubmenu.nativeElement.style.maxHeight = 'none';
         }),
+        takeUntil(this.unsubscribe$),
       )
       .subscribe(() => {
         this.changeDetectorRef.detectChanges();
@@ -123,6 +123,7 @@ export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
         tap(() => this.gioMenuService.overlay({ open: false })),
         delay(100),
         tap(() => this.overlayOptions.parent?.focus()),
+        takeUntil(this.unsubscribe$),
       )
       .subscribe();
   }
