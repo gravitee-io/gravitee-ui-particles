@@ -78,13 +78,13 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
   @Output()
   public flowExecutionChange = new EventEmitter<FlowExecution>();
 
-  public flowsGroupsVMSelected: FlowGroupMenuVM[] = [];
+  public flowGroupMenuItems: FlowGroupMenuVM[] = [];
 
   constructor(private readonly matDialog: MatDialog) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.flowsGroups || changes.selectedFlow) {
-      this.flowsGroupsVMSelected = cloneDeep(this.flowsGroups).map(flowGroup => {
+      this.flowGroupMenuItems = cloneDeep(this.flowsGroups).map(flowGroup => {
         return {
           ...flowGroup,
           flows: flowGroup.flows.map(flow => {
