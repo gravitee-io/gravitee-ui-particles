@@ -28,7 +28,7 @@ export class GioPolicyStudioDetailsInfoBarComponent {
   public flow?: FlowVM = undefined;
 
   @Input()
-  public entrypointsInfo: ConnectorInfo[] = [];
+  public entrypointsInfo?: ConnectorInfo[];
 
   public get condition(): string | undefined {
     const conditionSelector = this.flow?.selectors?.find(s => s.type === 'CONDITION') as ConditionSelector;

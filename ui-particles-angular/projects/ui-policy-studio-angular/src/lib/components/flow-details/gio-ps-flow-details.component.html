@@ -15,31 +15,87 @@
     limitations under the License.
 
 -->
-<ng-container *ngIf="flow; else emptyFlows">
-  <div class="header">
-    <div class="header__label">Flow details</div>
-    <div class="header__configBtn">
-      <button class="header__configBtn__edit" mat-stroked-button mat-icon-button (click)="onEditFlow()">
-        <mat-icon svgIcon="gio:edit-pencil"></mat-icon>
-      </button>
-      <button class="header__configBtn__delete" mat-stroked-button mat-icon-button (click)="onDeleteFlow()">
-        <mat-icon svgIcon="gio:trash"></mat-icon>
-      </button>
+
+<ng-container *ngIf="!loading; then flowDetailsTpl; else loadingTpl"></ng-container>
+
+<ng-template #flowDetailsTpl>
+  <ng-container *ngIf="flow; else emptyFlows">
+    <div class="header">
+      <div class="header__label">Flow details</div>
+      <div class="header__configBtn">
+        <button class="header__configBtn__edit" mat-stroked-button mat-icon-button (click)="onEditFlow()">
+          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>
+        </button>
+        <button class="header__configBtn__delete" mat-stroked-button mat-icon-button (click)="onDeleteFlow()">
+          <mat-icon svgIcon="gio:trash"></mat-icon>
+        </button>
+      </div>
     </div>
-  </div>
-  <gio-ps-flow-details-info-bar class="infoBar" [flow]="flow" [entrypointsInfo]="entrypointsInfo"></gio-ps-flow-details-info-bar>
+    <gio-ps-flow-details-info-bar class="infoBar" [flow]="flow" [entrypointsInfo]="entrypointsInfo"></gio-ps-flow-details-info-bar>
 
-  <div class="content">
-    <gio-banner-warning>🚧 Work in progress 🚧</gio-banner-warning>
+    <div class="content">
+      <mat-tab-group *ngIf="apiType === 'MESSAGE'" class="content__tabs">
+        <mat-tab label="Initial connection">
+          <gio-ps-flow-details-phase
+            class="content__phase"
+            name="Request phase"
+            description="Policies will be applied during the connection establishment"
+            [startConnector]="entrypointsInfo"
+            [endConnector]="endpointsInfo"
+            [steps]="flow.request ?? []"
+            [apiType]="apiType"
+            [policies]="policies"
+            policyExecutionPhase="REQUEST"
+            (stepsChange)="onStepsChange('request', $event)"
+          ></gio-ps-flow-details-phase>
+          <gio-ps-flow-details-phase
+            class="content__phase"
+            name="Response phase"
+            description="Policies will be applied during the connection termination"
+            [startConnector]="endpointsInfo"
+            [endConnector]="entrypointsInfo"
+            [steps]="flow.response ?? []"
+            [apiType]="apiType"
+            [policies]="policies"
+            policyExecutionPhase="RESPONSE"
+            (stepsChange)="onStepsChange('response', $event)"
+          ></gio-ps-flow-details-phase>
+        </mat-tab>
+        <mat-tab label="Event messages">
+          <gio-ps-flow-details-phase
+            class="content__phase"
+            name="Publish phase"
+            description="Policies will be applied on messages sent to the endpoint"
+            [startConnector]="entrypointsInfo | gioFilterConnectorsByMode : 'PUBLISH'"
+            [endConnector]="endpointsInfo | gioFilterConnectorsByMode : 'PUBLISH'"
+            [steps]="flow.publish ?? []"
+            [apiType]="apiType"
+            [policies]="policies"
+            policyExecutionPhase="MESSAGE_RESPONSE"
+            (stepsChange)="onStepsChange('publish', $event)"
+          ></gio-ps-flow-details-phase>
+          <gio-ps-flow-details-phase
+            class="content__phase"
+            name="Subscribe phase"
+            description="Policies will be applied on messages received by the entrypoint"
+            [startConnector]="endpointsInfo | gioFilterConnectorsByMode : 'SUBSCRIBE'"
+            [endConnector]="entrypointsInfo | gioFilterConnectorsByMode : 'SUBSCRIBE'"
+            [steps]="flow.subscribe ?? []"
+            [apiType]="apiType"
+            [policies]="policies"
+            policyExecutionPhase="MESSAGE_REQUEST"
+            (stepsChange)="onStepsChange('subscribe', $event)"
+          ></gio-ps-flow-details-phase>
+        </mat-tab>
+      </mat-tab-group>
 
-    <mat-tab-group *ngIf="apiType === 'MESSAGE'" class="content__tabs">
-      <mat-tab label="Initial connection">
+      <div *ngIf="apiType === 'PROXY'">
         <gio-ps-flow-details-phase
           class="content__phase"
           name="Request phase"
           description="Policies will be applied during the connection establishment"
-          [startConnector]="entrypointsInfo"
-          [endConnector]="endpointsInfo"
+          [startConnector]="entrypointsInfo | gioFilterConnectorsByMode : 'REQUEST_RESPONSE'"
+          [endConnector]="endpointsInfo | gioFilterConnectorsByMode : 'REQUEST_RESPONSE'"
           [steps]="flow.request ?? []"
           [apiType]="apiType"
           [policies]="policies"
@@ -50,75 +106,40 @@
           class="content__phase"
           name="Response phase"
           description="Policies will be applied during the connection termination"
-          [startConnector]="endpointsInfo"
-          [endConnector]="entrypointsInfo"
+          [startConnector]="endpointsInfo | gioFilterConnectorsByMode : 'REQUEST_RESPONSE'"
+          [endConnector]="entrypointsInfo | gioFilterConnectorsByMode : 'REQUEST_RESPONSE'"
           [steps]="flow.response ?? []"
           [apiType]="apiType"
           [policies]="policies"
           policyExecutionPhase="RESPONSE"
           (stepsChange)="onStepsChange('response', $event)"
         ></gio-ps-flow-details-phase>
-      </mat-tab>
-      <mat-tab label="Event messages">
-        <gio-ps-flow-details-phase
-          class="content__phase"
-          name="Publish phase"
-          description="Policies will be applied on messages sent to the endpoint"
-          [startConnector]="entrypointsInfo | gioFilterConnectorsByMode : 'PUBLISH'"
-          [endConnector]="endpointsInfo | gioFilterConnectorsByMode : 'PUBLISH'"
-          [steps]="flow.publish ?? []"
-          [apiType]="apiType"
-          [policies]="policies"
-          policyExecutionPhase="MESSAGE_RESPONSE"
-          (stepsChange)="onStepsChange('publish', $event)"
-        ></gio-ps-flow-details-phase>
-        <gio-ps-flow-details-phase
-          class="content__phase"
-          name="Subscribe phase"
-          description="Policies will be applied on messages received by the entrypoint"
-          [startConnector]="endpointsInfo | gioFilterConnectorsByMode : 'SUBSCRIBE'"
-          [endConnector]="entrypointsInfo | gioFilterConnectorsByMode : 'SUBSCRIBE'"
-          [steps]="flow.subscribe ?? []"
-          [apiType]="apiType"
-          [policies]="policies"
-          policyExecutionPhase="MESSAGE_REQUEST"
-          (stepsChange)="onStepsChange('subscribe', $event)"
-        ></gio-ps-flow-details-phase>
-      </mat-tab>
-    </mat-tab-group>
+      </div>
+    </div>
+  </ng-container>
 
-    <div *ngIf="apiType === 'PROXY'">
-      <gio-ps-flow-details-phase
-        class="content__phase"
-        name="Request phase"
-        description="Policies will be applied during the connection establishment"
-        [startConnector]="entrypointsInfo | gioFilterConnectorsByMode : 'REQUEST_RESPONSE'"
-        [endConnector]="endpointsInfo | gioFilterConnectorsByMode : 'REQUEST_RESPONSE'"
-        [steps]="flow.request ?? []"
-        [apiType]="apiType"
-        [policies]="policies"
-        policyExecutionPhase="REQUEST"
-        (stepsChange)="onStepsChange('request', $event)"
-      ></gio-ps-flow-details-phase>
-      <gio-ps-flow-details-phase
-        class="content__phase"
-        name="Response phase"
-        description="Policies will be applied during the connection termination"
-        [startConnector]="endpointsInfo | gioFilterConnectorsByMode : 'REQUEST_RESPONSE'"
-        [endConnector]="entrypointsInfo | gioFilterConnectorsByMode : 'REQUEST_RESPONSE'"
-        [steps]="flow.response ?? []"
-        [apiType]="apiType"
-        [policies]="policies"
-        policyExecutionPhase="RESPONSE"
-        (stepsChange)="onStepsChange('response', $event)"
-      ></gio-ps-flow-details-phase>
+  <ng-template #emptyFlows>
+    <div class="emptyFlows">
+      <h2>No flows yet</h2>
+      <p class="mat-body-1">Flows allow you to customize the behavior of your API event phases through configurable policies</p>
+    </div>
+  </ng-template>
+</ng-template>
+
+<ng-template #loadingTpl>
+  <div class="header loading">
+    <div class="header__label">Flow details</div>
+    <div class="header__configBtn">
+      <button class="header__configBtn__edit" mat-stroked-button mat-icon-button disabled>
+        <mat-icon svgIcon="gio:edit-pencil"></mat-icon>
+      </button>
+      <button class="header__configBtn__delete" mat-stroked-button mat-icon-button disabled>
+        <mat-icon svgIcon="gio:trash"></mat-icon>
+      </button>
     </div>
   </div>
-</ng-container>
-
-<ng-template #emptyFlows>
-  <div class="emptyFlows">
-    <h2>No flows yet</h2>
-    <p class="mat-body-1">Flows allow you to customize the behavior of your API event phases through configurable policies</p>
+  <gio-ps-flow-details-info-bar class="infoBar loading"></gio-ps-flow-details-info-bar>
+  <div class="content loading">
+    <gio-loader></gio-loader>
   </div>
 </ng-template>

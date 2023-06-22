@@ -80,6 +80,12 @@ export class GioPolicyStudioComponent implements OnChanges {
   public policies: Policy[] = [];
 
   /**
+   * Loading state
+   */
+  @Input()
+  public loading = false;
+
+  /**
    * Called when Policy Studio needs to fetch the policy schema
    * @returns Observable of the policy schema
    */

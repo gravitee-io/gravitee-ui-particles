@@ -55,6 +55,9 @@ interface FlowMenuVM extends FlowVM {
 })
 export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
   @Input()
+  public loading = false;
+
+  @Input()
   public apiType!: ApiType;
 
   @Input()
