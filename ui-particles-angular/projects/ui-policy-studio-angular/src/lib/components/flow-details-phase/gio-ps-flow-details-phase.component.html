@@ -51,13 +51,20 @@
 
       <!-- Policy -->
       <ng-container *ngIf="stepVM.type === 'step'">
-        <gio-ps-flow-details-phase-step
-          class="content__step__step"
-          [policies]="policies"
-          [step]="stepVM.step"
-          (stepChange)="onStepChange(stepVM.index, $event)"
-          (deleted)="onStepDeleted(stepVM.index)"
-        ></gio-ps-flow-details-phase-step>
+        <div class="content__step__policy">
+          <div *ngIf="stepVM.step?.condition" class="content__step__policy__condition">
+            <span class="gio-badge-neutral" [matTooltip]="'Condition: ' + stepVM.step.condition"
+              ><mat-icon svgIcon="gio:if"></mat-icon>{{ stepVM.step.condition }}</span
+            >
+          </div>
+          <gio-ps-flow-details-phase-step
+            class="content__step__step"
+            [policies]="policies"
+            [step]="stepVM.step"
+            (stepChange)="onStepChange(stepVM.index, $event)"
+            (deleted)="onStepDeleted(stepVM.index)"
+          ></gio-ps-flow-details-phase-step>
+        </div>
 
         <!-- Add policy button -->
         <mat-icon class="content__step__rightArrow" svgIcon="gio:arrow-right"></mat-icon>

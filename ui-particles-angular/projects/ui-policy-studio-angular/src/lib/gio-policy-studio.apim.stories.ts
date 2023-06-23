@@ -37,8 +37,10 @@ import {
   fakePlan,
   fakeRateLimitStep,
   fakeWebhookMessageEntrypoint,
+  fakeConditionedChannelFlow,
+  fakeConditionedHttpFlow,
 } from './models/index-testing';
-import { Policy, SaveOutput } from './models';
+import { ChannelSelector, HttpSelector, Policy, SaveOutput } from './models';
 import { fakePolicyDocumentation, fakePolicySchema } from './models/policy/PolicySchema.fixture';
 
 export default {
@@ -159,6 +161,7 @@ export const MessageWithFlowsAndPlans: Story = {
           fakeChannelFlow({
             name: 'plan flow 1',
           }),
+          fakeConditionedChannelFlow({}),
         ],
       }),
       fakePlan({
@@ -225,6 +228,30 @@ export const MessageWithDisabledPhase: Story = {
         response: [fakeTestPolicyStep()],
         publish: [fakeTestPolicyStep()],
         subscribe: [fakeTestPolicyStep()],
+      }),
+    ],
+    plans: [],
+  },
+};
+
+export const MessageWithConditionalStep: Story = {
+  name: 'Message API with conditional step',
+  args: {
+    apiType: 'MESSAGE',
+    entrypointsInfo: [fakeWebhookMessageEntrypoint()],
+    endpointsInfo: [fakeKafkaMessageEndpoint()],
+    commonFlows: [
+      fakeChannelFlow({
+        name: 'Flow',
+        request: [
+          fakeTestPolicyStep({
+            condition: 'true',
+          }),
+          fakeTestPolicyStep(),
+        ],
+        response: [fakeTestPolicyStep()],
+        publish: [],
+        subscribe: [],
       }),
     ],
     plans: [],
@@ -363,6 +390,15 @@ export const LongWorld: Story = {
         ],
         response: [],
       }),
+      fakeConditionedHttpFlow(base => {
+        base.name = 'ConditionedFlowNameWithVeryLongNameToTestOverflowLoremIpsumDolorSitAmetConsecteturAdipiscingElit';
+        const httpS = base.selectors?.find(s => s.type === 'HTTP') as HttpSelector;
+        if (httpS) {
+          httpS.path = '/ConditionedFlowNameWithVeryLongNameToTestOverflowLoremIpsumDolorSitAmetConsecteturAdipiscing/Elit';
+          httpS.methods = ['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS', 'TRACE'];
+        }
+        return base;
+      }),
     ],
     plans: [
       fakePlan({
@@ -379,6 +415,25 @@ export const LongWorld: Story = {
                 entrypoints: ['webhook'],
               },
             ],
+            request: [
+              fakeJsonToXmlStep({
+                name: 'VeryLongWorldToTestOverflowLoremIpsumDolorSitAmetConsecteturAdipiscingElit',
+                description:
+                  'VeryLongWorldToTestOverflowLoremIpsumDolorSitAmetConsecteturAdipiscingElitVeryLongWorldToTestOverflowLoremIpsumDolorSitAmetConsecteturAdipiscingElit',
+                condition: 'veryLongConditionToTestOverflowLoremIpsumDolorSitAmetConsecteturAdipiscingElit',
+              }),
+              fakeRateLimitStep(),
+            ],
+          }),
+          fakeConditionedChannelFlow(base => {
+            base.name = 'ConditionedFlowNameWithVeryLongNameToTestOverflowLoremIpsumDolorSitAmetConsecteturAdipiscingElit';
+            const chanelS = base.selectors?.find(s => s.type === 'CHANNEL') as ChannelSelector;
+            if (chanelS) {
+              chanelS.channel = '/ConditionedFlowNameWithVeryLongNameToTestOverflowLoremIpsumDolorSitAmetConsecteturAdipiscing/Elit';
+              chanelS.operations = ['PUBLISH', 'SUBSCRIBE'];
+              chanelS.channelOperator = 'STARTS_WITH';
+            }
+            return base;
           }),
         ],
       }),

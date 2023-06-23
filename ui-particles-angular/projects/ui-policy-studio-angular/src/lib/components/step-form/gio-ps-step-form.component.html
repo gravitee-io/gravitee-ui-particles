@@ -28,6 +28,12 @@
           <mat-hint>Describe how your policy works.</mat-hint>
         </mat-form-field>
 
+        <mat-form-field>
+          <mat-label>Trigger condition</mat-label>
+          <input matInput formControlName="condition" />
+          <mat-hint>The condition to execute this policy. Supports Expression Language.</mat-hint>
+        </mat-form-field>
+
         <gio-form-json-schema [jsonSchema]="$any(policySchema)" formControlName="configuration"></gio-form-json-schema>
       </ng-container>
     </ng-container>

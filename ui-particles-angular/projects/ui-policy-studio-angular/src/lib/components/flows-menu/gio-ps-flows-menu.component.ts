@@ -23,7 +23,7 @@ import {
   GioPolicyStudioFlowMessageFormDialogData,
 } from '../flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
 import { FlowGroupVM, FlowVM } from '../../gio-policy-studio.model';
-import { ApiType, ChannelSelector, ConnectorInfo, FlowExecution, HttpSelector, Operation } from '../../models';
+import { ApiType, ChannelSelector, ConditionSelector, ConnectorInfo, FlowExecution, HttpSelector, Operation } from '../../models';
 import {
   GioPolicyStudioFlowProxyFormDialogComponent,
   GioPolicyStudioFlowProxyFormDialogData,
@@ -46,6 +46,7 @@ interface FlowMenuVM extends FlowVM {
     class: string;
   }[];
   pathOrChannelLabel: string;
+  hasCondition: boolean;
 }
 
 @Component({
@@ -93,6 +94,9 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
           flows: flowGroup.flows.map(flow => {
             const badges: FlowMenuVM['badges'] = [];
             let pathOrChannelLabel = '';
+            let hasCondition = false;
+
+            // MESSAGE API - CHANNEL
             const channelSelector = flow.selectors?.find(s => s.type === 'CHANNEL') as ChannelSelector;
             if (channelSelector) {
               const operationToBadge: Record<Operation, string> = {
@@ -109,6 +113,7 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
               pathOrChannelLabel = `${channelSelector.channel}${channelSelector.channelOperator === 'STARTS_WITH' ? '**' : ''}`;
             }
 
+            // HTTP API - HTTP
             const httpSelector = flow.selectors?.find(s => s.type === 'HTTP') as HttpSelector;
             if (httpSelector) {
               // Keep only 2 first http methods and add +X badge if there are more
@@ -132,12 +137,18 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
               pathOrChannelLabel = `${httpSelector.path}${httpSelector.pathOperator === 'STARTS_WITH' ? '/**' : ''}`;
             }
 
+            const conditionSelector = flow.selectors?.find(s => s.type === 'CONDITION') as ConditionSelector;
+            if (conditionSelector && conditionSelector.condition) {
+              hasCondition = true;
+            }
+
             return {
               ...flow,
               selected: this.selectedFlow?._id === flow._id,
               mouseOver: false,
               badges,
               pathOrChannelLabel,
+              hasCondition,
             };
           }),
         };

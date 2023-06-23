@@ -28,6 +28,7 @@ import { MatInputHarness } from '@angular/material/input/testing';
 import {
   fakeAllPolicies,
   fakeChannelFlow,
+  fakeConditionedChannelFlow,
   fakeDefaultFlowExecution,
   fakeHTTPProxyEndpoint,
   fakeHTTPProxyEntrypoint,
@@ -608,13 +609,13 @@ describe('GioPolicyStudioModule', () => {
 
         expect(await requestPhase?.getSteps()).toStrictEqual([
           { name: 'Webhook', type: 'connector' },
-          { name: 'Policy to test UI', description: 'Test Policy description', type: 'step' },
+          { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
           { name: 'Kafka', type: 'connector' },
         ]);
 
         expect(await responsePhase?.getSteps()).toStrictEqual([
           { name: 'Kafka', type: 'connector' },
-          { name: 'Policy to test UI', description: 'Test Policy description', type: 'step' },
+          { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
           { name: 'Webhook', type: 'connector' },
         ]);
 
@@ -622,7 +623,7 @@ describe('GioPolicyStudioModule', () => {
 
         expect(await subscribePhase?.getSteps()).toStrictEqual([
           { name: 'Kafka', type: 'connector' },
-          { name: 'Policy to test UI', description: 'Test Policy description', type: 'step' },
+          { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
           { name: 'Webhook', type: 'connector' },
         ]);
       });
@@ -762,6 +763,47 @@ describe('GioPolicyStudioModule', () => {
         expect(commonFlow?.request).toEqual([fakeTestPolicyStep({ description: 'A' })]);
 
         expect(commonFlow?.subscribe).toEqual([]);
+      });
+
+      it('should display conditioned flow and conditioned steps', async () => {
+        const commonFlows = [
+          fakeConditionedChannelFlow({
+            name: 'Flow 1',
+            request: [fakeTestPolicyStep({ condition: 'condition1' }), fakeTestPolicyStep()],
+            response: [],
+            publish: [],
+            subscribe: [],
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        const flowsMenu = await policyStudioHarness.getFlowsMenu();
+
+        expect(flowsMenu).toStrictEqual([
+          {
+            flows: [
+              {
+                hasCondition: true,
+                infos: 'PUBchannel',
+                isSelected: true,
+                name: 'Flow 1',
+              },
+            ],
+            name: 'Common flows',
+          },
+        ]);
+
+        const requestPhase = await policyStudioHarness.getSelectedFlowPhase('REQUEST');
+
+        expect(await requestPhase?.getSteps()).toStrictEqual([
+          { name: 'Webhook', type: 'connector' },
+          { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: true, type: 'step' },
+          { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
+          { name: 'Kafka', type: 'connector' },
+        ]);
       });
     });
   });
@@ -966,13 +1008,13 @@ describe('GioPolicyStudioModule', () => {
 
         expect(await requestPhase?.getSteps()).toStrictEqual([
           { name: 'HTTP Proxy', type: 'connector' },
-          { name: 'Rate Limit', description: 'Step description', type: 'step' },
+          { name: 'Rate Limit', description: 'Step description', hasCondition: false, type: 'step' },
           { name: 'HTTP Proxy', type: 'connector' },
         ]);
 
         expect(await responsePhase?.getSteps()).toStrictEqual([
           { name: 'HTTP Proxy', type: 'connector' },
-          { name: 'Policy to test UI', description: 'Test Policy description', type: 'step' },
+          { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
           { name: 'HTTP Proxy', type: 'connector' },
         ]);
       });

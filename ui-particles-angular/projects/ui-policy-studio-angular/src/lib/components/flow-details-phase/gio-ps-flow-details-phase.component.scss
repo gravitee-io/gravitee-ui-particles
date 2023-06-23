@@ -87,6 +87,33 @@ $typography: map.get(gio.$mat-theme, typography);
       margin: 0 8px;
       color: mat.get-color-from-palette(gio.$mat-dove-palette, darker30);
     }
+
+    &__policy {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      &__condition {
+        position: absolute;
+        top: -32px;
+        right: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+
+        span {
+          display: inline-block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+
+          mat-icon {
+            margin-right: 4px;
+          }
+        }
+      }
+    }
   }
 }
 
