@@ -57,6 +57,10 @@ export class GioFormlyJsonSchemaService {
       };
     } else if (mapSource.type === 'string' && mapSource.format === 'gio-code-editor') {
       mappedField.type = 'gio-code-editor';
+      mappedField.props = {
+        ...mappedField.props,
+        monacoEditorConfig: mapSource.gioConfig?.monacoEditorConfig,
+      };
     }
 
     return mappedField;

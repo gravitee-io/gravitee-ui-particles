@@ -19,8 +19,12 @@ import { FieldType } from '@ngx-formly/material';
 
 import { MonacoEditorLanguageConfig } from '../../gio-monaco-editor/gio-monaco-editor.component';
 
+export type GioMonacoEditorConfig = {
+  language: 'json';
+};
+
 type CodeEditorProps = FormlyFieldProps & {
-  // TODO: add option to support multiple configs (languages, singleline, etc.)
+  monacoEditorConfig?: GioMonacoEditorConfig;
 };
 
 @Component({
@@ -46,6 +50,17 @@ export class GioFjsCodeEditorTypeComponent extends FieldType<FieldTypeConfig<Cod
   public languageConfig?: MonacoEditorLanguageConfig;
 
   public ngOnInit(): void {
-    this.languageConfig = undefined;
+    const language = this.props.monacoEditorConfig?.language;
+
+    switch (language) {
+      case 'json':
+        this.languageConfig = {
+          language: 'json',
+          schemas: [],
+        };
+        break;
+      default:
+        this.languageConfig = undefined;
+    }
   }
 }
