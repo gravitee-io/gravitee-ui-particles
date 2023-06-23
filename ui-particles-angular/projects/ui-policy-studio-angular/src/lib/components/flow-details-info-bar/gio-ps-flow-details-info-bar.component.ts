@@ -86,11 +86,21 @@ export class GioPolicyStudioDetailsInfoBarComponent {
     return httpSelector?.pathOperator;
   }
 
-  public get methods(): string[] | undefined {
+  public get methods(): { name: string; class: string }[] | undefined {
     const httpSelector = this.flow?.selectors?.find(s => s.type === 'HTTP') as HttpSelector;
     if (!httpSelector) {
       return undefined;
     }
-    return httpSelector?.methods?.length ? httpSelector?.methods : ['ALL'];
+    return httpSelector?.methods?.length
+      ? httpSelector?.methods.map(m => ({
+          name: m,
+          class: `gio-method-badge-${m.toLowerCase()}`,
+        }))
+      : [
+          {
+            name: 'ALL',
+            class: 'gio-badge-neutral',
+          },
+        ];
   }
 }
