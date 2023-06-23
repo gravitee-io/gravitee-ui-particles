@@ -39,7 +39,7 @@ $typography: map.get(gio.$mat-theme, typography);
       @include mat.typography-level($typography, body-2);
     }
 
-    &.gio-method-badge {
+    &.method {
       width: auto;
     }
 
