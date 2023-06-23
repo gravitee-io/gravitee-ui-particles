@@ -488,6 +488,8 @@ describe('GioPolicyStudioModule', () => {
           plans: new SimpleChange(null, null, true),
         });
 
+        expect(await policyStudioHarness.getSaveButtonState()).toEqual('DISABLED');
+
         // Edit flow into Plan to update flow
         await policyStudioHarness.editFlowConfig('Foo flow 1', fakeChannelFlow({ name: 'Edited flow' }));
 
@@ -505,6 +507,7 @@ describe('GioPolicyStudioModule', () => {
         let saveOutputToExpect: SaveOutput | undefined;
         component.save.subscribe(value => (saveOutputToExpect = value));
 
+        expect(await policyStudioHarness.getSaveButtonState()).toEqual('VISIBLE');
         await policyStudioHarness.save();
 
         // Strict expect
@@ -547,6 +550,7 @@ describe('GioPolicyStudioModule', () => {
             flows: [],
           }),
         ]);
+        expect(await policyStudioHarness.getSaveButtonState()).toEqual('SAVING');
       });
 
       it('should display flow detail info bar', async () => {

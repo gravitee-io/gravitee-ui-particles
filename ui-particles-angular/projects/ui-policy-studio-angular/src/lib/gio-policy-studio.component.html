@@ -39,7 +39,8 @@
   </ng-template>
 
   <div class="header__btn">
-    <button mat-stroked-button color="primary" [disabled]="loading || disableSaveButton" (click)="onSave()">Save</button>
+    <button *ngIf="!saving" mat-stroked-button color="primary" [disabled]="loading || disableSaveButton" (click)="onSave()">Save</button>
+    <button *ngIf="saving" mat-stroked-button color="primary" disabled>Saving...</button>
   </div>
 </div>
 
