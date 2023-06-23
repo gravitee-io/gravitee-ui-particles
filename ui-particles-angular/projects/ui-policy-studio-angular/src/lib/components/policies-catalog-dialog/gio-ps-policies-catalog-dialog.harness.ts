@@ -16,13 +16,14 @@
 import { ComponentHarness, parallel } from '@angular/cdk/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { DivHarness } from '@gravitee/ui-particles-angular/testing';
+import { MatChipListHarness, MatChipOptionHarness } from '@angular/material/chips/testing';
 
 import { GioPolicyStudioStepFormHarness } from '../step-form/gio-ps-step-form.harness';
 
 export class GioPolicyStudioPoliciesCatalogDialogHarness extends ComponentHarness {
   public static hostSelector = 'gio-ps-policies-catalog-dialog';
 
-  private policiesLocator = this.locatorForAll(DivHarness.with({ selector: '.policiesCatalog__policy' }));
+  private policiesLocator = this.locatorForAll(DivHarness.with({ selector: '.policiesCatalog__list__policy' }));
 
   public async getPhase(): Promise<string> {
     const phase = await this.locatorFor('.title__phase')();
@@ -30,17 +31,19 @@ export class GioPolicyStudioPoliciesCatalogDialogHarness extends ComponentHarnes
   }
 
   public async getPoliciesName(): Promise<string[]> {
-    const policies = await this.locatorForAll('.policiesCatalog__policy__head__name')();
+    const policies = await this.locatorForAll('.policiesCatalog__list__policy__head__name')();
     return parallel(() => policies.map(policy => policy.text()));
   }
 
   public async selectPolicy(policyName: string): Promise<void> {
     const policies = await this.policiesLocator();
-    const policy = policies.find(async p => (await p.getText({ childSelector: '.policiesCatalog__policy__head__name' })) === policyName);
+    const policy = policies.find(
+      async p => (await p.getText({ childSelector: '.policiesCatalog__list__policy__head__name' })) === policyName,
+    );
     if (!policy) {
       throw new Error(`Policy ${policyName} not found`);
     }
-    const selectBtn = await policy.childLocatorFor(MatButtonHarness.with({ selector: '.policiesCatalog__policy__selectBtn' }))();
+    const selectBtn = await policy.childLocatorFor(MatButtonHarness.with({ selector: '.policiesCatalog__list__policy__selectBtn' }))();
     await selectBtn.click();
   }
 
@@ -56,5 +59,22 @@ export class GioPolicyStudioPoliciesCatalogDialogHarness extends ComponentHarnes
 
   public async getStepForm(): Promise<GioPolicyStudioStepFormHarness> {
     return await this.locatorFor(GioPolicyStudioStepFormHarness)();
+  }
+
+  public async getCategoriesSelection(): Promise<{ name: string; selected: boolean }[]> {
+    const chipList = await this.locatorForOptional(MatChipListHarness.with({ ancestor: '.policiesCatalog__categoriesSelection' }))();
+    if (!chipList) {
+      return [];
+    }
+
+    const chips: MatChipOptionHarness[] = await chipList.getChips();
+
+    return parallel(() =>
+      chips.map(async chip => {
+        const selected = await chip.isSelected();
+        const name = await chip.getText();
+        return { name, selected };
+      }),
+    );
   }
 }

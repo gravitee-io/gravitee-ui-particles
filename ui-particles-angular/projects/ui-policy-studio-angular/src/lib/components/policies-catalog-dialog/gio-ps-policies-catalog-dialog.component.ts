@@ -13,8 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { toLower, uniq } from 'lodash';
+import { FormControl } from '@angular/forms';
+import { startWith, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 import { ApiType, ExecutionPhase, Policy, Step } from '../../models';
 
@@ -33,13 +37,17 @@ const executionPhaseLabels: Record<ExecutionPhase, string> = {
   MESSAGE_RESPONSE: 'Subscribe',
 };
 
+type PolicyVM = Policy & {
+  category: string;
+};
+
 @Component({
   selector: 'gio-ps-policies-catalog-dialog',
   templateUrl: './gio-ps-policies-catalog-dialog.component.html',
   styleUrls: ['./gio-ps-policies-catalog-dialog.component.scss'],
 })
-export class GioPolicyStudioPoliciesCatalogDialogComponent {
-  public policies: Policy[] = [];
+export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy {
+  public policies: PolicyVM[] = [];
 
   public executionPhaseLabel!: string;
 
@@ -47,19 +55,50 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent {
 
   public stepToAdd?: Step;
 
+  public categories: string[] = [];
+
   public isValid = false;
+
+  public selectedCategoriesControl?: FormControl;
+
+  private allPolicies: PolicyVM[] = [];
+
+  private unsubscribe$ = new Subject<void>();
 
   constructor(
     public dialogRef: MatDialogRef<GioPolicyStudioPoliciesCatalogDialogComponent, GioPolicyStudioPoliciesCatalogDialogResult>,
     @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioPoliciesCatalogDialogData,
   ) {
-    this.policies = flowDialogData.policies.filter(policy => {
-      if (flowDialogData.apiType === 'PROXY') {
-        return policy.proxy?.includes(flowDialogData.executionPhase);
-      }
-      return policy.message?.includes(flowDialogData.executionPhase);
-    });
     this.executionPhaseLabel = executionPhaseLabels[flowDialogData.executionPhase];
+
+    this.allPolicies = flowDialogData.policies
+      .filter(policy => {
+        if (flowDialogData.apiType === 'PROXY') {
+          return policy.proxy?.includes(flowDialogData.executionPhase);
+        }
+        return policy.message?.includes(flowDialogData.executionPhase);
+      })
+      .map(policy => ({
+        ...policy,
+        category: policy.category ?? 'Others',
+      }));
+    this.categories = uniq(this.allPolicies.map(policy => policy.category.toLowerCase()));
+
+    // By default, all categories are selected
+    this.selectedCategoriesControl = new FormControl(this.categories);
+
+    this.selectedCategoriesControl.valueChanges
+      .pipe(startWith(this.selectedCategoriesControl.value), takeUntil(this.unsubscribe$))
+      .subscribe((categories: string[]) => {
+        this.policies = this.allPolicies.filter(policy => {
+          return categories.map(toLower).includes(toLower(policy.category));
+        });
+      });
+  }
+
+  public ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   public onSelectPolicy(policy: Policy) {
