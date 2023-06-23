@@ -154,6 +154,23 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
 
       expect(await stepForm.getDocumentation()).toContain('= Test Policy documentation');
     });
+
+    it('should display categories selection', async () => {
+      await componentTestingOpenDialog();
+
+      const policiesCatalogDialog = await loader.getHarness(GioPolicyStudioPoliciesCatalogDialogHarness);
+
+      expect(await policiesCatalogDialog.getCategoriesSelection()).toEqual([
+        {
+          name: 'Others',
+          selected: true,
+        },
+        {
+          name: 'Security',
+          selected: true,
+        },
+      ]);
+    });
   });
 
   describe('When ApiType = MESSAGE and ExecutionPhase = RESPONSE', () => {

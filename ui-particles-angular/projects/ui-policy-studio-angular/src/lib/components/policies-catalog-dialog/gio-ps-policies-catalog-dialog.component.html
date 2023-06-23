@@ -23,24 +23,42 @@
   </button>
 </h2>
 
-<ng-container *ngIf="policies.length; else emptyPoliciesTpl">
+<ng-container>
   <mat-dialog-content *ngIf="!selectedPolicy" class="policiesCatalog">
-    <div *ngFor="let policy of policies" class="policiesCatalog__policy">
-      <div class="policiesCatalog__policy__head">
-        <mat-icon class="policiesCatalog__policy__head__icon" [svgIcon]="policy.icon ?? 'gio:puzzle'"></mat-icon>
+    <div class="policiesCatalog__categoriesSelection" *ngIf="selectedCategoriesControl && categories.length > 1">
+      <mat-chip-list aria-label="Categories selection" multiple [formControl]="selectedCategoriesControl">
+        <mat-chip
+          *ngFor="let category of categories"
+          [selected]="category"
+          [value]="category"
+          #chip="matChip"
+          (click)="chip.toggleSelected(true)"
+          >{{ category | titlecase }}</mat-chip
+        >
+      </mat-chip-list>
+      <gio-banner-warning *ngIf="selectedCategoriesControl.value.length < 1">Select at least one category.</gio-banner-warning>
+    </div>
 
-        <span *ngIf="policy.name" class="policiesCatalog__policy__head__name">{{ policy.name }}</span>
+    <div *ngIf="policies.length; else emptyPoliciesTpl" class="policiesCatalog__list">
+      <div *ngFor="let policy of policies" class="policiesCatalog__list__policy">
+        <div class="policiesCatalog__list__policy__head">
+          <mat-icon class="policiesCatalog__list__policy__head__icon" [svgIcon]="policy.icon ?? 'gio:puzzle'"></mat-icon>
+
+          <span *ngIf="policy.name" class="policiesCatalog__list__policy__head__name">{{ policy.name }}</span>
+        </div>
+
+        <div *ngIf="policy.description" class="policiesCatalog__list__policy__description">{{ policy.description }}</div>
+
+        <button class="policiesCatalog__list__policy__selectBtn" mat-stroked-button role="dialog" (click)="onSelectPolicy(policy)">
+          Select
+        </button>
       </div>
-
-      <div *ngIf="policy.description" class="policiesCatalog__policy__description">{{ policy.description }}</div>
-
-      <button class="policiesCatalog__policy__selectBtn" mat-stroked-button role="dialog" (click)="onSelectPolicy(policy)">Select</button>
     </div>
   </mat-dialog-content>
 </ng-container>
 
 <ng-template #emptyPoliciesTpl>
-  <mat-dialog-content class="emptyPoliciesCatalog">No policies available for this phase.</mat-dialog-content>
+  <mat-dialog-content class="emptyPoliciesCatalog">No policies available.</mat-dialog-content>
 </ng-template>
 
 <mat-dialog-content *ngIf="selectedPolicy" class="policyForm">

@@ -28,62 +28,68 @@ $typography: map.get(gio.$mat-theme, typography);
 }
 
 .policiesCatalog {
-  --grid-layout-gap: 16px;
-  --grid-column-count: 4;
-  --grid-item-min-width: 200px;
-  --gap-count: calc(var(--grid-column-count) - 1);
-  --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
-  --grid-item-max-width: calc((100% - var(--total-gap-width)) / var(--grid-column-count));
+  &__categoriesSelection {
+    padding: 0 0 8px;
+  }
 
-  display: grid;
-  grid-gap: var(--grid-layout-gap);
-  grid-template-columns: repeat(auto-fill, minmax(max(var(--grid-item-min-width), var(--grid-item-max-width)), 1fr));
+  &__list {
+    --grid-layout-gap: 16px;
+    --grid-column-count: 4;
+    --grid-item-min-width: 200px;
+    --gap-count: calc(var(--grid-column-count) - 1);
+    --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
+    --grid-item-max-width: calc((100% - var(--total-gap-width)) / var(--grid-column-count));
 
-  &__policy {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 16px;
-    border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
-    border-radius: 8px;
-    gap: 4px;
+    display: grid;
+    grid-gap: var(--grid-layout-gap);
+    grid-template-columns: repeat(auto-fill, minmax(max(var(--grid-item-min-width), var(--grid-item-max-width)), 1fr));
 
-    &__head {
+    &__policy {
       display: flex;
-      max-width: 100%;
-      align-items: center;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 16px;
+      border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
+      border-radius: 8px;
+      gap: 4px;
 
-      &__icon {
-        min-width: 24px;
-        flex: 1 1 24px;
-        margin-right: 8px;
+      &__head {
+        display: flex;
+        max-width: 100%;
+        align-items: center;
+
+        &__icon {
+          min-width: 24px;
+          flex: 1 1 24px;
+          margin-right: 8px;
+        }
+
+        &__name {
+          overflow: hidden;
+          flex: 1 1 auto;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
       }
 
-      &__name {
+      &__description {
+        @include mat.typography-level($typography, caption);
+
+        display: -webkit-box;
         overflow: hidden;
-        flex: 1 1 auto;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        -webkit-box-orient: vertical;
+        color: mat.get-color-from-palette(gio.$mat-space-palette, lighter40);
+        -webkit-line-clamp: 2;
+
+        &:empty {
+          display: none;
+        }
       }
-    }
 
-    &__description {
-      @include mat.typography-level($typography, caption);
-
-      display: -webkit-box;
-      overflow: hidden;
-      -webkit-box-orient: vertical;
-      color: mat.get-color-from-palette(gio.$mat-space-palette, lighter40);
-      -webkit-line-clamp: 2;
-
-      &:empty {
-        display: none;
+      &__selectBtn {
+        margin-top: 8px;
       }
-    }
-
-    &__selectBtn {
-      margin-top: 8px;
     }
   }
 }
