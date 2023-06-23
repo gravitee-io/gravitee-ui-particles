@@ -16,6 +16,7 @@
 
 import { ComponentHarness, parallel } from '@angular/cdk/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
+import { MatIconHarness } from '@angular/material/icon/testing';
 import { DivHarness } from '@gravitee/ui-particles-angular/testing';
 
 export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
@@ -36,6 +37,7 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
         name: string | null;
         isSelected: boolean;
         infos: string | null;
+        hasCondition: boolean;
       }[];
     }[]
   > {
@@ -53,6 +55,7 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
               name: await flowDiv.getText({ childSelector: '.list__flowsGroup__flow__name' }),
               infos: await flowDiv.getText({ childSelector: '.list__flowsGroup__flow__infos' }),
               isSelected: await flowDiv.host().then(host => host.hasClass('selected')),
+              hasCondition: !!(await flowDiv.childLocatorFor(MatIconHarness.with({ name: 'gio:if' }))),
             };
           }),
         );

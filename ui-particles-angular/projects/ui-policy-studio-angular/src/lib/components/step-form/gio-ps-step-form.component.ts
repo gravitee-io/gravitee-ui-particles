@@ -66,6 +66,7 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
   private initStepForm(): void {
     this.stepForm = new FormGroup({
       description: new FormControl(this.step?.description),
+      condition: new FormControl(this.step?.condition),
       configuration: new FormControl(this.step?.configuration ?? {}),
     });
 
@@ -73,6 +74,7 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
       this.stepChange.emit({
         ...this.step,
         description: this.stepForm?.get('description')?.value,
+        condition: this.stepForm?.get('condition')?.value ?? undefined,
         configuration: this.stepForm?.get('configuration')?.value,
       });
     });

@@ -124,6 +124,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
       const stepForm = await policiesCatalogDialog.getStepForm();
       await stepForm.setStepForm({
         description: 'My step description',
+        condition: 'test == true',
         async waitForPolicyFormCompletionCb() {
           // "Policy to test UI" have required configuration fields. We need to fill them to be able to add the step.
           const testPolicyConfigurationInput = await loader.getHarness(MatInputHarness.with({ selector: '[id*="test"]' }));
@@ -138,6 +139,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
         name: 'Policy to test UI',
         policy: 'test-policy',
         description: 'My step description',
+        condition: 'test == true',
         configuration: {
           test: '🦊',
         },

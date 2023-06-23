@@ -47,6 +47,29 @@ export function fakeChannelFlow(modifier?: Partial<Flow> | ((baseApi: Flow) => F
   };
 }
 
+export function fakeConditionedChannelFlow(modifier?: Partial<Flow> | ((baseApi: Flow) => Flow)): Flow {
+  const base = fakeChannelFlow((baseApi: Flow) => ({
+    ...baseApi,
+    name: 'Conditioned flow',
+    selectors: [
+      ...(baseApi.selectors ?? []),
+      {
+        type: 'CONDITION',
+        condition: 'false',
+      },
+    ],
+  }));
+
+  if (isFunction(modifier)) {
+    return modifier(base);
+  }
+
+  return {
+    ...base,
+    ...modifier,
+  };
+}
+
 export function fakeHttpFlow(modifier?: Partial<Flow> | ((baseApi: Flow) => Flow)): Flow {
   const httpSelector: HttpSelector = {
     type: 'HTTP',
@@ -64,6 +87,29 @@ export function fakeHttpFlow(modifier?: Partial<Flow> | ((baseApi: Flow) => Flow
     publish: [],
     enabled: true,
   };
+
+  if (isFunction(modifier)) {
+    return modifier(base);
+  }
+
+  return {
+    ...base,
+    ...modifier,
+  };
+}
+
+export function fakeConditionedHttpFlow(modifier?: Partial<Flow> | ((baseApi: Flow) => Flow)): Flow {
+  const base = fakeHttpFlow((baseApi: Flow) => ({
+    ...baseApi,
+    name: 'Conditioned flow',
+    selectors: [
+      ...(baseApi.selectors ?? []),
+      {
+        type: 'CONDITION',
+        condition: 'false',
+      },
+    ],
+  }));
 
   if (isFunction(modifier)) {
     return modifier(base);

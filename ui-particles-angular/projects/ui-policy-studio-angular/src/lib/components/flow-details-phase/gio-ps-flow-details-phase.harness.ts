@@ -45,6 +45,7 @@ export type StepCard =
   | {
       name: string;
       description?: string;
+      hasCondition: boolean;
       type: 'step';
     };
 
@@ -88,11 +89,13 @@ export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
           };
         }
         const step = await stepDiv.childLocatorFor(GioPolicyStudioDetailsPhaseStepHarness)();
+        const conditionDiv = await stepDiv.childLocatorForOptional(DivHarness.with({ selector: '.content__step__policy__condition' }))();
         const description = await step.getDescription();
 
         return {
           type: 'step',
           name: await step.getName(),
+          hasCondition: !!conditionDiv,
           ...(description ? { description } : {}),
         };
       }),

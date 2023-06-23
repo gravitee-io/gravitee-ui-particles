@@ -147,6 +147,10 @@ $typography: map.get(gio.$mat-theme, typography);
             unicode-bidi: bidi-override;
           }
         }
+
+        &__conditionBadge {
+          flex: 0 0 auto;
+        }
       }
     }
   }
