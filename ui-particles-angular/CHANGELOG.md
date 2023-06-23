@@ -1,3 +1,13 @@
+# [7.20.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.19.0...v7.20.0) (2023-06-23)
+
+
+### Features
+
+* add categories selection into policies catalog ([2161120](https://github.com/gravitee-io/gravitee-ui-particles/commit/216112081b8ea9bb1c7c5dbc72795df00a63cf5b))
+* add json-schema option to select monaco editor language ([c88786d](https://github.com/gravitee-io/gravitee-ui-particles/commit/c88786dbed423d288b0727627641ed8a781186e1))
+* change save button to saving...  on click ([c23e350](https://github.com/gravitee-io/gravitee-ui-particles/commit/c23e350ac6e33a54779439e66f4564afd86fbb98))
+* small ui/ux improvement ([d99e198](https://github.com/gravitee-io/gravitee-ui-particles/commit/d99e1987cbc70062b374801b4540a5b2b3c69111))
+
 # [7.19.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.18.0...v7.19.0) (2023-06-22)
 
 
