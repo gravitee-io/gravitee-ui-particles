@@ -113,6 +113,8 @@ export class GioPolicyStudioComponent implements OnChanges {
 
   public disableSaveButton = true;
 
+  public saving = false;
+
   // Used to keep track of initial flows groups to know if there are deleted flows
   private initialFlowsGroups: FlowGroupVM[] = [];
 
@@ -136,6 +138,9 @@ export class GioPolicyStudioComponent implements OnChanges {
 
       // Select first flow by default on first load
       this.selectedFlow = flatten(this.flowsGroups.map(flowGroup => flowGroup.flows))[0];
+
+      // Reset saving state when flowsGroups are updated
+      this.saving = false;
     }
 
     if (changes.policySchemaFetcher) {
@@ -196,6 +201,7 @@ export class GioPolicyStudioComponent implements OnChanges {
       ...(plansToUpdate ? { plansToUpdate } : {}),
       ...(this.hasFlowExecutionChanged ? { flowExecution: this.flowExecution } : {}),
     });
+    this.saving = true;
   }
 }
 

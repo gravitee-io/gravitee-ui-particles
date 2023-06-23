@@ -118,6 +118,25 @@ export class GioPolicyStudioHarness extends ComponentHarness {
   }
 
   /**
+   * Get Save button state
+   */
+  public async getSaveButtonState(): Promise<'VISIBLE' | 'DISABLED' | 'SAVING'> {
+    const saveButton = await this.locatorFor(MatButtonHarness.with({ ancestor: '.header__btn' }))();
+    const disabled = await saveButton.isDisabled();
+    const text = await saveButton.getText();
+
+    if (text === 'Saving...') {
+      return 'SAVING';
+    }
+
+    if (disabled) {
+      return 'DISABLED';
+    }
+
+    return 'VISIBLE';
+  }
+
+  /**
    * Click on the "Save" button
    */
   public async save(): Promise<void> {
