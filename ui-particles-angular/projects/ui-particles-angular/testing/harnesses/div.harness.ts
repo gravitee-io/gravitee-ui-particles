@@ -39,6 +39,10 @@ export class DivHarness extends ComponentHarness {
     return this.locatorFor(query);
   }
 
+  public childLocatorForOptional<T extends ComponentHarness>(query: HarnessQuery<T>): AsyncFactoryFn<T | null> {
+    return this.locatorForOptional(query);
+  }
+
   public childLocatorForAll<T extends ComponentHarness>(query: HarnessQuery<T>): AsyncFactoryFn<T[]> {
     return this.locatorForAll(query);
   }
