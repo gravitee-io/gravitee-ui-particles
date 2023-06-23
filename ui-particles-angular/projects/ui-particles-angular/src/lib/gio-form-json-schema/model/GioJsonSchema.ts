@@ -21,6 +21,7 @@
 export interface GioConfig {
   banner?: GioBannerConfig;
   uiType?: GioUiTypeConfig;
+  monacoEditorConfig?: GioMonacoEditorConfig;
 }
 
 type GioBannerConfig =
@@ -48,5 +49,7 @@ declare module 'json-schema' {
 }
 
 import { JSONSchema7 } from 'json-schema';
+
+import { GioMonacoEditorConfig } from '../type-component/code-editor-type.component';
 
 export type GioJsonSchema = JSONSchema7;
