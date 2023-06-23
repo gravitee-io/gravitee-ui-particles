@@ -24,7 +24,7 @@
       <ng-container *ngIf="stepForm" [formGroup]="stepForm">
         <mat-form-field>
           <mat-label>Description</mat-label>
-          <input matInput formControlName="description" cdkFocusInitial />
+          <textarea matInput formControlName="description" cdkFocusInitial></textarea>
           <mat-hint>Describe how your policy works.</mat-hint>
         </mat-form-field>
 

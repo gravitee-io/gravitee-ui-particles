@@ -50,6 +50,7 @@
 
   &__flowsMenu {
     overflow: hidden;
+    min-width: 230px;
     max-width: 400px;
     flex: 1 1 33%;
     border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
