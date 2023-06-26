@@ -20,8 +20,8 @@
     "@angular/core": "^13.3.0",
     "@angular/forms": "^13.3.0",
     "@angular/material": "^13.3.0",
-    "@ngx-formly/core": "^6.1.1",
-    "@ngx-formly/material": "^6.1.1",
+    "@ngx-formly/core": "^6.1.8",
+    "@ngx-formly/material": "^6.1.8",
     "asciidoctor": "^2.2.6",
     "ngx-file-helpers": "^7.0.0",
     "prismjs": "^1.29.0"

@@ -27,7 +27,18 @@
 
     <mat-card class="json-schema-story__preview" [class.isChromatic]="isChromatic">
       <form *ngIf="form; else loading" (ngSubmit)="onSubmit()" [formGroup]="form" gioFormFocusInvalid>
-        <mat-card-title>UI Preview</mat-card-title>
+        <div class="json-schema-story__header">
+          <mat-card-title>UI Preview</mat-card-title>
+          <gio-form-slide-toggle *ngIf="withToggle">
+            <gio-form-label>Disable form</gio-form-label>
+            <mat-slide-toggle
+              gioFormSlideToggle
+              aria-label="Disable form"
+              (change)="toggleDisabledProperty($event.checked)"
+              [checked]="disabled"
+            ></mat-slide-toggle>
+          </gio-form-slide-toggle>
+        </div>
 
         <mat-card-content>
           <gio-form-json-schema [jsonSchema]="jsonSchema" [options]="options" formControlName="schemaValue"></gio-form-json-schema>

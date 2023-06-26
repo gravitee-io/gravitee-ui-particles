@@ -5541,27 +5541,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ngx-formly/core@npm:6.0.4":
-  version: 6.0.4
-  resolution: "@ngx-formly/core@npm:6.0.4"
+"@ngx-formly/core@npm:6.1.8":
+  version: 6.1.8
+  resolution: "@ngx-formly/core@npm:6.1.8"
   dependencies:
     tslib: ^2.0.0
   peerDependencies:
     "@angular/forms": ">=13.2.0"
     rxjs: ^6.5.3 || ^7.0.0
-  checksum: 6b3901211c1f54b6a1770221e5c7200da47de479a022365deb60136a3286c297ecf1fdf88b93d396cbd5e5f1dfc0cae0b3fe68c34fb5c701fa6466d7ee22e8ea
+  checksum: a96638de2b88d7b10d384207d588876e4537bbb419d80c327321a786986f1bba5291a614948d5360d5853a884d9d61e6f6ab9752bdc9af62e8ff29e84359933d
   languageName: node
   linkType: hard
 
-"@ngx-formly/material@npm:6.0.4":
-  version: 6.0.4
-  resolution: "@ngx-formly/material@npm:6.0.4"
+"@ngx-formly/material@npm:6.1.8":
+  version: 6.1.8
+  resolution: "@ngx-formly/material@npm:6.1.8"
   dependencies:
     tslib: ^2.0.0
   peerDependencies:
     "@angular/material": ">=13.0.0"
-    "@ngx-formly/core": 6.0.4
-  checksum: 8cb800a7face6e5e1a1d1c7acd89d3b6f30c04c64f1f3b70a81c8cc089e2539e060b8e602bbf609c9c1538ec09046aadf1bc28f032853065812794568ef30b66
+    "@ngx-formly/core": 6.1.8
+  checksum: eaea23acad25e9a18f57604c9a5262c5c00f012beaa5d0efab46a23a06a1b63d82738958ef26cd80f13c5140bf2e08151a399aab68c6629f24372668dc782e0e
   languageName: node
   linkType: hard
 
@@ -27454,8 +27454,8 @@ __metadata:
     "@fontsource/material-icons": 4.5.4
     "@gravitee/ui-components": ^3.38.4
     "@highcharts/map-collection": ^1.1.4
-    "@ngx-formly/core": 6.0.4
-    "@ngx-formly/material": 6.0.4
+    "@ngx-formly/core": 6.1.8
+    "@ngx-formly/material": 6.1.8
     "@semantic-release/changelog": 6.0.2
     "@semantic-release/exec": 6.0.3
     "@semantic-release/git": 10.0.1

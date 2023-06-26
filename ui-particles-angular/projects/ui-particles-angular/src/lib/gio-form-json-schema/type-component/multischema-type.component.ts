@@ -13,9 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
 import { set } from 'lodash';
+import { takeUntil, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'gio-fjs-multi-schema-type',
@@ -31,9 +33,31 @@ import { set } from 'lodash';
   `,
   styleUrls: ['./multischema-type.component.scss'],
 })
-export class GioFjsMultiSchemaTypeComponent extends FieldType implements OnInit {
+export class GioFjsMultiSchemaTypeComponent extends FieldType implements OnInit, OnDestroy {
+  private unsubscribe$: Subject<void> = new Subject<void>();
+
+  constructor(private readonly cdr: ChangeDetectorRef) {
+    super();
+  }
+
+  public ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.unsubscribe();
+  }
+
   public ngOnInit(): void {
     set(this.field, 'fieldGroup[0].props.appearance', 'fill');
     set(this.field, 'fieldGroup[0].props.label', 'Select option');
+    set(this.field, 'fieldGroup[0].props.disabled', this.form.disabled);
+
+    this.form.valueChanges
+      .pipe(
+        tap(() => {
+          set(this.field, 'fieldGroup[0].props.disabled', this.form.disabled);
+          this.cdr.detectChanges();
+        }),
+        takeUntil(this.unsubscribe$),
+      )
+      .subscribe();
   }
 }

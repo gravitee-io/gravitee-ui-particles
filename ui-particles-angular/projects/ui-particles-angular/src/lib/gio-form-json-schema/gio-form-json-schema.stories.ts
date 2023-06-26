@@ -26,6 +26,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { GioFormSlideToggleModule } from '@gravitee/ui-particles-angular';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { GioMonacoEditorModule } from '../gio-monaco-editor/gio-monaco-editor.module';
 import { GioFormFocusInvalidModule } from '../gio-form-focus-first-invalid/gio-form-focus-first-invalid.module';
@@ -58,11 +60,13 @@ import { codeEditorExample } from './json-schema-example/code-editor';
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
+    MatSlideToggleModule,
     GioFormJsonSchemaModule,
     GioFormFocusInvalidModule,
     MatButtonModule,
     MatButtonToggleModule,
     GioFormJsonSchemaModule,
+    GioFormSlideToggleModule,
     GioMonacoEditorModule.forRoot({ theme: 'vs-dark' }),
   ],
   exports: [DemoComponent, GioFormJsonSchemaModule],
@@ -82,9 +86,15 @@ export default {
       disable: true,
     },
   },
-  render: ({ jsonSchema, initialValue, disabled }) => ({
-    template: `<gio-demo [jsonSchema]="jsonSchema" [initialValue]="initialValue" [isChromatic]="isChromatic()" [disabled]="disabled"></gio-demo>`,
-    props: { jsonSchema, initialValue, isChromatic, disabled },
+  render: ({ jsonSchema, initialValue, disabled, withToggle }) => ({
+    template: `<gio-demo 
+                    [jsonSchema]="jsonSchema" 
+                    [initialValue]="initialValue"
+                    [isChromatic]="isChromatic()" 
+                    [disabled]="disabled"
+                    [withToggle]="withToggle"
+                ></gio-demo>`,
+    props: { jsonSchema, initialValue, isChromatic, disabled, withToggle },
   }),
 } as Meta;
 
@@ -203,6 +213,15 @@ export const kafkaAdvanced: Story = {
   name: 'Kafka Advanced',
   args: {
     jsonSchema: kafkaAdvancedExample,
+  },
+};
+
+export const kafkaAdvancedWithDisableToggle: Story = {
+  name: 'Kafka Advanced Disabled With Disable Toggle',
+  args: {
+    jsonSchema: kafkaAdvancedExample,
+    withToggle: true,
+    disabled: true,
   },
 };
 
