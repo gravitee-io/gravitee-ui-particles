@@ -44,6 +44,9 @@ export class DemoComponent implements OnChanges, OnDestroy {
   @Input()
   public disabled = false;
 
+  @Input()
+  public withToggle = false;
+
   public form?: FormGroup;
   public options: FormlyFormOptions = {};
   public formValue: unknown;
@@ -135,5 +138,9 @@ export class DemoComponent implements OnChanges, OnDestroy {
   public onSubmit(): void {
     // eslint-disable-next-line no-console
     console.log('onSubmit output:', this.form?.getRawValue().schemaValue);
+  }
+
+  public toggleDisabledProperty(toggle: boolean): void {
+    toggle ? this.form?.disable() : this.form?.enable();
   }
 }
