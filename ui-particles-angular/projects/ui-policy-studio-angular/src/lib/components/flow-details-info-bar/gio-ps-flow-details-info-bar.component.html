@@ -20,9 +20,9 @@
   <span class="info__value strong">{{ flow?.name }}</span>
 </div>
 
-<div *ngIf="entrypointsInfo" class="info">
+<div *ngIf="entrypoints" class="info">
   <span class="info__label">Entrypoints</span>
-  <span *ngFor="let entrypoint of entrypointsInfo" class="info__value gio-badge gio-badge-neutral">
+  <span *ngFor="let entrypoint of entrypoints" class="info__value gio-badge gio-badge-neutral">
     <mat-icon [svgIcon]="entrypoint.icon"></mat-icon>
     {{ entrypoint.name }}</span
   >

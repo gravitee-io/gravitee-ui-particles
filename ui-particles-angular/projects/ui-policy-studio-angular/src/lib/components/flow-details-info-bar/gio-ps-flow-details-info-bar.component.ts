@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import { Component, Input } from '@angular/core';
+import { isEmpty } from 'lodash';
 
 import { FlowVM } from '../../gio-policy-studio.model';
 import { ChannelSelector, ConditionSelector, ConnectorInfo, HttpSelector, Operation } from '../../models';
@@ -49,7 +50,11 @@ export class GioPolicyStudioDetailsInfoBarComponent {
       PUBLISH: 'PUB',
       SUBSCRIBE: 'SUB',
     };
-    return channelSelector?.operations?.map(o => operationToBadge[o]).sort();
+    // If no operations are selected, all operations are valid
+    const operations =
+      !channelSelector.operations || isEmpty(channelSelector.operations) ? (['PUBLISH', 'SUBSCRIBE'] as const) : channelSelector.operations;
+
+    return operations.map(o => operationToBadge[o]).sort();
   }
 
   public get channel(): string | undefined {
@@ -66,6 +71,19 @@ export class GioPolicyStudioDetailsInfoBarComponent {
       return undefined;
     }
     return channelSelector?.channelOperator;
+  }
+
+  public get entrypoints(): ConnectorInfo[] | undefined {
+    const channelSelector = this.flow?.selectors?.find(s => s.type === 'CHANNEL') as ChannelSelector;
+    if (!channelSelector) {
+      return undefined;
+    }
+
+    return this.entrypointsInfo?.filter(
+      e =>
+        // If no entrypoints are selected, all entrypoints are valid
+        !channelSelector.entrypoints || isEmpty(channelSelector.entrypoints) || channelSelector.entrypoints?.includes(e.type),
+    );
   }
 
   // PROXY API type

@@ -39,6 +39,9 @@ import {
   fakeWebhookMessageEntrypoint,
   fakeConditionedChannelFlow,
   fakeConditionedHttpFlow,
+  fakeWebsocketMessageEntrypoint,
+  fakeSSEMessageEntrypoint,
+  fakeMockMessageEndpoint,
 } from './models/index-testing';
 import { ChannelSelector, HttpSelector, Policy, SaveOutput } from './models';
 import { fakePolicyDocumentation, fakePolicySchema } from './models/policy/PolicySchema.fixture';
@@ -200,15 +203,26 @@ export const MessageWithAllPhases: Story = {
   name: 'Message API with All phases',
   args: {
     apiType: 'MESSAGE',
-    entrypointsInfo: [fakeWebhookMessageEntrypoint(), fakeHTTPPostMessageEntrypoint()],
-    endpointsInfo: [fakeKafkaMessageEndpoint(), fakeHTTPGetMessageEntrypoint()],
+    entrypointsInfo: [
+      fakeSSEMessageEntrypoint(),
+      fakeWebsocketMessageEntrypoint(),
+      fakeHTTPPostMessageEntrypoint(),
+      fakeHTTPGetMessageEntrypoint(),
+      fakeWebhookMessageEntrypoint(),
+    ],
+    endpointsInfo: [fakeMockMessageEndpoint(), fakeKafkaMessageEndpoint()],
     commonFlows: [
-      fakeChannelFlow({
-        name: 'Flow',
-        request: [fakeTestPolicyStep()],
-        response: [fakeTestPolicyStep()],
-        publish: [fakeTestPolicyStep()],
-        subscribe: [fakeTestPolicyStep()],
+      fakeChannelFlow(base => {
+        const channelSelector = base.selectors?.find(selector => selector.type === 'CHANNEL') as ChannelSelector;
+        channelSelector.entrypoints = [];
+        return {
+          ...base,
+          name: 'Flow',
+          request: [fakeTestPolicyStep()],
+          response: [fakeTestPolicyStep()],
+          publish: [fakeTestPolicyStep()],
+          subscribe: [fakeTestPolicyStep()],
+        };
       }),
     ],
     plans: [],
@@ -216,14 +230,30 @@ export const MessageWithAllPhases: Story = {
 };
 
 export const MessageWithDisabledPhase: Story = {
-  name: 'Message API with disabled publish phase',
+  name: 'Message API with disabled phase',
   args: {
     apiType: 'MESSAGE',
-    entrypointsInfo: [fakeWebhookMessageEntrypoint()],
+    entrypointsInfo: [fakeWebhookMessageEntrypoint(), fakeWebsocketMessageEntrypoint()],
     endpointsInfo: [fakeKafkaMessageEndpoint()],
     commonFlows: [
       fakeChannelFlow({
-        name: 'Flow',
+        name: 'Publish disabled',
+        request: [fakeTestPolicyStep()],
+        response: [fakeTestPolicyStep()],
+        publish: [fakeTestPolicyStep()],
+        subscribe: [fakeTestPolicyStep()],
+      }),
+      fakeChannelFlow({
+        name: 'No entrypoints & operations selected',
+        selectors: [
+          {
+            type: 'CHANNEL',
+            channel: 'channel1',
+            channelOperator: 'EQUALS',
+            operations: [],
+            entrypoints: [],
+          },
+        ],
         request: [fakeTestPolicyStep()],
         response: [fakeTestPolicyStep()],
         publish: [fakeTestPolicyStep()],
