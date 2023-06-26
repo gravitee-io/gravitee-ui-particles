@@ -1,3 +1,10 @@
+## [7.21.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.21.0...v7.21.1) (2023-06-26)
+
+
+### Bug Fixes
+
+* correctly handle entrypoints for message API ([ad33b3c](https://github.com/gravitee-io/gravitee-ui-particles/commit/ad33b3cb039b24fdc0667e731635e7b5d00ab523))
+
 # [7.21.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.20.0...v7.21.0) (2023-06-26)
 
 
