@@ -13,16 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { tap } from 'rxjs/operators';
+import { isEmpty } from 'lodash';
 
 import { FlowVM } from '../../gio-policy-studio.model';
 import {
   GioPolicyStudioFlowMessageFormDialogComponent,
   GioPolicyStudioFlowMessageFormDialogData,
 } from '../flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
-import { ApiType, ConnectorInfo, Policy, Step } from '../../models';
+import { ApiType, ChannelSelector, ConnectorInfo, Policy, Step } from '../../models';
 import {
   GioPolicyStudioFlowProxyFormDialogComponent,
   GioPolicyStudioFlowProxyFormDialogData,
@@ -34,7 +35,7 @@ import { GioPolicyStudioFlowFormDialogResult } from '../flow-form-dialog/gio-ps-
   templateUrl: './gio-ps-flow-details.component.html',
   styleUrls: ['./gio-ps-flow-details.component.scss'],
 })
-export class GioPolicyStudioDetailsComponent {
+export class GioPolicyStudioDetailsComponent implements OnChanges {
   @Input()
   public loading = false;
 
@@ -59,7 +60,28 @@ export class GioPolicyStudioDetailsComponent {
   @Output()
   public deleteFlow = new EventEmitter<FlowVM>();
 
+  public messageFlowEntrypointsInfo: ConnectorInfo[] = [];
+
   constructor(private readonly matDialog: MatDialog) {}
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.entrypointsInfo) {
+      const channelSelector = this.flow?.selectors?.find(s => s.type === 'CHANNEL') as ChannelSelector;
+
+      if (!channelSelector) {
+        // If no channel selector found. Keep default value
+        this.messageFlowEntrypointsInfo = [];
+        return;
+      }
+
+      this.messageFlowEntrypointsInfo =
+        this.entrypointsInfo?.filter(
+          e =>
+            // If not entrypoints are defined, all entrypoints are valid
+            !channelSelector.entrypoints || isEmpty(channelSelector.entrypoints) || channelSelector.entrypoints?.includes(e.type),
+        ) ?? [];
+    }
+  }
 
   public onEditFlow(): void {
     const dialogResult =

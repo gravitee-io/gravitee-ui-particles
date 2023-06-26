@@ -557,17 +557,30 @@ describe('GioPolicyStudioModule', () => {
       it('should display flow detail info bar', async () => {
         const commonFlows = [
           fakeChannelFlow({
-            name: 'Flow 1',
+            name: 'Flow with entrypoints & operations',
             selectors: [
               {
                 type: 'CHANNEL',
                 channel: 'channel1',
                 channelOperator: 'EQUALS',
-                operations: ['SUBSCRIBE', 'PUBLISH'],
+                operations: ['SUBSCRIBE'],
+                entrypoints: ['webhook'],
               },
               {
                 type: 'CONDITION',
                 condition: 'condition1',
+              },
+            ],
+          }),
+          fakeChannelFlow({
+            name: 'Flow without entrypoints & operations',
+            selectors: [
+              {
+                type: 'CHANNEL',
+                channel: 'channel1',
+                channelOperator: 'EQUALS',
+                entrypoints: undefined,
+                operations: [],
               },
             ],
           }),
@@ -578,12 +591,21 @@ describe('GioPolicyStudioModule', () => {
         });
 
         expect(await policyStudioHarness.getSelectedFlowInfos()).toEqual({
-          Name: ['Flow 1'],
+          Name: ['Flow with entrypoints & operations'],
+          Channel: ['channel1'],
+          'Channel Operator': ['EQUALS'],
+          Operations: ['SUB'],
+          Entrypoints: ['Webhook'],
+          Condition: ['condition1'],
+        });
+
+        await policyStudioHarness.selectFlowInMenu('Flow without entrypoints & operations');
+        expect(await policyStudioHarness.getSelectedFlowInfos()).toEqual({
+          Name: ['Flow without entrypoints & operations'],
           Channel: ['channel1'],
           'Channel Operator': ['EQUALS'],
           Operations: ['PUB', 'SUB'],
           Entrypoints: ['Webhook'],
-          Condition: ['condition1'],
         });
       });
 
@@ -923,7 +945,6 @@ describe('GioPolicyStudioModule', () => {
 
         expect(await detailsHarness.getFlowInfos()).toEqual({
           Name: ['Flow 1'],
-          Entrypoints: ['HTTP Proxy'],
           Path: ['/path1'],
           'Path Operator': ['EQUALS'],
           'HTTP methods': ['ALL'],

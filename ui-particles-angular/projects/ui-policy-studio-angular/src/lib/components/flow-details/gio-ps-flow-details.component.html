@@ -34,13 +34,13 @@
     <gio-ps-flow-details-info-bar class="infoBar" [flow]="flow" [entrypointsInfo]="entrypointsInfo"></gio-ps-flow-details-info-bar>
 
     <div class="content">
-      <mat-tab-group *ngIf="apiType === 'MESSAGE'" class="content__tabs">
-        <mat-tab label="Initial connection">
+      <mat-tab-group *ngIf="apiType === 'MESSAGE'" class="content__tabs" dynamicHeight>
+        <mat-tab label="Initial connection" bodyClass="content__tabs__body">
           <gio-ps-flow-details-phase
             class="content__phase"
             name="Request phase"
             description="Policies will be applied during the connection establishment"
-            [startConnector]="entrypointsInfo"
+            [startConnector]="messageFlowEntrypointsInfo"
             [endConnector]="endpointsInfo"
             [steps]="flow.request ?? []"
             [apiType]="apiType"
@@ -53,7 +53,7 @@
             name="Response phase"
             description="Policies will be applied during the connection termination"
             [startConnector]="endpointsInfo"
-            [endConnector]="entrypointsInfo"
+            [endConnector]="messageFlowEntrypointsInfo"
             [steps]="flow.response ?? []"
             [apiType]="apiType"
             [policies]="policies"
@@ -61,12 +61,12 @@
             (stepsChange)="onStepsChange('response', $event)"
           ></gio-ps-flow-details-phase>
         </mat-tab>
-        <mat-tab label="Event messages">
+        <mat-tab label="Event messages" bodyClass="content__tabs__body">
           <gio-ps-flow-details-phase
             class="content__phase"
             name="Publish phase"
             description="Policies will be applied on messages sent to the endpoint"
-            [startConnector]="entrypointsInfo | gioFilterConnectorsByMode : 'PUBLISH'"
+            [startConnector]="messageFlowEntrypointsInfo | gioFilterConnectorsByMode : 'PUBLISH'"
             [endConnector]="endpointsInfo | gioFilterConnectorsByMode : 'PUBLISH'"
             [steps]="flow.publish ?? []"
             [apiType]="apiType"
@@ -79,7 +79,7 @@
             name="Subscribe phase"
             description="Policies will be applied on messages received by the entrypoint"
             [startConnector]="endpointsInfo | gioFilterConnectorsByMode : 'SUBSCRIBE'"
-            [endConnector]="entrypointsInfo | gioFilterConnectorsByMode : 'SUBSCRIBE'"
+            [endConnector]="messageFlowEntrypointsInfo | gioFilterConnectorsByMode : 'SUBSCRIBE'"
             [steps]="flow.subscribe ?? []"
             [apiType]="apiType"
             [policies]="policies"
@@ -89,7 +89,7 @@
         </mat-tab>
       </mat-tab-group>
 
-      <div *ngIf="apiType === 'PROXY'">
+      <ng-container *ngIf="apiType === 'PROXY'">
         <gio-ps-flow-details-phase
           class="content__phase"
           name="Request phase"
@@ -114,7 +114,7 @@
           policyExecutionPhase="RESPONSE"
           (stepsChange)="onStepsChange('response', $event)"
         ></gio-ps-flow-details-phase>
-      </div>
+      </ng-container>
     </div>
   </ng-container>
 

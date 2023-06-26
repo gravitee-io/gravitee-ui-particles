@@ -23,7 +23,7 @@ export function fakeSSEMessageEntrypoint(modifier?: Partial<ConnectorInfo> | ((b
     type: 'sse',
     name: 'Server-Sent Events',
     supportedModes: ['SUBSCRIBE'],
-    icon: 'gio:sse',
+    icon: 'gio:puzzle',
   };
 
   if (isFunction(modifier)) {

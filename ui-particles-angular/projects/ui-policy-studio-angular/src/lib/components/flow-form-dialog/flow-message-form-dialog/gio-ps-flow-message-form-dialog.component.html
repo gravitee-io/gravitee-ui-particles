@@ -30,7 +30,7 @@
     <mat-form-field>
       <mat-label>Flow name</mat-label>
       <input matInput formControlName="name" cdkFocusInitial />
-      <mat-hint>Names will be automatically generated with channel and operation if left blank</mat-hint>
+      <mat-hint>Names will be automatically generated with channel and operation if left blank.</mat-hint>
     </mat-form-field>
   </div>
   <div class="content__row">
@@ -40,7 +40,7 @@
         <mat-option value="EQUALS">Equals</mat-option>
         <mat-option value="STARTS_WITH">Starts with</mat-option>
       </mat-select>
-      <mat-hint>Channel operator</mat-hint>
+      <mat-hint>Channel operator.</mat-hint>
     </mat-form-field>
 
     <mat-form-field>
@@ -56,7 +56,7 @@
       <mat-select multiple formControlName="entrypoints">
         <mat-option *ngFor="let entrypoint of entrypoints" [value]="entrypoint.type">{{ entrypoint.name }}</mat-option>
       </mat-select>
-      <mat-hint>Entrypoints where your flow will be executed</mat-hint>
+      <mat-hint>Entrypoints where your flow will be executed. They will all be executed if left empty.</mat-hint>
     </mat-form-field>
   </div>
 
@@ -67,6 +67,7 @@
         <mat-option value="PUBLISH">Publish</mat-option>
         <mat-option value="SUBSCRIBE">Subscribe</mat-option>
       </mat-select>
+      <mat-hint>They will all be supported if left empty.</mat-hint>
     </mat-form-field>
   </div>
 
@@ -74,7 +75,7 @@
     <mat-form-field>
       <mat-label>Condition</mat-label>
       <input matInput formControlName="condition" />
-      <mat-hint>Condition to execute the flow, supports Expression Language</mat-hint>
+      <mat-hint>Condition to execute the flow, supports Expression Language.</mat-hint>
     </mat-form-field>
   </div>
 </mat-dialog-content>
