@@ -6,10 +6,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonHarness } from '@angular/material/button/testing';
+import { MatIconTestingModule } from '@angular/material/icon/testing';
 
-import { GioFormJsonSchemaComponent } from './gio-form-json-schema.component';
-import { GioFormJsonSchemaModule } from './gio-form-json-schema.module';
 import { GioJsonSchema } from './model/GioJsonSchema';
+import { GioFormJsonSchemaModule } from './gio-form-json-schema.module';
+import { GioFormJsonSchemaComponent } from './gio-form-json-schema.component';
+import { kafkaAdvancedExample } from './json-schema-example/kafka-advanced';
 
 /*
  * Copyright (C) 2015 The Gravitee team (http://gravitee.io)
@@ -29,7 +32,7 @@ import { GioJsonSchema } from './model/GioJsonSchema';
 describe('GioFormJsonSchema', () => {
   @Component({
     template: `
-      <form [formGroup]="form" (ngSubmit)="onSubmit(model)">
+      <form [formGroup]="form">
         <gio-form-json-schema formControlName="config" [jsonSchema]="jsonSchema"></gio-form-json-schema>
         <button type="submit">Submit</button>
       </form>
@@ -41,6 +44,14 @@ describe('GioFormJsonSchema', () => {
       config: new FormControl(),
     });
     public jsonSchema: GioJsonSchema = {};
+
+    public disableFormFields() {
+      this.form.disable();
+    }
+
+    public enableFormFields() {
+      this.form.enable();
+    }
   }
 
   describe('GioFormJsonSchemaModule', () => {
@@ -51,7 +62,7 @@ describe('GioFormJsonSchema', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         declarations: [TestComponent],
-        imports: [NoopAnimationsModule, ReactiveFormsModule, GioFormJsonSchemaModule],
+        imports: [NoopAnimationsModule, ReactiveFormsModule, GioFormJsonSchemaModule, MatIconTestingModule],
       }).overrideProvider(InteractivityChecker, {
         useValue: {
           isFocusable: () => true, // This checks focus trap, set it to true to  avoid the warning
@@ -167,6 +178,40 @@ describe('GioFormJsonSchema', () => {
       expect(banner).toBeDefined();
       expect(banner.textContent).toContain('banner title');
       expect(banner.textContent).toContain('banner text');
+    });
+
+    describe('disable/enable toggle tests', () => {
+      jest.setTimeout(600000);
+
+      it('should disable all form fields in the array', async () => {
+        fixture.componentInstance.jsonSchema = kafkaAdvancedExample;
+        fixture.detectChanges();
+
+        const addButton = await loader.getHarness(MatButtonHarness.with({ selector: '[aria-label="Add"]' }));
+        await addButton.click();
+
+        const input1 = await loader.getHarness(MatInputHarness.with({ selector: '[id*="string_0_0"]' }));
+        expect(await input1.isDisabled()).toEqual(false);
+        await input1.setValue('test-1');
+        expect(await input1.getValue()).toStrictEqual('test-1');
+
+        fixture.componentInstance.disableFormFields();
+        fixture.detectChanges();
+        expect(await input1.isDisabled()).toEqual(true);
+        expect(await addButton.isDisabled()).toEqual(true);
+
+        fixture.componentInstance.enableFormFields();
+        fixture.detectChanges();
+        expect(await input1.isDisabled()).toEqual(false);
+        expect(await addButton.isDisabled()).toEqual(false);
+
+        await addButton.click();
+        const input2 = await loader.getHarness(MatInputHarness.with({ selector: '[id*="string_1_1"]' }));
+        expect(await input2.isDisabled()).toEqual(false);
+        await input2.setValue('test-2');
+        fixture.detectChanges();
+        expect(await input2.getValue()).toStrictEqual('test-2');
+      });
     });
   });
 
