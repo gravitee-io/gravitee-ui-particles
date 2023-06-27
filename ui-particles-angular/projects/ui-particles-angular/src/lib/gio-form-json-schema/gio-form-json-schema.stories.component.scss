@@ -78,15 +78,8 @@
     }
   }
 
-  &__header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-
-    gio-form-slide-toggle {
-      margin: 8px 0;
-    }
+  .mat-slide-toggle {
+    margin-left: 16px;
   }
 }
 

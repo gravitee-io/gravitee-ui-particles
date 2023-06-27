@@ -26,7 +26,6 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import { GioFormSlideToggleModule } from '@gravitee/ui-particles-angular';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { GioMonacoEditorModule } from '../gio-monaco-editor/gio-monaco-editor.module';
@@ -66,7 +65,6 @@ import { codeEditorExample } from './json-schema-example/code-editor';
     MatButtonModule,
     MatButtonToggleModule,
     GioFormJsonSchemaModule,
-    GioFormSlideToggleModule,
     GioMonacoEditorModule.forRoot({ theme: 'vs-dark' }),
   ],
   exports: [DemoComponent, GioFormJsonSchemaModule],
@@ -86,15 +84,14 @@ export default {
       disable: true,
     },
   },
-  render: ({ jsonSchema, initialValue, disabled, withToggle }) => ({
+  render: ({ jsonSchema, initialValue, disabled }) => ({
     template: `<gio-demo 
                     [jsonSchema]="jsonSchema" 
                     [initialValue]="initialValue"
                     [isChromatic]="isChromatic()" 
                     [disabled]="disabled"
-                    [withToggle]="withToggle"
                 ></gio-demo>`,
-    props: { jsonSchema, initialValue, isChromatic, disabled, withToggle },
+    props: { jsonSchema, initialValue, isChromatic, disabled },
   }),
 } as Meta;
 
@@ -213,15 +210,6 @@ export const kafkaAdvanced: Story = {
   name: 'Kafka Advanced',
   args: {
     jsonSchema: kafkaAdvancedExample,
-  },
-};
-
-export const kafkaAdvancedWithDisableToggle: Story = {
-  name: 'Kafka Advanced Disabled With Disable Toggle',
-  args: {
-    jsonSchema: kafkaAdvancedExample,
-    withToggle: true,
-    disabled: true,
   },
 };
 
