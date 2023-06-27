@@ -27,19 +27,7 @@
 
     <mat-card class="json-schema-story__preview" [class.isChromatic]="isChromatic">
       <form *ngIf="form; else loading" (ngSubmit)="onSubmit()" [formGroup]="form" gioFormFocusInvalid>
-        <div class="json-schema-story__header">
-          <mat-card-title>UI Preview</mat-card-title>
-          <gio-form-slide-toggle *ngIf="withToggle">
-            <gio-form-label>Disable form</gio-form-label>
-            <mat-slide-toggle
-              gioFormSlideToggle
-              aria-label="Disable form"
-              (change)="toggleDisabledProperty($event.checked)"
-              [checked]="disabled"
-            ></mat-slide-toggle>
-          </gio-form-slide-toggle>
-        </div>
-
+        <mat-card-title>UI Preview</mat-card-title>
         <mat-card-content>
           <gio-form-json-schema [jsonSchema]="jsonSchema" [options]="options" formControlName="schemaValue"></gio-form-json-schema>
         </mat-card-content>
@@ -47,6 +35,9 @@
         <mat-card-actions align="end">
           <pre>{{ form.status }} | {{ form.dirty ? 'DIRTY' : 'PRISTINE' }} | {{ form.touched ? 'TOUCHED' : 'UNTOUCHED' }}</pre>
 
+          <mat-slide-toggle aria-label="Disable form" (change)="toggleDisabledProperty($event.checked)" [checked]="disabled"
+            >Disable form</mat-slide-toggle
+          >
           <button mat-button type="reset" [disabled]="disabled">Reset</button>
           <button mat-stroked-button type="submit" [disabled]="disabled">Submit</button>
         </mat-card-actions>
