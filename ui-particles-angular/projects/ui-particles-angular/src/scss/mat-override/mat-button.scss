@@ -55,6 +55,20 @@
     }
   }
 
+  .mat-button.mat-icon-button {
+    width: 36px;
+    height: 36px;
+    line-height: 24px;
+
+    .mat-icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 0;
+      line-height: 24px;
+    }
+  }
+
+  .mat-flat-button.mat-icon-button,
   .mat-stroked-button.mat-icon-button {
     width: 36px;
     height: 36px;
