@@ -16,6 +16,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { isEmpty } from 'lodash';
 import { MatDialog } from '@angular/material/dialog';
+import { GIO_DIALOG_WIDTH } from '@gravitee/ui-particles-angular';
 
 import { ApiType, ConnectorInfo, ExecutionPhase, Policy, Step } from '../../models';
 import {
@@ -122,7 +123,7 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
         },
         role: 'alertdialog',
         id: 'gioPolicyStudioPoliciesCatalogDialog',
-        width: '1000px',
+        width: GIO_DIALOG_WIDTH.LARGE,
       })
       .afterClosed()
       .subscribe(stepToAdd => {

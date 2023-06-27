@@ -1,0 +1,30 @@
+import { Meta, Story } from '@storybook/addon-docs';
+
+<Meta title="Components / Dialog / README" />
+
+# Gio Dialog
+
+Use angular material dialog to create a dialog.
+And use this constant 'GIO_DIALOG_WIDTH' to set the dialog width (SMALL | MEDIUM | LARGE)
+
+```typescript
+import { GIO_DIALOG_WIDTH } from '@gravitee/ui-particles-angular';
+
+...
+
+this.matDialog
+  .open<GioPolicyStudioStepEditDialogComponent, GioPolicyStudioStepEditDialogData, GioPolicyStudioStepEditDialogResult>(
+    GioPolicyStudioStepEditDialogComponent,
+    {
+      data: {
+        policy: this.policy,
+        step: this.step,
+      },
+      role: 'alertdialog',
+      id: 'gioPolicyStudioPolicyFormDialog',
+      width: GIO_DIALOG_WIDTH.LARGE,
+    },
+  )
+  .afterClosed()
+  ...
+```

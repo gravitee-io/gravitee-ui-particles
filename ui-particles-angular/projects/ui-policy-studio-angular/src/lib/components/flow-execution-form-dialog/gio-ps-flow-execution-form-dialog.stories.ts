@@ -19,6 +19,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { Component, Input } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { action } from '@storybook/addon-actions';
+import { GIO_DIALOG_WIDTH } from '@gravitee/ui-particles-angular';
 
 import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
 import { FlowExecution } from '../../models';
@@ -56,6 +57,7 @@ class GioPolicyStudioFlowExecutionFormDialogStoryComponent {
           },
           role: 'alertdialog',
           id: 'gioPsFlowExecutionFormDialog',
+          width: GIO_DIALOG_WIDTH.MEDIUM,
         },
       )
       .afterClosed()

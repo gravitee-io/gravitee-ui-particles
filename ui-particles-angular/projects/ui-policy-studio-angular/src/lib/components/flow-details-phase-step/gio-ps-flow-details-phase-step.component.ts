@@ -15,6 +15,7 @@
  */
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { GIO_DIALOG_WIDTH } from '@gravitee/ui-particles-angular';
 
 import { Policy, Step } from '../../models';
 import {
@@ -67,7 +68,7 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
           },
           role: 'alertdialog',
           id: 'gioPolicyStudioPolicyFormDialog',
-          width: '1000px',
+          width: GIO_DIALOG_WIDTH.LARGE,
         },
       )
       .afterClosed()

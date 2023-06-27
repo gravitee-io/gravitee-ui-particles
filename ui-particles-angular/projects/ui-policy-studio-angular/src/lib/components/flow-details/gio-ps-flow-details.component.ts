@@ -17,6 +17,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import { MatDialog } from '@angular/material/dialog';
 import { tap } from 'rxjs/operators';
 import { isEmpty } from 'lodash';
+import { GIO_DIALOG_WIDTH } from '@gravitee/ui-particles-angular';
 
 import { FlowVM } from '../../gio-policy-studio.model';
 import {
@@ -98,6 +99,7 @@ export class GioPolicyStudioDetailsComponent implements OnChanges {
               },
               role: 'alertdialog',
               id: 'gioPsFlowMessageFormDialog',
+              width: GIO_DIALOG_WIDTH.MEDIUM,
             })
             .afterClosed()
         : this.matDialog
@@ -109,6 +111,7 @@ export class GioPolicyStudioDetailsComponent implements OnChanges {
                 },
                 role: 'alertdialog',
                 id: 'gioPsFlowProxyFormDialog',
+                width: GIO_DIALOG_WIDTH.MEDIUM,
               },
             )
             .afterClosed();
