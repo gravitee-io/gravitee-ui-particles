@@ -36,7 +36,7 @@ $typography: map.get(gio.$mat-theme, typography);
   gap: 8px;
 
   &__name {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     @include mat.typography-level($typography, body-2);
   }
 

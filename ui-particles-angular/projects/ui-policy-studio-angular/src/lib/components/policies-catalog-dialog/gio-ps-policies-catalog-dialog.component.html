@@ -81,12 +81,12 @@
 </mat-dialog-content>
 
 <mat-dialog-actions class="actions">
-  <button class="actions__cancelBtn" mat-flat-button [mat-dialog-close]="">Cancel</button>
+  <button class="actions__cancelBtn" mat-button [mat-dialog-close]="">Cancel</button>
   <button
     *ngIf="selectedPolicy"
     class="actions__addBtn"
     color="primary"
-    mat-stroked-button
+    mat-flat-button
     role="dialog"
     [disabled]="!isValid"
     (click)="onAddPolicy()"
