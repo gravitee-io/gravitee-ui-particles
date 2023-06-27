@@ -23,8 +23,12 @@ $typography: map.get(gio.$mat-theme, typography);
   display: flex;
   align-items: center;
   padding: 8px;
-  border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
+  border: 1px solid mat.get-color-from-palette(gio.$mat-accent-palette, darker20);
   border-radius: 8px;
+
+  :host-context(.disabled) {
+    border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
+  }
 }
 
 .info {

@@ -34,7 +34,7 @@ $typography: map.get(gio.$mat-theme, typography);
 
   &__list {
     --grid-layout-gap: 16px;
-    --grid-column-count: 4;
+    --grid-column-count: 3;
     --grid-item-min-width: 200px;
     --gap-count: calc(var(--grid-column-count) - 1);
     --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
