@@ -1,3 +1,10 @@
+## [7.22.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.22.0...v7.22.1) (2023-06-27)
+
+
+### Bug Fixes
+
+* disable buttons in json schema components ([d363e78](https://github.com/gravitee-io/gravitee-ui-particles/commit/d363e7866fbf557dce687957bfb75f79350263f4))
+
 # [7.22.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.21.1...v7.22.0) (2023-06-27)
 
 
