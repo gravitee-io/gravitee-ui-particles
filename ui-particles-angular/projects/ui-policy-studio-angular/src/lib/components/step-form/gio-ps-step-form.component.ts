@@ -15,8 +15,10 @@
  */
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
+import { GioFormJsonSchemaComponent, GioJsonSchema } from '@gravitee/ui-particles-angular';
+import { isEmpty } from 'lodash';
 
 import { GioPolicyStudioService } from '../../gio-policy-studio.service';
 import { Policy, Step } from '../../models';
@@ -39,7 +41,7 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
   @Output()
   public isValid = new EventEmitter<boolean>();
 
-  public policySchema$?: Observable<unknown>;
+  public policySchema$?: Observable<GioJsonSchema | null | undefined>;
   public policyDocumentation$?: Observable<string>;
 
   public stepForm?: FormGroup;
@@ -49,8 +51,18 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.policy) {
-      this.policySchema$ = this.policyStudioService.getPolicySchema(this.policy);
-      this.policyDocumentation$ = this.policyStudioService.getPolicyDocumentation(this.policy);
+      this.policySchema$ = this.policyStudioService.getPolicySchema(this.policy).pipe(
+        map(schema => {
+          if (GioFormJsonSchemaComponent.isDisplayable(schema as GioJsonSchema)) {
+            return schema as GioJsonSchema;
+          }
+          return {};
+        }),
+      );
+
+      this.policyDocumentation$ = this.policyStudioService
+        .getPolicyDocumentation(this.policy)
+        .pipe(map(doc => (isEmpty(doc) ? 'No documentation available.' : doc)));
     }
   }
 

@@ -28,6 +28,7 @@ const POLICIES_SCHEMA: Record<string, unknown> = {
     },
     required: ['test'],
   },
+  'test-policy-empty': {},
   'json-xml': {
     type: 'object',
     id: 'urn:jsonschema:io:gravitee:policy:json2xml:configuration:JsonToXMLTransformationPolicyConfiguration',

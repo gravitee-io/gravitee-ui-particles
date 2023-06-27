@@ -124,7 +124,8 @@ export function fakeAllPolicies(): Policy[] {
   return [
     fakeTestPolicy(),
     fakeTestPolicy({
-      name: 'Test policy - Witout icon',
+      id: 'test-policy-empty',
+      name: 'Test policy - Witout icon, configuration and documentation',
       icon: undefined,
     }),
     fakeTestPolicy({
