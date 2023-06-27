@@ -73,7 +73,7 @@ export const ReactiveForm: Story = {
     });
 
     return {
-      template: `<gio-form-headers [formControl]="headersControl"></gio-form-headers>`,
+      template: `<gio-form-headers [formControl]="headersControl"></gio-form-headers> <br>Status :{{ headersControl.status }} | Touched :{{ headersControl.touched }}`,
       props: {
         headersControl,
       },

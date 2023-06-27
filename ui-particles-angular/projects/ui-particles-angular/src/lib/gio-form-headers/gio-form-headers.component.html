@@ -39,6 +39,9 @@
             [matAutocomplete]="headerNamesAutocomplete"
           ></textarea>
         </mat-form-field>
+        <mat-error *ngIf="control.get('key')?.hasError('pattern')">
+          Header name must not contain spaces. (RegExp: {{ control.get('key')?.getError('pattern')?.requiredPattern }})
+        </mat-error>
         <mat-autocomplete #headerNamesAutocomplete="matAutocomplete">
           <mat-option *ngFor="let headerName of getFilteredHeaderNames(headerIndex, control.value) | async" [value]="headerName">{{
             headerName

@@ -248,4 +248,20 @@ describe('GioFormHeadersModule', () => {
 
     expect(testComponent.headersControl.value).toEqual([{ name: 'host', value: 'api.gravitee.io' }]);
   });
+
+  it('should invalid header with space', async () => {
+    const formHeaders = await loader.getHarness(GioFormHeadersHarness);
+
+    expect((await formHeaders.getHeaderRows()).length).toEqual(1);
+
+    // Try to add header on last header row
+    const emptyLastHeaderRow = await formHeaders.getLastHeaderRow();
+    await emptyLastHeaderRow.keyInput.setValue('my host');
+
+    expect(testComponent.headersControl.invalid).toEqual(true);
+
+    await emptyLastHeaderRow.keyInput.setValue('my-host');
+
+    expect(testComponent.headersControl.invalid).toEqual(false);
+  });
 });
