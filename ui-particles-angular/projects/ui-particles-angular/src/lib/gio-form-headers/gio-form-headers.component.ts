@@ -16,7 +16,18 @@
 
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { Component, ElementRef, forwardRef, HostBinding, Input, OnInit } from '@angular/core';
-import { ControlValueAccessor, FormArray, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  FormArray,
+  FormControl,
+  FormGroup,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  Validator,
+  Validators,
+} from '@angular/forms';
 import { dropRight, isEmpty } from 'lodash';
 import { map, startWith, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
@@ -109,9 +120,14 @@ const HEADER_NAMES = [
       useExisting: forwardRef(() => GioFormHeadersComponent),
       multi: true,
     },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => GioFormHeadersComponent),
+      multi: true,
+    },
   ],
 })
-export class GioFormHeadersComponent implements OnInit, ControlValueAccessor {
+export class GioFormHeadersComponent implements OnInit, ControlValueAccessor, Validator {
   @Input()
   public adaptOutputFn?: FormHeaderAdaptOutputFn<unknown>;
 
@@ -233,8 +249,16 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor {
     return of(HEADER_NAMES);
   }
 
+  // From Validator interface
+  public validate(_control: AbstractControl): ValidationErrors | null {
+    if (this.headersFormArray.invalid) {
+      return { invalid: true };
+    }
+    return null;
+  }
+
   private initKeyFormControl(key: string, headerIndex: number) {
-    const control = new FormControl({ value: key, disabled: this.disabled });
+    const control = new FormControl({ value: key, disabled: this.disabled }, Validators.pattern('^\\S*$'));
     const filteredKeys = control.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value)),
