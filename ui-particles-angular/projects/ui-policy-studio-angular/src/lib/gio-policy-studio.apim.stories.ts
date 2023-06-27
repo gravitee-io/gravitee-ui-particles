@@ -18,6 +18,7 @@ import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { action } from '@storybook/addon-actions';
 import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 import { matIconRegisterProvider } from '../storybook-utils/mat-icon-register.provider';
 
@@ -75,8 +76,8 @@ export default {
       ...props,
       policies: fakeAllPolicies(),
       // Simulate a get policy schema http fetcher.
-      policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)),
-      policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)),
+      policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)).pipe(delay(600)),
+      policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)).pipe(delay(600)),
       onSave: (event: SaveOutput) => {
         console.info('saveOutput', event);
         action('saveOutput')(event);

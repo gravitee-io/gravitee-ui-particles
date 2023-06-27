@@ -20,8 +20,8 @@
   <div class="settings__header">Settings</div>
 
   <div class="settings__content">
-    <ng-container *ngIf="policySchema$ | async as policySchema; else loadingTmpl">
-      <ng-container *ngIf="stepForm" [formGroup]="stepForm">
+    <ng-container *ngIf="stepForm && policySchema$ | async as policySchema; else loadingTmpl">
+      <ng-container [formGroup]="stepForm">
         <mat-form-field>
           <mat-label>Description</mat-label>
           <textarea matInput formControlName="description" cdkFocusInitial></textarea>
@@ -34,7 +34,7 @@
           <mat-hint>The condition to execute this policy. Supports Expression Language.</mat-hint>
         </mat-form-field>
 
-        <gio-form-json-schema [jsonSchema]="$any(policySchema)" formControlName="configuration"></gio-form-json-schema>
+        <gio-form-json-schema *ngIf="policySchema" [jsonSchema]="$any(policySchema)" formControlName="configuration"></gio-form-json-schema>
       </ng-container>
     </ng-container>
   </div>
