@@ -20,6 +20,7 @@ import { Component, Input } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { action } from '@storybook/addon-actions';
 import { of } from 'rxjs';
+import { GIO_DIALOG_WIDTH } from '@gravitee/ui-particles-angular';
 
 import { POLICIES_V4_UNREGISTERED_ICON, fakeTestPolicyStep, fakeTestPolicy } from '../../models/index-testing';
 import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
@@ -59,7 +60,7 @@ class GioPolicyStudioStepEditDialogStoryComponent {
           data: this.dialogData,
           role: 'alertdialog',
           id: 'gioPsPolicyFormDialog',
-          width: '1000px',
+          width: GIO_DIALOG_WIDTH.LARGE,
         },
       )
       .afterClosed()

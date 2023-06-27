@@ -77,3 +77,5 @@ export * from './gio-loader/gio-loader.module';
 export * from './gio-loader/gio-loader.component';
 
 export * from './gio-prismjs/gio-prismjs.service';
+
+export * from './gio-dialog/gio-dialog.constant';
