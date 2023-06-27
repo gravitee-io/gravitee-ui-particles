@@ -1,3 +1,10 @@
+# [7.22.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.21.1...v7.22.0) (2023-06-27)
+
+
+### Features
+
+* add mat-icon-right class for right icon in btn ([3538d39](https://github.com/gravitee-io/gravitee-ui-particles/commit/3538d39c50a16e5d8d7cca26bdfb8891f51d7ede))
+
 ## [7.21.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.21.0...v7.21.1) (2023-06-26)
 
 
