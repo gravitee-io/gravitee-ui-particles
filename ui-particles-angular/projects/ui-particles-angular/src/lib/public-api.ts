@@ -79,3 +79,7 @@ export * from './gio-loader/gio-loader.component';
 export * from './gio-prismjs/gio-prismjs.service';
 
 export * from './gio-dialog/gio-dialog.constant';
+
+export * from './gio-clipboard/gio-clipboard.module';
+export * from './gio-clipboard/gio-clipboard-copy-icon.component';
+export * from './gio-clipboard/gio-clipboard-copy-wrapper.component';
