@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { AfterViewChecked, ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FieldArrayType } from '@ngx-formly/core';
-import { Subject } from 'rxjs';
-import { FormlyValueChangeEvent } from '@ngx-formly/core/lib/models';
 
 @Component({
   selector: 'gio-fjs-array-type',
@@ -40,7 +38,7 @@ import { FormlyValueChangeEvent } from '@ngx-formly/core/lib/models';
 
       <div [hidden]="collapse" class="wrapper__rows" [class.collapse-open]="collapse" [class.collapse-close]="!collapse">
         <div *ngFor="let field of field.fieldGroup; let i = index" class="wrapper__rows__row">
-          <formly-field class="wrapper__rows__row__field" [field]="field" (focusin)="onFocusIn()"></formly-field>
+          <formly-field class="wrapper__rows__row__field" [field]="field"></formly-field>
           <div class="wrapper__rows__row__remove">
             <button type="button" mat-icon-button aria-label="Remove" [disabled]="this.form?.disabled ?? false" (click)="remove(i)">
               <mat-icon svgIcon="gio:cancel"></mat-icon>
@@ -58,41 +56,6 @@ import { FormlyValueChangeEvent } from '@ngx-formly/core/lib/models';
   `,
   styleUrls: ['./array-type.component.scss'],
 })
-export class GioFjsArrayTypeComponent extends FieldArrayType implements AfterViewChecked {
+export class GioFjsArrayTypeComponent extends FieldArrayType {
   public collapse = false;
-
-  constructor(private readonly cdr: ChangeDetectorRef) {
-    super();
-  }
-
-  /**
-   * This method is here to ensure that all fields of the array are disabled or enabled when the form is disabled or enabled.
-   */
-  public ngAfterViewChecked(): void {
-    this.field.props.disabled = this.form.disabled;
-    this.field.fieldGroup?.forEach(f => {
-      if (f && f.props) f.props.disabled = this.form.disabled;
-    });
-    this.cdr.detectChanges();
-  }
-
-  /**
-   * This method fix an issue with the fieldChanges Subject which can be undefined when we enable or disable the form.
-   */
-  public onFocusIn() {
-    if (this.field && this.field.options && this.field.options.fieldChanges === undefined) {
-      this.field.options.fieldChanges = new Subject<FormlyValueChangeEvent>();
-    }
-  }
-
-  /**
-   * This method fix an issue with the fieldChanges Subject which can be undefined when we enable or disable the form
-   * and then try to add a new field.
-   */
-  public add() {
-    if (this.field && this.field.options && this.field.options.fieldChanges === undefined) {
-      this.field.options.fieldChanges = new Subject<FormlyValueChangeEvent>();
-    }
-    super.add();
-  }
 }
