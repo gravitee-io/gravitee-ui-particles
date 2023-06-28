@@ -1,3 +1,10 @@
+## [7.23.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.23.0...v7.23.1) (2023-06-28)
+
+
+### Bug Fixes
+
+* improved a few things to have better UX ([34d2c5d](https://github.com/gravitee-io/gravitee-ui-particles/commit/34d2c5d8c15e6c809113f89acc7de14cf2796a33))
+
 # [7.23.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.22.2...v7.23.0) (2023-06-28)
 
 
