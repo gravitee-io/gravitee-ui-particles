@@ -1,3 +1,10 @@
+## [7.22.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.22.1...v7.22.2) (2023-06-28)
+
+
+### Bug Fixes
+
+* check disabled state of array fields after adding en entry ([5e37fef](https://github.com/gravitee-io/gravitee-ui-particles/commit/5e37fef02f3059cdd3910ee60cdded080ad2dfdb))
+
 ## [7.22.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.22.0...v7.22.1) (2023-06-27)
 
 
