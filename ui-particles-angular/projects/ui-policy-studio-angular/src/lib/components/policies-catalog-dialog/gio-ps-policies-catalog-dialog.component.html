@@ -80,7 +80,7 @@
   <gio-ps-step-form [policy]="selectedPolicy" (stepChange)="onStepChange($event)" (isValid)="onIsValid($event)"></gio-ps-step-form>
 </mat-dialog-content>
 
-<mat-dialog-actions class="actions">
+<mat-dialog-actions class="actions" align="end">
   <button class="actions__cancelBtn" mat-button [mat-dialog-close]="">Cancel</button>
   <button
     *ngIf="selectedPolicy"
