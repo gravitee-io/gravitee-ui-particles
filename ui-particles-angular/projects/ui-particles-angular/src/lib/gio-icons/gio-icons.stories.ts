@@ -23,6 +23,7 @@ import { Story } from '@storybook/angular/types-7-0';
 import { MatButtonModule } from '@angular/material/button';
 
 import { GioBannerModule } from '../gio-banner/gio-banner.module';
+import { GioClipboardModule } from '../gio-clipboard/gio-clipboard.module';
 
 import { GioIconsModule } from './gio-icons.module';
 import { SbGetIconsListPipe } from './sb-get-icons-list.pipe';
@@ -40,6 +41,7 @@ export default {
         MatFormFieldModule,
         MatInputModule,
         GioBannerModule,
+        GioClipboardModule,
       ],
       declarations: [SbGetIconsListPipe],
     }),
@@ -61,8 +63,8 @@ export const All: Story = {
     </mat-form-field>
 
     <gio-banner-info *ngIf="selectedIconId" class="sb-demo">
-      <span>gio:{{ selectedIconId }}</span>
-      <span gioBannerBody><code>{{ '&lt;mat-icon svgIcon="gio:' + selectedIconId + '"&gt;&lt;/mat-icon&gt;' }}</code></span>
+      <span gioClipboardCopyWrapper [contentToCopy]="'gio:' + selectedIconId">gio:{{ selectedIconId }}</span>
+      <span gioBannerBody><code gioClipboardCopyWrapper [contentToCopy]="'&lt;mat-icon svgIcon=&quot;gio:' + selectedIconId + '&quot;&gt;&lt;/mat-icon&gt;'">{{ '&lt;mat-icon svgIcon="gio:' + selectedIconId + '"&gt;&lt;/mat-icon&gt;' }}</code></span>
       
     </gio-banner-info>
      
