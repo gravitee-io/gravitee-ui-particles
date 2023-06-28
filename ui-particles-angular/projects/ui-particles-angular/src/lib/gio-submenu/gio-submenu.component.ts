@@ -25,7 +25,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { of, Subject } from 'rxjs';
-import { delay, filter, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { delay, filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { GioMenuService, OverlayOptions } from '../gio-menu/gio-menu.service';
 
@@ -56,43 +56,45 @@ export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
   constructor(private readonly gioMenuService: GioMenuService, private readonly changeDetectorRef: ChangeDetectorRef) {}
 
   public ngAfterViewInit(): void {
-    this.gioMenuService.reduce
-      .pipe(
-        filter(reduced => reduced),
-        tap(() => {
-          this.reduced = true;
-          this.loaded = true;
-        }),
-        switchMap(() => this.gioMenuService.overlayObservable),
-        tap(overlayOptions => {
-          this.overlayOptions = overlayOptions;
-          if (overlayOptions.open) {
-            const top = overlayOptions.top || 0;
-            this.gioSubmenu.nativeElement.style.top = `${top}px`;
-            this.gioSubmenu.nativeElement.style.height = 'auto';
-            this.gioSubmenu.nativeElement.style.maxHeight = `calc(100vh - ${top + 8}px)`;
-          }
-        }),
-        filter(overlayOptions => !!overlayOptions.focus),
-        delay(200),
-        switchMap(() => of(this.gioSubmenu.nativeElement.querySelectorAll<HTMLElement>('gio-submenu-item'))),
-        filter(submenuItems => submenuItems.length > 0),
-        tap(submenuItems => submenuItems[0].focus()),
-        takeUntil(this.unsubscribe$),
-      )
-      .subscribe(() => {
-        this.changeDetectorRef.detectChanges();
-      });
+    // When the menu is reduced
+    const reduced$ = of({}).pipe(
+      tap(() => {
+        this.reduced = true;
+        this.loaded = true;
+        this.gioSubmenu.nativeElement.style.height = 'auto';
+      }),
+      // On hover root menu item, open the submenu with top position
+      switchMap(() => this.gioMenuService.overlayObservable),
+      tap(overlayOptions => {
+        this.overlayOptions = overlayOptions;
+        if (overlayOptions.open) {
+          const top = overlayOptions.top || 0;
+          this.gioSubmenu.nativeElement.style.top = `${top}px`;
+          this.gioSubmenu.nativeElement.style.maxHeight = `calc(100vh - ${top + 8}px)`;
+        }
+      }),
+      filter(overlayOptions => !!overlayOptions.focus),
+      // Focus the first submenu item
+      delay(200),
+      map(() => this.gioSubmenu.nativeElement.querySelectorAll<HTMLElement>('gio-submenu-item')),
+      filter(submenuItems => submenuItems.length > 0),
+      tap(submenuItems => submenuItems[0].focus()),
+    );
 
-    this.gioMenuService.reduce
+    // When the menu is not reduced
+    const notReduced$ = of({}).pipe(
+      tap(() => {
+        this.reduced = false;
+        this.loaded = true;
+        this.gioSubmenu.nativeElement.style.height = '100%';
+        this.gioSubmenu.nativeElement.style.maxHeight = 'unset';
+        this.gioSubmenu.nativeElement.style.top = 'unset';
+      }),
+    );
+
+    this.gioMenuService.reduced$
       .pipe(
-        filter(reduced => !reduced),
-        tap(() => {
-          this.reduced = false;
-          this.loaded = true;
-          this.gioSubmenu.nativeElement.style.height = '100%';
-          this.gioSubmenu.nativeElement.style.maxHeight = 'none';
-        }),
+        switchMap(reduced => (reduced ? reduced$ : notReduced$)),
         takeUntil(this.unsubscribe$),
       )
       .subscribe(() => {

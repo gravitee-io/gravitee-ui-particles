@@ -15,19 +15,21 @@
     limitations under the License.
 
 -->
-<div class="gio-menu" [class.gio-menu__reduced]="reduced" (mouseleave)="onMouseLeave()">
-  <ng-content select="gio-menu-header"></ng-content>
-  <ng-content select="gio-menu-list"></ng-content>
-  <ng-content select="gio-menu-footer"></ng-content>
-  <gio-menu-footer>
-    <gio-menu-item
-      tabIndex="1"
-      type="button"
-      class="gio-menu-footer__collapse"
-      [icon]="getCollapseButtonIcon()"
-      (click)="reduceMenu()"
-      [outlined]="true"
-      >Collapse menu</gio-menu-item
-    >
-  </gio-menu-footer>
-</div>
+<ng-container *ngIf="{ reduced: reduce$ | async } as context">
+  <div class="gio-menu" [class.gio-menu__reduced]="context.reduced" (mouseleave)="onMouseLeave(context.reduced)">
+    <ng-content select="gio-menu-header"></ng-content>
+    <ng-content select="gio-menu-list"></ng-content>
+    <ng-content select="gio-menu-footer"></ng-content>
+    <gio-menu-footer>
+      <gio-menu-item
+        tabIndex="1"
+        type="button"
+        class="gio-menu-footer__collapse"
+        [icon]="context.reduced ? 'gio:expande' : 'gio:collapse'"
+        (click)="reduceMenu(context.reduced)"
+        [outlined]="true"
+        >Collapse menu</gio-menu-item
+      >
+    </gio-menu-footer>
+  </div>
+</ng-container>
