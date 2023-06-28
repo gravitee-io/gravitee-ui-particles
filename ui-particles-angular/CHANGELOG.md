@@ -1,3 +1,20 @@
+# [7.23.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.22.2...v7.23.0) (2023-06-28)
+
+
+### Bug Fixes
+
+* fix some observable errors on menu reduce ([88e411f](https://github.com/gravitee-io/gravitee-ui-particles/commit/88e411fc474861823d9380ba186ad8d49bfe8c4d))
+* handle empty json-schema and documentation ([5bfa77f](https://github.com/gravitee-io/gravitee-ui-particles/commit/5bfa77f222a34d8000a556013a59ef611f7a3ce5))
+
+
+### Features
+
+* add constant to improve dialog width ([a802f25](https://github.com/gravitee-io/gravitee-ui-particles/commit/a802f25b08c64901d1fc5545baff6bb05dabf470))
+* add validator on header key ([8b9edd5](https://github.com/gravitee-io/gravitee-ui-particles/commit/8b9edd5cd04d257961cfd1b9bd27141281198448))
+* feedback from UI/UX team ([60584c6](https://github.com/gravitee-io/gravitee-ui-particles/commit/60584c6b39b41a113ec9eeff38051c58d6e5ba7b))
+* improve button with icon only ([b2371a6](https://github.com/gravitee-io/gravitee-ui-particles/commit/b2371a6dfbc558bf94790c0f2c034ae93dab2eb0))
+* move dialog buttons to the left to keep the console unified ([10aacc0](https://github.com/gravitee-io/gravitee-ui-particles/commit/10aacc0f539c0e81409590ea68dcba04a447902c))
+
 ## [7.22.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.22.1...v7.22.2) (2023-06-28)
 
 
