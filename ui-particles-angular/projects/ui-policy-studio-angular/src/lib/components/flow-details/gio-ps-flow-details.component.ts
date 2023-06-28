@@ -66,7 +66,7 @@ export class GioPolicyStudioDetailsComponent implements OnChanges {
   constructor(private readonly matDialog: MatDialog) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.entrypointsInfo) {
+    if (changes.entrypointsInfo || changes.flow) {
       const channelSelector = this.flow?.selectors?.find(s => s.type === 'CHANNEL') as ChannelSelector;
 
       if (!channelSelector) {

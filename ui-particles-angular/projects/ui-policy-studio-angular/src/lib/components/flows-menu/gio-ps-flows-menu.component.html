@@ -63,7 +63,12 @@
           }}</span>
         </div>
         <div class="list__flowsGroup__flow__infos__pathOrChannelLabel">
-          <span [attr.title]="flow.pathOrChannelLabel">{{ flow.pathOrChannelLabel }}</span>
+          <span *ngIf="flow.pathOrChannelLabel; else emptyPathOrChannelLabel" [attr.title]="flow.pathOrChannelLabel">{{
+            flow.pathOrChannelLabel
+          }}</span>
+          <ng-template #emptyPathOrChannelLabel>
+            <em>Empty</em>
+          </ng-template>
         </div>
 
         <span *ngIf="flow.hasCondition" class="list__flowsGroup__flow__infos__conditionBadge gio-badge-neutral" matTooltip="Conditioned"
