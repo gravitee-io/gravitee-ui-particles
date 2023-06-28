@@ -2,7 +2,7 @@ import { InteractivityChecker } from '@angular/cdk/a11y';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,7 +12,6 @@ import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { GioJsonSchema } from './model/GioJsonSchema';
 import { GioFormJsonSchemaModule } from './gio-form-json-schema.module';
 import { GioFormJsonSchemaComponent } from './gio-form-json-schema.component';
-import { kafkaAdvancedExample } from './json-schema-example/kafka-advanced';
 
 /*
  * Copyright (C) 2015 The Gravitee team (http://gravitee.io)
@@ -33,7 +32,7 @@ describe('GioFormJsonSchema', () => {
   @Component({
     template: `
       <form [formGroup]="form">
-        <gio-form-json-schema formControlName="config" [jsonSchema]="jsonSchema"></gio-form-json-schema>
+        <gio-form-json-schema *ngIf="jsonSchema" formControlName="config" [jsonSchema]="jsonSchema"></gio-form-json-schema>
         <button type="submit">Submit</button>
       </form>
     `,
@@ -43,7 +42,7 @@ describe('GioFormJsonSchema', () => {
     public form = new FormGroup({
       config: new FormControl(),
     });
-    public jsonSchema: GioJsonSchema = {};
+    public jsonSchema?: GioJsonSchema;
 
     public disableFormFields() {
       this.form.disable();
@@ -181,11 +180,23 @@ describe('GioFormJsonSchema', () => {
     });
 
     describe('disable/enable toggle tests', () => {
-      jest.setTimeout(600000);
-
-      it('should disable all form fields in the array', async () => {
-        fixture.componentInstance.jsonSchema = kafkaAdvancedExample;
-        fixture.detectChanges();
+      it('should disable all form fields in the array', fakeAsync(async () => {
+        fixture.componentInstance.jsonSchema = {
+          type: 'object',
+          additionalProperties: false,
+          properties: {
+            arrayOfString: {
+              type: 'array',
+              title: 'Array',
+              description: 'Array description. With min and max items',
+              items: {
+                type: 'string',
+              },
+              minItems: 1,
+            },
+          },
+        };
+        tick(100);
 
         const addButton = await loader.getHarness(MatButtonHarness.with({ selector: '[aria-label="Add"]' }));
         await addButton.click();
@@ -193,25 +204,28 @@ describe('GioFormJsonSchema', () => {
         const input1 = await loader.getHarness(MatInputHarness.with({ selector: '[id*="string_0_0"]' }));
         expect(await input1.isDisabled()).toEqual(false);
         await input1.setValue('test-1');
+        tick(100);
         expect(await input1.getValue()).toStrictEqual('test-1');
 
         fixture.componentInstance.disableFormFields();
-        fixture.detectChanges();
+
         expect(await input1.isDisabled()).toEqual(true);
         expect(await addButton.isDisabled()).toEqual(true);
 
         fixture.componentInstance.enableFormFields();
-        fixture.detectChanges();
+
         expect(await input1.isDisabled()).toEqual(false);
         expect(await addButton.isDisabled()).toEqual(false);
 
         await addButton.click();
+        tick(100);
         const input2 = await loader.getHarness(MatInputHarness.with({ selector: '[id*="string_1_1"]' }));
         expect(await input2.isDisabled()).toEqual(false);
+
         await input2.setValue('test-2');
-        fixture.detectChanges();
+        tick(100);
         expect(await input2.getValue()).toStrictEqual('test-2');
-      });
+      }));
     });
   });
 

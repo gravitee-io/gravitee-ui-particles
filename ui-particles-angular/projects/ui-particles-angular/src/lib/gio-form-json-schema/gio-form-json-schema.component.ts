@@ -210,15 +210,12 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
 
     this.isDisabled = isDisabled;
 
-    this.options = {
-      ...this.options,
-      formState: {
-        ...this.options.formState,
-        disabled: isDisabled,
-      },
-    };
-
-    isDisabled ? this.formGroup.disable() : this.formGroup.enable();
+    setTimeout(() => {
+      isDisabled ? this.formGroup.disable({ emitEvent: false }) : this.formGroup.enable({ emitEvent: false });
+      this.changeDetectorRef.markForCheck();
+      this.changeDetectorRef.detectChanges();
+      this.stateChanges$.next();
+    }, 0);
 
     this.stateChanges$.next();
   }
