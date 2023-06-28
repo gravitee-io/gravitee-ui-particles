@@ -16,7 +16,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { tap } from 'rxjs/operators';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, isEmpty } from 'lodash';
 import { GIO_DIALOG_WIDTH } from '@gravitee/ui-particles-angular';
 
 import {
@@ -104,7 +104,12 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
                 PUBLISH: 'PUB',
                 SUBSCRIBE: 'SUB',
               };
-              const operationBadges = (channelSelector.operations ?? [])
+              // If no operations are selected, all operations are valid
+              const operationBadges = (
+                !channelSelector.operations || isEmpty(channelSelector.operations)
+                  ? (['PUBLISH', 'SUBSCRIBE'] as const)
+                  : channelSelector.operations
+              )
                 .map(operation => ({
                   label: operationToBadge[operation],
                   class: 'gio-badge-neutral',
