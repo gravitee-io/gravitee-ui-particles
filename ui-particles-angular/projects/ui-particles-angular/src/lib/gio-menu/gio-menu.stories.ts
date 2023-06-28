@@ -58,7 +58,7 @@ export const Default: Story = {
   render: () => ({
     template: `
         <div id="sidenav">
-          <gio-menu>
+          <gio-menu reduced="false">
             ${gioMenuContent}
           </gio-menu>
           <h1>Selected env: {{ selectedItemValue }}</h1>
@@ -126,7 +126,7 @@ export const WithOneItemInSelector: Story = {
   render: () => ({
     template: `
         <div id="sidenav">
-          <gio-menu>
+          <gio-menu reduced="false">
             ${gioMenuContent}
           </gio-menu>
           <h1>Selected env: {{ selectedItemValue }}</h1>

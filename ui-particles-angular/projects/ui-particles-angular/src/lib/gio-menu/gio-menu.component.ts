@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
 
 import { GioMenuService } from './gio-menu.service';
 
@@ -23,26 +23,26 @@ import { GioMenuService } from './gio-menu.service';
   styleUrls: ['./gio-menu.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class GioMenuComponent implements OnInit {
-  @Input() public reduced = false;
+export class GioMenuComponent implements OnChanges {
+  @Input()
+  public reduced = false;
+
+  public reduce$ = this.gioMenuService.reduced$;
 
   constructor(private readonly gioMenuService: GioMenuService) {}
 
-  public ngOnInit(): void {
-    this.gioMenuService.reduced(this.reduced);
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.reduced) {
+      this.gioMenuService.reduce(this.reduced);
+    }
   }
 
-  public reduceMenu(): void {
-    this.reduced = !this.reduced;
-    this.gioMenuService.reduced(this.reduced);
+  public reduceMenu(reduced: boolean | null): void {
+    this.gioMenuService.reduce(!reduced);
   }
 
-  public getCollapseButtonIcon(): string {
-    return this.reduced ? 'gio:expande' : 'gio:collapse';
-  }
-
-  public onMouseLeave(): void {
-    if (this.reduced) {
+  public onMouseLeave(reduced: boolean | null): void {
+    if (reduced) {
       this.gioMenuService.overlay({ open: false });
     }
   }

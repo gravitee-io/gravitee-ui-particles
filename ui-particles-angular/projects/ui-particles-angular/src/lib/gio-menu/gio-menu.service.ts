@@ -24,21 +24,29 @@ export interface OverlayOptions {
   focus?: boolean;
 }
 
+// Keep the reduce state in local storage
+const REDUCE_STATE_KEY = 'gio-reduce-state';
+const getDefaultReduceState = () => (localStorage?.getItem(REDUCE_STATE_KEY) === 'true' ? true : false);
+
 @Injectable({ providedIn: 'root' })
 export class GioMenuService {
-  private reduceSource = new BehaviorSubject<boolean>(false);
-  private overlaySource = new BehaviorSubject<OverlayOptions>({ open: false });
-  public reduce = this.reduceSource.asObservable();
-  public overlayObservable = this.overlaySource.asObservable().pipe(
+  private reducedSubject = new BehaviorSubject<boolean>(getDefaultReduceState());
+
+  private overlaySubject = new BehaviorSubject<OverlayOptions>({ open: false });
+
+  public reduced$ = this.reducedSubject.asObservable();
+
+  public overlayObservable = this.overlaySubject.asObservable().pipe(
     distinctUntilChanged((prev, curr) => prev.open === curr.open),
     debounce(overlayOptions => timer(overlayOptions.open ? 150 : 500)),
   );
 
-  public reduced(reduced: boolean): void {
-    this.reduceSource.next(reduced);
+  public reduce(reduced: boolean): void {
+    this.reducedSubject.next(reduced);
+    localStorage?.setItem(REDUCE_STATE_KEY, reduced.toString());
   }
 
   public overlay(overlayOptions: OverlayOptions): void {
-    this.overlaySource.next(overlayOptions);
+    this.overlaySubject.next(overlayOptions);
   }
 }
