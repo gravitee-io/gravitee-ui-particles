@@ -73,7 +73,7 @@
   </div>
 </mat-dialog-content>
 
-<mat-dialog-actions class="actions">
+<mat-dialog-actions class="actions" align="end">
   <button class="actions__cancelBtn" mat-button [mat-dialog-close]="false">Cancel</button>
   <button class="actions__saveBtn" color="primary" mat-flat-button role="dialog" (click)="onSubmit()">
     {{ mode === 'create' ? 'Create' : 'Save' }}
