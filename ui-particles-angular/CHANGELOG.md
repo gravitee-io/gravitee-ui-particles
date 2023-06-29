@@ -1,3 +1,15 @@
+# [7.24.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.23.1...v7.24.0) (2023-06-29)
+
+
+### Bug Fixes
+
+* **console:** fix disabled json-schema ([d5388fb](https://github.com/gravitee-io/gravitee-ui-particles/commit/d5388fbed711ccc6914801488d023d1687cc9834))
+
+
+### Features
+
+* add GioClipboard component ([79e28d2](https://github.com/gravitee-io/gravitee-ui-particles/commit/79e28d23fd5d29efc2b46dc91a734ce663ff56bd))
+
 ## [7.23.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.23.0...v7.23.1) (2023-06-28)
 
 
