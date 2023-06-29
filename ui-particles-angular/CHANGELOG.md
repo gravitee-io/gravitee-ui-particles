@@ -1,3 +1,10 @@
+## [7.24.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.24.1...v7.24.2) (2023-06-29)
+
+
+### Bug Fixes
+
+* error with custom array header ([e74e0c4](https://github.com/gravitee-io/gravitee-ui-particles/commit/e74e0c41f6c4901992afa8c2b54430823985f957))
+
 ## [7.24.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.24.0...v7.24.1) (2023-06-29)
 
 
