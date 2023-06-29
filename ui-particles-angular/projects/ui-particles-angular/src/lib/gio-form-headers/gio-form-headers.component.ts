@@ -134,7 +134,7 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor, Va
   public mainForm: FormGroup;
   public headersFormArray = new FormArray([
     new FormGroup({
-      key: new FormControl(''),
+      key: new FormControl('', Validators.pattern('^\\S*$')),
       value: new FormControl(''),
     }),
   ]);

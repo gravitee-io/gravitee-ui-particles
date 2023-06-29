@@ -39,7 +39,15 @@ export class GioFormlyJsonSchemaService {
   }
 
   private uiTypeMap(mappedField: FormlyFieldConfig, mapSource: JSONSchema7): FormlyFieldConfig {
-    mappedField.type = mapSource.gioConfig?.uiType ?? mappedField.type;
+    if (mapSource.gioConfig?.uiType) {
+      // Clean the field to avoid conflict and init simple one with given type
+      mappedField = {
+        key: mappedField.key,
+        type: mapSource.gioConfig?.uiType,
+        props: mappedField.props,
+      };
+    }
+
     return mappedField;
   }
 
