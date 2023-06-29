@@ -1,3 +1,10 @@
+## [7.24.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.24.0...v7.24.1) (2023-06-29)
+
+
+### Bug Fixes
+
+* improve Policy Studio on some unexpected behaviour ([11d746a](https://github.com/gravitee-io/gravitee-ui-particles/commit/11d746aafe1a64b033335f0a04d604096a8e9108))
+
 # [7.24.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.23.1...v7.24.0) (2023-06-29)
 
 
