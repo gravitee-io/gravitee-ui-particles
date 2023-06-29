@@ -15,15 +15,15 @@
  */
 
 import { Inject } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { Policy, PolicyDocumentationFetcher, PolicySchemaFetcher } from './models';
 
 @Inject({})
 export class GioPolicyStudioService {
-  private schemasCache: Record<string, unknown> = {};
-  private documentationsCache: Record<string, string> = {};
+  private schemasCache: Record<string, BehaviorSubject<unknown>> = {};
+  private documentationsCache: Record<string, BehaviorSubject<string>> = {};
 
   private policySchemaFetcher?: PolicySchemaFetcher;
   private policyDocumentationFetcher?: PolicyDocumentationFetcher;
@@ -47,10 +47,14 @@ export class GioPolicyStudioService {
     if (!this.policySchemaFetcher) throw new Error('PolicySchemaFetcher not defined!');
 
     if (this.schemasCache[policy.id]) {
-      return of(this.schemasCache[policy.id]).pipe(shareReplay(1));
+      return this.schemasCache[policy.id].asObservable();
     }
 
-    return this.policySchemaFetcher(policy);
+    return this.policySchemaFetcher(policy).pipe(
+      tap(schema => {
+        this.schemasCache[policy.id] = new BehaviorSubject(schema);
+      }),
+    );
   }
 
   /**
@@ -64,9 +68,13 @@ export class GioPolicyStudioService {
     if (!this.policyDocumentationFetcher) throw new Error('PolicyDocumentationFetcher not defined!');
 
     if (this.documentationsCache[policy.id]) {
-      return of(this.documentationsCache[policy.id]).pipe(shareReplay(1));
+      return this.documentationsCache[policy.id].asObservable();
     }
 
-    return this.policyDocumentationFetcher(policy);
+    return this.policyDocumentationFetcher(policy).pipe(
+      tap(documentation => {
+        this.documentationsCache[policy.id] = new BehaviorSubject(documentation);
+      }),
+    );
   }
 }

@@ -19,8 +19,8 @@
 <div class="settings">
   <div class="settings__header">Settings</div>
 
-  <div class="settings__content" *ngIf="stepForm && (policySchema$ | async) as policySchema; else loadingTmpl">
-    <ng-container [formGroup]="stepForm">
+  <div class="settings__content">
+    <ng-container *ngIf="stepForm && (policySchema$ | async) as policySchema; else loadingTmpl" [formGroup]="stepForm">
       <mat-form-field>
         <mat-label>Description</mat-label>
         <textarea matInput formControlName="description" cdkFocusInitial></textarea>
