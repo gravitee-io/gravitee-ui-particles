@@ -15,7 +15,7 @@ Key autocomplete is provided for common headers.
 
 **Inputs**
 - Work with ReactiveFormsModule
-- `adaptOutputFn` (optional): A function to adapt the output of the component to the desired format. e.g. `(headers) => headers.map(({ key, value }) => ({ name: key, value }))`
+- `headerFieldMapper` (optional): A mapping definition for the default key/value attributes in order to adapt the output of the component to the desired format. e.g. `{keyName: 'name', valueName: 'value'}`
 
 **Output**
 
@@ -31,4 +31,18 @@ Example:
 
 ```html
 <gio-form-headers [formControl]="headersControl"></gio-form-headers>
+```
+
+To get an array of objects with `name` and `value` properties, you need to define the `headerFieldMapper`:
+```ts
+{
+  name: string;
+  value: string;
+}[]
+```
+
+Example:
+
+```html
+<gio-form-headers [headerFieldMapper]="{keyName: 'name', valueName: 'value'}" [formControl]="headersControl"></gio-form-headers>
 ```
