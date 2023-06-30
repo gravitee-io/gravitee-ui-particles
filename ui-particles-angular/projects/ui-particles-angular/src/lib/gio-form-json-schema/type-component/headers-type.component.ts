@@ -16,7 +16,7 @@
 import { Component } from '@angular/core';
 import { FieldType, FieldTypeConfig, FormlyFieldProps } from '@ngx-formly/core';
 
-import { FormHeaderAdaptOutputFn, Header } from '../../gio-form-headers/gio-form-headers.component';
+import { FormHeaderFieldMapper } from '../../gio-form-headers/gio-form-headers.component';
 
 type HeadersProps = FormlyFieldProps & {
   // The key and value names of the output array
@@ -48,7 +48,7 @@ type HeadersProps = FormlyFieldProps & {
         <formly-validation-message [field]="field"></formly-validation-message>
       </div>
       <div *ngIf="!collapse" class="wrapper__rows" [class.collapse-open]="collapse" [class.collapse-close]="!collapse">
-        <gio-form-headers [adaptOutputFn]="map" [formControl]="formControl"></gio-form-headers>
+        <gio-form-headers [headerFieldMapper]="outputConfig" [formControl]="formControl"></gio-form-headers>
       </div>
     </div>
   `,
@@ -57,22 +57,16 @@ type HeadersProps = FormlyFieldProps & {
 export class GioFjsHeadersTypeComponent extends FieldType<FieldTypeConfig<HeadersProps>> {
   public override defaultOptions?: Partial<FieldTypeConfig<HeadersProps>> | undefined = {
     props: {
-      outputConfig: {
-        keyName: 'name',
-        valueName: 'value',
-      },
+      outputConfig: this.outputConfig,
     },
   };
 
   public collapse = false;
 
-  public get map(): FormHeaderAdaptOutputFn<{ [x: string]: string }[]> {
-    return (headers: Header[] | null) =>
-      [...(headers ?? [])].map(header => {
-        return {
-          [this.props.outputConfig.keyName]: header.key,
-          [this.props.outputConfig.valueName]: header.value,
-        };
-      });
+  public get outputConfig(): FormHeaderFieldMapper {
+    return {
+      keyName: 'name',
+      valueName: 'value',
+    };
   }
 }

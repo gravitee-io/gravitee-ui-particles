@@ -34,7 +34,10 @@ import { Observable, of } from 'rxjs';
 
 export type Header = { key: string; value: string };
 
-export type FormHeaderAdaptOutputFn<H> = (headers: Header[] | null) => H;
+export type FormHeaderFieldMapper = {
+  keyName: string;
+  valueName: string;
+};
 
 const HEADER_NAMES = [
   'Accept',
@@ -129,7 +132,10 @@ const HEADER_NAMES = [
 })
 export class GioFormHeadersComponent implements OnInit, ControlValueAccessor, Validator {
   @Input()
-  public adaptOutputFn?: FormHeaderAdaptOutputFn<unknown>;
+  public headerFieldMapper: FormHeaderFieldMapper = {
+    keyName: 'key',
+    valueName: 'value',
+  };
 
   public mainForm: FormGroup;
   public headersFormArray = new FormArray([
@@ -157,24 +163,36 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor, Va
   }
 
   // From ControlValueAccessor interface
-  public writeValue(value: Header[] | null): void {
+  public writeValue(value: Record<string, string>[] | null): void {
     if (!value) {
       return;
     }
 
-    this.headers = value ?? [];
+    this.headers = [...(value ?? [])].map((header: Record<string, string>) => {
+      return {
+        key: header[this.headerFieldMapper.keyName],
+        value: header[this.headerFieldMapper.valueName],
+      };
+    });
     this.initHeadersForm();
   }
 
   // From ControlValueAccessor interface
   public registerOnChange(fn: (headers: unknown) => void): void {
-    const adaptOutputFn = this.adaptOutputFn;
-
-    if (adaptOutputFn) {
-      this._onChange = (headers: Header[] | null) => fn(adaptOutputFn(headers));
+    if (this.headerFieldMapper) {
+      this._onChange = (headers: Header[] | null) => fn(this.toHeaders(headers));
       return;
     }
     this._onChange = fn;
+  }
+
+  private toHeaders(headers: Header[] | null) {
+    return [...(headers ?? [])].map(header => {
+      return {
+        [this.headerFieldMapper.keyName]: header.key,
+        [this.headerFieldMapper.valueName]: header.value,
+      };
+    });
   }
 
   // From ControlValueAccessor interface
