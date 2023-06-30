@@ -44,7 +44,10 @@ export class GioFormlyJsonSchemaService {
       mappedField = {
         key: mappedField.key,
         type: mapSource.gioConfig?.uiType,
-        props: mappedField.props,
+        props: {
+          ...mappedField.props,
+          ...mapSource.gioConfig?.uiTypeProps,
+        },
       };
     }
 
