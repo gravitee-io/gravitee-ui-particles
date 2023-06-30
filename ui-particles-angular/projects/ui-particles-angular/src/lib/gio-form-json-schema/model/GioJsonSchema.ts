@@ -18,9 +18,8 @@
  * GioConfig is used to add some custom configuration to the JSONSchema7
  * ⚠️ Keep updated with the GioJsonSchema.json to have the same interface ⚠️
  */
-export interface GioConfig {
+export interface GioConfig extends GioUiTypeConfig {
   banner?: GioBannerConfig;
-  uiType?: GioUiTypeConfig;
   monacoEditorConfig?: GioMonacoEditorConfig;
 }
 
@@ -35,7 +34,10 @@ type GioBannerConfig =
 /**
  * Used to override the default formly type. It's useful when we want to use a custom component.
  */
-type GioUiTypeConfig = 'gio-headers-array' | string;
+type GioUiTypeConfig = {
+  uiType?: 'gio-headers-array' | string;
+  uiTypeProps?: Record<string, unknown>;
+};
 
 /**
  * Override the JSONSchema7 interface to add gioConfig
