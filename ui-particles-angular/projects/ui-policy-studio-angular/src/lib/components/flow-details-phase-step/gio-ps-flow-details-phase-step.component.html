@@ -34,9 +34,9 @@
     <span>Edit</span>
   </button>
 
-  <button disabled mat-menu-item (click)="onDisable()">
-    <mat-icon svgIcon="gio:prohibition"></mat-icon>
-    <span>Disable 🚧</span>
+  <button mat-menu-item (click)="onDisable()">
+    <mat-icon [svgIcon]="step.enabled ? 'gio:prohibition' : 'gio:check-circled-outline'"></mat-icon>
+    <span>{{ step.enabled ? 'Disable' : 'Enable' }}</span>
   </button>
 
   <button mat-menu-item (click)="onDelete()">
