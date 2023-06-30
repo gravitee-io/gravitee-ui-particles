@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Injectable, Input } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 import { MatTooltip } from '@angular/material/tooltip';
 
-@Injectable()
+@Directive()
 export abstract class GioClipboardComponent {
   public tooltipMessage = 'Copy to clipboard';
   public tooltipHideDelay = 0;
