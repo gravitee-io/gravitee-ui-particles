@@ -1,3 +1,15 @@
+# [7.25.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.24.2...v7.25.0) (2023-06-30)
+
+
+### Bug Fixes
+
+* prefere @Directive() for abstract component ([5e51c96](https://github.com/gravitee-io/gravitee-ui-particles/commit/5e51c96cf62b856d2333d2e2a4a95e64cccb0862))
+
+
+### Features
+
+* improve json-schema GioUiTypeConfig to allow to pass props ([a31c427](https://github.com/gravitee-io/gravitee-ui-particles/commit/a31c42723660fd90808ddf81e80c7af538eb0937))
+
 ## [7.24.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.24.1...v7.24.2) (2023-06-29)
 
 
