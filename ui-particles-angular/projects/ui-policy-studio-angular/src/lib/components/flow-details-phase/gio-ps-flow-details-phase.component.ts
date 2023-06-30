@@ -149,4 +149,19 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
     }
     this.stepsChange.emit([...this.steps.slice(0, index), ...this.steps.slice(index + 1)]);
   }
+
+  public onStepDisabled(index: number): void {
+    if (!this.steps) {
+      return;
+    }
+
+    this.stepsChange.emit([
+      ...this.steps.slice(0, index),
+      {
+        ...this.steps[index],
+        enabled: !this.steps[index].enabled,
+      },
+      ...this.steps.slice(index + 1),
+    ]);
+  }
 }

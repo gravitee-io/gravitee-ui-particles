@@ -827,6 +827,31 @@ describe('GioPolicyStudioModule', () => {
           { name: 'Kafka', type: 'connector' },
         ]);
       });
+
+      it('should disable/Enable step into phase', async () => {
+        component.commonFlows = [
+          fakeChannelFlow({
+            name: 'name',
+            request: [fakeTestPolicyStep({ description: 'description' })],
+          }),
+        ];
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        // Delete step B into REQUEST phase
+        const requestPhase = await policyStudioHarness.getSelectedFlowPhase('REQUEST');
+        await requestPhase?.disableEnableStep(0);
+
+        let saveOutput: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutput = value));
+        await policyStudioHarness.save();
+
+        expect(saveOutput?.commonFlows).toBeDefined();
+        const firstSaveFlows = saveOutput?.commonFlows?.[0];
+        expect(firstSaveFlows).toBeDefined();
+        expect(firstSaveFlows?.request).toEqual([fakeTestPolicyStep({ description: 'description', enabled: false })]);
+      });
     });
   });
 

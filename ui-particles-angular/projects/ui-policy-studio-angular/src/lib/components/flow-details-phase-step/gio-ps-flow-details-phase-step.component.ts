@@ -42,6 +42,9 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
   @Output()
   public deleted = new EventEmitter<void>();
 
+  @Output()
+  public disabled = new EventEmitter<void>();
+
   public policy?: Policy;
 
   constructor(private readonly matDialog: MatDialog) {}
@@ -82,7 +85,7 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
   }
 
   public onDisable() {
-    throw new Error('Wip');
+    this.disabled.emit();
   }
 
   public onDelete() {

@@ -164,4 +164,13 @@ export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
 
     await step.clickOnDelete();
   }
+
+  /**
+   * Disable a step
+   * @param index Index of the policy step to disable
+   */
+  public async disableEnableStep(index: number): Promise<void> {
+    const step = await this.getStep(index);
+    await step.clickOnDisableEnable();
+  }
 }
