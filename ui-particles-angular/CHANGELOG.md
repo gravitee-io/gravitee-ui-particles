@@ -1,3 +1,15 @@
+# [7.26.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.25.0...v7.26.0) (2023-07-03)
+
+
+### Bug Fixes
+
+* improve mapping of header values in gio-form-headers ([bfee846](https://github.com/gravitee-io/gravitee-ui-particles/commit/bfee846f51133ce0daf7ece3211b0b21317e77bc))
+
+
+### Features
+
+* disable or enable a step in a flow ([4864fbc](https://github.com/gravitee-io/gravitee-ui-particles/commit/4864fbc3aa09dd8182fdf701b2860af6fb25373f))
+
 # [7.25.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.24.2...v7.25.0) (2023-06-30)
 
 
