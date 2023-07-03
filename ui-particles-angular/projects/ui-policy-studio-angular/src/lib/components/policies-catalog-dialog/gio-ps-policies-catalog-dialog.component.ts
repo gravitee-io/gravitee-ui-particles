@@ -26,6 +26,7 @@ export type GioPolicyStudioPoliciesCatalogDialogData = {
   policies: Policy[];
   executionPhase: ExecutionPhase;
   apiType: ApiType;
+  trialUrl?: string;
 };
 
 export type GioPolicyStudioPoliciesCatalogDialogResult = undefined | Step;
@@ -65,6 +66,10 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
 
   private unsubscribe$ = new Subject<void>();
 
+  public isUnlicensed = false;
+
+  public trialUrl?: string;
+
   constructor(
     public dialogRef: MatDialogRef<GioPolicyStudioPoliciesCatalogDialogComponent, GioPolicyStudioPoliciesCatalogDialogResult>,
     @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioPoliciesCatalogDialogData,
@@ -82,6 +87,7 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
         ...policy,
         category: policy.category ?? 'Others',
       }));
+
     this.categories = uniq(this.allPolicies.map(policy => policy.category.toLowerCase()));
 
     // By default, all categories are selected
@@ -94,6 +100,8 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
           return categories.map(toLower).includes(toLower(policy.category));
         });
       });
+
+    this.trialUrl = flowDialogData.trialUrl;
   }
 
   public ngOnDestroy(): void {
@@ -102,6 +110,9 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
   }
 
   public onSelectPolicy(policy: Policy) {
+    if (policy.deployed === false) {
+      this.isUnlicensed = true;
+    }
     this.selectedPolicy = policy;
   }
 

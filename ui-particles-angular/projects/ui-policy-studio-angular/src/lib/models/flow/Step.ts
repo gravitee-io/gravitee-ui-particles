@@ -42,4 +42,8 @@ export interface Step {
    * The message condition of the step
    */
   messageCondition?: string;
+  /**
+   * Is the policy deployed or not.
+   */
+  deployed?: boolean;
 }

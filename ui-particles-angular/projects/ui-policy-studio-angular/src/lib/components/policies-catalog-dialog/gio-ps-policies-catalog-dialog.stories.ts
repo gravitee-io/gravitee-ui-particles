@@ -103,6 +103,7 @@ export default {
         apiType: args.apiType,
         executionPhase: args.executionPhase,
         policies: fakeAllPolicies(),
+        trialUrl: 'https://gravitee.io/self-hosted-trial',
       },
     },
   }),

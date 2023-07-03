@@ -69,6 +69,9 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
   @Input()
   public policyExecutionPhase!: ExecutionPhase;
 
+  @Input()
+  public trialUrl?: string;
+
   @Output()
   public stepsChange = new EventEmitter<Step[]>();
 
@@ -120,6 +123,7 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
           policies: this.policies,
           executionPhase: this.policyExecutionPhase,
           apiType: this.apiType,
+          trialUrl: this.trialUrl,
         },
         role: 'alertdialog',
         id: 'gioPolicyStudioPoliciesCatalogDialog',

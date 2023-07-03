@@ -47,6 +47,14 @@
           <span *ngIf="policy.name" class="policiesCatalog__list__policy__head__name">{{ policy.name }}</span>
         </div>
 
+        <div class="policiesCatalog__list__policy__enterprise" *ngIf="policy.deployed === false">
+          <mat-icon
+            class="policiesCatalog__list__policy__enterprise__lock"
+            [svgIcon]="'gio:lock'"
+            matTooltip="This policy is only available for users with an enterprise license."
+          ></mat-icon>
+        </div>
+
         <div *ngIf="policy.description" class="policiesCatalog__list__policy__description">{{ policy.description }}</div>
 
         <button class="policiesCatalog__list__policy__selectBtn" mat-stroked-button role="dialog" (click)="onSelectPolicy(policy)">
@@ -66,6 +74,14 @@
     <mat-icon svgIcon="gio:arrow-left"></mat-icon>
     Go back
   </button>
+
+  <gio-banner *ngIf="isUnlicensed" type="error" icon="gio:universe">
+    This policy is only available for users with an enterprise license.
+    <span gioBannerBody>Request a license to upgrade your account and unlock this policy</span>
+    <div gioBannerAction>
+      <a *ngIf="trialUrl" mat-stroked-button [href]="trialUrl" target="_blank">Request upgrade</a>
+    </div>
+  </gio-banner>
 
   <div class="policyForm__info">
     <div class="policyForm__info__head">
@@ -88,7 +104,7 @@
     color="primary"
     mat-flat-button
     role="dialog"
-    [disabled]="!isValid"
+    [disabled]="!isValid || isUnlicensed"
     (click)="onAddPolicy()"
   >
     Add policy

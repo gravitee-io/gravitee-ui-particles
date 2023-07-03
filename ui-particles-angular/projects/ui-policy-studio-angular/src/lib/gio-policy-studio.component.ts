@@ -80,6 +80,13 @@ export class GioPolicyStudioComponent implements OnChanges {
   public policies: Policy[] = [];
 
   /**
+   * When a policy is not available with the current license,
+   * this URL is used to redirect the user to the trial page.
+   */
+  @Input()
+  public trialUrl?: string;
+
+  /**
    * Loading state
    */
   @Input()

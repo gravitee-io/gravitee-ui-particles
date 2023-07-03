@@ -69,12 +69,14 @@ export default {
     [policies]="policies"
     [policySchemaFetcher]="policySchemaFetcher"
     [policyDocumentationFetcher]="policyDocumentationFetcher"
+    [trialUrl]="trialUrl"
     (save)="onSave($event)"
     >
     </gio-policy-studio></div>`,
     props: {
       ...props,
       policies: fakeAllPolicies(),
+      trialUrl: 'https://gravitee.io/self-hosted-trial',
       // Simulate a get policy schema http fetcher.
       policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)).pipe(delay(600)),
       policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)).pipe(delay(600)),

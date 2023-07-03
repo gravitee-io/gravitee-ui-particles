@@ -24,4 +24,5 @@ export interface Policy {
   version?: string;
   proxy?: ExecutionPhase[];
   message?: ExecutionPhase[];
+  deployed?: boolean;
 }

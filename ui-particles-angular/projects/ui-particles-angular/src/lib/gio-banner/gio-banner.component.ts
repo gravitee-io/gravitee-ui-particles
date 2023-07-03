@@ -25,6 +25,9 @@ export type GioBannerTypes = 'error' | 'info' | 'success' | 'warning';
 export class GioBannerComponent {
   @Input()
   public type: GioBannerTypes = 'info';
+
+  @Input()
+  public icon?: string;
 }
 
 @Directive({
@@ -44,6 +47,7 @@ export class GioBannerActionDirective {}
 })
 export class GioBannerErrorComponent extends GioBannerComponent {
   public type = 'error' as GioBannerTypes;
+  public icon = 'gio:chat-bubble-error';
 }
 
 @Component({
@@ -53,6 +57,7 @@ export class GioBannerErrorComponent extends GioBannerComponent {
 })
 export class GioBannerInfoComponent extends GioBannerComponent {
   public type = 'info' as GioBannerTypes;
+  public icon = 'gio:chat-lines';
 }
 
 @Component({
@@ -62,6 +67,7 @@ export class GioBannerInfoComponent extends GioBannerComponent {
 })
 export class GioBannerSuccessComponent extends GioBannerComponent {
   public type = 'success' as GioBannerTypes;
+  public icon = 'gio:chat-bubble-check';
 }
 
 @Component({
@@ -71,4 +77,5 @@ export class GioBannerSuccessComponent extends GioBannerComponent {
 })
 export class GioBannerWarningComponent extends GioBannerComponent {
   public type = 'warning' as GioBannerTypes;
+  public icon = 'gio:chat-bubble-warning';
 }

@@ -45,6 +45,7 @@
             [steps]="flow.request ?? []"
             [apiType]="apiType"
             [policies]="policies"
+            [trialUrl]="trialUrl"
             policyExecutionPhase="REQUEST"
             (stepsChange)="onStepsChange('request', $event)"
           ></gio-ps-flow-details-phase>
@@ -57,6 +58,7 @@
             [steps]="flow.response ?? []"
             [apiType]="apiType"
             [policies]="policies"
+            [trialUrl]="trialUrl"
             policyExecutionPhase="RESPONSE"
             (stepsChange)="onStepsChange('response', $event)"
           ></gio-ps-flow-details-phase>
@@ -71,6 +73,7 @@
             [steps]="flow.publish ?? []"
             [apiType]="apiType"
             [policies]="policies"
+            [trialUrl]="trialUrl"
             policyExecutionPhase="MESSAGE_RESPONSE"
             (stepsChange)="onStepsChange('publish', $event)"
           ></gio-ps-flow-details-phase>
@@ -83,6 +86,7 @@
             [steps]="flow.subscribe ?? []"
             [apiType]="apiType"
             [policies]="policies"
+            [trialUrl]="trialUrl"
             policyExecutionPhase="MESSAGE_REQUEST"
             (stepsChange)="onStepsChange('subscribe', $event)"
           ></gio-ps-flow-details-phase>
