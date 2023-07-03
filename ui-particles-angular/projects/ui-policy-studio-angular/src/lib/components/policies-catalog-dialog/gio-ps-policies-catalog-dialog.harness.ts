@@ -37,19 +37,25 @@ export class GioPolicyStudioPoliciesCatalogDialogHarness extends ComponentHarnes
 
   public async selectPolicy(policyName: string): Promise<void> {
     const policies = await this.policiesLocator();
-    const policy = policies.find(
-      async p => (await p.getText({ childSelector: '.policiesCatalog__list__policy__head__name' })) === policyName,
-    );
-    if (!policy) {
-      throw new Error(`Policy ${policyName} not found`);
+    for (const policy of policies) {
+      const name = await policy.getText({ childSelector: '.policiesCatalog__list__policy__head__name' });
+      if (name === policyName) {
+        const selectBtn = await policy.childLocatorFor(MatButtonHarness.with({ selector: '.policiesCatalog__list__policy__selectBtn' }))();
+        await selectBtn.click();
+        return;
+      }
     }
-    const selectBtn = await policy.childLocatorFor(MatButtonHarness.with({ selector: '.policiesCatalog__list__policy__selectBtn' }))();
-    await selectBtn.click();
+    throw new Error(`Policy ${policyName} not found`);
   }
 
   public async getSelectedPolicyName(): Promise<string> {
     const policy = await this.locatorFor('.policyForm__info__head__name')();
     return policy.text();
+  }
+
+  public async hasRequestUpgradeButton(): Promise<boolean> {
+    const requestUpgradeButton = await this.locatorForOptional(MatButtonHarness.with({ text: 'Request upgrade' }))();
+    return !!requestUpgradeButton;
   }
 
   public async clickAddPolicyButton(): Promise<void> {

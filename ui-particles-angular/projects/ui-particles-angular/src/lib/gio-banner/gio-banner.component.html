@@ -23,12 +23,17 @@
   [class.success]="type === 'success'"
 >
   <div class="banner__wrapper">
-    <div class="banner__wrapper__icon" [ngSwitch]="type">
-      <mat-icon *ngSwitchCase="'info'" svgIcon="gio:chat-lines"></mat-icon>
-      <mat-icon *ngSwitchCase="'error'" svgIcon="gio:chat-bubble-error"></mat-icon>
-      <mat-icon *ngSwitchCase="'warning'" svgIcon="gio:chat-bubble-warning"></mat-icon>
-      <mat-icon *ngSwitchCase="'success'" svgIcon="gio:chat-bubble-check"></mat-icon>
+    <div *ngIf="icon; else defaultTypeIcon" class="banner__wrapper__icon">
+      <mat-icon [svgIcon]="icon"></mat-icon>
     </div>
+    <ng-template #defaultTypeIcon>
+      <div class="banner__wrapper__icon" [ngSwitch]="type">
+        <mat-icon *ngSwitchCase="'info'" svgIcon="gio:chat-lines"></mat-icon>
+        <mat-icon *ngSwitchCase="'error'" svgIcon="gio:chat-bubble-error"></mat-icon>
+        <mat-icon *ngSwitchCase="'warning'" svgIcon="gio:chat-bubble-warning"></mat-icon>
+        <mat-icon *ngSwitchCase="'success'" svgIcon="gio:chat-bubble-check"></mat-icon>
+      </div>
+    </ng-template>
     <div class="banner__wrapper__head">
       <div class="banner__wrapper__title">
         <ng-content></ng-content>

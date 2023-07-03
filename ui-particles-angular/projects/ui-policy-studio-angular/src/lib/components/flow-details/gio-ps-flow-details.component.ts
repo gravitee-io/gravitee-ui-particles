@@ -55,6 +55,9 @@ export class GioPolicyStudioDetailsComponent implements OnChanges {
   @Input()
   public policies: Policy[] = [];
 
+  @Input()
+  public trialUrl?: string;
+
   @Output()
   public flowChange = new EventEmitter<FlowVM>();
 

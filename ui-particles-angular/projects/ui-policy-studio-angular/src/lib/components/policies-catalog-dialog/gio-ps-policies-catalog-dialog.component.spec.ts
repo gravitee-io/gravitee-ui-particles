@@ -98,6 +98,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
       apiType,
       policies: fakeAllPolicies(),
       executionPhase,
+      trialUrl: 'https://gravitee.io/self-hosted-trial',
     };
     loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
   };
@@ -220,6 +221,16 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
       await componentTestingOpenDialog();
 
       await expectPoliciesCatalogContent('Request', p => p.proxy?.includes('REQUEST'));
+    });
+
+    it('should display a banner with a "Request upgrade" button when policy is not deployed (enterprise license)', async () => {
+      await componentTestingOpenDialog();
+
+      const policiesCatalogDialog = await loader.getHarness(GioPolicyStudioPoliciesCatalogDialogHarness);
+      await policiesCatalogDialog.selectPolicy('No license policy');
+
+      expect(await policiesCatalogDialog.getSelectedPolicyName()).toEqual('No license policy');
+      expect(await policiesCatalogDialog.hasRequestUpgradeButton()).toBe(true);
     });
   });
 

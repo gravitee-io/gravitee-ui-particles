@@ -133,6 +133,11 @@ export function fakeAllPolicies(): Policy[] {
       description:
         'Test policy description - With very long name to test overflow. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis sem at nibh elementum imperdiet.',
     }),
+    fakeTestPolicy({
+      name: 'No license policy',
+      deployed: false,
+      description: 'No license policy should display a lock icon and a clear CTA.',
+    }),
     ...POLICIES_V4_UNREGISTERED_ICON.map(policy => ({
       ...policy,
       // Replace all icons with the policy id. Icons are registred in the IconRegistry before.

@@ -45,6 +45,7 @@ $typography: map.get(gio.$mat-theme, typography);
     grid-template-columns: repeat(auto-fill, minmax(max(var(--grid-item-min-width), var(--grid-item-max-width)), 1fr));
 
     &__policy {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -56,7 +57,7 @@ $typography: map.get(gio.$mat-theme, typography);
 
       &__head {
         display: flex;
-        max-width: 100%;
+        max-width: 95%;
         align-items: center;
 
         &__icon {
@@ -70,6 +71,22 @@ $typography: map.get(gio.$mat-theme, typography);
           flex: 1 1 auto;
           text-overflow: ellipsis;
           white-space: nowrap;
+        }
+      }
+
+      &__enterprise {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 8px 8px 8px 16px;
+        border-radius: 0 8px 0 38px;
+        background: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker10');
+        color: mat.get-color-from-palette(gio.$mat-accent-palette, 'darker20');
+
+        &__lock {
+          min-width: 16px;
+          max-width: 16px;
+          color: mat.get-color-from-palette(gio.$mat-accent-palette, 'darker20');
         }
       }
 

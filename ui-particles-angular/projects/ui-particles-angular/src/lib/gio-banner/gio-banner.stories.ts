@@ -51,6 +51,8 @@ export const All: Story = {
     <gio-banner-warning>This is a warning banner!</gio-banner-warning>
     <br>
     <gio-banner-error>Error <br> Second line <br> Wow another one</gio-banner-error>
+    <gio-banner type="error">This an error type banner with the default icon</gio-banner>
+    <gio-banner type="error" icon="gio:universe">This an error banner with a custom icon</gio-banner>
     `,
   }),
 };
