@@ -19,6 +19,7 @@
 @use '../../../scss' as gio;
 
 $text: map.get(gio.$mat-space-palette, lighter60);
+$text-light: mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
 
 .gio-submenu-group {
   display: flex;
@@ -32,5 +33,9 @@ $text: map.get(gio.$mat-space-palette, lighter60);
     margin: 1px 0;
     color: $text;
     letter-spacing: 0.4px;
+  }
+
+  &__title__light {
+    color: $text-light;
   }
 }

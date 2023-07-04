@@ -15,6 +15,8 @@
  */
 import { Component, Input } from '@angular/core';
 
+import { GioSubmenuTheme } from '../gio-submenu.component';
+
 @Component({
   selector: 'gio-submenu-group',
   templateUrl: './gio-submenu-group.component.html',
@@ -22,4 +24,6 @@ import { Component, Input } from '@angular/core';
 })
 export class GioSubmenuGroupComponent {
   @Input() public title = '';
+
+  @Input() public theme: GioSubmenuTheme = 'dark';
 }

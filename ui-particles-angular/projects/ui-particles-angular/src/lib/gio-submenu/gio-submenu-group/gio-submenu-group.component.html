@@ -16,6 +16,6 @@
 
 -->
 <div class="gio-submenu-group">
-  <div class="gio-submenu-group__title">{{ title }}</div>
+  <div class="gio-submenu-group__title" [class.gio-submenu-group__title__light]="theme === 'light'">{{ title }}</div>
   <ng-content></ng-content>
 </div>
