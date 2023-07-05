@@ -37,6 +37,24 @@ export const enumExample: GioJsonSchema = {
         },
       },
     },
+    enumWithCustomLabel: {
+      type: 'object',
+      title: 'Enum with custom select label',
+      properties: {
+        type: {
+          title: 'Type',
+          description: 'The type of the trust store',
+          enum: [null, 'JKS', 'PKCS12', 'PEM'],
+          gioConfig: {
+            enumLabelMap: {
+              JKS: 'Java Trust Store (.jks)',
+              PKCS12: 'PKCS#12 (.p12) / PFX (.pfx)',
+              PEM: 'PEM (.pem)',
+            },
+          },
+        },
+      },
+    },
     enumWithTitle: {
       type: 'object',
       title: 'Enum with custom select label',
