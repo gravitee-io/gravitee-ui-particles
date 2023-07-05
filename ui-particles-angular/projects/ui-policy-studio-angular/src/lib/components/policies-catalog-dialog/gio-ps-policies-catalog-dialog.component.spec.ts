@@ -165,11 +165,15 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
 
       expect(await policiesCatalogDialog.getCategoriesSelection()).toEqual([
         {
-          name: 'Others',
+          name: 'Security',
           selected: true,
         },
         {
-          name: 'Security',
+          name: 'Transformation',
+          selected: true,
+        },
+        {
+          name: 'Others',
           selected: true,
         },
       ]);

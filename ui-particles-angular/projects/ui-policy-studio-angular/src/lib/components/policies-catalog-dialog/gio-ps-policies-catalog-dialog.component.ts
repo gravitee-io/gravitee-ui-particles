@@ -88,7 +88,11 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
         category: policy.category ?? 'Others',
       }));
 
-    this.categories = uniq(this.allPolicies.map(policy => policy.category.toLowerCase()));
+    this.categories = uniq(this.allPolicies.map(policy => policy.category.toLowerCase())).sort((a, b) => a.localeCompare(b));
+    const othersIndex = this.categories.indexOf('others');
+    if (othersIndex !== -1) {
+      this.categories.push(this.categories.splice(othersIndex, 1)[0]);
+    }
 
     // By default, all categories are selected
     this.selectedCategoriesControl = new FormControl(this.categories);
