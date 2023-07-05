@@ -103,6 +103,7 @@
           [steps]="flow.request ?? []"
           [apiType]="apiType"
           [policies]="policies"
+          [trialUrl]="trialUrl"
           policyExecutionPhase="REQUEST"
           (stepsChange)="onStepsChange('request', $event)"
         ></gio-ps-flow-details-phase>
@@ -115,6 +116,7 @@
           [steps]="flow.response ?? []"
           [apiType]="apiType"
           [policies]="policies"
+          [trialUrl]="trialUrl"
           policyExecutionPhase="RESPONSE"
           (stepsChange)="onStepsChange('response', $event)"
         ></gio-ps-flow-details-phase>
