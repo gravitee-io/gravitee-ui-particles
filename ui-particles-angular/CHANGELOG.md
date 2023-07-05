@@ -1,3 +1,11 @@
+# [7.28.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.27.0...v7.28.0) (2023-07-05)
+
+
+### Features
+
+* add enumLabelMap to set label to json-schema enum ([d54ddf0](https://github.com/gravitee-io/gravitee-ui-particles/commit/d54ddf0f2f47bf4f6e42db5a03d5fc9c389416bd))
+* improve GioFormTagsInputComponent to add dynamic search autocomplete ([8317cc0](https://github.com/gravitee-io/gravitee-ui-particles/commit/8317cc0bd3cc66e3065819dc10e30808c856e93c))
+
 # [7.27.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.26.0...v7.27.0) (2023-07-05)
 
 
