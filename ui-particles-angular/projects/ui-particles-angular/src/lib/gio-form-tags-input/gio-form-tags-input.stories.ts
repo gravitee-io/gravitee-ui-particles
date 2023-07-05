@@ -269,7 +269,7 @@ const applications = range(10).map(i => ({
 }));
 
 export const WithAsyncAutocompleteOnly: Story = {
-  render: ({ tags, placeholder, required, disabled, tagValidationHook, autocompleteOptions, displayValueWith }) => {
+  render: ({ tags, placeholder, required, disabled, autocompleteOptions, displayValueWith, useAutocompleteOptionValueOnly }) => {
     const tagsControl = new FormControl({ value: tags, disabled });
 
     tagsControl.valueChanges.subscribe(value => {
@@ -284,9 +284,9 @@ export const WithAsyncAutocompleteOnly: Story = {
           [required]="required" 
           [placeholder]="placeholder" 
           [formControl]="tagsControl"
-          [tagValidationHook]="tagValidationHook"
           [autocompleteOptions]="autocompleteOptions"
           [displayValueWith]="displayValueWith"
+          [useAutocompleteOptionValueOnly]="useAutocompleteOptionValueOnly"
         >
         </gio-form-tags-input>
       </mat-form-field>
@@ -297,9 +297,9 @@ export const WithAsyncAutocompleteOnly: Story = {
         required,
         disabled,
         tagsControl,
-        tagValidationHook,
         autocompleteOptions,
         displayValueWith,
+        useAutocompleteOptionValueOnly,
       },
     };
   },
@@ -314,9 +314,7 @@ export const WithAsyncAutocompleteOnly: Story = {
       const application = applications.find(a => a.value === tag);
       return of(application ? application.label : tag);
     },
-    tagValidationHook: (tag: string, validationCb: (shouldAddTag: boolean) => void) => {
-      validationCb(applications.map(a => a.value).includes(tag));
-    },
+    useAutocompleteOptionValueOnly: true,
   },
   argTypes: {
     tagValidationHook: {
