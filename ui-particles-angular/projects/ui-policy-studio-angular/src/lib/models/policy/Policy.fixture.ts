@@ -138,6 +138,12 @@ export function fakeAllPolicies(): Policy[] {
       deployed: false,
       description: 'No license policy should display a lock icon and a clear CTA.',
     }),
+    fakeTestPolicy({
+      id: 'transformation-policy',
+      name: 'transformation policy',
+      category: 'transformation',
+      proxy: ['REQUEST'],
+    }),
     ...POLICIES_V4_UNREGISTERED_ICON.map(policy => ({
       ...policy,
       // Replace all icons with the policy id. Icons are registred in the IconRegistry before.
