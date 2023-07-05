@@ -17,7 +17,7 @@
 -->
 <mat-chip-list #tagChipList [attr.aria-label]="ariaLabel" multiple [disabled]="disabled">
   <mat-chip *ngFor="let tag of value" [selectable]="false" [removable]="!disabled" (removed)="removeChipToFormControl(tag)">
-    {{ tag }}
+    {{ _displayValueWith ? (_displayValueWith(tag) | async) : tag }}
     <mat-icon matChipRemove>cancel</mat-icon>
   </mat-chip>
   <input
@@ -31,8 +31,8 @@
     (matChipInputTokenEnd)="onMatChipTokenEnd()"
   />
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onAutocompleteSelect($event)">
-    <mat-option *ngFor="let value of autocompleteFilteredOptions$ | async" [value]="value">
-      {{ value }}
+    <mat-option *ngFor="let option of autocompleteFilteredOptions$ | async" [value]="option.value">
+      {{ option.label }}
     </mat-option>
   </mat-autocomplete>
 </mat-chip-list>

@@ -8,18 +8,20 @@ Documentation and examples for Form Tags Input, a component to specify a list of
 
 ## Demo
 
-<Story id="components-form-tags-input--with-initial-value"/>
+<Story id="components-form-tags-input--with-initial-value" />
 
 ## Usage
 
 **Inputs**
- - `ariaLabel`: `string` - Aria label for the input.
- - `addOnBlur`: `boolean` - Whether or not the chipEnd event will be emitted when the input is blurred.
- - `tagValidationHook`: `function(tag, validationCallback())` - Function called each time a tag is added. Useful to hook inside the addition process to, for instance, have custom validation in the components using `gio-form-tags-input`.
- - `placeholder`: `string` - The input's placeholder text.
- - `required`: `boolean` - Whether the input requires to have at least one value.
- - `disabled`: `boolean` - Whether the input is disabled.
 
+- `ariaLabel`: `string` - Aria label for the input.
+- `addOnBlur`: `boolean` - Whether or not the chipEnd event will be emitted when the input is blurred.
+- `tagValidationHook`: `function(tag, validationCallback())` - Function called each time a tag is added. Useful to hook inside the addition process to, for instance, have custom validation in the components using `gio-form-tags-input`.
+- `placeholder`: `string` - The input's placeholder text.
+- `required`: `boolean` - Whether the input requires to have at least one value.
+- `disabled`: `boolean` - Whether the input is disabled.
+- `autocompleteOptions`: `AutocompleteOptions | ((search: string) => Observable<AutocompleteOptions>)` - List of options to autocomplete the input. Can be a static list or a function returning an observable to filter the options.
+- `displayValueWith`: `(value: string) => Observable<string>` - Function to display the label of the input value. Useful to display the label of an value id, for instance.
 Example:
 
 ```html

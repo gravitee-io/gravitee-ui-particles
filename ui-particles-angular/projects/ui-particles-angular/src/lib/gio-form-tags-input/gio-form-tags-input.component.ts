@@ -22,10 +22,14 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { isEmpty } from 'lodash';
-import { fromEvent, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
+import { fromEvent, Observable, of, Subject } from 'rxjs';
+import { distinctUntilChanged, map, startWith, switchMap, tap } from 'rxjs/operators';
 
 export type Tags = Array<string>;
+
+export type AutocompleteOptions = (string | { value: string; label: string })[];
+
+export type DisplayValueWithFn = (value: string) => Observable<string>;
 
 @Component({
   selector: 'gio-form-tags-input',
@@ -66,11 +70,30 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
   public tagValidationHook: ((tag: string, validationCb: (shouldAddTag: boolean) => void) => void) | undefined = undefined;
 
   @Input()
-  public set autocompleteOptions(v: string[] | undefined) {
+  public set autocompleteOptions(v: AutocompleteOptions | ((search: string) => Observable<AutocompleteOptions>) | undefined) {
     this._autocompleteOptions = v;
     this.initAutocomplete();
   }
-  public _autocompleteOptions?: string[];
+  public _autocompleteOptions?: AutocompleteOptions | ((search: string) => Observable<AutocompleteOptions>);
+
+  /**
+   * Get the label of an option value.
+   * To use with autocompleteOptions label & value mode.
+   * Function called each time a tag needs to be displayed id defined.
+   */
+  @Input()
+  public set displayValueWith(displayValueWith: DisplayValueWithFn) {
+    this._displayValueWith = (value: string) => {
+      if (this.displayValueCache[value]) {
+        return of(this.displayValueCache[value]);
+      }
+      return displayValueWith(value).pipe(
+        tap(label => {
+          this.displayValueCache[value] = label;
+        }),
+      );
+    };
+  }
 
   @ViewChild('tagInput')
   public set tagInput(v: ElementRef<HTMLInputElement> | null) {
@@ -112,7 +135,7 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
 
   private _placeholder = '';
 
-  public autocompleteFilteredOptions$?: Observable<string[]>;
+  public autocompleteFilteredOptions$?: Observable<Record<string, string>[]>;
 
   // From ControlValueAccessor interface
   public focused = false;
@@ -153,6 +176,10 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
   }
 
   private _disabled = false;
+
+  public _displayValueWith?: (value: string) => Observable<string>;
+
+  private displayValueCache: Record<string, string> = {};
 
   // From ControlValueAccessor interface
   public get errorState(): boolean {
@@ -286,14 +313,52 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
     if (this._autocompleteOptions && this._tagInput?.nativeElement) {
       this.autocompleteFilteredOptions$ = fromEvent(this._tagInput.nativeElement, 'keyup').pipe(
         startWith([] as string[]),
-        map(() => {
-          return (this._autocompleteOptions ?? []).filter(defaultHeader =>
-            defaultHeader.toLowerCase().includes((this._tagInput?.nativeElement.value ?? '').toLowerCase()),
-          );
+        switchMap(() => {
+          if (typeof this._autocompleteOptions === 'function') {
+            return this._autocompleteOptions(this._tagInput?.nativeElement.value ?? '').pipe(
+              map(options => sanitizeAutocompleteOptions(options)),
+              // Add options to displayValueCache to avoid call on select
+              tap(options => {
+                options.forEach(option => {
+                  this.displayValueCache[option.value] = option.label;
+                });
+              }),
+            );
+          }
+          return of(defaultAutocompleteFilter(this._autocompleteOptions ?? [], this._tagInput?.nativeElement.value ?? ''));
         }),
+
         distinctUntilChanged(),
       );
       this.changeDetectorRef.detectChanges();
     }
   }
 }
+
+const defaultAutocompleteFilter = (
+  options: AutocompleteOptions,
+  search: string,
+): {
+  value: string;
+  label: string;
+}[] => {
+  return sanitizeAutocompleteOptions(options).filter(
+    defaultHeader =>
+      defaultHeader.label.toLowerCase().includes((search ?? '').toLowerCase()) ||
+      defaultHeader.value.toLowerCase().includes((search ?? '').toLowerCase()),
+  );
+};
+
+const sanitizeAutocompleteOptions = (
+  options: AutocompleteOptions,
+): {
+  value: string;
+  label: string;
+}[] => {
+  return options.map(option => {
+    if (option && typeof option !== 'string' && 'value' in option && 'label' in option) {
+      return option;
+    }
+    return { value: option, label: option };
+  });
+};

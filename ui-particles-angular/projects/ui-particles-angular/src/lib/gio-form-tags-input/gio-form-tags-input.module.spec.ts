@@ -21,35 +21,37 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatFormFieldHarness } from '@angular/material/form-field/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Observable, of } from 'rxjs';
 
 import { GioFormTagsInputHarness } from './gio-form-tags-input.harness';
 import { GioFormTagsInputModule } from './gio-form-tags-input.module';
+import { AutocompleteOptions, DisplayValueWithFn } from './gio-form-tags-input.component';
 
-@Component({
-  template: `
-    <mat-form-field appearance="fill">
-      <mat-label>My tags</mat-label>
-      <gio-form-tags-input
-        [required]="required"
-        [placeholder]="placeholder"
-        [formControl]="tagsControl"
-        [tagValidationHook]="tagValidationHook"
-        [autocompleteOptions]="autocompleteOptions"
-      ></gio-form-tags-input>
-      <mat-error>Error</mat-error>
-    </mat-form-field>
-  `,
-})
-class TestComponent {
-  public required = false;
-  public placeholder = 'Add a tag';
-  public tagValidationHook: ((tag: string, validationCb: (shouldAddTag: boolean) => void) => void) | undefined = undefined;
-  public autocompleteOptions?: string[] = undefined;
+describe('GioFormTagsInputModule - Static input', () => {
+  @Component({
+    template: `
+      <mat-form-field appearance="fill">
+        <mat-label>My tags</mat-label>
+        <gio-form-tags-input
+          [required]="required"
+          [placeholder]="placeholder"
+          [formControl]="tagsControl"
+          [tagValidationHook]="tagValidationHook"
+          [autocompleteOptions]="autocompleteOptions"
+        ></gio-form-tags-input>
+        <mat-error>Error</mat-error>
+      </mat-form-field>
+    `,
+  })
+  class TestComponent {
+    public required = false;
+    public placeholder = 'Add a tag';
+    public tagValidationHook: ((tag: string, validationCb: (shouldAddTag: boolean) => void) => void) | undefined = undefined;
+    public autocompleteOptions?: string[] = undefined;
 
-  public tagsControl = new FormControl(null, Validators.required);
-}
+    public tagsControl = new FormControl(null, Validators.required);
+  }
 
-describe('GioFormTagsInputModule', () => {
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
   let loader: HarnessLoader;
@@ -169,5 +171,98 @@ describe('GioFormTagsInputModule', () => {
 
       expect(await formTagsInputHarness.getTags()).toEqual(['alpha']);
     });
+  });
+});
+
+describe('GioFormTagsInputModule - Dynamic input', () => {
+  @Component({
+    template: `
+      <mat-form-field appearance="fill">
+        <mat-label>My tags</mat-label>
+        <gio-form-tags-input
+          [required]="required"
+          [placeholder]="placeholder"
+          [formControl]="tagsControl"
+          [tagValidationHook]="tagValidationHook"
+          [autocompleteOptions]="autocompleteOptions"
+          [displayValueWith]="displayValueWith"
+        ></gio-form-tags-input>
+        <mat-error>Error</mat-error>
+      </mat-form-field>
+    `,
+  })
+  class TestDynamicComponent {
+    public required = false;
+    public placeholder = 'Add a tag';
+    public tagValidationHook: ((tag: string, validationCb: (shouldAddTag: boolean) => void) => void) | undefined = undefined;
+    public autocompleteOptions?: (search: string) => Observable<AutocompleteOptions>;
+    public displayValueWith?: DisplayValueWithFn;
+
+    public tagsControl = new FormControl(null, Validators.required);
+  }
+
+  let component: TestDynamicComponent;
+  let fixture: ComponentFixture<TestDynamicComponent>;
+  let loader: HarnessLoader;
+
+  const fakeApplications = [
+    {
+      label: 'The A1 application',
+      value: 'a1',
+    },
+    {
+      label: 'The A2 application',
+      value: 'a2',
+    },
+    {
+      label: 'The B1 application',
+      value: 'b1',
+    },
+  ];
+  let displayValueWithFnCalledNumber = 0;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [TestDynamicComponent],
+      imports: [NoopAnimationsModule, GioFormTagsInputModule, MatFormFieldModule, ReactiveFormsModule],
+    });
+    fixture = TestBed.createComponent(TestDynamicComponent);
+    component = fixture.componentInstance;
+    loader = TestbedHarnessEnvironment.loader(fixture);
+
+    component.autocompleteOptions = (search: string) => {
+      return of(fakeApplications.filter(app => search && app.label.toLowerCase().includes(search.toLowerCase())));
+    };
+
+    component.displayValueWith = (value: string) => {
+      displayValueWithFnCalledNumber++;
+
+      return of(fakeApplications.find(app => app.value === value)?.label || value);
+    };
+  });
+
+  it('should display tags with value', async () => {
+    fixture.detectChanges();
+
+    const formTagsInputHarness = await loader.getHarness(GioFormTagsInputHarness);
+    expect(await formTagsInputHarness.getTags()).toEqual([]);
+
+    component.tagsControl.setValue(['a1', 'b1']);
+
+    expect(await formTagsInputHarness.getTags()).toEqual(['The A1 application', 'The B1 application']);
+    expect(displayValueWithFnCalledNumber).toEqual(2);
+
+    const matAutocomplete = await formTagsInputHarness.getMatAutocompleteHarness();
+
+    await matAutocomplete?.enterText('The A2');
+    const options = await matAutocomplete?.getOptions();
+    if (options?.length !== 1) {
+      throw new Error('Should be equal to 1');
+    }
+    await options[0].click();
+
+    expect(await formTagsInputHarness.getTags()).toEqual(['The A1 application', 'The B1 application', 'The A2 application']);
+    // Keep 2 call because autocomplete value is cached
+    expect(displayValueWithFnCalledNumber).toEqual(2);
   });
 });
