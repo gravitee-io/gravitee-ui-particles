@@ -17,6 +17,7 @@ import { Injectable } from '@angular/core';
 import { FormlyFieldConfig, FormlyFormBuilder } from '@ngx-formly/core';
 import { FormlyJsonschema } from '@ngx-formly/core/json-schema';
 import { JSONSchema7 } from 'json-schema';
+import { isArray, isEmpty } from 'lodash';
 
 import { GioJsonSchema } from './model/GioJsonSchema';
 
@@ -32,6 +33,7 @@ export class GioFormlyJsonSchemaService {
         mappedField = this.bannerMap(mappedField, mapSource);
         mappedField = this.toggleMap(mappedField, mapSource);
         mappedField = this.disabledMap(mappedField, mapSource);
+        mappedField = this.enumLabelMap(mappedField, mapSource);
 
         return mappedField;
       },
@@ -99,6 +101,22 @@ export class GioFormlyJsonSchemaService {
       ...mappedField.expressions,
       'props.disabled': field => field.options?.formState.disabled === true || field.props?.disabled === true,
     };
+    return mappedField;
+  }
+
+  private enumLabelMap(mappedField: FormlyFieldConfig, mapSource: JSONSchema7): FormlyFieldConfig {
+    if (mapSource.enum && !isEmpty(mapSource.enum) && mapSource.gioConfig?.enumLabelMap && isArray(mappedField.props?.options)) {
+      mappedField.props = {
+        ...mappedField.props,
+        options: mappedField.props?.options?.map(({ value }) => {
+          return {
+            label: value ? mapSource.gioConfig?.enumLabelMap?.[value] : value,
+            value: value,
+          };
+        }),
+      };
+    }
+
     return mappedField;
   }
 }
