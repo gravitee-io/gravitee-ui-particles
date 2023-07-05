@@ -1,3 +1,10 @@
+## [7.28.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.28.1...v7.28.2) (2023-07-05)
+
+
+### Bug Fixes
+
+* add light theme option to submenu group ([2e059ca](https://github.com/gravitee-io/gravitee-ui-particles/commit/2e059ca70ae636cf6b1f83198fed63cb8a611b94))
+
 ## [7.28.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.28.0...v7.28.1) (2023-07-05)
 
 
