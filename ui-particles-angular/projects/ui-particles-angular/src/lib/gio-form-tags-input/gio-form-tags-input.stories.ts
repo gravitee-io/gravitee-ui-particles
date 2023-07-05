@@ -19,6 +19,8 @@ import { action } from '@storybook/addon-actions';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { range } from 'lodash';
+import { of } from 'rxjs';
 
 import { GioFormTagsInputComponent, Tags } from './gio-form-tags-input.component';
 import { GioFormTagsInputModule } from './gio-form-tags-input.module';
@@ -252,6 +254,68 @@ export const WithAutocompleteOnly: Story = {
     autocompleteOptions: httpMethods,
     tagValidationHook: (tag: string, validationCb: (shouldAddTag: boolean) => void) => {
       validationCb(httpMethods.includes(tag.toUpperCase()));
+    },
+  },
+  argTypes: {
+    tagValidationHook: {
+      control: { type: 'function' },
+    },
+  },
+};
+
+const applications = range(10).map(i => ({
+  value: `${i}-applicationId`,
+  label: `${i} - Application`,
+}));
+
+export const WithAsyncAutocompleteOnly: Story = {
+  render: ({ tags, placeholder, required, disabled, tagValidationHook, autocompleteOptions, displayValueWith }) => {
+    const tagsControl = new FormControl({ value: tags, disabled });
+
+    tagsControl.valueChanges.subscribe(value => {
+      action('Tags')(value);
+    });
+
+    return {
+      template: `
+      <mat-form-field appearance="fill" style="width:100%">
+        <mat-label>Applications</mat-label>
+        <gio-form-tags-input
+          [required]="required" 
+          [placeholder]="placeholder" 
+          [formControl]="tagsControl"
+          [tagValidationHook]="tagValidationHook"
+          [autocompleteOptions]="autocompleteOptions"
+          [displayValueWith]="displayValueWith"
+        >
+        </gio-form-tags-input>
+      </mat-form-field>
+      `,
+      props: {
+        tags,
+        placeholder,
+        required,
+        disabled,
+        tagsControl,
+        tagValidationHook,
+        autocompleteOptions,
+        displayValueWith,
+      },
+    };
+  },
+  args: {
+    tags: [applications[0].value],
+    disabled: false,
+    placeholder: 'Search application  ',
+    autocompleteOptions: (tag: string) => {
+      return of(applications.filter(a => a.label.startsWith(tag)));
+    },
+    displayValueWith: (tag: string) => {
+      const application = applications.find(a => a.value === tag);
+      return of(application ? application.label : tag);
+    },
+    tagValidationHook: (tag: string, validationCb: (shouldAddTag: boolean) => void) => {
+      validationCb(applications.map(a => a.value).includes(tag));
     },
   },
   argTypes: {
