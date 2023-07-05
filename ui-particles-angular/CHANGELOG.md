@@ -1,3 +1,10 @@
+# [7.27.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.26.0...v7.27.0) (2023-07-05)
+
+
+### Features
+
+* display cta banner when undeployed policy is selected ([11c1537](https://github.com/gravitee-io/gravitee-ui-particles/commit/11c15374c81487ff346cd84482ef4cc5d00a882e))
+
 # [7.26.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.25.0...v7.26.0) (2023-07-03)
 
 
