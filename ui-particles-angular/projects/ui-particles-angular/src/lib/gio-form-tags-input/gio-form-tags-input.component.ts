@@ -95,6 +95,12 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
     };
   }
 
+  /**
+   * Set to true to force the chip to be part of the autocomplete options.
+   */
+  @Input()
+  public useAutocompleteOptionValueOnly = false;
+
   @ViewChild('tagInput')
   public set tagInput(v: ElementRef<HTMLInputElement> | null) {
     this._tagInput = v;
@@ -303,6 +309,9 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
   }
 
   public onMatChipTokenEnd(): void {
+    if (this.useAutocompleteOptionValueOnly) {
+      return;
+    }
     // Give priority to the `onAutocompleteSelect` when validating with the blur event
     setTimeout(() => {
       this.addChipToFormControl({ value: this._tagInput?.nativeElement.value ?? '' });

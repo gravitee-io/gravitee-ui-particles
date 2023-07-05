@@ -186,6 +186,7 @@ describe('GioFormTagsInputModule - Dynamic input', () => {
           [tagValidationHook]="tagValidationHook"
           [autocompleteOptions]="autocompleteOptions"
           [displayValueWith]="displayValueWith"
+          [useAutocompleteOptionValueOnly]="useAutocompleteOptionValueOnly"
         ></gio-form-tags-input>
         <mat-error>Error</mat-error>
       </mat-form-field>
@@ -197,6 +198,7 @@ describe('GioFormTagsInputModule - Dynamic input', () => {
     public tagValidationHook: ((tag: string, validationCb: (shouldAddTag: boolean) => void) => void) | undefined = undefined;
     public autocompleteOptions?: (search: string) => Observable<AutocompleteOptions>;
     public displayValueWith?: DisplayValueWithFn;
+    public useAutocompleteOptionValueOnly = false;
 
     public tagsControl = new FormControl(null, Validators.required);
   }
@@ -229,7 +231,7 @@ describe('GioFormTagsInputModule - Dynamic input', () => {
     fixture = TestBed.createComponent(TestDynamicComponent);
     component = fixture.componentInstance;
     loader = TestbedHarnessEnvironment.loader(fixture);
-
+    displayValueWithFnCalledNumber = 0;
     component.autocompleteOptions = (search: string) => {
       return of(fakeApplications.filter(app => search && app.label.toLowerCase().includes(search.toLowerCase())));
     };
@@ -262,6 +264,59 @@ describe('GioFormTagsInputModule - Dynamic input', () => {
     await options[0].click();
 
     expect(await formTagsInputHarness.getTags()).toEqual(['The A1 application', 'The B1 application', 'The A2 application']);
+    // Keep 2 call because autocomplete value is cached
+    expect(displayValueWithFnCalledNumber).toEqual(2);
+  });
+
+  it('should display value if tag not found', async () => {
+    //component.useAutocompleteOptionValueOnly = true
+    fixture.detectChanges();
+
+    const formTagsInputHarness = await loader.getHarness(GioFormTagsInputHarness);
+    expect(await formTagsInputHarness.getTags()).toEqual([]);
+
+    component.tagsControl.setValue(['a1', 'b1']);
+
+    expect(await formTagsInputHarness.getTags()).toEqual(['The A1 application', 'The B1 application']);
+    expect(displayValueWithFnCalledNumber).toEqual(2);
+
+    const matAutocomplete = await formTagsInputHarness.getMatAutocompleteHarness();
+
+    await matAutocomplete?.enterText('The A3');
+    const options = await matAutocomplete?.getOptions();
+    if (options?.length !== 0) {
+      throw new Error('Should be equal to 0');
+    }
+    // Click somewhere else in the component to close the autocomplete without selecting an option
+    await matAutocomplete?.blur();
+
+    expect(await formTagsInputHarness.getTags()).toEqual(['The A1 application', 'The B1 application', 'The A3']);
+    expect(displayValueWithFnCalledNumber).toEqual(3);
+  });
+
+  it('should not add unexisting tag', async () => {
+    component.useAutocompleteOptionValueOnly = true;
+    fixture.detectChanges();
+
+    const formTagsInputHarness = await loader.getHarness(GioFormTagsInputHarness);
+    expect(await formTagsInputHarness.getTags()).toEqual([]);
+
+    component.tagsControl.setValue(['a1', 'b1']);
+
+    expect(await formTagsInputHarness.getTags()).toEqual(['The A1 application', 'The B1 application']);
+    expect(displayValueWithFnCalledNumber).toEqual(2);
+
+    const matAutocomplete = await formTagsInputHarness.getMatAutocompleteHarness();
+
+    await matAutocomplete?.enterText('The A3');
+    const options = await matAutocomplete?.getOptions();
+    if (options?.length !== 0) {
+      throw new Error('Should be equal to 0');
+    }
+    // Click somewhere else in the component to close the autocomplete without selecting an option
+    await matAutocomplete?.blur();
+
+    expect(await formTagsInputHarness.getTags()).toEqual(['The A1 application', 'The B1 application']);
     // Keep 2 call because autocomplete value is cached
     expect(displayValueWithFnCalledNumber).toEqual(2);
   });
