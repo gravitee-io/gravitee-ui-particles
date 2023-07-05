@@ -1,3 +1,10 @@
+## [7.28.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.28.0...v7.28.1) (2023-07-05)
+
+
+### Bug Fixes
+
+* sort policies categories ([e3ba825](https://github.com/gravitee-io/gravitee-ui-particles/commit/e3ba8253f5f82e723771d0a6723ae52fdb66daa9))
+
 # [7.28.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.27.0...v7.28.0) (2023-07-05)
 
 
