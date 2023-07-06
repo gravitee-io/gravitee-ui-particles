@@ -1,3 +1,10 @@
+## [7.28.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.28.2...v7.28.3) (2023-07-06)
+
+
+### Bug Fixes
+
+* add trial url to proxy policies ([815b623](https://github.com/gravitee-io/gravitee-ui-particles/commit/815b623cbfd81d2915bdf47831c859d1b13ea633))
+
 ## [7.28.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.28.1...v7.28.2) (2023-07-05)
 
 
