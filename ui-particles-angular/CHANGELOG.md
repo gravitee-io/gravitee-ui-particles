@@ -1,3 +1,10 @@
+## [7.28.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.28.3...v7.28.4) (2023-07-06)
+
+
+### Bug Fixes
+
+* add a boolean to accept only tags available in autocomplete options ([f64e7cd](https://github.com/gravitee-io/gravitee-ui-particles/commit/f64e7cd5aa189fc7359f46faabb0721cbdbd82d1))
+
 ## [7.28.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.28.2...v7.28.3) (2023-07-06)
 
 
