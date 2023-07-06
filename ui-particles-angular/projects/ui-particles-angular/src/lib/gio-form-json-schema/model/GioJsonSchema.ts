@@ -48,6 +48,7 @@ type GioUiTypeConfig = {
 declare module 'json-schema' {
   export interface JSONSchema7 {
     gioConfig?: GioConfig;
+    deprecated?: boolean;
   }
 }
 

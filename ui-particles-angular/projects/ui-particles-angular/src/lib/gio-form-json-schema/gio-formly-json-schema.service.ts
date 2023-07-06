@@ -34,6 +34,7 @@ export class GioFormlyJsonSchemaService {
         mappedField = this.toggleMap(mappedField, mapSource);
         mappedField = this.disabledMap(mappedField, mapSource);
         mappedField = this.enumLabelMap(mappedField, mapSource);
+        mappedField = this.deprecatedMap(mappedField, mapSource);
 
         return mappedField;
       },
@@ -115,6 +116,14 @@ export class GioFormlyJsonSchemaService {
           };
         }),
       };
+    }
+
+    return mappedField;
+  }
+
+  private deprecatedMap(mappedField: FormlyFieldConfig, mapSource: JSONSchema7): FormlyFieldConfig {
+    if (mapSource.deprecated) {
+      return {};
     }
 
     return mappedField;
