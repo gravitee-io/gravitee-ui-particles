@@ -382,6 +382,71 @@ const POLICIES_SCHEMA: Record<string, unknown> = {
     },
     required: ['specification'],
   },
+  'transform-headers': {
+    $schema: 'http://json-schema.org/draft-07/schema#',
+    type: 'object',
+    additionalProperties: false,
+    properties: {
+      scope: {
+        title: 'Scope',
+        description: 'Select phase to execute the policy.',
+        type: 'string',
+        default: 'REQUEST',
+        enum: ['REQUEST', 'RESPONSE', 'REQUEST_CONTENT', 'RESPONSE_CONTENT'],
+        deprecated: 'true',
+      },
+      removeHeaders: {
+        type: 'array',
+        title: 'Remove headers',
+        items: {
+          type: ['string', 'null'],
+          description: 'Name of the header',
+          title: 'Header',
+        },
+      },
+      whitelistHeaders: {
+        type: 'array',
+        title: 'Headers to keep',
+        description: 'Works like a whitelist. All other headers will be removed.',
+        items: {
+          type: ['string', 'null'],
+          description: 'Name of the header',
+          title: 'Header',
+        },
+      },
+      addHeaders: {
+        type: 'array',
+        title: 'Add / update headers',
+        items: {
+          type: 'object',
+          title: 'Header',
+          properties: {
+            name: {
+              title: 'Name',
+              description: 'Name of the header',
+              type: 'string',
+              pattern: '^\\S*$',
+              validationMessage: {
+                '202': 'Header name must not contain spaces.',
+              },
+            },
+            value: {
+              title: 'Value',
+              description: 'Value of the header',
+              type: 'string',
+              'x-schema-form': {
+                'expression-language': true,
+              },
+            },
+          },
+          required: ['name', 'value'],
+        },
+        gioConfig: {
+          uiType: 'gio-headers-array',
+        },
+      },
+    },
+  },
 };
 /**
  * Try to find a policy schema from its id. if not found, return empty

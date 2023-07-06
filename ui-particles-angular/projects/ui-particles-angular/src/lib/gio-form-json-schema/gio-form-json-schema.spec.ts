@@ -179,6 +179,34 @@ describe('GioFormJsonSchema', () => {
       expect(banner.textContent).toContain('banner text');
     });
 
+    it('should not display deprecated fields', async () => {
+      expect.assertions(1);
+
+      fixture.componentInstance.jsonSchema = {
+        type: 'object',
+        properties: {
+          simpleString: {
+            title: 'Simple String',
+            description: 'Simple string without validation',
+            type: 'string',
+          },
+          deprecatedString: {
+            title: 'Deprecated simple string',
+            description: 'Deprecated simple string',
+            type: 'string',
+            deprecated: true,
+          },
+        },
+      };
+      fixture.detectChanges();
+
+      try {
+        await loader.getHarness(MatInputHarness.with({ selector: '[id*="deprecatedString"]' }));
+      } catch ({ message }) {
+        expect(message).toContain('Failed to find element matching one of the following queries');
+      }
+    });
+
     describe('disable/enable toggle tests', () => {
       it('should disable all form fields in the array', fakeAsync(async () => {
         fixture.componentInstance.jsonSchema = {
