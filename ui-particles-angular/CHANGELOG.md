@@ -1,3 +1,10 @@
+## [7.28.5](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.28.4...v7.28.5) (2023-07-07)
+
+
+### Bug Fixes
+
+* do not display deprecated form json schema form fields ([39b1b86](https://github.com/gravitee-io/gravitee-ui-particles/commit/39b1b86e57cc4a59526801f0c951cb83771ce306))
+
 ## [7.28.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.28.3...v7.28.4) (2023-07-06)
 
 
