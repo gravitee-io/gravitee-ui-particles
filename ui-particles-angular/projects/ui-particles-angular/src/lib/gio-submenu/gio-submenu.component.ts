@@ -45,6 +45,9 @@ export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
   @Input()
   public theme: GioSubmenuTheme = 'dark';
 
+  @Input()
+  public static = false;
+
   public reduced = false;
   public loaded = false;
   public overlayOptions: OverlayOptions = { open: false };
@@ -94,7 +97,7 @@ export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
 
     this.gioMenuService.reduced$
       .pipe(
-        switchMap(reduced => (reduced ? reduced$ : notReduced$)),
+        switchMap(reduced => (reduced && !this.static ? reduced$ : notReduced$)),
         takeUntil(this.unsubscribe$),
       )
       .subscribe(() => {
