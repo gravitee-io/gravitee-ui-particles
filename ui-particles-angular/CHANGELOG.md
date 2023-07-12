@@ -1,3 +1,10 @@
+## [7.28.6](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.28.5...v7.28.6) (2023-07-12)
+
+
+### Bug Fixes
+
+* **gio-submenu:** add static input flag to force submenu renderer ([4cd5dee](https://github.com/gravitee-io/gravitee-ui-particles/commit/4cd5dee5d0672fb86a12b91f5788a1dc66663307))
+
 ## [7.28.5](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.28.4...v7.28.5) (2023-07-07)
 
 
