@@ -8,10 +8,12 @@ import { MatInputHarness } from '@angular/material/input/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
+import { MatSelectHarness } from '@angular/material/select/testing';
 
 import { GioJsonSchema } from './model/GioJsonSchema';
 import { GioFormJsonSchemaModule } from './gio-form-json-schema.module';
 import { GioFormJsonSchemaComponent } from './gio-form-json-schema.component';
+import { oneOfExample } from './json-schema-example/oneOf';
 
 /*
  * Copyright (C) 2015 The Gravitee team (http://gravitee.io)
@@ -253,6 +255,24 @@ describe('GioFormJsonSchema', () => {
         await input2.setValue('test-2');
         tick(100);
         expect(await input2.getValue()).toStrictEqual('test-2');
+      }));
+
+      it('should disable/enable oneOf fields', fakeAsync(async () => {
+        fixture.componentInstance.jsonSchema = oneOfExample;
+        tick(100);
+        fixture.detectChanges();
+
+        const selectField = await loader.getHarness(MatSelectHarness.with({ selector: '[id*="enum__0"]' }));
+        expect(await selectField.isDisabled()).toEqual(false);
+
+        fixture.componentInstance.disableFormFields();
+        fixture.detectChanges();
+
+        expect(await selectField.isDisabled()).toEqual(true);
+        fixture.componentInstance.enableFormFields();
+        fixture.detectChanges();
+
+        expect(await selectField.isDisabled()).toEqual(false);
       }));
     });
   });
