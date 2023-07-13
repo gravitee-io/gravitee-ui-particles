@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
 import { set } from 'lodash';
-import { takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -33,7 +32,7 @@ import { Subject } from 'rxjs';
   `,
   styleUrls: ['./multischema-type.component.scss'],
 })
-export class GioFjsMultiSchemaTypeComponent extends FieldType implements OnInit, OnDestroy {
+export class GioFjsMultiSchemaTypeComponent extends FieldType implements OnInit, OnDestroy, AfterViewChecked {
   private unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(private readonly cdr: ChangeDetectorRef) {
@@ -48,16 +47,10 @@ export class GioFjsMultiSchemaTypeComponent extends FieldType implements OnInit,
   public ngOnInit(): void {
     set(this.field, 'fieldGroup[0].props.appearance', 'fill');
     set(this.field, 'fieldGroup[0].props.label', 'Select option');
-    set(this.field, 'fieldGroup[0].props.disabled', this.form.disabled);
+  }
 
-    this.form.valueChanges
-      .pipe(
-        tap(() => {
-          set(this.field, 'fieldGroup[0].props.disabled', this.form.disabled);
-          this.cdr.detectChanges();
-        }),
-        takeUntil(this.unsubscribe$),
-      )
-      .subscribe();
+  public ngAfterViewChecked(): void {
+    set(this.field, 'fieldGroup[0].props.disabled', this.formControl.disabled);
+    this.cdr.detectChanges();
   }
 }
