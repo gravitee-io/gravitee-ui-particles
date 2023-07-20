@@ -112,7 +112,7 @@ export class GioPolicyStudioHarness extends ComponentHarness {
       await matTabsHarness.selectTab({ label: 'Event messages' });
     }
 
-    const steps = await await this.phaseHarness(phaseType);
+    const steps = await this.phaseHarness(phaseType);
 
     return steps ? steps : undefined;
   }

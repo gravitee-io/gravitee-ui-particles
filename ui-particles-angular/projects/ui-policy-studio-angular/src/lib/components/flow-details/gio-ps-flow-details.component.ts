@@ -24,7 +24,7 @@ import {
   GioPolicyStudioFlowMessageFormDialogComponent,
   GioPolicyStudioFlowMessageFormDialogData,
 } from '../flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
-import { ApiType, ChannelSelector, ConnectorInfo, Policy, Step } from '../../models';
+import { ApiType, ChannelSelector, ConnectorInfo, Operation, Policy, Step } from '../../models';
 import {
   GioPolicyStudioFlowProxyFormDialogComponent,
   GioPolicyStudioFlowProxyFormDialogData,
@@ -66,11 +66,15 @@ export class GioPolicyStudioDetailsComponent implements OnChanges {
 
   public messageFlowEntrypointsInfo: ConnectorInfo[] = [];
 
+  public operations: Operation[] = [];
+
   constructor(private readonly matDialog: MatDialog) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.entrypointsInfo || changes.flow) {
       const channelSelector = this.flow?.selectors?.find(s => s.type === 'CHANNEL') as ChannelSelector;
+
+      this.operations = channelSelector?.operations ?? [];
 
       if (!channelSelector) {
         // If no channel selector found. Keep default value

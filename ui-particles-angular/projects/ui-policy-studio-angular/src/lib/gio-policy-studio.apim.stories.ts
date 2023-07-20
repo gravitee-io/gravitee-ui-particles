@@ -218,6 +218,7 @@ export const MessageWithAllPhases: Story = {
       fakeChannelFlow(base => {
         const channelSelector = base.selectors?.find(selector => selector.type === 'CHANNEL') as ChannelSelector;
         channelSelector.entrypoints = [];
+        channelSelector.operations = [];
         return {
           ...base,
           name: 'Flow',
