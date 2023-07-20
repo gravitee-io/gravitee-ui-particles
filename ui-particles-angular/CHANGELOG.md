@@ -1,3 +1,10 @@
+## [7.28.8](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.28.7...v7.28.8) (2023-07-20)
+
+
+### Bug Fixes
+
+* show phase by operation specified ([ca7542e](https://github.com/gravitee-io/gravitee-ui-particles/commit/ca7542e4510357e3144b61af4147ad367b322aee))
+
 ## [7.28.7](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.28.6...v7.28.7) (2023-07-20)
 
 
