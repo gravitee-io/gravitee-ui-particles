@@ -1,3 +1,10 @@
+## [7.28.7](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.28.6...v7.28.7) (2023-07-20)
+
+
+### Bug Fixes
+
+* disable mutlischema mat-select when form is disabled ([5448c41](https://github.com/gravitee-io/gravitee-ui-particles/commit/5448c41ad2699d8c84933eb567b5c07c08e063a0))
+
 ## [7.28.6](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.28.5...v7.28.6) (2023-07-12)
 
 
