@@ -39,13 +39,14 @@ import {
   fakeTestPolicy,
   fakeTestPolicyStep,
   fakeWebhookMessageEntrypoint,
+  fakeWebsocketMessageEntrypoint,
 } from '../public-testing-api';
 
 import { GioPolicyStudioModule } from './gio-policy-studio.module';
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
 import { GioPolicyStudioDetailsHarness } from './components/flow-details/gio-ps-flow-details.harness';
 import { GioPolicyStudioFlowsMenuHarness } from './components/flows-menu/gio-ps-flows-menu.harness';
-import { SaveOutput } from './models';
+import { ChannelSelector, SaveOutput } from './models';
 import { GioPolicyStudioHarness } from './gio-policy-studio.harness';
 import { fakePolicySchema } from './models/policy/PolicySchema.fixture';
 
@@ -609,10 +610,26 @@ describe('GioPolicyStudioModule', () => {
         });
       });
 
-      it('should display phases steps', async () => {
+      it('should both display only subscribe phase', async () => {
+        component.entrypointsInfo = [fakeWebsocketMessageEntrypoint()];
+        component.endpointsInfo = [fakeKafkaMessageEndpoint()];
+        component.ngOnChanges({
+          entrypointsInfo: new SimpleChange(null, null, true),
+          endpointsInfo: new SimpleChange(null, null, true),
+        });
+
+        const subscribeChannelSelector: ChannelSelector = {
+          type: 'CHANNEL',
+          channel: 'channel',
+          channelOperator: 'EQUALS',
+          entrypoints: ['websocket'],
+          operations: ['SUBSCRIBE'],
+        };
+
         const commonFlows = [
           fakeChannelFlow({
             name: 'Flow 1',
+            selectors: [subscribeChannelSelector],
             request: [fakeTestPolicyStep()],
             response: [fakeTestPolicyStep()],
             publish: [fakeTestPolicyStep()],
@@ -630,7 +647,7 @@ describe('GioPolicyStudioModule', () => {
         const subscribePhase = await policyStudioHarness.getSelectedFlowPhase('SUBSCRIBE');
 
         expect(await requestPhase?.getSteps()).toStrictEqual([
-          { name: 'Webhook', type: 'connector' },
+          { name: 'Websocket', type: 'connector' },
           { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
           { name: 'Kafka', type: 'connector' },
         ]);
@@ -638,7 +655,7 @@ describe('GioPolicyStudioModule', () => {
         expect(await responsePhase?.getSteps()).toStrictEqual([
           { name: 'Kafka', type: 'connector' },
           { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
-          { name: 'Webhook', type: 'connector' },
+          { name: 'Websocket', type: 'connector' },
         ]);
 
         expect(await publishPhase?.getSteps()).toEqual('DISABLED');
@@ -646,14 +663,201 @@ describe('GioPolicyStudioModule', () => {
         expect(await subscribePhase?.getSteps()).toStrictEqual([
           { name: 'Kafka', type: 'connector' },
           { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
-          { name: 'Webhook', type: 'connector' },
+          { name: 'Websocket', type: 'connector' },
+        ]);
+      });
+
+      it('should both display only publish phase', async () => {
+        component.entrypointsInfo = [fakeWebsocketMessageEntrypoint()];
+        component.endpointsInfo = [fakeKafkaMessageEndpoint()];
+        component.ngOnChanges({
+          entrypointsInfo: new SimpleChange(null, null, true),
+          endpointsInfo: new SimpleChange(null, null, true),
+        });
+
+        const publishChannelSelector: ChannelSelector = {
+          type: 'CHANNEL',
+          channel: 'channel',
+          channelOperator: 'EQUALS',
+          entrypoints: ['websocket'],
+          operations: ['PUBLISH'],
+        };
+
+        const commonFlows = [
+          fakeChannelFlow({
+            name: 'Flow 1',
+            selectors: [publishChannelSelector],
+            request: [fakeTestPolicyStep()],
+            response: [fakeTestPolicyStep()],
+            publish: [fakeTestPolicyStep()],
+            subscribe: [fakeTestPolicyStep()],
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        const requestPhase = await policyStudioHarness.getSelectedFlowPhase('REQUEST');
+        const responsePhase = await policyStudioHarness.getSelectedFlowPhase('RESPONSE');
+        const publishPhase = await policyStudioHarness.getSelectedFlowPhase('PUBLISH');
+        const subscribePhase = await policyStudioHarness.getSelectedFlowPhase('SUBSCRIBE');
+
+        expect(await requestPhase?.getSteps()).toStrictEqual([
+          { name: 'Websocket', type: 'connector' },
+          { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
+          { name: 'Kafka', type: 'connector' },
+        ]);
+
+        expect(await responsePhase?.getSteps()).toStrictEqual([
+          { name: 'Kafka', type: 'connector' },
+          { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
+          { name: 'Websocket', type: 'connector' },
+        ]);
+
+        expect(await publishPhase?.getSteps()).toStrictEqual([
+          { name: 'Websocket', type: 'connector' },
+          { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
+          { name: 'Kafka', type: 'connector' },
+        ]);
+
+        expect(await subscribePhase?.getSteps()).toEqual('DISABLED');
+      });
+
+      it('should display both phases with empty list', async () => {
+        component.entrypointsInfo = [fakeWebsocketMessageEntrypoint()];
+        component.endpointsInfo = [fakeKafkaMessageEndpoint()];
+        component.ngOnChanges({
+          entrypointsInfo: new SimpleChange(null, null, true),
+          endpointsInfo: new SimpleChange(null, null, true),
+        });
+
+        const emptyChannelSelector: ChannelSelector = {
+          type: 'CHANNEL',
+          channel: 'channel',
+          channelOperator: 'EQUALS',
+          entrypoints: ['websocket'],
+          operations: [],
+        };
+
+        const commonFlows = [
+          fakeChannelFlow({
+            name: 'Flow 1',
+            selectors: [emptyChannelSelector],
+            request: [fakeTestPolicyStep()],
+            response: [fakeTestPolicyStep()],
+            publish: [fakeTestPolicyStep()],
+            subscribe: [fakeTestPolicyStep()],
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        const requestPhase = await policyStudioHarness.getSelectedFlowPhase('REQUEST');
+        const responsePhase = await policyStudioHarness.getSelectedFlowPhase('RESPONSE');
+        const publishPhase = await policyStudioHarness.getSelectedFlowPhase('PUBLISH');
+        const subscribePhase = await policyStudioHarness.getSelectedFlowPhase('SUBSCRIBE');
+
+        expect(await requestPhase?.getSteps()).toStrictEqual([
+          { name: 'Websocket', type: 'connector' },
+          { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
+          { name: 'Kafka', type: 'connector' },
+        ]);
+
+        expect(await responsePhase?.getSteps()).toStrictEqual([
+          { name: 'Kafka', type: 'connector' },
+          { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
+          { name: 'Websocket', type: 'connector' },
+        ]);
+
+        expect(await publishPhase?.getSteps()).toStrictEqual([
+          { name: 'Websocket', type: 'connector' },
+          { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
+          { name: 'Kafka', type: 'connector' },
+        ]);
+
+        expect(await subscribePhase?.getSteps()).toStrictEqual([
+          { name: 'Kafka', type: 'connector' },
+          { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
+          { name: 'Websocket', type: 'connector' },
+        ]);
+      });
+
+      it('should display both phases with both operations selected', async () => {
+        component.entrypointsInfo = [fakeWebsocketMessageEntrypoint()];
+        component.endpointsInfo = [fakeKafkaMessageEndpoint()];
+        component.ngOnChanges({
+          entrypointsInfo: new SimpleChange(null, null, true),
+          endpointsInfo: new SimpleChange(null, null, true),
+        });
+
+        const allOperationsChannelSelector: ChannelSelector = {
+          type: 'CHANNEL',
+          channel: 'channel',
+          channelOperator: 'EQUALS',
+          entrypoints: ['websocket'],
+          operations: ['PUBLISH', 'SUBSCRIBE'],
+        };
+
+        const commonFlows = [
+          fakeChannelFlow({
+            name: 'Flow 1',
+            selectors: [allOperationsChannelSelector],
+            request: [fakeTestPolicyStep()],
+            response: [fakeTestPolicyStep()],
+            publish: [fakeTestPolicyStep()],
+            subscribe: [fakeTestPolicyStep()],
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        const requestPhase = await policyStudioHarness.getSelectedFlowPhase('REQUEST');
+        const responsePhase = await policyStudioHarness.getSelectedFlowPhase('RESPONSE');
+        const publishPhase = await policyStudioHarness.getSelectedFlowPhase('PUBLISH');
+        const subscribePhase = await policyStudioHarness.getSelectedFlowPhase('SUBSCRIBE');
+
+        expect(await requestPhase?.getSteps()).toStrictEqual([
+          { name: 'Websocket', type: 'connector' },
+          { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
+          { name: 'Kafka', type: 'connector' },
+        ]);
+
+        expect(await responsePhase?.getSteps()).toStrictEqual([
+          { name: 'Kafka', type: 'connector' },
+          { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
+          { name: 'Websocket', type: 'connector' },
+        ]);
+
+        expect(await publishPhase?.getSteps()).toStrictEqual([
+          { name: 'Websocket', type: 'connector' },
+          { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
+          { name: 'Kafka', type: 'connector' },
+        ]);
+
+        expect(await subscribePhase?.getSteps()).toStrictEqual([
+          { name: 'Kafka', type: 'connector' },
+          { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
+          { name: 'Websocket', type: 'connector' },
         ]);
       });
 
       it('should add step into phase', async () => {
+        const channelSelector: ChannelSelector = {
+          type: 'CHANNEL',
+          channel: 'channel',
+          channelOperator: 'EQUALS',
+          entrypoints: ['webhook'],
+          operations: ['SUBSCRIBE'],
+        };
         const commonFlows = [
           fakeChannelFlow({
             name: 'Alphabetical policy',
+            selectors: [channelSelector],
             request: [fakeTestPolicyStep({ description: 'B' })],
             response: [fakeTestPolicyStep({ description: 'B' })],
             publish: [fakeTestPolicyStep({ description: 'B' })],
@@ -716,9 +920,17 @@ describe('GioPolicyStudioModule', () => {
       });
 
       it('should edit step into phase', async () => {
+        const channelSelector: ChannelSelector = {
+          type: 'CHANNEL',
+          channel: 'channel',
+          channelOperator: 'EQUALS',
+          entrypoints: ['webhook'],
+          operations: ['SUBSCRIBE'],
+        };
         const commonFlows = [
           fakeChannelFlow({
             name: 'Alphabetical policy',
+            selectors: [channelSelector],
             request: [fakeTestPolicyStep({ description: 'B' })],
             subscribe: [fakeTestPolicyStep({ description: 'B' })],
           }),
@@ -754,9 +966,17 @@ describe('GioPolicyStudioModule', () => {
       });
 
       it('should delete step into phase', async () => {
+        const channelSelector: ChannelSelector = {
+          type: 'CHANNEL',
+          channel: 'channel',
+          channelOperator: 'EQUALS',
+          entrypoints: ['webhook'],
+          operations: ['SUBSCRIBE'],
+        };
         const commonFlows = [
           fakeChannelFlow({
             name: 'Alphabetical policy',
+            selectors: [channelSelector],
             request: [fakeTestPolicyStep({ description: 'A' }), fakeTestPolicyStep({ description: 'B' })],
             subscribe: [fakeTestPolicyStep({ description: 'B' })],
           }),

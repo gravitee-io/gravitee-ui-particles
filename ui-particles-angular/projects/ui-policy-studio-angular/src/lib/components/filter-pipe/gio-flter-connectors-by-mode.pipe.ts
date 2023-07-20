@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { Pipe, PipeTransform } from '@angular/core';
-import { filter } from 'lodash';
+import { filter, isEmpty } from 'lodash';
 
 import { ConnectorInfo, ConnectorMode } from '../../models';
 
@@ -22,16 +22,18 @@ import { ConnectorInfo, ConnectorMode } from '../../models';
   name: 'gioFilterConnectorsByMode',
 })
 export class GioFilterConnectorsByModePipe implements PipeTransform {
-  public transform(items: ConnectorInfo[], mode: ConnectorMode): ConnectorInfo[] {
-    if (!items) {
-      return [];
-    }
-    if (!mode) {
-      return items;
-    }
+  public transform(items: ConnectorInfo[], mode: ConnectorMode, activeModes: ConnectorMode[] = []): ConnectorInfo[] {
+    if (items) {
+      if (!mode) {
+        return items;
+      }
 
-    return filter(items, (item: ConnectorInfo) => {
-      return item.supportedModes.includes(mode);
-    });
+      if (isEmpty(activeModes) || activeModes.includes(mode)) {
+        return filter(items, (item: ConnectorInfo) => {
+          return item.supportedModes.includes(mode);
+        });
+      }
+    }
+    return [];
   }
 }

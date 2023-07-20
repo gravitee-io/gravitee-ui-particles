@@ -107,7 +107,7 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
         },
       ];
 
-      // Disable phase if there are not start & end connectors
+      // Disable phase if there are no start & end connectors
       this.isDisabled = this.stepsVM.filter(step => step.type === 'connectors' && !isEmpty(step.connectors)).length < 2;
     }
   }
