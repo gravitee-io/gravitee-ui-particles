@@ -83,3 +83,13 @@ export * from './gio-dialog/gio-dialog.constant';
 export * from './gio-clipboard/gio-clipboard.module';
 export * from './gio-clipboard/gio-clipboard-copy-icon.component';
 export * from './gio-clipboard/gio-clipboard-copy-wrapper.component';
+
+export * from './gio-pipe/gio.pipe.module';
+export * from './gio-pipe/safe.pipe';
+
+export * from './gio-license/gio-license.module';
+export * from './gio-license/gio-license.service';
+export * from './gio-license/gio-license.directive';
+export * from './gio-license/gio-license-dialog/gio-license-dialog.module';
+export * from './gio-license/gio-license-dialog/gio-license-dialog.component';
+export * from './gio-license/gio-license.testing.module';
