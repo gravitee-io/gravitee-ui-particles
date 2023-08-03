@@ -1,3 +1,10 @@
+## [7.28.9](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.28.8...v7.28.9) (2023-08-03)
+
+
+### Bug Fixes
+
+* request phase on add flow ([5431eab](https://github.com/gravitee-io/gravitee-ui-particles/commit/5431eab9574cc259f3f8da43373b83373d9d8459))
+
 ## [7.28.8](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.28.7...v7.28.8) (2023-07-20)
 
 
