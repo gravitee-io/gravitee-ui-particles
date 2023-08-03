@@ -74,7 +74,7 @@
             [apiType]="apiType"
             [policies]="policies"
             [trialUrl]="trialUrl"
-            policyExecutionPhase="MESSAGE_RESPONSE"
+            policyExecutionPhase="MESSAGE_REQUEST"
             (stepsChange)="onStepsChange('publish', $event)"
           ></gio-ps-flow-details-phase>
           <gio-ps-flow-details-phase
@@ -87,7 +87,7 @@
             [apiType]="apiType"
             [policies]="policies"
             [trialUrl]="trialUrl"
-            policyExecutionPhase="MESSAGE_REQUEST"
+            policyExecutionPhase="MESSAGE_RESPONSE"
             (stepsChange)="onStepsChange('subscribe', $event)"
           ></gio-ps-flow-details-phase>
         </mat-tab>
