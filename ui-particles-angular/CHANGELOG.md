@@ -1,3 +1,10 @@
+## [7.29.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.29.0...v7.29.1) (2023-08-10)
+
+
+### Bug Fixes
+
+* extract trialResourceURL ([9863fa3](https://github.com/gravitee-io/gravitee-ui-particles/commit/9863fa392e90ada94251300311ac6fb72648f515))
+
 # [7.29.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.28.9...v7.29.0) (2023-08-10)
 
 
