@@ -168,13 +168,13 @@ describe('GioLicenseService', () => {
 
   it('should return trial URL from UTM medium', () => {
     const expected =
-      'https://gravitee.io/self-hosted-trial?utm_source=oss_utm_source_test&utm_medium=feature_debugmode_v2&utm_campaign=oss_utm_campaign_test';
+      'https://url.test:3000/trial?utm_source=oss_utm_source_test&utm_medium=feature_debugmode_v2&utm_campaign=oss_utm_campaign_test';
     expect(gioLicenseService.getTrialURL({ feature: 'feature_debugmode_v2' })).toEqual(expected);
   });
 
   it('should return trial URL from UTM medium and UTM content', () => {
     const expected =
-      'https://gravitee.io/self-hosted-trial?utm_source=oss_utm_source_test&utm_medium=feature_debugmode_v2&utm_campaign=oss_utm_campaign_test&utm_content=organization';
+      'https://url.test:3000/trial?utm_source=oss_utm_source_test&utm_medium=feature_debugmode_v2&utm_campaign=oss_utm_campaign_test&utm_content=organization';
     expect(gioLicenseService.getTrialURL({ feature: 'feature_debugmode_v2', context: 'organization' })).toEqual(expected);
   });
 });

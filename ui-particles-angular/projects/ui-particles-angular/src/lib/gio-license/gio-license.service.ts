@@ -30,6 +30,7 @@ export type License = {
 export interface LicenseConfiguration {
   resourceURL: string;
   featureInfoData: Record<string, FeatureInfo>;
+  trialResourceURL: string;
   utmSource: string;
   utmCampaign: string;
 }
@@ -102,7 +103,7 @@ export class GioLicenseService {
     if (!licenseOptions.feature) {
       throw new Error(`feature is undefined`);
     }
-    let url = `https://gravitee.io/self-hosted-trial?utm_source=${this.licenseConfiguration.utmSource}&utm_medium=${licenseOptions.feature}&utm_campaign=${this.licenseConfiguration.utmCampaign}`;
+    let url = `${this.licenseConfiguration.trialResourceURL}?utm_source=${this.licenseConfiguration.utmSource}&utm_medium=${licenseOptions.feature}&utm_campaign=${this.licenseConfiguration.utmCampaign}`;
     if (licenseOptions.context) {
       url += `&utm_content=${licenseOptions.context}`;
     }
