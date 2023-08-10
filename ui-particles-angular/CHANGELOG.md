@@ -1,3 +1,10 @@
+# [7.29.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.28.9...v7.29.0) (2023-08-10)
+
+
+### Features
+
+* add gio-license components ([249e62e](https://github.com/gravitee-io/gravitee-ui-particles/commit/249e62e2b64ee102b4b7b7c37b6e65ea071a22f8))
+
 ## [7.28.9](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.28.8...v7.28.9) (2023-08-03)
 
 
