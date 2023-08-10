@@ -20,6 +20,7 @@ import { GioLicenseService, LicenseConfiguration } from './gio-license.service';
 
 export const LICENSE_CONFIGURATION_TESTING: LicenseConfiguration = {
   resourceURL: 'https://url.test:3000/license',
+  trialResourceURL: 'https://url.test:3000/trial',
   utmSource: 'oss_utm_source_test',
   utmCampaign: 'oss_utm_campaign_test',
   featureInfoData: {
