@@ -1,3 +1,10 @@
+## [7.29.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.29.1...v7.29.2) (2023-08-18)
+
+
+### Bug Fixes
+
+* **license:** remove storybook stuff from implementation ([c5a2fa4](https://github.com/gravitee-io/gravitee-ui-particles/commit/c5a2fa4dd067e6084e86e14e348b892a8c9f8f07))
+
 ## [7.29.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.29.0...v7.29.1) (2023-08-10)
 
 
