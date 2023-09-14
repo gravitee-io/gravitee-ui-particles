@@ -75,6 +75,7 @@ describe('GioFormJsonSchema', () => {
     });
 
     it('should complete form field and submit', async () => {
+      const valueChangesWatch: unknown[] = [];
       fixture.componentInstance.jsonSchema = {
         type: 'object',
         properties: {
@@ -85,12 +86,15 @@ describe('GioFormJsonSchema', () => {
           },
         },
       };
+      testComponent.form.valueChanges.subscribe(v => valueChangesWatch.push(v));
+
       fixture.detectChanges();
       expect(testComponent.form.touched).toEqual(false);
       expect(testComponent.form.dirty).toEqual(false);
       expect(testComponent.form.valid).toEqual(true);
       expect(testComponent.form.status).toEqual('VALID');
       expect(testComponent.form.invalid).toEqual(false); // Valid after initialization
+      expect(valueChangesWatch.length).toEqual(0);
 
       const simpleStringInput = await loader.getHarness(MatInputHarness.with({ selector: '[id*="simpleString"]' }));
       await simpleStringInput.setValue('What the fox say?');
@@ -101,6 +105,24 @@ describe('GioFormJsonSchema', () => {
       expect(testComponent.form.touched).toEqual(true);
       expect(testComponent.form.dirty).toEqual(true);
       expect(testComponent.form.invalid).toEqual(false);
+
+      expect(valueChangesWatch).toEqual([
+        {
+          config: {
+            simpleString: undefined,
+          },
+        },
+        {
+          config: {
+            simpleString: undefined,
+          },
+        },
+        {
+          config: {
+            simpleString: 'What the fox say?',
+          },
+        },
+      ]);
 
       // No banner on simple elements
       const banner = fixture.nativeElement.querySelector('.banner');

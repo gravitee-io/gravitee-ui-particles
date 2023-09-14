@@ -167,7 +167,9 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
       .subscribe(() => {
         this.changeDetectorRef.markForCheck();
         this.changeDetectorRef.detectChanges();
-        this.ngControl?.control?.updateValueAndValidity();
+        this.ngControl?.control?.updateValueAndValidity({
+          emitEvent: false,
+        });
       });
   }
 
