@@ -1,3 +1,10 @@
+## [7.29.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.29.2...v7.29.3) (2023-09-14)
+
+
+### Bug Fixes
+
+* **json-schema:** not emit valueChanges by default on init ([4f373aa](https://github.com/gravitee-io/gravitee-ui-particles/commit/4f373aa87f06cc9aee715519c47f05921dafd27b))
+
 ## [7.29.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.29.1...v7.29.2) (2023-08-18)
 
 
