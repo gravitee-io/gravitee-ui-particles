@@ -150,6 +150,8 @@ const icons = [
   'heart',
   'hexagon',
   'home',
+  'http-get',
+  'http-post',
   'if',
   'image',
   'info',
