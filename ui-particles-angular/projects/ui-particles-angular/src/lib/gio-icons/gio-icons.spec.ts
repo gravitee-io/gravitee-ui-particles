@@ -215,6 +215,7 @@ const icons = [
   'octagon',
   'off-rounded',
   'on-rounded',
+  'open-id',
   'open-vpn',
   'page',
   'palette',
