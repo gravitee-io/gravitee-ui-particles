@@ -267,6 +267,7 @@ const icons = [
   'sliders',
   'smartphone-device',
   'square',
+  'sse',
   'star-dashed',
   'star-half-dashed',
   'star-outline',
