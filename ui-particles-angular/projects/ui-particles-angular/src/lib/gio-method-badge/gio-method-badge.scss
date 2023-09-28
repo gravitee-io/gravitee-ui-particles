@@ -16,8 +16,8 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 
-@use '../../gio-mat-palettes.scss' as palettes;
-@use '../../gio-mat-theme-variable' as theme;
+@use '../../scss/gio-mat-palettes.scss' as palettes;
+@use '../../scss/gio-mat-theme-variable' as theme;
 
 /**
  * Gravitee.io version of bootstrap "badge" element dedicated to HTTP verbs

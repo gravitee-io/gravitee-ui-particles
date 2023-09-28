@@ -16,7 +16,7 @@
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
 
-import { GioIconsModule } from '../../../lib/gio-icons/gio-icons.module';
+import { GioIconsModule } from '../gio-icons/gio-icons.module';
 
 export default {
   title: 'Components / Badge',

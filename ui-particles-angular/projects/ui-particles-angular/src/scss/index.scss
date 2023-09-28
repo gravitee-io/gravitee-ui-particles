@@ -25,4 +25,4 @@
 
 @forward './gio-mat-theme' show mat-theme;
 
-@forward './gio-components' show all-components;
+@forward '../lib/gio-scss-components' show all-components;

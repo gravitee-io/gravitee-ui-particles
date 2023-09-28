@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@use '../../theme/typography/gio-typography' as typo;
+@use '../../scss/theme/typography/gio-typography' as typo;
 
 @mixin theme() {
   .gio-caption-2,
