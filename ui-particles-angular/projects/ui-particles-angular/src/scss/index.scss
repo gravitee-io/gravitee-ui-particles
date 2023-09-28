@@ -25,4 +25,6 @@
 
 @forward './gio-mat-theme' show mat-theme;
 
+@forward '../lib/public-api';
+
 @forward '../lib/gio-scss-components' show all-components;
