@@ -93,3 +93,7 @@ export * from './gio-license/gio-license.directive';
 export * from './gio-license/gio-license-dialog/gio-license-dialog.module';
 export * from './gio-license/gio-license-dialog/gio-license-dialog.component';
 export * from './gio-license/gio-license.testing.module';
+
+export * from './gio-form-cron/gio-form-cron.component';
+export * from './gio-form-cron/gio-form-cron.module';
+export * from './gio-form-cron/gio-form-cron.harness';
