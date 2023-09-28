@@ -16,8 +16,8 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 
-@use '../../gio-mat-palettes.scss' as palettes;
-@use '../../gio-mat-theme-variable' as theme;
+@use '../../scss/gio-mat-palettes.scss' as palettes;
+@use '../../scss/gio-mat-theme-variable' as theme;
 
 $background: map.get(theme.$mat-theme, background);
 $typography: map.get(theme.$mat-theme, typography);
