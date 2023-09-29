@@ -15,4 +15,148 @@
     limitations under the License.
 
 -->
-🚧
+<ng-container *ngIf="internalFormGroup" [formGroup]="internalFormGroup">
+  <mat-button-toggle-group class="gio-button-toggle-group" name="mode" aria-label="Cron mode" formControlName="mode">
+    <mat-button-toggle value="second">Secondly</mat-button-toggle>
+    <mat-button-toggle value="minute">Minutely</mat-button-toggle>
+    <mat-button-toggle value="hour">Hourly</mat-button-toggle>
+    <mat-button-toggle value="day">Daily</mat-button-toggle>
+    <mat-button-toggle value="week">Weekly</mat-button-toggle>
+    <mat-button-toggle value="month">Month</mat-button-toggle>
+    <mat-button-toggle value="custom">Custom</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <ng-container [ngSwitch]="internalFormGroup.get('mode')?.value">
+    <ng-container *ngSwitchCase="'second'">
+      <div class="modeForm">
+        <span class="cron-form-label">Every </span>
+        <mat-form-field>
+          <mat-label>Second</mat-label>
+          <mat-select formControlName="seconds">
+            <mat-option *ngFor="let second of seconds" [value]="second">{{ second }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'minute'">
+      <div class="modeForm">
+        <span class="cron-form-label">Every </span>
+        <mat-form-field>
+          <mat-label>Minute(s)</mat-label>
+          <mat-select formControlName="minutes">
+            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'hour'">
+      <div class="modeForm">
+        <span class="cron-form-label">Every </span>
+        <mat-form-field>
+          <mat-label>Hour(s)</mat-label>
+          <mat-select formControlName="hours">
+            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <span class="cron-form-label">:</span>
+        <mat-form-field>
+          <mat-label>Minute(s)</mat-label>
+          <mat-select formControlName="minutes">
+            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'day'">
+      <div class="modeForm">
+        <span class="cron-form-label">Every </span>
+        <mat-form-field>
+          <mat-label>Day(s)</mat-label>
+          <mat-select formControlName="daysOfMouth">
+            <mat-option *ngFor="let day of daysOfMouth" [value]="day">{{ day }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <span class="cron-form-label"> at </span>
+        <mat-form-field>
+          <mat-label>Hour(s)</mat-label>
+          <mat-select formControlName="hours">
+            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <span class="cron-form-label">:</span>
+        <mat-form-field>
+          <mat-label>Minute(s)</mat-label>
+          <mat-select formControlName="minutes">
+            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'week'">
+      <div class="modeForm">
+        <span class="cron-form-label">Every </span>
+        <mat-form-field>
+          <mat-label>Day of the week</mat-label>
+          <mat-select formControlName="daysOfWeek">
+            <mat-option *ngFor="let day of daysOfWeek" [value]="day">{{ day }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <span class="cron-form-label"> at </span>
+        <mat-form-field>
+          <mat-label>Hours</mat-label>
+          <mat-select formControlName="hours">
+            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <span class="cron-form-label">:</span>
+        <mat-form-field>
+          <mat-label>Minutes</mat-label>
+          <mat-select formControlName="minutes">
+            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'month'">
+      <div class="modeForm">
+        <span class="cron-form-label">On the </span>
+        <mat-form-field>
+          <mat-label>Day(s) of every month</mat-label>
+          <mat-select formControlName="daysOfMouth">
+            <mat-option *ngFor="let day of daysOfMouth" [value]="day">{{ day }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <span class="cron-form-label"> at </span>
+        <mat-form-field>
+          <mat-label>Hours</mat-label>
+          <mat-select formControlName="hours">
+            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <span class="cron-form-label">:</span>
+        <mat-form-field>
+          <mat-label>Minutes</mat-label>
+          <mat-select formControlName="minutes">
+            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'custom'">
+      <div class="modeForm">
+        <mat-form-field>
+          <mat-label>Cron expression</mat-label>
+          <input matInput formControlName="cronExpression" placeholder="* * * * * *" />
+        </mat-form-field>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  {{ internalFormGroup.valueChanges | async | json }}
+</ng-container>
