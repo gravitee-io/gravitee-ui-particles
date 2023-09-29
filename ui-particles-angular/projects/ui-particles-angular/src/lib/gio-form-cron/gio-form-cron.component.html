@@ -22,7 +22,7 @@
     <mat-button-toggle value="hour">Hourly</mat-button-toggle>
     <mat-button-toggle value="day">Daily</mat-button-toggle>
     <mat-button-toggle value="week">Weekly</mat-button-toggle>
-    <mat-button-toggle value="month">Month</mat-button-toggle>
+    <mat-button-toggle value="month">Monthly</mat-button-toggle>
     <mat-button-toggle value="custom">Custom</mat-button-toggle>
   </mat-button-toggle-group>
 
@@ -152,13 +152,13 @@
       <div class="modeForm">
         <mat-form-field>
           <mat-label>Cron expression</mat-label>
-          <input matInput formControlName="cronExpression" placeholder="* * * * * *" />
+          <input matInput formControlName="customExpression" placeholder="* * * * * *" />
         </mat-form-field>
       </div>
     </ng-container>
   </ng-container>
 
   <div class="preview">
-    {{ internalFormGroup.valueChanges | async | json }}
+    {{ value }}
   </div>
 </ng-container>

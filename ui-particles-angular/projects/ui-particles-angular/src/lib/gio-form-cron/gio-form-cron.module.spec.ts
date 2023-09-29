@@ -53,6 +53,7 @@ describe('GioFormCronModule', () => {
 
     // Default mode
     expect(await formCronHarness.getMode()).toBe('Secondly');
+    expect(await formCronHarness.getValue()).toBe('');
   });
 
   it('should select Monthly mode for "0 15 10 8 * *" cron', async () => {
@@ -60,6 +61,7 @@ describe('GioFormCronModule', () => {
 
     const formCronHarness = await loader.getHarness(GioFormCronHarness);
 
-    expect(await formCronHarness.getMode()).toBe('Month');
+    expect(await formCronHarness.getMode()).toBe('Monthly');
+    expect(await formCronHarness.getValue()).toBe('0 15 10 8 * *');
   });
 });
