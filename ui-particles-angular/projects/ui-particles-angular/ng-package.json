@@ -6,5 +6,5 @@
     "styleIncludePaths": ["../../../node_modules"]
   },
   "assets": ["index.scss", "src/scss/**/*.scss", "src/lib/**/!(*.component).scss", "LICENSE.txt", "assets/**/*"],
-  "allowedNonPeerDependencies": ["@fontsource/fira-mono", "@fontsource/golos-ui", "@fontsource/material-icons"]
+  "allowedNonPeerDependencies": ["@fontsource/fira-mono", "@fontsource/golos-ui", "@fontsource/material-icons", "cronstrue"]
 }
