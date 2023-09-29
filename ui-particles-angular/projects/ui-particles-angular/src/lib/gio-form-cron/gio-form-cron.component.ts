@@ -22,7 +22,7 @@ import { isEmpty, range } from 'lodash';
 import { Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 
-import { CronDisplay, getDefaultCronDisplay, parseCronExpression } from './gio-form-cron.adapter';
+import { CronDisplay, getDefaultCronDisplay, parseCronExpression, toCronExpression } from './gio-form-cron.adapter';
 
 @Component({
   selector: 'gio-form-cron',
@@ -40,12 +40,14 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
   public daysOfMonth = [...range(1, 32)];
   public daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   public internalFormGroup?: FormGroup;
+  public value?: string;
 
   private touched = false;
   private focused = false;
-  private value?: string;
 
-  private cronDisplay?: CronDisplay;
+  private defaultMode = 'second' as const;
+
+  private cronDisplay: CronDisplay = getDefaultCronDisplay(this.defaultMode);
 
   private unsubscribe$ = new Subject<void>();
 
@@ -70,7 +72,7 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
 
   public ngOnInit(): void {
     this.internalFormGroup = new FormGroup({
-      mode: new FormControl('second'),
+      mode: new FormControl(this.defaultMode),
       secondInterval: new FormControl(),
       minuteInterval: new FormControl(),
       hourInterval: new FormControl(),
@@ -80,7 +82,7 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
 
       hours: new FormControl(),
       minutes: new FormControl(),
-      cronExpression: new FormControl('* * * * * *'),
+      customExpression: new FormControl(),
     });
 
     this.internalFormGroup
@@ -90,6 +92,27 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
           this.cronDisplay = getDefaultCronDisplay(mode);
 
           this.refreshInternalForm();
+        }),
+        takeUntil(this.unsubscribe$),
+      )
+      .subscribe();
+
+    this.internalFormGroup.valueChanges
+      ?.pipe(
+        tap(value => {
+          this.value = toCronExpression({
+            mode: value.mode,
+            secondInterval: value.secondInterval,
+            minuteInterval: value.minuteInterval,
+            hourInterval: value.hourInterval,
+            dayInterval: value.dayInterval,
+            dayOfWeek: value.dayOfWeek,
+            dayOfMonth: value.dayOfMonth,
+            customExpression: value.customExpression,
+            hours: value.hours,
+            minutes: value.minutes,
+          });
+          this._onChange(this.value);
         }),
         takeUntil(this.unsubscribe$),
       )
@@ -126,12 +149,12 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
 
   private refreshInternalForm(): void {
     const d = this.cronDisplay;
-    if (!d || !this.internalFormGroup) return;
+    if (!this.internalFormGroup) return;
 
     this.internalFormGroup.patchValue(
       {
         mode: d.mode,
-
+        customExpression: d.customExpression,
         secondInterval: d.secondInterval,
         minuteInterval: d.minuteInterval,
         hourInterval: d.hourInterval,

@@ -42,4 +42,10 @@ export class GioFormCronHarness extends ComponentHarness {
     }
     return selected;
   }
+
+  public async getValue(): Promise<string | null> {
+    const value = await this.locatorFor('.preview')();
+
+    return value.text();
+  }
 }
