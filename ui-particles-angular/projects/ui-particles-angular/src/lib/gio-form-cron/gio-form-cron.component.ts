@@ -18,11 +18,11 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { Component, ElementRef, OnDestroy, OnInit, Optional, Self } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormGroup, NgControl } from '@angular/forms';
-import { range } from 'lodash';
+import { isEmpty, range } from 'lodash';
 import { Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 
-import { getDefaultCronDisplay } from './gio-form-cron.adapter';
+import { CronDisplay, getDefaultCronDisplay, parseCronExpression } from './gio-form-cron.adapter';
 
 @Component({
   selector: 'gio-form-cron',
@@ -44,6 +44,8 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
   private touched = false;
   private focused = false;
   private value?: string;
+
+  private cronDisplay?: CronDisplay;
 
   private unsubscribe$ = new Subject<void>();
 
@@ -85,26 +87,15 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
       .get('mode')
       ?.valueChanges.pipe(
         tap(mode => {
-          const d = getDefaultCronDisplay(mode);
+          this.cronDisplay = getDefaultCronDisplay(mode);
 
-          this.internalFormGroup?.patchValue(
-            {
-              secondInterval: d.secondInterval,
-              minuteInterval: d.minuteInterval,
-              hourInterval: d.hourInterval,
-              dayInterval: d.dayInterval,
-              dayOfWeek: d.dayOfWeek,
-              dayOfMonth: d.dayOfMonth,
-
-              hours: d.hours,
-              minutes: d.minutes,
-            },
-            { emitEvent: false },
-          );
+          this.refreshInternalForm();
         }),
         takeUntil(this.unsubscribe$),
       )
       .subscribe();
+
+    this.refreshInternalForm();
   }
 
   public ngOnDestroy(): void {
@@ -115,7 +106,12 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
 
   // From ControlValueAccessor interface
   public writeValue(value: string): void {
+    if (isEmpty(value)) {
+      return;
+    }
     this.value = value;
+    this.cronDisplay = parseCronExpression(value);
+    this.refreshInternalForm();
   }
 
   // From ControlValueAccessor interface
@@ -126,5 +122,27 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
   // From ControlValueAccessor interface
   public registerOnTouched(fn: () => void): void {
     this._onTouched = fn;
+  }
+
+  private refreshInternalForm(): void {
+    const d = this.cronDisplay;
+    if (!d || !this.internalFormGroup) return;
+
+    this.internalFormGroup.patchValue(
+      {
+        mode: d.mode,
+
+        secondInterval: d.secondInterval,
+        minuteInterval: d.minuteInterval,
+        hourInterval: d.hourInterval,
+        dayInterval: d.dayInterval,
+        dayOfWeek: d.dayOfWeek,
+        dayOfMonth: d.dayOfMonth,
+
+        hours: d.hours,
+        minutes: d.minutes,
+      },
+      { emitEvent: false },
+    );
   }
 }

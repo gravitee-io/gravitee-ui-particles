@@ -17,7 +17,7 @@ import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { GioFormCronComponent } from './gio-form-cron.component';
 import { GioFormCronModule } from './gio-form-cron.module';
@@ -35,22 +35,34 @@ export default {
       defaultValue: false,
       control: { type: 'boolean' },
     },
-  },
-  render: ({ disabled }) => ({
-    template: `
-      <gio-form-cron></gio-form-cron>
-    `,
-    props: {
-      disabled,
+    initialValue: {
+      control: { type: 'text' },
     },
-  }),
+  },
+  render: p => {
+    const control = new FormControl({ value: p.initialValue ?? '', disabled: p.disabled });
+
+    return {
+      template: `
+        <gio-form-cron [formControl]="control"></gio-form-cron>
+        <br>
+        --------------------
+        <br>
+        <input type="text" [formControl]="control" />
+      `,
+      props: {
+        control,
+      },
+    };
+  },
 } as Meta;
 
 export const Default: Story = {
-  render: ({ disabled }) => ({
-    props: {
-      disabled,
-    },
-  }),
   args: {},
+};
+
+export const WithInitialValue: Story = {
+  args: {
+    initialValue: '0 0 0 * * 0',
+  },
 };

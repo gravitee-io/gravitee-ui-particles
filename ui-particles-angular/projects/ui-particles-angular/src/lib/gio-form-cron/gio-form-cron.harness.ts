@@ -15,6 +15,7 @@
  */
 
 import { BaseHarnessFilters, ComponentHarness, HarnessPredicate } from '@angular/cdk/testing';
+import { MatButtonToggleGroupHarness } from '@angular/material/button-toggle/testing';
 
 export type GioFormCronHarnessFilters = BaseHarnessFilters;
 
@@ -29,5 +30,16 @@ export class GioFormCronHarness extends ComponentHarness {
    */
   public static with(options: GioFormCronHarnessFilters = {}): HarnessPredicate<GioFormCronHarness> {
     return new HarnessPredicate(GioFormCronHarness, options);
+  }
+
+  public async getMode(): Promise<string> {
+    const mode = await this.locatorFor(MatButtonToggleGroupHarness.with({ selector: '[formControlName="mode"]' }))();
+
+    const selected = await (await mode.getToggles({ checked: true }))[0].getText();
+
+    if (!selected) {
+      throw new Error('No selected button');
+    }
+    return selected;
   }
 }
