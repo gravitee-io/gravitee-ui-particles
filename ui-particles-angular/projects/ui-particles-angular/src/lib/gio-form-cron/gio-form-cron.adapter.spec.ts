@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { CronDisplayMode, getDefaultCronDisplay, parseCronExpression } from './gio-form-cron.adapter';
+import { CronDisplayMode, getDefaultCronDisplay, parseCronExpression, toCronDescription, toCronExpression } from './gio-form-cron.adapter';
 
 describe('parseCronExpression', () => {
   it('should return custom cron', () => {
     expect(parseCronExpression('15 10 8 3 *')).toEqual({
       mode: 'custom',
-      cronExpression: '15 10 8 3 *',
-      cronDescription: 'At 10:15 AM, on day 8 of the month, only in March',
+      customExpression: '15 10 8 3 *',
     });
   });
 
@@ -28,8 +27,6 @@ describe('parseCronExpression', () => {
     expect(parseCronExpression('*/6 * * * * *')).toEqual({
       mode: 'second',
       secondInterval: 6,
-      cronExpression: '*/6 * * * * *',
-      cronDescription: 'Every 6 seconds',
     });
   });
 
@@ -37,8 +34,6 @@ describe('parseCronExpression', () => {
     expect(parseCronExpression('0 */42 * * * *')).toEqual({
       mode: 'minute',
       minuteInterval: 42,
-      cronExpression: '0 */42 * * * *',
-      cronDescription: 'Every 42 minutes',
     });
   });
 
@@ -47,8 +42,6 @@ describe('parseCronExpression', () => {
       mode: 'hour',
       hourInterval: 4,
       minutes: 15,
-      cronExpression: '0 15 */4 * * *',
-      cronDescription: 'At 15 minutes past the hour, every 4 hours',
     });
   });
 
@@ -58,8 +51,6 @@ describe('parseCronExpression', () => {
       dayInterval: 3,
       minutes: 30,
       hours: 12,
-      cronExpression: '0 30 12 */3 * *',
-      cronDescription: 'At 12:30 PM, every 3 days',
     });
   });
 
@@ -70,8 +61,6 @@ describe('parseCronExpression', () => {
       dayOfWeek: 5,
       minutes: 15,
       hours: 10,
-      cronExpression: '0 15 10 * * 5',
-      cronDescription: 'At 10:15 AM, only on Friday',
     });
   });
 
@@ -81,8 +70,6 @@ describe('parseCronExpression', () => {
       dayOfMonth: 8,
       minutes: 15,
       hours: 10,
-      cronExpression: '0 15 10 8 * *',
-      cronDescription: 'At 10:15 AM, on day 8 of the month',
     });
   });
 
@@ -99,8 +86,46 @@ describe('getDefaultCronDisplay', () => {
     ['day', '0 0 0 */1 * *'],
     ['week', '0 0 0 * * 0'],
     ['month', '0 0 0 1 * *'],
-    ['custom', '* * * * *'],
+    ['custom', '* * * * * *'],
   ])('should return default cron for mode %s', (mode, expected) => {
-    expect(getDefaultCronDisplay(mode as CronDisplayMode).cronExpression).toEqual(expected);
+    const dm = getDefaultCronDisplay(mode as CronDisplayMode);
+
+    expect(toCronExpression(dm)).toEqual(expected);
+  });
+});
+
+describe('toCronDescription', () => {
+  it.each([['15 10 8 3 *', 'At 10:15 AM, on day 8 of the month, only in March']])('should return description for %s', (cron, expected) => {
+    expect(toCronDescription(cron)).toEqual(expected);
+  });
+});
+
+describe('toCronExpression', () => {
+  it('should return custom cron', () => {
+    expect(toCronExpression({ mode: 'custom', customExpression: '15 10 8 3 *' })).toEqual('15 10 8 3 *');
+  });
+
+  it('should return secondly cron', () => {
+    expect(toCronExpression({ mode: 'second', secondInterval: 6 })).toEqual('*/6 * * * * *');
+  });
+
+  it('should return minutely cron', () => {
+    expect(toCronExpression({ mode: 'minute', minuteInterval: 42 })).toEqual('0 */42 * * * *');
+  });
+
+  it('should return hourly cron', () => {
+    expect(toCronExpression({ mode: 'hour', hourInterval: 4, minutes: 15 })).toEqual('0 15 */4 * * *');
+  });
+
+  it('should return daily cron', () => {
+    expect(toCronExpression({ mode: 'day', dayInterval: 3, minutes: 30, hours: 12 })).toEqual('0 30 12 */3 * *');
+  });
+
+  it('should return weekly cron', () => {
+    expect(toCronExpression({ mode: 'week', dayOfWeek: 5, minutes: 15, hours: 10 })).toEqual('0 15 10 * * 5');
+  });
+
+  it('should return monthly cron', () => {
+    expect(toCronExpression({ mode: 'month', dayOfMonth: 8, minutes: 15, hours: 10 })).toEqual('0 15 10 8 * *');
   });
 });

@@ -17,17 +17,17 @@ import Cronstrue from 'cronstrue/i18n';
 
 export interface CronDisplay {
   mode: CronDisplayMode;
+
   secondInterval?: number;
   minuteInterval?: number;
   hourInterval?: number;
   dayInterval?: number;
   dayOfWeek?: number;
   dayOfMonth?: number;
+  customExpression?: string;
 
   hours?: number;
   minutes?: number;
-  cronExpression: string;
-  cronDescription: string;
 }
 export const CRON_DISPLAY_MODES = ['second', 'minute', 'hour', 'day', 'week', 'month', 'custom'] as const;
 export type CronDisplayMode = (typeof CRON_DISPLAY_MODES)[number];
@@ -40,7 +40,7 @@ const DISPLAY_MODE_LIST: {
   {
     mode: 'second',
     default: '*/0 * * * * *',
-    regex: /^\*(\/\d+)?(\s\*){5}$/,
+    regex: /^(\*\/\d+\s)(\*\s){4}\*/,
   },
   {
     mode: 'minute',
@@ -69,7 +69,7 @@ const DISPLAY_MODE_LIST: {
   },
   {
     mode: 'custom',
-    default: '* * * * *',
+    default: '* * * * * *',
     regex: /^.*$/,
   },
 ];
@@ -95,8 +95,6 @@ export const parseCronExpression = (cronExpression: string): CronDisplay => {
     parts.push('');
   }
 
-  const cronDescription = Cronstrue.toString(cronExpression);
-
   const hourInterval = getHourInterval(parts);
   const minuteInterval = getMinuteInterval(parts);
   const secondInterval = getSecondInterval(parts);
@@ -114,23 +112,17 @@ export const parseCronExpression = (cronExpression: string): CronDisplay => {
       return {
         mode: 'second',
         secondInterval,
-        cronExpression,
-        cronDescription,
       };
     case 'minute':
       return {
         mode: 'minute',
         minuteInterval,
-        cronExpression,
-        cronDescription,
       };
     case 'hour':
       return {
         mode: 'hour',
         hourInterval,
         minutes,
-        cronExpression,
-        cronDescription,
       };
     case 'day':
       return {
@@ -138,8 +130,6 @@ export const parseCronExpression = (cronExpression: string): CronDisplay => {
         dayInterval,
         hours,
         minutes,
-        cronExpression,
-        cronDescription,
       };
     case 'week':
       return {
@@ -147,8 +137,6 @@ export const parseCronExpression = (cronExpression: string): CronDisplay => {
         dayOfWeek,
         hours,
         minutes,
-        cronExpression,
-        cronDescription,
       };
     case 'month':
       return {
@@ -156,22 +144,36 @@ export const parseCronExpression = (cronExpression: string): CronDisplay => {
         dayOfMonth,
         hours,
         minutes,
-        cronExpression,
-        cronDescription,
       };
     case 'custom':
       return {
         mode: 'custom',
-        cronExpression,
-        cronDescription,
+        customExpression: cronExpression,
       };
   }
+};
 
-  return {
-    mode: 'custom',
-    cronExpression,
-    cronDescription,
-  };
+export const toCronExpression = (cronDisplay: Omit<CronDisplay, 'cronDescription'>): string => {
+  switch (cronDisplay.mode) {
+    case 'second':
+      return `*/${cronDisplay.secondInterval} * * * * *`;
+    case 'minute':
+      return `0 */${cronDisplay.minuteInterval} * * * *`;
+    case 'hour':
+      return `0 ${cronDisplay.minutes} */${cronDisplay.hourInterval} * * *`;
+    case 'day':
+      return `0 ${cronDisplay.minutes} ${cronDisplay.hours} */${cronDisplay.dayInterval} * *`;
+    case 'week':
+      return `0 ${cronDisplay.minutes} ${cronDisplay.hours} * * ${cronDisplay.dayOfWeek}`;
+    case 'month':
+      return `0 ${cronDisplay.minutes} ${cronDisplay.hours} ${cronDisplay.dayOfMonth} * *`;
+    case 'custom':
+      return `${cronDisplay.customExpression}`;
+  }
+};
+
+export const toCronDescription = (cronExpression: string): string => {
+  return Cronstrue.toString(cronExpression);
 };
 
 const cronIsValid = (cronExpression: string): boolean => {
