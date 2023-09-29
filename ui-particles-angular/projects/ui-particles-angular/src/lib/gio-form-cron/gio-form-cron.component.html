@@ -32,8 +32,8 @@
         <span class="cron-form-label">Every </span>
         <mat-form-field>
           <mat-label>Second</mat-label>
-          <mat-select formControlName="seconds">
-            <mat-option *ngFor="let second of seconds" [value]="second">{{ second }}</mat-option>
+          <mat-select formControlName="secondInterval">
+            <mat-option *ngFor="let second of seconds" [value]="second">{{ second + 1 }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -44,8 +44,8 @@
         <span class="cron-form-label">Every </span>
         <mat-form-field>
           <mat-label>Minute(s)</mat-label>
-          <mat-select formControlName="minutes">
-            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
+          <mat-select formControlName="minuteInterval">
+            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute + 1 }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -56,15 +56,15 @@
         <span class="cron-form-label">Every </span>
         <mat-form-field>
           <mat-label>Hour(s)</mat-label>
-          <mat-select formControlName="hours">
-            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}</mat-option>
+          <mat-select formControlName="hourInterval">
+            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour + 1 }}</mat-option>
           </mat-select>
         </mat-form-field>
         <span class="cron-form-label">:</span>
         <mat-form-field>
           <mat-label>Minute(s)</mat-label>
           <mat-select formControlName="minutes">
-            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
+            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute + 1 }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -75,22 +75,22 @@
         <span class="cron-form-label">Every </span>
         <mat-form-field>
           <mat-label>Day(s)</mat-label>
-          <mat-select formControlName="daysOfMouth">
-            <mat-option *ngFor="let day of daysOfMouth" [value]="day">{{ day }}</mat-option>
+          <mat-select formControlName="dayInterval">
+            <mat-option *ngFor="let day of daysOfMonth" [value]="day">{{ day }}</mat-option>
           </mat-select>
         </mat-form-field>
         <span class="cron-form-label"> at </span>
         <mat-form-field>
           <mat-label>Hour(s)</mat-label>
           <mat-select formControlName="hours">
-            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}</mat-option>
+            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour + 1 }}</mat-option>
           </mat-select>
         </mat-form-field>
         <span class="cron-form-label">:</span>
         <mat-form-field>
           <mat-label>Minute(s)</mat-label>
           <mat-select formControlName="minutes">
-            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
+            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute + 1 }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -101,22 +101,22 @@
         <span class="cron-form-label">Every </span>
         <mat-form-field>
           <mat-label>Day of the week</mat-label>
-          <mat-select formControlName="daysOfWeek">
-            <mat-option *ngFor="let day of daysOfWeek" [value]="day">{{ day }}</mat-option>
+          <mat-select formControlName="dayOfWeek">
+            <mat-option *ngFor="let day of daysOfWeek; let index = index" [value]="index">{{ day }}</mat-option>
           </mat-select>
         </mat-form-field>
         <span class="cron-form-label"> at </span>
         <mat-form-field>
           <mat-label>Hours</mat-label>
           <mat-select formControlName="hours">
-            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}</mat-option>
+            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour + 1 }}</mat-option>
           </mat-select>
         </mat-form-field>
         <span class="cron-form-label">:</span>
         <mat-form-field>
           <mat-label>Minutes</mat-label>
           <mat-select formControlName="minutes">
-            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
+            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute + 1 }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -127,22 +127,22 @@
         <span class="cron-form-label">On the </span>
         <mat-form-field>
           <mat-label>Day(s) of every month</mat-label>
-          <mat-select formControlName="daysOfMouth">
-            <mat-option *ngFor="let day of daysOfMouth" [value]="day">{{ day }}</mat-option>
+          <mat-select formControlName="dayOfMonth">
+            <mat-option *ngFor="let day of daysOfMonth" [value]="day">{{ day }}</mat-option>
           </mat-select>
         </mat-form-field>
         <span class="cron-form-label"> at </span>
         <mat-form-field>
           <mat-label>Hours</mat-label>
           <mat-select formControlName="hours">
-            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}</mat-option>
+            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour + 1 }}</mat-option>
           </mat-select>
         </mat-form-field>
         <span class="cron-form-label">:</span>
         <mat-form-field>
           <mat-label>Minutes</mat-label>
           <mat-select formControlName="minutes">
-            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
+            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute + 1 }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
