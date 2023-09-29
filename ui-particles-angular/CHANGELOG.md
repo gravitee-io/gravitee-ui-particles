@@ -1,3 +1,12 @@
+# [7.31.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.30.0...v7.31.0) (2023-09-29)
+
+
+### Features
+
+* add http-get and http-post icons ([a667fd4](https://github.com/gravitee-io/gravitee-ui-particles/commit/a667fd4b9e073af52aded3176fe5c7577e35dc0c))
+* add open-id icon ([97be504](https://github.com/gravitee-io/gravitee-ui-particles/commit/97be5045e06f2dfb024f550498f8752b51571f37))
+* add sse icon ([929c1a4](https://github.com/gravitee-io/gravitee-ui-particles/commit/929c1a4649b2764daf9ee73e48fc2c9fcec6c7a2))
+
 # [7.30.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.29.3...v7.30.0) (2023-09-29)
 
 
