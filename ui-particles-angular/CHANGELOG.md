@@ -1,3 +1,10 @@
+# [7.30.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.29.3...v7.30.0) (2023-09-29)
+
+
+### Features
+
+* add gio-button-toggle-group component ([2ea897b](https://github.com/gravitee-io/gravitee-ui-particles/commit/2ea897ba2f42cb916a189c7cdf113c7fd6d78b3c))
+
 ## [7.29.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.29.2...v7.29.3) (2023-09-14)
 
 
