@@ -16,23 +16,32 @@
 // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
 
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { Component, ElementRef, OnDestroy, Optional, Self } from '@angular/core';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { Component, ElementRef, OnDestroy, OnInit, Optional, Self } from '@angular/core';
+import { ControlValueAccessor, FormControl, FormGroup, NgControl } from '@angular/forms';
+import { range } from 'lodash';
 
 @Component({
   selector: 'gio-form-cron',
   templateUrl: './gio-form-cron.component.html',
   styleUrls: ['./gio-form-cron.component.scss'],
 })
-export class GioFormCronComponent implements ControlValueAccessor, OnDestroy {
+export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDestroy {
   public _onChange: (value: string | null) => void = () => ({});
 
   public _onTouched: () => void = () => ({});
+
+  public seconds = [...range(1, 60)];
+  public minutes = [...range(1, 60)];
+  public hours = [...range(1, 24)];
+  public daysOfMouth = [...range(1, 32)];
+  public daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   private touched = false;
   private focused = false;
 
   private value?: string;
+
+  public internalFormGroup?: FormGroup;
 
   constructor(
     @Optional() @Self() public readonly ngControl: NgControl,
@@ -50,6 +59,18 @@ export class GioFormCronComponent implements ControlValueAccessor, OnDestroy {
       this.focused = !!origin;
       this._onTouched();
       this.touched = true;
+    });
+  }
+
+  public ngOnInit(): void {
+    this.internalFormGroup = new FormGroup({
+      mode: new FormControl('second'),
+      hours: new FormControl(),
+      minutes: new FormControl(),
+      seconds: new FormControl(),
+      dayOfMonth: new FormControl(),
+      dayOfWeek: new FormControl(),
+      cronExpression: new FormControl('* * * * * *'),
     });
   }
 
