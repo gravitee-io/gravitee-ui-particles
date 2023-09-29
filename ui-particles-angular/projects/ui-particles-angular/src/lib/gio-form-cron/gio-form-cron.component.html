@@ -158,5 +158,7 @@
     </ng-container>
   </ng-container>
 
-  {{ internalFormGroup.valueChanges | async | json }}
+  <div class="preview">
+    {{ internalFormGroup.valueChanges | async | json }}
+  </div>
 </ng-container>

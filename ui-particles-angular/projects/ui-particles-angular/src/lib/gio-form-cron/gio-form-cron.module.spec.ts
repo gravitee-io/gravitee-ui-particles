@@ -25,10 +25,10 @@ import { GioFormCronModule } from './gio-form-cron.module';
 
 describe('GioFormCronModule', () => {
   @Component({
-    template: ` <gio-form-cron></gio-form-cron> `,
+    template: ` <gio-form-cron [formControl]="testControl"></gio-form-cron> `,
   })
   class TestComponent {
-    public control = new FormControl(null, Validators.required);
+    public testControl = new FormControl(null, Validators.required);
   }
 
   let component: TestComponent;
@@ -50,5 +50,16 @@ describe('GioFormCronModule', () => {
 
     expect(formCronHarness).toBeTruthy();
     expect(component).toBeTruthy();
+
+    // Default mode
+    expect(await formCronHarness.getMode()).toBe('Secondly');
+  });
+
+  it('should select Monthly mode for "0 15 10 8 * *" cron', async () => {
+    component.testControl.setValue('0 15 10 8 * *');
+
+    const formCronHarness = await loader.getHarness(GioFormCronHarness);
+
+    expect(await formCronHarness.getMode()).toBe('Month');
   });
 });
