@@ -52,8 +52,8 @@ describe('GioFormCronModule', () => {
     expect(component).toBeTruthy();
 
     // Default mode
-    expect(await formCronHarness.getMode()).toBe('Secondly');
-    expect(await formCronHarness.getValue()).toBe('');
+    expect(await formCronHarness.getMode()).toBe(null);
+    expect(await formCronHarness.getValue()).toBe(null);
   });
 
   it('should select Monthly mode for "0 15 10 8 * *" cron', async () => {

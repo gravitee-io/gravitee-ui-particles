@@ -158,7 +158,11 @@
     </ng-container>
   </ng-container>
 
-  <div class="preview">
+  <div *ngIf="value; else placeholder" class="preview">
     {{ value }}
   </div>
 </ng-container>
+
+<ng-template #placeholder>
+  <div class="placeholder">No cron expression defined.</div>
+</ng-template>

@@ -45,9 +45,7 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
   private touched = false;
   private focused = false;
 
-  private defaultMode = 'secondly' as const;
-
-  private cronDisplay: CronDisplay = getDefaultCronDisplay(this.defaultMode);
+  private cronDisplay?: CronDisplay;
 
   private unsubscribe$ = new Subject<void>();
 
@@ -72,7 +70,7 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
 
   public ngOnInit(): void {
     this.internalFormGroup = new FormGroup({
-      mode: new FormControl(this.defaultMode),
+      mode: new FormControl(),
       secondInterval: new FormControl(),
       minuteInterval: new FormControl(),
       hourInterval: new FormControl(),
@@ -149,7 +147,7 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
 
   private refreshInternalForm(): void {
     const d = this.cronDisplay;
-    if (!this.internalFormGroup) return;
+    if (!d || !this.internalFormGroup) return;
 
     this.internalFormGroup.patchValue(
       {

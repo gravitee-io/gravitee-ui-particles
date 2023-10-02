@@ -32,20 +32,20 @@ export class GioFormCronHarness extends ComponentHarness {
     return new HarnessPredicate(GioFormCronHarness, options);
   }
 
-  public async getMode(): Promise<string> {
+  public async getMode(): Promise<string | null> {
     const mode = await this.locatorFor(MatButtonToggleGroupHarness.with({ selector: '[formControlName="mode"]' }))();
 
-    const selected = await (await mode.getToggles({ checked: true }))[0].getText();
+    const selected = await (await mode.getToggles({ checked: true }))[0]?.getText();
 
     if (!selected) {
-      throw new Error('No selected button');
+      return null;
     }
     return selected;
   }
 
   public async getValue(): Promise<string | null> {
-    const value = await this.locatorFor('.preview')();
+    const value = await this.locatorForOptional('.preview')();
 
-    return value.text();
+    return value?.text() ?? null;
   }
 }
