@@ -61,8 +61,44 @@ export const Default: Story = {
   args: {},
 };
 
-export const WithInitialValue: Story = {
+export const WithInitialSecondlyValue: Story = {
   args: {
-    initialValue: '0 0 0 * * 0',
+    initialValue: '*/6 * * * * *',
+  },
+};
+
+export const WithInitialMinutelyValue: Story = {
+  args: {
+    initialValue: '0 */6 * * * *',
+  },
+};
+
+export const WithInitialHourlyValue: Story = {
+  args: {
+    initialValue: '0 0 */6 * * *',
+  },
+};
+
+export const WithInitialDailyValue: Story = {
+  args: {
+    initialValue: '0 0 0 */6 * *',
+  },
+};
+
+export const WithInitialWeeklyValue: Story = {
+  args: {
+    initialValue: '0 0 0 * * 5',
+  },
+};
+
+export const WithInitialMonthlyValue: Story = {
+  args: {
+    initialValue: '0 0 0 6 * *',
+  },
+};
+
+export const WithInitialCustomValue: Story = {
+  args: {
+    initialValue: '15 10 8 3 *',
   },
 };
