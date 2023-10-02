@@ -20,9 +20,9 @@ import { Component, ElementRef, OnDestroy, OnInit, Optional, Self } from '@angul
 import { ControlValueAccessor, FormControl, FormGroup, NgControl } from '@angular/forms';
 import { isEmpty, range } from 'lodash';
 import { Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { filter, takeUntil, tap } from 'rxjs/operators';
 
-import { CronDisplay, getDefaultCronDisplay, parseCronExpression, toCronExpression } from './gio-form-cron.adapter';
+import { CronDisplay, getDefaultCronDisplay, parseCronExpression, toCronDescription, toCronExpression } from './gio-form-cron.adapter';
 
 @Component({
   selector: 'gio-form-cron',
@@ -34,13 +34,14 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
 
   public _onTouched: () => void = () => ({});
 
-  public seconds = [...range(0, 59)];
-  public minutes = [...range(0, 59)];
-  public hours = [...range(0, 23)];
+  public seconds = [...range(0, 60)];
+  public minutes = [...range(0, 60)];
+  public hours = [...range(0, 24)];
   public daysOfMonth = [...range(1, 32)];
   public daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   public internalFormGroup?: FormGroup;
   public value?: string;
+  public expressionDescription?: string;
 
   private touched = false;
   private focused = false;
@@ -86,6 +87,7 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
     this.internalFormGroup
       .get('mode')
       ?.valueChanges.pipe(
+        filter(mode => !!mode),
         tap(mode => {
           this.cronDisplay = getDefaultCronDisplay(mode);
 
@@ -98,6 +100,10 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
     this.internalFormGroup.valueChanges
       ?.pipe(
         tap(value => {
+          if (!value?.mode) {
+            this._onChange(null);
+            return;
+          }
           this.value = toCronExpression({
             mode: value.mode,
             secondInterval: value.secondInterval,
@@ -110,6 +116,7 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
             hours: value.hours,
             minutes: value.minutes,
           });
+          this.expressionDescription = toCronDescription(this.value);
           this._onChange(this.value);
         }),
         takeUntil(this.unsubscribe$),
@@ -132,6 +139,7 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
     }
     this.value = value;
     this.cronDisplay = parseCronExpression(value);
+    this.expressionDescription = toCronDescription(this.value);
     this.refreshInternalForm();
   }
 
@@ -143,6 +151,12 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
   // From ControlValueAccessor interface
   public registerOnTouched(fn: () => void): void {
     this._onTouched = fn;
+  }
+
+  public onClear() {
+    this.value = undefined;
+    this.cronDisplay = undefined;
+    this.internalFormGroup?.reset({}, { emitEvent: true });
   }
 
   private refreshInternalForm(): void {

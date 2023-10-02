@@ -16,7 +16,7 @@
 
 -->
 <ng-container *ngIf="internalFormGroup" [formGroup]="internalFormGroup">
-  <mat-button-toggle-group class="gio-button-toggle-group" name="mode" aria-label="Cron mode" formControlName="mode">
+  <mat-button-toggle-group class="gio-button-toggle-group menu" name="mode" aria-label="Cron mode" formControlName="mode">
     <mat-button-toggle value="secondly">Secondly</mat-button-toggle>
     <mat-button-toggle value="minutely">Minutely</mat-button-toggle>
     <mat-button-toggle value="hourly">Hourly</mat-button-toggle>
@@ -25,15 +25,18 @@
     <mat-button-toggle value="monthly">Monthly</mat-button-toggle>
     <mat-button-toggle value="custom">Custom</mat-button-toggle>
   </mat-button-toggle-group>
+  <button *ngIf="value" mat-icon-button aria-label="Clear" (click)="onClear()">
+    <mat-icon>close</mat-icon>
+  </button>
 
   <ng-container [ngSwitch]="internalFormGroup.get('mode')?.value">
     <ng-container *ngSwitchCase="'secondly'">
       <div class="modeForm">
         <span class="cron-form-label">Every </span>
-        <mat-form-field>
+        <mat-form-field class="modeForm__field-small">
           <mat-label>Second</mat-label>
           <mat-select formControlName="secondInterval">
-            <mat-option *ngFor="let second of seconds" [value]="second">{{ second + 1 }}</mat-option>
+            <mat-option *ngFor="let second of seconds" [value]="second">{{ second }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -42,10 +45,10 @@
     <ng-container *ngSwitchCase="'minutely'">
       <div class="modeForm">
         <span class="cron-form-label">Every </span>
-        <mat-form-field>
+        <mat-form-field class="modeForm__field-small">
           <mat-label>Minute(s)</mat-label>
           <mat-select formControlName="minuteInterval">
-            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute + 1 }}</mat-option>
+            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -54,17 +57,17 @@
     <ng-container *ngSwitchCase="'hourly'">
       <div class="modeForm">
         <span class="cron-form-label">Every </span>
-        <mat-form-field>
+        <mat-form-field class="modeForm__field-small">
           <mat-label>Hour(s)</mat-label>
           <mat-select formControlName="hourInterval">
-            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour + 1 }}</mat-option>
+            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}</mat-option>
           </mat-select>
         </mat-form-field>
         <span class="cron-form-label">:</span>
-        <mat-form-field>
+        <mat-form-field class="modeForm__field-small">
           <mat-label>Minute(s)</mat-label>
           <mat-select formControlName="minutes">
-            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute + 1 }}</mat-option>
+            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -73,24 +76,24 @@
     <ng-container *ngSwitchCase="'daily'">
       <div class="modeForm">
         <span class="cron-form-label">Every </span>
-        <mat-form-field>
+        <mat-form-field class="modeForm__field-small">
           <mat-label>Day(s)</mat-label>
           <mat-select formControlName="dayInterval">
             <mat-option *ngFor="let day of daysOfMonth" [value]="day">{{ day }}</mat-option>
           </mat-select>
         </mat-form-field>
         <span class="cron-form-label"> at </span>
-        <mat-form-field>
+        <mat-form-field class="modeForm__field-small">
           <mat-label>Hour(s)</mat-label>
           <mat-select formControlName="hours">
-            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour + 1 }}</mat-option>
+            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}</mat-option>
           </mat-select>
         </mat-form-field>
         <span class="cron-form-label">:</span>
-        <mat-form-field>
+        <mat-form-field class="modeForm__field-small">
           <mat-label>Minute(s)</mat-label>
           <mat-select formControlName="minutes">
-            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute + 1 }}</mat-option>
+            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -99,24 +102,24 @@
     <ng-container *ngSwitchCase="'weekly'">
       <div class="modeForm">
         <span class="cron-form-label">Every </span>
-        <mat-form-field>
+        <mat-form-field class="modeForm__field-medium">
           <mat-label>Day of the week</mat-label>
           <mat-select formControlName="dayOfWeek">
             <mat-option *ngFor="let day of daysOfWeek; let index = index" [value]="index">{{ day }}</mat-option>
           </mat-select>
         </mat-form-field>
         <span class="cron-form-label"> at </span>
-        <mat-form-field>
+        <mat-form-field class="modeForm__field-small">
           <mat-label>Hours</mat-label>
           <mat-select formControlName="hours">
-            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour + 1 }}</mat-option>
+            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}</mat-option>
           </mat-select>
         </mat-form-field>
         <span class="cron-form-label">:</span>
-        <mat-form-field>
+        <mat-form-field class="modeForm__field-small">
           <mat-label>Minutes</mat-label>
           <mat-select formControlName="minutes">
-            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute + 1 }}</mat-option>
+            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -125,24 +128,24 @@
     <ng-container *ngSwitchCase="'monthly'">
       <div class="modeForm">
         <span class="cron-form-label">On the </span>
-        <mat-form-field>
-          <mat-label>Day(s) of every month</mat-label>
+        <mat-form-field class="modeForm__field-small">
+          <mat-label>Day(s)</mat-label>
           <mat-select formControlName="dayOfMonth">
             <mat-option *ngFor="let day of daysOfMonth" [value]="day">{{ day }}</mat-option>
           </mat-select>
         </mat-form-field>
-        <span class="cron-form-label"> at </span>
-        <mat-form-field>
+        <span class="cron-form-label"> of every month at </span>
+        <mat-form-field class="modeForm__field-small">
           <mat-label>Hours</mat-label>
           <mat-select formControlName="hours">
-            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour + 1 }}</mat-option>
+            <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}</mat-option>
           </mat-select>
         </mat-form-field>
         <span class="cron-form-label">:</span>
-        <mat-form-field>
+        <mat-form-field class="modeForm__field-small">
           <mat-label>Minutes</mat-label>
           <mat-select formControlName="minutes">
-            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute + 1 }}</mat-option>
+            <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -150,7 +153,7 @@
 
     <ng-container *ngSwitchCase="'custom'">
       <div class="modeForm">
-        <mat-form-field>
+        <mat-form-field class="modeForm__field-custom">
           <mat-label>Cron expression</mat-label>
           <input matInput formControlName="customExpression" placeholder="* * * * * *" />
         </mat-form-field>
@@ -159,7 +162,10 @@
   </ng-container>
 
   <div *ngIf="value; else placeholder" class="preview">
-    {{ value }}
+    <span *ngIf="internalFormGroup.get('mode')?.value !== 'custom'" class="preview__value">
+      {{ value }}
+    </span>
+    <span class="preview__hint">{{ expressionDescription }}</span>
   </div>
 </ng-container>
 

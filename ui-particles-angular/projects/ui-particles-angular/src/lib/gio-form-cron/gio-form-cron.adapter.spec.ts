@@ -80,9 +80,9 @@ describe('parseCronExpression', () => {
 
 describe('getDefaultCronDisplay', () => {
   it.each([
-    ['secondly', '*/0 * * * * *'],
-    ['minutely', '0 */0 * * * *'],
-    ['hourly', '0 0 */0 * * *'],
+    ['secondly', '*/1 * * * * *'],
+    ['minutely', '0 */1 * * * *'],
+    ['hourly', '0 0 */1 * * *'],
     ['daily', '0 0 0 */1 * *'],
     ['weekly', '0 0 0 * * 0'],
     ['monthly', '0 0 0 1 * *'],

@@ -39,17 +39,17 @@ const DISPLAY_MODE_LIST: {
 }[] = [
   {
     mode: 'secondly',
-    default: '*/0 * * * * *',
+    default: '*/1 * * * * *',
     regex: /^(\*\/\d+\s)(\*\s){4}\*/,
   },
   {
     mode: 'minutely',
-    default: '0 */0 * * * *',
+    default: '0 */1 * * * *',
     regex: /^0\s\*\/\d+\s(\*\s){3}\*$/,
   },
   {
     mode: 'hourly',
-    default: '0 0 */0 * * *',
+    default: '0 0 */1 * * *',
     regex: /^0\s\d+\s\*\/\d+\s(\*\s){2}\*$/,
   },
   {

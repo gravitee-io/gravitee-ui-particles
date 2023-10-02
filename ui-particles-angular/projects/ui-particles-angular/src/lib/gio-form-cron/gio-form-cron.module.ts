@@ -20,11 +20,23 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+
+import { GioIconsModule } from '../gio-icons/gio-icons.module';
 
 import { GioFormCronComponent } from './gio-form-cron.component';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, MatButtonToggleModule, MatFormFieldModule, MatSelectModule, MatInputModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatButtonToggleModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule,
+    GioIconsModule,
+  ],
   declarations: [GioFormCronComponent],
   exports: [GioFormCronComponent],
 })

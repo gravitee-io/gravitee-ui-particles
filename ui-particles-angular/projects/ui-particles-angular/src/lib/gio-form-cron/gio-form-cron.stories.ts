@@ -48,7 +48,7 @@ export default {
         <br>
         --------------------
         <br>
-        <input type="text" [formControl]="control" />
+        Output: {{control.value}} | Touched: {{ control.touched | json}} | Error: {{ control.errors | json}}
       `,
       props: {
         control,
