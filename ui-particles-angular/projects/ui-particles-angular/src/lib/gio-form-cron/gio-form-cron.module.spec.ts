@@ -64,4 +64,14 @@ describe('GioFormCronModule', () => {
     expect(await formCronHarness.getMode()).toBe('Monthly');
     expect(await formCronHarness.getValue()).toBe('0 15 10 8 * *');
   });
+
+  it('should clear value', async () => {
+    component.testControl.setValue('0 15 10 8 * *');
+
+    const formCronHarness = await loader.getHarness(GioFormCronHarness);
+    await formCronHarness.clear();
+
+    expect(await formCronHarness.getMode()).toBe(null);
+    expect(await formCronHarness.getValue()).toBe(null);
+  });
 });

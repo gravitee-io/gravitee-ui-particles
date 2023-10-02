@@ -43,8 +43,13 @@ export class GioFormCronHarness extends ComponentHarness {
     return selected;
   }
 
+  public async clear(): Promise<void> {
+    const clearButton = await this.locatorForOptional('[aria-label="Clear"]')();
+    await clearButton?.click();
+  }
+
   public async getValue(): Promise<string | null> {
-    const value = await this.locatorForOptional('.preview')();
+    const value = await this.locatorForOptional('.preview__value')();
 
     return value?.text() ?? null;
   }
