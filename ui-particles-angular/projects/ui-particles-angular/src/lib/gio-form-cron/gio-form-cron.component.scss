@@ -17,10 +17,16 @@
 @use '@angular/material' as mat;
 @use '../../scss' as gio;
 
+$typography: map.get(gio.$mat-theme, typography);
+
 .preview {
   display: flex;
   padding: 16px 8px;
   border-radius: 8px;
   background-color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker10');
   color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker10-contrast');
+}
+
+.placeholder {
+  @include mat.typography-level($typography, caption);
 }
