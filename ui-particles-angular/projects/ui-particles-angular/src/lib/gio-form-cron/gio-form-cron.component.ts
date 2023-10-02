@@ -45,7 +45,7 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
   private touched = false;
   private focused = false;
 
-  private defaultMode = 'second' as const;
+  private defaultMode = 'secondly' as const;
 
   private cronDisplay: CronDisplay = getDefaultCronDisplay(this.defaultMode);
 

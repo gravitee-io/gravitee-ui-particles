@@ -29,7 +29,7 @@ export interface CronDisplay {
   hours?: number;
   minutes?: number;
 }
-export const CRON_DISPLAY_MODES = ['second', 'minute', 'hour', 'day', 'week', 'month', 'custom'] as const;
+export const CRON_DISPLAY_MODES = ['secondly', 'minutely', 'hourly', 'daily', 'weekly', 'monthly', 'custom'] as const;
 export type CronDisplayMode = (typeof CRON_DISPLAY_MODES)[number];
 
 const DISPLAY_MODE_LIST: {
@@ -38,32 +38,32 @@ const DISPLAY_MODE_LIST: {
   regex: RegExp;
 }[] = [
   {
-    mode: 'second',
+    mode: 'secondly',
     default: '*/0 * * * * *',
     regex: /^(\*\/\d+\s)(\*\s){4}\*/,
   },
   {
-    mode: 'minute',
+    mode: 'minutely',
     default: '0 */0 * * * *',
     regex: /^0\s\*\/\d+\s(\*\s){3}\*$/,
   },
   {
-    mode: 'hour',
+    mode: 'hourly',
     default: '0 0 */0 * * *',
     regex: /^0\s\d+\s\*\/\d+\s(\*\s){2}\*$/,
   },
   {
-    mode: 'day',
+    mode: 'daily',
     default: '0 0 0 */1 * *',
     regex: /^0\s\d+\s\d+\s\*\/\d+\s\*\s\*$/,
   },
   {
-    mode: 'week',
+    mode: 'weekly',
     default: '0 0 0 * * 0',
     regex: /^(\d{1,2}\s){2,3}(\*\s){2}\d{1,2}$/,
   },
   {
-    mode: 'month',
+    mode: 'monthly',
     default: '0 0 0 1 * *',
     regex: /^(\d+\s){3,4}\*\s\*$/,
   },
@@ -108,39 +108,39 @@ export const parseCronExpression = (cronExpression: string): CronDisplay => {
   const displayMode = getDisplayMode(cronExpression);
 
   switch (displayMode.mode) {
-    case 'second':
+    case 'secondly':
       return {
-        mode: 'second',
+        mode: 'secondly',
         secondInterval,
       };
-    case 'minute':
+    case 'minutely':
       return {
-        mode: 'minute',
+        mode: 'minutely',
         minuteInterval,
       };
-    case 'hour':
+    case 'hourly':
       return {
-        mode: 'hour',
+        mode: 'hourly',
         hourInterval,
         minutes,
       };
-    case 'day':
+    case 'daily':
       return {
-        mode: 'day',
+        mode: 'daily',
         dayInterval,
         hours,
         minutes,
       };
-    case 'week':
+    case 'weekly':
       return {
-        mode: 'week',
+        mode: 'weekly',
         dayOfWeek,
         hours,
         minutes,
       };
-    case 'month':
+    case 'monthly':
       return {
-        mode: 'month',
+        mode: 'monthly',
         dayOfMonth,
         hours,
         minutes,
@@ -155,17 +155,17 @@ export const parseCronExpression = (cronExpression: string): CronDisplay => {
 
 export const toCronExpression = (cronDisplay: Omit<CronDisplay, 'cronDescription'>): string => {
   switch (cronDisplay.mode) {
-    case 'second':
+    case 'secondly':
       return `*/${cronDisplay.secondInterval} * * * * *`;
-    case 'minute':
+    case 'minutely':
       return `0 */${cronDisplay.minuteInterval} * * * *`;
-    case 'hour':
+    case 'hourly':
       return `0 ${cronDisplay.minutes} */${cronDisplay.hourInterval} * * *`;
-    case 'day':
+    case 'daily':
       return `0 ${cronDisplay.minutes} ${cronDisplay.hours} */${cronDisplay.dayInterval} * *`;
-    case 'week':
+    case 'weekly':
       return `0 ${cronDisplay.minutes} ${cronDisplay.hours} * * ${cronDisplay.dayOfWeek}`;
-    case 'month':
+    case 'monthly':
       return `0 ${cronDisplay.minutes} ${cronDisplay.hours} ${cronDisplay.dayOfMonth} * *`;
     case 'custom':
       return `${cronDisplay.customExpression}`;

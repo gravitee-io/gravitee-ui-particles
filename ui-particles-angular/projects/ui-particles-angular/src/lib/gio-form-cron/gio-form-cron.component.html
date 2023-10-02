@@ -17,17 +17,17 @@
 -->
 <ng-container *ngIf="internalFormGroup" [formGroup]="internalFormGroup">
   <mat-button-toggle-group class="gio-button-toggle-group" name="mode" aria-label="Cron mode" formControlName="mode">
-    <mat-button-toggle value="second">Secondly</mat-button-toggle>
-    <mat-button-toggle value="minute">Minutely</mat-button-toggle>
-    <mat-button-toggle value="hour">Hourly</mat-button-toggle>
-    <mat-button-toggle value="day">Daily</mat-button-toggle>
-    <mat-button-toggle value="week">Weekly</mat-button-toggle>
-    <mat-button-toggle value="month">Monthly</mat-button-toggle>
+    <mat-button-toggle value="secondly">Secondly</mat-button-toggle>
+    <mat-button-toggle value="minutely">Minutely</mat-button-toggle>
+    <mat-button-toggle value="hourly">Hourly</mat-button-toggle>
+    <mat-button-toggle value="daily">Daily</mat-button-toggle>
+    <mat-button-toggle value="weekly">Weekly</mat-button-toggle>
+    <mat-button-toggle value="monthly">Monthly</mat-button-toggle>
     <mat-button-toggle value="custom">Custom</mat-button-toggle>
   </mat-button-toggle-group>
 
   <ng-container [ngSwitch]="internalFormGroup.get('mode')?.value">
-    <ng-container *ngSwitchCase="'second'">
+    <ng-container *ngSwitchCase="'secondly'">
       <div class="modeForm">
         <span class="cron-form-label">Every </span>
         <mat-form-field>
@@ -39,7 +39,7 @@
       </div>
     </ng-container>
 
-    <ng-container *ngSwitchCase="'minute'">
+    <ng-container *ngSwitchCase="'minutely'">
       <div class="modeForm">
         <span class="cron-form-label">Every </span>
         <mat-form-field>
@@ -51,7 +51,7 @@
       </div>
     </ng-container>
 
-    <ng-container *ngSwitchCase="'hour'">
+    <ng-container *ngSwitchCase="'hourly'">
       <div class="modeForm">
         <span class="cron-form-label">Every </span>
         <mat-form-field>
@@ -70,7 +70,7 @@
       </div>
     </ng-container>
 
-    <ng-container *ngSwitchCase="'day'">
+    <ng-container *ngSwitchCase="'daily'">
       <div class="modeForm">
         <span class="cron-form-label">Every </span>
         <mat-form-field>
@@ -96,7 +96,7 @@
       </div>
     </ng-container>
 
-    <ng-container *ngSwitchCase="'week'">
+    <ng-container *ngSwitchCase="'weekly'">
       <div class="modeForm">
         <span class="cron-form-label">Every </span>
         <mat-form-field>
@@ -122,7 +122,7 @@
       </div>
     </ng-container>
 
-    <ng-container *ngSwitchCase="'month'">
+    <ng-container *ngSwitchCase="'monthly'">
       <div class="modeForm">
         <span class="cron-form-label">On the </span>
         <mat-form-field>

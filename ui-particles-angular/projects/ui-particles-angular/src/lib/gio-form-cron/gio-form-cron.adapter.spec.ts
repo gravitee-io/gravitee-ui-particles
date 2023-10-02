@@ -25,21 +25,21 @@ describe('parseCronExpression', () => {
 
   it('should return secondly cron', () => {
     expect(parseCronExpression('*/6 * * * * *')).toEqual({
-      mode: 'second',
+      mode: 'secondly',
       secondInterval: 6,
     });
   });
 
   it('should return minutely cron', () => {
     expect(parseCronExpression('0 */42 * * * *')).toEqual({
-      mode: 'minute',
+      mode: 'minutely',
       minuteInterval: 42,
     });
   });
 
   it('should return hourly cron', () => {
     expect(parseCronExpression('0 15 */4 * * *')).toEqual({
-      mode: 'hour',
+      mode: 'hourly',
       hourInterval: 4,
       minutes: 15,
     });
@@ -47,7 +47,7 @@ describe('parseCronExpression', () => {
 
   it('should return daily cron', () => {
     expect(parseCronExpression('0 30 12 */3 * *')).toEqual({
-      mode: 'day',
+      mode: 'daily',
       dayInterval: 3,
       minutes: 30,
       hours: 12,
@@ -57,7 +57,7 @@ describe('parseCronExpression', () => {
   it('should return weekly cron', () => {
     // TODO : make work with 0 15 10 * * FRI
     expect(parseCronExpression('0 15 10 * * 5')).toEqual({
-      mode: 'week',
+      mode: 'weekly',
       dayOfWeek: 5,
       minutes: 15,
       hours: 10,
@@ -66,7 +66,7 @@ describe('parseCronExpression', () => {
 
   it('should return monthly cron', () => {
     expect(parseCronExpression('0 15 10 8 * *')).toEqual({
-      mode: 'month',
+      mode: 'monthly',
       dayOfMonth: 8,
       minutes: 15,
       hours: 10,
@@ -80,12 +80,12 @@ describe('parseCronExpression', () => {
 
 describe('getDefaultCronDisplay', () => {
   it.each([
-    ['second', '*/0 * * * * *'],
-    ['minute', '0 */0 * * * *'],
-    ['hour', '0 0 */0 * * *'],
-    ['day', '0 0 0 */1 * *'],
-    ['week', '0 0 0 * * 0'],
-    ['month', '0 0 0 1 * *'],
+    ['secondly', '*/0 * * * * *'],
+    ['minutely', '0 */0 * * * *'],
+    ['hourly', '0 0 */0 * * *'],
+    ['daily', '0 0 0 */1 * *'],
+    ['weekly', '0 0 0 * * 0'],
+    ['monthly', '0 0 0 1 * *'],
     ['custom', '* * * * * *'],
   ])('should return default cron for mode %s', (mode, expected) => {
     const dm = getDefaultCronDisplay(mode as CronDisplayMode);
@@ -106,26 +106,26 @@ describe('toCronExpression', () => {
   });
 
   it('should return secondly cron', () => {
-    expect(toCronExpression({ mode: 'second', secondInterval: 6 })).toEqual('*/6 * * * * *');
+    expect(toCronExpression({ mode: 'secondly', secondInterval: 6 })).toEqual('*/6 * * * * *');
   });
 
   it('should return minutely cron', () => {
-    expect(toCronExpression({ mode: 'minute', minuteInterval: 42 })).toEqual('0 */42 * * * *');
+    expect(toCronExpression({ mode: 'minutely', minuteInterval: 42 })).toEqual('0 */42 * * * *');
   });
 
   it('should return hourly cron', () => {
-    expect(toCronExpression({ mode: 'hour', hourInterval: 4, minutes: 15 })).toEqual('0 15 */4 * * *');
+    expect(toCronExpression({ mode: 'hourly', hourInterval: 4, minutes: 15 })).toEqual('0 15 */4 * * *');
   });
 
   it('should return daily cron', () => {
-    expect(toCronExpression({ mode: 'day', dayInterval: 3, minutes: 30, hours: 12 })).toEqual('0 30 12 */3 * *');
+    expect(toCronExpression({ mode: 'daily', dayInterval: 3, minutes: 30, hours: 12 })).toEqual('0 30 12 */3 * *');
   });
 
   it('should return weekly cron', () => {
-    expect(toCronExpression({ mode: 'week', dayOfWeek: 5, minutes: 15, hours: 10 })).toEqual('0 15 10 * * 5');
+    expect(toCronExpression({ mode: 'weekly', dayOfWeek: 5, minutes: 15, hours: 10 })).toEqual('0 15 10 * * 5');
   });
 
   it('should return monthly cron', () => {
-    expect(toCronExpression({ mode: 'month', dayOfMonth: 8, minutes: 15, hours: 10 })).toEqual('0 15 10 8 * *');
+    expect(toCronExpression({ mode: 'monthly', dayOfMonth: 8, minutes: 15, hours: 10 })).toEqual('0 15 10 8 * *');
   });
 });
