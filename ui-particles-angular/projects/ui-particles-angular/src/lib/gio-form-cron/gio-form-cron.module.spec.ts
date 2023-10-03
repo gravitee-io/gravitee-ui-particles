@@ -17,7 +17,7 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { GioFormCronHarness } from './gio-form-cron.harness';
@@ -28,7 +28,7 @@ describe('GioFormCronModule', () => {
     template: ` <gio-form-cron [formControl]="testControl"></gio-form-cron> `,
   })
   class TestComponent {
-    public testControl = new FormControl(null, Validators.required);
+    public testControl = new FormControl(null);
   }
 
   let component: TestComponent;
@@ -84,6 +84,8 @@ describe('GioFormCronModule', () => {
     expect(await formCronHarness.getValue()).toEqual(null);
     expect(component.testControl.value).toEqual(null);
     expect(testControlValueChanges).toEqual(['0 15 10 8 * *', null]);
+    expect(component.testControl.errors).toEqual(null);
+    expect(await formCronHarness.hasError()).toEqual(false);
   });
 
   it('should disabled', async () => {
@@ -96,5 +98,18 @@ describe('GioFormCronModule', () => {
 
     component.testControl.enable();
     expect(await formCronHarness.isDisabled()).toEqual(false);
+  });
+
+  it('should in error with bad custom expression', async () => {
+    component.testControl.setValue('0 15 10 8 * *');
+
+    const formCronHarness = await loader.getHarness(GioFormCronHarness);
+    expect(await formCronHarness.hasError()).toEqual(false);
+
+    await formCronHarness.setCustomValue('BadExpression');
+    expect(await formCronHarness.hasError()).toEqual(true);
+
+    await formCronHarness.setCustomValue('0 15 10 8 * *');
+    expect(await formCronHarness.hasError()).toEqual(false);
   });
 });

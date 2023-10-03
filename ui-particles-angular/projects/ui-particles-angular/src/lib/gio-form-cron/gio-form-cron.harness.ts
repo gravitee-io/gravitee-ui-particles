@@ -16,6 +16,7 @@
 
 import { BaseHarnessFilters, ComponentHarness, HarnessPredicate } from '@angular/cdk/testing';
 import { MatButtonToggleGroupHarness } from '@angular/material/button-toggle/testing';
+import { MatInputHarness } from '@angular/material/input/testing';
 
 export type GioFormCronHarnessFilters = BaseHarnessFilters;
 
@@ -45,6 +46,11 @@ export class GioFormCronHarness extends ComponentHarness {
     return selected;
   }
 
+  public async setMode(mode: string): Promise<void> {
+    const modeToggle = await this.getModeToggleGroup();
+    await (await modeToggle.getToggles({ text: mode }))[0]?.check();
+  }
+
   public async clear(): Promise<void> {
     const clearButton = await this.locatorForOptional('[aria-label="Clear"]')();
     await clearButton?.click();
@@ -56,8 +62,25 @@ export class GioFormCronHarness extends ComponentHarness {
     return value?.text() ?? null;
   }
 
+  public async setCustomValue(value: string): Promise<void> {
+    if ((await this.getMode()) !== 'Custom') {
+      await this.setMode('Custom');
+    }
+
+    const input = await this.locatorFor(MatInputHarness.with({ selector: '[formControlName="customExpression"]' }))();
+    await input.setValue(value);
+  }
+
   public async isDisabled(): Promise<boolean> {
     const mode = await this.getModeToggleGroup();
     return mode.isDisabled();
+  }
+
+  public async hasError(): Promise<boolean> {
+    const host = await this.host();
+    const attribute = await host.getAttribute('class');
+    const error = attribute?.includes('ng-invalid');
+
+    return error ?? false;
   }
 }

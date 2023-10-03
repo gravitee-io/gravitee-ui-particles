@@ -15,8 +15,17 @@
  */
 
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { Component, ElementRef, HostBinding, NgZone, OnDestroy, OnInit, Optional, Self } from '@angular/core';
-import { ControlValueAccessor, FormControl, FormGroup, NgControl } from '@angular/forms';
+import { Component, ElementRef, HostBinding, NgZone, OnDestroy, OnInit, forwardRef } from '@angular/core';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  FormControl,
+  FormGroup,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  Validator,
+} from '@angular/forms';
 import { isEmpty, range } from 'lodash';
 import { Subject } from 'rxjs';
 import { filter, takeUntil, tap } from 'rxjs/operators';
@@ -27,8 +36,20 @@ import { CronDisplay, getDefaultCronDisplay, parseCronExpression, toCronDescript
   selector: 'gio-form-cron',
   templateUrl: './gio-form-cron.component.html',
   styleUrls: ['./gio-form-cron.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => GioFormCronComponent),
+      multi: true,
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => GioFormCronComponent),
+      multi: true,
+    },
+  ],
 })
-export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDestroy, Validator {
   public _onChange: (value: string | null) => void = () => ({});
 
   public _onTouched: () => void = () => ({});
@@ -48,25 +69,14 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
   private touched = false;
   private focused = false;
   @HostBinding('class.disabled')
+  private hasError = false;
 
   private cronDisplay?: CronDisplay;
 
   private unsubscribe$ = new Subject<void>();
   private resizeObserver?: ResizeObserver;
 
-  constructor(
-    @Optional() @Self() public readonly ngControl: NgControl,
-    private readonly elRef: ElementRef,
-    private readonly fm: FocusMonitor,
-    private readonly ngZone: NgZone,
-  ) {
-    // Replace the provider from above with this.
-    if (this.ngControl != null) {
-      // Setting the value accessor directly (instead of using
-      // the providers) to avoid running into a circular import.
-      this.ngControl.valueAccessor = this;
-    }
-
+  constructor(private readonly elRef: ElementRef, private readonly fm: FocusMonitor, private readonly ngZone: NgZone) {
     fm.monitor(elRef.nativeElement, true).subscribe(origin => {
       this.focused = !!origin;
       this._onTouched();
@@ -116,24 +126,32 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
     this.internalFormGroup.valueChanges
       ?.pipe(
         tap(value => {
+          this.hasError = false;
           if (!value?.mode) {
             this._onChange(null);
             return;
           }
-          this.value = toCronExpression({
-            mode: value.mode,
-            secondInterval: value.secondInterval,
-            minuteInterval: value.minuteInterval,
-            hourInterval: value.hourInterval,
-            dayInterval: value.dayInterval,
-            dayOfWeek: value.dayOfWeek,
-            dayOfMonth: value.dayOfMonth,
-            customExpression: value.customExpression,
-            hours: value.hours,
-            minutes: value.minutes,
-          });
-          this.expressionDescription = toCronDescription(this.value);
-          this._onChange(this.value);
+          try {
+            this.value = toCronExpression({
+              mode: value.mode,
+              secondInterval: value.secondInterval,
+              minuteInterval: value.minuteInterval,
+              hourInterval: value.hourInterval,
+              dayInterval: value.dayInterval,
+              dayOfWeek: value.dayOfWeek,
+              dayOfMonth: value.dayOfMonth,
+              customExpression: value.customExpression,
+              hours: value.hours,
+              minutes: value.minutes,
+            });
+
+            this.expressionDescription = toCronDescription(this.value);
+            this._onChange(this.value);
+          } catch (error) {
+            this.hasError = true;
+            this.expressionDescription = `${error}` ?? 'Invalid cron expression.';
+            this._onChange(null);
+          }
         }),
         takeUntil(this.unsubscribe$),
       )
@@ -152,13 +170,19 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
   // From ControlValueAccessor interface
   public writeValue(value: string): void {
     if (isEmpty(value)) {
+      this.onClear();
       return;
     }
-    this.value = value;
-    this.cronDisplay = parseCronExpression(value);
+    try {
+      this.value = value;
+      this.cronDisplay = parseCronExpression(value);
 
-    this.expressionDescription = toCronDescription(this.value);
-    this.refreshInternalForm();
+      this.expressionDescription = toCronDescription(this.value);
+      this.refreshInternalForm();
+    } catch (error) {
+      this.hasError = true;
+      this.expressionDescription = `${error}` ?? 'Invalid cron expression.';
+    }
   }
 
   // From ControlValueAccessor interface
@@ -175,6 +199,10 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
   public setDisabledState(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
     this.refreshInternalForm();
+  }
+
+  public validate(_: AbstractControl): ValidationErrors | null {
+    return this.hasError ? { invalid: true } : null;
   }
 
   public onClear() {
