@@ -15,6 +15,7 @@
  */
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
+import { action } from '@storybook/addon-actions';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -41,6 +42,11 @@ export default {
   },
   render: p => {
     const control = new FormControl({ value: p.initialValue ?? '', disabled: p.disabled });
+
+    control.valueChanges.subscribe(v => {
+      console.info('Value changed', v);
+      action('Value changed')(v);
+    });
 
     return {
       template: `
