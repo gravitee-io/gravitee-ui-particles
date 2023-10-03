@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
 
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { Component, ElementRef, OnDestroy, OnInit, Optional, Self } from '@angular/core';
@@ -42,6 +41,7 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
   public internalFormGroup?: FormGroup;
   public value?: string;
   public expressionDescription?: string;
+  public isDisabled = false;
 
   private touched = false;
   private focused = false;
@@ -83,6 +83,7 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
       minutes: new FormControl(),
       customExpression: new FormControl(),
     });
+    this.isDisabled ? this.internalFormGroup.disable({ emitEvent: false }) : this.internalFormGroup.enable({ emitEvent: false });
 
     this.internalFormGroup
       .get('mode')
@@ -139,6 +140,7 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
     }
     this.value = value;
     this.cronDisplay = parseCronExpression(value);
+
     this.expressionDescription = toCronDescription(this.value);
     this.refreshInternalForm();
   }
@@ -151,6 +153,12 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
   // From ControlValueAccessor interface
   public registerOnTouched(fn: () => void): void {
     this._onTouched = fn;
+  }
+
+  // From ControlValueAccessor interface
+  public setDisabledState(isDisabled: boolean): void {
+    this.isDisabled = isDisabled;
+    this.refreshInternalForm();
   }
 
   public onClear() {
@@ -179,5 +187,7 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
       },
       { emitEvent: false },
     );
+
+    this.isDisabled ? this.internalFormGroup.disable({ emitEvent: false }) : this.internalFormGroup.enable({ emitEvent: false });
   }
 }

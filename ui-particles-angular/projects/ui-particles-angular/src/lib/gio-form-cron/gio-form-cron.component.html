@@ -25,7 +25,7 @@
     <mat-button-toggle value="monthly">Monthly</mat-button-toggle>
     <mat-button-toggle value="custom">Custom</mat-button-toggle>
   </mat-button-toggle-group>
-  <button *ngIf="value" mat-icon-button aria-label="Clear" (click)="onClear()">
+  <button *ngIf="value && !isDisabled" mat-icon-button aria-label="Clear" type="button" (click)="onClear()">
     <mat-icon>close</mat-icon>
   </button>
 
