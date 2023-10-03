@@ -111,7 +111,7 @@ export const WithInitialMonthlyValue: Story = {
 
 export const WithInitialCustomValue: Story = {
   args: {
-    initialValue: '15 10 8 3 *',
+    initialValue: '0 0 0 LW * *',
   },
 };
 
@@ -123,7 +123,7 @@ export const Disabled: Story = {
 
 export const DisabledWithInitialValue: Story = {
   args: {
-    initialValue: '15 10 8 3 *',
+    initialValue: '0 0 0 LW * *',
     disabled: true,
   },
 };
@@ -137,14 +137,14 @@ export const SmallWidth: Story = {
     };
   },
   args: {
-    initialValue: '15 10 8 3 *',
+    initialValue: '0 0 0 LW * *',
   },
 };
 
 export const Required: Story = {
   args: {
     required: true,
-    initialValue: '15 10 8 3 *',
+    initialValue: '0 0 0 LW * *',
   },
   play: () => {
     const formCron = document.querySelector<HTMLButtonElement>('[aria-label="Clear"]');
@@ -157,7 +157,7 @@ export const Required: Story = {
 export const WithErrorInValue: Story = {
   args: {
     required: false,
-    initialValue: '15 10 8 3 *',
+    initialValue: '0 0 0 LW * *',
   },
   play: () => {
     const formCron = document.querySelector<HTMLInputElement>('[formControlName="customExpression"]');

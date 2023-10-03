@@ -174,6 +174,10 @@ export const toCronExpression = (cronDisplay: Omit<CronDisplay, 'cronDescription
 };
 
 export const toCronDescription = (cronExpression: string): string => {
+  if (!cronIsValid(cronExpression)) {
+    throw new Error('Invalid cron expression.');
+  }
+
   if (!isEmpty(cronExpression)) {
     return Cronstrue.toString(cronExpression);
   }
@@ -184,8 +188,8 @@ export const toCronDescription = (cronExpression: string): string => {
 const cronIsValid = (cronExpression: string): boolean => {
   const parts = cronExpression.split(' ');
 
-  if (parts.length < 5 || parts.length > 6) {
-    return false;
+  if (parts.length != 6) {
+    throw new Error('Cron expression must have 6 parts.');
   }
 
   return true;
