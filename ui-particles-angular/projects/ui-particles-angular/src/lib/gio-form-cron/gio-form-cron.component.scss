@@ -20,55 +20,76 @@
 $typography: map.get(gio.$mat-theme, typography);
 
 :host {
-  display: inline-block;
+  display: block;
+}
+
+.wrapper {
+  display: inline-flex;
+  flex-direction: column;
   padding: 8px;
   border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, 'darker20');
   border-radius: 8px;
-}
 
-.menu {
-  border: none;
-  margin-bottom: 8px;
-}
+  .menu {
+    display: inline-flex;
+    margin-bottom: 4px;
 
-.modeForm {
-  margin-bottom: 8px;
-
-  &__field-small,
-  &__field-medium,
-  &__field-custom {
-    display: inline-block;
-    height: 52px;
+    &__mode {
+      border: none;
+      margin-bottom: 0;
+    }
   }
 
-  &__field-small {
-    width: 80px;
+  .modeForm {
+    margin-bottom: 8px;
+
+    &__field-small,
+    &__field-medium,
+    &__field-custom {
+      display: inline-block;
+      height: 52px;
+    }
+
+    &__field-small {
+      width: 80px;
+    }
+
+    &__field-medium {
+      width: 120px;
+    }
+
+    &__field-custom {
+      width: 100%;
+    }
   }
 
-  &__field-medium {
-    width: 120px;
+  .preview,
+  .placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker10');
+    color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker10-contrast');
   }
 
-  &__field-custom {
-    width: 100%;
+  .preview {
+    &__hint {
+      @include mat.typography-level($typography, caption);
+    }
   }
-}
 
-.preview {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 8px;
-  border-radius: 8px;
-  background-color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker10');
-  color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker10-contrast');
-
-  &__hint {
-    padding-left: 18px;
+  .placeholder {
     @include mat.typography-level($typography, caption);
   }
 }
 
-.placeholder {
-  @include mat.typography-level($typography, caption);
+:host-context(.disabled) {
+  .wrapper {
+    .preview,
+    .placeholder {
+      opacity: 0.4;
+    }
+  }
 }

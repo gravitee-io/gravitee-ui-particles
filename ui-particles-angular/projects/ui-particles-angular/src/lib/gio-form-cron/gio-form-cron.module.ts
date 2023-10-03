@@ -21,6 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { GioIconsModule } from '../gio-icons/gio-icons.module';
 
@@ -35,6 +36,7 @@ import { GioFormCronComponent } from './gio-form-cron.component';
     MatSelectModule,
     MatInputModule,
     MatButtonModule,
+    MatTooltipModule,
     GioIconsModule,
   ],
   declarations: [GioFormCronComponent],

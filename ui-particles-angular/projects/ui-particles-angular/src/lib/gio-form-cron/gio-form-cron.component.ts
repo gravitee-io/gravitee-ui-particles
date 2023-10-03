@@ -15,7 +15,7 @@
  */
 
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { Component, ElementRef, OnDestroy, OnInit, Optional, Self } from '@angular/core';
+import { Component, ElementRef, HostBinding, NgZone, OnDestroy, OnInit, Optional, Self } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormGroup, NgControl } from '@angular/forms';
 import { isEmpty, range } from 'lodash';
 import { Subject } from 'rxjs';
@@ -42,18 +42,23 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
   public value?: string;
   public expressionDescription?: string;
   public isDisabled = false;
+  @HostBinding('class.smallDisplay')
+  public smallDisplay = false;
 
   private touched = false;
   private focused = false;
+  @HostBinding('class.disabled')
 
   private cronDisplay?: CronDisplay;
 
   private unsubscribe$ = new Subject<void>();
+  private resizeObserver?: ResizeObserver;
 
   constructor(
     @Optional() @Self() public readonly ngControl: NgControl,
     private readonly elRef: ElementRef,
     private readonly fm: FocusMonitor,
+    private readonly ngZone: NgZone,
   ) {
     // Replace the provider from above with this.
     if (this.ngControl != null) {
@@ -70,6 +75,16 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
   }
 
   public ngOnInit(): void {
+    if (window.ResizeObserver) {
+      this.resizeObserver = new ResizeObserver(entries => {
+        this.ngZone.run(() => {
+          const width = entries[0].contentRect.width;
+          this.smallDisplay = width < 580;
+        });
+      });
+      this.resizeObserver.observe(this.elRef.nativeElement);
+    }
+
     this.internalFormGroup = new FormGroup({
       mode: new FormControl(),
       secondInterval: new FormControl(),
@@ -129,6 +144,7 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
 
   public ngOnDestroy(): void {
     this.fm.stopMonitoring(this.elRef.nativeElement);
+    this.resizeObserver?.unobserve(this.elRef.nativeElement);
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
