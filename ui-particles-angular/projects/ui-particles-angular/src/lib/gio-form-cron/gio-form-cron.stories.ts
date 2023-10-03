@@ -23,6 +23,28 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GioFormCronComponent } from './gio-form-cron.component';
 import { GioFormCronModule } from './gio-form-cron.module';
 
+const DefaultRender: Meta['render'] = p => {
+  const control = new FormControl({ value: p.initialValue ?? '', disabled: p.disabled });
+
+  control.valueChanges.subscribe(v => {
+    console.info('Value changed', v);
+    action('Value changed')(v);
+  });
+
+  return {
+    template: `
+      <gio-form-cron  [formControl]="control"></gio-form-cron>
+      <br>
+      --------------------
+      <br>
+      Output: {{control.value}} | Touched: {{ control.touched | json}} | Error: {{ control.errors | json}}
+    `,
+    props: {
+      control,
+    },
+  };
+};
+
 export default {
   title: 'Components / Form Cron',
   component: GioFormCronComponent,
@@ -40,27 +62,7 @@ export default {
       control: { type: 'text' },
     },
   },
-  render: p => {
-    const control = new FormControl({ value: p.initialValue ?? '', disabled: p.disabled });
-
-    control.valueChanges.subscribe(v => {
-      console.info('Value changed', v);
-      action('Value changed')(v);
-    });
-
-    return {
-      template: `
-        <gio-form-cron [formControl]="control"></gio-form-cron>
-        <br>
-        --------------------
-        <br>
-        Output: {{control.value}} | Touched: {{ control.touched | json}} | Error: {{ control.errors | json}}
-      `,
-      props: {
-        control,
-      },
-    };
-  },
+  render: DefaultRender,
 } as Meta;
 
 export const Default: Story = {
@@ -119,5 +121,18 @@ export const DisabledWithInitialValue: Story = {
   args: {
     initialValue: '15 10 8 3 *',
     disabled: true,
+  },
+};
+
+export const SmallWidth: Story = {
+  render: (p, c) => {
+    const parentRender = DefaultRender(p, c);
+    return {
+      ...parentRender,
+      template: `<div style="width: 300px">${parentRender.template}</div>`,
+    };
+  },
+  args: {
+    initialValue: '15 10 8 3 *',
   },
 };
