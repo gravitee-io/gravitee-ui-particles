@@ -93,12 +93,25 @@ export const WithInitialWeeklyValue: Story = {
 
 export const WithInitialMonthlyValue: Story = {
   args: {
-    initialValue: '0 0 0 6 * *',
+    initialValue: '0 15 10 8 * *',
   },
 };
 
 export const WithInitialCustomValue: Story = {
   args: {
     initialValue: '15 10 8 3 *',
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+};
+
+export const DisabledWithInitialValue: Story = {
+  args: {
+    initialValue: '15 10 8 3 *',
+    disabled: true,
   },
 };

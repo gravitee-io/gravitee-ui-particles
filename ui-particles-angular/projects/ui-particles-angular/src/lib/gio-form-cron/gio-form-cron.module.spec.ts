@@ -61,8 +61,9 @@ describe('GioFormCronModule', () => {
 
     const formCronHarness = await loader.getHarness(GioFormCronHarness);
 
-    expect(await formCronHarness.getMode()).toBe('Monthly');
-    expect(await formCronHarness.getValue()).toBe('0 15 10 8 * *');
+    expect(await formCronHarness.getMode()).toEqual('Monthly');
+    expect(await formCronHarness.getValue()).toEqual('0 15 10 8 * *');
+    expect(component.testControl.value).toEqual('0 15 10 8 * *');
   });
 
   it('should clear value', async () => {
@@ -71,7 +72,20 @@ describe('GioFormCronModule', () => {
     const formCronHarness = await loader.getHarness(GioFormCronHarness);
     await formCronHarness.clear();
 
-    expect(await formCronHarness.getMode()).toBe(null);
-    expect(await formCronHarness.getValue()).toBe(null);
+    expect(await formCronHarness.getMode()).toEqual(null);
+    expect(await formCronHarness.getValue()).toEqual(null);
+    expect(component.testControl.value).toEqual(null);
+  });
+
+  it('should disabled', async () => {
+    component.testControl.setValue('0 15 10 8 * *');
+    component.testControl.disable();
+
+    const formCronHarness = await loader.getHarness(GioFormCronHarness);
+
+    expect(await formCronHarness.isDisabled()).toEqual(true);
+
+    component.testControl.enable();
+    expect(await formCronHarness.isDisabled()).toEqual(false);
   });
 });

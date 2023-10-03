@@ -22,6 +22,8 @@ export type GioFormCronHarnessFilters = BaseHarnessFilters;
 export class GioFormCronHarness extends ComponentHarness {
   public static hostSelector = 'gio-form-cron';
 
+  protected getModeToggleGroup = this.locatorFor(MatButtonToggleGroupHarness.with({ selector: '[formControlName="mode"]' }));
+
   /**
    * Gets a `HarnessPredicate` that can be used to search for this harness.
    *
@@ -33,7 +35,7 @@ export class GioFormCronHarness extends ComponentHarness {
   }
 
   public async getMode(): Promise<string | null> {
-    const mode = await this.locatorFor(MatButtonToggleGroupHarness.with({ selector: '[formControlName="mode"]' }))();
+    const mode = await this.getModeToggleGroup();
 
     const selected = await (await mode.getToggles({ checked: true }))[0]?.getText();
 
@@ -52,5 +54,10 @@ export class GioFormCronHarness extends ComponentHarness {
     const value = await this.locatorForOptional('.preview__value')();
 
     return value?.text() ?? null;
+  }
+
+  public async isDisabled(): Promise<boolean> {
+    const mode = await this.getModeToggleGroup();
+    return mode.isDisabled();
   }
 }
