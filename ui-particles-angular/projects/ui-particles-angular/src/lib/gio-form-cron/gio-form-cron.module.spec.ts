@@ -34,6 +34,7 @@ describe('GioFormCronModule', () => {
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
   let loader: HarnessLoader;
+  let testControlValueChanges: string[] = [];
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -45,11 +46,16 @@ describe('GioFormCronModule', () => {
     loader = TestbedHarnessEnvironment.loader(fixture);
   });
 
+  beforeEach(() => {
+    testControlValueChanges = [];
+    component.testControl.valueChanges.subscribe(v => testControlValueChanges.push(v));
+  });
+
   it('should init component', async () => {
     const formCronHarness = await loader.getHarness(GioFormCronHarness);
 
     expect(formCronHarness).toBeTruthy();
-    expect(component).toBeTruthy();
+    expect(testControlValueChanges).toEqual([]);
 
     // Default mode
     expect(await formCronHarness.getMode()).toBe(null);
@@ -57,13 +63,15 @@ describe('GioFormCronModule', () => {
   });
 
   it('should select Monthly mode for "0 15 10 8 * *" cron', async () => {
-    component.testControl.setValue('0 15 10 8 * *');
+    component.testControl.setValue('0 15 10 8 * *', { emitEvent: false });
 
     const formCronHarness = await loader.getHarness(GioFormCronHarness);
 
     expect(await formCronHarness.getMode()).toEqual('Monthly');
     expect(await formCronHarness.getValue()).toEqual('0 15 10 8 * *');
     expect(component.testControl.value).toEqual('0 15 10 8 * *');
+    // Like native angular form not emit event on init
+    expect(testControlValueChanges).toEqual([]);
   });
 
   it('should clear value', async () => {
@@ -75,6 +83,7 @@ describe('GioFormCronModule', () => {
     expect(await formCronHarness.getMode()).toEqual(null);
     expect(await formCronHarness.getValue()).toEqual(null);
     expect(component.testControl.value).toEqual(null);
+    expect(testControlValueChanges).toEqual(['0 15 10 8 * *', null]);
   });
 
   it('should disabled', async () => {
