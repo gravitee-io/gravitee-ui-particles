@@ -93,3 +93,14 @@ $typography: map.get(gio.$mat-theme, typography);
     }
   }
 }
+
+:host-context(.ng-invalid:not(.ng-pristine)) {
+  .wrapper {
+    border-color: mat.get-color-from-palette(gio.$mat-error-palette, 'default');
+
+    .preview,
+    .placeholder {
+      color: mat.get-color-from-palette(gio.$mat-error-palette, 'default');
+    }
+  }
+}

@@ -18,17 +18,17 @@ import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
 import { action } from '@storybook/addon-actions';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { GioFormCronComponent } from './gio-form-cron.component';
 import { GioFormCronModule } from './gio-form-cron.module';
 
 const DefaultRender: Meta['render'] = p => {
-  const control = new FormControl({ value: p.initialValue ?? '', disabled: p.disabled });
+  const control = new FormControl({ value: p.initialValue ?? '', disabled: p.disabled }, p.required ? Validators.required : null);
 
   control.valueChanges.subscribe(v => {
     console.info('Value changed', v);
-    action('Value changed')(v);
+    action('Value changed')({ value: v });
   });
 
   return {
@@ -60,6 +60,10 @@ export default {
     },
     initialValue: {
       control: { type: 'text' },
+    },
+    required: {
+      defaultValue: false,
+      control: { type: 'boolean' },
     },
   },
   render: DefaultRender,
@@ -134,5 +138,32 @@ export const SmallWidth: Story = {
   },
   args: {
     initialValue: '15 10 8 3 *',
+  },
+};
+
+export const Required: Story = {
+  args: {
+    required: true,
+    initialValue: '15 10 8 3 *',
+  },
+  play: () => {
+    const formCron = document.querySelector<HTMLButtonElement>('[aria-label="Clear"]');
+    if (formCron) {
+      formCron.click();
+    }
+  },
+};
+
+export const WithErrorInValue: Story = {
+  args: {
+    required: false,
+    initialValue: '15 10 8 3 *',
+  },
+  play: () => {
+    const formCron = document.querySelector<HTMLInputElement>('[formControlName="customExpression"]');
+    if (formCron) {
+      formCron.value = 'Bad value 🦊';
+      formCron.dispatchEvent(new Event('input'));
+    }
   },
 };

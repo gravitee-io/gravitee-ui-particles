@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import Cronstrue from 'cronstrue/i18n';
+import { isEmpty } from 'lodash';
 
 export interface CronDisplay {
   mode: CronDisplayMode;
@@ -173,7 +174,11 @@ export const toCronExpression = (cronDisplay: Omit<CronDisplay, 'cronDescription
 };
 
 export const toCronDescription = (cronExpression: string): string => {
-  return Cronstrue.toString(cronExpression);
+  if (!isEmpty(cronExpression)) {
+    return Cronstrue.toString(cronExpression);
+  }
+
+  return '';
 };
 
 const cronIsValid = (cronExpression: string): boolean => {
