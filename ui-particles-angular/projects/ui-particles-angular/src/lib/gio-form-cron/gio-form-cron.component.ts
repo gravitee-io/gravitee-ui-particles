@@ -108,6 +108,7 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
       minutes: new FormControl(),
       customExpression: new FormControl(),
     });
+
     this.isDisabled ? this.internalFormGroup.disable({ emitEvent: false }) : this.internalFormGroup.enable({ emitEvent: false });
 
     this.internalFormGroup
@@ -198,6 +199,7 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
   // From ControlValueAccessor interface
   public setDisabledState(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
+
     this.refreshInternalForm();
   }
 
@@ -212,26 +214,28 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
   }
 
   private refreshInternalForm(): void {
-    const d = this.cronDisplay;
-    if (!d || !this.internalFormGroup) return;
-
-    this.internalFormGroup.patchValue(
-      {
-        mode: d.mode,
-        customExpression: d.customExpression,
-        secondInterval: d.secondInterval,
-        minuteInterval: d.minuteInterval,
-        hourInterval: d.hourInterval,
-        dayInterval: d.dayInterval,
-        dayOfWeek: d.dayOfWeek,
-        dayOfMonth: d.dayOfMonth,
-
-        hours: d.hours,
-        minutes: d.minutes,
-      },
-      { emitEvent: false },
-    );
+    if (!this.internalFormGroup) return;
 
     this.isDisabled ? this.internalFormGroup.disable({ emitEvent: false }) : this.internalFormGroup.enable({ emitEvent: false });
+
+    const d = this.cronDisplay;
+    if (d) {
+      this.internalFormGroup.patchValue(
+        {
+          mode: d.mode,
+          customExpression: d.customExpression,
+          secondInterval: d.secondInterval,
+          minuteInterval: d.minuteInterval,
+          hourInterval: d.hourInterval,
+          dayInterval: d.dayInterval,
+          dayOfWeek: d.dayOfWeek,
+          dayOfMonth: d.dayOfMonth,
+
+          hours: d.hours,
+          minutes: d.minutes,
+        },
+        { emitEvent: false },
+      );
+    }
   }
 }

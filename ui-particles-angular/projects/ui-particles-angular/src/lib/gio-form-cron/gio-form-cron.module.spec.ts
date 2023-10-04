@@ -100,6 +100,17 @@ describe('GioFormCronModule', () => {
     expect(await formCronHarness.isDisabled()).toEqual(false);
   });
 
+  it('should disabled with empty value', async () => {
+    component.testControl.disable();
+
+    const formCronHarness = await loader.getHarness(GioFormCronHarness);
+
+    expect(await formCronHarness.isDisabled()).toEqual(true);
+
+    component.testControl.enable();
+    expect(await formCronHarness.isDisabled()).toEqual(false);
+  });
+
   it('should in error with bad custom expression', async () => {
     component.testControl.setValue('0 15 10 8 * *');
 

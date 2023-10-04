@@ -16,7 +16,7 @@
 
 -->
 <div class="label"><ng-content select="gio-form-cron-label"></ng-content></div>
-<div class="wrapper" [class.smallDisplay]="smallDisplay">
+<div class="wrapper" [class.smallDisplay]="smallDisplay" [class.disabled]="isDisabled">
   <ng-container *ngIf="internalFormGroup" [formGroup]="internalFormGroup">
     <div class="menu">
       <mat-button-toggle-group class="gio-button-toggle-group menu__mode" name="mode" aria-label="Cron mode" formControlName="mode">
