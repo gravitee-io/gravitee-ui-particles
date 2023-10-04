@@ -36,7 +36,7 @@ let route = 'plans';
 export const Default: Story = {
   render: () => ({
     template: `
-        <gio-submenu>
+        <gio-submenu [reduced]="false">
             <div gioSubmenuTitle>Submenu title</div>   
             <gio-submenu-item (click)="onClick('message')" [active]="isActive('message')">Message</gio-submenu-item>
             <gio-submenu-group title="Portal">
@@ -73,7 +73,7 @@ export const Default: Story = {
 export const Light: Story = {
   render: () => ({
     template: `
-        <gio-submenu theme="light">
+        <gio-submenu theme="light" [reduced]="false">
             <div gioSubmenuTitle>Submenu title</div>   
             <gio-submenu-item (click)="onClick('message')" [active]="isActive('message')">Message</gio-submenu-item>
             <gio-submenu-group title="Portal" theme="light">
