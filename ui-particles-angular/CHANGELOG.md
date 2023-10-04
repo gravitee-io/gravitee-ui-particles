@@ -1,3 +1,21 @@
+# [7.33.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.32.0...v7.33.0) (2023-10-04)
+
+
+### Bug Fixes
+
+* form-cron - throw when cron does not have 6 parts ([33b7c97](https://github.com/gravitee-io/gravitee-ui-particles/commit/33b7c974599ea9df3d209eb90987244284a7765c))
+
+
+### Features
+
+* cron-form - check from valueChanges job ([7594482](https://github.com/gravitee-io/gravitee-ui-particles/commit/7594482b1112ff8f6a8a35630f3156d8d25441dc))
+* cron-form - handle default undefined value ([6b8aa59](https://github.com/gravitee-io/gravitee-ui-particles/commit/6b8aa590ddd2f6906089fdd3eb1385cf7032159b))
+* cron-form - impl error management & display ([23f2093](https://github.com/gravitee-io/gravitee-ui-particles/commit/23f20939b32e0aceb30322fb712af70dd7cecb50))
+* cron-form - impl small display mode ([b60d759](https://github.com/gravitee-io/gravitee-ui-particles/commit/b60d759c728a8c1480fd1f38d14d31f3334bf7d8))
+* cron-form - implement disabled state ([dcd0d80](https://github.com/gravitee-io/gravitee-ui-particles/commit/dcd0d807e6378fd22a51bb28818db2ce93551645))
+* cron-form - improve UI / UX ([c78d30d](https://github.com/gravitee-io/gravitee-ui-particles/commit/c78d30d0048ca5fbfd50a13a0164b760921b1e17))
+* cron-form - trim & ignore extra space ([eda2898](https://github.com/gravitee-io/gravitee-ui-particles/commit/eda28981cb170e052eeed518da53d0c9acdd0f5b))
+
 # [7.32.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.31.0...v7.32.0) (2023-10-03)
 
 
