@@ -41,7 +41,7 @@ $typography: map.get(gio.$mat-theme, typography);
   border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, 'darker20');
   border-radius: 8px;
 
-  &:hover {
+  &:hover:not(.disabled) {
     padding: 7px;
     border: 2px solid mat.get-color-from-palette(gio.$mat-dove-palette, 'darker80');
   }
@@ -99,24 +99,11 @@ $typography: map.get(gio.$mat-theme, typography);
   .placeholder {
     @include mat.typography-level($typography, caption);
   }
-}
 
-:host-context(.disabled) {
-  .wrapper {
+  &.disabled {
     .preview,
     .placeholder {
       opacity: 0.4;
-    }
-  }
-}
-
-:host-context(.ng-invalid:not(.ng-pristine)) {
-  .wrapper {
-    border-color: mat.get-color-from-palette(gio.$mat-error-palette, 'default');
-
-    .preview,
-    .placeholder {
-      color: mat.get-color-from-palette(gio.$mat-error-palette, 'default');
     }
   }
 }
@@ -130,5 +117,17 @@ $typography: map.get(gio.$mat-theme, typography);
 
   &:empty {
     display: none;
+  }
+}
+
+/* stylelint-disable no-descending-specificity */
+:host(.ng-invalid:not(.ng-pristine)) {
+  .wrapper {
+    border-color: mat.get-color-from-palette(gio.$mat-error-palette, 'default');
+
+    .preview,
+    .placeholder {
+      color: mat.get-color-from-palette(gio.$mat-error-palette, 'default');
+    }
   }
 }
