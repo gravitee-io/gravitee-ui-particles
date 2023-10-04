@@ -46,6 +46,9 @@ export default {
     }),
   ],
   render: () => ({}),
+  parameters: {
+    chromatic: { delay: 500 },
+  },
 } as Meta;
 
 export const MatInput: Story = {

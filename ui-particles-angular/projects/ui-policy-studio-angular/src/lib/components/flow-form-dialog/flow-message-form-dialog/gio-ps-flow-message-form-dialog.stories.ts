@@ -96,7 +96,7 @@ export default {
     props: { ...args },
   }),
   parameters: {
-    chromatic: { delay: 1000 },
+    chromatic: { delay: 1000, pauseAnimationAtEnd: true },
   },
 } as Meta;
 

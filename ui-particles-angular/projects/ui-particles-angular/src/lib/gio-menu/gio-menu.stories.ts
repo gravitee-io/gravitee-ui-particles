@@ -58,7 +58,7 @@ export const Default: Story = {
   render: () => ({
     template: `
         <div id="sidenav">
-          <gio-menu reduced="false">
+          <gio-menu [reduced]="false">
             ${gioMenuContent}
           </gio-menu>
           <h1>Selected env: {{ selectedItemValue }}</h1>
@@ -92,7 +92,7 @@ export const Reduced: Story = {
   render: () => ({
     template: `
         <div id="sidenav">
-          <gio-menu reduced="true">
+          <gio-menu [reduced]="true">
             ${gioMenuContent}
           </gio-menu>
           <h1>Selected env: {{ selectedItemValue }}</h1>
@@ -126,7 +126,7 @@ export const WithOneItemInSelector: Story = {
   render: () => ({
     template: `
         <div id="sidenav">
-          <gio-menu reduced="false">
+          <gio-menu [reduced]="false">
             ${gioMenuContent}
           </gio-menu>
           <h1>Selected env: {{ selectedItemValue }}</h1>
@@ -224,7 +224,7 @@ export const WithSubMenu: Story = {
   render: () => ({
     template: `
         <div id="sidenav">
-          <gio-menu>
+          <gio-menu [reduced]="false">
             ${gioMenuContent}
           </gio-menu>
           <gio-submenu>
@@ -260,7 +260,7 @@ export const ReducedWithSubMenu: Story = {
   render: () => ({
     template: `
         <div id="sidenav">
-          <gio-menu reduced="true">
+          <gio-menu [reduced]="true">
             ${gioMenuContent}
           </gio-menu>
           <gio-submenu>
