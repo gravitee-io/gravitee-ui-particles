@@ -95,12 +95,22 @@ describe('getDefaultCronDisplay', () => {
 });
 
 describe('toCronDescription', () => {
-  it.each([['0 0 0 LW * *', 'At 12:00 AM, on the last weekday of the month']])('should return description for %s', (cron, expected) => {
+  it.each([
+    [
+      '0 0 0 LW * *',
+      'At 12:00 AM, on the last weekday of the month',
+      ['* * * * * *', 'Every second'],
+      // trim spaces
+      [' * * * * * * ', 'Every second'],
+      // ignore extra spaces
+      ['* *  *   *    *    *', 'Every second'],
+    ],
+  ])('should return description for %s', (cron, expected) => {
     expect(toCronDescription(cron)).toEqual(expected);
   });
 
-  it('throw when cron does not have 6 parts', () => {
-    expect(() => toCronDescription('15 10 * * 5')).toThrowError('Cron expression must have 6 parts.');
+  it.each(['15 10 * * 5', '1 2 3 4 5', '1 2 3 4 5 ', '1 2 3 4  5', '1 2 3 4   5'])('throw when cron [%s] does not have 6 parts', cron => {
+    expect(() => toCronDescription(cron)).toThrowError('Cron expression must have 6 parts.');
   });
 });
 
