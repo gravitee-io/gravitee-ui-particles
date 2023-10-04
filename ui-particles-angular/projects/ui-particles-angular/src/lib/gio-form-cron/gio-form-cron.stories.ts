@@ -33,7 +33,10 @@ const DefaultRender: Meta['render'] = p => {
 
   return {
     template: `
-      <gio-form-cron  [formControl]="control"></gio-form-cron>
+      <gio-form-cron [formControl]="control">
+      <gio-form-cron-label>Schedule</gio-form-cron-label>
+      <gio-form-cron-hint>Custom hint</gio-form-cron-hint>
+      </gio-form-cron>
       <br>
       --------------------
       <br>

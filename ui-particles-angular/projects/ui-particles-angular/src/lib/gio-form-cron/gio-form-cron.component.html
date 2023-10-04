@@ -15,6 +15,7 @@
     limitations under the License.
 
 -->
+<div class="label"><ng-content select="gio-form-cron-label"></ng-content></div>
 <div class="wrapper" [class.smallDisplay]="smallDisplay">
   <ng-container *ngIf="internalFormGroup" [formGroup]="internalFormGroup">
     <div class="menu">
@@ -190,3 +191,4 @@
     <div class="placeholder">No cron expression defined.</div>
   </ng-template>
 </div>
+<div class="hint"><ng-content select="gio-form-cron-hint"></ng-content></div>
