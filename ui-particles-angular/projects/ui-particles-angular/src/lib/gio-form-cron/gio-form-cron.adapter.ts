@@ -85,9 +85,7 @@ export const getDefaultCronDisplay = (mode: CronDisplayMode): CronDisplay => {
 };
 
 export const parseCronExpression = (cronExpression: string): CronDisplay => {
-  if (!cronIsValid(cronExpression)) {
-    throw new Error('Invalid cron expression.');
-  }
+  throwIfInvalid(cronExpression);
 
   const parts = cronExpression.split(' ');
 
@@ -174,9 +172,7 @@ export const toCronExpression = (cronDisplay: Omit<CronDisplay, 'cronDescription
 };
 
 export const toCronDescription = (cronExpression: string): string => {
-  if (!cronIsValid(cronExpression)) {
-    throw new Error('Invalid cron expression.');
-  }
+  throwIfInvalid(cronExpression);
 
   if (!isEmpty(cronExpression)) {
     return Cronstrue.toString(cronExpression);
@@ -185,14 +181,16 @@ export const toCronDescription = (cronExpression: string): string => {
   return '';
 };
 
-const cronIsValid = (cronExpression: string): boolean => {
-  const parts = cronExpression.split(' ');
+/**
+ * Simple validation to ensure that the cron expression has 6 parts.
+ * Note : The full cron expression validation is done by the backend.
+ */
+const throwIfInvalid = (cronExpression: string): void => {
+  const parts = cronExpression.trim().split(/\s+/);
 
   if (parts.length != 6) {
     throw new Error('Cron expression must have 6 parts.');
   }
-
-  return true;
 };
 
 const getDisplayMode = (
