@@ -23,12 +23,28 @@ $typography: map.get(gio.$mat-theme, typography);
   display: block;
 }
 
+.label {
+  @include mat.typography-level($typography, caption);
+
+  padding-left: 10px;
+  color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker50');
+
+  &:empty {
+    display: none;
+  }
+}
+
 .wrapper {
   display: inline-flex;
   flex-direction: column;
   padding: 8px;
   border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, 'darker20');
   border-radius: 8px;
+
+  &:hover {
+    padding: 7px;
+    border: 2px solid mat.get-color-from-palette(gio.$mat-dove-palette, 'darker80');
+  }
 
   .menu {
     display: inline-flex;
@@ -102,5 +118,17 @@ $typography: map.get(gio.$mat-theme, typography);
     .placeholder {
       color: mat.get-color-from-palette(gio.$mat-error-palette, 'default');
     }
+  }
+}
+
+.hint {
+  @include mat.typography-level($typography, caption);
+
+  padding-top: 2px;
+  padding-left: 10px;
+  color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker50');
+
+  &:empty {
+    display: none;
   }
 }

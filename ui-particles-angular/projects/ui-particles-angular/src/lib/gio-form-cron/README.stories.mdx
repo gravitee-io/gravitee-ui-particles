@@ -5,6 +5,10 @@ import { Meta, Story } from '@storybook/addon-docs';
 # Form Cron
 
 Components to create a cron expression. Usable in angular forms.
+
+Cron expression is a string of 6 parts separated by space. Each part is a time definition. 
+This component are made for [Spring](https://spring.io/blog/2020/11/10/new-in-spring-5-3-improved-cron-expressions) [cron expression](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/scheduling/support/CronExpression.html) only.
+
 ## Demo
 
 <Story id="components-form-cron--default" />
@@ -13,4 +17,13 @@ Components to create a cron expression. Usable in angular forms.
 
 ```html
 <gio-form-cron></gio-form-cron>
+```
+
+With optional label and hint
+
+```html
+<gio-form-cron>
+  <gio-form-cron-label>Label</gio-form-cron-label>
+  <gio-form-cron-hint>Hint</gio-form-cron-hint>
+</gio-form-cron>
 ```

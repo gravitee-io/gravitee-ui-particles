@@ -26,6 +26,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { GioIconsModule } from '../gio-icons/gio-icons.module';
 
 import { GioFormCronComponent } from './gio-form-cron.component';
+import { GioFormCronLabelComponent } from './gio-form-cron-label.component';
+import { GioFormCronHintComponent } from './gio-form-cron-hint.component';
 
 @NgModule({
   imports: [
@@ -39,7 +41,7 @@ import { GioFormCronComponent } from './gio-form-cron.component';
     MatTooltipModule,
     GioIconsModule,
   ],
-  declarations: [GioFormCronComponent],
-  exports: [GioFormCronComponent],
+  declarations: [GioFormCronComponent, GioFormCronLabelComponent, GioFormCronHintComponent],
+  exports: [GioFormCronComponent, GioFormCronLabelComponent, GioFormCronHintComponent],
 })
 export class GioFormCronModule {}
