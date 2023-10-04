@@ -20,7 +20,8 @@
 $typography: map.get(gio.$mat-theme, typography);
 
 :host {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 .label {
