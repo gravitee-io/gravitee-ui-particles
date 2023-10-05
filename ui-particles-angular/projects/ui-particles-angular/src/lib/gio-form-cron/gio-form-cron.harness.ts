@@ -25,6 +25,7 @@ export class GioFormCronHarness extends ComponentHarness {
 
   protected getModeToggleGroup = this.locatorFor(MatButtonToggleGroupHarness.with({ selector: '[formControlName="mode"]' }));
 
+  protected getCustomExpressionInput = this.locatorFor(MatInputHarness.with({ selector: '[formControlName="customExpression"]' }));
   /**
    * Gets a `HarnessPredicate` that can be used to search for this harness.
    *
@@ -57,6 +58,10 @@ export class GioFormCronHarness extends ComponentHarness {
   }
 
   public async getValue(): Promise<string | null> {
+    if ((await this.getMode()) === 'Custom') {
+      const input = await this.getCustomExpressionInput();
+      return input.getValue();
+    }
     const value = await this.locatorForOptional('.preview__value')();
 
     return value?.text() ?? null;
@@ -67,7 +72,7 @@ export class GioFormCronHarness extends ComponentHarness {
       await this.setMode('Custom');
     }
 
-    const input = await this.locatorFor(MatInputHarness.with({ selector: '[formControlName="customExpression"]' }))();
+    const input = await this.getCustomExpressionInput();
     await input.setValue(value);
   }
 

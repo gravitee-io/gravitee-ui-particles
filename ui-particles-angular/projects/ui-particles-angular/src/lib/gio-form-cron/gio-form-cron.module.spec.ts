@@ -74,6 +74,18 @@ describe('GioFormCronModule', () => {
     expect(testControlValueChanges).toEqual([]);
   });
 
+  it('should select Custom mode for "0 0 0 LW * *" cron', async () => {
+    component.testControl.setValue('0 0 0 LW * *', { emitEvent: false });
+
+    const formCronHarness = await loader.getHarness(GioFormCronHarness);
+
+    expect(await formCronHarness.getMode()).toEqual('Custom');
+    expect(await formCronHarness.getValue()).toEqual('0 0 0 LW * *');
+    expect(component.testControl.value).toEqual('0 0 0 LW * *');
+    // Like native angular form not emit event on init
+    expect(testControlValueChanges).toEqual([]);
+  });
+
   it('should clear value', async () => {
     component.testControl.setValue('0 15 10 8 * *');
 
