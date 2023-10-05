@@ -122,8 +122,10 @@ $typography: map.get(gio.$mat-theme, typography);
 }
 
 /* stylelint-disable no-descending-specificity */
-:host(.ng-invalid:not(.ng-pristine)) {
+:host(.ng-invalid.ng-touched) {
   .wrapper {
+    padding: 7px;
+    border-width: 2px;
     border-color: mat.get-color-from-palette(gio.$mat-error-palette, 'default');
 
     .preview,

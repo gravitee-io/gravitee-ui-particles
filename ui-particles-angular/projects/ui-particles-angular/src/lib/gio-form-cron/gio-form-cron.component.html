@@ -42,7 +42,14 @@
           smallDisplay ? 'C' : 'Custom'
         }}</mat-button-toggle>
       </mat-button-toggle-group>
-      <button *ngIf="value && !isDisabled" mat-icon-button aria-label="Clear" matTooltip="Clear" type="button" (click)="onClear()">
+      <button
+        *ngIf="value && !isDisabled"
+        mat-icon-button
+        aria-label="Clear"
+        matTooltip="Clear"
+        type="button"
+        (click)="onClear({ touched: true })"
+      >
         <mat-icon>close</mat-icon>
       </button>
     </div>
