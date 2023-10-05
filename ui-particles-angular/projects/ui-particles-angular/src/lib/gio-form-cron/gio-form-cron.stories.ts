@@ -153,6 +153,7 @@ export const Required: Story = {
     const formCron = document.querySelector<HTMLButtonElement>('[aria-label="Clear"]');
     if (formCron) {
       formCron.click();
+      formCron.focus();
     }
   },
 };
@@ -165,6 +166,7 @@ export const WithErrorInValue: Story = {
   play: () => {
     const formCron = document.querySelector<HTMLInputElement>('[formControlName="customExpression"]');
     if (formCron) {
+      formCron.focus();
       formCron.value = 'Bad value 🦊';
       formCron.dispatchEvent(new Event('input'));
     }

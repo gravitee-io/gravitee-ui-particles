@@ -24,6 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { GioSaveBarModule } from '../gio-save-bar/gio-save-bar.module';
 import { GioFormTagsInputModule } from '../gio-form-tags-input/gio-form-tags-input.module';
+import { GioFormCronModule } from '../gio-form-cron/gio-form-cron.module';
 
 import { GioFormFocusInvalidFormDirective } from './gio-form-focus-first-invalid.directive';
 import { GioFormFocusInvalidModule } from './gio-form-focus-first-invalid.module';
@@ -43,6 +44,7 @@ export default {
         MatSelectModule,
         MatButtonModule,
         GioFormTagsInputModule,
+        GioFormCronModule,
       ],
     }),
   ],
@@ -52,6 +54,7 @@ export const Demo: Story = {
   render: () => {
     const form = new FormGroup({
       anInput: new FormControl(null, Validators.required),
+      cron: new FormControl(null, Validators.required),
       aSelect: new FormControl(null, Validators.required),
       aTextarea: new FormControl(null, Validators.required),
       aTagsInput: new FormControl(null, Validators.required),
@@ -69,6 +72,12 @@ export const Demo: Story = {
           <mat-label>Input</mat-label>
           <input gioFormFocusInvalidIgnore matInput required formControlName="anInput">
         </mat-form-field>
+
+        <br *ngFor="let item of [].constructor(30)">
+
+        <gio-form-cron formControlName="cron">
+          <gio-form-cron-label>Cron</gio-form-cron-label>
+        </gio-form-cron>
 
         <br *ngFor="let item of [].constructor(30)">
 

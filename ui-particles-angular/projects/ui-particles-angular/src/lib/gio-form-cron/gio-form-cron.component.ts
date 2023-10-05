@@ -207,10 +207,15 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
     return this.hasError ? { invalid: true } : null;
   }
 
-  public onClear() {
+  public onClear({ touched }: { touched?: boolean } = {}): void {
     this.value = undefined;
     this.cronDisplay = undefined;
     this.internalFormGroup?.reset({}, { emitEvent: true });
+
+    if (touched) {
+      this.touched = true;
+      this._onTouched();
+    }
   }
 
   private refreshInternalForm(): void {
