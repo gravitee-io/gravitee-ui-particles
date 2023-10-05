@@ -86,9 +86,26 @@ export const Default: StoryObj = {
 
 Default.args = {
   featureInfo: {
+    image: 'images/audit-trail.svg',
+    description:
+      'Explore Gravitee enterprise functionality, such as support for event brokers, asynchronous APIs, and Webhook subscriptions.',
+  },
+};
+
+export const Custom: StoryObj = {
+  play: context => {
+    const button = context.canvasElement.querySelector('#open-dialog') as HTMLButtonElement;
+    button.click();
+  },
+};
+
+Custom.args = {
+  featureInfo: {
     title: 'Request an icon',
     image: 'images/audit-trail.svg',
     description:
       'Explore Gravitee enterprise functionality, such as support for event brokers, asynchronous APIs, and Webhook subscriptions.',
+    trialButtonLabel: 'Contact Gravitee to upgrade',
+    hideDays: true,
   },
 };
