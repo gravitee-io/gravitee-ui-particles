@@ -1,3 +1,10 @@
+# [7.34.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.33.0...v7.34.0) (2023-10-05)
+
+
+### Features
+
+* **license:** improve custom dialog ([29f3adf](https://github.com/gravitee-io/gravitee-ui-particles/commit/29f3adfda3d70627be6b8a523fe7469730924d02))
+
 # [7.33.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.32.0...v7.33.0) (2023-10-04)
 
 
