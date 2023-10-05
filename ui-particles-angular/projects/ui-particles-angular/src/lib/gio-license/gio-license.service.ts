@@ -53,6 +53,8 @@ export interface FeatureInfo {
   image?: string;
   description?: string;
   title?: string;
+  trialButtonLabel?: string;
+  hideDays?: boolean;
 }
 
 @Injectable({
