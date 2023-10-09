@@ -1,3 +1,17 @@
+# [7.35.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.34.0...v7.35.0) (2023-10-09)
+
+
+### Bug Fixes
+
+* cron-form - disabled state without initial value ([fe8b024](https://github.com/gravitee-io/gravitee-ui-particles/commit/fe8b02411dedf2cf1b9e9183f7ac6426aa3cc651))
+* cron-form - full width by default ([70699b3](https://github.com/gravitee-io/gravitee-ui-particles/commit/70699b342df2f23b6e0e418973d75a0565bbabe0))
+* cron-form - make invalid / touched state the same as material behaviour ([109613f](https://github.com/gravitee-io/gravitee-ui-particles/commit/109613fe98319108392dee22810623b1d7ddbd21))
+
+
+### Features
+
+* cron-form - add label & hint like material form field ([6af4bb5](https://github.com/gravitee-io/gravitee-ui-particles/commit/6af4bb589c8b68c8e3840270d2ee8638753d76ea))
+
 # [7.34.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.33.0...v7.34.0) (2023-10-05)
 
 
