@@ -24,7 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 
 import { GioIconsModule } from '../gio-icons/gio-icons.module';
-import { GioFormSlideToggleModule } from '../gio-form-slide-toogle/gio-form-slide-toggle.module';
+import { GioFormSlideToggleModule } from '../gio-form-slide-toggle/gio-form-slide-toggle.module';
 import { GioFormHeadersModule } from '../gio-form-headers/gio-form-headers.module';
 import { GioMonacoEditorModule } from '../gio-monaco-editor/gio-monaco-editor.module';
 

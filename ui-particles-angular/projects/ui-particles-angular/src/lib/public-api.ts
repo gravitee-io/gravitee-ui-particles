@@ -60,9 +60,9 @@ export * from './gio-form-json-schema/gio-form-json-schema.component';
 export * from './gio-form-json-schema/gio-form-json-schema.module';
 export * from './gio-form-json-schema/model/GioJsonSchema';
 
-export * from './gio-form-slide-toogle/gio-form-slide-toggle.component';
-export * from './gio-form-slide-toogle/gio-form-slide-toggle.module';
-export * from './gio-form-slide-toogle/gio-form-label.directive';
+export * from './gio-form-slide-toggle/gio-form-slide-toggle.component';
+export * from './gio-form-slide-toggle/gio-form-slide-toggle.module';
+export * from './gio-form-slide-toggle/gio-form-label.directive';
 
 export * from './gio-form-focus-first-invalid/gio-form-focus-first-invalid.directive';
 export * from './gio-form-focus-first-invalid/gio-form-focus-first-invalid-ignore.directive';
