@@ -20,6 +20,7 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonHarness } from '@angular/material/button/testing';
+import { InteractivityChecker } from '@angular/cdk/a11y';
 
 import { GioConfirmDialogComponent, GioConfirmDialogData } from './gio-confirm-dialog.component';
 import { GioConfirmDialogModule } from './gio-confirm-dialog.module';
@@ -54,6 +55,10 @@ describe('GioConfirmDialogComponent', () => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
       imports: [GioConfirmDialogModule, NoopAnimationsModule],
+    }).overrideProvider(InteractivityChecker, {
+      useValue: {
+        isFocusable: () => true, // This traps focus checks and so avoid warnings when dealing with
+      },
     });
 
     fixture = TestBed.createComponent(TestComponent);
