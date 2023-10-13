@@ -17,7 +17,19 @@
 
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { ChangeDetectorRef, Component, DoCheck, ElementRef, HostBinding, Input, OnDestroy, Optional, Self, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  DoCheck,
+  ElementRef,
+  HostBinding,
+  Input,
+  OnDestroy,
+  Optional,
+  Self,
+  ViewChild,
+} from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatFormFieldControl } from '@angular/material/form-field';
@@ -35,6 +47,7 @@ export type DisplayValueWithFn = (value: string) => Observable<string>;
   selector: 'gio-form-tags-input',
   templateUrl: './gio-form-tags-input.component.html',
   styleUrls: ['./gio-form-tags-input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: MatFormFieldControl,
@@ -313,9 +326,7 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
       return;
     }
     // Give priority to the `onAutocompleteSelect` when validating with the blur event
-    setTimeout(() => {
-      this.addChipToFormControl({ value: this._tagInput?.nativeElement.value ?? '' });
-    }, 100);
+    this.addChipToFormControl({ value: this._tagInput?.nativeElement.value ?? '' });
   }
 
   private initAutocomplete(): void {
