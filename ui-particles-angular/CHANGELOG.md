@@ -1,3 +1,18 @@
+# [7.37.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.36.0...v7.37.0) (2023-10-13)
+
+
+### Bug Fixes
+
+* policy-studio - enable save button if json-schema are valid when ready ([6c2e9c9](https://github.com/gravitee-io/gravitee-ui-particles/commit/6c2e9c94542b531ab3950cfd6fa54db160baea86))
+* policy-studio - unlock Save button after 5s ([ac31625](https://github.com/gravitee-io/gravitee-ui-particles/commit/ac3162533dbf701813c3cc04965f06080e638500))
+
+
+### Features
+
+* add ready output to form-json schema component ([38912a3](https://github.com/gravitee-io/gravitee-ui-particles/commit/38912a383c6bbd28b599fb7374032dfe8c86b25f))
+* improve policy catalog filters ([c286a63](https://github.com/gravitee-io/gravitee-ui-particles/commit/c286a63fe8d9fc4314b2b6e02cd69fb096119ff1))
+* init control value with default value without emit event ([93d6701](https://github.com/gravitee-io/gravitee-ui-particles/commit/93d6701de4bd85e8b79b950e7b49480a4cdfdefc))
+
 # [7.36.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.35.0...v7.36.0) (2023-10-13)
 
 
