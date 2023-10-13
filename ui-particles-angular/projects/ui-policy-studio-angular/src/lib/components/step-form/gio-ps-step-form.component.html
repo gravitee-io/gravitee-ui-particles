@@ -33,7 +33,12 @@
         <mat-hint>The condition to execute this policy. Supports Expression Language.</mat-hint>
       </mat-form-field>
 
-      <gio-form-json-schema *ngIf="policySchema" [jsonSchema]="$any(policySchema)" formControlName="configuration"></gio-form-json-schema>
+      <gio-form-json-schema
+        *ngIf="policySchema"
+        [jsonSchema]="$any(policySchema)"
+        (ready)="onJsonSchemaReady($event)"
+        formControlName="configuration"
+      ></gio-form-json-schema>
     </ng-container>
   </div>
 </div>
