@@ -1,3 +1,15 @@
+# [7.36.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.35.0...v7.36.0) (2023-10-13)
+
+
+### Bug Fixes
+
+* fix misspelling in gio-form-slide-toggle folder ([1204b91](https://github.com/gravitee-io/gravitee-ui-particles/commit/1204b91e547f7109e7646647d8560e2cf3e8ea45))
+
+
+### Features
+
+* create component for custom radio ([acc86ab](https://github.com/gravitee-io/gravitee-ui-particles/commit/acc86ab3cb9fa33cebdd6c8b7ed1f4d166ea2dfa))
+
 # [7.35.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.34.0...v7.35.0) (2023-10-09)
 
 
