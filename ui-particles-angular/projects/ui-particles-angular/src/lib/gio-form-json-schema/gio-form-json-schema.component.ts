@@ -150,6 +150,15 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnChang
       );
     });
 
+    // Init control value with default value without emit event
+    this.formGroup.valueChanges.pipe(take(1), takeUntil(this.unsubscribe$)).subscribe(value => {
+      this.ngControl?.control?.reset(value, { emitEvent: false });
+      this.changeDetectorRef.markForCheck();
+      this.changeDetectorRef.detectChanges();
+    });
+    this.changeDetectorRef.markForCheck();
+    this.changeDetectorRef.detectChanges();
+
     // Subscribe to state changes to manage touches, status and value
     this.stateChanges$
       .pipe(
@@ -195,11 +204,6 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnChang
   }
 
   public ngAfterViewInit(): void {
-    // Init control value with default value without emit event
-    this.ngControl?.control?.setValue(this.formGroup.value, { emitEvent: false });
-    this.changeDetectorRef.markForCheck();
-    this.changeDetectorRef.detectChanges();
-
     // Group all valueChanges events emit by formly in a single one
     merge(this.formGroup.statusChanges, this.formGroup.valueChanges)
       .pipe(
