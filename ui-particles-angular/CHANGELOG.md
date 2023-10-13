@@ -1,3 +1,10 @@
+## [7.37.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.37.0...v7.37.1) (2023-10-13)
+
+
+### Bug Fixes
+
+* json-schema - move init default value higher up in the lifecycle ([c19345d](https://github.com/gravitee-io/gravitee-ui-particles/commit/c19345d42737caf607b278ced6be3b9e1ad4bbb4))
+
 # [7.37.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.36.0...v7.37.0) (2023-10-13)
 
 
