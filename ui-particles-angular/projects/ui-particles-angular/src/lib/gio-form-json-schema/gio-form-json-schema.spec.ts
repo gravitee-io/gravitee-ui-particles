@@ -99,13 +99,13 @@ describe('GioFormJsonSchema', () => {
       expect(testComponent.isReady).toEqual(false);
       expect(testComponent.form.touched).toEqual(false);
       expect(testComponent.form.dirty).toEqual(false);
-      expect(testComponent.form.valid).toEqual(true);
-      expect(testComponent.form.status).toEqual('VALID');
+      expect(testComponent.form.status).toEqual('PENDING');
       expect(testComponent.form.invalid).toEqual(false); // Valid after initialization
       expect(valueChangesWatch.length).toEqual(0);
 
       await fixture.whenStable();
       expect(testComponent.isReady).toEqual(true);
+      expect(testComponent.form.status).toEqual('VALID');
 
       const simpleStringInput = await loader.getHarness(MatInputHarness.with({ selector: '[id*="simpleString"]' }));
 
@@ -163,6 +163,41 @@ describe('GioFormJsonSchema', () => {
       expect(testComponent.form.touched).toEqual(false);
       expect(testComponent.form.dirty).toEqual(false);
       expect(testComponent.form.invalid).toEqual(true);
+    });
+
+    it('should init form with required & default json-schema option', async () => {
+      fixture.componentInstance.jsonSchema = {
+        type: 'object',
+        properties: {
+          simpleString: {
+            title: 'Simple String',
+            description: 'Simple string without validation',
+            type: 'string',
+            default: 'default value',
+          },
+        },
+        required: ['simpleString'],
+      };
+
+      expect(testComponent.form.value).toEqual({ config: null });
+      fixture.detectChanges();
+      expect(testComponent.isReady).toEqual(false);
+      expect(testComponent.form.value).toEqual({
+        config: {
+          simpleString: 'default value',
+        },
+      });
+
+      await fixture.whenStable();
+      expect(testComponent.isReady).toEqual(true);
+      expect(testComponent.form.touched).toEqual(false);
+      expect(testComponent.form.dirty).toEqual(false);
+      expect(testComponent.form.invalid).toEqual(false);
+      expect(testComponent.form.value).toEqual({
+        config: {
+          simpleString: 'default value',
+        },
+      });
     });
 
     it('should switch between valid and invalid state', async () => {
@@ -266,6 +301,7 @@ describe('GioFormJsonSchema', () => {
           },
         };
         tick(100);
+        await fixture.whenStable();
 
         const addButton = await loader.getHarness(MatButtonHarness.with({ selector: '[aria-label="Add"]' }));
         await addButton.click();
