@@ -28,8 +28,17 @@ $typography: map.get(gio.$mat-theme, typography);
 }
 
 .policiesCatalog {
-  &__categoriesSelection {
+  &__filters {
+    display: flex;
+    flex-direction: column;
     padding: 0 0 8px;
+    gap: 8px;
+
+    &__search {
+      width: 100%;
+      height: 54px;
+      padding-bottom: 0;
+    }
   }
 
   &__list {

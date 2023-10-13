@@ -16,7 +16,8 @@
 import { ComponentHarness, parallel } from '@angular/cdk/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { DivHarness } from '@gravitee/ui-particles-angular/testing';
-import { MatChipListHarness, MatChipOptionHarness } from '@angular/material/chips/testing';
+import { MatChipListboxHarness, MatChipOptionHarness } from '@angular/material/chips/testing';
+import { MatInputHarness } from '@angular/material/input/testing';
 
 import { GioPolicyStudioStepFormHarness } from '../step-form/gio-ps-step-form.harness';
 
@@ -25,6 +26,7 @@ export class GioPolicyStudioPoliciesCatalogDialogHarness extends ComponentHarnes
 
   private policiesLocator = this.locatorForAll(DivHarness.with({ selector: '.policiesCatalog__list__policy' }));
 
+  private getCategoriesFilter = this.locatorForOptional(MatChipListboxHarness.with({ selector: '[formControlName="categories"]' }));
   public async getPhase(): Promise<string> {
     const phase = await this.locatorFor('.title__phase')();
     return phase.text();
@@ -68,7 +70,7 @@ export class GioPolicyStudioPoliciesCatalogDialogHarness extends ComponentHarnes
   }
 
   public async getCategoriesSelection(): Promise<{ name: string; selected: boolean }[]> {
-    const chipList = await this.locatorForOptional(MatChipListHarness.with({ ancestor: '.policiesCatalog__categoriesSelection' }))();
+    const chipList = await this.getCategoriesFilter();
     if (!chipList) {
       return [];
     }
@@ -82,5 +84,17 @@ export class GioPolicyStudioPoliciesCatalogDialogHarness extends ComponentHarnes
         return { name, selected };
       }),
     );
+  }
+
+  public async selectCategoryFilter(categoryName: string): Promise<void> {
+    const chipList = await this.getCategoriesFilter();
+    await chipList?.selectChips({ text: categoryName });
+  }
+
+  public async searchFilter(search: string): Promise<void> {
+    const searchInput = await this.locatorFor(MatInputHarness.with({ selector: '[formControlName="search"]' }))();
+    if (searchInput) {
+      await searchInput.setValue(search);
+    }
   }
 }
