@@ -18,17 +18,21 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  EventEmitter,
   Host,
   HostBinding,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   Optional,
+  Output,
+  SimpleChanges,
 } from '@angular/core';
 import { ControlValueAccessor, FormGroup, NgControl } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { cloneDeep, isEmpty, isObject } from 'lodash';
-import { debounceTime, delay, distinctUntilChanged, filter, map, take, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, delay, distinctUntilChanged, filter, map, startWith, take, takeUntil, tap } from 'rxjs/operators';
 import { merge, ReplaySubject, Subject } from 'rxjs';
 import { FocusMonitor } from '@angular/cdk/a11y';
 
@@ -42,7 +46,7 @@ import { GioFormlyJsonSchemaService } from './gio-formly-json-schema.service';
   template: `<formly-form *ngIf="formGroup" [fields]="fields" [options]="options" [form]="formGroup" [model]="model"></formly-form>`,
   styleUrls: ['./gio-form-json-schema.component.scss'],
 })
-export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
+export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnChanges, OnInit, AfterViewInit, OnDestroy {
   public static isDisplayable(jsonSchema: GioJsonSchema): boolean {
     const properties = ['properties', 'oneOf', 'anyOf', 'allOf', '$ref', 'items'] as const;
 
@@ -65,11 +69,16 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
   @Input()
   public options: FormlyFormOptions = {};
 
+  // When true the form is ready and control status are up-to-date
+  // Useful to know when initial control status can be used
+  @Output()
+  public ready = new EventEmitter<boolean>();
+
+  private isReady = false;
+
   public model: unknown = {};
 
   public fields: FormlyFieldConfig[] = [];
-
-  public loading = true;
 
   public isDisabled = false;
 
@@ -108,6 +117,13 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
       });
   }
 
+  public ngOnChanges(changes: SimpleChanges) {
+    if (changes.jsonSchema) {
+      this.isReady = false;
+      this.ready.next(false);
+    }
+  }
+
   public ngOnInit(): void {
     // When the parent form is touched, mark all the sub formGroup as touched if not already touched
     const parentControl = this.ngControl?.control?.parent;
@@ -125,7 +141,6 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
         this.formGroup.markAllAsTouched();
         this.stateChanges$.next();
       });
-
     // Add async validator to the parent
     this.ngControl?.control?.addAsyncValidators(() => {
       return this.isValid$.pipe(
@@ -170,17 +185,27 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnInit,
         this.ngControl?.control?.updateValueAndValidity({
           emitEvent: false,
         });
+
+        // After the first state change, the form is ready
+        if (!this.isReady) {
+          this.isReady = true;
+          this.ready.emit(true);
+        }
       });
   }
 
   public ngAfterViewInit(): void {
     // Group all valueChanges events emit by formly in a single one
     merge(this.formGroup.statusChanges, this.formGroup.valueChanges)
-      .pipe(debounceTime(100), takeUntil(this.unsubscribe$))
+      .pipe(
+        // Force fist stateChanges$
+        startWith({}),
+        debounceTime(100),
+        takeUntil(this.unsubscribe$),
+      )
       .subscribe(() => {
         this.stateChanges$.next();
       });
-    this.stateChanges$.next();
   }
 
   public ngOnDestroy() {

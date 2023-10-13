@@ -34,7 +34,12 @@ describe('GioFormJsonSchema', () => {
   @Component({
     template: `
       <form [formGroup]="form">
-        <gio-form-json-schema *ngIf="jsonSchema" formControlName="config" [jsonSchema]="jsonSchema"></gio-form-json-schema>
+        <gio-form-json-schema
+          *ngIf="jsonSchema"
+          formControlName="config"
+          [jsonSchema]="jsonSchema"
+          (ready)="isReady = $event"
+        ></gio-form-json-schema>
         <button type="submit">Submit</button>
       </form>
     `,
@@ -45,6 +50,7 @@ describe('GioFormJsonSchema', () => {
       config: new FormControl(),
     });
     public jsonSchema?: GioJsonSchema;
+    public isReady?: boolean;
 
     public disableFormFields() {
       this.form.disable();
@@ -88,7 +94,9 @@ describe('GioFormJsonSchema', () => {
       };
       testComponent.form.valueChanges.subscribe(v => valueChangesWatch.push(v));
 
+      expect(testComponent.isReady).toEqual(undefined);
       fixture.detectChanges();
+      expect(testComponent.isReady).toEqual(false);
       expect(testComponent.form.touched).toEqual(false);
       expect(testComponent.form.dirty).toEqual(false);
       expect(testComponent.form.valid).toEqual(true);
@@ -96,7 +104,11 @@ describe('GioFormJsonSchema', () => {
       expect(testComponent.form.invalid).toEqual(false); // Valid after initialization
       expect(valueChangesWatch.length).toEqual(0);
 
+      await fixture.whenStable();
+      expect(testComponent.isReady).toEqual(true);
+
       const simpleStringInput = await loader.getHarness(MatInputHarness.with({ selector: '[id*="simpleString"]' }));
+
       await simpleStringInput.setValue('What the fox say?');
 
       expect(testComponent.form.get('config')?.value).toEqual({
@@ -141,8 +153,13 @@ describe('GioFormJsonSchema', () => {
         },
         required: ['simpleString'],
       };
+      expect(testComponent.isReady).toEqual(undefined);
+
       fixture.detectChanges();
+      expect(testComponent.isReady).toEqual(false);
+
       await fixture.whenStable();
+      expect(testComponent.isReady).toEqual(true);
       expect(testComponent.form.touched).toEqual(false);
       expect(testComponent.form.dirty).toEqual(false);
       expect(testComponent.form.invalid).toEqual(true);
@@ -283,6 +300,7 @@ describe('GioFormJsonSchema', () => {
         fixture.componentInstance.jsonSchema = oneOfExample;
         tick(100);
         fixture.detectChanges();
+        tick(100);
 
         const selectField = await loader.getHarness(MatSelectHarness.with({ selector: '[id*="enum__0"]' }));
         expect(await selectField.isDisabled()).toEqual(false);
