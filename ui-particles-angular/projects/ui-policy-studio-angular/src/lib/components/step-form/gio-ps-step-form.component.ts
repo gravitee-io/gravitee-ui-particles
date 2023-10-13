@@ -95,4 +95,11 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
       this.isValid.emit(valid === 'VALID');
     });
   }
+
+  public onJsonSchemaReady(isReady: boolean) {
+    // When ready and if the form is valid, emit
+    if (isReady && this.stepForm?.status === 'VALID') {
+      this.isValid.emit(true);
+    }
+  }
 }
