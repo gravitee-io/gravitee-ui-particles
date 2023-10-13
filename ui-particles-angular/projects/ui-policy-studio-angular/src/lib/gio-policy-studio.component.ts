@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { cloneDeep, differenceBy, flatten, isEqual, omit, unionBy, uniqueId } from 'lodash';
-import { EMPTY } from 'rxjs';
+import { EMPTY, Subscription, timer } from 'rxjs';
 
 import {
   ApiType,
@@ -36,7 +36,7 @@ import { GioPolicyStudioService } from './gio-policy-studio.service';
   templateUrl: './gio-policy-studio.component.html',
   styleUrls: ['./gio-policy-studio.component.scss'],
 })
-export class GioPolicyStudioComponent implements OnChanges {
+export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
   /**
    * API type (required)
    */
@@ -127,6 +127,9 @@ export class GioPolicyStudioComponent implements OnChanges {
 
   private hasFlowExecutionChanged = false;
 
+  private unSavingButtonSubscription?: Subscription;
+  public enableSavingTimer = true;
+
   constructor(private readonly policyStudioService: GioPolicyStudioService) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -148,6 +151,7 @@ export class GioPolicyStudioComponent implements OnChanges {
 
       // Reset saving state when flowsGroups are updated
       this.saving = false;
+      this.unSavingButtonSubscription?.unsubscribe();
     }
 
     if (changes.policySchemaFetcher) {
@@ -157,6 +161,10 @@ export class GioPolicyStudioComponent implements OnChanges {
     if (changes.policyDocumentationFetcher) {
       this.policyStudioService.setPolicyDocumentationFetcher(this.policyDocumentationFetcher);
     }
+  }
+
+  public ngOnDestroy() {
+    this.unSavingButtonSubscription?.unsubscribe();
   }
 
   public onFlowExecutionChange(flowExecution: FlowExecution): void {
@@ -209,6 +217,13 @@ export class GioPolicyStudioComponent implements OnChanges {
       ...(this.hasFlowExecutionChanged ? { flowExecution: this.flowExecution } : {}),
     });
     this.saving = true;
+
+    this.unSavingButtonSubscription?.unsubscribe();
+    if (this.enableSavingTimer) {
+      this.unSavingButtonSubscription = timer(5000).subscribe(() => {
+        this.saving = false;
+      });
+    }
   }
 }
 

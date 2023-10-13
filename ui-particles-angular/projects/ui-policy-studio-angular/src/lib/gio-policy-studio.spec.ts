@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { MatTooltipHarness } from '@angular/material/tooltip/testing';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
@@ -80,6 +80,7 @@ describe('GioPolicyStudioModule', () => {
       policySchemaFetcher: new SimpleChange(null, null, true),
       policyDocumentationFetcher: new SimpleChange(null, null, true),
     });
+    component.enableSavingTimer = false;
   });
 
   describe('MESSAGE API type', () => {
@@ -1072,6 +1073,27 @@ describe('GioPolicyStudioModule', () => {
         expect(firstSaveFlows).toBeDefined();
         expect(firstSaveFlows?.request).toEqual([fakeTestPolicyStep({ description: 'description', enabled: false })]);
       });
+
+      it('should re enable save button after 5s', fakeAsync(async () => {
+        const commonFlows = [fakeChannelFlow({ name: '' }), fakeChannelFlow({ name: 'Flow to delete' })];
+        component.commonFlows = commonFlows;
+        component.enableSavingTimer = true;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        expect(await policyStudioHarness.getSaveButtonState()).toEqual('DISABLED');
+
+        // Delete flow
+        await policyStudioHarness.deleteFlow('Flow to delete');
+        expect(await policyStudioHarness.getSaveButtonState()).toEqual('VISIBLE');
+
+        await policyStudioHarness.save();
+        expect(await policyStudioHarness.getSaveButtonState()).toEqual('SAVING');
+
+        tick(5000);
+        expect(await policyStudioHarness.getSaveButtonState()).toEqual('VISIBLE');
+      }));
     });
   });
 
