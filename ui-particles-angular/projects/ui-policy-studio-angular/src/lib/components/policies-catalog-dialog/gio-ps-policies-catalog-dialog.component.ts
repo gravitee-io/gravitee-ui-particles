@@ -16,7 +16,7 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { toLower, uniq } from 'lodash';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
@@ -62,6 +62,11 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
 
   public selectedCategoriesControl?: FormControl;
 
+  public filtersForm = new FormGroup({
+    categories: new FormControl([]),
+    search: new FormControl(''),
+  });
+
   private allPolicies: PolicyVM[] = [];
 
   private unsubscribe$ = new Subject<void>();
@@ -94,15 +99,17 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
       this.categories.push(this.categories.splice(othersIndex, 1)[0]);
     }
 
-    // By default, all categories are selected
-    this.selectedCategoriesControl = new FormControl(this.categories);
-
-    this.selectedCategoriesControl.valueChanges
-      .pipe(startWith(this.selectedCategoriesControl.value), takeUntil(this.unsubscribe$))
-      .subscribe((categories: string[]) => {
-        this.policies = this.allPolicies.filter(policy => {
-          return categories.map(toLower).includes(toLower(policy.category));
-        });
+    this.filtersForm.valueChanges
+      .pipe(startWith(this.filtersForm.value), takeUntil(this.unsubscribe$))
+      .subscribe(({ categories, search }: { categories?: string[]; search?: string }) => {
+        const selectedCategories = categories && categories.length > 0 ? categories : this.categories;
+        this.policies = this.allPolicies
+          .filter(policy => {
+            return selectedCategories.map(toLower).includes(toLower(policy.category));
+          })
+          .filter(policy => {
+            return search ? toLower(policy.name).includes(toLower(search)) : true;
+          });
       });
 
     this.trialUrl = flowDialogData.trialUrl;
@@ -138,6 +145,9 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
   }
 
   public onGoBack() {
+    // Reset to initial value
     this.selectedPolicy = undefined;
+    this.isValid = false;
+    this.isUnlicensed = false;
   }
 }

@@ -166,17 +166,30 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
       expect(await policiesCatalogDialog.getCategoriesSelection()).toEqual([
         {
           name: 'Security',
-          selected: true,
+          selected: false,
         },
         {
           name: 'Transformation',
-          selected: true,
+          selected: false,
         },
         {
           name: 'Others',
-          selected: true,
+          selected: false,
         },
       ]);
+    });
+
+    it('should filter policy list', async () => {
+      await componentTestingOpenDialog();
+
+      const policiesCatalogDialog = await loader.getHarness(GioPolicyStudioPoliciesCatalogDialogHarness);
+
+      expect(await policiesCatalogDialog.getPoliciesName()).toHaveLength(10);
+      await policiesCatalogDialog.selectCategoryFilter('Others');
+      expect(await policiesCatalogDialog.getPoliciesName()).toHaveLength(4);
+
+      await policiesCatalogDialog.searchFilter('Policy to test UI');
+      expect(await policiesCatalogDialog.getPoliciesName()).toHaveLength(1);
     });
   });
 
