@@ -1,3 +1,10 @@
+## [7.37.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.37.2...v7.37.3) (2023-10-16)
+
+
+### Bug Fixes
+
+* enable markdown in monaco editor ([5284bf2](https://github.com/gravitee-io/gravitee-ui-particles/commit/5284bf2e1d59831a801cfdc5af343b357404f562))
+
 ## [7.37.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.37.1...v7.37.2) (2023-10-16)
 
 
