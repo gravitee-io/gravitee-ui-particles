@@ -143,3 +143,17 @@ export const InsideMatFormField: Story = {
   },
   args: {},
 };
+
+export const LanguageMarkdown: Story = {
+  args: {
+    languageConfig: {
+      language: 'markdown',
+    },
+    value: `# Header 1 #
+## Header 2 ##
+### Header 3 ###             (Hashes on right are optional)
+## Markdown plus h2 with a custom ID ##   {#id-goes-here}
+[Link back to H2](#id-goes-here)
+`,
+  },
+};
