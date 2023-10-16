@@ -1,3 +1,10 @@
+## [7.37.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.37.1...v7.37.2) (2023-10-16)
+
+
+### Bug Fixes
+
+* change tags inputs detection to OnPush to avoid duplicated API calls with displayValueWith ([45e9e2e](https://github.com/gravitee-io/gravitee-ui-particles/commit/45e9e2e529d6e93f7ed4e428740990e243436db4))
+
 ## [7.37.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.37.0...v7.37.1) (2023-10-13)
 
 
