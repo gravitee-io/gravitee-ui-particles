@@ -36,10 +36,14 @@ import { GioMonacoEditorConfig, GIO_MONACO_EDITOR_CONFIG } from './models/GioMon
 import { GioLanguageJsonService } from './services/gio-language-json.service';
 import { GioMonacoEditorService } from './services/gio-monaco-editor.service';
 
-export type MonacoEditorLanguageConfig = {
-  language: 'json';
-  schemas: { uri: string; schema: unknown }[];
-};
+export type MonacoEditorLanguageConfig =
+  | {
+      language: 'json' | 'markdown';
+      schemas: { uri: string; schema: unknown }[];
+    }
+  | {
+      language: 'markdown';
+    };
 
 @Component({
   selector: 'gio-monaco-editor',
@@ -190,20 +194,14 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
       return;
     }
 
-    const { language } = languageConfig;
-
-    if (language) {
-      const lang = language.toLowerCase();
-
-      switch (lang) {
-        case 'json':
-          if (languageConfig.schemas) {
-            this.languageJsonService.addSchemas(uri, languageConfig.schemas);
-          }
-          break;
-        default:
-          break;
-      }
+    switch (languageConfig.language) {
+      case 'json':
+        if (languageConfig.schemas) {
+          this.languageJsonService.addSchemas(uri, languageConfig.schemas);
+        }
+        break;
+      default:
+        break;
     }
   }
 }
