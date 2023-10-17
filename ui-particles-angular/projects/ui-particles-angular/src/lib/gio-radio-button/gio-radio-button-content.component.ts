@@ -34,5 +34,5 @@ export class GioRadioButtonSubitleComponent {}
 })
 export class GioRadioButtonContentComponent {
   @Input()
-  protected icon: string | undefined;
+  public icon: string | undefined;
 }
