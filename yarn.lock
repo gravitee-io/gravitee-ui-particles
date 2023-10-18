@@ -11044,14 +11044,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:7.3.0":
-  version: 7.3.0
-  resolution: "chromatic@npm:7.3.0"
+"chromatic@npm:6.5.6":
+  version: 6.5.6
+  resolution: "chromatic@npm:6.5.6"
   bin:
-    chroma: dist/bin.js
-    chromatic: dist/bin.js
-    chromatic-cli: dist/bin.js
-  checksum: 0f8bc34aa0cb7f20398ef64c9dbdd2abdd8f33546495b805773e054b2f3eac1902b15608eaabd98b7fca6c1a4ac366976d2aa8eceecfeb8a24fa194eab524750
+    chroma: bin/main.cjs
+    chromatic: bin/main.cjs
+    chromatic-cli: bin/main.cjs
+  checksum: dbfe276683add0420e559c1dc42e5c10d9dcd8c3b53fb4a1d36de684077a455d472c5e64427d83ccb88f3b73643aabc4979bd1b38339c42784c73e3659377fc2
   languageName: node
   linkType: hard
 
@@ -15820,7 +15820,7 @@ __metadata:
     "@commitlint/cli": 17.4.2
     "@commitlint/config-conventional": 17.4.2
     "@types/svg-parser": 2.0.3
-    chromatic: 7.3.0
+    chromatic: 6.5.6
     husky: 8.0.3
     license-check-and-add: 4.0.5
     lint-staged: 13.1.0
