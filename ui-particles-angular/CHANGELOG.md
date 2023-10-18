@@ -1,3 +1,10 @@
+## [7.37.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.37.3...v7.37.4) (2023-10-18)
+
+
+### Bug Fixes
+
+* export radio button content component in public api ([3e360d2](https://github.com/gravitee-io/gravitee-ui-particles/commit/3e360d22c4fe9f9be21a60e7b721db0611ca58b2))
+
 ## [7.37.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.37.2...v7.37.3) (2023-10-16)
 
 
