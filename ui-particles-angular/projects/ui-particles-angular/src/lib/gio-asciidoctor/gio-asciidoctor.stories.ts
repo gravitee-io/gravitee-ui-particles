@@ -34,7 +34,7 @@ export default {
   }),
 } as Meta;
 
-export const Empty: Story = {};
+export const Default: Story = {};
 
 export const PolicyMock: Story = {};
 PolicyMock.args = {
