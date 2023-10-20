@@ -16,7 +16,7 @@
 
 import { BaseHarnessFilters, ComponentHarness, HarnessPredicate, parallel, TestKey } from '@angular/cdk/testing';
 import { MatAutocompleteHarness } from '@angular/material/autocomplete/testing';
-import { MatChipListHarness } from '@angular/material/chips/testing';
+import { MatChipHarness, MatChipListHarness } from '@angular/material/chips/testing';
 
 export type GioFormTagsInputHarnessFilters = BaseHarnessFilters;
 
@@ -35,10 +35,16 @@ export class GioFormTagsInputHarness extends ComponentHarness {
   }
 
   protected getMatChipListHarness = this.locatorFor(MatChipListHarness);
+  protected getMatChipsHarness = this.locatorForAll(MatChipHarness);
 
   public async isDisabled(): Promise<boolean> {
     const matChipList = await this.getMatChipListHarness();
-    return matChipList.isDisabled();
+    const matChips = await this.getMatChipsHarness();
+
+    const chipListDisabled = await matChipList.isDisabled();
+    const chipsDisabled = await parallel(() => matChips.map(async matChip => await matChip.isDisabled()));
+
+    return chipListDisabled && chipsDisabled.every(chipDisabled => chipDisabled);
   }
 
   public async getTags(): Promise<string[]> {

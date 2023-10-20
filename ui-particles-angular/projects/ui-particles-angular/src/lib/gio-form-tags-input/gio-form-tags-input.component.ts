@@ -255,6 +255,11 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
     this.fm.stopMonitoring(this.elRef.nativeElement);
   }
 
+  // From ControlValueAccess interface
+  public setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
   // From ControlValueAccessor interface
   public writeValue(value: string[]): void {
     this._value = value;
