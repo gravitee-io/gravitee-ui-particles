@@ -1,3 +1,10 @@
+## [7.37.5](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.37.4...v7.37.5) (2023-10-20)
+
+
+### Bug Fixes
+
+* **gio-form-tags-input:** fix disabled state behavior ([2776f00](https://github.com/gravitee-io/gravitee-ui-particles/commit/2776f004621beb2e8749efdc1a6f1ce278780f51))
+
 ## [7.37.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.37.3...v7.37.4) (2023-10-18)
 
 
