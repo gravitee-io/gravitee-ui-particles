@@ -16,14 +16,20 @@
 
 -->
 <mat-chip-list #tagChipList [attr.aria-label]="ariaLabel" multiple [disabled]="disabled">
-  <mat-chip *ngFor="let tag of value" [selectable]="false" [removable]="!disabled" (removed)="removeChipToFormControl(tag)">
+  <mat-chip
+    *ngFor="let tag of value"
+    [selectable]="false"
+    [removable]="!disabled"
+    (removed)="removeChipToFormControl(tag)"
+    [disabled]="disabled"
+  >
     {{ _displayValueWith ? (_displayValueWith(tag) | async) : tag }}
     <mat-icon matChipRemove>cancel</mat-icon>
   </mat-chip>
   <input
     *ngIf="!disabled"
     #tagInput
-    [matAutocompleteDisabled]="!_autocompleteOptions"
+    [matAutocompleteDisabled]="!_autocompleteOptions || disabled"
     [matAutocomplete]="auto"
     [placeholder]="placeholder"
     [matChipInputFor]="tagChipList"

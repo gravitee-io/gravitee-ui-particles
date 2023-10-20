@@ -159,6 +159,14 @@ export const FormControlEmpty: Story = {
   args: {},
 };
 
+export const FormControlDisabled: Story = {
+  render: FormControlEmpty.render,
+  args: {
+    tags: ['A'],
+    disabled: true,
+  },
+};
+
 export const WithTagValidationHook: Story = {
   render: FormControlEmpty.render,
   args: {

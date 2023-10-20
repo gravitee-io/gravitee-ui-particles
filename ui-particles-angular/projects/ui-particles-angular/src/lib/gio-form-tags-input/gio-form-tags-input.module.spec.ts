@@ -198,7 +198,9 @@ describe('GioFormTagsInputModule - Dynamic input', () => {
     public placeholder = 'Add a tag';
     public tagValidationHook: ((tag: string, validationCb: (shouldAddTag: boolean) => void) => void) | undefined = undefined;
     public autocompleteOptions?: (search: string) => Observable<AutocompleteOptions>;
-    public displayValueWith?: DisplayValueWithFn;
+    public displayValueWith: DisplayValueWithFn = (_value: string) => {
+      return of();
+    };
     public useAutocompleteOptionValueOnly = false;
 
     public tagsControl = new FormControl(null, Validators.required);
