@@ -121,7 +121,13 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
   }
   private _tagInput: ElementRef<HTMLInputElement> | null = null;
 
-  // From ControlValueAccessor interface
+  public autocompleteFilteredOptions$?: Observable<Record<string, string>[]>;
+
+  public _displayValueWith?: (value: string) => Observable<string>;
+
+  private displayValueCache: Record<string, string> = {};
+
+  // From MatFormFieldControl interface
   public get value(): Tags | null {
     return this._value;
   }
@@ -134,14 +140,14 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
 
   private _value: Tags | null = null;
 
-  // From ControlValueAccessor interface
+  // From MatFormFieldControl interface
   public stateChanges = new Subject<void>();
 
-  // From ControlValueAccessor interface
+  // From MatFormFieldControl interface
   @HostBinding('id')
   public id = `gio-form-tags-input-${GioFormTagsInputComponent.nextId++}`;
 
-  // From ControlValueAccessor interface
+  // From MatFormFieldControl interface
   @Input()
   public get placeholder(): string {
     return this._placeholder;
@@ -154,23 +160,21 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
 
   private _placeholder = '';
 
-  public autocompleteFilteredOptions$?: Observable<Record<string, string>[]>;
-
-  // From ControlValueAccessor interface
+  // From MatFormFieldControl interface
   public focused = false;
 
-  // From ControlValueAccessor interface
+  // From MatFormFieldControl interface
   public get empty(): boolean {
     return isEmpty(this.value) && isEmpty(this._tagInput?.nativeElement?.value);
   }
 
-  // From ControlValueAccessor interface
+  // From MatFormFieldControl interface
   @HostBinding('class.floating')
   public get shouldLabelFloat(): boolean {
     return this.focused || !this.empty;
   }
 
-  // From ControlValueAccessor interface
+  // From MatFormFieldControl interface
   @Input()
   public get required(): boolean {
     return this._required;
@@ -183,7 +187,7 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
 
   private _required = false;
 
-  // From ControlValueAccessor interface
+  // From MatFormFieldControl interface
   @Input()
   public get disabled(): boolean {
     return this._disabled || (this.ngControl && this.ngControl.disabled === true);
@@ -196,11 +200,7 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
 
   private _disabled = false;
 
-  public _displayValueWith?: (value: string) => Observable<string>;
-
-  private displayValueCache: Record<string, string> = {};
-
-  // From ControlValueAccessor interface
+  // From MatFormFieldControl interface
   public get errorState(): boolean {
     return (
       this.touched &&
@@ -211,13 +211,13 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
     );
   }
 
-  // From ControlValueAccessor interface
+  // From MatFormFieldControl interface
   public controlType?: string;
 
-  // From ControlValueAccessor interface
+  // From MatFormFieldControl interface
   public autofilled?: boolean;
 
-  // From ControlValueAccessor interface
+  // From MatFormFieldControl interface
   public userAriaDescribedBy?: string;
 
   constructor(
@@ -270,7 +270,7 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
     this._onTouched = fn;
   }
 
-  // From ControlValueAccessor interface
+  // From MatFormFieldControl interface
   @HostBinding('attr.aria-describedby')
   public describedBy = '';
 
@@ -278,7 +278,7 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
     this.describedBy = ids.join(' ');
   }
 
-  // From ControlValueAccessor interface
+  // From MatFormFieldControl interface
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
   public onContainerClick(_event: MouseEvent): void {}
 
