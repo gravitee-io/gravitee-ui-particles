@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { range } from 'lodash';
 import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 import { GioFormTagsInputComponent, Tags } from './gio-form-tags-input.component';
 import { GioFormTagsInputModule } from './gio-form-tags-input.module';
@@ -316,7 +317,7 @@ export const WithAsyncAutocompleteOnly: Story = {
     disabled: false,
     placeholder: 'Search application  ',
     autocompleteOptions: (tag: string) => {
-      return of(applications.filter(a => a.label.startsWith(tag)));
+      return of(applications.filter(a => a.label.startsWith(tag))).pipe(delay(1000));
     },
     displayValueWith: (tag: string) => {
       const application = applications.find(a => a.value === tag);

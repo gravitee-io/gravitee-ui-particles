@@ -37,6 +37,9 @@
     (matChipInputTokenEnd)="onMatChipTokenEnd()"
   />
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onAutocompleteSelect($event)">
+    <mat-option *ngIf="loading" disabled id="loader">
+      <div class="loader-option"><gio-loader></gio-loader></div>
+    </mat-option>
     <mat-option *ngFor="let option of autocompleteFilteredOptions$ | async" [value]="option.value">
       {{ option.label }}
     </mat-option>

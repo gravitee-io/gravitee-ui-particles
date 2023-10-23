@@ -20,12 +20,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatFormFieldHarness } from '@angular/material/form-field/testing';
+import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 
+import { AutocompleteOptions, DisplayValueWithFn } from './gio-form-tags-input.component';
 import { GioFormTagsInputHarness } from './gio-form-tags-input.harness';
 import { GioFormTagsInputModule } from './gio-form-tags-input.module';
-import { AutocompleteOptions, DisplayValueWithFn } from './gio-form-tags-input.component';
 
 describe('GioFormTagsInputModule - Static input', () => {
   @Component({
@@ -59,7 +60,7 @@ describe('GioFormTagsInputModule - Static input', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      imports: [NoopAnimationsModule, GioFormTagsInputModule, MatFormFieldModule, ReactiveFormsModule],
+      imports: [NoopAnimationsModule, MatIconTestingModule, GioFormTagsInputModule, MatFormFieldModule, ReactiveFormsModule],
     });
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
@@ -229,7 +230,7 @@ describe('GioFormTagsInputModule - Dynamic input', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestDynamicComponent],
-      imports: [NoopAnimationsModule, GioFormTagsInputModule, MatFormFieldModule, ReactiveFormsModule],
+      imports: [NoopAnimationsModule, MatIconTestingModule, GioFormTagsInputModule, MatFormFieldModule, ReactiveFormsModule],
     });
     fixture = TestBed.createComponent(TestDynamicComponent);
     component = fixture.componentInstance;
@@ -307,5 +308,30 @@ describe('GioFormTagsInputModule - Dynamic input', () => {
     await matAutocomplete?.blur();
 
     expect(await formTagsInputHarness.getTags()).toEqual([]);
+  });
+
+  it('should display loading spinner when waiting for autocomplete values', async () => {
+    const subject: Subject<{ label: string; value: string }[]> = new Subject();
+
+    component.autocompleteOptions = () => subject.asObservable();
+    fixture.detectChanges();
+
+    const formTagsInputHarness = await loader.getHarness(GioFormTagsInputHarness);
+    const autocompleteHarness = await formTagsInputHarness.getMatAutocompleteHarness();
+
+    await autocompleteHarness?.enterText('The ');
+    fixture.detectChanges();
+
+    const ids = await autocompleteHarness
+      ?.getOptions()
+      .then(options => Promise.all(options.map(option => option.host())))
+      .then(options => Promise.all(options.map(option => option.getAttribute('id'))));
+    expect(ids).toEqual(['loader']);
+
+    subject.next(fakeApplications);
+    fixture.detectChanges();
+
+    const text2 = await autocompleteHarness?.getOptions().then(opt => Promise.all(opt.map(o => o.getText())));
+    expect(text2).toEqual(fakeApplications.map(a => a.label));
   });
 });

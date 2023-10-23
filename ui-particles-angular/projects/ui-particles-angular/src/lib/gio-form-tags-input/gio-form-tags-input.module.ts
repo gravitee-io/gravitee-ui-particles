@@ -23,10 +23,22 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
+import { GioLoaderModule } from '../gio-loader/gio-loader.module';
+
 import { GioFormTagsInputComponent } from './gio-form-tags-input.component';
 
 @NgModule({
-  imports: [CommonModule, A11yModule, MatChipsModule, MatInputModule, FormsModule, MatIconModule, MatAutocompleteModule, MatSelectModule],
+  imports: [
+    CommonModule,
+    A11yModule,
+    MatChipsModule,
+    MatInputModule,
+    FormsModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    MatSelectModule,
+    GioLoaderModule,
+  ],
   declarations: [GioFormTagsInputComponent],
   exports: [GioFormTagsInputComponent],
 })
