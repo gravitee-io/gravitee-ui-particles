@@ -13,3 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+.loader-option {
+  display: flex;
+
+  gio-loader {
+    width: 24px;
+  }
+}

@@ -85,7 +85,6 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
   @Input()
   public set autocompleteOptions(v: AutocompleteOptions | ((search: string) => Observable<AutocompleteOptions>) | undefined) {
     this._autocompleteOptions = v;
-    this.initAutocomplete();
   }
   public _autocompleteOptions?: AutocompleteOptions | ((search: string) => Observable<AutocompleteOptions>);
 
@@ -116,8 +115,17 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
 
   @ViewChild('tagInput')
   public set tagInput(v: ElementRef<HTMLInputElement> | null) {
+    if (v) {
+      this.fm.monitor(v.nativeElement).subscribe(origin => {
+        if (origin) {
+          this.initAutocomplete();
+        }
+      });
+    } else if (this._tagInput) {
+      this.fm.stopMonitoring(this._tagInput.nativeElement);
+    }
+
     this._tagInput = v;
-    this.initAutocomplete();
   }
   private _tagInput: ElementRef<HTMLInputElement> | null = null;
 
@@ -126,6 +134,8 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
   public _displayValueWith?: (value: string) => Observable<string>;
 
   private displayValueCache: Record<string, string> = {};
+
+  public loading = false;
 
   // From MatFormFieldControl interface
   public get value(): Tags | null {
@@ -253,6 +263,9 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
   public ngOnDestroy(): void {
     this.stateChanges.complete();
     this.fm.stopMonitoring(this.elRef.nativeElement);
+    if (this._tagInput) {
+      this.fm.stopMonitoring(this._tagInput.nativeElement);
+    }
   }
 
   // From ControlValueAccess interface
@@ -338,6 +351,9 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
     if (this._autocompleteOptions && this._tagInput?.nativeElement) {
       this.autocompleteFilteredOptions$ = fromEvent(this._tagInput.nativeElement, 'keyup').pipe(
         startWith([] as string[]),
+        tap(() => {
+          this.loading = true;
+        }),
         switchMap(() => {
           if (typeof this._autocompleteOptions === 'function') {
             return this._autocompleteOptions(this._tagInput?.nativeElement.value ?? '').pipe(
@@ -351,6 +367,9 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
             );
           }
           return of(defaultAutocompleteFilter(this._autocompleteOptions ?? [], this._tagInput?.nativeElement.value ?? ''));
+        }),
+        tap(() => {
+          this.loading = false;
         }),
 
         distinctUntilChanged(),
