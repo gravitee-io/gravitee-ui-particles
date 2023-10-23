@@ -13,19 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Directive, Input } from '@angular/core';
+import { Directive, Input, ViewChild } from '@angular/core';
 import { MatTooltip } from '@angular/material/tooltip';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Directive()
 export abstract class GioClipboardComponent {
-  public tooltipMessage = 'Copy to clipboard';
+  public label = 'Copy to clipboard';
   public tooltipHideDelay = 0;
   public clicked = false;
+
+  @ViewChild('tooltip') public tooltip!: MatTooltip;
 
   @Input()
   public contentToCopy = '';
   @Input()
   public alwaysVisible = false;
+
+  @Input()
+  public tabIndex = undefined;
+
+  constructor(private clipboard: Clipboard) {}
 
   public onCopied(success: boolean, tooltip: MatTooltip) {
     tooltip.message = success ? 'Copied!' : 'Failed to copy!';
@@ -39,8 +47,15 @@ export abstract class GioClipboardComponent {
 
     setTimeout(() => {
       this.clicked = false;
-      tooltip.message = this.tooltipMessage;
+      tooltip.message = this.label;
       tooltip.hideDelay = this.tooltipHideDelay;
     }, 2500);
+  }
+
+  public onKeyupSpace() {
+    this.clipboard.copy(this.contentToCopy);
+    if (this.tooltip) {
+      this.onCopied(true, this.tooltip);
+    }
   }
 }

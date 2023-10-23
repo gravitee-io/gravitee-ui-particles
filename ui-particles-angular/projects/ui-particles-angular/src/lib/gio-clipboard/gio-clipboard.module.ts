@@ -19,12 +19,13 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatButtonModule } from '@angular/material/button';
 
 import { GioClipboardCopyWrapperComponent } from './gio-clipboard-copy-wrapper.component';
 import { GioClipboardCopyIconComponent } from './gio-clipboard-copy-icon.component';
 
 @NgModule({
-  imports: [CommonModule, MatIconModule, MatTooltipModule, MatRippleModule, ClipboardModule],
+  imports: [CommonModule, MatIconModule, MatTooltipModule, MatRippleModule, ClipboardModule, MatButtonModule],
   declarations: [GioClipboardCopyWrapperComponent, GioClipboardCopyIconComponent],
   exports: [GioClipboardCopyWrapperComponent, GioClipboardCopyIconComponent],
 })

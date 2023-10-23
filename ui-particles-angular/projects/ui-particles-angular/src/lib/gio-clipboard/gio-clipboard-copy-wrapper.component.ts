@@ -23,9 +23,10 @@ import { GioClipboardComponent } from './gio-clipboard.base.component';
   styleUrls: ['./gio-clipboard-copy-wrapper.component.scss'],
   template: `
     <ng-content></ng-content>
-    <span
+    <button
       #tooltip="matTooltip"
       class="right"
+      [attr.aria-label]="label"
       [class.clicked]="clicked"
       [class.always-visible]="alwaysVisible"
       [cdkCopyToClipboard]="contentToCopy"
@@ -33,11 +34,12 @@ import { GioClipboardComponent } from './gio-clipboard.base.component';
       matRipple
       [matRippleCentered]="true"
       [matRippleUnbounded]="true"
-      [matTooltip]="tooltipMessage"
+      [matTooltip]="label"
       [matTooltipPosition]="'after'"
+      (keyup.Space)="onKeyupSpace()"
     >
       <mat-icon [inline]="true">{{ clicked ? 'check' : 'content_copy' }}</mat-icon>
-    </span>
+    </button>
   `,
 })
 export class GioClipboardCopyWrapperComponent extends GioClipboardComponent {}
