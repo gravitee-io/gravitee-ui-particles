@@ -21,19 +21,22 @@ import { GioClipboardComponent } from './gio-clipboard.base.component';
   selector: 'gio-clipboard-copy-icon',
   styleUrls: ['./gio-clipboard-copy-icon.component.scss'],
   template: `
-    <mat-icon
+    <button
       #tooltip="matTooltip"
-      class="icon"
+      class="btn"
+      [attr.aria-label]="label"
       [class.clicked]="clicked"
       [cdkCopyToClipboard]="contentToCopy"
       (cdkCopyToClipboardCopied)="onCopied($event, tooltip)"
       matRipple
       [matRippleCentered]="true"
       [matRippleUnbounded]="true"
-      [matTooltip]="tooltipMessage"
+      [matTooltip]="label"
       [matTooltipPosition]="'after'"
-      >{{ clicked ? 'check' : 'content_copy' }}</mat-icon
+      (keyup.Space)="onKeyupSpace()"
     >
+      <mat-icon>{{ clicked ? 'check' : 'content_copy' }}</mat-icon>
+    </button>
   `,
 })
 export class GioClipboardCopyIconComponent extends GioClipboardComponent {}
