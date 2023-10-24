@@ -19,11 +19,13 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  EventEmitter,
   Inject,
   Input,
   NgZone,
   OnDestroy,
   Optional,
+  Output,
   Self,
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
@@ -57,6 +59,9 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
 
   @Input()
   public options: editor.IStandaloneEditorConstructionOptions = {};
+
+  @Output()
+  public editorInit = new EventEmitter<editor.IStandaloneCodeEditor>();
 
   public loaded$ = new ReplaySubject<boolean>(1);
 
@@ -187,6 +192,7 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
     });
 
     this.setupLanguage(settings.uri, this.languageConfig);
+    this.editorInit.emit(this.standaloneCodeEditor);
   }
 
   private setupLanguage(uri: string, languageConfig?: MonacoEditorLanguageConfig) {
