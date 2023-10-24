@@ -1,3 +1,16 @@
+# [7.38.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.37.5...v7.38.0) (2023-10-24)
+
+
+### Bug Fixes
+
+* **gio-form-tags-input:** call autocomplete options on focus ([21f2a45](https://github.com/gravitee-io/gravitee-ui-particles/commit/21f2a4582d1ff90cb20d86d1eaf7906b115ba60b))
+* **gio-loader:** force no margin for mat-icon ([392f001](https://github.com/gravitee-io/gravitee-ui-particles/commit/392f00149f2abd7f66dffc17db14b7166796fc3f))
+
+
+### Features
+
+* improve a11y on clipboard components ([dda05dc](https://github.com/gravitee-io/gravitee-ui-particles/commit/dda05dcfc31dc005a566536d9a289c109028bc09))
+
 ## [7.37.5](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.37.4...v7.37.5) (2023-10-20)
 
 
