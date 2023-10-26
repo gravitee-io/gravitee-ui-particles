@@ -25,6 +25,7 @@ import { GioClipboardComponent } from './gio-clipboard.base.component';
     <ng-content></ng-content>
     <button
       #tooltip="matTooltip"
+      type="button"
       class="right"
       [attr.aria-label]="label"
       [class.clicked]="clicked"
