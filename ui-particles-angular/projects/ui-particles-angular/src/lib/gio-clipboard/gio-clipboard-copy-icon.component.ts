@@ -23,6 +23,7 @@ import { GioClipboardComponent } from './gio-clipboard.base.component';
   template: `
     <button
       #tooltip="matTooltip"
+      type="button"
       class="btn"
       [attr.aria-label]="label"
       [class.clicked]="clicked"
