@@ -108,6 +108,15 @@ export const Default: Story = {
       </div>
       <span gioBannerBody>This is the body of the banner. <a href="">Learn more</a></span>
     </gio-banner>
+
+    <h5>Collapsible banner</h5>
+    <gio-banner [collapsible]="true">
+      <div>Collapsible banner</div>
+      <div gioBannerAction>
+          <button  mat-raised-button color="basic">Action</button>
+      </div>
+      <span gioBannerBody>This is the body of the banner. <a href="">Learn more</a> <br><br><br><br><br>End</span>
+    </gio-banner>
     `,
   }),
 };

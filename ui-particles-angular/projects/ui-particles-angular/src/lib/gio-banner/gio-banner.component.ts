@@ -28,6 +28,18 @@ export class GioBannerComponent {
 
   @Input()
   public icon?: string;
+
+  @Input()
+  public collapsible?: boolean = false;
+
+  public collapse = false;
+
+  public toggleCollapse() {
+    if (!this.collapsible) {
+      return;
+    }
+    this.collapse = !this.collapse;
+  }
 }
 
 @Directive({

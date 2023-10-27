@@ -12,7 +12,14 @@ Documentation and examples for banner. Allows you to display banner in cards or 
 
 ## Usage
 
-`<gio-banner></gio-banner>` can be used with a `type` input to change its color and icon dynamically.
+**Inputs**
+
+- `type`: `string` - input to change its color and icon dynamically.
+- `collapsible`: `boolean` - Enable collapsible mode
+
+**Template**
+
+`<gio-banner></gio-banner>`
 
 It is also possible to use it with the following tag declination:
 
@@ -30,11 +37,22 @@ It is also possible to use it with the following tag declination:
 <gio-banner-warning>This is a warning banner!</gio-banner-warning>
 ```
 
-It is possible to add body with [gioBannerBody] directive
+With body
 
-```html 
+```html
 <gio-banner>
   Title content
   <span gioBannerBody>This is the body of the banner.</span>
+</gio-banner>
+```
+
+With Action
+
+```html
+<gio-banner>
+  Title content
+  <div gioBannerAction>
+    <button mat-raised-button color="basic">Action</button>
+  </div>
 </gio-banner>
 ```
