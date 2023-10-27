@@ -62,13 +62,13 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
   public internalFormGroup?: FormGroup;
   public value?: string;
   public expressionDescription?: string;
+  @HostBinding('class.disabled')
   public isDisabled = false;
   @HostBinding('class.smallDisplay')
   public smallDisplay = false;
 
   private touched = false;
   private focused = false;
-  @HostBinding('class.disabled')
   private hasError = false;
 
   private cronDisplay?: CronDisplay;
