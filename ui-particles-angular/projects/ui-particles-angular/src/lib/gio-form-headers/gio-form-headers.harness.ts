@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { AsyncFactoryFn, BaseHarnessFilters, ComponentHarness, HarnessPredicate } from '@angular/cdk/testing';
+import { AsyncFactoryFn, BaseHarnessFilters, ComponentHarness, HarnessPredicate, parallel } from '@angular/cdk/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { MatAutocompleteHarness } from '@angular/material/autocomplete/testing';
@@ -85,5 +85,16 @@ export class GioFormHeadersHarness extends ComponentHarness {
 
   public async isDisabled(): Promise<boolean> {
     return (await this.host()).hasClass('disabled');
+  }
+
+  public async getValue(): Promise<{ key: string; value: string }[]> {
+    const rows = await this.getHeaderRows();
+
+    if (!(await this.isDisabled())) {
+      // Remove last empty value
+      rows.pop();
+    }
+
+    return parallel(() => rows.map(async r => ({ key: await r.keyInput.getValue(), value: await r.valueInput.getValue() })));
   }
 }
