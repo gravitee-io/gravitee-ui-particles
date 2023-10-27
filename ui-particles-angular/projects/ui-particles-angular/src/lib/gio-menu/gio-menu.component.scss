@@ -18,7 +18,7 @@
 
 @use '../../scss' as gio;
 
-$background: map.get(gio.$mat-space-palette, lighter10);
+$background: map.get(gio.$mat-oem-palette, background);
 
 .gio-menu {
   display: flex;

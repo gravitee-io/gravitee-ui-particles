@@ -18,8 +18,10 @@
 
 @use '../../../scss' as gio;
 
-$text: map.get(gio.$mat-space-palette, lighter60);
-$text-light: mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
+$menuText: map.get(gio.$mat-oem-palette, background-contrast);
+$text: color-mix(in srgb, $menuText 70%, black);
+$menuTextLight: map.get(gio.$mat-oem-palette-light, background-contrast);
+$textLight: color-mix(in srgb, $menuTextLight 70%, black);
 
 .gio-submenu-group {
   display: flex;
@@ -36,6 +38,6 @@ $text-light: mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
   }
 
   &__title__light {
-    color: $text-light;
+    color: $textLight;
   }
 }

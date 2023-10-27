@@ -18,11 +18,17 @@
 
 @use '../../../scss' as gio;
 
-$activeBackground: map.get(gio.$mat-space-palette, lighter30);
-$hoverBackground: map.get(gio.$mat-space-palette, lighter20);
-$activeBackgroundLight: map.get(gio.$mat-accent-palette, default);
-$hoverBackgroundLight: map.get(gio.$mat-accent-palette, darker20);
-$textLight: map.get(gio.$mat-basic-palette, white);
+$activeBackground: map.get(gio.$mat-oem-palette, active);
+$activeText: map.get(gio.$mat-oem-palette, active-contrast);
+$hoverBackground: color-mix(in srgb, $activeBackground 50%, transparent);
+$hoverText: map.get(gio.$mat-oem-palette, active-contrast);
+$background: map.get(gio.$mat-oem-palette, background);
+$text: map.get(gio.$mat-oem-palette, background-contrast);
+$menu-border: color-mix(in srgb, $background 75%, $text);
+$activeBackgroundLight: map.get(gio.$mat-oem-palette-light, active);
+$activeTextLight: map.get(gio.$mat-oem-palette-light, active-contrast);
+$hoverBackgroundLight: color-mix(in srgb, $activeBackgroundLight 50%, transparent);
+$hoverTextLight: map.get(gio.$mat-oem-palette-light, active-contrast);
 
 :host {
   display: block;
@@ -48,14 +54,14 @@ $textLight: map.get(gio.$mat-basic-palette, white);
     height: 20px;
     flex: none;
     flex-grow: 0;
-    color: $textLight;
+    color: $text;
     letter-spacing: 0.4px;
   }
 
   &__icon-right {
     width: 20px;
     height: 20px;
-    color: $textLight;
+    color: $text;
     float: right;
   }
 }
@@ -66,12 +72,15 @@ $textLight: map.get(gio.$mat-basic-palette, white);
 
 :host-context(.gio-submenu__light) .gio-submenu-item__active {
   background: $activeBackgroundLight;
+  color: $activeTextLight;
 }
 
 .gio-submenu-item:hover:not(.gio-submenu-item__active) {
   background: $hoverBackground;
+  color: $hoverText;
 }
 
 :host-context(.gio-submenu__light) .gio-submenu-item:hover:not(.gio-submenu-item__active) {
   background: $hoverBackgroundLight;
+  color: $hoverTextLight;
 }

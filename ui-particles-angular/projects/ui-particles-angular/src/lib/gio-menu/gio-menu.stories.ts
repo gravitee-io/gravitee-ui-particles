@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Args, Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
 import { withDesign } from 'storybook-addon-designs';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -54,27 +54,53 @@ const gioMenuContent = `
               <gio-menu-item tabindex="1" icon="gio:building" (click)="onClick('org')" [active]="isActive('org')">Organization settings</gio-menu-item>
             </gio-menu-footer>`;
 
+const colorArgTypes = {
+  darkMode: {
+    control: 'boolean',
+  },
+  menuBackground: {
+    control: 'color',
+  },
+  menuActive: {
+    control: 'color',
+  },
+};
+
+const computeStyle = (args: Args) => {
+  const darkMode = args.darkMode ?? true;
+  const backgroundStyle = computeStyleAndContrastByPrefix('background', args.menuBackground, '#1c1e39', darkMode);
+  const activeStyle = computeStyleAndContrastByPrefix('active', args.menuActive, '#494b61', darkMode);
+  return backgroundStyle + activeStyle;
+};
+
+const computeStyleAndContrastByPrefix = (prefix: string, color: string, defaultColor: string, darkMode = true) => {
+  return `--gio-oem-palette--${prefix}:${color ?? defaultColor}; --gio-oem-palette--${prefix}-contrast:${darkMode ? '#fff' : '#100c27'}; `;
+};
+
 export const Default: Story = {
-  render: () => ({
-    template: `
-        <div id="sidenav">
+  argTypes: colorArgTypes,
+  render: args => {
+    return {
+      template: `
+        <div id="sidenav" [style]="style">
           <gio-menu [reduced]="false">
             ${gioMenuContent}
           </gio-menu>
           <h1>Selected env: {{ selectedItemValue }}</h1>
         </div>
         `,
-    props: {
-      onClick: (target: string) => (route = target),
-      isActive: (target: string) => (route != target ? null : true),
-      selectedItemValue: 'dev',
-      selectorItems: [
-        { value: 'prod', displayValue: '🚀 Prod' },
-        { value: 'dev', displayValue: '🧪 Development' },
-      ],
-    },
-    styles: [
-      ` 
+      props: {
+        onClick: (target: string) => (route = target),
+        isActive: (target: string) => (route != target ? null : true),
+        selectedItemValue: 'dev',
+        selectorItems: [
+          { value: 'prod', displayValue: '🚀 Prod' },
+          { value: 'dev', displayValue: '🧪 Development' },
+        ],
+        style: computeStyle(args),
+      },
+      styles: [
+        ` 
         #sidenav {
             height: 956px;
             display: flex;
@@ -84,31 +110,35 @@ export const Default: Story = {
             margin-left: 12px
         };
         `,
-    ],
-  }),
+      ],
+    };
+  },
 };
 
 export const Reduced: Story = {
-  render: () => ({
-    template: `
-        <div id="sidenav">
+  argTypes: colorArgTypes,
+  render: args => {
+    return {
+      template: `
+        <div id="sidenav"  [style]="style">
           <gio-menu [reduced]="true">
             ${gioMenuContent}
           </gio-menu>
           <h1>Selected env: {{ selectedItemValue }}</h1>
         </div>
         `,
-    props: {
-      onClick: (target: string) => (route = target),
-      isActive: (target: string) => (route != target ? null : true),
-      selectedItemValue: 'prod',
-      selectorItems: [
-        { value: 'prod', displayValue: '🚀 Prod' },
-        { value: 'dev', displayValue: '🧪 Development' },
-      ],
-    },
-    styles: [
-      ` 
+      props: {
+        onClick: (target: string) => (route = target),
+        isActive: (target: string) => (route != target ? null : true),
+        selectedItemValue: 'prod',
+        selectorItems: [
+          { value: 'prod', displayValue: '🚀 Prod' },
+          { value: 'dev', displayValue: '🧪 Development' },
+        ],
+        style: computeStyle(args),
+      },
+      styles: [
+        ` 
         #sidenav {
             height: 956px;
             display: flex;
@@ -118,28 +148,32 @@ export const Reduced: Story = {
             margin-left: 12px
         };
         `,
-    ],
-  }),
+      ],
+    };
+  },
 };
 
 export const WithOneItemInSelector: Story = {
-  render: () => ({
-    template: `
-        <div id="sidenav">
+  argTypes: colorArgTypes,
+  render: args => {
+    return {
+      template: `
+        <div id="sidenav"  [style]="style">
           <gio-menu [reduced]="false">
             ${gioMenuContent}
           </gio-menu>
           <h1>Selected env: {{ selectedItemValue }}</h1>
         </div>
         `,
-    props: {
-      onClick: (target: string) => (route = target),
-      isActive: (target: string) => (route != target ? null : true),
-      selectedItemValue: 'onlyOne',
-      selectorItems: [{ value: 'onlyOne', displayValue: '🧪 Only Env' }],
-    },
-    styles: [
-      ` 
+      props: {
+        onClick: (target: string) => (route = target),
+        isActive: (target: string) => (route != target ? null : true),
+        selectedItemValue: 'onlyOne',
+        selectorItems: [{ value: 'onlyOne', displayValue: '🧪 Only Env' }],
+        style: computeStyle(args),
+      },
+      styles: [
+        ` 
         #sidenav {
             height: 956px;
             display: flex;
@@ -149,14 +183,17 @@ export const WithOneItemInSelector: Story = {
             margin-left: 12px
         };
         `,
-    ],
-  }),
+      ],
+    };
+  },
 };
 
 export const SmallMenu: Story = {
-  render: () => ({
-    template: `
-        <div id="sidenav">
+  argTypes: colorArgTypes,
+  render: args => {
+    return {
+      template: `
+        <div id="sidenav"  [style]="style">
           <gio-menu>
             <gio-menu-header>    
               <gio-menu-selector tabindex="1" [selectedItemValue]="selectedItemValue" selectorTitle="Environment" [selectorItems]="selectorItems" (selectChange)="selectedItemValue=$event"></gio-menu-selector>
@@ -173,14 +210,15 @@ export const SmallMenu: Story = {
           <h1>Selected env: {{ selectedItemValue }}</h1>
         </div>
         `,
-    props: {
-      onClick: (target: string) => (route = target),
-      isActive: (target: string) => (route != target ? null : true),
-      selectedItemValue: 'onlyOne',
-      selectorItems: [{ value: 'onlyOne', displayValue: '🧪 Only Env' }],
-    },
-    styles: [
-      ` 
+      props: {
+        onClick: (target: string) => (route = target),
+        isActive: (target: string) => (route != target ? null : true),
+        selectedItemValue: 'onlyOne',
+        selectorItems: [{ value: 'onlyOne', displayValue: '🧪 Only Env' }],
+        style: computeStyle(args),
+      },
+      styles: [
+        ` 
         #sidenav {
             height: 500px;
             display: flex;
@@ -190,8 +228,9 @@ export const SmallMenu: Story = {
             margin-left: 12px
         };
         `,
-    ],
-  }),
+      ],
+    };
+  },
 };
 
 const gioSubmenuContent = `
@@ -221,9 +260,11 @@ const gioSubmenuContent = `
       <gio-submenu-item tabindex="1" (click)="onClick('audit')" [active]="isActive('audit')" iconRight="gio:lock">Audit</gio-submenu-item>`;
 
 export const WithSubMenu: Story = {
-  render: () => ({
-    template: `
-        <div id="sidenav">
+  argTypes: colorArgTypes,
+  render: args => {
+    return {
+      template: `
+        <div id="sidenav"  [style]="style">
           <gio-menu [reduced]="false">
             ${gioMenuContent}
           </gio-menu>
@@ -233,16 +274,17 @@ export const WithSubMenu: Story = {
           <h1>Selected env: {{ selectedItemValue }}</h1>
         </div>
         `,
-    props: {
-      onClick: (target: string) => (route = target),
-      isActive: (target: string) => (route != target ? null : true),
-      onSubClick: (target: string) => (subRoute = target),
-      isSubActive: (target: string) => (subRoute != target ? null : true),
-      selectedItemValue: 'onlyOne',
-      selectorItems: [{ value: 'onlyOne', displayValue: '🧪 Only Env' }],
-    },
-    styles: [
-      ` 
+      props: {
+        onClick: (target: string) => (route = target),
+        isActive: (target: string) => (route != target ? null : true),
+        onSubClick: (target: string) => (subRoute = target),
+        isSubActive: (target: string) => (subRoute != target ? null : true),
+        selectedItemValue: 'onlyOne',
+        selectorItems: [{ value: 'onlyOne', displayValue: '🧪 Only Env' }],
+        style: computeStyle(args),
+      },
+      styles: [
+        ` 
         #sidenav {
             height: 956px;
             display: flex;
@@ -252,14 +294,17 @@ export const WithSubMenu: Story = {
             margin-left: 12px
         };
         `,
-    ],
-  }),
+      ],
+    };
+  },
 };
 
 export const ReducedWithSubMenu: Story = {
-  render: () => ({
-    template: `
-        <div id="sidenav">
+  argTypes: colorArgTypes,
+  render: args => {
+    return {
+      template: `
+        <div id="sidenav" [style]="style">
           <gio-menu [reduced]="true">
             ${gioMenuContent}
           </gio-menu>
@@ -269,16 +314,17 @@ export const ReducedWithSubMenu: Story = {
           <h1>Selected env: {{ selectedItemValue }}</h1>
         </div>
         `,
-    props: {
-      onClick: (target: string) => (route = target),
-      isActive: (target: string) => (route != target ? null : true),
-      onSubClick: (target: string) => (subRoute = target),
-      isSubActive: (target: string) => (subRoute != target ? null : true),
-      selectedItemValue: 'onlyOne',
-      selectorItems: [{ value: 'onlyOne', displayValue: '🧪 Only Env' }],
-    },
-    styles: [
-      ` 
+      props: {
+        onClick: (target: string) => (route = target),
+        isActive: (target: string) => (route != target ? null : true),
+        onSubClick: (target: string) => (subRoute = target),
+        isSubActive: (target: string) => (subRoute != target ? null : true),
+        selectedItemValue: 'onlyOne',
+        selectorItems: [{ value: 'onlyOne', displayValue: '🧪 Only Env' }],
+        style: computeStyle(args),
+      },
+      styles: [
+        ` 
         #sidenav {
             height: 956px;
             display: flex;
@@ -288,6 +334,7 @@ export const ReducedWithSubMenu: Story = {
             margin-left: 12px
         };
         `,
-    ],
-  }),
+      ],
+    };
+  },
 };

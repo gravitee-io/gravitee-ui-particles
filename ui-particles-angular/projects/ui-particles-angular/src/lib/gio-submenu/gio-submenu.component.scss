@@ -15,12 +15,13 @@
  */
 @use 'sass:map';
 @use '@angular/material' as mat;
-
 @use '../../scss' as gio;
 
-$background: map.get(gio.$mat-space-palette, default);
-$backgroundLight: map.get(gio.$mat-accent-palette, darker40);
-$textLight: map.get(gio.$mat-basic-palette, white);
+$menuBackground: map.get(gio.$mat-oem-palette, background);
+$background: color-mix(in srgb, $menuBackground 80%, black);
+$text: map.get(gio.$mat-oem-palette, background-contrast);
+$backgroundLight: map.get(gio.$mat-oem-palette-light, background);
+$textLight: map.get(gio.$mat-oem-palette-light, background-contrast);
 
 :host {
   z-index: 100;
@@ -63,7 +64,7 @@ $textLight: map.get(gio.$mat-basic-palette, white);
 
   &__title {
     padding-bottom: 8px;
-    color: $textLight;
+    color: $text;
   }
 
   .hide {

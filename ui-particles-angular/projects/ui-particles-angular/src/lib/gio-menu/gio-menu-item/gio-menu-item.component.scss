@@ -18,10 +18,13 @@
 
 @use '../../../scss' as gio;
 
-$activeBackground: map.get(gio.$mat-space-palette, lighter30);
-$hoverBackground: map.get(gio.$mat-space-palette, lighter20);
-$background: map.get(gio.$mat-space-palette, lighter10);
-$text: map.get(gio.$mat-dove-palette, default);
+$activeBackground: map.get(gio.$mat-oem-palette, active);
+$activeText: map.get(gio.$mat-oem-palette, active-contrast);
+$hoverBackground: color-mix(in srgb, $activeBackground 50%, transparent);
+$hoverText: map.get(gio.$mat-oem-palette, active-contrast);
+$background: map.get(gio.$mat-oem-palette, background);
+$text: map.get(gio.$mat-oem-palette, background-contrast);
+$menu-border: color-mix(in srgb, $background 75%, $text);
 
 :host {
   display: block;
@@ -45,10 +48,11 @@ $text: map.get(gio.$mat-dove-palette, default);
 
   &__active {
     background: $activeBackground;
+    color: $activeText;
   }
 
   &__outlined {
-    border: 1px solid map.get(gio.$mat-space-palette, lighter40);
+    border: 1px solid $menu-border;
     border-radius: 4px;
   }
 
@@ -90,4 +94,5 @@ $text: map.get(gio.$mat-dove-palette, default);
 
 .gio-menu-item:hover:not(.gio-menu-item__active) {
   background: $hoverBackground;
+  color: $hoverText;
 }

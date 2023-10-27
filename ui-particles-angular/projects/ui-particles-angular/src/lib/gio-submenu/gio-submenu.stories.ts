@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Args, Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
 import { withDesign } from 'storybook-addon-designs';
 
@@ -33,9 +33,35 @@ export default {
 } as Meta;
 
 let route = 'plans';
+
+const colorArgTypes = {
+  darkMode: {
+    control: 'boolean',
+  },
+  menuBackground: {
+    control: 'color',
+  },
+  menuActive: {
+    control: 'color',
+  },
+};
+
+const computeStyle = (args: Args) => {
+  const darkMode = args.darkMode ?? true;
+  const backgroundStyle = computeStyleAndContrastByPrefix('background', args.menuBackground, '#1c1e39', darkMode);
+  const activeStyle = computeStyleAndContrastByPrefix('active', args.menuActive, '#494b61', darkMode);
+  return backgroundStyle + activeStyle;
+};
+
+const computeStyleAndContrastByPrefix = (prefix: string, color: string, defaultColor: string, darkMode = true) => {
+  return `--gio-oem-palette--${prefix}:${color ?? defaultColor}; --gio-oem-palette--${prefix}-contrast:${darkMode ? '#fff' : '#100c27'}; `;
+};
+
 export const Default: Story = {
-  render: () => ({
-    template: `
+  argTypes: colorArgTypes,
+  render: args => {
+    return {
+      template: `
         <gio-submenu [reduced]="false">
             <div gioSubmenuTitle>Submenu title</div>   
             <gio-submenu-item (click)="onClick('message')" [active]="isActive('message')">Message</gio-submenu-item>
@@ -63,16 +89,20 @@ export const Default: Story = {
             <gio-submenu-item (click)="onClick('audit')" [active]="isActive('audit')">Audit</gio-submenu-item>
         </gio-submenu>
         `,
-    props: {
-      onClick: (target: string) => (route = target),
-      isActive: (target: string) => (route != target ? null : true),
-    },
-  }),
+      props: {
+        onClick: (target: string) => (route = target),
+        isActive: (target: string) => (route != target ? null : true),
+        style: computeStyle(args),
+      },
+    };
+  },
 };
 
 export const Light: Story = {
-  render: () => ({
-    template: `
+  argTypes: colorArgTypes,
+  render: args => {
+    return {
+      template: `
         <gio-submenu theme="light" [reduced]="false">
             <div gioSubmenuTitle>Submenu title</div>   
             <gio-submenu-item (click)="onClick('message')" [active]="isActive('message')">Message</gio-submenu-item>
@@ -100,9 +130,11 @@ export const Light: Story = {
             <gio-submenu-item (click)="onClick('audit')" [active]="isActive('audit')">Audit</gio-submenu-item>
         </gio-submenu>
         `,
-    props: {
-      onClick: (target: string) => (route = target),
-      isActive: (target: string) => (route != target ? null : true),
-    },
-  }),
+      props: {
+        onClick: (target: string) => (route = target),
+        isActive: (target: string) => (route != target ? null : true),
+        style: computeStyle(args),
+      },
+    };
+  },
 };

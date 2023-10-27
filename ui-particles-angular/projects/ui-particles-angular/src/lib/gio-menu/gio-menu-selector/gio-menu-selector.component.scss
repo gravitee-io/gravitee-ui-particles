@@ -17,14 +17,16 @@
 @use '@angular/material' as mat;
 @use '../../../scss' as gio;
 
-$background: map.get(gio.$mat-space-palette, lighter10);
-$text: map.get(gio.$mat-dove-palette, default);
+$background: map.get(gio.$mat-oem-palette, background);
+$text: map.get(gio.$mat-oem-palette, background-contrast);
+$menu-border: color-mix(in srgb, $background 75%, $text);
+$myActiveBackground: map.get(gio.$mat-oem-palette, active);
 
 .gio-menu-selector {
   width: 192px;
   padding: 10px 14px 0;
   border-style: solid;
-  border-color: map.get(gio.$mat-space-palette, lighter40);
+  border-color: $menu-border;
   border-radius: 4px;
   margin-bottom: 8px;
   color: $text;
@@ -34,16 +36,32 @@ $text: map.get(gio.$mat-dove-palette, default);
   }
 }
 
+.gio-menu-selector__mat-option.mat-option.mat-selected {
+  color: black; // select has white background so text should be dark
+}
+
 ::ng-deep {
   gio-menu-selector {
     .gio-menu-selector {
       > * {
         display: block;
       }
+    }
 
-      @include mat.select-color(gio.$mat-theme-dark);
-      @include mat.form-field-color(gio.$mat-theme-dark);
-      @include mat.core-color(gio.$mat-theme-dark);
+    .mat-form-field-label > mat-label {
+      color: $text;
+    }
+
+    .mat-select-min-line {
+      color: $text;
+    }
+
+    .gio-menu-selector .mat-form-field .mat-select-arrow {
+      color: $text;
+    }
+
+    .gio-menu-selector .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+      color: $text !important;
     }
   }
 
