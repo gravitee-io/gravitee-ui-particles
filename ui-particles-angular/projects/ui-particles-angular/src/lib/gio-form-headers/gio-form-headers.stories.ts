@@ -32,7 +32,7 @@ export default {
   ],
   argTypes: {},
   render: args => ({
-    template: `<gio-form-headers [ngModel]="headers"></gio-form-headers>`,
+    template: `<gio-form-headers [ngModel]="headers"><gio-form-headers-label>Request headers</gio-form-headers-label></gio-form-headers>`,
     props: args,
   }),
   args: {
@@ -110,7 +110,10 @@ export const ReactiveFormDisabled: Story = {
     });
 
     return {
-      template: `<gio-form-headers [formControl]="headersControl"></gio-form-headers>`,
+      template: `
+      <gio-form-headers [formControl]="headersControl">
+        <gio-form-headers-label>Request headers</gio-form-headers-label>
+      </gio-form-headers>`,
       props: {
         headersControl,
       },

@@ -13,13 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@use 'sass:map';
 @use '@angular/material' as mat;
 
 @use '../../scss' as gio;
 
+$typography: map.get(gio.$mat-theme, typography);
+
 :host {
   display: block;
   overflow: hidden;
+}
+
+.label {
+  @include mat.typography-level($typography, caption);
+
+  padding-left: 10px;
+  color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker50');
+
+  &:empty {
+    display: none;
+  }
 }
 
 .gio-form-headers {
@@ -79,6 +93,12 @@
       background-color: mat.get-color-from-palette(gio.$mat-basic-palette, white);
       opacity: 0.9;
     }
+  }
+}
+
+:host(.disabled) {
+  .label {
+    color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker20');
   }
 }
 
