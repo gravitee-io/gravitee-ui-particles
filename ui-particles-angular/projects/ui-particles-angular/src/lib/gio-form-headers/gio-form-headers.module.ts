@@ -25,6 +25,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { GioIconsModule } from '../gio-icons/gio-icons.module';
 
 import { GioFormHeadersComponent } from './gio-form-headers.component';
+import { GioFormHeadersLabelComponent } from './gio-form-headers-label.component';
 
 @NgModule({
   imports: [
@@ -37,7 +38,7 @@ import { GioFormHeadersComponent } from './gio-form-headers.component';
     MatAutocompleteModule,
     MatOptionModule,
   ],
-  declarations: [GioFormHeadersComponent],
+  declarations: [GioFormHeadersComponent, GioFormHeadersLabelComponent],
   exports: [GioFormHeadersComponent],
 })
 export class GioFormHeadersModule {}
