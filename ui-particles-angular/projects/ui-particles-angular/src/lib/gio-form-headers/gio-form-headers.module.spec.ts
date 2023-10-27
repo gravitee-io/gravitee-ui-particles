@@ -120,6 +120,11 @@ describe('GioFormHeadersModule', () => {
       { key: 'host', value: 'api.gravitee.io' },
       { key: 'accept', value: '*/*' },
     ]);
+
+    expect(await formHeaders.getValue()).toEqual([
+      { key: 'host', value: 'api.gravitee.io' },
+      { key: 'accept', value: '*/*' },
+    ]);
   });
 
   it('should edit header', async () => {
@@ -234,6 +239,8 @@ describe('GioFormHeadersModule', () => {
       })),
     );
     expect(headers).toEqual(HEADERS);
+
+    expect(await formHeaders.getValue()).toEqual(HEADERS);
   });
 
   it('should display headers with key field mapped to name', async () => {

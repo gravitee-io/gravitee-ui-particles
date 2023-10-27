@@ -18,13 +18,9 @@ import { Story } from '@storybook/angular/types-7-0';
 
 export default {
   title: 'Components / Table Light',
-  render: () => ({}),
-} as Meta;
-
-export const HttpHeaders: Story = {
-  render: () => ({
+  render: args => ({
     template: `
-      <table class="gio-table-light">
+      <table class="gio-table-light" [class.disabled]="disabled">
           <thead>
               <tr>
                   <th>key</th>
@@ -51,5 +47,20 @@ export const HttpHeaders: Story = {
           </tbody>
       </table>
     `,
+    props: {
+      disabled: args.disabled,
+    },
   }),
+} as Meta;
+
+export const HttpHeaders: Story = {
+  args: {
+    disabled: false,
+  },
+};
+
+export const HttpHeadersDisabled: Story = {
+  args: {
+    disabled: true,
+  },
 };
