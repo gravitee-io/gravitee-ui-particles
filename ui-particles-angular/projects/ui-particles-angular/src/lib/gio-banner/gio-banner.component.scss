@@ -47,8 +47,10 @@ $types: (
       border: 3px solid mat.get-color-from-palette($typePalette, default);
       color: mat.get-color-from-palette($typePalette, darker);
 
-      .mat-icon {
-        color: mat.get-color-from-palette($typePalette, default);
+      .banner__wrapper__icon {
+        .mat-icon {
+          color: mat.get-color-from-palette($typePalette, default);
+        }
       }
 
       ::ng-deep {
@@ -62,7 +64,7 @@ $types: (
   &__wrapper {
     position: relative;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
 
     @include mat.typography-level($typography, body-2);
 
@@ -84,6 +86,27 @@ $types: (
       flex: 1;
       align-items: center;
       padding: 4px 0;
+
+      &.collapsible {
+        cursor: pointer;
+      }
+
+      &__collapse {
+        display: flex;
+        height: 14px;
+        flex: 0 0 auto;
+        align-items: center;
+
+        .collapse-open {
+          transform: rotate(180deg);
+          transition: transform 225ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .collapse-close {
+          transform: rotate(0deg);
+          transition: transform 225ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+      }
     }
 
     &__action {

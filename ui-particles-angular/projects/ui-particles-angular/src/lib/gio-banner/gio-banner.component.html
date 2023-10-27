@@ -35,10 +35,15 @@
       </div>
     </ng-template>
     <div class="banner__wrapper__head">
-      <div class="banner__wrapper__title">
+      <div class="banner__wrapper__title" [class.collapsible]="collapsible" (click)="toggleCollapse()">
         <ng-content></ng-content>
+        <div *ngIf="collapsible" class="banner__wrapper__title__collapse">
+          <button type="button" mat-icon-button aria-label="Collapse">
+            <mat-icon [class.collapse-open]="collapse" [class.collapse-close]="!collapse" svgIcon="gio:nav-arrow-down"></mat-icon>
+          </button>
+        </div>
       </div>
-      <div #body class="banner__wrapper__body" [class.hide]="!body.children.length">
+      <div #body class="banner__wrapper__body" [class.hide]="!body.children.length || (collapsible && !collapse)">
         <ng-content select="[gioBannerBody]"></ng-content>
       </div>
     </div>

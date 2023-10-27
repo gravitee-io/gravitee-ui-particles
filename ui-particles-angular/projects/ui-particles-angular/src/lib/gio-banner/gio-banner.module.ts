@@ -16,6 +16,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 import { GioIconsModule } from '../gio-icons/gio-icons.module';
 
@@ -30,7 +31,7 @@ import {
 } from './gio-banner.component';
 
 @NgModule({
-  imports: [CommonModule, MatIconModule, GioIconsModule],
+  imports: [CommonModule, MatIconModule, MatButtonModule, GioIconsModule],
   declarations: [
     GioBannerComponent,
     GioBannerErrorComponent,
