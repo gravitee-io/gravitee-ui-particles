@@ -1,0 +1,49 @@
+/*
+ * Copyright (C) 2021 The Gravitee team (http://gravitee.io)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@use '@angular/material' as mat;
+
+$mat-oem-palette: mat.define-palette(
+  (
+    // mat-space-palette lighter10
+    background: var(--gio-oem-palette--background, #1c1e39),
+    // mat-space-palette lighter30
+    active: var(--gio-oem-palette--active, #494b61),
+    contrast: (
+      background: var(--gio-oem-palette--background-contrast, #fff),
+      active: var(--gio-oem-palette--active-contrast, #fff),
+    )
+  ),
+  background,
+  background,
+  background
+);
+
+// palette used for gio-submenu (Organization menu in APIM) and is not customizable for now.
+$mat-oem-palette-light: mat.define-palette(
+  (
+    // mat-accent-palette darker40
+    background: #51438e,
+    // mat-accent-palette default
+    active: #876fec,
+    contrast: (
+      background: #fff,
+      active: #fff,
+    )
+  ),
+  background,
+  background,
+  background
+);

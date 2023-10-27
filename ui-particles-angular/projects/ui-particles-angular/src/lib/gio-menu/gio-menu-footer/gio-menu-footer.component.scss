@@ -17,13 +17,17 @@
 @use '@angular/material' as mat;
 @use '../../../scss' as gio;
 
+$background: map.get(gio.$mat-oem-palette, background);
+$text: map.get(gio.$mat-oem-palette, background-contrast);
+$menu-border: color-mix(in srgb, $background 50%, $text);
+
 :host {
   flex-grow: 0;
 }
 
 .gio-menu-footer {
   padding: 16px;
-  border-top: 1px solid map.get(gio.$mat-space-palette, lighter40);
+  border-top: 1px solid $menu-border;
 }
 
 :host-context(.gio-menu__reduced) .gio-menu-footer {
