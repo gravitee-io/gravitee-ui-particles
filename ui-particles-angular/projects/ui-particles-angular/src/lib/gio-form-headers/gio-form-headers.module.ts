@@ -39,6 +39,6 @@ import { GioFormHeadersLabelComponent } from './gio-form-headers-label.component
     MatOptionModule,
   ],
   declarations: [GioFormHeadersComponent, GioFormHeadersLabelComponent],
-  exports: [GioFormHeadersComponent],
+  exports: [GioFormHeadersComponent, GioFormHeadersLabelComponent],
 })
 export class GioFormHeadersModule {}
