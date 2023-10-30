@@ -42,6 +42,7 @@ export * from './gio-confirm-and-validate-dialog/gio-confirm-and-validate-dialog
 export * from './gio-icons/gio-icons.module';
 
 export * from './gio-form-headers/gio-form-headers.component';
+export * from './gio-form-headers/gio-form-headers-label.component';
 export * from './gio-form-headers/gio-form-headers.module';
 export * from './gio-form-headers/gio-form-headers.harness';
 
