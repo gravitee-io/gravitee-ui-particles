@@ -27,7 +27,7 @@ import {
   Self,
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { uniqueId } from 'lodash';
+import { isString, uniqueId } from 'lodash';
 import Monaco, { editor } from 'monaco-editor';
 import { ReplaySubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -123,7 +123,7 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
   // From ControlValueAccessor interface
   public writeValue(_value: string): void {
     if (_value) {
-      this.value = _value;
+      this.value = isString(_value) ? _value : JSON.stringify(_value);
     }
     if (this.textModel) {
       this.textModel.setValue(this.value);
@@ -174,9 +174,11 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
     this.textModel?.onDidChangeContent(() => {
       const newValue = this.textModel?.getValue();
       this.ngZone.run(() => {
-        this.value = newValue ?? '';
-        this._onChange(newValue ?? '');
-        this._onTouched();
+        setTimeout(() => {
+          this.value = newValue ?? '';
+          this._onChange(newValue ?? '');
+          this._onTouched();
+        }, 0);
       });
     });
 

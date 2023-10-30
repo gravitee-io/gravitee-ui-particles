@@ -17,7 +17,7 @@ import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
 import { action } from '@storybook/addon-actions';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import GioJsonSchema from '../gio-form-json-schema/model/GioJsonSchema.json';
@@ -137,6 +137,39 @@ export const InsideMatFormField: Story = {
       `,
       props: {
         control,
+        languageConfig,
+      },
+    };
+  },
+  args: {},
+};
+
+export const formControlName: Story = {
+  render: ({ value, disabled, languageConfig }) => {
+    const control = new FormControl({ value, disabled }, Validators.required);
+    control.valueChanges.subscribe(value => {
+      action('valueChanges')(value);
+    });
+    control.statusChanges.subscribe(status => {
+      action('statusChanges')(status);
+    });
+    const from = new FormGroup({ control });
+
+    return {
+      template: `
+      <mat-form-field style="width:100%;" [formGroup]="from">
+        <mat-label>Monaco editor</mat-label>
+        <gio-monaco-editor gioMonacoEditorFormField formControlName="control" [languageConfig]="languageConfig"></gio-monaco-editor>
+        <mat-error *ngIf="from.get('control').hasError('required')">This field is required</mat-error>
+      </mat-form-field>
+      <br>
+      <pre>{{ from.status }}</pre>
+      <pre>{{ from.dirty ? 'DIRTY' : 'PRISTINE' }}</pre>
+      <pre>{{ from.touched ? 'TOUCHED' : 'UNTOUCHED' }}</pre>
+      <pre>{{ from.get('control').value?.length < 1000 ? (from.get('control').value | json) : '...TL;TR...' }}</pre>
+      `,
+      props: {
+        from,
         languageConfig,
       },
     };
