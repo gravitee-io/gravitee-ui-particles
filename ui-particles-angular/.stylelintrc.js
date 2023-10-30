@@ -10,5 +10,6 @@ module.exports = {
         ignorePseudoElements: ['ng-deep'],
       },
     ],
+    'custom-property-pattern': ['-.*', '--.*'],
   },
 };
