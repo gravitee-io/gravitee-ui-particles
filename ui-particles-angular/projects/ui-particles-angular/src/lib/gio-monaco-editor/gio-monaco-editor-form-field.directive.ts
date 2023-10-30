@@ -141,7 +141,7 @@ export class GioMonacoEditorFormFieldDirective implements OnInit, DoCheck, MatFo
       });
     this.ngControl = this.hostGioMonacoEditorComponent?.ngControl;
 
-    this.hostGioMonacoEditorComponent.loaded$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
+    this.hostGioMonacoEditorComponent?.loaded$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
       // Auto resize editor
       this.hostGioMonacoEditorComponent.standaloneCodeEditor?.onDidContentSizeChange(() => {
         const height = Math.min(
