@@ -14,33 +14,40 @@
  * limitations under the License.
  */
 
-import { BaseHarnessFilters, ComponentHarness, HarnessPredicate } from '@angular/cdk/testing';
+import { BaseHarnessFilters, ComponentHarness, HarnessPredicate, LocatorFactory } from '@angular/cdk/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { GioMonacoEditorComponent } from './gio-monaco-editor.component';
 import { GioMonacoEditorModule } from './gio-monaco-editor.module';
 import { GioMonacoEditorTestingComponent } from './gio-monaco-editor.testing.component';
 
-// Hack to replace the default gio-monaco-editor component with fake one for testing purpose.
-try {
-  TestBed.overrideModule(GioMonacoEditorModule, {
-    remove: {
-      declarations: [GioMonacoEditorComponent],
-      exports: [GioMonacoEditorComponent],
-    },
-    add: {
-      declarations: [GioMonacoEditorTestingComponent],
-      exports: [GioMonacoEditorTestingComponent],
-    },
-  });
-} catch (e) {
-  // Do nothing
-}
+export const ConfigureTestingGioMonacoEditor = () => {
+  // Hack to replace the default gio-monaco-editor component with fake one for testing purpose.
+  try {
+    TestBed.overrideModule(GioMonacoEditorModule, {
+      remove: {
+        declarations: [GioMonacoEditorComponent],
+        exports: [GioMonacoEditorComponent],
+      },
+      add: {
+        declarations: [GioMonacoEditorTestingComponent],
+        exports: [GioMonacoEditorTestingComponent],
+      },
+    });
+  } catch (e) {
+    // Do nothing
+  }
+};
+ConfigureTestingGioMonacoEditor();
 
 export type GioMonacoEditorHarnessFilters = BaseHarnessFilters;
 
 export class GioMonacoEditorHarness extends ComponentHarness {
   public static hostSelector = 'gio-monaco-editor';
+
+  constructor(locatorFactory: LocatorFactory) {
+    super(locatorFactory);
+  }
 
   /**
    * Gets a `HarnessPredicate` that can be used to search for a `GioMonacoEditorHarness` that meets
@@ -64,5 +71,10 @@ export class GioMonacoEditorHarness extends ComponentHarness {
   public async getValue(): Promise<string> {
     const inputEl = await this.getInputEl();
     return inputEl.getProperty('value');
+  }
+
+  public async isDisabled(): Promise<boolean> {
+    const inputEl = await this.getInputEl();
+    return inputEl.getProperty('disabled');
   }
 }

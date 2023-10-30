@@ -20,7 +20,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { GioMonacoEditorHarness } from './gio-monaco-editor.harness';
+import { GioMonacoEditorHarness, ConfigureTestingGioMonacoEditor } from './gio-monaco-editor.harness';
 import { GioMonacoEditorModule } from './gio-monaco-editor.module';
 
 @Component({
@@ -42,6 +42,7 @@ describe('GioMonacoEditorModule', () => {
       declarations: [TestComponent],
       imports: [NoopAnimationsModule, GioMonacoEditorModule, ReactiveFormsModule],
     });
+    ConfigureTestingGioMonacoEditor();
 
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
@@ -58,5 +59,16 @@ describe('GioMonacoEditorModule', () => {
 
     expect(component.control.value).toEqual('TheCode');
     expect(await gioMonacoEditorHarness.getValue()).toEqual('TheCode');
+  });
+
+  it('should disable / enable', async () => {
+    component.control.disable();
+    fixture.detectChanges();
+    const gioMonacoEditorHarness = await loader.getHarness(GioMonacoEditorHarness);
+    expect(await gioMonacoEditorHarness.isDisabled()).toBe(true);
+
+    component.control.enable();
+
+    expect(await gioMonacoEditorHarness.isDisabled()).toBe(false);
   });
 });

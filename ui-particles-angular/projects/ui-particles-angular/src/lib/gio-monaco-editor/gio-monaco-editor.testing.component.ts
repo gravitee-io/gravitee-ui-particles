@@ -23,7 +23,7 @@ import { GioMonacoEditorComponent } from './gio-monaco-editor.component';
  */
 @Component({
   selector: 'gio-monaco-editor',
-  template: '<input type="text" [value]="getValue" (input)="changeValue($any($event).target?.value)" />',
+  template: '<input type="text" [value]="getValue" [disabled]="readOnly" (input)="changeValue($any($event).target?.value)" />',
 })
 export class GioMonacoEditorTestingComponent extends GioMonacoEditorComponent {
   public get getValue(): string {

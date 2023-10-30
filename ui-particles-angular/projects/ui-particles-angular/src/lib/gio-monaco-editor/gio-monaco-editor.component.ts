@@ -70,9 +70,10 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
   };
 
   public value = '';
-  protected readOnly = false;
+  public readOnly = false;
   public standaloneCodeEditor?: editor.IStandaloneCodeEditor;
   private textModel?: editor.ITextModel;
+  private toDisposes: Monaco.IDisposable[] = [];
 
   protected _onChange: (_value: string | null) => void = () => ({});
 
@@ -107,6 +108,8 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
   }
 
   public ngOnDestroy() {
+    this.toDisposes.forEach(d => d.dispose());
+
     if (this.standaloneCodeEditor) {
       this.standaloneCodeEditor.dispose();
       this.standaloneCodeEditor = undefined;
@@ -143,6 +146,12 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
   // From ControlValueAccessor interface
   public setDisabledState(isDisabled: boolean): void {
     this.readOnly = isDisabled;
+
+    if (this.standaloneCodeEditor) {
+      this.standaloneCodeEditor.updateOptions({
+        readOnly: isDisabled,
+      });
+    }
   }
 
   private setupEditor(monaco: typeof Monaco) {
@@ -171,22 +180,26 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
       ...options,
     });
 
-    this.textModel?.onDidChangeContent(() => {
+    const onDidChangeContent = this.textModel?.onDidChangeContent(() => {
       const newValue = this.textModel?.getValue();
       this.ngZone.run(() => {
-        setTimeout(() => {
-          this.value = newValue ?? '';
-          this._onChange(newValue ?? '');
-          this._onTouched();
-        }, 0);
+        if (!this.readOnly) {
+          setTimeout(() => {
+            this.value = newValue ?? '';
+            this._onChange(newValue ?? '');
+            this._onTouched();
+          }, 0);
+        }
       });
     });
 
-    this.standaloneCodeEditor?.onDidBlurEditorWidget(() => {
+    const onDidBlurEditorWidget = this.standaloneCodeEditor?.onDidBlurEditorWidget(() => {
       this.ngZone.run(() => {
-        this._onTouched();
+        if (!this.readOnly) this._onTouched();
       });
     });
+
+    this.toDisposes = [onDidChangeContent, onDidBlurEditorWidget].filter(d => !!d) as Monaco.IDisposable[];
 
     this.setupLanguage(settings.uri, this.languageConfig);
   }
