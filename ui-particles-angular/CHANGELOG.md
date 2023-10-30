@@ -1,3 +1,13 @@
+# [7.39.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.38.1...v7.39.0) (2023-10-30)
+
+
+### Features
+
+* add collapsible mode for banner ([61bfe52](https://github.com/gravitee-io/gravitee-ui-particles/commit/61bfe52459a9a3fd55351e389d5c558a78855e7d))
+* add label to gio-form-headers like in gio-form-cron and like material field ([09afa1a](https://github.com/gravitee-io/gravitee-ui-particles/commit/09afa1a2e22436ea91a0d77f8b082f11930be29f))
+* improve form-cron disabled display ([4377f5a](https://github.com/gravitee-io/gravitee-ui-particles/commit/4377f5ae3b0acdd8f9261944e02e3e9a4b98be79))
+* improve form-headers disabled display ([34fb877](https://github.com/gravitee-io/gravitee-ui-particles/commit/34fb8771080bc69f9ea64e6d9c7e2c5f2e1ce324))
+
 ## [7.38.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.38.0...v7.38.1) (2023-10-26)
 
 
