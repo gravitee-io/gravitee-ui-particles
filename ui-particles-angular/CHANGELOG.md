@@ -1,3 +1,10 @@
+# [7.42.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.41.0...v7.42.0) (2023-10-31)
+
+
+### Features
+
+* move all components that can be customized for OEM partners in a dedicated folder ([f9da6e9](https://github.com/gravitee-io/gravitee-ui-particles/commit/f9da6e937f3909b5d88d28b46838d3d454e8ca8f))
+
 # [7.41.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.40.0...v7.41.0) (2023-10-31)
 
 
