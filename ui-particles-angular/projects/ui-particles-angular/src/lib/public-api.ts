@@ -48,9 +48,6 @@ export * from './gio-form-headers/gio-form-headers.harness';
 
 export * from './gio-form-file-picker';
 
-export * from './gio-menu';
-export * from './gio-submenu';
-export * from './gio-top-bar';
 export * from './gio-avatar';
 
 export * from './gio-breadcrumb';
@@ -103,3 +100,5 @@ export * from './gio-form-cron/gio-form-cron.harness';
 
 export * from './gio-radio-button/gio-radio-button-content.component';
 export * from './gio-radio-button/gio-radio-button.module';
+
+export * from './oem-theme/public-api';
