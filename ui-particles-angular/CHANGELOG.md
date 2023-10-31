@@ -1,3 +1,18 @@
+# [7.40.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.39.0...v7.40.0) (2023-10-31)
+
+
+### Bug Fixes
+
+* do not resize icons into banner ([02d9713](https://github.com/gravitee-io/gravitee-ui-particles/commit/02d971327ad4f729c7bbf8a4ce022d0b200201d6))
+* export GioFormHeadersLabelComponent ([9e751c8](https://github.com/gravitee-io/gravitee-ui-particles/commit/9e751c87d9f10ab59cb5839670cd358d6bb0cecc))
+* fix angular form error with formControlName ([5b86a4d](https://github.com/gravitee-io/gravitee-ui-particles/commit/5b86a4d9c6904d5e06c1decf9b61f3d937d4c9ad))
+
+
+### Features
+
+* allow linting of -- and - variables ([0038c81](https://github.com/gravitee-io/gravitee-ui-particles/commit/0038c81897b56678ed9448fd852798dc43d2c13a))
+* customize menu colors ([07b7d9c](https://github.com/gravitee-io/gravitee-ui-particles/commit/07b7d9c9dcd5fdc39c943920dc16cc229c31ef15))
+
 # [7.39.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.38.1...v7.39.0) (2023-10-30)
 
 
