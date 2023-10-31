@@ -1,3 +1,10 @@
+# [7.41.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.40.0...v7.41.0) (2023-10-31)
+
+
+### Features
+
+* **oem:** add global view for oem theme + docs ([b312bc9](https://github.com/gravitee-io/gravitee-ui-particles/commit/b312bc90b81d627574ca0fd52d9777e34a24c8c4))
+
 # [7.40.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.39.0...v7.40.0) (2023-10-31)
 
 
