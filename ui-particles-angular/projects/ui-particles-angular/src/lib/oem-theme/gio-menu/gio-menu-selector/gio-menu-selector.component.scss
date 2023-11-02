@@ -15,20 +15,16 @@
  */
 @use 'sass:map';
 @use 'ui-particles-angular/projects/ui-particles-angular/index' as gio;
-
-$background: map.get(gio.$mat-oem-palette, background);
-$text: map.get(gio.$mat-oem-palette, background-contrast);
-$menu-border: color-mix(in srgb, $background 75%, $text);
-$myActiveBackground: map.get(gio.$mat-oem-palette, active);
+@use '../../../../scss/gio-oem-palette-variable' as oem;
 
 .gio-menu-selector {
   width: 192px;
   padding: 10px 14px 0;
   border-style: solid;
-  border-color: $menu-border;
+  border-color: oem.$oem-menu-border;
   border-radius: 4px;
   margin-bottom: 8px;
-  color: $text;
+  color: oem.$oem-menu-text;
 
   &__mat-form-field {
     padding-bottom: 0;
@@ -48,19 +44,19 @@ $myActiveBackground: map.get(gio.$mat-oem-palette, active);
     }
 
     .mat-form-field-label > mat-label {
-      color: $text;
+      color: oem.$oem-menu-text;
     }
 
     .mat-select-min-line {
-      color: $text;
+      color: oem.$oem-menu-text;
     }
 
     .gio-menu-selector .mat-form-field .mat-select-arrow {
-      color: $text;
+      color: oem.$oem-menu-text;
     }
 
     .gio-menu-selector .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
-      color: $text !important;
+      color: oem.$oem-menu-text !important;
     }
   }
 

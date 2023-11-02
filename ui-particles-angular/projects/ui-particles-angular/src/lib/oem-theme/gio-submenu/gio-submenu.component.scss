@@ -15,12 +15,7 @@
  */
 @use 'sass:map';
 @use 'ui-particles-angular/projects/ui-particles-angular/index' as gio;
-
-$menuBackground: map.get(gio.$mat-oem-palette, background);
-$background: color-mix(in srgb, $menuBackground 80%, black);
-$text: map.get(gio.$mat-oem-palette, background-contrast);
-$backgroundLight: map.get(gio.$mat-oem-palette-light, background);
-$textLight: map.get(gio.$mat-oem-palette-light, background-contrast);
+@use '../../../scss/gio-oem-palette-variable' as oem;
 
 :host {
   z-index: 100;
@@ -35,10 +30,10 @@ $textLight: map.get(gio.$mat-oem-palette-light, background-contrast);
   flex-grow: 0;
   justify-content: flex-start;
   padding: 16px;
-  background: $background;
+  background: oem.$oem-sub-menu-background;
 
   &__light {
-    background: $backgroundLight;
+    background: oem.$oem-light-menu-background;
   }
 
   &__reduced {
@@ -63,7 +58,7 @@ $textLight: map.get(gio.$mat-oem-palette-light, background-contrast);
 
   &__title {
     padding-bottom: 8px;
-    color: $text;
+    color: oem.$oem-menu-text;
   }
 
   .hide {
