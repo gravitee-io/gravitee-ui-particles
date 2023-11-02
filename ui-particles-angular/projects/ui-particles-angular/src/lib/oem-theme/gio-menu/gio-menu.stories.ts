@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Args, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
 import { withDesign } from 'storybook-addon-designs';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { GioSubmenuModule } from '../gio-submenu';
+import { COLOR_ARG_TYPES, computeStyle } from '../oem-theme-shared';
 
 import { GioMenuModule } from './gio-menu.module';
 import { GioMenuItemComponent } from './gio-menu-item/gio-menu-item.component';
@@ -28,7 +29,7 @@ export default {
   component: GioMenuItemComponent,
   decorators: [
     moduleMetadata({
-      imports: [GioMenuModule, NoopAnimationsModule, GioSubmenuModule],
+      imports: [GioMenuModule, GioSubmenuModule, NoopAnimationsModule],
     }),
     withDesign,
   ],
@@ -54,31 +55,8 @@ const gioMenuContent = `
               <gio-menu-item tabindex="1" icon="gio:building" (click)="onClick('org')" [active]="isActive('org')">Organization settings</gio-menu-item>
             </gio-menu-footer>`;
 
-const colorArgTypes = {
-  darkMode: {
-    control: 'boolean',
-  },
-  menuBackground: {
-    control: 'color',
-  },
-  menuActive: {
-    control: 'color',
-  },
-};
-
-const computeStyle = (args: Args) => {
-  const darkMode = args.darkMode ?? true;
-  const backgroundStyle = computeStyleAndContrastByPrefix('background', args.menuBackground, '#1c1e39', darkMode);
-  const activeStyle = computeStyleAndContrastByPrefix('active', args.menuActive, '#494b61', darkMode);
-  return backgroundStyle + activeStyle;
-};
-
-const computeStyleAndContrastByPrefix = (prefix: string, color: string, defaultColor: string, darkMode = true) => {
-  return `--gio-oem-palette--${prefix}:${color ?? defaultColor}; --gio-oem-palette--${prefix}-contrast:${darkMode ? '#fff' : '#100c27'}; `;
-};
-
 export const Default: Story = {
-  argTypes: colorArgTypes,
+  argTypes: COLOR_ARG_TYPES,
   render: args => {
     return {
       template: `
@@ -116,7 +94,7 @@ export const Default: Story = {
 };
 
 export const Reduced: Story = {
-  argTypes: colorArgTypes,
+  argTypes: COLOR_ARG_TYPES,
   render: args => {
     return {
       template: `
@@ -154,7 +132,7 @@ export const Reduced: Story = {
 };
 
 export const WithOneItemInSelector: Story = {
-  argTypes: colorArgTypes,
+  argTypes: COLOR_ARG_TYPES,
   render: args => {
     return {
       template: `
@@ -189,7 +167,7 @@ export const WithOneItemInSelector: Story = {
 };
 
 export const SmallMenu: Story = {
-  argTypes: colorArgTypes,
+  argTypes: COLOR_ARG_TYPES,
   render: args => {
     return {
       template: `
@@ -260,7 +238,7 @@ const gioSubmenuContent = `
       <gio-submenu-item tabindex="1" (click)="onClick('audit')" [active]="isActive('audit')" iconRight="gio:lock">Audit</gio-submenu-item>`;
 
 export const WithSubMenu: Story = {
-  argTypes: colorArgTypes,
+  argTypes: COLOR_ARG_TYPES,
   render: args => {
     return {
       template: `
@@ -300,7 +278,7 @@ export const WithSubMenu: Story = {
 };
 
 export const ReducedWithSubMenu: Story = {
-  argTypes: colorArgTypes,
+  argTypes: COLOR_ARG_TYPES,
   render: args => {
     return {
       template: `

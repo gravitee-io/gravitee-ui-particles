@@ -13,11 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Args, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
 import { withDesign } from 'storybook-addon-designs';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { GioSubmenuGroupComponent } from '@gravitee/ui-particles-angular';
 
-import { GioSubmenuGroupComponent } from './gio-submenu-group/gio-submenu-group.component';
+import { COLOR_ARG_TYPES, computeStyle } from '../oem-theme-shared';
+
 import { GioSubmenuModule } from './gio-submenu.module';
 
 export default {
@@ -25,7 +28,7 @@ export default {
   component: GioSubmenuGroupComponent,
   decorators: [
     moduleMetadata({
-      imports: [GioSubmenuModule],
+      imports: [GioSubmenuModule, NoopAnimationsModule],
     }),
     withDesign,
   ],
@@ -34,35 +37,13 @@ export default {
 
 let route = 'plans';
 
-const colorArgTypes = {
-  darkMode: {
-    control: 'boolean',
-  },
-  menuBackground: {
-    control: 'color',
-  },
-  menuActive: {
-    control: 'color',
-  },
-};
-
-const computeStyle = (args: Args) => {
-  const darkMode = args.darkMode ?? true;
-  const backgroundStyle = computeStyleAndContrastByPrefix('background', args.menuBackground, '#1c1e39', darkMode);
-  const activeStyle = computeStyleAndContrastByPrefix('active', args.menuActive, '#494b61', darkMode);
-  return backgroundStyle + activeStyle;
-};
-
-const computeStyleAndContrastByPrefix = (prefix: string, color: string, defaultColor: string, darkMode = true) => {
-  return `--gio-oem-palette--${prefix}:${color ?? defaultColor}; --gio-oem-palette--${prefix}-contrast:${darkMode ? '#fff' : '#100c27'}; `;
-};
-
 export const Default: Story = {
-  argTypes: colorArgTypes,
+  argTypes: COLOR_ARG_TYPES,
   render: args => {
     return {
       template: `
-        <gio-submenu [reduced]="false">
+<div [style]="style">
+        <gio-submenu >
             <div gioSubmenuTitle>Submenu title</div>   
             <gio-submenu-item (click)="onClick('message')" [active]="isActive('message')">Message</gio-submenu-item>
             <gio-submenu-group title="Portal">
@@ -88,6 +69,7 @@ export const Default: Story = {
             </gio-submenu-group>
             <gio-submenu-item (click)="onClick('audit')" [active]="isActive('audit')">Audit</gio-submenu-item>
         </gio-submenu>
+        </div>
         `,
       props: {
         onClick: (target: string) => (route = target),
@@ -99,11 +81,12 @@ export const Default: Story = {
 };
 
 export const Light: Story = {
-  argTypes: colorArgTypes,
+  argTypes: COLOR_ARG_TYPES,
   render: args => {
     return {
       template: `
-        <gio-submenu theme="light" [reduced]="false">
+<div [style]="style">
+        <gio-submenu theme="light" >
             <div gioSubmenuTitle>Submenu title</div>   
             <gio-submenu-item (click)="onClick('message')" [active]="isActive('message')">Message</gio-submenu-item>
             <gio-submenu-group title="Portal" theme="light">
@@ -129,6 +112,7 @@ export const Light: Story = {
             </gio-submenu-group>
             <gio-submenu-item (click)="onClick('audit')" [active]="isActive('audit')">Audit</gio-submenu-item>
         </gio-submenu>
+        </div>
         `,
       props: {
         onClick: (target: string) => (route = target),
