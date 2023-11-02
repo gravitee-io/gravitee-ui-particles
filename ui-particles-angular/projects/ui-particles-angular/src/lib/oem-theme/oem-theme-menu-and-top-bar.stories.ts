@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Args, Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
 import { withDesign } from 'storybook-addon-designs';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,6 +25,7 @@ import { GioSubmenuModule } from './gio-submenu';
 import { GioMenuModule } from './gio-menu';
 import { GioMenuItemComponent } from './gio-menu/gio-menu-item/gio-menu-item.component';
 import { GioTopBarLinkModule, GioTopBarMenuModule, GioTopBarModule } from './gio-top-bar';
+import { COLOR_ARG_TYPES, computeStyle } from './oem-theme-shared';
 
 export default {
   title: 'OEM Theme',
@@ -116,40 +117,15 @@ const gioSubmenuContent = `
             <gio-submenu-item (click)="onSubClick('audit')" [active]="isActive('audit')">Audit</gio-submenu-item>
 `;
 
-const colorArgTypes = {
-  darkMode: {
-    control: 'boolean',
-  },
-  menuBackground: {
-    control: 'color',
-  },
-  menuActive: {
-    control: 'color',
-  },
-};
-
-const computeStyle = (args: Args) => {
-  const darkMode = args.darkMode ?? true;
-  const backgroundStyle = computeStyleAndContrastByPrefix('background', args.menuBackground, '#1c1e39', darkMode);
-  const activeStyle = computeStyleAndContrastByPrefix('active', args.menuActive, '#494b61', darkMode);
-  return backgroundStyle + activeStyle;
-};
-
-const computeStyleAndContrastByPrefix = (prefix: string, color: string, defaultColor: string, darkMode = true) => {
-  return `--gio-oem-palette--${prefix}:${color ?? defaultColor}; --gio-oem-palette--${prefix}-contrast:${darkMode ? '#fff' : '#100c27'}; `;
-};
-
 export const Default: Story = {
   name: 'Menu and Top Bar',
-  argTypes: colorArgTypes,
+  argTypes: COLOR_ARG_TYPES,
   render: args => {
     return {
       template: `
-<div>
-    <div>
+<div [style]="style">
         ${gioTopBarContent}
-    </div>
-    <div id="sidenav" [style]="style">
+    <div id="sidenav" >
         <gio-menu [reduced]="false">
           ${gioMenuContent}
         </gio-menu>
@@ -215,7 +191,7 @@ export const Default: Story = {
         }
         
         .api-name {
-          border-left: 1px solid var(--gio-oem-palette--background-contrast); 
+          border-left: 1px solid var(--gio-oem-palette--background-contrast, #fff); 
           padding-left: 12px;
         }
         `,
