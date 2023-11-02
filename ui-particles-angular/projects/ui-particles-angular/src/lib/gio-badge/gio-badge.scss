@@ -18,6 +18,7 @@
 
 @use '../../scss/gio-mat-palettes.scss' as palettes;
 @use '../../scss/gio-mat-theme-variable' as theme;
+@use '../../scss/gio-oem-palette-variable' as oem;
 
 /**
  * Gravitee.io version of bootstrap "badge" element
@@ -111,5 +112,14 @@
 
     background-color: mat.get-color-from-palette(palettes.$mat-warning-palette, lighter);
     color: mat.get-color-from-palette(palettes.$mat-warning-palette, lighter-contrast);
+  }
+}
+
+// OEM Theme
+
+.gio-top-bar-menu {
+  .gio-badge-accent {
+    background-color: oem.$oem-top-bar-notification;
+    color: oem.$oem-top-bar-notification-contrast;
   }
 }

@@ -18,7 +18,8 @@
 
 @use 'ui-particles-angular/projects/ui-particles-angular/index' as gio;
 
-$background: map.get(gio.$mat-theme, background);
+@use '../../../../scss/gio-oem-palette-variable' as oem;
+
 $typography: map.get(gio.$mat-theme, typography);
 
 .gio-top-bar-content {
@@ -37,8 +38,8 @@ $typography: map.get(gio.$mat-theme, typography);
   }
 
   &.apim {
-    background: rgb(0 111 185 / 50%);
-    color: map.get(gio.$mat-cyan-palette, default-contrast);
+    background: oem.$oem-top-bar-apim-button-background;
+    color: oem.$oem-menu-text;
   }
 
   &.cockpit {

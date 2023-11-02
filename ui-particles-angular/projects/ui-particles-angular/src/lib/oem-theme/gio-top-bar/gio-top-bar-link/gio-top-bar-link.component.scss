@@ -16,6 +16,7 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 @use 'ui-particles-angular/projects/ui-particles-angular/index' as gio;
+@use '../../../../scss/gio-oem-palette-variable' as oem;
 
 $typography: map.get(gio.$mat-theme, typography);
 
@@ -27,7 +28,7 @@ $typography: map.get(gio.$mat-theme, typography);
   @include mat.typography-level($typography, body-2);
 
   height: 20px;
-  color: map.get(gio.$mat-dove-palette, default);
+  color: oem.$oem-menu-text;
   letter-spacing: 0.4px;
   text-decoration: none;
 
