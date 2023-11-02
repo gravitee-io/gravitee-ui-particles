@@ -15,8 +15,7 @@
  */
 @use 'sass:map';
 @use 'ui-particles-angular/projects/ui-particles-angular/index' as gio;
-
-$background: map.get(gio.$mat-oem-palette, background);
+@use '../../../scss/gio-oem-palette-variable' as oem;
 
 .gio-menu {
   display: flex;
@@ -25,7 +24,7 @@ $background: map.get(gio.$mat-oem-palette, background);
   flex-direction: column;
   justify-content: flex-start;
   padding: 16px 0 0;
-  background: $background;
+  background: oem.$oem-menu-background;
 
   &__reduced {
     width: 76px;

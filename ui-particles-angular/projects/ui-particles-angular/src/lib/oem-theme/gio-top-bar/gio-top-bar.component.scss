@@ -15,8 +15,8 @@
  */
 @use 'sass:map';
 @use 'ui-particles-angular/projects/ui-particles-angular/index' as gio;
+@use '../../../scss/gio-oem-palette-variable' as oem;
 
-$background: map.get(gio.$mat-theme, background);
 $typography: map.get(gio.$mat-theme, typography);
 
 :host {
@@ -32,7 +32,7 @@ $typography: map.get(gio.$mat-theme, typography);
       line-height: 36px;
 
       &:hover {
-        background: map.get(gio.$mat-space-palette, lighter20);
+        background: oem.$oem-menu-hover;
       }
     }
   }
@@ -42,7 +42,8 @@ $typography: map.get(gio.$mat-theme, typography);
   display: flex;
   align-items: center;
   padding: 16px;
-  background: map.get(gio.$mat-space-palette, lighter10);
-  color: map.get(gio.$mat-dove-palette, default);
+  border-bottom: 1px solid oem.$oem-menu-border;
+  background: oem.$oem-menu-background;
+  color: oem.$oem-menu-text;
   gap: 18px;
 }

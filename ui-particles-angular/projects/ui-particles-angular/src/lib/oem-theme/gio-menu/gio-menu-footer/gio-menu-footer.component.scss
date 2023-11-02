@@ -15,10 +15,7 @@
  */
 @use 'sass:map';
 @use 'ui-particles-angular/projects/ui-particles-angular/index' as gio;
-
-$background: map.get(gio.$mat-oem-palette, background);
-$text: map.get(gio.$mat-oem-palette, background-contrast);
-$menu-border: color-mix(in srgb, $background 50%, $text);
+@use '../../../../scss/gio-oem-palette-variable' as oem;
 
 :host {
   flex-grow: 0;
@@ -26,7 +23,7 @@ $menu-border: color-mix(in srgb, $background 50%, $text);
 
 .gio-menu-footer {
   padding: 16px;
-  border-top: 1px solid $menu-border;
+  border-top: 1px solid oem.$oem-menu-border;
 }
 
 :host-context(.gio-menu__reduced) .gio-menu-footer {

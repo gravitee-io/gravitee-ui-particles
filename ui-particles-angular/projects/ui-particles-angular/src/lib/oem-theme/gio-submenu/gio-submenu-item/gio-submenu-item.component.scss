@@ -15,18 +15,7 @@
  */
 @use 'sass:map';
 @use 'ui-particles-angular/projects/ui-particles-angular/index' as gio;
-
-$activeBackground: map.get(gio.$mat-oem-palette, active);
-$activeText: map.get(gio.$mat-oem-palette, active-contrast);
-$hoverBackground: color-mix(in srgb, $activeBackground 50%, transparent);
-$hoverText: map.get(gio.$mat-oem-palette, active-contrast);
-$background: map.get(gio.$mat-oem-palette, background);
-$text: map.get(gio.$mat-oem-palette, background-contrast);
-$menu-border: color-mix(in srgb, $background 75%, $text);
-$activeBackgroundLight: map.get(gio.$mat-oem-palette-light, active);
-$activeTextLight: map.get(gio.$mat-oem-palette-light, active-contrast);
-$hoverBackgroundLight: color-mix(in srgb, $activeBackgroundLight 50%, transparent);
-$hoverTextLight: map.get(gio.$mat-oem-palette-light, active-contrast);
+@use '../../../../scss/gio-oem-palette-variable' as oem;
 
 :host {
   display: block;
@@ -44,7 +33,7 @@ $hoverTextLight: map.get(gio.$mat-oem-palette-light, active-contrast);
   cursor: pointer;
 
   &__active {
-    background: $activeBackground;
+    background: oem.$oem-menu-active;
   }
 
   &__title {
@@ -52,14 +41,14 @@ $hoverTextLight: map.get(gio.$mat-oem-palette-light, active-contrast);
     height: 20px;
     flex: none;
     flex-grow: 0;
-    color: $text;
+    color: oem.$oem-menu-text;
     letter-spacing: 0.4px;
   }
 
   &__icon-right {
     width: 20px;
     height: 20px;
-    color: $text;
+    color: oem.$oem-menu-text;
     float: right;
   }
 }
@@ -68,17 +57,19 @@ $hoverTextLight: map.get(gio.$mat-oem-palette-light, active-contrast);
   padding: 8px 20px;
 }
 
-:host-context(.gio-submenu__light) .gio-submenu-item__active {
-  background: $activeBackgroundLight;
-  color: $activeTextLight;
-}
-
 .gio-submenu-item:hover:not(.gio-submenu-item__active) {
-  background: $hoverBackground;
-  color: $hoverText;
+  background: oem.$oem-menu-hover;
+  color: oem.$oem-menu-hover-text;
 }
 
-:host-context(.gio-submenu__light) .gio-submenu-item:hover:not(.gio-submenu-item__active) {
-  background: $hoverBackgroundLight;
-  color: $hoverTextLight;
+:host-context(.gio-submenu__light) {
+  .gio-submenu-item__active {
+    background: oem.$oem-light-menu-selected;
+    color: oem.$oem-light-menu-text;
+  }
+
+  .gio-submenu-item:hover:not(.gio-submenu-item__active) {
+    background: oem.$oem-light-menu-hover;
+    color: oem.$oem-light-menu-text;
+  }
 }
