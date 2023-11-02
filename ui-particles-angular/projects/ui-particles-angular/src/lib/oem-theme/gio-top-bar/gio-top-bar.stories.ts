@@ -20,6 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 import { GioIconsModule } from '../../gio-icons/gio-icons.module';
+import { COLOR_ARG_TYPES, computeStyle } from '../oem-theme-shared';
 
 import { GioTopBarComponent } from './gio-top-bar.component';
 import { GioTopBarModule } from './gio-top-bar.module';
@@ -39,11 +40,13 @@ export default {
 } as Meta;
 
 export const Default: Story = {
-  render: () => ({
-    template: `
-        <div id="main">
+  argTypes: COLOR_ARG_TYPES,
+  render: args => {
+    return {
+      template: `
+        <div id="main" [style]="style">
           <gio-top-bar>
-            <button mat-icon-button gioTopBarHome>
+            <button mat-icon-button>
               <mat-icon svgIcon="gio:gravitee" (click)="click('am')"></mat-icon>
             </button>
             <gio-top-bar-content type="am" productName="Access Management"></gio-top-bar-content>
@@ -58,7 +61,7 @@ export const Default: Story = {
             </gio-top-bar-menu>
           </gio-top-bar>
           <gio-top-bar>
-            <button mat-icon-button gioTopBarHome>
+            <button mat-icon-button>
               <mat-icon svgIcon="gio:gravitee" (click)="click('apim')"></mat-icon>
             </button>
             <gio-top-bar-content type="apim" productName="API Management"></gio-top-bar-content>
@@ -74,7 +77,7 @@ export const Default: Story = {
             </gio-top-bar-menu>
           </gio-top-bar>
           <gio-top-bar>
-            <button mat-icon-button gioTopBarHome>
+            <button mat-icon-button>
               <mat-icon svgIcon="gio:gravitee" (click)="click('cockpit')"></mat-icon>
             </button>
             <gio-top-bar-content type="cockpit" productName="Cockpit"></gio-top-bar-content>
@@ -90,11 +93,12 @@ export const Default: Story = {
           </gio-top-bar>
         </div>
         `,
-    props: {
-      click: (product: string) => alert('click on ' + product),
-    },
-    styles: [
-      ` 
+      props: {
+        click: (product: string) => alert('click on ' + product),
+        style: computeStyle(args),
+      },
+      styles: [
+        ` 
         #main {
             padding: 16px;
             display: flex;
@@ -115,6 +119,7 @@ export const Default: Story = {
         }
 
         `,
-    ],
-  }),
+      ],
+    };
+  },
 };
