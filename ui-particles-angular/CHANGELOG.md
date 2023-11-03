@@ -1,3 +1,10 @@
+# [7.43.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.42.0...v7.43.0) (2023-11-03)
+
+
+### Features
+
+* **oem:** add oem customization to top bar ([b472ff5](https://github.com/gravitee-io/gravitee-ui-particles/commit/b472ff5ca16ae4ad9fde7db8a6d0692c4a092b73))
+
 # [7.42.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.41.0...v7.42.0) (2023-10-31)
 
 
