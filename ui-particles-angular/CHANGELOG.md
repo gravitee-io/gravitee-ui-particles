@@ -1,3 +1,10 @@
+# [7.44.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.43.0...v7.44.0) (2023-11-06)
+
+
+### Features
+
+* **oem:** remove dark mode option ([446bc1c](https://github.com/gravitee-io/gravitee-ui-particles/commit/446bc1cb4c3ab76405f8d178feac2f2bf692d5c2))
+
 # [7.43.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.42.0...v7.43.0) (2023-11-03)
 
 
