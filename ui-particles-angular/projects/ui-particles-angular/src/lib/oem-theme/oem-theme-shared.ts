@@ -16,9 +16,6 @@
 import { Args } from '@storybook/angular';
 
 const COLOR_ARG_TYPES = {
-  darkMode: {
-    control: 'boolean',
-  },
   menuBackground: {
     control: 'color',
   },
@@ -28,9 +25,8 @@ const COLOR_ARG_TYPES = {
 };
 
 const computeStyle = (args: Args) => {
-  const darkMode = args.darkMode ?? true;
-  const backgroundStyle = computeStyleAndContrastByPrefix('background', args.menuBackground, darkMode);
-  const activeStyle = computeStyleAndContrastByPrefix('active', args.menuActive, darkMode);
+  const backgroundStyle = computeStyleAndContrastByPrefix('background', args.menuBackground);
+  const activeStyle = computeStyleAndContrastByPrefix('active', args.menuActive);
   let subMenu = '';
   // If the menu background is defined, then define the sub-menu color
   if (args.menuBackground) {
@@ -39,12 +35,12 @@ const computeStyle = (args: Args) => {
   return backgroundStyle + activeStyle + subMenu;
 };
 
-const computeStyleAndContrastByPrefix = (prefix: string, color: string, darkMode = true) => {
+const computeStyleAndContrastByPrefix = (prefix: string, color: string) => {
   if (!color) {
     return '';
   }
   const paletteColor = `--gio-oem-palette--${prefix}:${color}; `;
-  const paletteColorContrast = `--gio-oem-palette--${prefix}-contrast:${darkMode ? '#fff' : '#100c27'}; `;
+  const paletteColorContrast = `--gio-oem-palette--${prefix}-contrast: #fff; `;
   return paletteColor + paletteColorContrast;
 };
 

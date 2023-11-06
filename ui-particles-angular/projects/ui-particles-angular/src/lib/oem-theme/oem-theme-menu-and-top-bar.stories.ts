@@ -28,7 +28,7 @@ import { GioTopBarLinkModule, GioTopBarMenuModule, GioTopBarModule } from './gio
 import { COLOR_ARG_TYPES, computeStyle } from './oem-theme-shared';
 
 export default {
-  title: 'OEM Theme',
+  title: 'OEM Theme / Menu + Top Bar',
   component: GioMenuItemComponent,
   decorators: [
     moduleMetadata({
@@ -118,7 +118,6 @@ const gioSubmenuContent = `
 `;
 
 export const Default: Story = {
-  name: 'Menu and Top Bar',
   argTypes: COLOR_ARG_TYPES,
   render: args => {
     return {
