@@ -20,6 +20,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { tap } from 'rxjs/operators';
 import { MatButtonModule } from '@angular/material/button';
+import { HttpClientModule } from '@angular/common/http';
 
 import { FeatureInfo } from '../gio-license.service';
 
@@ -60,7 +61,7 @@ export default {
   decorators: [
     moduleMetadata({
       declarations: [GioLicenseDialogStoryComponent],
-      imports: [GioLicenseDialogModule, MatButtonModule, MatDialogModule, BrowserAnimationsModule],
+      imports: [GioLicenseDialogModule, MatButtonModule, MatDialogModule, BrowserAnimationsModule, HttpClientModule],
     }),
   ],
   argTypes: {

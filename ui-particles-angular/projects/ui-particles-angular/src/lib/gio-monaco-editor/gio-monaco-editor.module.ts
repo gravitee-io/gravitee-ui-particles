@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -23,7 +22,7 @@ import { GioMonacoEditorComponent } from './gio-monaco-editor.component';
 import { GioMonacoEditorConfig, GIO_MONACO_EDITOR_CONFIG } from './models/GioMonacoEditorConfig';
 
 @NgModule({
-  imports: [CommonModule, HttpClientModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   declarations: [GioMonacoEditorComponent, GioMonacoEditorFormFieldDirective],
   exports: [GioMonacoEditorComponent, GioMonacoEditorFormFieldDirective],
   providers: [

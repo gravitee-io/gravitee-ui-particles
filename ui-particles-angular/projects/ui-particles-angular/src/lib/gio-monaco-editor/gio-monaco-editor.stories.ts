@@ -19,6 +19,7 @@ import { action } from '@storybook/addon-actions';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { HttpClientModule } from '@angular/common/http';
 
 import GioJsonSchema from '../gio-form-json-schema/model/GioJsonSchema.json';
 
@@ -30,7 +31,7 @@ export default {
   component: GioMonacoEditorComponent,
   decorators: [
     moduleMetadata({
-      imports: [BrowserAnimationsModule, GioMonacoEditorModule, ReactiveFormsModule, MatFormFieldModule],
+      imports: [BrowserAnimationsModule, HttpClientModule, GioMonacoEditorModule, ReactiveFormsModule, MatFormFieldModule],
     }),
   ],
   parameters: {

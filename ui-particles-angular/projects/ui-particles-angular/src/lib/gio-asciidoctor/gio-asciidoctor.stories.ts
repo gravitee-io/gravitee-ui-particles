@@ -15,6 +15,7 @@
  */
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
+import { HttpClientModule } from '@angular/common/http';
 
 import { GioAsciidoctorComponent } from './gio-asciidoctor.component';
 import { GioAsciidoctorModule } from './gio-asciidoctor.module';
@@ -25,7 +26,7 @@ export default {
   component: GioAsciidoctorComponent,
   decorators: [
     moduleMetadata({
-      imports: [GioAsciidoctorModule],
+      imports: [GioAsciidoctorModule, HttpClientModule],
     }),
   ],
   render: ({ content, src }) => ({
