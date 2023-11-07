@@ -1,3 +1,10 @@
+## [7.45.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.45.0...v7.45.1) (2023-11-07)
+
+
+### Bug Fixes
+
+* remove unnecessary HttpClientModule ([289732d](https://github.com/gravitee-io/gravitee-ui-particles/commit/289732d6d49d942841712825cbe0d58c7cb69b6d))
+
 # [7.45.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.44.0...v7.45.0) (2023-11-07)
 
 
