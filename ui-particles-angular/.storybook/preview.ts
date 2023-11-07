@@ -1,6 +1,7 @@
 // Set material classes to the Storybook body
 import { moduleMetadata } from '@storybook/angular';
 import { GioMatConfigModule } from '../projects/ui-particles-angular/src/lib/gio-mat-config';
+import { HttpClientModule } from '@angular/common/http';
 
 window.document.body?.classList.add('mat-app-background');
 window.document.body?.classList.add('mat-typography');
@@ -31,4 +32,4 @@ export const parameters = {
   },
 };
 
-export const decorators = [moduleMetadata({ imports: [GioMatConfigModule] })];
+export const decorators = [moduleMetadata({ imports: [GioMatConfigModule, HttpClientModule] })];

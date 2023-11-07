@@ -24,6 +24,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { of } from 'rxjs';
 import { MatInputHarness } from '@angular/material/input/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import {
   fakeAllPolicies,
@@ -58,7 +59,7 @@ describe('GioPolicyStudioModule', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, GioPolicyStudioModule, MatIconTestingModule],
+      imports: [NoopAnimationsModule, HttpClientTestingModule, GioPolicyStudioModule, MatIconTestingModule],
     })
       .overrideProvider(InteractivityChecker, {
         useValue: {

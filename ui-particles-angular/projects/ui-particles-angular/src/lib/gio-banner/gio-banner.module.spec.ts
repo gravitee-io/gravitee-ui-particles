@@ -15,6 +15,7 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { GioBannerComponent } from './gio-banner.component';
 import { GioBannerModule } from './gio-banner.module';
@@ -24,7 +25,7 @@ describe('GioBannerComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, GioBannerModule],
+      imports: [NoopAnimationsModule, HttpClientTestingModule, GioBannerModule],
     });
     fixture = TestBed.createComponent(GioBannerComponent);
   });

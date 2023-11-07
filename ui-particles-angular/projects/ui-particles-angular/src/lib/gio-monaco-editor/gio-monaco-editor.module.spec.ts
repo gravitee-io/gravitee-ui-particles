@@ -19,6 +19,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { GioMonacoEditorHarness, ConfigureTestingGioMonacoEditor } from './gio-monaco-editor.harness';
 import { GioMonacoEditorModule } from './gio-monaco-editor.module';
@@ -40,7 +41,7 @@ describe('GioMonacoEditorModule', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      imports: [NoopAnimationsModule, GioMonacoEditorModule, ReactiveFormsModule],
+      imports: [NoopAnimationsModule, HttpClientTestingModule, GioMonacoEditorModule, ReactiveFormsModule],
     });
     ConfigureTestingGioMonacoEditor();
 
