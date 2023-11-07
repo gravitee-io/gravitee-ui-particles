@@ -1,3 +1,10 @@
+# [7.45.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.44.0...v7.45.0) (2023-11-07)
+
+
+### Features
+
+* **oem:** customize light submenu ([dc7cf3e](https://github.com/gravitee-io/gravitee-ui-particles/commit/dc7cf3eb4e13ac366181afddd4046463353b7eb2))
+
 # [7.44.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.43.0...v7.44.0) (2023-11-06)
 
 
