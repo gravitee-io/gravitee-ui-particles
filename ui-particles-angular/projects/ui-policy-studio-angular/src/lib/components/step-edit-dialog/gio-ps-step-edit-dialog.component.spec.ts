@@ -24,6 +24,7 @@ import { InteractivityChecker } from '@angular/cdk/a11y';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { of } from 'rxjs';
 import { MatInputHarness } from '@angular/material/input/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { fakeTestPolicyStep, fakeTestPolicy } from '../../models/index-testing';
 import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
@@ -72,7 +73,7 @@ describe('GioPolicyStudioStepEditDialogComponent', () => {
   const createTestingComponent = (policy: Policy, step: Step) => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      imports: [GioPolicyStudioModule, MatDialogModule, NoopAnimationsModule, MatIconTestingModule],
+      imports: [GioPolicyStudioModule, HttpClientTestingModule, MatDialogModule, NoopAnimationsModule, MatIconTestingModule],
       providers: [
         {
           provide: GioPolicyStudioService,

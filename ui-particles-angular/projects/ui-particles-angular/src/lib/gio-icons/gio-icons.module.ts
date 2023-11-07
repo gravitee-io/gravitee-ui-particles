@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @NgModule({
-  imports: [CommonModule, HttpClientModule, MatIconModule],
+  imports: [CommonModule, MatIconModule],
   exports: [MatIconModule],
 })
 export class GioIconsModule {

@@ -18,13 +18,11 @@ import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { GioLicenseDirective } from './gio-license.directive';
-import { GioLicenseService } from './gio-license.service';
 import { GioLicenseDialogModule } from './gio-license-dialog/gio-license-dialog.module';
 
 @NgModule({
   imports: [CommonModule, MatDialogModule, GioLicenseDialogModule],
   declarations: [GioLicenseDirective],
   exports: [GioLicenseDirective],
-  providers: [GioLicenseService],
 })
 export class GioLicenseModule {}

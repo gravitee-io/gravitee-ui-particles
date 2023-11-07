@@ -21,6 +21,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
 import { MatButtonModule } from '@angular/material/button';
+import { HttpClientModule } from '@angular/common/http';
 
 import { GioBannerModule } from '../gio-banner/gio-banner.module';
 import { GioClipboardModule } from '../gio-clipboard/gio-clipboard.module';
@@ -42,6 +43,7 @@ export default {
         MatInputModule,
         GioBannerModule,
         GioClipboardModule,
+        HttpClientModule,
       ],
       declarations: [SbGetIconsListPipe],
     }),
