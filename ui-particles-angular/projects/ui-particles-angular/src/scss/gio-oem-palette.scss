@@ -30,20 +30,3 @@ $mat-oem-palette: mat.define-palette(
   background,
   background
 );
-
-// palette used for gio-submenu (Organization menu in APIM) and is not customizable for now.
-$mat-oem-palette-light: mat.define-palette(
-  (
-    // mat-accent-palette darker40
-    background: #51438e,
-    // mat-accent-palette default
-    active: #876fec,
-    contrast: (
-      background: #fff,
-      active: #fff,
-    )
-  ),
-  background,
-  background,
-  background
-);
