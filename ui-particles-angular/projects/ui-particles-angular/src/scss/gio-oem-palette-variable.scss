@@ -38,8 +38,8 @@ $oem-top-bar-notification-contrast: var(--gio-oem-palette--active-contrast, map.
 $oem-top-bar-apim-button-background: var(--gio-oem-palette--sub-menu, rgb(0 111 185 / 50%));
 
 // Light
-$oem-light-menu-background: map.get(palette.$mat-oem-palette-light, background);
-$oem-light-menu-selected: map.get(palette.$mat-oem-palette-light, active);
-$oem-light-menu-text: map.get(palette.$mat-oem-palette-light, active-contrast);
-$oem-light-menu-hover: color-mix(in srgb, $oem-light-menu-selected 50%, transparent);
+$oem-light-menu-selected: var(--gio-oem-palette--active, map.get(gio.$mat-accent-palette, default));
+$oem-light-menu-background: color-mix(in srgb, $oem-light-menu-selected 60%, black);
+$oem-light-menu-text: map.get(palette.$mat-oem-palette, active-contrast);
+$oem-light-menu-hover: color-mix(in srgb, $oem-light-menu-selected 80%, black);
 $oem-light-sub-menu-title: color-mix(in srgb, $oem-light-menu-text 70%, black);
