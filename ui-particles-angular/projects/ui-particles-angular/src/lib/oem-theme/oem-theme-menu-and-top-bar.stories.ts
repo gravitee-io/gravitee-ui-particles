@@ -25,7 +25,7 @@ import { GioSubmenuModule } from './gio-submenu';
 import { GioMenuModule } from './gio-menu';
 import { GioMenuItemComponent } from './gio-menu/gio-menu-item/gio-menu-item.component';
 import { GioTopBarLinkModule, GioTopBarMenuModule, GioTopBarModule } from './gio-top-bar';
-import { COLOR_ARG_TYPES, computeStyle } from './oem-theme-shared';
+import { COLOR_ARG_TYPES, computeStylesForStory } from './oem-theme.service';
 
 export default {
   title: 'OEM Theme / Menu + Top Bar',
@@ -146,7 +146,7 @@ export const Default: Story = {
           { value: 'prod', displayValue: '🚀 Prod' },
           { value: 'dev', displayValue: '🧪 Development' },
         ],
-        style: computeStyle(args),
+        style: computeStylesForStory(args),
       },
       styles: [
         ` 
