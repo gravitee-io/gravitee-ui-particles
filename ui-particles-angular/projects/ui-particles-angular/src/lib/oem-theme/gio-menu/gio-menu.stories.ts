@@ -19,7 +19,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { GioSubmenuModule } from '../gio-submenu';
-import { COLOR_ARG_TYPES, computeStyle } from '../oem-theme-shared';
+import { COLOR_ARG_TYPES, computeStylesForStory } from '../oem-theme.service';
 
 import { GioMenuModule } from './gio-menu.module';
 import { GioMenuItemComponent } from './gio-menu-item/gio-menu-item.component';
@@ -75,7 +75,7 @@ export const Default: Story = {
           { value: 'prod', displayValue: '🚀 Prod' },
           { value: 'dev', displayValue: '🧪 Development' },
         ],
-        style: computeStyle(args),
+        style: computeStylesForStory(args),
       },
       styles: [
         ` 
@@ -113,7 +113,7 @@ export const Reduced: Story = {
           { value: 'prod', displayValue: '🚀 Prod' },
           { value: 'dev', displayValue: '🧪 Development' },
         ],
-        style: computeStyle(args),
+        style: computeStylesForStory(args),
       },
       styles: [
         ` 
@@ -148,7 +148,7 @@ export const WithOneItemInSelector: Story = {
         isActive: (target: string) => (route != target ? null : true),
         selectedItemValue: 'onlyOne',
         selectorItems: [{ value: 'onlyOne', displayValue: '🧪 Only Env' }],
-        style: computeStyle(args),
+        style: computeStylesForStory(args),
       },
       styles: [
         ` 
@@ -193,7 +193,7 @@ export const SmallMenu: Story = {
         isActive: (target: string) => (route != target ? null : true),
         selectedItemValue: 'onlyOne',
         selectorItems: [{ value: 'onlyOne', displayValue: '🧪 Only Env' }],
-        style: computeStyle(args),
+        style: computeStylesForStory(args),
       },
       styles: [
         ` 
@@ -259,7 +259,7 @@ export const WithSubMenu: Story = {
         isSubActive: (target: string) => (subRoute != target ? null : true),
         selectedItemValue: 'onlyOne',
         selectorItems: [{ value: 'onlyOne', displayValue: '🧪 Only Env' }],
-        style: computeStyle(args),
+        style: computeStylesForStory(args),
       },
       styles: [
         ` 
@@ -299,7 +299,7 @@ export const ReducedWithSubMenu: Story = {
         isSubActive: (target: string) => (subRoute != target ? null : true),
         selectedItemValue: 'onlyOne',
         selectorItems: [{ value: 'onlyOne', displayValue: '🧪 Only Env' }],
-        style: computeStyle(args),
+        style: computeStylesForStory(args),
       },
       styles: [
         ` 

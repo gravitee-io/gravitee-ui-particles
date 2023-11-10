@@ -19,7 +19,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { GioSubmenuGroupComponent } from '@gravitee/ui-particles-angular';
 
-import { COLOR_ARG_TYPES, computeStyle } from '../oem-theme-shared';
+import { COLOR_ARG_TYPES, computeStylesForStory } from '../oem-theme.service';
 
 import { GioSubmenuModule } from './gio-submenu.module';
 
@@ -74,7 +74,7 @@ export const Default: Story = {
       props: {
         onClick: (target: string) => (route = target),
         isActive: (target: string) => (route != target ? null : true),
-        style: computeStyle(args),
+        style: computeStylesForStory(args),
       },
     };
   },
@@ -117,7 +117,7 @@ export const Light: Story = {
       props: {
         onClick: (target: string) => (route = target),
         isActive: (target: string) => (route != target ? null : true),
-        style: computeStyle(args),
+        style: computeStylesForStory(args),
       },
     };
   },

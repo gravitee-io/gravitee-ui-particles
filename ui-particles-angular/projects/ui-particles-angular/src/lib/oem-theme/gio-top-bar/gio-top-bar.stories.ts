@@ -20,7 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 import { GioIconsModule } from '../../gio-icons/gio-icons.module';
-import { COLOR_ARG_TYPES, computeStyle } from '../oem-theme-shared';
+import { COLOR_ARG_TYPES, computeStylesForStory } from '../oem-theme.service';
 
 import { GioTopBarComponent } from './gio-top-bar.component';
 import { GioTopBarModule } from './gio-top-bar.module';
@@ -95,7 +95,7 @@ export const Default: Story = {
         `,
       props: {
         click: (product: string) => alert('click on ' + product),
-        style: computeStyle(args),
+        style: computeStylesForStory(args),
       },
       styles: [
         ` 
