@@ -1,3 +1,10 @@
+# [7.46.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.45.1...v7.46.0) (2023-11-13)
+
+
+### Features
+
+* expose theme style calculation in a service ([0311ae3](https://github.com/gravitee-io/gravitee-ui-particles/commit/0311ae310e9d634745b723a173c0811578f6e11a))
+
 ## [7.45.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.45.0...v7.45.1) (2023-11-07)
 
 
