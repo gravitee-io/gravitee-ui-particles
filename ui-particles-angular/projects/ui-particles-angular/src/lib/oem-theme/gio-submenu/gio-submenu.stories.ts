@@ -19,7 +19,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { GioSubmenuGroupComponent } from '@gravitee/ui-particles-angular';
 
-import { COLOR_ARG_TYPES, computeStylesForStory } from '../oem-theme.service';
+import { OEM_THEME_ARG_TYPES, computeStylesForStory } from '../oem-theme.service';
 
 import { GioSubmenuModule } from './gio-submenu.module';
 
@@ -38,7 +38,7 @@ export default {
 let route = 'plans';
 
 export const Default: Story = {
-  argTypes: COLOR_ARG_TYPES,
+  argTypes: OEM_THEME_ARG_TYPES,
   render: args => {
     return {
       template: `
@@ -81,7 +81,7 @@ export const Default: Story = {
 };
 
 export const Light: Story = {
-  argTypes: COLOR_ARG_TYPES,
+  argTypes: OEM_THEME_ARG_TYPES,
   render: args => {
     return {
       template: `
