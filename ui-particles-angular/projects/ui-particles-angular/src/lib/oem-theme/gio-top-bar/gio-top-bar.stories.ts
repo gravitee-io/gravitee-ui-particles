@@ -20,7 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 import { GioIconsModule } from '../../gio-icons/gio-icons.module';
-import { COLOR_ARG_TYPES, computeStylesForStory } from '../oem-theme.service';
+import { OEM_THEME_ARG_TYPES, computeStylesForStory } from '../oem-theme.service';
 
 import { GioTopBarComponent } from './gio-top-bar.component';
 import { GioTopBarModule } from './gio-top-bar.module';
@@ -40,7 +40,7 @@ export default {
 } as Meta;
 
 export const Default: Story = {
-  argTypes: COLOR_ARG_TYPES,
+  argTypes: OEM_THEME_ARG_TYPES,
   render: args => {
     return {
       template: `
@@ -81,6 +81,22 @@ export const Default: Story = {
               <mat-icon svgIcon="gio:gravitee" (click)="click('cockpit')"></mat-icon>
             </button>
             <gio-top-bar-content type="cockpit" productName="Cockpit"></gio-top-bar-content>
+            <gio-top-bar-menu>
+              <button mat-icon-button>
+                <mat-icon svgIcon="gio:question-mark-circle"></mat-icon>
+              </button>
+              <button mat-icon-button>
+                <mat-icon svgIcon="gio:bell"></mat-icon>
+              </button>
+              <div class="image"></div>
+            </gio-top-bar-menu>
+          </gio-top-bar>
+          <gio-top-bar>
+            <button mat-icon-button>
+            <img src="${args.logo}" alt="custom logo" style="max-height: 36px; max-width: 36px">
+            </button>
+            <gio-top-bar-content type="apim" productName="API Management"></gio-top-bar-content>
+            <gio-top-bar-link url="#" name="Developers portal"></gio-top-bar-link>
             <gio-top-bar-menu>
               <button mat-icon-button>
                 <mat-icon svgIcon="gio:question-mark-circle"></mat-icon>

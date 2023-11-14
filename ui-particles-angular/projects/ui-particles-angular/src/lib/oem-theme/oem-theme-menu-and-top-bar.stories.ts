@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Args, Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
 import { withDesign } from 'storybook-addon-designs';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,7 +25,7 @@ import { GioSubmenuModule } from './gio-submenu';
 import { GioMenuModule } from './gio-menu';
 import { GioMenuItemComponent } from './gio-menu/gio-menu-item/gio-menu-item.component';
 import { GioTopBarLinkModule, GioTopBarMenuModule, GioTopBarModule } from './gio-top-bar';
-import { COLOR_ARG_TYPES, computeStylesForStory } from './oem-theme.service';
+import { OEM_THEME_ARG_TYPES, computeStylesForStory } from './oem-theme.service';
 
 export default {
   title: 'OEM Theme / Menu + Top Bar',
@@ -51,10 +51,10 @@ export default {
 
 let route = 'apis';
 let subRoute = '';
-const gioTopBarContent = `
+const gioTopBarContent = (args: Args) => `
 <gio-top-bar>
             <button mat-icon-button>
-              <mat-icon svgIcon="gio:gravitee" (click)="click('apim')"></mat-icon>
+                <img src="${args.logo}" alt="custom logo" style="max-height: 36px; max-width: 36px">
             </button>
             <gio-top-bar-content type="apim" productName="API Management"></gio-top-bar-content>
             <gio-top-bar-link url="#" name="Developers portal"></gio-top-bar-link>
@@ -118,12 +118,12 @@ const gioSubmenuContent = `
 `;
 
 export const Default: Story = {
-  argTypes: COLOR_ARG_TYPES,
+  argTypes: OEM_THEME_ARG_TYPES,
   render: args => {
     return {
       template: `
 <div [style]="style">
-        ${gioTopBarContent}
+        ${gioTopBarContent(args)}
     <div id="sidenav" >
         <gio-menu [reduced]="false">
           ${gioMenuContent}

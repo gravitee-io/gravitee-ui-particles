@@ -19,7 +19,7 @@ import { withDesign } from 'storybook-addon-designs';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { GioSubmenuModule } from '../gio-submenu';
-import { COLOR_ARG_TYPES, computeStylesForStory } from '../oem-theme.service';
+import { OEM_THEME_ARG_TYPES, computeStylesForStory } from '../oem-theme.service';
 
 import { GioMenuModule } from './gio-menu.module';
 import { GioMenuItemComponent } from './gio-menu-item/gio-menu-item.component';
@@ -56,7 +56,7 @@ const gioMenuContent = `
             </gio-menu-footer>`;
 
 export const Default: Story = {
-  argTypes: COLOR_ARG_TYPES,
+  argTypes: OEM_THEME_ARG_TYPES,
   render: args => {
     return {
       template: `
@@ -94,7 +94,7 @@ export const Default: Story = {
 };
 
 export const Reduced: Story = {
-  argTypes: COLOR_ARG_TYPES,
+  argTypes: OEM_THEME_ARG_TYPES,
   render: args => {
     return {
       template: `
@@ -132,7 +132,7 @@ export const Reduced: Story = {
 };
 
 export const WithOneItemInSelector: Story = {
-  argTypes: COLOR_ARG_TYPES,
+  argTypes: OEM_THEME_ARG_TYPES,
   render: args => {
     return {
       template: `
@@ -167,7 +167,7 @@ export const WithOneItemInSelector: Story = {
 };
 
 export const SmallMenu: Story = {
-  argTypes: COLOR_ARG_TYPES,
+  argTypes: OEM_THEME_ARG_TYPES,
   render: args => {
     return {
       template: `
@@ -238,7 +238,7 @@ const gioSubmenuContent = `
       <gio-submenu-item tabindex="1" (click)="onClick('audit')" [active]="isActive('audit')" iconRight="gio:lock">Audit</gio-submenu-item>`;
 
 export const WithSubMenu: Story = {
-  argTypes: COLOR_ARG_TYPES,
+  argTypes: OEM_THEME_ARG_TYPES,
   render: args => {
     return {
       template: `
@@ -278,7 +278,7 @@ export const WithSubMenu: Story = {
 };
 
 export const ReducedWithSubMenu: Story = {
-  argTypes: COLOR_ARG_TYPES,
+  argTypes: OEM_THEME_ARG_TYPES,
   render: args => {
     return {
       template: `
