@@ -177,4 +177,29 @@ describe('GioLicenseService', () => {
       'https://url.test:3000/trial?utm_source=oss_utm_source_test&utm_medium=feature_debugmode_v2&utm_campaign=oss_utm_campaign_test&utm_content=organization';
     expect(gioLicenseService.getTrialURL({ feature: 'feature_debugmode_v2', context: 'organization' })).toEqual(expected);
   });
+
+  it('should check if license is OEM', done => {
+    const oemLicense: License = {
+      tier: '',
+      packs: [],
+      features: ['oem-customization'],
+    };
+
+    gioLicenseService
+      .isOEM$()
+      .pipe(
+        tap(isOEM => {
+          expect(isOEM).toEqual(true);
+          done();
+        }),
+      )
+      .subscribe();
+
+    const req = httpTestingController.expectOne({
+      method: 'GET',
+      url: `https://url.test:3000/license`,
+    });
+
+    req.flush(oemLicense);
+  });
 });
