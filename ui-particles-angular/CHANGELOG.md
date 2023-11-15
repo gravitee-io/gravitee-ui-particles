@@ -1,3 +1,10 @@
+# [7.48.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.47.0...v7.48.0) (2023-11-15)
+
+
+### Features
+
+* add isOEM method in license service ([d477fd5](https://github.com/gravitee-io/gravitee-ui-particles/commit/d477fd5612584ceada68fd2da0ff9b22da01a3c1))
+
 # [7.47.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.46.0...v7.47.0) (2023-11-15)
 
 
