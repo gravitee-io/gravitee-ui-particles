@@ -112,6 +112,10 @@ export class GioLicenseService {
     return url;
   }
 
+  public isOEM$(): Observable<boolean> {
+    return this.getLicense$().pipe(map(license => license !== null && license.features.includes('oem-customization')));
+  }
+
   public openDialog(licenseOptions: LicenseOptions, event?: Event) {
     event?.stopPropagation();
     event?.preventDefault();
