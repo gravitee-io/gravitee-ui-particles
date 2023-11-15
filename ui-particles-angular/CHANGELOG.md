@@ -1,3 +1,10 @@
+# [7.47.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.46.0...v7.47.0) (2023-11-15)
+
+
+### Features
+
+* add examples of customized logo in top bar ([38e22b4](https://github.com/gravitee-io/gravitee-ui-particles/commit/38e22b488f5e1a031f3e286753c5092920ba9001))
+
 # [7.46.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.45.1...v7.46.0) (2023-11-13)
 
 
