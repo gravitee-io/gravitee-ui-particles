@@ -31,8 +31,8 @@ export interface LicenseConfiguration {
   resourceURL: string;
   featureInfoData: Record<string, FeatureInfo>;
   trialResourceURL: string;
-  utmSource: string;
-  utmCampaign: string;
+  utmSource?: string;
+  utmCampaign?: string;
 }
 
 export interface UTM {
@@ -105,11 +105,12 @@ export class GioLicenseService {
     if (!licenseOptions.feature) {
       throw new Error(`feature is undefined`);
     }
-    let url = `${this.licenseConfiguration.trialResourceURL}?utm_source=${this.licenseConfiguration.utmSource}&utm_medium=${licenseOptions.feature}&utm_campaign=${this.licenseConfiguration.utmCampaign}`;
-    if (licenseOptions.context) {
-      url += `&utm_content=${licenseOptions.context}`;
-    }
-    return url;
+    const urlParams =
+      this.licenseConfiguration.utmSource || this.licenseConfiguration.utmCampaign
+        ? `?utm_source=${this.licenseConfiguration.utmSource}&utm_medium=${licenseOptions.feature}&utm_campaign=${this.licenseConfiguration.utmCampaign}`
+        : '';
+    const context = urlParams.length > 0 && licenseOptions.context ? `&utm_content=${licenseOptions.context}` : '';
+    return `${this.licenseConfiguration.trialResourceURL}${urlParams}${context}`;
   }
 
   public isOEM$(): Observable<boolean> {

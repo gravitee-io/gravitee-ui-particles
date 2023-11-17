@@ -31,6 +31,17 @@ export const LICENSE_CONFIGURATION_TESTING: LicenseConfiguration = {
     },
   },
 };
+export const OEM_LICENSE_CONFIGURATION_TESTING: LicenseConfiguration = {
+  resourceURL: 'https://oem.test:3000/license',
+  trialResourceURL: 'https://oem.test:3000/trial',
+  featureInfoData: {
+    foobar: {
+      image: 'assets/gio-icons.svg',
+      description: 'Foobar feature description',
+      title: 'FOOBAR',
+    },
+  },
+};
 
 @NgModule({
   imports: [],
