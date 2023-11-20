@@ -1,3 +1,10 @@
+## [7.49.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.49.0...v7.49.1) (2023-11-20)
+
+
+### Bug Fixes
+
+* **gio-menu:** apply color to arrow in Organization select ([87f31a9](https://github.com/gravitee-io/gravitee-ui-particles/commit/87f31a93180ce43d5245dc4754aef24b569bd5f4))
+
 # [7.49.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.48.0...v7.49.0) (2023-11-20)
 
 
