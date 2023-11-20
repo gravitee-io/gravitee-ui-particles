@@ -45,8 +45,4 @@ export class GioMenuSelectorComponent {
   public onSelectionChange($event: MatSelectChange): void {
     this.selectChange.emit($event.value);
   }
-
-  public isDisabled(): boolean {
-    return this.selectorItems.length <= 1;
-  }
 }
