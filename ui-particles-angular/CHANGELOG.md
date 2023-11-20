@@ -1,3 +1,10 @@
+# [7.49.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.48.0...v7.49.0) (2023-11-20)
+
+
+### Features
+
+* make utm parameters optional in CTA URLs ([c059437](https://github.com/gravitee-io/gravitee-ui-particles/commit/c059437959d9b9c8c657d936ad7996effc98ec4e))
+
 # [7.48.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.47.0...v7.48.0) (2023-11-15)
 
 
