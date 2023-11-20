@@ -52,7 +52,7 @@
     }
 
     .gio-menu-selector .mat-form-field .mat-select-arrow {
-      color: oem.$oem-menu-text;
+      color: oem.$oem-menu-text !important;
     }
 
     .gio-menu-selector .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
