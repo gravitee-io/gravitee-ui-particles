@@ -1,3 +1,10 @@
+## [7.49.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.49.1...v7.49.2) (2023-11-21)
+
+
+### Bug Fixes
+
+* **gio-menu:** remove disable state on selector when only one value ([80aa543](https://github.com/gravitee-io/gravitee-ui-particles/commit/80aa5434a4175c45938918b38db94639439852f3))
+
 ## [7.49.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.49.0...v7.49.1) (2023-11-20)
 
 
