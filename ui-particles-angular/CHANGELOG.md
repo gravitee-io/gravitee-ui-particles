@@ -1,3 +1,10 @@
+# [7.50.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.49.2...v7.50.0) (2023-11-22)
+
+
+### Features
+
+* **monaco-editor:** add option to disable minimap ([016104c](https://github.com/gravitee-io/gravitee-ui-particles/commit/016104cfd5956e7c812e4573d0487aa99a8df04a))
+
 ## [7.49.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.49.1...v7.49.2) (2023-11-21)
 
 
