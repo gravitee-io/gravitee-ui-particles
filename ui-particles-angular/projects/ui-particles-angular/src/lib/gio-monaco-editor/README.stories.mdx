@@ -56,11 +56,12 @@ GioMonacoEditorModule.forRoot({
 - `formControl` - form control to bind to. Work with ReactiveFormsModule.
 - `languageConfig`: `object` - language configuration of the editor.
 - `options`: `IStandaloneEditorConstructionOptions` - options of the editor.
+- `disableMiniMap`: `boolean` - option to disable the minimap (mini view of the document displayed on the right)
 
 Example:
 
 ```html
-<gio-monaco-editor [formControl]="control" [languageConfig]="languageConfig"></gio-monaco-editor>
+<gio-monaco-editor [formControl]="control" [languageConfig]="languageConfig" [disableMiniMap]="disbaleMiniMap"></gio-monaco-editor>
 ```
 
 ## Testing
