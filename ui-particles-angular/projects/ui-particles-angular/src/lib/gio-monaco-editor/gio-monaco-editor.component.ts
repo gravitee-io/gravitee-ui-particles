@@ -58,6 +58,9 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
   @Input()
   public options: editor.IStandaloneEditorConstructionOptions = {};
 
+  @Input()
+  public disableMiniMap = false;
+
   public loaded$ = new ReplaySubject<boolean>(1);
 
   private defaultOptions: editor.IStandaloneEditorConstructionOptions = {
@@ -174,6 +177,9 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
       readOnly: this.readOnly,
       theme: this.config.theme ?? 'vs',
       model: this.textModel,
+      minimap: {
+        enabled: !this.disableMiniMap,
+      },
     });
 
     this.standaloneCodeEditor = monaco.editor.create(domElement, {

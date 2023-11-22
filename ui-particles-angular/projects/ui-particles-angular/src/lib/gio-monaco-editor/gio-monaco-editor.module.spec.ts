@@ -20,6 +20,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MonacoEditorLanguageConfig } from '@gravitee/ui-particles-angular';
 
 import { GioMonacoEditorHarness, ConfigureTestingGioMonacoEditor } from './gio-monaco-editor.harness';
 import { GioMonacoEditorModule } from './gio-monaco-editor.module';
@@ -28,7 +29,7 @@ import { GioMonacoEditorModule } from './gio-monaco-editor.module';
   template: `<gio-monaco-editor [formControl]="control" [languageConfig]="languageConfig"></gio-monaco-editor> `,
 })
 class TestComponent {
-  public languageConfig = false;
+  public languageConfig: MonacoEditorLanguageConfig = { language: 'markdown' };
 
   public control = new FormControl('InitialValue');
 }

@@ -49,8 +49,11 @@ export default {
     value: {
       control: { type: 'object' },
     },
+    disableMiniMap: {
+      control: { type: 'boolean' },
+    },
   },
-  render: ({ value, disabled, languageConfig }) => {
+  render: ({ value, disabled, languageConfig, disableMiniMap }) => {
     const control = new FormControl({ value, disabled });
     control.valueChanges.subscribe(value => {
       action('valueChanges')(value);
@@ -60,7 +63,7 @@ export default {
     });
     return {
       template: `
-      <gio-monaco-editor [formControl]="control" [languageConfig]="languageConfig"></gio-monaco-editor>
+      <gio-monaco-editor [formControl]="control" [languageConfig]="languageConfig" [disableMiniMap]="disableMiniMap"></gio-monaco-editor>
       <br>
       <pre>{{ control.status }}</pre>
       <pre>{{ control.dirty ? 'DIRTY' : 'PRISTINE' }}</pre>
@@ -70,6 +73,7 @@ export default {
       props: {
         control,
         languageConfig,
+        disableMiniMap,
       },
     };
   },
@@ -188,5 +192,29 @@ export const LanguageMarkdown: Story = {
 ## Markdown plus h2 with a custom ID ##   {#id-goes-here}
 [Link back to H2](#id-goes-here)
 `,
+    disableMiniMap: true,
+  },
+};
+
+export const DisableMiniMap: Story = {
+  args: {
+    languageConfig: {
+      language: 'json',
+      schemas: [
+        {
+          uri: 'http://myserver/foo-schema.json',
+          schema: GioJsonSchema,
+        },
+      ],
+    },
+    value: `{
+  "type": "object",
+  "properties": {
+    "firstName": {
+      "type": "string"
+    },
+  },
+    }`,
+    disableMiniMap: true,
   },
 };
