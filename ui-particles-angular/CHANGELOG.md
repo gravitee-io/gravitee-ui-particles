@@ -1,3 +1,10 @@
+# [7.51.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.50.0...v7.51.0) (2023-12-11)
+
+
+### Features
+
+* improve content part for dialogs ([8be9b1a](https://github.com/gravitee-io/gravitee-ui-particles/commit/8be9b1a32bafe77445e197025b9d11c15ceec37f))
+
 # [7.50.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.49.2...v7.50.0) (2023-11-22)
 
 
