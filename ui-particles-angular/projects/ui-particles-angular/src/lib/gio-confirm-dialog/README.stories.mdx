@@ -14,7 +14,7 @@ Documentation and examples for Confirm dialog, a component to asking for confirm
 
 **Inputs**
  - `title`: `string` - The dialog title.
- - `content`: `string` - The dialog content override.
+ - `content`: `string` | `{ componentOutlet: Type<unknown>; componentInputs?: Record<string, unknown>; }` - The dialog content override.
  - `confirmButton`: `string` - The dialog confirmation button override.
  - `confirmCancel`: `string` - The dialog cancel button override.
 
@@ -34,10 +34,43 @@ this.matDialog
     id: 'confirmDialog',
   })
   .afterClosed()
-  .pipe(
-    tap(confirmed => {
-      action('confirmed?')(confirmed);
-    }),
-  )
+  .pipe(...)
+  .subscribe((confirmed => {});
+```
+
+Example with content component:
+
+```typescript
+@Component({ selector: 'dynamic-comp', template: `<div>{{ title }}</div>` })
+export class DynamicContentComponent {
+
+  title: string;
+
+  constructor(@Inject('contentComponentInputs') contentComponentInputs: { title: string }) {
+      this.title = contentComponentInputs.title;
+  }
+}
+```
+
+```typescript
+
+this.matDialog
+  .open<GioConfirmDialogComponent, GioConfirmDialogData, boolean>(GioConfirmDialogComponent, {
+    data: {
+      title: 'title override',
+      content: {
+        componentOutlet: DynamicContentComponent,
+        componentInputs: {
+            title: 'Dynamic component title'
+        },
+      },
+      confirmButton: 'confirmButton override',
+      cancelButton: 'cancelButton override',
+    },
+    role: 'alertdialog',
+    id: 'confirmDialog',
+  })
+  .afterClosed()
+  .pipe(...)
   .subscribe((confirmed => {});
 ```

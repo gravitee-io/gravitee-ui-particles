@@ -16,7 +16,7 @@ Documentation and examples for Confirm and Validate dialog, a component to askin
 
 - `title`: `string` - The dialog title.
 - `warning`: `string` - Add this string into warning banner
-- `content`: `string` - The dialog content override.
+- `content`: `string` | `{ componentOutlet: Type<unknown>; componentInputs?: Record<string, unknown>; }` - The dialog content override.
 - `validationMessage`: `string` - The action to do to validate. Default: `Please, type in <code>confirm</code> to confirm.`
 - `validationValue`: `string` - The dialog content override. Default: `confirm`
 - `confirmButton`: `string` - The dialog confirmation button override.
@@ -41,10 +41,45 @@ this.matDialog
     id: 'confirmDialog',
   })
   .afterClosed()
-  .pipe(
-    tap(confirmed => {
-      action('confirmed?')(confirmed);
-    }),
-  )
+  .pipe(...)
+  .subscribe((confirmed => {});
+```
+
+Example with content component:
+
+```typescript
+@Component({ selector: 'dynamic-comp', template: `<div>{{ title }}</div>` })
+export class DynamicContentComponent {
+
+  title: string;
+
+  constructor(@Inject('contentComponentInputs') contentComponentInputs: { title: string }) {
+      this.title = contentComponentInputs.title;
+  }
+}
+```
+
+```typescript
+this.matDialog
+  .open<GioConfirmAndValidateDialogComponent, GioConfirmAndValidateDialogData, boolean>(GioConfirmAndValidateDialogComponent, {
+    data: {
+      title: 'title override',
+      warning: 'warning override',
+     content: {
+        componentOutlet: DynamicContentComponent,
+        componentInputs: {
+            title: 'Dynamic component title'
+        },
+      },
+      validationMessage: 'validationMessage override',
+      validationValue: 'validationValue override',
+      confirmButton: 'confirmButton override',
+      cancelButton: 'cancelButton override',
+    },
+    role: 'alertdialog',
+    id: 'confirmDialog',
+  })
+  .afterClosed()
+  .pipe(...)
   .subscribe((confirmed => {});
 ```

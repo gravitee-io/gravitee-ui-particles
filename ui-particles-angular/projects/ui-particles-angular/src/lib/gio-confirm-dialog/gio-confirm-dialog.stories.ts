@@ -14,48 +14,12 @@
  * limitations under the License.
  */
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { Component, Input } from '@angular/core';
-import { tap } from 'rxjs/operators';
-import { action } from '@storybook/addon-actions';
 
+import { ConfirmDialogStoryComponent, ConfirmContentDialogStoryComponent } from './gio-confirm-dialog.stories.component';
 import { GioConfirmDialogComponent, GioConfirmDialogData } from './gio-confirm-dialog.component';
 import { GioConfirmDialogModule } from './gio-confirm-dialog.module';
-
-@Component({
-  selector: 'gio-confirm-dialog-story',
-  template: `<button id="open-confirm-dialog" (click)="openConfirmDialog()">Open confirm dialog</button>`,
-})
-class ConfirmDialogStoryComponent {
-  @Input() public title?: string;
-  @Input() public content?: string;
-  @Input() public confirmButton?: string;
-  @Input() public cancelButton?: string;
-
-  constructor(private readonly matDialog: MatDialog) {}
-
-  public openConfirmDialog() {
-    this.matDialog
-      .open<GioConfirmDialogComponent, GioConfirmDialogData, boolean>(GioConfirmDialogComponent, {
-        data: {
-          title: this.title,
-          content: this.content,
-          confirmButton: this.confirmButton,
-          cancelButton: this.cancelButton,
-        },
-        role: 'alertdialog',
-        id: 'confirmDialog',
-      })
-      .afterClosed()
-      .pipe(
-        tap(confirmed => {
-          action('confirmed?')(confirmed);
-        }),
-      )
-      .subscribe();
-  }
-}
 
 export default {
   title: 'Components / Confirm dialog',
@@ -85,7 +49,7 @@ export default {
     props: { ...args },
   }),
   parameters: {
-    chromatic: { delay: 1000 },
+    chromatic: { delay: 2000 },
   },
 } as Meta;
 
@@ -105,6 +69,24 @@ export const Custom: StoryObj<GioConfirmDialogData> = {
 Custom.args = {
   title: 'Are you sure you want to remove all cats ?',
   content: '🙀😿 Are you sure? You can’t undo this action afterwards.',
+  confirmButton: 'Yes, I want',
+  cancelButton: 'Nope',
+};
+
+export const CustomContentComponent: StoryObj<GioConfirmDialogData> = {
+  play: context => {
+    const button = context.canvasElement.querySelector('#open-confirm-dialog') as HTMLButtonElement;
+    button.click();
+  },
+};
+CustomContentComponent.args = {
+  title: 'Are you sure you want to remove all cats?',
+  content: {
+    componentOutlet: ConfirmContentDialogStoryComponent,
+    componentInputs: {
+      title: 'ARE YOU SURE? YOU CAN’T UNDO THIS ACTION AFTERWARDS.',
+    },
+  },
   confirmButton: 'Yes, I want',
   cancelButton: 'Nope',
 };
