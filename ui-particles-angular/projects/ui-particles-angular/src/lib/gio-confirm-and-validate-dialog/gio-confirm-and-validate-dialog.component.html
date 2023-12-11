@@ -20,6 +20,11 @@
 <mat-dialog-content class="confirm-dialog__body">
   <gio-banner-warning *ngIf="warning"><span [innerHTML]="warning"></span></gio-banner-warning>
   <p class="confirm-dialog__body__content" *ngIf="content" [innerHTML]="content"></p>
+
+  <div class="confirm-dialog__body__content" *ngIf="contentComponentOutlet">
+    <ng-container *ngComponentOutlet="contentComponentOutlet; injector: contentComponentInjector"></ng-container>
+  </div>
+
   <p class="confirm-dialog__body__validate-message" [innerHTML]="validationMessage"></p>
   <mat-form-field class="confirm-dialog__body__validate-input" appearance="outline" floatLabel="always">
     <mat-label>Confirm</mat-label>

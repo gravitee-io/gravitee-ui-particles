@@ -21,6 +21,10 @@
   <p [innerHTML]="content"></p>
 </mat-dialog-content>
 
+<mat-dialog-content *ngIf="contentComponentOutlet" class="confirm-dialog__content">
+  <ng-container *ngComponentOutlet="contentComponentOutlet; injector: contentComponentInjector"></ng-container>
+</mat-dialog-content>
+
 <mat-dialog-actions align="end" class="confirm-dialog__actions">
   <button class="confirm-dialog__cancel-button" mat-flat-button [mat-dialog-close]="false">
     {{ cancelButton }}

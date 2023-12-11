@@ -13,14 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Injector, Type } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { toLower } from 'lodash';
+import { isObject, isString, toLower } from 'lodash';
 
 export type GioConfirmAndValidateDialogData = {
   title?: string;
   warning?: string;
-  content?: string;
+  content?:
+    | string
+    | {
+        componentOutlet: Type<unknown>;
+        componentInputs?: Record<string, unknown>;
+      };
   validationMessage?: string;
   validationValue?: string;
   confirmButton?: string;
@@ -36,6 +41,9 @@ export class GioConfirmAndValidateDialogComponent {
   public title: string;
   public warning?: string;
   public content?: string;
+  public contentComponentOutlet?: Type<unknown>;
+  public contentComponentInputs?: Record<string, unknown>;
+  public contentComponentInjector: Injector;
   public validationMessage?: string;
   public validationValue: string;
   public confirmButton: string;
@@ -47,10 +55,23 @@ export class GioConfirmAndValidateDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<GioConfirmAndValidateDialogComponent>,
     @Inject(MAT_DIALOG_DATA) confirmDialogData: GioConfirmAndValidateDialogData,
+    private readonly parentInjector: Injector,
   ) {
     this.title = confirmDialogData?.title ?? 'Are you sure?';
     this.warning = confirmDialogData?.warning;
-    this.content = confirmDialogData?.content;
+    this.contentComponentInjector = parentInjector;
+
+    if (isString(confirmDialogData?.content)) {
+      this.content = confirmDialogData?.content as string;
+    } else if (isObject(confirmDialogData?.content)) {
+      this.contentComponentOutlet = confirmDialogData?.content.componentOutlet;
+      // TODO: When Angular 16 ready use ngComponentOutletInputs
+      this.contentComponentInjector = Injector.create({
+        providers: [{ provide: 'contentComponentInputs', useValue: confirmDialogData?.content.componentInputs }],
+        parent: parentInjector,
+      });
+    }
+
     this.validationMessage = extendValidationMessage(
       confirmDialogData?.validationMessage ?? 'Please, type <code>confirm</code> to confirm.',
     );
