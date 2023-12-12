@@ -68,7 +68,7 @@ export class GioPolicyStudioFlowProxyFormDialogHarness extends ComponentHarness 
     if (flow.methods) {
       const methodsInput = await this.methodsInput();
       await methodsInput.removeTag('ALL');
-      for await (const method of flow.methods) {
+      for (const method of flow.methods) {
         await methodsInput.addTag(method);
       }
     }
