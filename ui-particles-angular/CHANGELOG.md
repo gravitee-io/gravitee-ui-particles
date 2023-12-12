@@ -1,3 +1,10 @@
+## [7.51.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.51.0...v7.51.1) (2023-12-12)
+
+
+### Bug Fixes
+
+* remove `for await` use parallel instead ([b23b3ae](https://github.com/gravitee-io/gravitee-ui-particles/commit/b23b3ae360dec708ad0e25136b752da30e80fa74))
+
 # [7.51.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.50.0...v7.51.0) (2023-12-11)
 
 
