@@ -15,7 +15,7 @@
  */
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { cloneDeep } from 'lodash';
 
 import { FlowExecution } from '../../models';
@@ -30,7 +30,7 @@ export type GioPolicyStudioFlowExecutionFormDialogData = {
   styleUrls: ['./gio-ps-flow-execution-form-dialog.component.scss'],
 })
 export class GioPolicyStudioFlowExecutionFormDialogComponent {
-  public flowExecutionFormGroup?: FormGroup;
+  public flowExecutionFormGroup?: UntypedFormGroup;
 
   public existingFlowExecution?: FlowExecution;
 
@@ -40,9 +40,9 @@ export class GioPolicyStudioFlowExecutionFormDialogComponent {
   ) {
     this.existingFlowExecution = cloneDeep(flowDialogData?.flowExecution);
 
-    this.flowExecutionFormGroup = new FormGroup({
-      mode: new FormControl(flowDialogData?.flowExecution?.mode ?? 'DEFAULT'),
-      matchRequired: new FormControl(flowDialogData?.flowExecution?.matchRequired ?? false),
+    this.flowExecutionFormGroup = new UntypedFormGroup({
+      mode: new UntypedFormControl(flowDialogData?.flowExecution?.mode ?? 'DEFAULT'),
+      matchRequired: new UntypedFormControl(flowDialogData?.flowExecution?.matchRequired ?? false),
     });
   }
 

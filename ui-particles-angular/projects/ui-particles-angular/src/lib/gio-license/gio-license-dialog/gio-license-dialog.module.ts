@@ -27,6 +27,5 @@ import { GioLicenseDialogComponent } from './gio-license-dialog.component';
   imports: [CommonModule, MatDialogModule, GioIconsModule, MatButtonModule, GioSafePipeModule],
   declarations: [GioLicenseDialogComponent],
   exports: [GioLicenseDialogComponent],
-  entryComponents: [GioLicenseDialogComponent],
 })
 export class GioLicenseDialogModule {}

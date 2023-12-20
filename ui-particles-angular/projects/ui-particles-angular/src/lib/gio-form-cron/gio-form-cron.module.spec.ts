@@ -17,7 +17,7 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { GioFormCronHarness } from './gio-form-cron.harness';
@@ -28,7 +28,7 @@ describe('GioFormCronModule', () => {
     template: ` <gio-form-cron [formControl]="testControl"></gio-form-cron> `,
   })
   class TestComponent {
-    public testControl = new FormControl(null);
+    public testControl = new UntypedFormControl(null);
   }
 
   let component: TestComponent;

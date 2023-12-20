@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { FormlyFormOptions } from '@ngx-formly/core';
 import { combineLatest, Subject } from 'rxjs';
 import { debounceTime, startWith, takeUntil, tap } from 'rxjs/operators';
 import Ajv from 'ajv';
+import { CommonModule } from '@angular/common';
 
 import GioJsonSchema from './model/GioJsonSchema.json';
 import { FormlyJSONSchema7 } from './model/FormlyJSONSchema7';
@@ -28,6 +29,7 @@ const ajv = new Ajv({ strict: false, logger: false });
   selector: 'gio-demo',
   templateUrl: './gio-form-json-schema.stories.component.html',
   styleUrls: ['./gio-form-json-schema.stories.component.scss'],
+  imports: [CommonModule],
 })
 export class DemoComponent implements OnChanges, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>();
@@ -47,14 +49,14 @@ export class DemoComponent implements OnChanges, OnDestroy {
   @Input()
   public withToggle = false;
 
-  public form?: FormGroup;
+  public form?: UntypedFormGroup;
   public options: FormlyFormOptions = {};
   public formValue: unknown;
   public formValueError?: string;
   public formValueErrorNumber?: number;
 
-  public inputValueControl?: FormControl;
-  public jsonSchemaControl?: FormControl;
+  public inputValueControl?: UntypedFormControl;
+  public jsonSchemaControl?: UntypedFormControl;
 
   public monacoEditorJsonSchemaLanguage = {
     language: 'json',
@@ -76,8 +78,8 @@ export class DemoComponent implements OnChanges, OnDestroy {
   constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
   public ngOnChanges(): void {
-    this.jsonSchemaControl = new FormControl(JSON.stringify(this.jsonSchema, null, 2));
-    this.inputValueControl = new FormControl(JSON.stringify(this.initialValue, null, 2));
+    this.jsonSchemaControl = new UntypedFormControl(JSON.stringify(this.jsonSchema, null, 2));
+    this.inputValueControl = new UntypedFormControl(JSON.stringify(this.initialValue, null, 2));
 
     combineLatest([
       this.jsonSchemaControl.valueChanges.pipe(startWith(this.jsonSchemaControl.value)),
@@ -112,8 +114,8 @@ export class DemoComponent implements OnChanges, OnDestroy {
   }
 
   private resetUiPreview() {
-    this.form = new FormGroup({
-      schemaValue: new FormControl({
+    this.form = new UntypedFormGroup({
+      schemaValue: new UntypedFormControl({
         value: this.initialValue,
         disabled: this.disabled ?? false,
       }),

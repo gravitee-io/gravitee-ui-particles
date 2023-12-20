@@ -17,7 +17,7 @@ import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
 import { action } from '@storybook/addon-actions';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import GioJsonSchema from '../gio-form-json-schema/model/GioJsonSchema.json';
@@ -54,7 +54,7 @@ export default {
     },
   },
   render: ({ value, disabled, languageConfig, disableMiniMap }) => {
-    const control = new FormControl({ value, disabled });
+    const control = new UntypedFormControl({ value, disabled });
     control.valueChanges.subscribe(value => {
       action('valueChanges')(value);
     });
@@ -118,7 +118,7 @@ export const WithValue: Story = {
 
 export const InsideMatFormField: Story = {
   render: ({ value, disabled, languageConfig }) => {
-    const control = new FormControl({ value, disabled }, Validators.required);
+    const control = new UntypedFormControl({ value, disabled }, Validators.required);
     control.valueChanges.subscribe(value => {
       action('valueChanges')(value);
     });
@@ -150,14 +150,14 @@ export const InsideMatFormField: Story = {
 
 export const formControlName: Story = {
   render: ({ value, disabled, languageConfig }) => {
-    const control = new FormControl({ value, disabled }, Validators.required);
+    const control = new UntypedFormControl({ value, disabled }, Validators.required);
     control.valueChanges.subscribe(value => {
       action('valueChanges')(value);
     });
     control.statusChanges.subscribe(status => {
       action('statusChanges')(status);
     });
-    const from = new FormGroup({ control });
+    const from = new UntypedFormGroup({ control });
 
     return {
       template: `

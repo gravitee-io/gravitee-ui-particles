@@ -275,15 +275,15 @@ describe('GioFormTagsInputModule - Dynamic input', () => {
 
   it('should display value if tag not found', async () => {
     const formTagsInputHarness = await loader.getHarness(GioFormTagsInputHarness);
+    fixture.detectChanges();
     expect(await formTagsInputHarness.getTags()).toEqual([]);
 
     const matAutocomplete = await formTagsInputHarness.getMatAutocompleteHarness();
 
     await matAutocomplete?.enterText('The A3');
-    const options = await matAutocomplete?.getOptions();
-    if (options?.length !== 0) {
-      throw new Error('Should be equal to 0');
-    }
+    // Not open because no options
+    expect(await matAutocomplete?.isOpen()).toBe(false);
+
     // Click somewhere else in the component to close the autocomplete without selecting an option
     await matAutocomplete?.blur();
 
@@ -300,10 +300,8 @@ describe('GioFormTagsInputModule - Dynamic input', () => {
 
     const matAutocomplete = await formTagsInputHarness.getMatAutocompleteHarness();
     await matAutocomplete?.enterText('The A3');
-    const options = await matAutocomplete?.getOptions();
-    if (options?.length !== 0) {
-      throw new Error('Should be equal to 0');
-    }
+    // Not open because no options
+    expect(await matAutocomplete?.isOpen()).toBe(false);
     // Click somewhere else in the component to close the autocomplete without selecting an option
     await matAutocomplete?.blur();
 

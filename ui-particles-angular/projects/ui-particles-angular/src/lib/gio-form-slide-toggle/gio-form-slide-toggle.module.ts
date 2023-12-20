@@ -23,6 +23,5 @@ import { GioFormSlideToggleComponent } from './gio-form-slide-toggle.component';
   imports: [CommonModule],
   declarations: [GioFormSlideToggleComponent, GioFormLabelComponent, GioFormPrefixDirective, GioFormSlideToggleDirective],
   exports: [GioFormSlideToggleComponent, GioFormLabelComponent, GioFormPrefixDirective, GioFormSlideToggleDirective],
-  entryComponents: [GioFormSlideToggleComponent],
 })
 export class GioFormSlideToggleModule {}

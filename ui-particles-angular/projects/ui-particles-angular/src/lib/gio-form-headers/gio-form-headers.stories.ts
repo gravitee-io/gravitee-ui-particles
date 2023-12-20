@@ -17,7 +17,7 @@ import { Meta, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { GioFormHeadersComponent } from './gio-form-headers.component';
 import { GioFormHeadersModule } from './gio-form-headers.module';
@@ -63,7 +63,7 @@ export const Filled: Story = {
 
 export const ReactiveForm: Story = {
   render: args => {
-    const headersControl = new FormControl({
+    const headersControl = new UntypedFormControl({
       value: args.headers,
       disabled: args.disabled,
     });
@@ -100,7 +100,7 @@ export const ReactiveForm: Story = {
 
 export const ReactiveFormDisabled: Story = {
   render: args => {
-    const headersControl = new FormControl({
+    const headersControl = new UntypedFormControl({
       value: args.headers,
       disabled: args.disabled,
     });

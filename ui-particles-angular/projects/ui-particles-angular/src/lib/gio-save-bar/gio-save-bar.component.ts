@@ -15,7 +15,7 @@
  */
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { timer } from 'rxjs';
 
 @Component({
@@ -57,7 +57,7 @@ export class GioSaveBarComponent {
   public creationMode = false;
 
   @Input()
-  public form?: FormGroup;
+  public form?: UntypedFormGroup;
 
   private hasSubmitLock = true;
 

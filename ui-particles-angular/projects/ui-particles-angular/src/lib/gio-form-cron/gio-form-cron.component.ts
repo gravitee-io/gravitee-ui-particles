@@ -19,8 +19,8 @@ import { Component, ElementRef, HostBinding, NgZone, OnDestroy, OnInit, forwardR
 import {
   AbstractControl,
   ControlValueAccessor,
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
@@ -59,7 +59,7 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
   public hours = [...range(0, 24)];
   public daysOfMonth = [...range(1, 32)];
   public daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  public internalFormGroup?: FormGroup;
+  public internalFormGroup?: UntypedFormGroup;
   public value?: string;
   public expressionDescription?: string;
   @HostBinding('class.disabled')
@@ -95,18 +95,18 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
       this.resizeObserver.observe(this.elRef.nativeElement);
     }
 
-    this.internalFormGroup = new FormGroup({
-      mode: new FormControl(),
-      secondInterval: new FormControl(),
-      minuteInterval: new FormControl(),
-      hourInterval: new FormControl(),
-      dayInterval: new FormControl(),
-      dayOfWeek: new FormControl(),
-      dayOfMonth: new FormControl(),
+    this.internalFormGroup = new UntypedFormGroup({
+      mode: new UntypedFormControl(),
+      secondInterval: new UntypedFormControl(),
+      minuteInterval: new UntypedFormControl(),
+      hourInterval: new UntypedFormControl(),
+      dayInterval: new UntypedFormControl(),
+      dayOfWeek: new UntypedFormControl(),
+      dayOfMonth: new UntypedFormControl(),
 
-      hours: new FormControl(),
-      minutes: new FormControl(),
-      customExpression: new FormControl(),
+      hours: new UntypedFormControl(),
+      minutes: new UntypedFormControl(),
+      customExpression: new UntypedFormControl(),
     });
 
     this.isDisabled ? this.internalFormGroup.disable({ emitEvent: false }) : this.internalFormGroup.enable({ emitEvent: false });

@@ -19,9 +19,9 @@ import { Component, ElementRef, forwardRef, HostBinding, Input, OnInit } from '@
 import {
   AbstractControl,
   ControlValueAccessor,
-  FormArray,
-  FormControl,
-  FormGroup,
+  UntypedFormArray,
+  UntypedFormControl,
+  UntypedFormGroup,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
@@ -137,11 +137,11 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor, Va
     valueName: 'value',
   };
 
-  public mainForm: FormGroup;
-  public headersFormArray = new FormArray([
-    new FormGroup({
-      key: new FormControl('', Validators.pattern('^\\S*$')),
-      value: new FormControl(''),
+  public mainForm: UntypedFormGroup;
+  public headersFormArray = new UntypedFormArray([
+    new UntypedFormGroup({
+      key: new UntypedFormControl('', Validators.pattern('^\\S*$')),
+      value: new UntypedFormControl(''),
     }),
   ]);
 
@@ -157,7 +157,7 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor, Va
   private filteredHeaderNames: Observable<string[]>[] = [];
 
   constructor(private readonly fm: FocusMonitor, private readonly elRef: ElementRef) {
-    this.mainForm = new FormGroup({
+    this.mainForm = new UntypedFormGroup({
       headers: this.headersFormArray,
     });
   }
@@ -242,9 +242,9 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor, Va
     // Populate headers array from headers
     this.headers.forEach(({ key, value }, headerIndex) => {
       this.headersFormArray.push(
-        new FormGroup({
+        new UntypedFormGroup({
           key: this.initKeyFormControl(key, headerIndex),
-          value: new FormControl({ value, disabled: this.disabled }),
+          value: new UntypedFormControl({ value, disabled: this.disabled }),
         }),
         {
           emitEvent: false,
@@ -276,7 +276,7 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor, Va
   }
 
   private initKeyFormControl(key: string, headerIndex: number) {
-    const control = new FormControl({ value: key, disabled: this.disabled }, Validators.pattern('^\\S*$'));
+    const control = new UntypedFormControl({ value: key, disabled: this.disabled }, Validators.pattern('^\\S*$'));
     const filteredKeys = control.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value)),
@@ -296,9 +296,9 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor, Va
     }
 
     this.headersFormArray.push(
-      new FormGroup({
+      new UntypedFormGroup({
         key: this.initKeyFormControl('', this.headersFormArray.length),
-        value: new FormControl(''),
+        value: new UntypedFormControl(''),
       }),
       { emitEvent: false },
     );

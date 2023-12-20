@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { map, takeUntil } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { GioFormJsonSchemaComponent, GioJsonSchema } from '@gravitee/ui-particles-angular';
@@ -44,7 +44,7 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
   public policySchema$?: Observable<GioJsonSchema | null | undefined>;
   public policyDocumentation$?: Observable<string>;
 
-  public stepForm?: FormGroup;
+  public stepForm?: UntypedFormGroup;
 
   private unsubscribe$ = new Subject<void>();
   constructor(private readonly policyStudioService: GioPolicyStudioService) {}
@@ -76,10 +76,10 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
   }
 
   private initStepForm(): void {
-    this.stepForm = new FormGroup({
-      description: new FormControl(this.step?.description),
-      condition: new FormControl(this.step?.condition),
-      configuration: new FormControl(this.step?.configuration ?? {}),
+    this.stepForm = new UntypedFormGroup({
+      description: new UntypedFormControl(this.step?.description),
+      condition: new UntypedFormControl(this.step?.condition),
+      configuration: new UntypedFormControl(this.step?.configuration ?? {}),
     });
 
     this.stepForm.valueChanges.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {

@@ -18,7 +18,7 @@ import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
 import { action } from '@storybook/addon-actions';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { range } from 'lodash';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
@@ -128,7 +128,7 @@ export const Disabled: Story = {
 
 export const FormControlEmpty: Story = {
   render: ({ tags, placeholder, required, disabled, tagValidationHook }) => {
-    const tagsControl = new FormControl({ value: tags, disabled });
+    const tagsControl = new UntypedFormControl({ value: tags, disabled });
 
     tagsControl.valueChanges.subscribe(value => {
       action('Tags')(value);
@@ -187,7 +187,7 @@ export const WithTagValidationHook: Story = {
 
 export const WithAutocomplete: Story = {
   render: ({ tags, placeholder, required, disabled }) => {
-    const tagsControl = new FormControl({ value: tags, disabled });
+    const tagsControl = new UntypedFormControl({ value: tags, disabled });
 
     tagsControl.valueChanges.subscribe(value => {
       action('Tags')(value);
@@ -225,7 +225,7 @@ export const WithAutocomplete: Story = {
 const httpMethods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS', 'TRACE', 'CONNECT'];
 export const WithAutocompleteOnly: Story = {
   render: ({ tags, placeholder, required, disabled, tagValidationHook, autocompleteOptions }) => {
-    const tagsControl = new FormControl({ value: tags, disabled });
+    const tagsControl = new UntypedFormControl({ value: tags, disabled });
 
     tagsControl.valueChanges.subscribe(value => {
       action('Tags')(value);
@@ -279,7 +279,7 @@ const applications = range(10).map(i => ({
 
 export const WithAsyncAutocompleteOnly: Story = {
   render: ({ tags, placeholder, required, disabled, autocompleteOptions, displayValueWith, useAutocompleteOptionValueOnly }) => {
-    const tagsControl = new FormControl({ value: tags, disabled });
+    const tagsControl = new UntypedFormControl({ value: tags, disabled });
 
     tagsControl.valueChanges.subscribe(value => {
       action('Tags')(value);

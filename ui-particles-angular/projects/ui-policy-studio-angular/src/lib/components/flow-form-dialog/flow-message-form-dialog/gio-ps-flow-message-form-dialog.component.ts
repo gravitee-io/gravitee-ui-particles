@@ -15,7 +15,7 @@
  */
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { cloneDeep, uniqueId } from 'lodash';
 
 import { FlowVM } from '../../../gio-policy-studio.model';
@@ -34,7 +34,7 @@ export type GioPolicyStudioFlowMessageFormDialogData = {
 })
 export class GioPolicyStudioFlowMessageFormDialogComponent {
   public entrypoints: ConnectorInfo[] = [];
-  public flowFormGroup?: FormGroup;
+  public flowFormGroup?: UntypedFormGroup;
 
   public existingFlow?: FlowVM;
   public mode: 'create' | 'edit' = 'create';
@@ -51,13 +51,13 @@ export class GioPolicyStudioFlowMessageFormDialogComponent {
     const channelSelector = flowDialogData?.flow?.selectors?.find(s => s.type === 'CHANNEL') as ChannelSelector;
     const conditionSelector = flowDialogData?.flow?.selectors?.find(s => s.type === 'CONDITION') as ConditionSelector;
 
-    this.flowFormGroup = new FormGroup({
-      name: new FormControl(flowDialogData?.flow?.name ?? ''),
-      channelOperator: new FormControl(channelSelector?.channelOperator ?? 'EQUALS'),
-      channel: new FormControl(channelSelector?.channel ?? ''),
-      operations: new FormControl(channelSelector?.operations ?? []),
-      entrypoints: new FormControl(channelSelector?.entrypoints ?? []),
-      condition: new FormControl(conditionSelector?.condition ?? ''),
+    this.flowFormGroup = new UntypedFormGroup({
+      name: new UntypedFormControl(flowDialogData?.flow?.name ?? ''),
+      channelOperator: new UntypedFormControl(channelSelector?.channelOperator ?? 'EQUALS'),
+      channel: new UntypedFormControl(channelSelector?.channel ?? ''),
+      operations: new UntypedFormControl(channelSelector?.operations ?? []),
+      entrypoints: new UntypedFormControl(channelSelector?.entrypoints ?? []),
+      condition: new UntypedFormControl(conditionSelector?.condition ?? ''),
     });
   }
 

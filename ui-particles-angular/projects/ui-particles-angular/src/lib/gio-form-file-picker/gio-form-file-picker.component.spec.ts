@@ -17,7 +17,7 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { Component } from '@angular/core';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UntypedFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 
 import { GioFormFilePickerInputHarness } from './gio-form-file-picker.component.harness';
@@ -47,7 +47,7 @@ export class TestFilePickerInputComponent {
   public multiple = false;
   public accept = '*';
   public ngModelChange: () => void = () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
-  public myForm = new FormBuilder().group({
+  public myForm = new UntypedFormBuilder().group({
     file: [],
     fileRequired: [undefined, Validators.required],
   });
