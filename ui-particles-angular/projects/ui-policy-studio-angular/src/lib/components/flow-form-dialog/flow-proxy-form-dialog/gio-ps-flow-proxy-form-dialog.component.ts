@@ -15,7 +15,7 @@
  */
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { cloneDeep, uniqueId } from 'lodash';
 
 import { FlowVM } from '../../../gio-policy-studio.model';
@@ -36,7 +36,7 @@ const METHODS_AUTOCOMPLETE: HttpMethodVM[] = ['ALL', ...HttpMethods];
   styleUrls: ['./gio-ps-flow-proxy-form-dialog.component.scss'],
 })
 export class GioPolicyStudioFlowProxyFormDialogComponent {
-  public flowFormGroup?: FormGroup;
+  public flowFormGroup?: UntypedFormGroup;
 
   public existingFlow?: FlowVM;
   public mode: 'create' | 'edit' = 'create';
@@ -52,12 +52,12 @@ export class GioPolicyStudioFlowProxyFormDialogComponent {
     const httpSelector = flowDialogData?.flow?.selectors?.find(s => s.type === 'HTTP') as HttpSelector;
     const conditionSelector = flowDialogData?.flow?.selectors?.find(s => s.type === 'CONDITION') as ConditionSelector;
 
-    this.flowFormGroup = new FormGroup({
-      name: new FormControl(flowDialogData?.flow?.name ?? ''),
-      pathOperator: new FormControl(httpSelector?.pathOperator ?? 'EQUALS'),
-      path: new FormControl(sanitizePathFormValue(httpSelector?.path)),
-      methods: new FormControl(sanitizeMethodFormValue(httpSelector?.methods)),
-      condition: new FormControl(conditionSelector?.condition ?? ''),
+    this.flowFormGroup = new UntypedFormGroup({
+      name: new UntypedFormControl(flowDialogData?.flow?.name ?? ''),
+      pathOperator: new UntypedFormControl(httpSelector?.pathOperator ?? 'EQUALS'),
+      path: new UntypedFormControl(sanitizePathFormValue(httpSelector?.path)),
+      methods: new UntypedFormControl(sanitizeMethodFormValue(httpSelector?.methods)),
+      condition: new UntypedFormControl(conditionSelector?.condition ?? ''),
     });
   }
 

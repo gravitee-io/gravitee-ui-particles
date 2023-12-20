@@ -29,7 +29,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { ControlValueAccessor, FormGroup, NgControl } from '@angular/forms';
+import { ControlValueAccessor, UntypedFormGroup, NgControl } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { cloneDeep, isEmpty, isObject } from 'lodash';
 import { debounceTime, delay, distinctUntilChanged, filter, map, startWith, take, takeUntil, tap } from 'rxjs/operators';
@@ -64,7 +64,7 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnChang
     }
   }
 
-  public formGroup: FormGroup = new FormGroup({});
+  public formGroup: UntypedFormGroup = new UntypedFormGroup({});
 
   @Input()
   public options: FormlyFormOptions = {};

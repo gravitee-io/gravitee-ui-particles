@@ -18,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Story } from '@storybook/angular/types-7-0';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UntypedFormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { action } from '@storybook/addon-actions';
@@ -157,7 +157,7 @@ export const MatInput: Story = {
        `,
     ],
     props: {
-      errorFormControl: new FormControl('', [Validators.required]),
+      errorFormControl: new UntypedFormControl('', [Validators.required]),
       fruits: ['Lemon', 'Lime', 'Apple'],
       onTagsChange: (e: Tags[]) => action('Tags')(e),
     },

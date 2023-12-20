@@ -16,7 +16,7 @@
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormControl, FormsModule } from '@angular/forms';
+import { UntypedFormControl, FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -188,7 +188,7 @@ export const MatTableWithMatFormField: Story = {
       dataSource: ELEMENT_DATA,
       errorStateMatcher: {
         // Invalid form immediately if invalid
-        isErrorState(control: FormControl | null): boolean {
+        isErrorState(control: UntypedFormControl | null): boolean {
           return !!(control && control.invalid);
         },
       },

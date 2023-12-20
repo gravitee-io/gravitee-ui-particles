@@ -17,7 +17,7 @@ import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
 import { action } from '@storybook/addon-actions';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
 import { GioSaveBarComponent } from './gio-save-bar.component';
@@ -81,8 +81,8 @@ export const ReactiveForm: Story = {
   name: 'Update Mode / Reactive Form',
 
   render: () => {
-    const form = new FormGroup({
-      anInput: new FormControl('Edit me to display the save bar'),
+    const form = new UntypedFormGroup({
+      anInput: new UntypedFormControl('Edit me to display the save bar'),
     });
 
     const formInitialValues = form.getRawValue();

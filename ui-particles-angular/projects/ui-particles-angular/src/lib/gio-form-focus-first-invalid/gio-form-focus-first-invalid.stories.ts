@@ -16,7 +16,7 @@
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -52,13 +52,13 @@ export default {
 
 export const Demo: Story = {
   render: () => {
-    const form = new FormGroup({
-      anInput: new FormControl(null, Validators.required),
-      cron: new FormControl(null, Validators.required),
-      aSelect: new FormControl(null, Validators.required),
-      aTextarea: new FormControl(null, Validators.required),
-      aTagsInput: new FormControl(null, Validators.required),
-      aColorInput: new FormControl(null, Validators.required),
+    const form = new UntypedFormGroup({
+      anInput: new UntypedFormControl(null, Validators.required),
+      cron: new UntypedFormControl(null, Validators.required),
+      aSelect: new UntypedFormControl(null, Validators.required),
+      aTextarea: new UntypedFormControl(null, Validators.required),
+      aTagsInput: new UntypedFormControl(null, Validators.required),
+      aColorInput: new UntypedFormControl(null, Validators.required),
     });
 
     return {

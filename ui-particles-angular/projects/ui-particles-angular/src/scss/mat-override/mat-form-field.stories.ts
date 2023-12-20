@@ -20,7 +20,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UntypedFormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 export default {
   title: 'Material Override / MatFormField',
@@ -61,7 +61,7 @@ export const MatHintAndErrorFontSize: Story = {
       </mat-card>
     `,
     props: {
-      emailFormControl: new FormControl('', [Validators.required, Validators.email]),
+      emailFormControl: new UntypedFormControl('', [Validators.required, Validators.email]),
     },
   }),
 };
@@ -101,7 +101,7 @@ export const PaddingBottomMatFormField: Story = {
       </mat-card>
     `,
     props: {
-      emailFormControl: new FormControl('', [Validators.required, Validators.email]),
+      emailFormControl: new UntypedFormControl('', [Validators.required, Validators.email]),
     },
   }),
 };
@@ -125,7 +125,7 @@ export const DisabledMatFormFieldShouldHaveNotAllowedCursor: Story = {
       </mat-card>
     `,
     props: {
-      emailFormControl: new FormControl('', [Validators.required, Validators.email]),
+      emailFormControl: new UntypedFormControl('', [Validators.required, Validators.email]),
     },
   }),
 };

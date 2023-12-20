@@ -17,7 +17,7 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { UntypedFormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -28,7 +28,7 @@ import { GioFormHeadersModule } from './gio-form-headers.module';
   template: `<gio-form-headers [formControl]="headersControl" [headerFieldMapper]="mapper"></gio-form-headers> `,
 })
 class TestComponent {
-  public headersControl = new FormControl([]);
+  public headersControl = new UntypedFormControl([]);
   public mapper = {
     keyName: 'key',
     valueName: 'value',

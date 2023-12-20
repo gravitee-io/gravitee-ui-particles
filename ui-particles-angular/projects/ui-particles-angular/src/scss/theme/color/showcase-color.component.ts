@@ -13,56 +13,66 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component } from '@angular/core';
-
-import gioMaterialColorString from './gio-palettes.stories.scss';
-
-/**
- * Hack to get the color string from the gio-palettes.stories.scss file
- */
-const gioMaterialColor: { key: string; value: string }[] = gioMaterialColorString
-  .split(':export ')[1]
-  .replace(/\{|\}/g, '')
-  .split(';')
-  .map(color => color.split(':'))
-  .filter(color => !!color[1])
-  .reduce((acc, [key, value]) => {
-    acc.push({
-      key: `${key}`.trim(),
-      value: `${value}`.trim(),
-    });
-
-    return acc;
-  }, [] as { key: string; value: string }[]);
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'gio-color',
   templateUrl: './showcase-color.component.html',
-  styleUrls: ['./showcase-color.component.scss'],
+  styleUrls: ['./showcase-color.component.scss', './gio-palettes.stories.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ShowcaseColorComponent {
-  public colorPalettes = gioMaterialColor.reduce((prev, { key, value }) => {
-    const [paletteName, fullColorName] = key.split('__');
-    const colorName = fullColorName.split('-contrast')[0];
+  public colorPalettes: { name: string; colors: { name: string; color?: string; contrast?: string }[] }[] = [];
 
-    let palette = prev.find(p => p.name === paletteName);
-    if (!palette) {
-      palette = { name: paletteName, colors: [] };
-      prev.push(palette);
-    }
+  constructor() {
+    this.colorPalettes = [].slice
+      .call(document.styleSheets)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .map((styleSheet: any) => [].slice.call(styleSheet.cssRules))
+      .flat()
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .filter((cssRule: any) => cssRule.selectorText === ':root')
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .map((cssRule: any) => cssRule.cssText.split('{')[1].split('}')[0].trim().split(';'))
+      .flat()
+      .filter(text => text !== '')
+      .map(text => text.split(':'))
+      .map(parts => parts[0].trim() + ':  ' + parts[1].trim())
+      .filter(text => text.startsWith('--gp'))
+      .reduce((acc, variable) => {
+        const [key, value] = variable.split(':');
 
-    let color = palette.colors.find(p => p.name === colorName);
-    if (!color) {
-      color = { name: colorName };
-      palette.colors.push(color);
-    }
+        acc.push({
+          key: `${key.replace('--gp--', '')}`.trim(),
+          value: `${value}`.trim(),
+        });
 
-    if (fullColorName.endsWith('-contrast')) {
-      color.contrast = value;
-    } else {
-      color.color = value;
-    }
+        return acc;
+      }, [] as { key: string; value: string }[])
 
-    return prev;
-  }, [] as { name: string; colors: { name: string; color?: string; contrast?: string }[] }[]);
+      .reduce((prev, { key, value }) => {
+        const [paletteName, fullColorName] = key.split('__');
+        const colorName = fullColorName.split('-contrast')[0];
+
+        let palette = prev.find(p => p.name === paletteName);
+        if (!palette) {
+          palette = { name: paletteName, colors: [] };
+          prev.push(palette);
+        }
+
+        let color = palette.colors.find(p => p.name === colorName);
+        if (!color) {
+          color = { name: colorName };
+          palette.colors.push(color);
+        }
+
+        if (fullColorName.endsWith('-contrast')) {
+          color.contrast = value;
+        } else {
+          color.color = value;
+        }
+
+        return prev;
+      }, [] as { name: string; colors: { name: string; color?: string; contrast?: string }[] }[]);
+  }
 }

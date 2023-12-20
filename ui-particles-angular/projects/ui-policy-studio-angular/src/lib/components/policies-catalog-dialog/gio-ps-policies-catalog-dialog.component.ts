@@ -16,7 +16,7 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { toLower, uniq } from 'lodash';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
@@ -60,11 +60,11 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
 
   public isValid = false;
 
-  public selectedCategoriesControl?: FormControl;
+  public selectedCategoriesControl?: UntypedFormControl;
 
-  public filtersForm = new FormGroup({
-    categories: new FormControl([]),
-    search: new FormControl(''),
+  public filtersForm = new UntypedFormGroup({
+    categories: new UntypedFormControl([]),
+    search: new UntypedFormControl(''),
   });
 
   private allPolicies: PolicyVM[] = [];

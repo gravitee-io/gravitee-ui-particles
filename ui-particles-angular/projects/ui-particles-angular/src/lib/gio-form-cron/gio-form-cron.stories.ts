@@ -18,13 +18,13 @@ import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
 import { action } from '@storybook/addon-actions';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UntypedFormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { GioFormCronComponent } from './gio-form-cron.component';
 import { GioFormCronModule } from './gio-form-cron.module';
 
 const DefaultRender: Meta['render'] = p => {
-  const control = new FormControl({ value: p.initialValue ?? '', disabled: p.disabled }, p.required ? Validators.required : null);
+  const control = new UntypedFormControl({ value: p.initialValue ?? '', disabled: p.disabled }, p.required ? Validators.required : null);
 
   control.valueChanges.subscribe(v => {
     console.info('Value changed', v);
