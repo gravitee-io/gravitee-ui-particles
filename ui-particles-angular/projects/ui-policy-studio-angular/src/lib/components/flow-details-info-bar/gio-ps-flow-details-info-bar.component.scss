@@ -48,5 +48,9 @@ $typography: map.get(gio.$mat-theme, typography);
         margin-right: 4px;
       }
     }
+
+    &.condition {
+      text-transform: none;
+    }
   }
 }

@@ -291,6 +291,37 @@ export const MessageWithConditionalStep: Story = {
     plans: [],
   },
 };
+export const MessageWithConditionalExpressionLanguageStep: Story = {
+  name: 'Message API with conditional expression language step',
+  args: {
+    apiType: 'MESSAGE',
+    entrypointsInfo: [fakeWebhookMessageEntrypoint()],
+    endpointsInfo: [fakeKafkaMessageEndpoint()],
+    commonFlows: [
+      fakeChannelFlow({
+        name: 'Flow',
+        request: [],
+        response: [fakeTestPolicyStep()],
+        selectors: [
+          {
+            type: 'CHANNEL',
+            operations: ['PUBLISH', 'SUBSCRIBE'],
+            channel: 'boop',
+            channelOperator: 'EQUALS',
+            entrypoints: ['sse'],
+          },
+          {
+            type: 'CONDITION',
+            condition: "{#request.params['includeheaders'] == null}",
+          },
+        ],
+        publish: [],
+        subscribe: [],
+      }),
+    ],
+    plans: [],
+  },
+};
 
 export const ProxyWithFlowsAndPlans: Story = {
   name: 'Proxy API with flows & plans',

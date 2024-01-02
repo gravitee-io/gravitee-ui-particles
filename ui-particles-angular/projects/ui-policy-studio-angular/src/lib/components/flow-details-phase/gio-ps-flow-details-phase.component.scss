@@ -106,6 +106,7 @@ $typography: map.get(gio.$mat-theme, typography);
           display: inline-block;
           overflow: hidden;
           text-overflow: ellipsis;
+          text-transform: none;
           white-space: nowrap;
 
           mat-icon {
