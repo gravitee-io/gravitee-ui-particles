@@ -1,3 +1,10 @@
+# [7.52.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.51.1...v7.52.0) (2024-01-02)
+
+
+### Features
+
+* **policy-studio:** keep original text formatting for flow conditions ([249c9dc](https://github.com/gravitee-io/gravitee-ui-particles/commit/249c9dc47cff7bd3df04a102bd393c6c01fd96a8))
+
 ## [7.51.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.51.0...v7.51.1) (2023-12-12)
 
 
