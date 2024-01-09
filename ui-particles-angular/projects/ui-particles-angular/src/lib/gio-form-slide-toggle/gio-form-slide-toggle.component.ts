@@ -15,7 +15,7 @@
  */
 import { AfterContentInit, Component, ContentChild, Input, OnDestroy } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { MatLegacySlideToggle as MatSlideToggle } from '@angular/material/legacy-slide-toggle';
 import { Observable, Subject } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 

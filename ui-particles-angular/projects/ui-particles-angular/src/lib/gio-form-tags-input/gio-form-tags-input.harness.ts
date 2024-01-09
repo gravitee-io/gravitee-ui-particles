@@ -15,8 +15,11 @@
  */
 
 import { BaseHarnessFilters, ComponentHarness, HarnessPredicate, parallel, TestKey } from '@angular/cdk/testing';
-import { MatAutocompleteHarness } from '@angular/material/autocomplete/testing';
-import { MatChipHarness, MatChipListHarness } from '@angular/material/chips/testing';
+import { MatLegacyAutocompleteHarness as MatAutocompleteHarness } from '@angular/material/legacy-autocomplete/testing';
+import {
+  MatLegacyChipHarness as MatChipHarness,
+  MatLegacyChipListHarness as MatChipListHarness,
+} from '@angular/material/legacy-chips/testing';
 
 export type GioFormTagsInputHarnessFilters = BaseHarnessFilters;
 

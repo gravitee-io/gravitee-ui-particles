@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { MatTooltipHarness } from '@angular/material/tooltip/testing';
+import { MatLegacyTooltipHarness as MatTooltipHarness } from '@angular/material/legacy-tooltip/testing';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { SimpleChange } from '@angular/core';
 import { InteractivityChecker } from '@angular/cdk/a11y';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonHarness } from '@angular/material/button/testing';
+import { MatLegacyButtonHarness as MatButtonHarness } from '@angular/material/legacy-button/testing';
 import { of } from 'rxjs';
-import { MatInputHarness } from '@angular/material/input/testing';
+import { MatLegacyInputHarness as MatInputHarness } from '@angular/material/legacy-input/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import {

@@ -15,7 +15,7 @@
  */
 
 import { ComponentHarness, parallel } from '@angular/cdk/testing';
-import { MatButtonHarness } from '@angular/material/button/testing';
+import { MatLegacyButtonHarness as MatButtonHarness } from '@angular/material/legacy-button/testing';
 import { MatIconHarness } from '@angular/material/icon/testing';
 import { DivHarness } from '@gravitee/ui-particles-angular/testing';
 

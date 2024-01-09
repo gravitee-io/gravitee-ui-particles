@@ -19,7 +19,7 @@
 @use './gio-mat-palettes' as palettes;
 
 // Config mat Typography
-$mat-typography: mat.define-typography-config(
+$mat-typography: mat.define-legacy-typography-config(
   $font-family: '"Golos UI", Roboto, "Helvetica Neue", sans-serif',
   $display-4: mat.define-typography-level(112px, 112px, 400, $letter-spacing: -0.05em),
   $display-3: mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),

@@ -13,7 +13,7 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2017",
+    "target": "ES2022",
     "module": "es2020",
     "lib": ["es2018", "dom"],
     "paths": {
@@ -21,7 +21,8 @@
       "@gravitee/ui-particles-angular/testing": ["dist/ui-particles-angular/testing", "projects/ui-particles-angular/testing/public-api.ts"]
     },
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

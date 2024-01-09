@@ -48,7 +48,7 @@ export class GioFormFilePickerComponent implements OnInit, ControlValueAccessor 
   }
 
   public fileValues: FileValue[] = [];
-  public readMode: ReadMode = ReadMode.dataURL;
+  public readMode: ReadMode = ReadMode.DataURL;
   public dragHover = false;
   public isDisabled = false;
 

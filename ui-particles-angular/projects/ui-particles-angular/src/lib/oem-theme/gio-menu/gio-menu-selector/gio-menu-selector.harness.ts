@@ -15,7 +15,7 @@
  */
 
 import { ComponentHarness } from '@angular/cdk/testing';
-import { MatSelectHarness } from '@angular/material/select/testing';
+import { MatLegacySelectHarness as MatSelectHarness } from '@angular/material/legacy-select/testing';
 
 export class GioMenuSelectorHarness extends ComponentHarness {
   public static hostSelector = 'gio-menu-selector';

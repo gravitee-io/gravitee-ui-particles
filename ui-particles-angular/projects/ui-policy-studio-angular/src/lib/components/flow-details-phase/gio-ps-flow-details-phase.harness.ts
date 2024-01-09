@@ -17,7 +17,7 @@
 import { BaseHarnessFilters, ComponentHarness, HarnessPredicate, parallel } from '@angular/cdk/testing';
 import { DivHarness, SpanHarness } from '@gravitee/ui-particles-angular/testing';
 import { isEmpty } from 'lodash';
-import { MatButtonHarness } from '@angular/material/button/testing';
+import { MatLegacyButtonHarness as MatButtonHarness } from '@angular/material/legacy-button/testing';
 
 import { GioPolicyStudioDetailsPhaseStepHarness } from '../flow-details-phase-step/gio-ps-flow-details-phase-step.harness';
 import { GioPolicyStudioStepEditDialogHarness } from '../step-edit-dialog/gio-ps-step-edit-dialog.harness';

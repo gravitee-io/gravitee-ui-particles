@@ -15,9 +15,9 @@
  */
 
 import { AsyncFactoryFn, BaseHarnessFilters, ComponentHarness, HarnessPredicate, parallel } from '@angular/cdk/testing';
-import { MatButtonHarness } from '@angular/material/button/testing';
-import { MatInputHarness } from '@angular/material/input/testing';
-import { MatAutocompleteHarness } from '@angular/material/autocomplete/testing';
+import { MatLegacyButtonHarness as MatButtonHarness } from '@angular/material/legacy-button/testing';
+import { MatLegacyInputHarness as MatInputHarness } from '@angular/material/legacy-input/testing';
+import { MatLegacyAutocompleteHarness as MatAutocompleteHarness } from '@angular/material/legacy-autocomplete/testing';
 
 export class GioFormHeadersHarness extends ComponentHarness {
   public static hostSelector = 'gio-form-headers';

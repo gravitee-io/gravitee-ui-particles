@@ -15,7 +15,7 @@
  */
 
 import { ComponentHarness, LocatorFactory } from '@angular/cdk/testing';
-import { MatInputHarness } from '@angular/material/input/testing';
+import { MatLegacyInputHarness as MatInputHarness } from '@angular/material/legacy-input/testing';
 
 export type StepForm = {
   description?: string;

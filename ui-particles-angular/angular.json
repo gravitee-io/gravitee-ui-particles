@@ -144,5 +144,13 @@
       }
     }
   },
-  "defaultProject": "ui-particles-angular"
+  "defaultProject": "ui-particles-angular",
+  "schematics": {
+    "@angular-eslint/schematics:application": {
+      "setParserOptionsProject": true
+    },
+    "@angular-eslint/schematics:library": {
+      "setParserOptionsProject": true
+    }
+  }
 }
