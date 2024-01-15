@@ -13,13 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
-import { withDesign } from 'storybook-addon-designs';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { GioSubmenuGroupComponent } from '@gravitee/ui-particles-angular';
 
-import { OEM_THEME_ARG_TYPES, computeStylesForStory } from '../oem-theme.service';
+import { OEM_THEME_ARG_TYPES, computeStylesForStory, OEM_DEFAULT_LOGO } from '../oem-theme.service';
 
 import { GioSubmenuModule } from './gio-submenu.module';
 
@@ -28,17 +25,19 @@ export default {
   component: GioSubmenuGroupComponent,
   decorators: [
     moduleMetadata({
-      imports: [GioSubmenuModule, NoopAnimationsModule],
+      imports: [GioSubmenuModule],
     }),
-    withDesign,
   ],
   render: () => ({}),
 } as Meta;
 
 let route = 'plans';
 
-export const Default: Story = {
+export const Default: StoryObj = {
   argTypes: OEM_THEME_ARG_TYPES,
+  args: {
+    logo: OEM_DEFAULT_LOGO,
+  },
   render: args => {
     return {
       template: `
@@ -80,8 +79,11 @@ export const Default: Story = {
   },
 };
 
-export const Light: Story = {
+export const Light: StoryObj = {
   argTypes: OEM_THEME_ARG_TYPES,
+  args: {
+    logo: OEM_DEFAULT_LOGO,
+  },
   render: args => {
     return {
       template: `

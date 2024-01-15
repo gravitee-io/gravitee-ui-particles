@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { MatLegacyOptionModule } from '@angular/material/legacy-core';
 import { MatLegacyAutocompleteModule } from '@angular/material/legacy-autocomplete';
 import { MatLegacyInputModule } from '@angular/material/legacy-input';
@@ -24,13 +22,13 @@ export default {
   title: 'Material Override',
   decorators: [
     moduleMetadata({
-      imports: [NoopAnimationsModule, MatLegacyInputModule, MatLegacyAutocompleteModule, MatLegacyOptionModule],
+      imports: [MatLegacyInputModule, MatLegacyAutocompleteModule, MatLegacyOptionModule],
     }),
   ],
   render: () => ({}),
 } as Meta;
 
-export const MatOptionMDC: Story = {
+export const MatOptionMDC: StoryObj = {
   render: () => ({
     template: `
         <mat-form-field [floatLabel]="'never'">

@@ -49,7 +49,6 @@ import { GioFilterConnectorsByModePipe } from './components/filter-pipe/gio-flte
 import { GioPolicyStudioPoliciesCatalogDialogComponent } from './components/policies-catalog-dialog/gio-ps-policies-catalog-dialog.component';
 import { GioPolicyStudioStepEditDialogComponent } from './components/step-edit-dialog/gio-ps-step-edit-dialog.component';
 import { GioPolicyStudioStepFormComponent } from './components/step-form/gio-ps-step-form.component';
-import { GioPolicyStudioService } from './gio-policy-studio.service';
 
 @NgModule({
   declarations: [
@@ -91,6 +90,5 @@ import { GioPolicyStudioService } from './gio-policy-studio.service';
     GioLoaderModule,
   ],
   exports: [GioPolicyStudioComponent],
-  providers: [GioPolicyStudioService],
 })
 export class GioPolicyStudioModule {}

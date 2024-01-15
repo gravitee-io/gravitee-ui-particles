@@ -13,11 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UntypedFormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { GioFormCronComponent } from './gio-form-cron.component';
@@ -53,7 +51,7 @@ export default {
   component: GioFormCronComponent,
   decorators: [
     moduleMetadata({
-      imports: [BrowserAnimationsModule, GioFormCronModule, FormsModule, ReactiveFormsModule, MatFormFieldModule],
+      imports: [GioFormCronModule, FormsModule, ReactiveFormsModule, MatFormFieldModule],
     }),
   ],
   argTypes: {
@@ -72,66 +70,66 @@ export default {
   render: DefaultRender,
 } as Meta;
 
-export const Default: Story = {
+export const Default: StoryObj = {
   args: {},
 };
 
-export const WithInitialSecondlyValue: Story = {
+export const WithInitialSecondlyValue: StoryObj = {
   args: {
     initialValue: '*/6 * * * * *',
   },
 };
 
-export const WithInitialMinutelyValue: Story = {
+export const WithInitialMinutelyValue: StoryObj = {
   args: {
     initialValue: '0 */6 * * * *',
   },
 };
 
-export const WithInitialHourlyValue: Story = {
+export const WithInitialHourlyValue: StoryObj = {
   args: {
     initialValue: '0 0 */6 * * *',
   },
 };
 
-export const WithInitialDailyValue: Story = {
+export const WithInitialDailyValue: StoryObj = {
   args: {
     initialValue: '0 0 0 */6 * *',
   },
 };
 
-export const WithInitialWeeklyValue: Story = {
+export const WithInitialWeeklyValue: StoryObj = {
   args: {
     initialValue: '0 0 0 * * 5',
   },
 };
 
-export const WithInitialMonthlyValue: Story = {
+export const WithInitialMonthlyValue: StoryObj = {
   args: {
     initialValue: '0 15 10 8 * *',
   },
 };
 
-export const WithInitialCustomValue: Story = {
+export const WithInitialCustomValue: StoryObj = {
   args: {
     initialValue: '0 0 0 LW * *',
   },
 };
 
-export const Disabled: Story = {
+export const Disabled: StoryObj = {
   args: {
     disabled: true,
   },
 };
 
-export const DisabledWithInitialValue: Story = {
+export const DisabledWithInitialValue: StoryObj = {
   args: {
     initialValue: '0 0 0 LW * *',
     disabled: true,
   },
 };
 
-export const SmallWidth: Story = {
+export const SmallWidth: StoryObj = {
   render: (p, c) => {
     const parentRender = DefaultRender(p, c);
     return {
@@ -144,7 +142,7 @@ export const SmallWidth: Story = {
   },
 };
 
-export const Required: Story = {
+export const Required: StoryObj = {
   args: {
     required: true,
     initialValue: '0 0 0 LW * *',
@@ -158,7 +156,7 @@ export const Required: Story = {
   },
 };
 
-export const WithErrorInValue: Story = {
+export const WithErrorInValue: StoryObj = {
   args: {
     required: false,
     initialValue: '0 0 0 LW * *',

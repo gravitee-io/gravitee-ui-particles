@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
@@ -27,12 +25,12 @@ export default {
   component: GioClipboardCopyWrapperComponent,
   decorators: [
     moduleMetadata({
-      imports: [BrowserAnimationsModule, GioClipboardModule, MatFormFieldModule, MatInputModule],
+      imports: [GioClipboardModule, MatFormFieldModule, MatInputModule],
     }),
   ],
 } as Meta;
 
-export const InnerButton: Story = {
+export const InnerButton: StoryObj = {
   render: () => {
     return {
       template: `<div style="width:300px;"><div gioClipboardCopyWrapper contentToCopy="Hello" > Copy me ! </div></div>`,
@@ -41,7 +39,7 @@ export const InnerButton: Story = {
   },
 };
 
-export const InnerButtonAlwaysVisible: Story = {
+export const InnerButtonAlwaysVisible: StoryObj = {
   render: () => {
     return {
       template: `<div style="width:300px;"><div gioClipboardCopyWrapper contentToCopy="Hello" alwaysVisible="true" > Copy me ! </div></div>`,
@@ -50,7 +48,7 @@ export const InnerButtonAlwaysVisible: Story = {
   },
 };
 
-export const FormField: Story = {
+export const FormField: StoryObj = {
   render: () => {
     return {
       template: `

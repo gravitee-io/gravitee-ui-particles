@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { MatLegacyButtonModule } from '@angular/material/legacy-button';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -30,7 +29,7 @@ export default {
   render: () => ({}),
 } as Meta;
 
-export const MatButton: Story = {
+export const MatButton: StoryObj = {
   render: () => ({
     template: `
         <h3>Design System buttons</h3>

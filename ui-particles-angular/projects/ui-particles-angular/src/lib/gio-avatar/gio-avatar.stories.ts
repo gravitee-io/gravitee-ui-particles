@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata, componentWrapperDecorator } from '@storybook/angular';
-import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
+import { Meta, moduleMetadata, componentWrapperDecorator, StoryObj } from '@storybook/angular';
 
 import { GioAvatarComponent } from './gio-avatar.component';
 import { GioAvatarModule } from './gio-avatar.module';
@@ -51,45 +50,45 @@ export default {
   }),
 } as Meta;
 
-export const IconDefault: Story = {};
+export const IconDefault: StoryObj = {};
 
-export const ImageDefault: Story<GioAvatarComponent> = {};
+export const ImageDefault: StoryObj<GioAvatarComponent> = {};
 ImageDefault.args = {
   src: 'https://i.pravatar.cc/500?u=a042581f4e29020504d',
 };
 
-export const ImageWithBadUrl: Story<GioAvatarComponent> = {};
+export const ImageWithBadUrl: StoryObj<GioAvatarComponent> = {};
 ImageWithBadUrl.args = {
   src: 'https://nope.nope',
 };
 
-export const IconWithParentDiv: Story<GioAvatarComponent> = {};
+export const IconWithParentDiv: StoryObj<GioAvatarComponent> = {};
 IconWithParentDiv.args = {};
 IconWithParentDiv.decorators = [componentWrapperDecorator(story => `<div style="width:300px; height:300px">${story}</div>`)];
 
-export const ImageWithParentDiv: Story<GioAvatarComponent> = {};
+export const ImageWithParentDiv: StoryObj<GioAvatarComponent> = {};
 ImageWithParentDiv.args = {
   src: 'https://i.pravatar.cc/500?u=a042581f4e29020504d',
 };
 ImageWithParentDiv.decorators = [componentWrapperDecorator(story => `<div style="width:300px; height:300px">${story}</div>`)];
 
-export const IconWithSize24Px: Story<GioAvatarComponent> = {};
+export const IconWithSize24Px: StoryObj<GioAvatarComponent> = {};
 IconWithSize24Px.args = {
   size: 24,
 };
 
-export const ImageWithSize24Px: Story<GioAvatarComponent> = {};
+export const ImageWithSize24Px: StoryObj<GioAvatarComponent> = {};
 ImageWithSize24Px.args = {
   src: 'https://i.pravatar.cc/100?u=a042581f4e29020504d',
   size: 24,
 };
 
-export const IconWithRoundedBorder: Story<GioAvatarComponent> = {};
+export const IconWithRoundedBorder: StoryObj<GioAvatarComponent> = {};
 IconWithRoundedBorder.args = {
   roundedBorder: true,
 };
 
-export const ImageWithRoundedBorder: Story<GioAvatarComponent> = {};
+export const ImageWithRoundedBorder: StoryObj<GioAvatarComponent> = {};
 ImageWithRoundedBorder.args = {
   src: 'https://i.pravatar.cc/100?u=a042581f4e29020504d',
   roundedBorder: true,

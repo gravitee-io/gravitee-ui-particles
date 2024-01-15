@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { Component, Inject, Injector, Type } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { isObject, isString, toLower } from 'lodash';
 
 export type GioConfirmAndValidateDialogData = {
@@ -52,11 +52,7 @@ export class GioConfirmAndValidateDialogComponent {
   public confirmValue?: string;
   public isValid = false;
 
-  constructor(
-    public dialogRef: MatDialogRef<GioConfirmAndValidateDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) confirmDialogData: GioConfirmAndValidateDialogData,
-    private readonly parentInjector: Injector,
-  ) {
+  constructor(@Inject(MAT_DIALOG_DATA) confirmDialogData: GioConfirmAndValidateDialogData, private readonly parentInjector: Injector) {
     this.title = confirmDialogData?.title ?? 'Are you sure?';
     this.warning = confirmDialogData?.warning;
     this.contentComponentInjector = parentInjector;

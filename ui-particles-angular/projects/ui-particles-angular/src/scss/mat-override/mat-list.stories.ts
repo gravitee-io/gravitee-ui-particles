@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { MatIconModule } from '@angular/material/icon';
 import { MatLegacyCardModule } from '@angular/material/legacy-card';
 import { MatLegacyListModule } from '@angular/material/legacy-list';
@@ -44,13 +42,13 @@ export default {
   title: 'Material Override',
   decorators: [
     moduleMetadata({
-      imports: [BrowserAnimationsModule, MatLegacyListModule, MatIconModule, MatLegacyCardModule],
+      imports: [MatLegacyListModule, MatIconModule, MatLegacyCardModule],
     }),
   ],
   render: () => ({}),
 } as Meta;
 
-export const MatList: Story = {
+export const MatList: StoryObj = {
   render: () => ({
     template: `
       <div>Material overrides for Mat List component:</div>

@@ -13,11 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { range } from 'lodash';
 import { of } from 'rxjs';
@@ -31,7 +29,7 @@ export default {
   component: GioFormTagsInputComponent,
   decorators: [
     moduleMetadata({
-      imports: [BrowserAnimationsModule, GioFormTagsInputModule, FormsModule, ReactiveFormsModule, MatFormFieldModule],
+      imports: [GioFormTagsInputModule, FormsModule, ReactiveFormsModule, MatFormFieldModule],
     }),
   ],
   render: () => ({}),
@@ -55,7 +53,7 @@ export default {
   },
 } as Meta;
 
-export const WithoutFormField: Story = {
+export const WithoutFormField: StoryObj = {
   render: ({ tags = ['A', 'B'], placeholder, required, disabled }) => ({
     template: `
       <gio-form-tags-input [disabled]="disabled" [required]="required" [placeholder]="placeholder" [ngModel]="tags" (ngModelChange)="onTagsChange($event)">
@@ -72,7 +70,7 @@ export const WithoutFormField: Story = {
   args: {},
 };
 
-export const EmptyModel: Story = {
+export const EmptyModel: StoryObj = {
   render: ({ tags, placeholder, required, disabled }) => ({
     template: `
     <mat-form-field appearance="fill" style="width:100%">
@@ -98,7 +96,7 @@ export const EmptyModel: Story = {
   args: {},
 };
 
-export const WithInitialValue: Story = {
+export const WithInitialValue: StoryObj = {
   render: EmptyModel.render,
   args: {
     tags: ['A', 'B'],
@@ -107,7 +105,7 @@ export const WithInitialValue: Story = {
   },
 };
 
-export const Required: Story = {
+export const Required: StoryObj = {
   render: EmptyModel.render,
   args: {
     tags: ['A', 'B'],
@@ -116,7 +114,7 @@ export const Required: Story = {
   },
 };
 
-export const Disabled: Story = {
+export const Disabled: StoryObj = {
   render: EmptyModel.render,
   args: {
     tags: ['A', 'B'],
@@ -126,7 +124,7 @@ export const Disabled: Story = {
   },
 };
 
-export const FormControlEmpty: Story = {
+export const FormControlEmpty: StoryObj = {
   render: ({ tags, placeholder, required, disabled, tagValidationHook }) => {
     const tagsControl = new UntypedFormControl({ value: tags, disabled });
 
@@ -160,7 +158,7 @@ export const FormControlEmpty: Story = {
   args: {},
 };
 
-export const FormControlDisabled: Story = {
+export const FormControlDisabled: StoryObj = {
   render: FormControlEmpty.render,
   args: {
     tags: ['A'],
@@ -168,7 +166,7 @@ export const FormControlDisabled: Story = {
   },
 };
 
-export const WithTagValidationHook: Story = {
+export const WithTagValidationHook: StoryObj = {
   render: FormControlEmpty.render,
   args: {
     tags: ['A'],
@@ -185,7 +183,7 @@ export const WithTagValidationHook: Story = {
   },
 };
 
-export const WithAutocomplete: Story = {
+export const WithAutocomplete: StoryObj = {
   render: ({ tags, placeholder, required, disabled }) => {
     const tagsControl = new UntypedFormControl({ value: tags, disabled });
 
@@ -223,7 +221,7 @@ export const WithAutocomplete: Story = {
 };
 
 const httpMethods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS', 'TRACE', 'CONNECT'];
-export const WithAutocompleteOnly: Story = {
+export const WithAutocompleteOnly: StoryObj = {
   render: ({ tags, placeholder, required, disabled, tagValidationHook, autocompleteOptions }) => {
     const tagsControl = new UntypedFormControl({ value: tags, disabled });
 
@@ -277,7 +275,7 @@ const applications = range(10).map(i => ({
   label: `${i} - Application`,
 }));
 
-export const WithAsyncAutocompleteOnly: Story = {
+export const WithAsyncAutocompleteOnly: StoryObj = {
   render: ({ tags, placeholder, required, disabled, autocompleteOptions, displayValueWith, useAutocompleteOptionValueOnly }) => {
     const tagsControl = new UntypedFormControl({ value: tags, disabled });
 

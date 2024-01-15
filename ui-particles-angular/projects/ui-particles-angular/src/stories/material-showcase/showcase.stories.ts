@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
@@ -43,8 +41,6 @@ export default {
   decorators: [
     moduleMetadata({
       imports: [
-        BrowserAnimationsModule,
-
         MatButtonModule,
         MatGridListModule,
         MatIconModule,
@@ -68,11 +64,7 @@ export default {
       declarations: [ShowcaseMaterialComponent],
     }),
   ],
-  render: () => ({}),
+  component: ShowcaseMaterialComponent,
 } as Meta;
 
-export const Common: Story = {
-  render: () => ({
-    component: ShowcaseMaterialComponent,
-  }),
-};
+export const Common: StoryObj = {};

@@ -15,7 +15,6 @@
  */
 import { Component, Input } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { tap } from 'rxjs/operators';
@@ -60,7 +59,7 @@ export default {
   decorators: [
     moduleMetadata({
       declarations: [GioLicenseDialogStoryComponent],
-      imports: [GioLicenseDialogModule, MatButtonModule, MatDialogModule, BrowserAnimationsModule],
+      imports: [GioLicenseDialogModule, MatButtonModule, MatDialogModule],
     }),
   ],
   argTypes: {

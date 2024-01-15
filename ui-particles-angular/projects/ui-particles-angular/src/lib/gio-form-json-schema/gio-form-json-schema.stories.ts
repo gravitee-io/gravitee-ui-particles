@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import isChromatic from 'chromatic/isChromatic';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -75,7 +73,7 @@ export default {
   title: 'Components / Form Json schema',
   decorators: [
     moduleMetadata({
-      imports: [BrowserAnimationsModule, CommonModule, MatSelectModule, GioFJSStoryModule],
+      imports: [CommonModule, MatSelectModule, GioFJSStoryModule],
     }),
   ],
   parameters: {
@@ -95,7 +93,7 @@ export default {
   }),
 } as Meta;
 
-export const StringDisabled: Story = {
+export const StringDisabled: StoryObj = {
   name: 'Disabled',
   args: {
     jsonSchema: stringExample,
@@ -103,42 +101,37 @@ export const StringDisabled: Story = {
   },
 };
 
-export const String: Story = {
-  name: 'String',
+export const String: StoryObj = {
   args: {
     jsonSchema: stringExample,
   },
 };
 
-export const Number: Story = {
-  name: 'Number',
+export const Number: StoryObj = {
   args: {
     jsonSchema: integerExample,
   },
 };
 
-export const Boolean: Story = {
-  name: 'Boolean',
+export const Boolean: StoryObj = {
   args: {
     jsonSchema: booleanExample,
   },
 };
 
-export const Array: Story = {
-  name: 'Array',
+export const Array: StoryObj = {
   args: {
     jsonSchema: arrayExample,
   },
 };
 
-export const Mixed: Story = {
-  name: 'Mixed',
+export const Mixed: StoryObj = {
   args: {
     jsonSchema: mixedExample,
   },
 };
 
-export const MixedWithValue: Story = {
+export const MixedWithValue: StoryObj = {
   name: 'Mixed with value',
   args: {
     jsonSchema: mixedExample,
@@ -148,7 +141,7 @@ export const MixedWithValue: Story = {
   },
 };
 
-export const WithBanner: Story = {
+export const WithBanner: StoryObj = {
   name: 'With banner',
   args: {
     jsonSchema: {
@@ -171,70 +164,63 @@ export const WithBanner: Story = {
   },
 };
 
-export const oneOf: Story = {
-  name: 'OneOf',
+export const OneOf: StoryObj = {
   args: {
     jsonSchema: oneOfExample,
   },
 };
 
-export const allOf: Story = {
-  name: 'AllOf',
+export const AllOf: StoryObj = {
   args: {
     jsonSchema: allOfExample,
   },
 };
 
-export const enumStory: Story = {
+export const EnumStory: StoryObj = {
   name: 'Enum',
   args: {
     jsonSchema: enumExample,
   },
 };
 
-export const references: Story = {
-  name: 'References',
+export const References: StoryObj = {
   args: {
     jsonSchema: referencesExample,
   },
 };
 
-export const codeEditor: Story = {
-  name: 'Code Editor',
+export const CodeEditor: StoryObj = {
   args: {
     jsonSchema: codeEditorExample,
   },
 };
 
-export const kafkaAdvanced: Story = {
-  name: 'Kafka Advanced',
+export const KafkaAdvanced: StoryObj = {
   args: {
     jsonSchema: kafkaAdvancedExample,
   },
 };
 
-export const mqttAdvanced: Story = {
+export const MqttAdvanced: StoryObj = {
   name: 'MQTT Advanced',
   args: {
     jsonSchema: mqttAdvancedExample,
   },
 };
 
-export const httpProxy: Story = {
-  name: 'Http Proxy',
+export const HttpProxy: StoryObj = {
   args: {
     jsonSchema: httpProxyExample,
   },
 };
 
-export const webhookAdvanced: Story = {
-  name: 'Webhook Advanced',
+export const WebhookAdvanced: StoryObj = {
   args: {
     jsonSchema: webhookAdvancedExample,
   },
 };
 
-export const Entrypoints: Story = {
+export const Entrypoints: StoryObj = {
   name: 'Gio - V4 Entrypoints',
   render: () => ({
     template: `<mat-form-field appearance="fill" style="width:100%">
@@ -248,7 +234,7 @@ export const Entrypoints: Story = {
   }),
 };
 
-export const Endpoints: Story = {
+export const Endpoints: StoryObj = {
   name: 'Gio - V4 Endpoints',
   render: () => ({
     template: `<mat-form-field appearance="fill" style="width:100%">

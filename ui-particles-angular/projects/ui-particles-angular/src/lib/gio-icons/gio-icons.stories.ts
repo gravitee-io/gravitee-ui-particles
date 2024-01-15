@@ -17,11 +17,8 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClientModule } from '@angular/common/http';
 
 import { GioBannerModule } from '../gio-banner/gio-banner.module';
 import { GioClipboardModule } from '../gio-clipboard/gio-clipboard.module';
@@ -34,7 +31,6 @@ export default {
   decorators: [
     moduleMetadata({
       imports: [
-        NoopAnimationsModule,
         FormsModule,
         GioIconsModule,
         MatButtonModule,
@@ -43,7 +39,6 @@ export default {
         MatInputModule,
         GioBannerModule,
         GioClipboardModule,
-        HttpClientModule,
       ],
       declarations: [SbGetIconsListPipe],
     }),
@@ -53,7 +48,7 @@ export default {
 /**
  * TODO: Improve UX selection with hover and selected icons ext...
  */
-export const All: Story = {
+export const All: StoryObj = {
   render: () => ({
     template: `
     <mat-form-field class="example-form-field" appearance="fill" style="width:100%;">

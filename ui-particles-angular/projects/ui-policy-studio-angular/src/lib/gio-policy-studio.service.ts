@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-import { Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { Policy, PolicyDocumentationFetcher, PolicySchemaFetcher } from './models';
 
-@Inject({})
+@Injectable({
+  providedIn: 'root',
+})
 export class GioPolicyStudioService {
   private schemasCache: Record<string, BehaviorSubject<unknown>> = {};
   private documentationsCache: Record<string, BehaviorSubject<string>> = {};

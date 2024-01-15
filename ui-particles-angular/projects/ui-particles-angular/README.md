@@ -1,6 +1,6 @@
 # Gravitee.io UI Particles Angular
 
-⚠️ Current version of this package is compatible with Angular 12.
+⚠️ Current version of this package is compatible with Angular 15.
 
 ## Overview
 

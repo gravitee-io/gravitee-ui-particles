@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { MatLegacyCardModule } from '@angular/material/legacy-card';
 
 export default {
@@ -27,7 +26,7 @@ export default {
   render: () => ({}),
 } as Meta;
 
-export const MatCard: Story = {
+export const MatCard: StoryObj = {
   render: () => ({
     template: `
       <p>

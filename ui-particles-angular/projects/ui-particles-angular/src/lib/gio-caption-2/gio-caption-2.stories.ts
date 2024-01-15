@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 export default {
   title: 'Components / Caption 2',
@@ -22,7 +21,7 @@ export default {
   render: () => ({}),
 } as Meta;
 
-export const All: Story = {
+export const All: StoryObj = {
   render: () => ({
     template: `
       <p class="gio-caption-strong">Caption 2 lorem ipsum</p>

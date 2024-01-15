@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { MatCardModule } from '@angular/material/card';
-import { withDesign } from 'storybook-addon-designs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -30,7 +28,6 @@ export default {
     moduleMetadata({
       imports: [GioBannerModule, MatCardModule, MatButtonModule, MatIconModule],
     }),
-    withDesign,
   ],
   render: () => ({}),
   parameters: {
@@ -41,7 +38,7 @@ export default {
   },
 } as Meta;
 
-export const All: Story = {
+export const All: StoryObj = {
   render: () => ({
     template: `
     <gio-banner-info>This is an info banner!</gio-banner-info>
@@ -57,7 +54,7 @@ export const All: Story = {
   }),
 };
 
-export const AllInMatCard: Story = {
+export const AllInMatCard: StoryObj = {
   render: () => ({
     template: `
     <mat-card>
@@ -74,7 +71,7 @@ export const AllInMatCard: Story = {
   }),
 };
 
-export const AllWithTypeInput: Story = {
+export const AllWithTypeInput: StoryObj = {
   render: () => ({
     template: `
     <gio-banner type="info">This is an info banner!</gio-banner>
@@ -88,7 +85,7 @@ export const AllWithTypeInput: Story = {
   }),
 };
 
-export const Default: Story = {
+export const Default: StoryObj = {
   render: () => ({
     template: `
     <h5>Outside Mat Card</h5>

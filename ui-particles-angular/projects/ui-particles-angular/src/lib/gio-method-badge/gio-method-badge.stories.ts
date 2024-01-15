@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 import { GioIconsModule } from '../gio-icons/gio-icons.module';
 
@@ -40,7 +39,7 @@ const classByNames = {
   Other: 'gio-method-badge-other',
 };
 
-export const All: Story = {
+export const All: StoryObj = {
   render: () => ({
     template: Object.entries(classByNames).reduce((previousValue, [name, cssClass]) => {
       return `${previousValue}

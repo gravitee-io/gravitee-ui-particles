@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { UntypedFormControl, FormsModule } from '@angular/forms';
 import { MatLegacyTableModule } from '@angular/material/legacy-table';
 import { MatLegacyFormFieldModule } from '@angular/material/legacy-form-field';
@@ -46,14 +44,7 @@ export default {
   title: 'Material Override',
   decorators: [
     moduleMetadata({
-      imports: [
-        BrowserAnimationsModule,
-        FormsModule,
-        MatLegacyTableModule,
-        MatLegacyFormFieldModule,
-        MatLegacyInputModule,
-        MatLegacySelectModule,
-      ],
+      imports: [FormsModule, MatLegacyTableModule, MatLegacyFormFieldModule, MatLegacyInputModule, MatLegacySelectModule],
     }),
   ],
   render: () => ({}),
@@ -62,7 +53,7 @@ export default {
   },
 } as Meta;
 
-export const MatTableRowsHover: Story = {
+export const MatTableRowsHover: StoryObj = {
   render: () => ({
     template: `
       <p>
@@ -114,7 +105,7 @@ export const MatTableRowsHover: Story = {
   }),
 };
 
-export const MatTableWithMatFormField: Story = {
+export const MatTableWithMatFormField: StoryObj = {
   render: () => ({
     template: `<p>Keep or remove padding-bottom for mat-form-field in table td</p>
 

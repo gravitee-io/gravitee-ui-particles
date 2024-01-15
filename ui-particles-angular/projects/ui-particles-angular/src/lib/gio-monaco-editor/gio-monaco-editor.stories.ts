@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UntypedFormControl, UntypedFormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
@@ -30,7 +28,7 @@ export default {
   component: GioMonacoEditorComponent,
   decorators: [
     moduleMetadata({
-      imports: [BrowserAnimationsModule, GioMonacoEditorModule, ReactiveFormsModule, MatFormFieldModule],
+      imports: [GioMonacoEditorModule, ReactiveFormsModule, MatFormFieldModule],
     }),
   ],
   parameters: {
@@ -79,11 +77,11 @@ export default {
   },
 } as Meta;
 
-export const Default: Story = {
+export const Default: StoryObj = {
   args: {},
 };
 
-export const LanguageJson: Story = {
+export const LanguageJson: StoryObj = {
   args: {
     languageConfig: {
       language: 'json',
@@ -97,13 +95,13 @@ export const LanguageJson: Story = {
   },
 };
 
-export const Disabled: Story = {
+export const Disabled: StoryObj = {
   args: {
     disabled: true,
   },
 };
 
-export const WithValue: Story = {
+export const WithValue: StoryObj = {
   args: {
     value: `{
       "type": "object",
@@ -116,7 +114,7 @@ export const WithValue: Story = {
   },
 };
 
-export const InsideMatFormField: Story = {
+export const InsideMatFormField: StoryObj = {
   render: ({ value, disabled, languageConfig }) => {
     const control = new UntypedFormControl({ value, disabled }, Validators.required);
     control.valueChanges.subscribe(value => {
@@ -148,7 +146,7 @@ export const InsideMatFormField: Story = {
   args: {},
 };
 
-export const formControlName: Story = {
+export const FormControlName: StoryObj = {
   render: ({ value, disabled, languageConfig }) => {
     const control = new UntypedFormControl({ value, disabled }, Validators.required);
     control.valueChanges.subscribe(value => {
@@ -181,7 +179,7 @@ export const formControlName: Story = {
   args: {},
 };
 
-export const LanguageMarkdown: Story = {
+export const LanguageMarkdown: StoryObj = {
   args: {
     languageConfig: {
       language: 'markdown',
@@ -196,7 +194,7 @@ export const LanguageMarkdown: Story = {
   },
 };
 
-export const DisableMiniMap: Story = {
+export const DisableMiniMap: StoryObj = {
   args: {
     languageConfig: {
       language: 'json',

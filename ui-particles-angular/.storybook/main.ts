@@ -1,28 +1,35 @@
+import { dirname, join } from 'path';
 module.exports = {
-  framework: '@storybook/angular',
+  framework: getAbsolutePath('@storybook/angular'),
   stories: ['../projects/**/*.stories.@(ts|mdx)'],
+
   addons: [
-    '@storybook/addon-a11y',
-    'storybook-addon-designs',
-    '@storybook/addon-essentials',
+    getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('@storybook/addon-designs'),
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        docs: false,
+      },
+    },
     {
       name: '@storybook/addon-docs',
       options: { transcludeMarkdown: true },
     },
   ],
+
   features: {
     previewCsfV3: true,
     storyStoreV7: true,
   },
+
   angularOptions: {
     enableIvy: true,
   },
-  core: {
-    builder: 'webpack5',
-  },
+
   staticDirs: [
     { from: '../../node_modules/@gravitee/ui-components/assets', to: '/' },
-    { from: './ui-particles.ico', to: '/ui-particles.ico' },
+    { from: './favicon.ico', to: '/favicon.ico' },
     { from: '../projects/ui-particles-angular/assets/gio-icons.svg', to: '/assets/gio-icons.svg' },
     {
       from: '../projects/ui-particles-angular/assets/license-expiration-notification-background.svg',
@@ -34,4 +41,12 @@ module.exports = {
     { from: '../../node_modules/prismjs/prism.js', to: '/assets/prismjs/prism.js' },
     { from: '../../node_modules/prismjs/components/prism-json.js', to: '/assets/prismjs/components/prism-json.js' },
   ],
+
+  docs: {
+    autodocs: false,
+  },
 };
+
+function getAbsolutePath(value: string): any {
+  return dirname(require.resolve(join(value, 'package.json')));
+}

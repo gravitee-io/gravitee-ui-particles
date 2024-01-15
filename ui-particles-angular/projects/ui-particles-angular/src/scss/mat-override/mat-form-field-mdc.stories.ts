@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -26,13 +24,13 @@ export default {
   title: 'Material Override / MatFormField MDC',
   decorators: [
     moduleMetadata({
-      imports: [BrowserAnimationsModule, ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatIconModule],
+      imports: [ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatIconModule],
     }),
   ],
   render: () => ({}),
 } as Meta;
 
-export const SubscriptSizing: Story = {
+export const SubscriptSizing: StoryObj = {
   render: () => ({
     template: `
       <p>
@@ -75,7 +73,7 @@ export const SubscriptSizing: Story = {
   }),
 };
 
-export const MarginMatFormField: Story = {
+export const MarginMatFormField: StoryObj = {
   render: () => ({
     template: `
       <p>
@@ -123,7 +121,7 @@ export const MarginMatFormField: Story = {
   }),
 };
 
-export const DisabledMatFormFieldShouldHaveNotAllowedCursor: Story = {
+export const DisabledMatFormFieldShouldHaveNotAllowedCursor: StoryObj = {
   render: () => ({
     template: `
       <p>

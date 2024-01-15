@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 import { GioIconsModule } from '../gio-icons/gio-icons.module';
 
@@ -29,12 +27,11 @@ export default {
     moduleMetadata({
       imports: [GioBreadcrumbModule, GioIconsModule],
     }),
-    withDesign,
   ],
   render: () => ({}),
 } as Meta;
 
-export const Default: Story = {
+export const Default: StoryObj = {
   render: () => ({
     template: `<gio-breadcrumb>
                   <span *gioBreadcrumbItem>APIs</span>
@@ -44,7 +41,7 @@ export const Default: Story = {
   }),
 };
 
-export const Links: Story = {
+export const Links: StoryObj = {
   render: () => ({
     template: `<gio-breadcrumb>
                   <a href="/apis" *gioBreadcrumbItem>APIs</a>

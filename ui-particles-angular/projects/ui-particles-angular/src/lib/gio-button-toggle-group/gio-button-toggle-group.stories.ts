@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 export default {
   title: 'Components / Button Toggle Group',
@@ -27,7 +26,7 @@ export default {
   render: () => ({}),
 } as Meta;
 
-export const Default: Story = {
+export const Default: StoryObj = {
   render: () => ({
     template: `
     <p style="background-color: #fff; padding:16px;">

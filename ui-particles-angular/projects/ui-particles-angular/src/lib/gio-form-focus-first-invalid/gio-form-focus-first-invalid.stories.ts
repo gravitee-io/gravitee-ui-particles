@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { UntypedFormControl, UntypedFormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -37,7 +35,6 @@ export default {
       imports: [
         GioFormFocusInvalidModule,
         GioSaveBarModule,
-        BrowserAnimationsModule,
         ReactiveFormsModule,
         MatFormFieldModule,
         MatInputModule,
@@ -50,7 +47,7 @@ export default {
   ],
 } as Meta;
 
-export const Demo: Story = {
+export const Demo: StoryObj = {
   render: () => {
     const form = new UntypedFormGroup({
       anInput: new UntypedFormControl(null, Validators.required),

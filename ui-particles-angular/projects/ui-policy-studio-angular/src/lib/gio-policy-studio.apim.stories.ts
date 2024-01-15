@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
@@ -51,8 +49,9 @@ export default {
   title: 'Policy Studio / APIM',
   decorators: [
     moduleMetadata({
-      imports: [BrowserAnimationsModule, GioPolicyStudioModule],
-
+      imports: [GioPolicyStudioModule],
+    }),
+    applicationConfig({
       providers: [matIconRegisterProvider(POLICIES_V4_UNREGISTERED_ICON.map(policy => ({ id: policy.id, svg: policy.icon })))],
     }),
   ],
@@ -88,8 +87,7 @@ export default {
   }),
 } as Meta;
 
-export const Loading: Story = {
-  name: 'Loading',
+export const Loading: StoryObj = {
   args: {
     loading: true,
     apiType: 'MESSAGE',
@@ -102,7 +100,7 @@ export const Loading: Story = {
   },
 };
 
-export const MessageWithoutFlows: Story = {
+export const MessageWithoutFlows: StoryObj = {
   name: 'Message API without flows',
   args: {
     apiType: 'MESSAGE',
@@ -115,7 +113,7 @@ export const MessageWithoutFlows: Story = {
   },
 };
 
-export const MessageWithFlows: Story = {
+export const MessageWithFlows: StoryObj = {
   name: 'Message API with flows',
   args: {
     apiType: 'MESSAGE',
@@ -137,7 +135,7 @@ export const MessageWithFlows: Story = {
   },
 };
 
-export const MessageWithFlowsAndPlans: Story = {
+export const MessageWithFlowsAndPlans: StoryObj = {
   name: 'Message API with flows & plans',
   args: {
     apiType: 'MESSAGE',
@@ -202,7 +200,7 @@ export const MessageWithFlowsAndPlans: Story = {
   },
 };
 
-export const MessageWithAllPhases: Story = {
+export const MessageWithAllPhases: StoryObj = {
   name: 'Message API with All phases',
   args: {
     apiType: 'MESSAGE',
@@ -233,7 +231,7 @@ export const MessageWithAllPhases: Story = {
   },
 };
 
-export const MessageWithDisabledPhase: Story = {
+export const MessageWithDisabledPhase: StoryObj = {
   name: 'Message API with disabled phase',
   args: {
     apiType: 'MESSAGE',
@@ -268,7 +266,7 @@ export const MessageWithDisabledPhase: Story = {
   },
 };
 
-export const MessageWithConditionalStep: Story = {
+export const MessageWithConditionalStep: StoryObj = {
   name: 'Message API with conditional step',
   args: {
     apiType: 'MESSAGE',
@@ -291,7 +289,7 @@ export const MessageWithConditionalStep: Story = {
     plans: [],
   },
 };
-export const MessageWithConditionalExpressionLanguageStep: Story = {
+export const MessageWithConditionalExpressionLanguageStep: StoryObj = {
   name: 'Message API with conditional expression language step',
   args: {
     apiType: 'MESSAGE',
@@ -323,7 +321,7 @@ export const MessageWithConditionalExpressionLanguageStep: Story = {
   },
 };
 
-export const ProxyWithFlowsAndPlans: Story = {
+export const ProxyWithFlowsAndPlans: StoryObj = {
   name: 'Proxy API with flows & plans',
   args: {
     apiType: 'PROXY',
@@ -397,7 +395,7 @@ export const ProxyWithFlowsAndPlans: Story = {
   },
 };
 
-export const ProxyWithFlowSteps: Story = {
+export const ProxyWithFlowSteps: StoryObj = {
   name: 'Proxy API With Flow steps',
   args: {
     apiType: 'PROXY',
@@ -428,8 +426,7 @@ export const ProxyWithFlowSteps: Story = {
   },
 };
 
-export const LongWorld: Story = {
-  name: 'Long World',
+export const LongWorld: StoryObj = {
   args: {
     apiType: 'PROXY',
     entrypointsInfo: [fakeHTTPProxyEntrypoint()],

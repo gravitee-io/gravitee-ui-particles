@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
-import { withDesign } from 'storybook-addon-designs';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 import { GioIconsModule } from '../../gio-icons/gio-icons.module';
-import { OEM_THEME_ARG_TYPES, computeStylesForStory } from '../oem-theme.service';
+import { OEM_THEME_ARG_TYPES, computeStylesForStory, OEM_DEFAULT_LOGO } from '../oem-theme.service';
 
 import { GioTopBarComponent } from './gio-top-bar.component';
 import { GioTopBarModule } from './gio-top-bar.module';
@@ -34,13 +32,15 @@ export default {
     moduleMetadata({
       imports: [MatIconModule, MatButtonModule, GioIconsModule, GioTopBarModule, GioTopBarLinkModule, GioTopBarMenuModule],
     }),
-    withDesign,
   ],
   render: () => ({}),
 } as Meta;
 
-export const Default: Story = {
+export const Default: StoryObj = {
   argTypes: OEM_THEME_ARG_TYPES,
+  args: {
+    logo: OEM_DEFAULT_LOGO,
+  },
   render: args => {
     return {
       template: `

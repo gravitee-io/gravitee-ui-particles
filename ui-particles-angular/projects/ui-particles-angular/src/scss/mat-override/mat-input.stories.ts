@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Story } from '@storybook/angular/types-7-0';
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { UntypedFormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -39,7 +38,6 @@ export default {
         MatNativeDateModule,
         GioFormTagsInputModule,
         MatLegacySelectModule,
-        BrowserAnimationsModule,
         ReactiveFormsModule,
         FormsModule,
       ],
@@ -51,7 +49,7 @@ export default {
   },
 } as Meta;
 
-export const MatInput: Story = {
+export const MatInput: StoryObj = {
   render: () => ({
     template: `
         <h3>Design System inputs</h3>

@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 import { GioLoaderComponent } from './gio-loader.component';
 import { GioLoaderModule } from './gio-loader.module';
@@ -30,13 +29,13 @@ export default {
   render: () => ({}),
 } as Meta;
 
-export const Loader: Story = {
+export const Loader: StoryObj = {
   render: () => ({
     template: "<gio-loader style='width:56px; height: 56px'></gio-loader>",
   }),
 };
 
-export const LoaderWithBackground: Story = {
+export const LoaderWithBackground: StoryObj = {
   render: () => ({
     template: '<gio-loader style="width:32px; height: 32px; background: pink; border-radius: 50%;  padding: 4px;"></gio-loader>',
   }),
