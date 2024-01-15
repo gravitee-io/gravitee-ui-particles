@@ -15,7 +15,7 @@
  */
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
-import { MatLegacyButtonModule } from '@angular/material/legacy-button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 import { GioIconsModule } from '../../lib/gio-icons/gio-icons.module';
@@ -24,13 +24,13 @@ export default {
   title: 'Material Override',
   decorators: [
     moduleMetadata({
-      imports: [MatLegacyButtonModule, MatIconModule, GioIconsModule],
+      imports: [MatButtonModule, MatIconModule, GioIconsModule],
     }),
   ],
   render: () => ({}),
 } as Meta;
 
-export const MatButton: Story = {
+export const MatButtonMDC: Story = {
   render: () => ({
     template: `
         <h3>Design System buttons</h3>
@@ -44,9 +44,9 @@ export const MatButton: Story = {
                     <button mat-flat-button color="primary" class="small">Small button</button>
                     </div>
                 <div class="button-container">
-                    <button mat-flat-button mat-icon-button color="primary" class="large"><mat-icon svgIcon="gio:plus"></mat-icon></button>
-                    <button mat-flat-button mat-icon-button color="primary" class="medium"><mat-icon svgIcon="gio:plus"></mat-icon></button>
-                    <button mat-flat-button mat-icon-button color="primary" class="small"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-flat-button color="primary" class="large">s<mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-flat-button color="primary" class="medium"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-flat-button  color="primary" class="small"><mat-icon svgIcon="gio:plus"></mat-icon></button>
                     </div>
                 <div class="button-container">
                     <button mat-flat-button color="primary" class="large"><mat-icon svgIcon="gio:star-outline"></mat-icon>Large button</button>
@@ -54,9 +54,9 @@ export const MatButton: Story = {
                     <button mat-flat-button color="primary" class="small"><mat-icon svgIcon="gio:star-outline"></mat-icon>Small button</button>
                 </div>
                 <div class="button-container">
-                    <button mat-flat-button color="primary" class="large">Large button<mat-icon svgIcon="gio:star-outline" class="mat-icon-right"></mat-icon></button>
-                    <button mat-flat-button color="primary" class="medium">Medium button<mat-icon svgIcon="gio:star-outline" class="mat-icon-right"></mat-icon></button>
-                    <button mat-flat-button color="primary" class="small">Small button<mat-icon svgIcon="gio:star-outline" class="mat-icon-right"></mat-icon></button>
+                    <button mat-flat-button color="primary" class="large">Large button<mat-icon svgIcon="gio:star-outline" iconPositionEnd></mat-icon></button>
+                    <button mat-flat-button color="primary" class="medium">Medium button<mat-icon svgIcon="gio:star-outline" iconPositionEnd></mat-icon></button>
+                    <button mat-flat-button color="primary" class="small">Small button<mat-icon svgIcon="gio:star-outline" iconPositionEnd></mat-icon></button>
                 </div>
             </div>
             <div>
@@ -68,9 +68,9 @@ export const MatButton: Story = {
                     <button mat-stroked-button class="small">Small button</button>
                     </div>
                 <div class="button-container">
-                    <button mat-stroked-button mat-icon-button class="large"><mat-icon svgIcon="gio:plus"></mat-icon></button>
-                    <button mat-stroked-button mat-icon-button class="medium"><mat-icon svgIcon="gio:plus"></mat-icon></button>
-                    <button mat-stroked-button mat-icon-button class="small"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-stroked-button class="large"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-stroked-button class="medium"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-stroked-button class="small"><mat-icon svgIcon="gio:plus"></mat-icon></button>
                     </div>
                 <div class="button-container">
                     <button mat-stroked-button class="large"><mat-icon svgIcon="gio:star-outline"></mat-icon>Large button</button>
@@ -78,9 +78,9 @@ export const MatButton: Story = {
                     <button mat-stroked-button class="small"><mat-icon svgIcon="gio:star-outline"></mat-icon>Small button</button>
                 </div>
                 <div class="button-container">
-                    <button mat-stroked-button class="large">Large button<mat-icon svgIcon="gio:star-outline" class="mat-icon-right"></mat-icon></button>
-                    <button mat-stroked-button class="medium">Medium button<mat-icon svgIcon="gio:star-outline" class="mat-icon-right"></mat-icon></button>
-                    <button mat-stroked-button class="small">Small button<mat-icon svgIcon="gio:star-outline" class="mat-icon-right"></mat-icon></button>
+                    <button mat-stroked-button class="large">Large button<mat-icon svgIcon="gio:star-outline" iconPositionEnd></mat-icon></button>
+                    <button mat-stroked-button class="medium">Medium button<mat-icon svgIcon="gio:star-outline" iconPositionEnd></mat-icon></button>
+                    <button mat-stroked-button class="small">Small button<mat-icon svgIcon="gio:star-outline" iconPositionEnd></mat-icon></button>
                 </div>
             </div>
             <div>
@@ -92,9 +92,9 @@ export const MatButton: Story = {
                     <button mat-button class="small">Small button</button>
                     </div>
                 <div class="button-container">
-                    <button mat-button mat-icon-button class="large"><mat-icon svgIcon="gio:plus"></mat-icon></button>
-                    <button mat-button mat-icon-button class="medium"><mat-icon svgIcon="gio:plus"></mat-icon></button>
-                    <button mat-button mat-icon-button class="small"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-button class="large"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-button class="medium"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-button class="small"><mat-icon svgIcon="gio:plus"></mat-icon></button>
                     </div>
                 <div class="button-container">
                     <button mat-button class="large"><mat-icon svgIcon="gio:star-outline"></mat-icon>Large button</button>
@@ -102,9 +102,9 @@ export const MatButton: Story = {
                     <button mat-button class="small"><mat-icon svgIcon="gio:star-outline"></mat-icon>Small button</button>
                 </div>
                 <div class="button-container">
-                    <button mat-button class="large">Large button<mat-icon svgIcon="gio:star-outline" class="mat-icon-right"></mat-icon></button>
-                    <button mat-button class="medium">Medium button<mat-icon svgIcon="gio:star-outline" class="mat-icon-right"></mat-icon></button>
-                    <button mat-button class="small">Small button<mat-icon svgIcon="gio:star-outline" class="mat-icon-right"></mat-icon></button>
+                    <button mat-button class="large">Large button<mat-icon svgIcon="gio:star-outline" iconPositionEnd></mat-icon></button>
+                    <button mat-button class="medium">Medium button<mat-icon svgIcon="gio:star-outline" iconPositionEnd></mat-icon></button>
+                    <button mat-button class="small">Small button<mat-icon svgIcon="gio:star-outline" iconPositionEnd></mat-icon></button>
                 </div>
             </div>
             <div>
@@ -116,9 +116,9 @@ export const MatButton: Story = {
                     <button mat-flat-button color="accent" class="small">Small button</button>
                     </div>
                 <div class="button-container">
-                    <button mat-flat-button mat-icon-button color="accent" class="large"><mat-icon svgIcon="gio:plus"></mat-icon></button>
-                    <button mat-flat-button mat-icon-button color="accent" class="medium"><mat-icon svgIcon="gio:plus"></mat-icon></button>
-                    <button mat-flat-button mat-icon-button color="accent" class="small"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-flat-button color="accent" class="large"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-flat-button color="accent" class="medium"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-flat-button color="accent" class="small"><mat-icon svgIcon="gio:plus"></mat-icon></button>
                     </div>
                 <div class="button-container">
                     <button mat-flat-button color="accent" class="large"><mat-icon svgIcon="gio:star-outline"></mat-icon>Large button</button>
@@ -126,9 +126,9 @@ export const MatButton: Story = {
                     <button mat-flat-button color="accent" class="small"><mat-icon svgIcon="gio:star-outline"></mat-icon>Small button</button>
                 </div>
                 <div class="button-container">
-                    <button mat-flat-button color="accent" class="large">Large button<mat-icon svgIcon="gio:star-outline" class="mat-icon-right"></mat-icon></button>
-                    <button mat-flat-button color="accent" class="medium">Medium button<mat-icon svgIcon="gio:star-outline" class="mat-icon-right"></mat-icon></button>
-                    <button mat-flat-button color="accent" class="small">Small button<mat-icon svgIcon="gio:star-outline" class="mat-icon-right"></mat-icon></button>
+                    <button mat-flat-button color="accent" class="large">Large button<mat-icon svgIcon="gio:star-outline" iconPositionEnd></mat-icon></button>
+                    <button mat-flat-button color="accent" class="medium">Medium button<mat-icon svgIcon="gio:star-outline" iconPositionEnd></mat-icon></button>
+                    <button mat-flat-button color="accent" class="small">Small button<mat-icon svgIcon="gio:star-outline" iconPositionEnd></mat-icon></button>
                 </div>
             </div>
             <div>
@@ -140,9 +140,9 @@ export const MatButton: Story = {
                     <button mat-flat-button color="warn" class="small">Small button</button>
                     </div>
                 <div class="button-container">
-                    <button mat-flat-button mat-icon-button color="warn" class="large"><mat-icon svgIcon="gio:plus"></mat-icon></button>
-                    <button mat-flat-button mat-icon-button color="warn" class="medium"><mat-icon svgIcon="gio:plus"></mat-icon></button>
-                    <button mat-flat-button mat-icon-button color="warn" class="small"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-flat-button color="warn" class="large"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-flat-button color="warn" class="medium"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-flat-button color="warn" class="small"><mat-icon svgIcon="gio:plus"></mat-icon></button>
                     </div>
                 <div class="button-container">
                     <button mat-flat-button color="warn" class="large"><mat-icon svgIcon="gio:star-outline"></mat-icon>Large button</button>
@@ -150,9 +150,9 @@ export const MatButton: Story = {
                     <button mat-flat-button color="warn" class="small"><mat-icon svgIcon="gio:star-outline"></mat-icon>Small button</button>
                 </div>
                 <div class="button-container">
-                    <button mat-flat-button color="warn" class="large">Large button<mat-icon svgIcon="gio:star-outline" class="mat-icon-right"></mat-icon></button>
-                    <button mat-flat-button color="warn" class="medium">Medium button<mat-icon svgIcon="gio:star-outline" class="mat-icon-right"></mat-icon></button>
-                    <button mat-flat-button color="warn" class="small">Small button<mat-icon svgIcon="gio:star-outline" class="mat-icon-right"></mat-icon></button>
+                    <button mat-flat-button color="warn" class="large">Large button<mat-icon svgIcon="gio:star-outline" iconPositionEnd></mat-icon></button>
+                    <button mat-flat-button color="warn" class="medium">Medium button<mat-icon svgIcon="gio:star-outline" iconPositionEnd></mat-icon></button>
+                    <button mat-flat-button color="warn" class="small">Small button<mat-icon svgIcon="gio:star-outline" iconPositionEnd></mat-icon></button>
                 </div>
             </div>
         </div>
@@ -250,19 +250,19 @@ export const MatButton: Story = {
               <div>
                   <h4>Default button + icon without text</h4>
                   <div class="button-container">
-                      <button mat-button mat-icon-button aria-label="Example icon button with a edit-pencil icon">
+                      <button mat-button aria-label="Example icon button with a edit-pencil icon">
                           <mat-icon svgIcon="gio:edit-pencil"></mat-icon>
                       </button>
-                      <button mat-button mat-icon-button color="primary" aria-label="Example icon button with a edit-pencil icon">
+                      <button mat-button color="primary" aria-label="Example icon button with a edit-pencil icon">
                           <mat-icon svgIcon="gio:edit-pencil"></mat-icon>
                       </button>
-                      <button mat-button mat-icon-button color="accent" aria-label="Example icon button with a edit-pencil icon">
+                      <button mat-button color="accent" aria-label="Example icon button with a edit-pencil icon">
                           <mat-icon svgIcon="gio:edit-pencil"></mat-icon>
                       </button>
-                      <button mat-button mat-icon-button color="warn" aria-label="Example icon button with a edit-pencil icon">
+                      <button mat-button color="warn" aria-label="Example icon button with a edit-pencil icon">
                           <mat-icon svgIcon="gio:edit-pencil"></mat-icon>
                       </button>
-                      <button mat-button mat-icon-button disabled aria-label="Example icon button with a edit-pencil icon">
+                      <button mat-button disabled aria-label="Example icon button with a edit-pencil icon">
                           <mat-icon svgIcon="gio:edit-pencil"></mat-icon>
                       </button>
                   </div>
@@ -334,19 +334,19 @@ export const MatButton: Story = {
               <div>
                   <h4>Stroked icon without text</h4>
                   <div class="button-container">
-                      <button mat-stroked-button mat-icon-button aria-label="Example icon button with a settings icon">
+                      <button mat-stroked-button aria-label="Example icon button with a settings icon">
                           <mat-icon svgIcon="gio:settings"></mat-icon>
                       </button>
-                      <button mat-stroked-button mat-icon-button color="primary" aria-label="Example icon button with a settings icon">
+                      <button mat-stroked-button color="primary" aria-label="Example icon button with a settings icon">
                           <mat-icon svgIcon="gio:settings"></mat-icon>
                       </button>
-                      <button mat-stroked-button mat-icon-button color="accent" aria-label="Example icon button with a settings icon">
+                      <button mat-stroked-button color="accent" aria-label="Example icon button with a settings icon">
                           <mat-icon svgIcon="gio:settings"></mat-icon>
                       </button>
-                      <button mat-stroked-button mat-icon-button color="warn" aria-label="Example icon button with a settings icon">
+                      <button mat-stroked-button color="warn" aria-label="Example icon button with a settings icon">
                           <mat-icon svgIcon="gio:settings"></mat-icon>
                       </button>
-                      <button mat-stroked-button mat-icon-button disabled aria-label="Example icon button with a settings icon">
+                      <button mat-stroked-button disabled aria-label="Example icon button with a settings icon">
                           <mat-icon svgIcon="gio:plus"></mat-icon>
                       </button>
                   </div>

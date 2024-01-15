@@ -21,6 +21,7 @@
 $background: map.get(theme.$mat-theme, background);
 
 @mixin mat-table() {
+  // Legacy mat-table
   .mat-table {
     tbody tr:hover {
       background-color: mat.get-color-from-palette($background, hover);
@@ -47,6 +48,13 @@ $background: map.get(theme.$mat-theme, background);
           margin-bottom: -1.34375em;
         }
       }
+    }
+  }
+
+  // MDC mat-table
+  .mat-mdc-table {
+    tbody tr.mat-mdc-row:hover {
+      background-color: mat.get-color-from-palette($background, hover);
     }
   }
 }

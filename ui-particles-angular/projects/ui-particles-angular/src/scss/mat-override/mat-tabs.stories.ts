@@ -16,13 +16,13 @@
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTabsModule } from '@angular/material/tabs';
+import { MatLegacyTabsModule } from '@angular/material/legacy-tabs';
 
 export default {
   title: 'Material Override',
   decorators: [
     moduleMetadata({
-      imports: [BrowserAnimationsModule, MatTabsModule],
+      imports: [BrowserAnimationsModule, MatLegacyTabsModule],
     }),
   ],
 } as Meta;

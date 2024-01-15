@@ -17,10 +17,10 @@ import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UntypedFormControl, FormsModule } from '@angular/forms';
-import { MatLegacyTableModule } from '@angular/material/legacy-table';
-import { MatLegacyFormFieldModule } from '@angular/material/legacy-form-field';
-import { MatLegacyInputModule } from '@angular/material/legacy-input';
-import { MatLegacySelectModule } from '@angular/material/legacy-select';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 interface PeriodicElement {
   name: string;
@@ -43,17 +43,10 @@ const ELEMENT_DATA: PeriodicElement[] = [
 ];
 
 export default {
-  title: 'Material Override',
+  title: 'Material Override / MatTable MDC',
   decorators: [
     moduleMetadata({
-      imports: [
-        BrowserAnimationsModule,
-        FormsModule,
-        MatLegacyTableModule,
-        MatLegacyFormFieldModule,
-        MatLegacyInputModule,
-        MatLegacySelectModule,
-      ],
+      imports: [BrowserAnimationsModule, FormsModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule],
     }),
   ],
   render: () => ({}),
