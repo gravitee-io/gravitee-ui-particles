@@ -19,7 +19,7 @@ import { switchMap, tap } from 'rxjs/operators';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { LICENSE_CONFIGURATION_TESTING, OEM_LICENSE_CONFIGURATION_TESTING } from './gio-license.testing.module';
-import { GioLicenseService, License } from './gio-license.service';
+import { GioLicenseService, License, LicenseOptions } from './gio-license.service';
 
 describe('GioLicenseService', () => {
   let httpTestingController: HttpTestingController;
@@ -207,6 +207,65 @@ describe('GioLicenseService', () => {
       });
 
       req.flush(oemLicense);
+    });
+
+    // Need a workaround to be able to use both it.each and done callback https://github.com/DefinitelyTyped/DefinitelyTyped/issues/34617#issuecomment-497760008
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    it.each<any>([
+      [['A', 'B', 'C'], [{ feature: 'A' }], true],
+      [['A', 'B', 'C'], [{ feature: 'A' }, { feature: 'B' }, { feature: 'C' }], true],
+      [['A', 'B', 'C'], [{ feature: 'D' }], false],
+      [['A', 'B', 'C'], [{ feature: 'A' }, { feature: 'B' }, { feature: 'D' }], false],
+    ] as [string[], LicenseOptions[], boolean][])(
+      'Check license has all features',
+      (licenseFeatures: string[], expectedFeatures: LicenseOptions[], expectedResult: boolean, done: jest.DoneCallback) => {
+        const license: License = {
+          tier: 'tier',
+          packs: [],
+          features: licenseFeatures,
+        };
+
+        gioLicenseService
+          .hasAllFeatures$(expectedFeatures)
+          .pipe(
+            tap(ok => {
+              expect(ok).toEqual(expectedResult);
+              done();
+            }),
+          )
+          .subscribe();
+
+        const req = httpTestingController.expectOne({
+          method: 'GET',
+          url: `https://url.test:3000/license`,
+        });
+
+        req.flush(license);
+      },
+    );
+
+    it('undeployed feature', (done: jest.DoneCallback) => {
+      gioLicenseService
+        .hasAllFeatures$([{ feature: 'A', deployed: false }, { feature: 'B' }])
+        .pipe(
+          tap(ok => {
+            expect(ok).toEqual(false);
+            done();
+          }),
+        )
+        .subscribe();
+    });
+
+    it('undefined feature', (done: jest.DoneCallback) => {
+      gioLicenseService
+        .hasAllFeatures$(undefined)
+        .pipe(
+          tap(ok => {
+            expect(ok).toEqual(true);
+            done();
+          }),
+        )
+        .subscribe();
     });
   });
 
