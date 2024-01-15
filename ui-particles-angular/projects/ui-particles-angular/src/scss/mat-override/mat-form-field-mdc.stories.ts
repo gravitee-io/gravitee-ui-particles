@@ -16,43 +16,44 @@
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatLegacyCardModule } from '@angular/material/legacy-card';
-import { MatLegacyFormFieldModule } from '@angular/material/legacy-form-field';
-import { MatLegacyInputModule } from '@angular/material/legacy-input';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { UntypedFormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
 export default {
-  title: 'Material Override / MatFormField',
+  title: 'Material Override / MatFormField MDC',
   decorators: [
     moduleMetadata({
-      imports: [
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
-        MatLegacyCardModule,
-        MatLegacyFormFieldModule,
-        MatLegacyInputModule,
-        MatIconModule,
-      ],
+      imports: [BrowserAnimationsModule, ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatIconModule],
     }),
   ],
   render: () => ({}),
 } as Meta;
 
-export const MatHintAndErrorFontSize: Story = {
+export const SubscriptSizing: Story = {
   render: () => ({
     template: `
       <p>
-      "mat-error" and "mat-hint" should have caption font-size
+      by default, subscript sizing is set to "dynamic" (see GioMatConfigModule)
+      (only for mdc component)
       </p>
       
       <mat-card>
+      <mat-card-content>
         <p style="display:flex; flex-direction:column;">
           <mat-form-field appearance="fill">
             <mat-label>Fill form field</mat-label>
             <input matInput placeholder="Placeholder" />
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
             <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Fill form field</mat-label>
+            <input matInput placeholder="Placeholder" />
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Multiline hint Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br> Nullam auctor, nunc vel<br> Nullam auctor, nunc vel</mat-hint>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Click to see mat-error</mat-label>
@@ -65,6 +66,7 @@ export const MatHintAndErrorFontSize: Story = {
             </mat-error>
           </mat-form-field>
         </p>
+        </mat-card-content>
       </mat-card>
     `,
     props: {
@@ -73,14 +75,15 @@ export const MatHintAndErrorFontSize: Story = {
   }),
 };
 
-export const PaddingBottomMatFormField: Story = {
+export const MarginMatFormField: Story = {
   render: () => ({
     template: `
       <p>
-      Add default top margin between mat-form-field
+      Add default margin to mat-mdc-form-field
       </p>
       
       <mat-card>
+      <mat-card-content>
         <p style="display:flex; flex-direction:column;">
           <mat-form-field appearance="fill">
             <mat-label>Fill form field</mat-label>
@@ -88,7 +91,7 @@ export const PaddingBottomMatFormField: Story = {
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
             <mat-hint>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br> Nullam auctor, nunc vel</mat-hint>
           </mat-form-field>
-          <mat-form-field appearance="fill">
+          <mat-form-field>
             <mat-label>Second Fill form field</mat-label>
             <input matInput placeholder="Placeholder" />
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
@@ -104,7 +107,14 @@ export const PaddingBottomMatFormField: Story = {
               Email is <strong>required</strong>
             </mat-error>
           </mat-form-field>
+          <mat-form-field subscriptSizing="fixed">
+            <mat-label>Form field with fixed subscriptSizing</mat-label>
+            <input matInput placeholder="Placeholder" />
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>SubscriptSizing = fixed </mat-hint>
+          </mat-form-field>
         </p>
+      </mat-card-content>
       </mat-card>
     `,
     props: {
@@ -121,6 +131,7 @@ export const DisabledMatFormFieldShouldHaveNotAllowedCursor: Story = {
       </p>
       
       <mat-card>
+      <mat-card-content>
         <p style="display:flex; flex-direction:column;">
           <mat-form-field appearance="fill" disabled="true">
             <mat-label>Fill form field</mat-label>
@@ -129,6 +140,7 @@ export const DisabledMatFormFieldShouldHaveNotAllowedCursor: Story = {
             <mat-hint>Hint</mat-hint>
           </mat-form-field>
         </p>
+      </mat-card-content>
       </mat-card>
     `,
     props: {

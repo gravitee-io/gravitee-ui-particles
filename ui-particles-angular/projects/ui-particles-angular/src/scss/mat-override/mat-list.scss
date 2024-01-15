@@ -21,6 +21,8 @@
 $background: map.get(theme.$mat-theme, background);
 
 @mixin mat-list() {
+  // Legacy mat-list
+
   /**
    * When a Mat List is inside a Mat Card then set a negative to balance default padding of the Mat Card
    */
@@ -32,6 +34,17 @@ $background: map.get(theme.$mat-theme, background);
    * Change background color of each list item on hover
    */
   .mat-list-item {
+    &:hover {
+      background-color: mat.get-color-from-palette($background, hover);
+    }
+  }
+
+  // MDC mat-list
+
+  /**
+     * Change background color of each list item on hover
+     */
+  .mat-mdc-list-item {
     &:hover {
       background-color: mat.get-color-from-palette($background, hover);
     }

@@ -15,19 +15,19 @@
  */
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
-import { MatLegacyCardModule } from '@angular/material/legacy-card';
+import { MatCardModule } from '@angular/material/card';
 
 export default {
   title: 'Material Override',
   decorators: [
     moduleMetadata({
-      imports: [MatLegacyCardModule],
+      imports: [MatCardModule],
     }),
   ],
   render: () => ({}),
 } as Meta;
 
-export const MatCard: Story = {
+export const MatCardMDC: Story = {
   render: () => ({
     template: `
       <p>
@@ -35,16 +35,22 @@ export const MatCard: Story = {
       </p>
       
       <mat-card>
+      <mat-card-content>
         Default elevation is 3
         <br>
 
         <mat-card>
+      <mat-card-content>
           MatCard inside MatCard keep elevation to lvl 1 by default
+        </mat-card-content>
         </mat-card>
         <br>
-        <mat-card class="mat-elevation-z2">
+        <mat-card class="mat-mdc-elevation-specific mat-elevation-z2">
+      <mat-card-content>
           MatCard inside MatCard with custom elevation to lvl 2
+        </mat-card-content>
         </mat-card>
+        </mat-card-content>
       </mat-card>
     `,
   }),

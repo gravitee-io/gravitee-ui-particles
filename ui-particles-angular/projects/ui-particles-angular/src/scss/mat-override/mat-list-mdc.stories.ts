@@ -16,9 +16,9 @@
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/types-7-0';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
-import { MatLegacyCardModule } from '@angular/material/legacy-card';
-import { MatLegacyListModule } from '@angular/material/legacy-list';
+import { MatCardModule } from '@angular/material/card';
 
 interface PeriodicElement {
   name: string;
@@ -44,13 +44,13 @@ export default {
   title: 'Material Override',
   decorators: [
     moduleMetadata({
-      imports: [BrowserAnimationsModule, MatLegacyListModule, MatIconModule, MatLegacyCardModule],
+      imports: [BrowserAnimationsModule, MatListModule, MatIconModule, MatCardModule],
     }),
   ],
   render: () => ({}),
 } as Meta;
 
-export const MatList: Story = {
+export const MatListMDC: Story = {
   render: () => ({
     template: `
       <div>Material overrides for Mat List component:</div>
@@ -59,13 +59,13 @@ export const MatList: Story = {
         <li>Change background color of each list item on hover</li>
       </ul>
       <mat-card>
-        <mat-list>
-          <mat-list-item *ngFor="let element of elements">
-            <mat-icon mat-list-icon>science</mat-icon>
-            <div mat-line><strong>{{element.symbol}}</strong> - {{element.name}}</div>
-            <div mat-line> {{element.weight}} </div>
-          </mat-list-item>
-        </mat-list>
+          <mat-list>
+            <mat-list-item *ngFor="let element of elements">
+              <mat-icon matListItemIcon>science</mat-icon>
+              <div matListItemTitle><strong>{{element.symbol}}</strong> - {{element.name}}</div>
+              <div matListItemLine>{{element.weight}}</div>
+            </mat-list-item>
+          </mat-list>
       </mat-card>`,
     props: {
       elements: ELEMENT_DATA,

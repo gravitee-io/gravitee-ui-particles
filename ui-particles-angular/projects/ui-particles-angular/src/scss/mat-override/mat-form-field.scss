@@ -20,6 +20,7 @@
 @use '../gio-mat-palettes' as palettes;
 
 @mixin mat-form-field() {
+  // Legacy mat-form-field
   .mat-form-field:not([class*='mat-paginator']) {
     // Increase default padding to have space for two lines of hint & error bellow the input
     padding-bottom: 16px;
@@ -47,5 +48,15 @@
 
   .mat-form-field-appearance-outline .mat-form-field-infix {
     padding-top: 0.8em;
+  }
+
+  // MDC mat-form-field
+
+  .mat-mdc-form-field {
+    margin: 0.25em 0;
+  }
+
+  .mat-mdc-form-field.mat-form-field-disabled {
+    cursor: not-allowed !important;
   }
 }

@@ -15,22 +15,22 @@
  */
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
+import { MatOptionModule } from '@angular/material/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatLegacyOptionModule } from '@angular/material/legacy-core';
-import { MatLegacyAutocompleteModule } from '@angular/material/legacy-autocomplete';
-import { MatLegacyInputModule } from '@angular/material/legacy-input';
 
 export default {
   title: 'Material Override',
   decorators: [
     moduleMetadata({
-      imports: [NoopAnimationsModule, MatLegacyInputModule, MatLegacyAutocompleteModule, MatLegacyOptionModule],
+      imports: [NoopAnimationsModule, MatInputModule, MatAutocompleteModule, MatOptionModule],
     }),
   ],
   render: () => ({}),
 } as Meta;
 
-export const MatOptionMDC: Story = {
+export const MatOption: Story = {
   render: () => ({
     template: `
         <mat-form-field [floatLabel]="'never'">

@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { Story } from '@storybook/angular/types-7-0';
 import { Meta, moduleMetadata } from '@storybook/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UntypedFormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatLegacyInputModule } from '@angular/material/legacy-input';
-import { MatIconModule } from '@angular/material/icon';
-import { MatLegacySelectModule } from '@angular/material/legacy-select';
 import { action } from '@storybook/addon-actions';
+import { MatSelectModule } from '@angular/material/select';
 
 import { Tags } from '../../lib/gio-form-tags-input/gio-form-tags-input.component';
 import { GioFormTagsInputModule, GioIconsModule } from '../../public-api';
@@ -32,13 +32,13 @@ export default {
   decorators: [
     moduleMetadata({
       imports: [
-        MatLegacyInputModule,
+        MatInputModule,
         MatIconModule,
         GioIconsModule,
         MatDatepickerModule,
         MatNativeDateModule,
         GioFormTagsInputModule,
-        MatLegacySelectModule,
+        MatSelectModule,
         BrowserAnimationsModule,
         ReactiveFormsModule,
         FormsModule,
@@ -51,7 +51,7 @@ export default {
   },
 } as Meta;
 
-export const MatInput: Story = {
+export const MatInputMDC: Story = {
   render: () => ({
     template: `
         <h3>Design System inputs</h3>
@@ -121,7 +121,7 @@ export const MatInput: Story = {
             <mat-icon svgIcon="gio:cancel" matSuffix (click)="input.value = ''"></mat-icon>
           </mat-form-field>
   
-          <mat-form-field >
+          <mat-form-field appearance="outline">
             <mat-label>Select input</mat-label>
             <mat-select>
                 <mat-option value="option1">Option 1</mat-option>
@@ -130,7 +130,7 @@ export const MatInput: Story = {
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field >
+          <mat-form-field appearance="fill">
             <mat-label>Date picker</mat-label>
             <input matInput [matDatepicker]="picker">
             <mat-hint>MM/DD/YYYY</mat-hint>
