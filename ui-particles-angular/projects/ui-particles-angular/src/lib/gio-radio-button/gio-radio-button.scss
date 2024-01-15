@@ -48,14 +48,14 @@ $typography: map.get(theme.$mat-theme, typography);
     }
 
     &__title {
-      @include mat.typography-level($typography, subheading-2);
+      @include mat.typography-level($typography, subtitle-1);
 
       margin-bottom: 8px;
       text-wrap: initial;
     }
 
     &__subtitle {
-      @include mat.typography-level($typography, body-1);
+      @include mat.typography-level($typography, body-2);
 
       text-wrap: initial;
     }

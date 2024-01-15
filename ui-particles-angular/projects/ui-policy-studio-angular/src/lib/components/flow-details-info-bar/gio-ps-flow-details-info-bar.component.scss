@@ -28,7 +28,7 @@ $typography: map.get(gio.$mat-theme, typography);
 
 .info {
   &__label {
-    @include mat.typography-level($typography, body-1);
+    @include mat.typography-level($typography, body-2);
 
     color: mat.get-color-from-palette(gio.$mat-space-palette, lighter40);
   }
@@ -36,7 +36,7 @@ $typography: map.get(gio.$mat-theme, typography);
   &__value {
     &.strong {
       padding-left: 8px;
-      @include mat.typography-level($typography, body-2);
+      @include mat.typography-level($typography, subtitle-2);
     }
 
     &.method {

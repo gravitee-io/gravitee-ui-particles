@@ -19,21 +19,21 @@
 @use './gio-mat-palettes' as palettes;
 
 // Config mat Typography
-$mat-typography: mat.define-typography-config(
+$mat-legacy-typography: mat.define-legacy-typography-config(
   $font-family: '"Golos UI", Roboto, "Helvetica Neue", sans-serif',
-  $headline-1: mat.define-typography-level(112px, 112px, 400, $letter-spacing: -0.05em),
-  $headline-2: mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
-  $headline-3: mat.define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
-  $headline-4: mat.define-typography-level(60px, 66px, 600, $letter-spacing: -0.5px),
-  $headline-5: mat.define-typography-level(42px, 52px, 600),
-  $headline-6: mat.define-typography-level(26px, 36px, 600),
-  $subtitle-1: mat.define-typography-level(18px, 24px, 600, $letter-spacing: 0.4px),
-  $subtitle-2: mat.define-typography-level(14px, 20px, 600, $letter-spacing: 0.4px),
-  $body-1: mat.define-typography-level(16px, 24px, 600, $letter-spacing: 0.4px),
-  $body-2: mat.define-typography-level(14px, 20px, 400, $letter-spacing: 0.4px),
+  $display-4: mat.define-typography-level(112px, 112px, 400, $letter-spacing: -0.05em),
+  $display-3: mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
+  $display-2: mat.define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
+  $display-1: mat.define-typography-level(60px, 66px, 600, $letter-spacing: -0.5px),
+  $headline: mat.define-typography-level(42px, 52px, 600),
+  $title: mat.define-typography-level(26px, 36px, 600),
+  $subheading-2: mat.define-typography-level(18px, 24px, 600, $letter-spacing: 0.4px),
+  $subheading-1: mat.define-typography-level(16px, 24px, 600, $letter-spacing: 0.4px),
+  $body-2: mat.define-typography-level(14px, 20px, 600, $letter-spacing: 0.4px),
+  $body-1: mat.define-typography-level(14px, 20px, 400, $letter-spacing: 0.4px),
   $caption: mat.define-typography-level(12px, 16px, 400),
   $button: mat.define-typography-level(14px, 14px, 500),
-  $overline: mat.define-typography-level(inherit, 1.125, 400),
+  $input: mat.define-typography-level(inherit, 1.125, 400),
 );
 
 // Mat default light theme
@@ -44,19 +44,19 @@ $mat-theme-default: mat.define-light-theme(
       accent: palettes.$mat-accent-palette,
       warn: palettes.$mat-error-palette,
     ),
-    typography: $mat-typography,
+    typography: $mat-legacy-typography,
   )
 );
 
 // Mat default dark theme
-$mat-theme-dark: mat.define-dark-theme(
+$mat-legacy-theme-dark: mat.define-dark-theme(
   (
     color: (
       primary: palettes.$mat-primary-palette,
       accent: palettes.$mat-accent-palette,
       warn: palettes.$mat-error-palette,
     ),
-    typography: $mat-typography,
+    typography: $mat-legacy-typography,
   )
 );
 
@@ -88,13 +88,13 @@ $gio-background-foreground: (
 
 // For backward compatibility with Material Design merge $gio-background-foreground into $mat-theme-default and into $mat-theme-default.color.
 // Otherwise the colors of bg and fg seton partially applied
-$mat-color: map.merge(map.get($mat-theme-default, color), $gio-background-foreground);
-$mat-theme: map.merge(
+$mat-legacy-color: map.merge(map.get($mat-theme-default, color), $gio-background-foreground);
+$mat-legacy-theme: map.merge(
   $mat-theme-default,
   map.merge(
     $gio-background-foreground,
     (
-      color: $mat-color,
+      color: $mat-legacy-color,
     )
   )
 );

@@ -42,7 +42,7 @@ h6,
 }
 
 h1 {
-  @include mat.typography-level($typography, headline);
+  @include mat.typography-level($typography, headline-5);
 
   &:first-of-type {
     // Hack to remove the top margin of the first h1. Not perfect but it works if we don't have content before the first h1.
@@ -51,15 +51,15 @@ h1 {
 }
 
 h2 {
-  @include mat.typography-level($typography, title);
+  @include mat.typography-level($typography, headline-6);
 }
 
 h3 {
-  @include mat.typography-level($typography, subheading-2);
+  @include mat.typography-level($typography, subtitle-1);
 }
 
 h4 {
-  @include mat.typography-level($typography, subheading-1);
+  @include mat.typography-level($typography, body-1);
 }
 
 h5,
@@ -68,5 +68,5 @@ h6 {
 }
 
 p {
-  @include mat.typography-level($typography, body-1);
+  @include mat.typography-level($typography, body-2);
 }

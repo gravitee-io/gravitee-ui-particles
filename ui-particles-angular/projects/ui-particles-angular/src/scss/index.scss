@@ -22,6 +22,7 @@
 @forward './theme/typography/gio-typography' show subtitle-typography, code-typography, link-typography, caption-2;
 
 @forward './gio-mat-theme-variable' show $mat-theme, $mat-typography, $mat-theme-dark;
+@forward './gio-mat-legacy-theme-variable' show $mat-legacy-theme, $mat-legacy-typography, $mat-legacy-theme-dark;
 
 @forward './gio-fonts' show import-fonts;
 

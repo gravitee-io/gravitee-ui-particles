@@ -23,7 +23,7 @@ $typography: map.get(gio.$mat-theme, typography);
 .wrapper {
   &__title {
     @include gio.subtitle-typography;
-    @include mat.typography-level($typography, body-2);
+    @include mat.typography-level($typography, subtitle-2);
 
     margin-bottom: 4px;
   }
