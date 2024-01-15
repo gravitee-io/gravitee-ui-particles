@@ -20,24 +20,26 @@
     <h3>Button</h3>
 
     <mat-card style="display: flex; justify-content: space-around; flex-direction: column">
-      <div>
-        <button mat-button>Basic</button>
-        <button mat-raised-button color="primary">Primary</button>
-        <button mat-raised-button color="accent">Accent</button>
-        <button mat-raised-button color="warn">Warn</button>
-        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-      </div>
-      <div>
-        <button mat-button disabled>Basic</button>
-        <button mat-raised-button color="primary" disabled>Primary</button>
-        <button mat-raised-button color="accent" disabled>Accent</button>
-        <button mat-raised-button color="warn" disabled>Warn</button>
-        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon" disabled>
-          <mat-icon>more_vert</mat-icon>
-        </button>
-      </div>
+      <mat-card-content>
+        <div>
+          <button mat-button>Basic</button>
+          <button mat-raised-button color="primary">Primary</button>
+          <button mat-raised-button color="accent">Accent</button>
+          <button mat-raised-button color="warn">Warn</button>
+          <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </div>
+        <div>
+          <button mat-button disabled>Basic</button>
+          <button mat-raised-button color="primary" disabled>Primary</button>
+          <button mat-raised-button color="accent" disabled>Accent</button>
+          <button mat-raised-button color="warn" disabled>Warn</button>
+          <button mat-icon-button aria-label="Example icon button with a vertical three dot icon" disabled>
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </div>
+      </mat-card-content>
     </mat-card>
   </div>
 
@@ -104,64 +106,52 @@
   <div class="sc__zone">
     <h3>Form field</h3>
     <mat-card>
-      <p>
-        <mat-form-field appearance="legacy">
-          <mat-label>Legacy form field</mat-label>
-          <input matInput placeholder="Placeholder" />
-          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-          <mat-hint>Hint</mat-hint>
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field appearance="standard">
-          <mat-label>Standard form field</mat-label>
-          <input matInput placeholder="Placeholder" />
-          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-          <mat-hint>Hint</mat-hint>
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field appearance="fill">
-          <mat-label>Fill form field</mat-label>
-          <input matInput placeholder="Placeholder" />
-          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-          <mat-hint>Hint</mat-hint>
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field appearance="outline">
-          <mat-label>Outline form field</mat-label>
-          <input matInput placeholder="Placeholder" />
-          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-          <mat-hint>Hint</mat-hint>
-        </mat-form-field>
-      </p>
-      <p>
-        <!-- <gio-form-slide-toggle>
+      <mat-card-content>
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Fill form field</mat-label>
+            <input matInput placeholder="Placeholder" />
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Outline form field</mat-label>
+            <input matInput placeholder="Placeholder" />
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+        </p>
+        <p>
+          <!-- <gio-form-slide-toggle>
           <gio-form-label>Label 1</gio-form-label>
           Label 2 - Description
           <mat-slide-toggle gioFormSlideToggle></mat-slide-toggle>
         </gio-form-slide-toggle> -->
-      </p>
+        </p>
+      </mat-card-content>
     </mat-card>
   </div>
 
   <div class="sc__zone">
     <h3>Checkbox / Radio</h3>
     <mat-card>
-      <section>
-        <mat-checkbox style="display: block">Check me!</mat-checkbox>
-        <mat-checkbox style="display: block" [disabled]="true">Disabled</mat-checkbox>
-        <mat-checkbox style="display: block" color="primary" [checked]="true">Check me!</mat-checkbox>
-        <mat-checkbox style="display: block" color="accent" [checked]="true">Check me!</mat-checkbox>
-        <mat-checkbox style="display: block" color="warn" [checked]="true">Check me!</mat-checkbox>
-      </section>
-      <section>
-        <mat-radio-group aria-label="Select an option">
-          <mat-radio-button value="1">Option 1</mat-radio-button>
-          <mat-radio-button value="2">Option 2</mat-radio-button>
-        </mat-radio-group>
-      </section>
+      <mat-card-content>
+        <section>
+          <mat-checkbox style="display: block">Check me!</mat-checkbox>
+          <mat-checkbox style="display: block" [disabled]="true">Disabled</mat-checkbox>
+          <mat-checkbox style="display: block" color="primary" [checked]="true">Check me!</mat-checkbox>
+          <mat-checkbox style="display: block" color="accent" [checked]="true">Check me!</mat-checkbox>
+          <mat-checkbox style="display: block" color="warn" [checked]="true">Check me!</mat-checkbox>
+        </section>
+        <section>
+          <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">Option 1</mat-radio-button>
+            <mat-radio-button value="2">Option 2</mat-radio-button>
+          </mat-radio-group>
+        </section>
+      </mat-card-content>
     </mat-card>
   </div>
 
@@ -180,7 +170,7 @@
     <h3>Progress bar</h3>
     <mat-progress-bar style="margin: 10px" mode="buffer"></mat-progress-bar>
     <mat-progress-bar style="margin: 10px" mode="indeterminate"></mat-progress-bar>
-    <mat-progress-bar style="margin: 10px" color="accent" mode="buffer" value="33" bufferValue="75"></mat-progress-bar>
+    <mat-progress-bar style="margin: 10px" color="accent" mode="buffer" value="33" [bufferValue]="75"></mat-progress-bar>
   </div>
 
   <div class="sc__zone">

@@ -144,30 +144,36 @@ export const WithInitValues: Story = () => ({
 });
 WithInitValues.storyName = 'with FormGroup and init values';
 
-export const DisabledWithInitValues: Story = () => ({
-  template: `
+export const DisabledWithInitValues: Story = {
+  render: () => {
+    const formControl = new UntypedFormControl({
+      value: [
+        ...[
+          'https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Gundam.jpg/250px-Gundam.jpg',
+          'https://upload.wikimedia.org/wikipedia/en/c/c2/ZetaBluRay2.jpg',
+        ],
+        ...['assets/gravitee-logo-cyan.svg'],
+      ],
+      disabled: true,
+    });
+    formControl.valueChanges.subscribe(value => {
+      action('formValue')(value);
+    });
+
+    return {
+      template: `
       <gio-form-file-picker
         [formControl]="formControl"
-        [ngModel]="ngModel"
         [multiple]="multiple"
-        [disabled]="disabled"
-        (ngModelChange)="ngModelChange($event)"
       ></gio-form-file-picker>
   `,
-  props: {
-    disabled: true,
-    formControl: new UntypedFormControl(),
-    ngModel: [
-      ...[
-        'https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Gundam.jpg/250px-Gundam.jpg',
-        'https://upload.wikimedia.org/wikipedia/en/c/c2/ZetaBluRay2.jpg',
-      ],
-      ...['assets/gravitee-logo-cyan.svg'],
-    ],
-    multiple: true,
-    ngModelChange: action('ngModelChange'),
+      props: {
+        formControl,
+        multiple: true,
+      },
+    };
   },
-});
+};
 DisabledWithInitValues.storyName = 'disabled with init values';
 
 export const WithFormValidator: Story = () => {

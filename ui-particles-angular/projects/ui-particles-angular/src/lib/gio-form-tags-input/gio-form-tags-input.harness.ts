@@ -15,11 +15,8 @@
  */
 
 import { BaseHarnessFilters, ComponentHarness, HarnessPredicate, parallel, TestKey } from '@angular/cdk/testing';
-import { MatLegacyAutocompleteHarness as MatAutocompleteHarness } from '@angular/material/legacy-autocomplete/testing';
-import {
-  MatLegacyChipHarness as MatChipHarness,
-  MatLegacyChipListHarness as MatChipListHarness,
-} from '@angular/material/legacy-chips/testing';
+import { MatAutocompleteHarness } from '@angular/material/autocomplete/testing';
+import { MatChipHarness, MatChipGridHarness } from '@angular/material/chips/testing';
 
 export type GioFormTagsInputHarnessFilters = BaseHarnessFilters;
 
@@ -37,31 +34,34 @@ export class GioFormTagsInputHarness extends ComponentHarness {
     return new HarnessPredicate(GioFormTagsInputHarness, options);
   }
 
-  protected getMatChipListHarness = this.locatorFor(MatChipListHarness);
+  protected getMatChipGridHarness = this.locatorFor(MatChipGridHarness);
   protected getMatChipsHarness = this.locatorForAll(MatChipHarness);
 
   public async isDisabled(): Promise<boolean> {
-    const matChipList = await this.getMatChipListHarness();
+    const matChipGrid = await this.getMatChipGridHarness();
     const matChips = await this.getMatChipsHarness();
 
-    const chipListDisabled = await matChipList.isDisabled();
+    const chipListDisabled = await matChipGrid.isDisabled();
     const chipsDisabled = await parallel(() => matChips.map(async matChip => await matChip.isDisabled()));
 
     return chipListDisabled && chipsDisabled.every(chipDisabled => chipDisabled);
   }
 
   public async getTags(): Promise<string[]> {
-    const matChipList = await this.getMatChipListHarness();
+    const matChipGrid = await this.getMatChipGridHarness();
 
-    const chips = await matChipList.getChips();
+    const chips = await matChipGrid.getRows();
 
     return parallel(() => chips.map(async chip => await chip.getText()));
   }
 
   public async addTag(tag: string, separatorKey: TestKey | 'blur' = TestKey.ENTER): Promise<void> {
-    const matChipList = await this.getMatChipListHarness();
+    const matChipGrid = await this.getMatChipGridHarness();
 
-    const chipInput = await matChipList.getInput();
+    const chipInput = await matChipGrid.getInput();
+    if (!chipInput) {
+      throw new Error('No tags input found!');
+    }
     await chipInput.setValue(tag);
     if (separatorKey === 'blur') {
       await chipInput.blur();
@@ -71,9 +71,9 @@ export class GioFormTagsInputHarness extends ComponentHarness {
   }
 
   public async removeTag(tag: string): Promise<void> {
-    const matChipList = await this.getMatChipListHarness();
+    const matChipGrid = await this.getMatChipGridHarness();
 
-    const chips = await matChipList.getChips({ text: tag });
+    const chips = await matChipGrid.getRows({ text: tag });
     if (chips[0]) {
       await chips[0].remove();
     }

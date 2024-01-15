@@ -15,7 +15,7 @@
  */
 import { Directive, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { filter, map, takeUntil, tap } from 'rxjs/operators';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 
 import { FeatureInfo, GioLicenseService, LicenseOptions } from './gio-license.service';

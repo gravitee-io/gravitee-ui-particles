@@ -1,22 +1,5 @@
-import { InteractivityChecker } from '@angular/cdk/a11y';
-import { HarnessLoader } from '@angular/cdk/testing';
-import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatLegacyInputHarness as MatInputHarness } from '@angular/material/legacy-input/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatLegacyButtonHarness as MatButtonHarness } from '@angular/material/legacy-button/testing';
-import { MatIconTestingModule } from '@angular/material/icon/testing';
-import { MatLegacySelectHarness as MatSelectHarness } from '@angular/material/legacy-select/testing';
-
-import { GioJsonSchema } from './model/GioJsonSchema';
-import { GioFormJsonSchemaModule } from './gio-form-json-schema.module';
-import { GioFormJsonSchemaComponent } from './gio-form-json-schema.component';
-import { oneOfExample } from './json-schema-example/oneOf';
-
 /*
- * Copyright (C) 2015 The Gravitee team (http://gravitee.io)
+ * Copyright (C) 2024 The Gravitee team (http://gravitee.io)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +13,23 @@ import { oneOfExample } from './json-schema-example/oneOf';
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { InteractivityChecker } from '@angular/cdk/a11y';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatLegacyInputHarness as MatInputHarness } from '@angular/material/legacy-input/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonHarness } from '@angular/material/button/testing';
+import { MatIconTestingModule } from '@angular/material/icon/testing';
+import { MatSelectHarness } from '@angular/material/select/testing';
+
+import { GioJsonSchema } from './model/GioJsonSchema';
+import { GioFormJsonSchemaModule } from './gio-form-json-schema.module';
+import { GioFormJsonSchemaComponent } from './gio-form-json-schema.component';
+import { oneOfExample } from './json-schema-example/oneOf';
+
 describe('GioFormJsonSchema', () => {
   @Component({
     template: `

@@ -15,19 +15,12 @@
     limitations under the License.
 
 -->
-<mat-chip-list #tagChipList [attr.aria-label]="ariaLabel" multiple [disabled]="disabled">
-  <mat-chip
-    *ngFor="let tag of value"
-    [selectable]="false"
-    [removable]="!disabled"
-    (removed)="removeChipToFormControl(tag)"
-    [disabled]="disabled"
-  >
+<mat-chip-grid #tagChipList [attr.aria-label]="ariaLabel" multiple [disabled]="disabled">
+  <mat-chip-row *ngFor="let tag of value" [removable]="!disabled" (removed)="removeChipToFormControl(tag)" [disabled]="disabled">
     {{ _displayValueWith ? (_displayValueWith(tag) | async) : tag }}
     <mat-icon matChipRemove>cancel</mat-icon>
-  </mat-chip>
+  </mat-chip-row>
   <input
-    *ngIf="!disabled"
     #tagInput
     [matAutocompleteDisabled]="!_autocompleteOptions || disabled"
     [matAutocomplete]="auto"
@@ -44,4 +37,4 @@
       {{ option.label }}
     </mat-option>
   </mat-autocomplete>
-</mat-chip-list>
+</mat-chip-grid>

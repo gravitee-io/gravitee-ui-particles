@@ -33,6 +33,7 @@ $typography: map.get(theme.$mat-theme, typography);
 
   &__content {
     padding-left: 24px;
+    cursor: pointer;
 
     &__icon {
       margin-bottom: 24px;
@@ -61,11 +62,21 @@ $typography: map.get(theme.$mat-theme, typography);
     }
   }
 
+  // TODO(mdc-migration): remove when legacy theme is removed
   .gio-radio-button.mat-radio-checked {
     border: 2px solid mat.get-color-from-palette(palettes.$mat-accent-palette, 'default');
   }
 
+  .gio-radio-button.mat-mdc-radio-checked {
+    border: 2px solid mat.get-color-from-palette(palettes.$mat-accent-palette, 'default');
+  }
+
+  // TODO(mdc-migration): remove when legacy theme is removed
   .mat-radio-checked .mat-icon {
+    color: mat.get-color-from-palette(palettes.$mat-accent-palette, 'default');
+  }
+
+  .mat-mdc-radio-checked .mat-icon {
     color: mat.get-color-from-palette(palettes.$mat-accent-palette, 'default');
   }
 }
@@ -79,11 +90,21 @@ $typography: map.get(theme.$mat-theme, typography);
     @include gio-radio-button;
   }
 
+  // TODO(mdc-migration): remove when legacy theme is removed
   .gio-radio-button.mat-radio-checked {
     border: 2px solid mat.get-color-from-palette(palettes.$mat-accent-palette, 'default');
   }
 
+  .gio-radio-button.mat-mdc-radio-checked {
+    border: 2px solid mat.get-color-from-palette(palettes.$mat-accent-palette, 'default');
+  }
+
+  // TODO(mdc-migration): remove when legacy theme is removed
   .gio-radio-button.mat-radio-checked .mat-icon {
+    color: mat.get-color-from-palette(palettes.$mat-accent-palette, 'default');
+  }
+
+  .gio-radio-button.mat-mdc-radio-checked .mat-icon {
     color: mat.get-color-from-palette(palettes.$mat-accent-palette, 'default');
   }
 }

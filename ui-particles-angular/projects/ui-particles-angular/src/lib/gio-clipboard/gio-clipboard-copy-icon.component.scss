@@ -19,6 +19,10 @@
 
 $primary: map.get(gio.$mat-theme, primary);
 
+:host-context(.mat-mdc-form-field-icon-suffix) {
+  padding: 12px;
+}
+
 .btn {
   padding: 0;
   border: none;

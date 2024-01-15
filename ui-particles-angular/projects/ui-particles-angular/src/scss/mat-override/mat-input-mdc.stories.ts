@@ -62,18 +62,18 @@ export const MatInputMDC: Story = {
             <input matInput>
           </mat-form-field>
           <mat-form-field>
-            <mat-icon svgIcon="gio:star-outline" matPrefix></mat-icon>
+            <mat-icon svgIcon="gio:star-outline" matIconPrefix></mat-icon>
             <mat-label>Simple input with icon</mat-label>
             <input matInput>
           </mat-form-field>
           <mat-form-field>
-            <mat-icon svgIcon="gio:star-outline" matPrefix></mat-icon>
+            <mat-icon svgIcon="gio:star-outline" matIconPrefix></mat-icon>
             <mat-label>Simple input with icon and hint</mat-label>
             <input matInput>
             <mat-hint>This is a hint text</mat-hint>
           </mat-form-field>
           <mat-form-field >
-            <mat-icon svgIcon="gio:star-outline" matPrefix></mat-icon>
+            <mat-icon svgIcon="gio:star-outline" matIconPrefix></mat-icon>
             <mat-label>Click to see control with error</mat-label>
             <input matInput required [formControl]="errorFormControl">
             <mat-error *ngIf="errorFormControl.hasError('required')">This is an error message</mat-error>
@@ -103,20 +103,20 @@ export const MatInputMDC: Story = {
 
           <mat-form-field>
             <mat-label>Multi text input with icon prefix</mat-label>
-            <mat-icon svgIcon="gio:star-outline" matPrefix></mat-icon>
+            <mat-icon svgIcon="gio:star-outline" matIconPrefix></mat-icon>
             <gio-form-tags-input [disabled]="disabled" [required]="required" [placeholder]="placeholder" [ngModel]="fruits" (ngModelChange)="onTagsChange($event)">
             </gio-form-tags-input>
           </mat-form-field>
           
           <mat-form-field>
             <mat-label>Input with text prefix</mat-label>
-            <span matPrefix>http://</span>
+            <span matTextPrefix>http://</span>
             <input matInput>
           </mat-form-field>
   
           <mat-form-field>
             <mat-label>Search input</mat-label>
-            <mat-icon svgIcon="gio:search" matPrefix></mat-icon>
+            <mat-icon svgIcon="gio:search" matIconPrefix></mat-icon>
             <input matInput #input>
             <mat-icon svgIcon="gio:cancel" matSuffix (click)="input.value = ''"></mat-icon>
           </mat-form-field>

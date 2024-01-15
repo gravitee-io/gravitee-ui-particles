@@ -111,7 +111,7 @@ export const SimilarToMatFormFieldWithIcon: Story = {
     template: `
       <p class="mat-body">
         <mat-form-field [appearance]="appearance">
-          <mat-icon matPrefix>lock</mat-icon>
+          <mat-icon matIconPrefix>lock</mat-icon>
           <mat-label>Standard form field</mat-label>
           <input matInput placeholder="Placeholder">
           <mat-hint>Hint</mat-hint>
@@ -144,7 +144,7 @@ export const SimilarToMatFormFieldDisabled: Story = {
     template: `
       <p>
         <mat-form-field [appearance]="appearance">
-          <mat-icon matPrefix>lock</mat-icon>
+          <mat-icon matIconPrefix>lock</mat-icon>
           <mat-label>Standard form field</mat-label>
           <input [disabled]="disabled" matInput value="Value">
           <mat-hint>Hint</mat-hint>
@@ -181,7 +181,7 @@ export const FullWidth: Story = {
     template: `
       <p>
         <mat-form-field [appearance]="appearance" style="width:100%">
-          <mat-icon matPrefix>lock</mat-icon>
+          <mat-icon matIconPrefix>lock</mat-icon>
           <mat-label>Standard form field</mat-label>
           <input [disabled]="disabled" matInput value="Value">
           <mat-hint>Hint</mat-hint>

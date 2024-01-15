@@ -15,7 +15,7 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { GioLicenseDirective } from './gio-license.directive';
 import { GioLicenseDialogModule } from './gio-license-dialog/gio-license-dialog.module';

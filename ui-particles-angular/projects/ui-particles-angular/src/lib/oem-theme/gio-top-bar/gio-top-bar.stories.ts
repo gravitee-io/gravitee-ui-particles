@@ -93,7 +93,7 @@ export const Default: Story = {
           </gio-top-bar>
           <gio-top-bar>
             <button mat-icon-button>
-            <img src="${args.logo}" alt="custom logo" style="max-height: 36px; max-width: 36px">
+              <img src="${args.logo}" alt="custom logo" style="height: 36px; width: 36px">
             </button>
             <gio-top-bar-content type="apim" productName="API Management"></gio-top-bar-content>
             <gio-top-bar-link url="#" name="Developers portal"></gio-top-bar-link>

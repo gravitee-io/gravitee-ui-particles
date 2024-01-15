@@ -22,9 +22,9 @@ import { FieldWrapper, FormlyFieldConfig } from '@ngx-formly/core';
     <ng-container #fieldComponent></ng-container>
 
     <ng-template #matSuffix>
-      <span style="cursor: pointer" (click)="addonEyeClick($event)">
+      <button mat-icon-button type="button" (click)="addonEyeClick($event)">
         <mat-icon [svgIcon]="hide ? 'gio:eye-empty' : 'gio:eye-off'"></mat-icon>
-      </span>
+      </button>
     </ng-template>
   `,
 })
