@@ -16,7 +16,7 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { switchMap, tap } from 'rxjs/operators';
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { LICENSE_CONFIGURATION_TESTING, OEM_LICENSE_CONFIGURATION_TESTING } from './gio-license.testing.module';
 import { GioLicenseService, License, LicenseOptions } from './gio-license.service';

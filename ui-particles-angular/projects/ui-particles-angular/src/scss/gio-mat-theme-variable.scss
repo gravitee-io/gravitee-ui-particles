@@ -45,6 +45,7 @@ $mat-theme-default: mat.define-light-theme(
       warn: palettes.$mat-error-palette,
     ),
     typography: $mat-typography,
+    density: -1,
   )
 );
 

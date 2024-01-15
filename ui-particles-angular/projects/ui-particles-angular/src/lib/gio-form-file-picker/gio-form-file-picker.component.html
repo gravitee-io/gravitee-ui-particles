@@ -54,12 +54,12 @@
 <ng-template #disabledTpl>
   <div class="file-picker disabled">
     <ng-container *ngIf="fileValues.length === 0">
-      <span #previewEmpty class="file-picker__preview-empty disabled">
-        <ng-content select="gio-form-file-picker-empty"></ng-content>
+      <span class="file-picker__preview-empty disabled">
         <gio-form-file-picker-empty
           *ngIf="previewEmpty.children.length === 0"
           class="file-picker__preview-empty__default"
         ></gio-form-file-picker-empty>
+        <span #previewEmpty><ng-content select="gio-form-file-picker-empty"></ng-content></span>
       </span>
     </ng-container>
 

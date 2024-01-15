@@ -25,11 +25,15 @@ $typography: map.get(gio.$mat-theme, typography);
 
 ::ng-deep {
   gio-top-bar {
-    .mat-icon-button {
+    .mdc-icon-button.mat-mdc-icon-button {
       width: 36px;
       height: 36px;
+      padding: 0;
       border-radius: 4px;
-      line-height: 36px;
+
+      &:has(.mat-icon) {
+        padding: 6px;
+      }
 
       &:hover {
         background: oem.$oem-menu-hover;

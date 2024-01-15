@@ -55,6 +55,9 @@
     @include mat.typography-hierarchy(theme-variable.$mat-typography);
   }
 
+  @include mat.form-field-density(-2);
+  @include mat.button-density(0);
+
   // Gio overrides
   @include override.mat-h5;
   @include override.mat-form-field;
