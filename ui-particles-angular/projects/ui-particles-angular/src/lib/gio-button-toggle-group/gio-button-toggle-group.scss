@@ -28,7 +28,7 @@ $typography: map.get(theme.$mat-theme, typography);
   margin-bottom: 16px;
 
   .mat-button-toggle {
-    @include mat.typography-level($typography, body-2);
+    @include mat.typography-level($typography, subtitle-2);
 
     display: flex;
     flex-direction: row;

@@ -15,12 +15,13 @@
  */
 @use '@angular/material' as mat;
 
+@use './gio-mat-legacy-theme-variable' as legacy-theme-variable;
 @use './gio-mat-theme-variable' as theme-variable;
 
 @use './mat-override' as override;
 
 // Config material theme with gio theme
-@mixin mat-theme() {
+@mixin mat-theme($legacy: false) {
   // TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
   //  The following line adds:
   //    1. Default typography styles for all components
@@ -29,9 +30,30 @@
   //  If you don't need the default component typographies but still want the hierarchy styles,
   //  you can delete this line and instead use:
   //    `@include mat.legacy-typography-hierarchy(theme-variable.$mat-typography);`
-  @include mat.all-legacy-component-typographies(theme-variable.$mat-typography);
+
+  /*
+ TODO(mdc-migration): Remove all-legacy-component-typographies once all legacy components are migrated
+ */
+  @include mat.all-legacy-component-typographies(legacy-theme-variable.$mat-legacy-typography);
+  @include mat.all-component-typographies(theme-variable.$mat-typography);
+
+  /*
+ TODO(mdc-migration): Remove legacy-core once all legacy components are migrated
+ */
   @include mat.legacy-core;
-  @include mat.all-legacy-component-themes(theme-variable.$mat-theme);
+  @include mat.core;
+
+  /*
+ TODO(mdc-migration): Remove all-legacy-component-themes once all legacy components are migrated
+ */
+  @include mat.all-legacy-component-themes(legacy-theme-variable.$mat-legacy-theme);
+  @include mat.all-component-themes(theme-variable.$mat-theme);
+
+  @if $legacy {
+    @include mat.legacy-typography-hierarchy(legacy-theme-variable.$mat-legacy-typography);
+  } @else {
+    @include mat.typography-hierarchy(theme-variable.$mat-typography);
+  }
 
   // Gio overrides
   @include override.mat-h5;

@@ -35,7 +35,7 @@ $typography: map.get(gio.$mat-theme, typography);
   margin-bottom: 16px;
 
   &__label {
-    @include mat.typography-level($typography, subheading-1);
+    @include mat.typography-level($typography, body-1);
 
     display: flex;
     flex: 1 1 auto;
@@ -67,7 +67,7 @@ $typography: map.get(gio.$mat-theme, typography);
       background-color: mat.get-color-from-palette(gio.$mat-accent-palette, lighter60);
 
       &__label {
-        @include mat.typography-level($typography, body-2);
+        @include mat.typography-level($typography, subtitle-2);
 
         display: flex;
         overflow: hidden;

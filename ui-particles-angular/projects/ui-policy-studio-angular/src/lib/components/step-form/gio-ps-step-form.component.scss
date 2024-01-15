@@ -62,5 +62,5 @@ $typography: map.get(gio.$mat-theme, typography);
   padding: 16px;
   border-bottom: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
 
-  @include mat.typography-level($typography, body-2);
+  @include mat.typography-level($typography, subtitle-2);
 }

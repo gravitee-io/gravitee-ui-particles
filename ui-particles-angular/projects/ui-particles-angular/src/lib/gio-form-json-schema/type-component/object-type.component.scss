@@ -25,7 +25,7 @@ $typography: map.get(gio.$mat-theme, typography);
   flex-direction: column;
 
   &__title {
-    @include mat.typography-level($typography, 'subheading-2');
+    @include mat.typography-level($typography, 'subtitle-1');
 
     margin-bottom: 16px;
   }

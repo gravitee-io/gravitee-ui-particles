@@ -25,7 +25,7 @@ $typography: map.get(gio.$mat-theme, typography);
 }
 
 .gio-top-bar-link {
-  @include mat.typography-level($typography, body-2);
+  @include mat.typography-level($typography, subtitle-2);
 
   height: 20px;
   color: oem.$oem-menu-text;

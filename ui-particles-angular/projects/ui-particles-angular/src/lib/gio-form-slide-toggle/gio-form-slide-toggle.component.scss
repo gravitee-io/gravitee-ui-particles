@@ -74,11 +74,11 @@ $foreground: map.get(gio.$mat-theme, foreground);
       padding-left: 14px;
 
       &__label-1 {
-        @include mat.typography-level($typography, body-2);
+        @include mat.typography-level($typography, subtitle-2);
       }
 
       &__label-2 {
-        @include mat.typography-level($typography, body-1);
+        @include mat.typography-level($typography, body-2);
       }
 
       &.disabled {

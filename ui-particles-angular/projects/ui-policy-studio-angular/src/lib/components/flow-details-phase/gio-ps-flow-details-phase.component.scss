@@ -37,12 +37,12 @@ $typography: map.get(gio.$mat-theme, typography);
 
   &__name {
     flex: 0 1 auto;
-    @include mat.typography-level($typography, body-2);
+    @include mat.typography-level($typography, subtitle-2);
   }
 
   &__description {
     flex: 1 1 auto;
-    @include mat.typography-level($typography, body-1);
+    @include mat.typography-level($typography, body-2);
 
     color: mat.get-color-from-palette(gio.$mat-space-palette, lighter40);
   }

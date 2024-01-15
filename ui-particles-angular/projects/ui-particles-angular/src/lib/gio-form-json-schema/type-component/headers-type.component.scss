@@ -34,7 +34,7 @@ $typography: map.get(gio.$mat-theme, typography);
       flex: 1 1 auto;
 
       &__title {
-        @include mat.typography-level($typography, 'subheading-1');
+        @include mat.typography-level($typography, 'body-1');
 
         margin-bottom: 8px;
       }
