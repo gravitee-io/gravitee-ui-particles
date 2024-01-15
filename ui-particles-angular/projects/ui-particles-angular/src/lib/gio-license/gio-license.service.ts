@@ -88,6 +88,18 @@ export class GioLicenseService {
     );
   }
 
+  public hasAllFeatures$(licenseOptions: LicenseOptions[] | undefined): Observable<boolean> {
+    if (!licenseOptions) {
+      return of(true);
+    }
+    if (licenseOptions?.find(o => o.feature != null && o.deployed === false) != null) {
+      return of(false);
+    }
+    return this.getLicense$().pipe(
+      map(license => license != null && licenseOptions?.every(o => license.features.find(feat => feat === o.feature) != null)),
+    );
+  }
+
   public getFeatureInfo(licenseOptions: LicenseOptions): FeatureInfo {
     if (!licenseOptions.feature) {
       throw new Error(`feature is undefined`);
