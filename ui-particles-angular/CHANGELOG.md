@@ -1,3 +1,10 @@
+# [7.53.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.52.0...v7.53.0) (2024-01-15)
+
+
+### Features
+
+* **license-service:** add method to check license has all features in a list ([e366613](https://github.com/gravitee-io/gravitee-ui-particles/commit/e3666132a402a55ec461cb531ddaf603142261b8))
+
 # [7.52.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.51.1...v7.52.0) (2024-01-02)
 
 
