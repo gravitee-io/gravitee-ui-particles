@@ -18,7 +18,9 @@
 <div class="json-schema-story">
   <div class="row">
     <mat-card *ngIf="!isChromatic" class="json-schema-story__json-schema">
-      <mat-card-title>Json Schema</mat-card-title>
+      <mat-card-header>
+        <mat-card-title>Json Schema</mat-card-title>
+      </mat-card-header>
 
       <mat-card-content>
         <gio-monaco-editor [formControl]="jsonSchemaControl" [languageConfig]="monacoEditorJsonSchemaLanguage"></gio-monaco-editor>
@@ -27,7 +29,9 @@
 
     <mat-card class="json-schema-story__preview" [class.isChromatic]="isChromatic">
       <form *ngIf="form; else loading" (ngSubmit)="onSubmit()" [formGroup]="form" gioFormFocusInvalid>
-        <mat-card-title>UI Preview</mat-card-title>
+        <mat-card-header>
+          <mat-card-title>UI Preview</mat-card-title>
+        </mat-card-header>
         <mat-card-content>
           <gio-form-json-schema [jsonSchema]="jsonSchema" [options]="options" formControlName="schemaValue"></gio-form-json-schema>
         </mat-card-content>
@@ -46,21 +50,25 @@
   </div>
   <div *ngIf="!isChromatic" class="row">
     <mat-card class="json-schema-story__value">
-      <mat-card-title>Input Value</mat-card-title>
+      <mat-card-header>
+        <mat-card-title>Input Value</mat-card-title>
+      </mat-card-header>
       <mat-card-content>
         <gio-monaco-editor [formControl]="inputValueControl" [languageConfig]="monacoEditorJsonLanguage"></gio-monaco-editor>
       </mat-card-content>
     </mat-card>
 
     <mat-card class="json-schema-story__output">
-      <mat-card-title
-        >Output
+      <mat-card-header>
+        <mat-card-title
+          >Output
 
-        <mat-button-toggle-group #outputMode="matButtonToggleGroup" value="json">
-          <mat-button-toggle value="json">Json</mat-button-toggle>
-          <mat-button-toggle value="error"> ({{ formValueErrorNumber ? formValueErrorNumber : 'No' }}) Errors</mat-button-toggle>
-        </mat-button-toggle-group>
-      </mat-card-title>
+          <mat-button-toggle-group #outputMode="matButtonToggleGroup" value="json">
+            <mat-button-toggle value="json">Json</mat-button-toggle>
+            <mat-button-toggle value="error"> ({{ formValueErrorNumber ? formValueErrorNumber : 'No' }}) Errors</mat-button-toggle>
+          </mat-button-toggle-group>
+        </mat-card-title>
+      </mat-card-header>
 
       <mat-card-content *ngIf="form; else loading">
         <ng-container *ngIf="outputMode.value === 'json'">

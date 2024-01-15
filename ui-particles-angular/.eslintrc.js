@@ -2,6 +2,7 @@ module.exports = {
   root: true,
   ignorePatterns: ['projects/**/*'],
   plugins: ['eslint-plugin-import', 'rxjs'],
+  extends: ['plugin:storybook/recommended'],
   overrides: [
     {
       files: ['*.ts'],

@@ -13,21 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 import { ConfirmDialogStoryComponent, ConfirmContentDialogStoryComponent } from './gio-confirm-dialog.stories.component';
-import { GioConfirmDialogComponent, GioConfirmDialogData } from './gio-confirm-dialog.component';
+import { GioConfirmDialogData } from './gio-confirm-dialog.component';
 import { GioConfirmDialogModule } from './gio-confirm-dialog.module';
 
 export default {
   title: 'Components / Confirm dialog',
-  component: GioConfirmDialogComponent,
+  component: ConfirmDialogStoryComponent,
   decorators: [
     moduleMetadata({
       declarations: [ConfirmDialogStoryComponent],
-      imports: [GioConfirmDialogModule, MatDialogModule, NoopAnimationsModule],
+      imports: [GioConfirmDialogModule, MatDialogModule],
     }),
   ],
   argTypes: {
@@ -44,10 +43,6 @@ export default {
       type: { name: 'string', required: false },
     },
   },
-  render: args => ({
-    component: ConfirmDialogStoryComponent,
-    props: { ...args },
-  }),
   parameters: {
     chromatic: { delay: 2000 },
   },

@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { Component, Input } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { action } from '@storybook/addon-actions';
@@ -79,7 +78,9 @@ export default {
   decorators: [
     moduleMetadata({
       declarations: [GioPolicyStudioStepEditDialogStoryComponent],
-      imports: [GioPolicyStudioModule, MatDialogModule, NoopAnimationsModule],
+      imports: [GioPolicyStudioModule, MatDialogModule],
+    }),
+    applicationConfig({
       providers: [
         matIconRegisterProvider(POLICIES_V4_UNREGISTERED_ICON.map(policy => ({ id: policy.id, svg: policy.icon }))),
         {
@@ -110,7 +111,6 @@ export default {
 } as Meta;
 
 export const Default: StoryObj = {
-  name: 'Default',
   args: {
     policy: fakeTestPolicy({
       description: 'This is a test policy',

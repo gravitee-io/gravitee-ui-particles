@@ -1,15 +1,14 @@
 // Set material classes to the Storybook body
-import { moduleMetadata } from '@storybook/angular';
+import { applicationConfig, moduleMetadata } from '@storybook/angular';
 import { GioMatConfigModule } from '../projects/ui-particles-angular/src/lib/gio-mat-config';
 import { HttpClientModule } from '@angular/common/http';
+import { importProvidersFrom } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 window.document.body?.classList.add('mat-app-background');
 window.document.body?.classList.add('mat-typography');
 
 export const parameters = {
-  docs: {
-    inlineStories: true,
-  },
   options: {
     storySort: {
       method: 'alphabetical',
@@ -32,4 +31,9 @@ export const parameters = {
   },
 };
 
-export const decorators = [moduleMetadata({ imports: [GioMatConfigModule, HttpClientModule] })];
+export const decorators = [
+  moduleMetadata({ imports: [GioMatConfigModule] }),
+  applicationConfig({
+    providers: [importProvidersFrom(BrowserAnimationsModule), importProvidersFrom(HttpClientModule)],
+  }),
+];

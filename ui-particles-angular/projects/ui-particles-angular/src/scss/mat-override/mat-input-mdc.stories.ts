@@ -15,9 +15,7 @@
  */
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { Story } from '@storybook/angular/types-7-0';
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { UntypedFormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -39,7 +37,6 @@ export default {
         MatNativeDateModule,
         GioFormTagsInputModule,
         MatSelectModule,
-        BrowserAnimationsModule,
         ReactiveFormsModule,
         FormsModule,
       ],
@@ -51,7 +48,7 @@ export default {
   },
 } as Meta;
 
-export const MatInputMDC: Story = {
+export const MatInputMDC: StoryObj = {
   render: () => ({
     template: `
         <h3>Design System inputs</h3>

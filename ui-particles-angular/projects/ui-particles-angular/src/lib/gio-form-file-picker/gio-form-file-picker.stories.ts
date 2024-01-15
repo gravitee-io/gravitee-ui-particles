@@ -16,7 +16,7 @@
 // tslint:disable: no-duplicate-string
 import { UntypedFormBuilder, UntypedFormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { action } from '@storybook/addon-actions';
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 import { GioFormFilePickerComponent } from './gio-form-file-picker.component';
 import { GioFormFilePickerModule } from './gio-form-file-picker.module';
@@ -32,14 +32,14 @@ export default {
   ],
 } as Meta;
 
-export const Default: Story = () => ({
+export const Default: StoryObj = () => ({
   props: {
     ngModelChange: action('ngModelChange'),
   },
 });
 Default.storyName = 'default';
 
-export const DefaultDisabled: Story = () => ({
+export const DefaultDisabled: StoryObj = () => ({
   component: GioFormFilePickerComponent,
   props: {
     disabled: true,
@@ -47,7 +47,7 @@ export const DefaultDisabled: Story = () => ({
 });
 DefaultDisabled.storyName = 'default disabled';
 
-export const WithCustomContent: Story = () => ({
+export const WithCustomContent: StoryObj = () => ({
   template: `
       <p>With custom add button</p>
       <gio-form-file-picker (ngModelChange)="onChange($event)">
@@ -78,7 +78,7 @@ export const WithCustomContent: Story = () => ({
 });
 WithCustomContent.storyName = 'with custom button and empty text';
 
-export const WithMultipleFiles: Story = () => ({
+export const WithMultipleFiles: StoryObj = () => ({
   props: {
     multiple: true,
     ngModelChange: action('ngModelChange'),
@@ -86,7 +86,7 @@ export const WithMultipleFiles: Story = () => ({
 });
 WithMultipleFiles.storyName = 'with multiple files';
 
-export const WithAccept: Story = () => ({
+export const WithAccept: StoryObj = () => ({
   props: {
     multiple: true,
     accept: 'image/*',
@@ -95,7 +95,7 @@ export const WithAccept: Story = () => ({
 });
 WithAccept.storyName = 'accept only images';
 
-export const WithFormGroup: Story = () => {
+export const WithFormGroup: StoryObj = () => {
   const formGroup = new UntypedFormBuilder().group({
     files: [],
   });
@@ -120,7 +120,7 @@ export const WithFormGroup: Story = () => {
 };
 WithFormGroup.storyName = 'with FormGroup';
 
-export const WithInitValues: Story = () => ({
+export const WithInitValues: StoryObj = () => ({
   template: `
       <gio-form-file-picker
         [formControl]="formControl"
@@ -144,7 +144,7 @@ export const WithInitValues: Story = () => ({
 });
 WithInitValues.storyName = 'with FormGroup and init values';
 
-export const DisabledWithInitValues: Story = {
+export const DisabledWithInitValues: StoryObj = {
   render: () => {
     const formControl = new UntypedFormControl({
       value: [
@@ -176,7 +176,7 @@ export const DisabledWithInitValues: Story = {
 };
 DisabledWithInitValues.storyName = 'disabled with init values';
 
-export const WithFormValidator: Story = () => {
+export const WithFormValidator: StoryObj = () => {
   const formGroup = new UntypedFormBuilder().group({
     files: [undefined, Validators.required],
   });
@@ -206,7 +206,7 @@ export const WithFormValidator: Story = () => {
 };
 WithFormValidator.storyName = 'with form validator';
 
-export const WithFormDisabled: Story = () => {
+export const WithFormDisabled: StoryObj = () => {
   const formGroup = new UntypedFormBuilder().group({
     files: [],
   });
@@ -231,7 +231,7 @@ export const WithFormDisabled: Story = () => {
 };
 WithFormDisabled.storyName = 'with form disabled';
 
-export const WithFormReset: Story = () => {
+export const WithFormReset: StoryObj = () => {
   const formGroup = new UntypedFormBuilder().group({
     files: [],
   });

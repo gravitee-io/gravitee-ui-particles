@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { MatLegacyCardModule } from '@angular/material/legacy-card';
 import { MatLegacyFormFieldModule } from '@angular/material/legacy-form-field';
 import { MatLegacyInputModule } from '@angular/material/legacy-input';
@@ -26,20 +24,13 @@ export default {
   title: 'Material Override / MatFormField',
   decorators: [
     moduleMetadata({
-      imports: [
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
-        MatLegacyCardModule,
-        MatLegacyFormFieldModule,
-        MatLegacyInputModule,
-        MatIconModule,
-      ],
+      imports: [ReactiveFormsModule, MatLegacyCardModule, MatLegacyFormFieldModule, MatLegacyInputModule, MatIconModule],
     }),
   ],
   render: () => ({}),
 } as Meta;
 
-export const MatHintAndErrorFontSize: Story = {
+export const MatHintAndErrorFontSize: StoryObj = {
   render: () => ({
     template: `
       <p>
@@ -73,7 +64,7 @@ export const MatHintAndErrorFontSize: Story = {
   }),
 };
 
-export const PaddingBottomMatFormField: Story = {
+export const PaddingBottomMatFormField: StoryObj = {
   render: () => ({
     template: `
       <p>
@@ -113,7 +104,7 @@ export const PaddingBottomMatFormField: Story = {
   }),
 };
 
-export const DisabledMatFormFieldShouldHaveNotAllowedCursor: Story = {
+export const DisabledMatFormFieldShouldHaveNotAllowedCursor: StoryObj = {
   render: () => ({
     template: `
       <p>

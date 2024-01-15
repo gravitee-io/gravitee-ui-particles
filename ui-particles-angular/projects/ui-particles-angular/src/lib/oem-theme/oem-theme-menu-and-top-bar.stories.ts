@@ -13,10 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Args, Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
-import { withDesign } from 'storybook-addon-designs';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Args, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { GioIconsModule } from '@gravitee/ui-particles-angular';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,7 +22,7 @@ import { GioSubmenuModule } from './gio-submenu';
 import { GioMenuModule } from './gio-menu';
 import { GioMenuItemComponent } from './gio-menu/gio-menu-item/gio-menu-item.component';
 import { GioTopBarLinkModule, GioTopBarMenuModule, GioTopBarModule } from './gio-top-bar';
-import { OEM_THEME_ARG_TYPES, computeStylesForStory } from './oem-theme.service';
+import { OEM_THEME_ARG_TYPES, computeStylesForStory, OEM_DEFAULT_LOGO } from './oem-theme.service';
 
 export default {
   title: 'OEM Theme / Menu + Top Bar',
@@ -34,7 +31,6 @@ export default {
     moduleMetadata({
       imports: [
         GioMenuModule,
-        NoopAnimationsModule,
         GioSubmenuModule,
         MatIconModule,
         MatButtonModule,
@@ -44,7 +40,6 @@ export default {
         GioTopBarMenuModule,
       ],
     }),
-    withDesign,
   ],
   render: () => ({}),
 } as Meta;
@@ -117,8 +112,11 @@ const gioSubmenuContent = `
             <gio-submenu-item (click)="onSubClick('audit')" [active]="isActive('audit')">Audit</gio-submenu-item>
 `;
 
-export const Default: Story = {
+export const Default: StoryObj = {
   argTypes: OEM_THEME_ARG_TYPES,
+  args: {
+    logo: OEM_DEFAULT_LOGO,
+  },
   render: args => {
     return {
       template: `

@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
+import { Meta, StoryObj } from '@storybook/angular';
 
 export default {
   title: 'Components / Table Light',
@@ -53,13 +52,13 @@ export default {
   }),
 } as Meta;
 
-export const HttpHeaders: Story = {
+export const HttpHeaders: StoryObj = {
   args: {
     disabled: false,
   },
 };
 
-export const HttpHeadersDisabled: Story = {
+export const HttpHeadersDisabled: StoryObj = {
   args: {
     disabled: true,
   },

@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 import { GioAsciidoctorComponent } from './gio-asciidoctor.component';
 import { GioAsciidoctorModule } from './gio-asciidoctor.module';
@@ -34,19 +33,19 @@ export default {
   }),
 } as Meta;
 
-export const Default: Story = {};
+export const Default: StoryObj = {};
 
-export const PolicyMock: Story = {};
+export const PolicyMock: StoryObj = {};
 PolicyMock.args = {
   content: policyMockReadme,
 };
 
-export const SanitizedMaliciousDoc: Story = {};
+export const SanitizedMaliciousDoc: StoryObj = {};
 SanitizedMaliciousDoc.args = {
   content: '```test"><img src=x onerror=alert(1)></img>',
 };
 
-export const WithPrimJsCodeHighlighter: Story = {};
+export const WithPrimJsCodeHighlighter: StoryObj = {};
 WithPrimJsCodeHighlighter.args = {
   content: `
 = Test PrimJs code highlighter
@@ -66,7 +65,7 @@ WithPrimJsCodeHighlighter.args = {
 `,
 };
 
-export const LoadSrcUrl: Story = {};
+export const LoadSrcUrl: StoryObj = {};
 LoadSrcUrl.args = {
   src: 'https://raw.githubusercontent.com/gravitee-io/gravitee-policy-message-filtering/master/README.adoc',
 };

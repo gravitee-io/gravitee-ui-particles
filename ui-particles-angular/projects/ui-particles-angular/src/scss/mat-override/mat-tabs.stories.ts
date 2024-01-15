@@ -13,21 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { MatLegacyTabsModule } from '@angular/material/legacy-tabs';
 
 export default {
   title: 'Material Override',
   decorators: [
     moduleMetadata({
-      imports: [BrowserAnimationsModule, MatLegacyTabsModule],
+      imports: [MatLegacyTabsModule],
     }),
   ],
 } as Meta;
 
-export const MatTabs: Story = {
+export const MatTabs: StoryObj = {
   render: () => ({
     template: `
     <p>

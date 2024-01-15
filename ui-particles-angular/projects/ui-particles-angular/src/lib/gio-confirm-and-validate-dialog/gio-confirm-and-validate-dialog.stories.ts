@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 import { GioBannerModule } from '../public-api';
 
 import { GioConfirmAndValidateDialogModule } from './gio-confirm-and-validate-dialog.module';
-import { GioConfirmAndValidateDialogComponent, GioConfirmAndValidateDialogData } from './gio-confirm-and-validate-dialog.component';
+import { GioConfirmAndValidateDialogData } from './gio-confirm-and-validate-dialog.component';
 import {
   ConfirmAndValidateDialogStoryComponent,
   ConfirmAndValidateContentDialogStoryComponent,
@@ -28,11 +27,11 @@ import {
 
 export default {
   title: 'Components / Confirm and validate dialog',
-  component: GioConfirmAndValidateDialogComponent,
+  component: ConfirmAndValidateDialogStoryComponent,
   decorators: [
     moduleMetadata({
       declarations: [ConfirmAndValidateDialogStoryComponent, ConfirmAndValidateContentDialogStoryComponent],
-      imports: [GioConfirmAndValidateDialogModule, GioBannerModule, MatDialogModule, NoopAnimationsModule],
+      imports: [GioConfirmAndValidateDialogModule, GioBannerModule, MatDialogModule],
     }),
   ],
   argTypes: {
@@ -58,10 +57,6 @@ export default {
       type: { name: 'string', required: false },
     },
   },
-  render: args => ({
-    component: ConfirmAndValidateDialogStoryComponent,
-    props: { ...args },
-  }),
   parameters: {
     chromatic: { delay: 2000 },
   },

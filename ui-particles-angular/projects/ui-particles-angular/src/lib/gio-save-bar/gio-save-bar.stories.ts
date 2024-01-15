@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UntypedFormControl, UntypedFormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -28,12 +26,12 @@ export default {
   component: GioSaveBarComponent,
   decorators: [
     moduleMetadata({
-      imports: [FormsModule, MatButtonModule, GioSaveBarModule, BrowserAnimationsModule, ReactiveFormsModule],
+      imports: [FormsModule, MatButtonModule, GioSaveBarModule, ReactiveFormsModule],
     }),
   ],
 } as Meta;
 
-export const SimpleUsageInUpdateMode: Story = {
+export const SimpleUsageInUpdateMode: StoryObj = {
   name: 'Update Mode / Simple Usage',
   render: () => ({
     template: `
@@ -47,7 +45,7 @@ export const SimpleUsageInUpdateMode: Story = {
   }),
 };
 
-export const Default: Story = {
+export const Default: StoryObj = {
   name: 'Update Mode / Direct Bindings Usage',
   render: () => ({
     template: `
@@ -77,7 +75,7 @@ export const Default: Story = {
   }),
 };
 
-export const ReactiveForm: Story = {
+export const ReactiveForm: StoryObj = {
   name: 'Update Mode / Reactive Form',
 
   render: () => {
@@ -111,7 +109,7 @@ export const ReactiveForm: Story = {
   },
 };
 
-export const SimpleUsageInCreationMode: Story = {
+export const SimpleUsageInCreationMode: StoryObj = {
   name: 'Creation Mode / Simple Usage',
   render: () => ({
     template: `
@@ -125,7 +123,7 @@ export const SimpleUsageInCreationMode: Story = {
   }),
 };
 
-export const CustomInnerButtonInCreationMode: Story = {
+export const CustomInnerButtonInCreationMode: StoryObj = {
   name: 'Creation Mode / Custom Inner Button',
   render: () => ({
     template: `
@@ -141,7 +139,7 @@ export const CustomInnerButtonInCreationMode: Story = {
   }),
 };
 
-export const CustomInnerButtonInUpdateMode: Story = {
+export const CustomInnerButtonInUpdateMode: StoryObj = {
   name: 'Update Mode / Custom Inner Button',
   render: () => ({
     template: `
@@ -159,7 +157,7 @@ export const CustomInnerButtonInUpdateMode: Story = {
   }),
 };
 
-export const CreationMode: Story = {
+export const CreationMode: StoryObj = {
   name: 'Creation Mode / Form',
   render: () => ({
     template: `

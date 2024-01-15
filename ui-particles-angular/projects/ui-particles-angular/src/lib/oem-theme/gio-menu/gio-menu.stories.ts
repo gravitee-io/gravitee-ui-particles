@@ -13,13 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
-import { withDesign } from 'storybook-addon-designs';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 import { GioSubmenuModule } from '../gio-submenu';
-import { OEM_THEME_ARG_TYPES, computeStylesForStory } from '../oem-theme.service';
+import { OEM_THEME_ARG_TYPES, computeStylesForStory, OEM_DEFAULT_LOGO } from '../oem-theme.service';
 
 import { GioMenuModule } from './gio-menu.module';
 import { GioMenuItemComponent } from './gio-menu-item/gio-menu-item.component';
@@ -29,9 +26,8 @@ export default {
   component: GioMenuItemComponent,
   decorators: [
     moduleMetadata({
-      imports: [GioMenuModule, GioSubmenuModule, NoopAnimationsModule],
+      imports: [GioMenuModule, GioSubmenuModule],
     }),
-    withDesign,
   ],
   render: () => ({}),
 } as Meta;
@@ -55,8 +51,11 @@ const gioMenuContent = `
               <gio-menu-item tabindex="1" icon="gio:building" (click)="onClick('org')" [active]="isActive('org')">Organization settings</gio-menu-item>
             </gio-menu-footer>`;
 
-export const Default: Story = {
+export const Default: StoryObj = {
   argTypes: OEM_THEME_ARG_TYPES,
+  args: {
+    logo: OEM_DEFAULT_LOGO,
+  },
   render: args => {
     return {
       template: `
@@ -93,8 +92,11 @@ export const Default: Story = {
   },
 };
 
-export const Reduced: Story = {
+export const Reduced: StoryObj = {
   argTypes: OEM_THEME_ARG_TYPES,
+  args: {
+    logo: OEM_DEFAULT_LOGO,
+  },
   render: args => {
     return {
       template: `
@@ -131,8 +133,11 @@ export const Reduced: Story = {
   },
 };
 
-export const WithOneItemInSelector: Story = {
+export const WithOneItemInSelector: StoryObj = {
   argTypes: OEM_THEME_ARG_TYPES,
+  args: {
+    logo: OEM_DEFAULT_LOGO,
+  },
   render: args => {
     return {
       template: `
@@ -166,8 +171,11 @@ export const WithOneItemInSelector: Story = {
   },
 };
 
-export const SmallMenu: Story = {
+export const SmallMenu: StoryObj = {
   argTypes: OEM_THEME_ARG_TYPES,
+  args: {
+    logo: OEM_DEFAULT_LOGO,
+  },
   render: args => {
     return {
       template: `
@@ -237,8 +245,11 @@ const gioSubmenuContent = `
         </gio-submenu-group>
       <gio-submenu-item tabindex="1" (click)="onClick('audit')" [active]="isActive('audit')" iconRight="gio:lock">Audit</gio-submenu-item>`;
 
-export const WithSubMenu: Story = {
+export const WithSubMenu: StoryObj = {
   argTypes: OEM_THEME_ARG_TYPES,
+  args: {
+    logo: OEM_DEFAULT_LOGO,
+  },
   render: args => {
     return {
       template: `
@@ -277,8 +288,11 @@ export const WithSubMenu: Story = {
   },
 };
 
-export const ReducedWithSubMenu: Story = {
+export const ReducedWithSubMenu: StoryObj = {
   argTypes: OEM_THEME_ARG_TYPES,
+  args: {
+    logo: OEM_DEFAULT_LOGO,
+  },
   render: args => {
     return {
       template: `

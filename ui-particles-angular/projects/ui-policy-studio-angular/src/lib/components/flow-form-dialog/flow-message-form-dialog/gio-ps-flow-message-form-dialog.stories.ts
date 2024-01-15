@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { Component, Input } from '@angular/core';
 import { tap } from 'rxjs/operators';
@@ -87,7 +86,7 @@ export default {
   decorators: [
     moduleMetadata({
       declarations: [GioPolicyStudioFlowMessageFormDialogStoryComponent],
-      imports: [GioPolicyStudioModule, MatDialogModule, NoopAnimationsModule],
+      imports: [GioPolicyStudioModule, MatDialogModule],
     }),
   ],
   argTypes: {},

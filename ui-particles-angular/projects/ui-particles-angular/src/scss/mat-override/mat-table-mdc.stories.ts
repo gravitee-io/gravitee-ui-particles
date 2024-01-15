@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { UntypedFormControl, FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -46,7 +44,7 @@ export default {
   title: 'Material Override / MatTable MDC',
   decorators: [
     moduleMetadata({
-      imports: [BrowserAnimationsModule, FormsModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule],
+      imports: [FormsModule, MatTableModule, MatFormFieldModule, MatInputModule, MatSelectModule],
     }),
   ],
   render: () => ({}),
@@ -55,7 +53,7 @@ export default {
   },
 } as Meta;
 
-export const MatTableRowsHover: Story = {
+export const MatTableRowsHover: StoryObj = {
   render: () => ({
     template: `
       <p>
@@ -107,7 +105,7 @@ export const MatTableRowsHover: Story = {
   }),
 };
 
-export const MatTableWithMatFormField: Story = {
+export const MatTableWithMatFormField: StoryObj = {
   render: () => ({
     template: `<p>Keep or remove padding-bottom for mat-form-field in table td</p>
 

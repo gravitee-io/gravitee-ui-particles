@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
-import { Story } from '@storybook/angular/types-7-0';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 import { GioIconsModule } from '../gio-icons/gio-icons.module';
 
@@ -43,7 +42,7 @@ const simpleCases: string = Object.entries(classByNames).reduce((previousValue, 
       </div>`;
 }, '');
 
-export const All: Story = {
+export const All: StoryObj = {
   render: () => ({
     template: `
       <h4>Text Only</h4>

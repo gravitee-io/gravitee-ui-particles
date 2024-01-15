@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
-import { Story } from '@storybook/angular/dist/ts3.9/client/preview/types-7-0';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { GioFormHeadersComponent } from './gio-form-headers.component';
@@ -27,7 +25,7 @@ export default {
   component: GioFormHeadersComponent,
   decorators: [
     moduleMetadata({
-      imports: [BrowserAnimationsModule, GioFormHeadersModule, FormsModule, ReactiveFormsModule],
+      imports: [GioFormHeadersModule, FormsModule, ReactiveFormsModule],
     }),
   ],
   argTypes: {},
@@ -40,9 +38,9 @@ export default {
   },
 } as Meta;
 
-export const Default: Story = {};
+export const Default: StoryObj = {};
 
-export const Filled: Story = {
+export const Filled: StoryObj = {
   args: {
     headers: [
       {
@@ -61,7 +59,7 @@ export const Filled: Story = {
   },
 };
 
-export const ReactiveForm: Story = {
+export const ReactiveForm: StoryObj = {
   render: args => {
     const headersControl = new UntypedFormControl({
       value: args.headers,
@@ -98,7 +96,7 @@ export const ReactiveForm: Story = {
   },
 };
 
-export const ReactiveFormDisabled: Story = {
+export const ReactiveFormDisabled: StoryObj = {
   render: args => {
     const headersControl = new UntypedFormControl({
       value: args.headers,
@@ -138,7 +136,7 @@ export const ReactiveFormDisabled: Story = {
   },
 };
 
-export const SmallWidth: Story = {
+export const SmallWidth: StoryObj = {
   render: args => ({
     template: `<div style="width: 200px;"><gio-form-headers [ngModel]="headers"></gio-form-headers></div>`,
     props: args,
