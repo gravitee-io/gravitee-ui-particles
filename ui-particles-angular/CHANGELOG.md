@@ -1,3 +1,10 @@
+# [7.54.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.53.0...v7.54.0) (2024-01-17)
+
+
+### Features
+
+* add shield-star icon ([0919855](https://github.com/gravitee-io/gravitee-ui-particles/commit/0919855706e57c435301c237305234bb8a46a9e4))
+
 # [7.53.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.52.0...v7.53.0) (2024-01-15)
 
 
