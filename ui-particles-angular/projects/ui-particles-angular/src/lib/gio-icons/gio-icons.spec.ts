@@ -260,6 +260,7 @@ const icons = [
   'shield-minus',
   'shield-off',
   'shield-question',
+  'shield-star',
   'shield-upload',
   'shopping-bag',
   'shopping-cart',
