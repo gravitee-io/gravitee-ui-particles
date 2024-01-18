@@ -15,7 +15,7 @@
  */
 
 import { ComponentHarness } from '@angular/cdk/testing';
-import { MatLegacyButtonHarness as MatButtonHarness } from '@angular/material/legacy-button/testing';
+import { MatButtonHarness } from '@angular/material/button/testing';
 
 import { GioPolicyStudioDetailsInfoBarHarness } from '../flow-details-info-bar/gio-ps-flow-details-info-bar.harness';
 

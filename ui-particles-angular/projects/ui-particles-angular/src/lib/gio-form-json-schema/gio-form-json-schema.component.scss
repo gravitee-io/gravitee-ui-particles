@@ -16,6 +16,8 @@
 
 ::ng-deep {
   gio-form-json-schema {
+    // TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.
+    // Remove this rule if it is no longer needed.
     // appearance=outline
     .mat-form-field.mat-form-field-appearance-outline:not(::ng-deep :has(mat-hint), ::ng-deep :has(mat-error)) {
       padding-bottom: 0;
@@ -25,6 +27,8 @@
       }
     }
 
+    // TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.
+    // Remove this rule if it is no longer needed.
     // appearance=fill
     .mat-form-field.mat-form-field-appearance-fill:not(::ng-deep :has(mat-hint), ::ng-deep :has(mat-error)) {
       padding-bottom: 0;

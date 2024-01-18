@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { Directive, Input, ViewChild } from '@angular/core';
-import { MatLegacyTooltip as MatTooltip } from '@angular/material/legacy-tooltip';
+import { MatTooltip } from '@angular/material/tooltip';
 import { Clipboard } from '@angular/cdk/clipboard';
 
 @Directive()

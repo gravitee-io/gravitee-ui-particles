@@ -15,8 +15,8 @@
  */
 
 import { ComponentHarness } from '@angular/cdk/testing';
-import { MatLegacyButtonHarness as MatButtonHarness } from '@angular/material/legacy-button/testing';
-import { MatLegacyTabGroupHarness as MatTabGroupHarness } from '@angular/material/legacy-tabs/testing';
+import { MatButtonHarness } from '@angular/material/button/testing';
+import { MatTabGroupHarness } from '@angular/material/tabs/testing';
 
 import { ChannelSelector, ConditionSelector, Flow, FlowExecution, HttpSelector } from './models';
 import { GioPolicyStudioFlowsMenuHarness } from './components/flows-menu/gio-ps-flows-menu.harness';

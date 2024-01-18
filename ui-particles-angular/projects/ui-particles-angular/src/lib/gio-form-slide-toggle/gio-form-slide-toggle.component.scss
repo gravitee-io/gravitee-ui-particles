@@ -26,37 +26,19 @@ $foreground: map.get(gio.$mat-theme, foreground);
   padding: 4px 0; // add padding to have "same" size like mat-form-field
 }
 
-// to change style in component provide by ng-content
-::ng-deep {
-  gio-form-slide-toggle {
-    div.form-slide-toggle__icon {
-      .mat-icon {
-        font-size: 150%;
-        line-height: 1.125;
-      }
-    }
-  }
-}
-
 .form-slide-toggle {
   display: flex;
   min-height: 60px;
   align-items: center;
-
-  &.appearance-fill {
-    padding: 0 0.75em;
-  }
-
-  &.appearance-outline {
-    padding: 0 0.75em;
-  }
+  padding-left: 12px;
 
   &__icon {
     &:empty {
       display: none;
     }
 
-    padding-right: 8px;
+    display: flex;
+    padding: 12px 12px 12px 0;
   }
 
   &__field {

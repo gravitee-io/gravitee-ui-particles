@@ -42,7 +42,7 @@ $typography: map.get(gio.$mat-theme, typography);
   border-bottom: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
 
   &__label {
-    @include mat.typography-level($typography, body-1);
+    @include gio.subtitle-typography;
 
     display: flex;
     flex: 1 1 auto;

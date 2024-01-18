@@ -30,7 +30,7 @@
         <mat-label>Search</mat-label>
         <input matInput formControlName="search" />
         <button
-          matSuffix
+          matIconSuffix
           mat-icon-button
           aria-label="Clear"
           *ngIf="filtersForm.get('search')?.value"
@@ -39,22 +39,17 @@
           <mat-icon svgIcon="gio:cancel"></mat-icon>
         </button>
       </mat-form-field>
-      <mat-chip-list
+      <mat-chip-listbox
         *ngIf="categories.length > 1"
         class="policiesCatalog__filters__categories"
         aria-label="Categories selection"
         multiple
         formControlName="categories"
       >
-        <mat-chip
-          *ngFor="let category of categories"
-          [selected]="category"
-          [value]="category"
-          #chip="matChip"
-          (click)="chip.toggleSelected(true)"
-          >{{ category | titlecase }}</mat-chip
-        >
-      </mat-chip-list>
+        <mat-chip-option *ngFor="let category of categories" [selected]="category" [value]="category">{{
+          category | titlecase
+        }}</mat-chip-option>
+      </mat-chip-listbox>
     </div>
 
     <div *ngIf="policies.length; else emptyPoliciesTpl" class="policiesCatalog__list">
@@ -84,7 +79,7 @@
 </ng-container>
 
 <ng-template #emptyPoliciesTpl>
-  <mat-dialog-content class="emptyPoliciesCatalog">No policies available.</mat-dialog-content>
+  <div class="emptyPoliciesCatalog">No policies available.</div>
 </ng-template>
 
 <mat-dialog-content *ngIf="selectedPolicy" class="policyForm">

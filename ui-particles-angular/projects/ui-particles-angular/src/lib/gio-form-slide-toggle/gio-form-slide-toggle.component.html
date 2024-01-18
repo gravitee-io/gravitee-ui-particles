@@ -15,12 +15,7 @@
     limitations under the License.
 
 -->
-<div
-  class="form-slide-toggle"
-  [class.appearance-standard]="appearance === 'standard'"
-  [class.appearance-fill]="appearance === 'fill'"
-  [class.appearance-outline]="appearance === 'outline'"
->
+<div class="form-slide-toggle" [class.appearance-fill]="appearance === 'fill'" [class.appearance-outline]="appearance === 'outline'">
   <div class="form-slide-toggle__icon">
     <ng-content select="[gioFormPrefix]"></ng-content>
   </div>

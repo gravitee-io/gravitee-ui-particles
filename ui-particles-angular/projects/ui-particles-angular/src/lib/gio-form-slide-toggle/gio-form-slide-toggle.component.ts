@@ -15,7 +15,7 @@
  */
 import { AfterContentInit, Component, ContentChild, Input, OnDestroy } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { MatLegacySlideToggle as MatSlideToggle } from '@angular/material/legacy-slide-toggle';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { Observable, Subject } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 
@@ -28,7 +28,7 @@ export class GioFormSlideToggleComponent implements AfterContentInit, OnDestroy 
   private unsubscribe$: Subject<void> = new Subject<void>();
 
   @Input()
-  public appearance: 'standard' | 'fill' | 'outline' = 'outline';
+  public appearance: 'fill' | 'outline' = 'outline';
 
   @ContentChild(MatSlideToggle, {
     static: false,

@@ -25,8 +25,8 @@ $typography: map.get(gio.$mat-theme, typography);
   }
 
   &__closeBtn {
-    top: -20px;
-    right: -20px;
+    top: 0;
+    right: -24px;
     float: right;
   }
 

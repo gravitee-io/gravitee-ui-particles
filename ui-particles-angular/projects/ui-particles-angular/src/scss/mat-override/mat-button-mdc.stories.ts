@@ -43,9 +43,9 @@ export const MatButtonMDC: StoryObj = {
                     <button mat-flat-button color="primary" class="small">Small button</button>
                     </div>
                 <div class="button-container">
-                    <button mat-flat-button color="primary" class="large">s<mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-flat-button color="primary" class="large"><mat-icon svgIcon="gio:plus"></mat-icon></button>
                     <button mat-flat-button color="primary" class="medium"><mat-icon svgIcon="gio:plus"></mat-icon></button>
-                    <button mat-flat-button  color="primary" class="small"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-flat-button color="primary" class="small"><mat-icon svgIcon="gio:plus"></mat-icon></button>
                     </div>
                 <div class="button-container">
                     <button mat-flat-button color="primary" class="large"><mat-icon svgIcon="gio:star-outline"></mat-icon>Large button</button>

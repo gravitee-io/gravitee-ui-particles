@@ -18,8 +18,8 @@
 
 .title {
   &__closeBtn {
-    top: -20px;
-    right: -20px;
+    top: 0;
+    right: -24px;
     float: right;
   }
 }
@@ -27,6 +27,7 @@
 .content {
   &__row {
     display: flex;
+    align-items: flex-start;
     gap: 16px;
 
     mat-form-field {

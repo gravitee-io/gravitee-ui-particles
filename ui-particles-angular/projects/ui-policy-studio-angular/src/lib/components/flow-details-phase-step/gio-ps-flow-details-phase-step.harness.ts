@@ -16,7 +16,7 @@
 
 import { BaseHarnessFilters, ComponentHarness, HarnessPredicate } from '@angular/cdk/testing';
 import { SpanHarness } from '@gravitee/ui-particles-angular/testing';
-import { MatLegacyMenuHarness as MatMenuHarness } from '@angular/material/legacy-menu/testing';
+import { MatMenuHarness } from '@angular/material/menu/testing';
 import { DivHarness } from '@gravitee/ui-particles-angular/testing';
 
 export type GioPolicyStudioDetailsPhaseStepHarnessFilters = BaseHarnessFilters;
