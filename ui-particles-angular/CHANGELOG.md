@@ -1,3 +1,11 @@
+# [7.55.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.54.0...v7.55.0) (2024-01-18)
+
+
+### Features
+
+* **ui-angular:** add license expiration notification component ([b20942e](https://github.com/gravitee-io/gravitee-ui-particles/commit/b20942e6b540e8209ab1c0474acd9b5d6cbfc9f8))
+* **ui-angular:** add license expiration notification to menu ([50e547a](https://github.com/gravitee-io/gravitee-ui-particles/commit/50e547aff8f9859db71529689af5389fe9f2b921))
+
 # [7.54.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.53.0...v7.54.0) (2024-01-17)
 
 
