@@ -26,6 +26,7 @@ import { GioMenuFooterComponent } from './gio-menu-footer/gio-menu-footer.compon
 import { GioMenuListComponent } from './gio-menu-list/gio-menu-list.component';
 import { GioMenuSelectorComponent } from './gio-menu-selector/gio-menu-selector.component';
 import { GioMenuHeaderComponent } from './gio-menu-header/gio-menu-header.component';
+import { GioMenuLicenseExpirationNotificationComponent } from './gio-menu-license-expiration-notification/gio-menu-license-expiration-notification.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { GioMenuHeaderComponent } from './gio-menu-header/gio-menu-header.compon
     GioMenuListComponent,
     GioMenuHeaderComponent,
     GioMenuSelectorComponent,
+    GioMenuLicenseExpirationNotificationComponent,
   ],
   exports: [
     GioMenuComponent,
@@ -43,6 +45,7 @@ import { GioMenuHeaderComponent } from './gio-menu-header/gio-menu-header.compon
     GioMenuListComponent,
     GioMenuHeaderComponent,
     GioMenuSelectorComponent,
+    GioMenuLicenseExpirationNotificationComponent,
   ],
   imports: [CommonModule, MatIconModule, GioIconsModule, MatSelectModule],
 })

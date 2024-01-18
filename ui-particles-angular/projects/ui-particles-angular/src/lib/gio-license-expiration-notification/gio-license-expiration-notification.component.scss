@@ -129,3 +129,7 @@ $expiration-notification-container-height: 152px;
     }
   }
 }
+
+:host-context(.gio-menu__reduced) .status {
+  display: none;
+}

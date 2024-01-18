@@ -13,14 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { Component } from '@angular/core';
 
-export * from './gio-menu.module';
-export * from './gio-menu.service';
-export * from './gio-menu.component';
-export * from './gio-menu-item/gio-menu-item.component';
-export * from './gio-menu-list/gio-menu-list.component';
-export * from './gio-menu-footer/gio-menu-footer.component';
-export * from './gio-menu-header/gio-menu-header.component';
-export * from './gio-menu-selector/gio-menu-selector.component';
-export * from './gio-menu-selector/gio-menu-selector.harness';
-export * from './gio-menu-license-expiration-notification/gio-menu-license-expiration-notification.component';
+@Component({
+  selector: 'gio-menu-license-expiration-notification',
+  templateUrl: './gio-menu-license-expiration-notification.component.html',
+  styleUrls: ['./gio-menu-license-expiration-notification.component.scss'],
+})
+export class GioMenuLicenseExpirationNotificationComponent {}

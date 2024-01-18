@@ -18,6 +18,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Story } from '@storybook/angular/types-7-0';
 import { HttpClientModule } from '@angular/common/http';
 import { withDesign } from 'storybook-addon-designs';
+import { computeStylesForStory, GioMenuModule } from '@gravitee/ui-particles-angular';
 
 import { GioLicenseExpirationNotificationComponent } from './gio-license-expiration-notification.component';
 import { GioLicenseExpirationNotificationModule } from './gio-license-expiration-notification.module';
@@ -71,10 +72,68 @@ export const Default: Story = {
   },
 };
 
+let route = 'apis';
+const gioMenuContent = `
+            <gio-menu-header>    
+              <gio-menu-selector tabindex="1" [selectedItemValue]="selectedItemValue" selectorTitle="Environment" [selectorItems]="selectorItems" (selectChange)="selectedItemValue=$event"></gio-menu-selector>
+            </gio-menu-header>
+            <gio-menu-list>    
+              <gio-menu-item tabindex="1" icon="gio:home" (click)="onClick('dashboard')" [active]="isActive('dashboard')">Dashboard</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:upload-cloud" (click)="onClick('apis')" [active]="isActive('apis')">Apis</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:multi-window" (click)="onClick('apps')" [active]="isActive('apps')">Applications</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:cloud-server" (click)="onClick('gateways')" [active]="isActive('gateways')">Gateways</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:verified" (click)="onClick('audit')" [active]="isActive('audit')" iconRight="gio:lock">Audit</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:message-text" (click)="onClick('messages')" [active]="isActive('messages')">Messages</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:settings" (click)="onClick('settings')" [active]="isActive('settings')">Settings</gio-menu-item>
+            </gio-menu-list>
+            <gio-menu-license-expiration-notification>
+                        <gio-license-expiration-notification [expirationDate]="expirationDate"></gio-license-expiration-notification>
+            </gio-menu-license-expiration-notification>
+            <gio-menu-footer>
+              <gio-menu-item tabindex="1" icon="gio:building" (click)="onClick('org')" [active]="isActive('org')">Organization settings</gio-menu-item>
+            </gio-menu-footer>`;
+
+export const InMenu: Story = {
+  render: args => {
+    return {
+      template: `
+        <div id="sidenav"  [style]="style">
+          <gio-menu [reduced]="false">
+            ${gioMenuContent}
+          </gio-menu>
+        </div>
+        `,
+      props: {
+        onClick: (target: string) => (route = target),
+        isActive: (target: string) => (route != target ? null : true),
+        selectedItemValue: 'prod',
+        selectorItems: [
+          { value: 'prod', displayValue: '🚀 Prod' },
+          { value: 'dev', displayValue: '🧪 Development' },
+        ],
+        style: computeStylesForStory(args),
+        expirationDate: new Date(),
+      },
+      styles: [
+        ` 
+        #sidenav {
+            height: 956px;
+            display: flex;
+        }
+        
+        #sidenav h1 {
+            margin-left: 12px
+        };
+        `,
+      ],
+    };
+  },
+};
+
 export const Error: Story = {
   render: _ => {
     return {
-      template: `<gio-expiration-notification [expirationDate]="expirationDate" [inError]="inError"></gio-expiration-notification>
+      template: `<gio-license-expiration-notification [expirationDate]="expirationDate" [inError]="inError"></gio-license-expiration-notification>
         `,
       props: {
         expirationDate: new Date(),
