@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 import { ComponentHarness, parallel } from '@angular/cdk/testing';
-import { MatLegacyButtonHarness as MatButtonHarness } from '@angular/material/legacy-button/testing';
+import { MatButtonHarness } from '@angular/material/button/testing';
 import { DivHarness } from '@gravitee/ui-particles-angular/testing';
-import {
-  MatLegacyChipListboxHarness as MatChipListboxHarness,
-  MatLegacyChipOptionHarness as MatChipOptionHarness,
-} from '@angular/material/legacy-chips/testing';
-import { MatLegacyInputHarness as MatInputHarness } from '@angular/material/legacy-input/testing';
+import { MatChipListboxHarness, MatChipOptionHarness } from '@angular/material/chips/testing';
+import { MatInputHarness } from '@angular/material/input/testing';
 
 import { GioPolicyStudioStepFormHarness } from '../step-form/gio-ps-step-form.harness';
 

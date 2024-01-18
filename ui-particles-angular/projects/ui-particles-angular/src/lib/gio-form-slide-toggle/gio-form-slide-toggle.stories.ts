@@ -95,7 +95,7 @@ export const SimilarToMatFormField: StoryObj = {
   }),
   argTypes: {
     appearance: {
-      options: ['standard', 'fill', 'outline'],
+      options: ['fill', 'outline'],
       control: { type: 'select' },
     },
   },

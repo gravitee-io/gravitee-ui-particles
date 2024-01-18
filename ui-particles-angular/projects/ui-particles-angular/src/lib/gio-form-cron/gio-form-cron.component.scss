@@ -21,7 +21,14 @@ $typography: map.get(gio.$mat-theme, typography);
 
 :host {
   display: flex;
+  min-width: 356px;
   flex-direction: column;
+}
+
+::ng-deep {
+  gio-form-cron {
+    @include mat.form-field-density(-2);
+  }
 }
 
 .label {
@@ -58,7 +65,11 @@ $typography: map.get(gio.$mat-theme, typography);
   }
 
   .modeForm {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     margin-bottom: 8px;
+    column-gap: 4px;
 
     &__field-small,
     &__field-medium,
@@ -68,11 +79,11 @@ $typography: map.get(gio.$mat-theme, typography);
     }
 
     &__field-small {
-      width: 80px;
+      width: 124px;
     }
 
     &__field-medium {
-      width: 120px;
+      width: 158px;
     }
 
     &__field-custom {

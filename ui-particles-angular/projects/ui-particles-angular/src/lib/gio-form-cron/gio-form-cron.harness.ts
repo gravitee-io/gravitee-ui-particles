@@ -16,7 +16,7 @@
 
 import { BaseHarnessFilters, ComponentHarness, HarnessPredicate } from '@angular/cdk/testing';
 import { MatButtonToggleGroupHarness } from '@angular/material/button-toggle/testing';
-import { MatLegacyInputHarness as MatInputHarness } from '@angular/material/legacy-input/testing';
+import { MatInputHarness } from '@angular/material/input/testing';
 
 export type GioFormCronHarnessFilters = BaseHarnessFilters;
 

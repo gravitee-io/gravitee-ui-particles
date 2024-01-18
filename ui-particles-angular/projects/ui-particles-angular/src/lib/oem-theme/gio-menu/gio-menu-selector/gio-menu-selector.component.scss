@@ -19,20 +19,16 @@
 
 .gio-menu-selector {
   width: 192px;
-  padding: 10px 14px 0;
+  padding: 4px 14px 10px;
   border-style: solid;
   border-color: oem.$oem-menu-border;
   border-radius: 4px;
   margin-bottom: 8px;
   color: oem.$oem-menu-text;
 
-  &__mat-form-field {
-    padding-bottom: 0;
+  &__label {
+    margin-bottom: 2px;
   }
-}
-
-.gio-menu-selector__mat-option.mat-option.mat-selected {
-  color: black; // select has white background so text should be dark
 }
 
 ::ng-deep {
@@ -43,28 +39,17 @@
       }
     }
 
-    .mat-form-field-label > mat-label {
+    .mat-mdc-select-value {
       color: oem.$oem-menu-text;
     }
 
-    .mat-select-min-line {
+    .mat-mdc-select-arrow {
       color: oem.$oem-menu-text;
     }
-
-    .gio-menu-selector .mat-form-field .mat-select-arrow {
-      color: oem.$oem-menu-text !important;
-    }
-
-    .gio-menu-selector .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
-      color: oem.$oem-menu-text !important;
-    }
   }
 
-  .mat-form-field-appearance-legacy .mat-form-field-wrapper {
-    padding-bottom: 6px;
-  }
-
-  .mat-form-field-underline {
-    display: none;
+  .mdc-menu-surface.mat-mdc-select-panel.gio-menu-selector-custom-width {
+    width: 192px;
+    margin: 10px -16px 0;
   }
 }

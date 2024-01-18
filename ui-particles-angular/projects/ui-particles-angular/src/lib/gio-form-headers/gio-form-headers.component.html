@@ -30,7 +30,7 @@
       [formGroupName]="headerIndex"
     >
       <td class="gio-form-headers__table__header-row__td-key">
-        <mat-form-field class="gio-form-headers__table__header-row__td-key__field" [floatLabel]="'never'" appearance="standard">
+        <div class="gio-form-headers__table__header-row__td-key__field">
           <textarea
             formControlName="key"
             matInput
@@ -39,7 +39,7 @@
             cdkAutosizeMinRows="1"
             [matAutocomplete]="headerNamesAutocomplete"
           ></textarea>
-        </mat-form-field>
+        </div>
         <mat-error *ngIf="control.get('key')?.hasError('pattern')">
           Header name must not contain spaces. (RegExp: {{ control.get('key')?.getError('pattern')?.requiredPattern }})
         </mat-error>
@@ -50,9 +50,9 @@
         </mat-autocomplete>
       </td>
       <td class="gio-form-headers__table__header-row__td-value">
-        <mat-form-field class="gio-form-headers__table__header-row__td-value__field" [floatLabel]="'never'" appearance="standard">
+        <div class="gio-form-headers__table__header-row__td-value__field">
           <textarea formControlName="value" matInput placeholder="Value..." cdkTextareaAutosize cdkAutosizeMinRows="1"></textarea>
-        </mat-form-field>
+        </div>
         <button
           class="gio-form-headers__table__header-row__td-value__button"
           *ngIf="headersFormArray.controls.length - 1 !== headerIndex"

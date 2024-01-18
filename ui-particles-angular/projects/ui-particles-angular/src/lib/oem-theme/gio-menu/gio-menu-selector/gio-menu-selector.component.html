@@ -16,12 +16,16 @@
 
 -->
 <div class="gio-menu-selector">
-  <mat-form-field class="gio-menu-selector__mat-form-field" appearance="legacy">
-    <mat-label>{{ selectorTitle }}</mat-label>
-    <mat-select [tabIndex]="tabIndex" [value]="selectedItemValue" (selectionChange)="onSelectionChange($event)">
-      <mat-option class="gio-menu-selector__mat-option" *ngFor="let item of selectorItems" [value]="item.value">
-        {{ item.displayValue }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+  <span class="gio-menu-selector__label mat-caption">{{ selectorTitle }}</span>
+  <mat-select
+    class="gio-menu-selector__select"
+    [tabIndex]="tabIndex"
+    panelClass="gio-menu-selector-custom-width"
+    [value]="selectedItemValue"
+    (selectionChange)="onSelectionChange($event)"
+  >
+    <mat-option class="gio-menu-selector__select__mat-option" *ngFor="let item of selectorItems" [value]="item.value">
+      {{ item.displayValue }}
+    </mat-option>
+  </mat-select>
 </div>

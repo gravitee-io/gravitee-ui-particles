@@ -19,7 +19,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatLegacyInputHarness as MatInputHarness } from '@angular/material/legacy-input/testing';
+import { MatInputHarness } from '@angular/material/input/testing';
 
 import { GioSaveBarModule } from './gio-save-bar.module';
 import { GioSaveBarHarness } from './gio-save-bar.harness';
@@ -258,7 +258,7 @@ describe('GioSaveBarModule', () => {
       template: `
         <div>
           <input />
-          <gio-save-bar creationMode="true" [hideSubmitButton]="hideSubmitButton" (submitted)="onSubmit($event)"></gio-save-bar>
+          <gio-save-bar [creationMode]="true" [hideSubmitButton]="hideSubmitButton" (submitted)="onSubmit($event)"></gio-save-bar>
         </div>
       `,
     })

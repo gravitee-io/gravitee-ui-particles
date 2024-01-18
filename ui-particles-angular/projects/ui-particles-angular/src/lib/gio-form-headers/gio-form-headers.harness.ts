@@ -15,9 +15,9 @@
  */
 
 import { AsyncFactoryFn, BaseHarnessFilters, ComponentHarness, HarnessPredicate, parallel } from '@angular/cdk/testing';
-import { MatLegacyButtonHarness as MatButtonHarness } from '@angular/material/legacy-button/testing';
-import { MatLegacyInputHarness as MatInputHarness } from '@angular/material/legacy-input/testing';
-import { MatLegacyAutocompleteHarness as MatAutocompleteHarness } from '@angular/material/legacy-autocomplete/testing';
+import { MatButtonHarness } from '@angular/material/button/testing';
+import { MatInputHarness } from '@angular/material/input/testing';
+import { MatAutocompleteHarness } from '@angular/material/autocomplete/testing';
 
 export class GioFormHeadersHarness extends ComponentHarness {
   public static hostSelector = 'gio-form-headers';
@@ -39,7 +39,7 @@ export class GioFormHeadersHarness extends ComponentHarness {
     this.locatorFor(MatInputHarness.with({ ancestor: `[ng-reflect-name="${rowIndex}"]`, selector: '[formControlName=key]' }));
 
   private getHeaderRowInputKeyAutocomplete = (rowIndex: number): AsyncFactoryFn<MatAutocompleteHarness> =>
-    this.locatorFor(MatAutocompleteHarness.with({ ancestor: `tr[ng-reflect-name="${rowIndex}"]`, selector: '.mat-autocomplete-trigger' }));
+    this.locatorFor(MatAutocompleteHarness.with({ ancestor: `tr[ng-reflect-name="${rowIndex}"]` }));
 
   private getHeaderRowInputValue = (rowIndex: number): AsyncFactoryFn<MatInputHarness> =>
     this.locatorFor(MatInputHarness.with({ ancestor: `tr[ng-reflect-name="${rowIndex}"]`, selector: '[formControlName=value]' }));

@@ -42,6 +42,7 @@ $typography: map.get(gio.$mat-theme, typography);
 .save-bar__content {
   display: flex;
   height: 100%;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   padding: 16px 24px;
