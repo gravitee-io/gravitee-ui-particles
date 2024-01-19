@@ -92,6 +92,10 @@ export * from './gio-license/gio-license-dialog/gio-license-dialog.module';
 export * from './gio-license/gio-license-dialog/gio-license-dialog.component';
 export * from './gio-license/gio-license.testing.module';
 
+export * from './gio-license-expiration-notification/gio-license-expiration-notification.module';
+export * from './gio-license-expiration-notification/gio-license-expiration-notification.component';
+export * from './gio-license-expiration-notification/gio-license-expiration-notification.harness';
+
 export * from './gio-form-cron/gio-form-cron.component';
 export * from './gio-form-cron/gio-form-cron-label.component';
 export * from './gio-form-cron/gio-form-cron-hint.component';
