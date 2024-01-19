@@ -13,11 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { moduleMetadata, Meta, Args } from '@storybook/angular';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { Story } from '@storybook/angular/types-7-0';
-import { HttpClientModule } from '@angular/common/http';
-import { withDesign } from 'storybook-addon-designs';
+import { moduleMetadata, Meta, Args, StoryObj } from '@storybook/angular';
 import { computeStylesForStory, GioMenuModule } from '@gravitee/ui-particles-angular';
 
 import { GioLicenseExpirationNotificationComponent } from './gio-license-expiration-notification.component';
@@ -28,9 +24,8 @@ export default {
   component: GioLicenseExpirationNotificationComponent,
   decorators: [
     moduleMetadata({
-      imports: [GioLicenseExpirationNotificationModule, GioMenuModule, NoopAnimationsModule, HttpClientModule],
+      imports: [GioLicenseExpirationNotificationModule, GioMenuModule],
     }),
-    withDesign,
   ],
   render: () => ({}),
 } as Meta;
@@ -41,15 +36,13 @@ const getExpirationDate = (args: Args) => new Date(args.expirationDate);
 const getShowCallToAction = (args: Args) => args.showCallToAction;
 const getLink = (args: Args) => args.callToActionLink;
 
-export const Default: Story = {
+export const Default: StoryObj = {
   argTypes: {
     expirationDate: {
       control: 'date',
-      defaultValue: new Date(),
     },
     showCallToAction: {
       control: 'boolean',
-      defaultValue: true,
     },
     callToActionMessage: {
       type: 'string',
@@ -57,6 +50,10 @@ export const Default: Story = {
     callToActionLink: {
       type: 'string',
     },
+  },
+  args: {
+    showCallToAction: true,
+    expirationDate: new Date(),
   },
   render: args => {
     return {
@@ -93,7 +90,7 @@ const gioMenuContent = `
               <gio-menu-item tabindex="1" icon="gio:building" (click)="onClick('org')" [active]="isActive('org')">Organization settings</gio-menu-item>
             </gio-menu-footer>`;
 
-export const InMenu: Story = {
+export const InMenu: StoryObj = {
   render: args => {
     return {
       template: `
@@ -130,7 +127,7 @@ export const InMenu: Story = {
   },
 };
 
-export const Error: Story = {
+export const Error: StoryObj = {
   render: _ => {
     return {
       template: `<gio-license-expiration-notification [expirationDate]="expirationDate" [inError]="inError"></gio-license-expiration-notification>

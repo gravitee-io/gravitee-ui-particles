@@ -103,7 +103,7 @@ $expiration-notification-container-height: 152px;
     }
 
     &__text {
-      @include mat.typography-level($typography, subheading-1);
+      @include mat.typography-level($typography, body-1);
 
       margin: 24px 12px;
       text-align: left;
