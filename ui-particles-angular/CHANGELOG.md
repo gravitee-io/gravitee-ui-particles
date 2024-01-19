@@ -1,3 +1,10 @@
+## [7.56.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.56.0...v7.56.1) (2024-01-19)
+
+
+### Bug Fixes
+
+* export gio license expiration notification ([745eafe](https://github.com/gravitee-io/gravitee-ui-particles/commit/745eafea45a3f388e1950d61d29e18f7750f1815))
+
 # [7.56.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.55.0...v7.56.0) (2024-01-19)
 
 
