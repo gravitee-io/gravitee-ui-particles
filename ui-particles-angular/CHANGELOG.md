@@ -1,3 +1,10 @@
+# [7.56.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.55.0...v7.56.0) (2024-01-19)
+
+
+### Features
+
+* add expiration date to license + service ([0dce30c](https://github.com/gravitee-io/gravitee-ui-particles/commit/0dce30cf5b843d67768142f6e1b9a58aabbccc25))
+
 # [7.55.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.54.0...v7.55.0) (2024-01-18)
 
 
