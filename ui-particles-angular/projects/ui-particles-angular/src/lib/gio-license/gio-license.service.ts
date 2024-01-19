@@ -25,6 +25,7 @@ export type License = {
   tier: string;
   packs: Array<string>;
   features: Array<string>;
+  expiresAt?: Date;
 };
 
 export interface LicenseConfiguration {
@@ -145,5 +146,9 @@ export class GioLicenseService {
       })
       .afterClosed()
       .subscribe();
+  }
+
+  public getExpirationDate$(): Observable<Date | undefined> {
+    return this.getLicense$().pipe(map(license => license.expiresAt));
   }
 }

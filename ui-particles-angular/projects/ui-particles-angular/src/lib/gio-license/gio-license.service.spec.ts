@@ -267,6 +267,32 @@ describe('GioLicenseService', () => {
         )
         .subscribe();
     });
+
+    it('should return license expiration date', done => {
+      const expiringLicense: License = {
+        tier: '',
+        packs: [],
+        features: [],
+        expiresAt: new Date(),
+      };
+
+      gioLicenseService
+        .getExpirationDate$()
+        .pipe(
+          tap(expirationDate => {
+            expect(expirationDate).toEqual(expiringLicense.expiresAt);
+            done();
+          }),
+        )
+        .subscribe();
+
+      const req = httpTestingController.expectOne({
+        method: 'GET',
+        url: `https://url.test:3000/license`,
+      });
+
+      req.flush(expiringLicense);
+    });
   });
 
   describe('With OEM license', () => {
