@@ -1,3 +1,10 @@
+# [7.57.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.56.1...v7.57.0) (2024-01-22)
+
+
+### Features
+
+* change method name to match `expiresAt` returned by /license ([de3b4ca](https://github.com/gravitee-io/gravitee-ui-particles/commit/de3b4ca0c9844946a4a737ac3f968fa97f43dba8))
+
 ## [7.56.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.56.0...v7.56.1) (2024-01-19)
 
 
