@@ -148,7 +148,7 @@ export class GioLicenseService {
       .subscribe();
   }
 
-  public getExpirationDate$(): Observable<Date | undefined> {
-    return this.getLicense$().pipe(map(license => license.expiresAt));
+  public getExpiresAt$(): Observable<Date | undefined> {
+    return this.getLicense$().pipe(map(license => (license.expiresAt ? new Date(license.expiresAt) : undefined)));
   }
 }
