@@ -268,30 +268,67 @@ describe('GioLicenseService', () => {
         .subscribe();
     });
 
-    it('should return license expiration date', done => {
-      const expiringLicense: License = {
-        tier: '',
-        packs: [],
-        features: [],
-        expiresAt: new Date(),
-      };
+    describe('getExpiresAt$', () => {
+      /* eslint-disable @typescript-eslint/no-explicit-any */
+      it.each<any>([[1706092042001], ['2023-03-14T12:55:39.954Z']] as [any][])(
+        'Check date is returned when expiration date is truthy',
+        (date: any, done: jest.DoneCallback) => {
+          const expiringLicense = {
+            tier: '',
+            packs: [],
+            features: [],
+            expiresAt: date,
+          };
 
-      gioLicenseService
-        .getExpirationDate$()
-        .pipe(
-          tap(expirationDate => {
-            expect(expirationDate).toEqual(expiringLicense.expiresAt);
-            done();
-          }),
-        )
-        .subscribe();
+          gioLicenseService
+            .getExpiresAt$()
+            .pipe(
+              tap(expirationDate => {
+                expect(expirationDate instanceof Date).toEqual(true);
+                expect(expirationDate).toEqual(new Date(expiringLicense.expiresAt));
+                done();
+              }),
+            )
+            .subscribe();
 
-      const req = httpTestingController.expectOne({
-        method: 'GET',
-        url: `https://url.test:3000/license`,
-      });
+          const req = httpTestingController.expectOne({
+            method: 'GET',
+            url: `https://url.test:3000/license`,
+          });
 
-      req.flush(expiringLicense);
+          req.flush(expiringLicense);
+        },
+      );
+
+      it.each<any>([[undefined], [null]] as [any][])(
+        'Check undefined is returned when expiration date is falsy',
+        (date: any, done: jest.DoneCallback) => {
+          const expiringLicense = {
+            tier: '',
+            packs: [],
+            features: [],
+            expiresAt: date,
+          };
+
+          gioLicenseService
+            .getExpiresAt$()
+            .pipe(
+              tap(expirationDate => {
+                expect(expirationDate).toEqual(undefined);
+                done();
+              }),
+            )
+            .subscribe();
+
+          const req = httpTestingController.expectOne({
+            method: 'GET',
+            url: `https://url.test:3000/license`,
+          });
+
+          req.flush(expiringLicense);
+        },
+      );
+      /* eslint-enable @typescript-eslint/no-explicit-any */
     });
   });
 
