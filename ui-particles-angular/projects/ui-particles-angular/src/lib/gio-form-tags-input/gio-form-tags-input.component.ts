@@ -276,6 +276,9 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
   // From ControlValueAccessor interface
   public writeValue(value: string[]): void {
     this._value = value;
+    this.changeDetectorRef.detectChanges();
+    this.changeDetectorRef.markForCheck();
+    this.stateChanges.next();
   }
 
   // From ControlValueAccessor interface
