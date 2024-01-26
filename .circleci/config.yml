@@ -223,11 +223,13 @@ jobs:
 workflows:
   version: 2.1
   validate_build_branch:
-    # Trigger on all branches except `main`
+    # Trigger on all branches except `main` & `7.x`
     when:
       and:
         - not:
             equal: [main, << pipeline.git.branch >>]
+        - not:
+            equal: [7.x, << pipeline.git.branch >>]
     jobs:
       - lint-test:
           name: Lint & Test
@@ -308,10 +310,11 @@ workflows:
                 var-name: CHROMATIC_PROJECT_TOKEN
 
   release:
-    # Trigger only for `main` branch
+    # Trigger only for `main` & `7.x` branch
     when:
       or:
         - equal: [main, << pipeline.git.branch >>]
+        - equal: [7.x, << pipeline.git.branch >>]
         # TODO: Remove me. Used to test release
         - equal: [circleci, << pipeline.git.branch >>]
     jobs:
