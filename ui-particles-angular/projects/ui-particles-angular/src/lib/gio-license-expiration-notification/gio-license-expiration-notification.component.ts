@@ -50,12 +50,16 @@ export class GioLicenseExpirationNotificationComponent implements OnInit, OnChan
       return;
     }
 
-    const timeRemaining = this.transformDateWithoutHours(this.expirationDate) - this.transformDateWithoutHours(new Date());
+    const date = new Date();
+    const timeRemaining = this.transformDateWithoutHours(this.expirationDate) - this.transformDateWithoutHours(date);
     this.daysRemaining = timeRemaining / (1000 * 3600 * 24);
 
-    if (this.daysRemaining <= 0) {
+    if (this.expirationDate.getTime() - date.getTime() < 0) {
       this.title = 'Your license has expired';
       this.statusColor = 'red';
+    } else if (this.daysRemaining === 0) {
+      this.title = `Your license will expire today`;
+      this.statusColor = 'orange';
     } else {
       this.title = `Your license will expire in ${this.daysRemaining} day${this.daysRemaining === 1 ? '' : 's'}`;
       this.statusColor = this.daysRemaining > 5 ? 'blue' : 'orange';

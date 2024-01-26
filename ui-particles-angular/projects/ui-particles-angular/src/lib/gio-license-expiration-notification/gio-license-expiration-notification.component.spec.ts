@@ -66,7 +66,32 @@ describe('GioLicenseExpirationNotificationComponent', () => {
     });
 
     it('should display expiration message', async () => {
-      component.expirationDate = new Date();
+      const expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() - 1);
+
+      component.expirationDate = expirationDate;
+      fixture.detectChanges();
+
+      const harness = await loader.getHarness(GioLicenseExpirationNotificationHarness);
+      expect(await harness.getTitleText()).toEqual('Your license has expired');
+    });
+
+    it('should display expiration message when expires today', async () => {
+      const expirationDate = new Date();
+      expirationDate.setMinutes(expirationDate.getMinutes() + 1);
+
+      component.expirationDate = expirationDate;
+      fixture.detectChanges();
+
+      const harness = await loader.getHarness(GioLicenseExpirationNotificationHarness);
+      expect(await harness.getTitleText()).toEqual('Your license will expire today');
+    });
+
+    it('should display expiration message when expired today 1 minute ago', async () => {
+      const expirationDate = new Date();
+      expirationDate.setMinutes(expirationDate.getMinutes() - 1);
+
+      component.expirationDate = expirationDate;
       fixture.detectChanges();
 
       const harness = await loader.getHarness(GioLicenseExpirationNotificationHarness);
@@ -170,8 +195,22 @@ describe('GioLicenseExpirationNotificationComponent', () => {
       expect(await harness.isColor('orange')).toEqual(true);
     });
 
+    it('should be orange if expires today', async () => {
+      const expirationDate = new Date();
+      expirationDate.setMinutes(expirationDate.getMinutes() + 1);
+
+      component.expirationDate = expirationDate;
+      fixture.detectChanges();
+
+      const harness = await loader.getHarness(GioLicenseExpirationNotificationHarness);
+      expect(await harness.isColor('orange')).toEqual(true);
+    });
+
     it('should be red if expired', async () => {
-      component.expirationDate = new Date();
+      const expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() - 1);
+
+      component.expirationDate = expirationDate;
       fixture.detectChanges();
 
       const harness = await loader.getHarness(GioLicenseExpirationNotificationHarness);
