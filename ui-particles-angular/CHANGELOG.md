@@ -1,3 +1,15 @@
+# [8.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.58.0...v8.0.0) (2024-01-26)
+
+
+### chore
+
+* bump to angular 14 ([6ae501b](https://github.com/gravitee-io/gravitee-ui-particles/commit/6ae501bd1b49eb8bf6c31b0f38d073e87784d176))
+
+
+### BREAKING CHANGES
+
+* Upgrade to Angular 14
+
 # [7.58.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.57.0...v7.58.0) (2024-01-26)
 
 
