@@ -1,6 +1,7 @@
 {
   "name": "@gravitee/ui-analytics",
   "version": "0.0.0-semantically-released",
+  "private": false,
   "description": "Gravitee.io - UI Analytics Angular",
   "repository": {
     "type": "git",

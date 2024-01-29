@@ -1,6 +1,7 @@
 {
   "name": "@gravitee/ui-policy-studio-angular",
   "version": "0.0.0-semantically-released",
+  "private": false,
   "description": "Gravitee.io - UI Policy Studio Angular",
   "repository": {
     "type": "git",

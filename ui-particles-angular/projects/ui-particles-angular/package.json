@@ -1,6 +1,7 @@
 {
   "name": "@gravitee/ui-particles-angular",
   "version": "0.0.0-semantically-released",
+  "private": false,
   "description": "Gravitee.io - UI Particles Angular",
   "repository": {
     "type": "git",
