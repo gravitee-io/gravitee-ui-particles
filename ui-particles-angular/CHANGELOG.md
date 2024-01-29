@@ -1,3 +1,15 @@
+# [9.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v8.0.0...v9.0.0) (2024-01-29)
+
+
+### chore
+
+* upgrade to Angular 15 ([9d749ed](https://github.com/gravitee-io/gravitee-ui-particles/commit/9d749ed2e82990c58f79f35bf08836e508d13807))
+
+
+### BREAKING CHANGES
+
+* Upgrade to Angular 15
+
 # [8.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.58.0...v8.0.0) (2024-01-26)
 
 
