@@ -1,3 +1,10 @@
+## [9.0.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.0.0...v9.0.1) (2024-01-29)
+
+
+### Bug Fixes
+
+* update semantic-release to correct publication on npm ([2ed9faa](https://github.com/gravitee-io/gravitee-ui-particles/commit/2ed9faa892bc588ddfa92236d0360d9fcc279a2c))
+
 # [9.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v8.0.0...v9.0.0) (2024-01-29)
 
 
