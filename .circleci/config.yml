@@ -128,9 +128,9 @@ jobs:
       dry_run:
         type: boolean
         default: true
-    executor:
-      class: small
-      name: node-lts
+    docker:
+      #        TODO: Try to fix. Hack because npm publish + semantic-release is not working as before with 18.10 node version
+      - image: cimg/node:16.13
     steps:
       - add_ssh_keys:
           fingerprints:
@@ -152,7 +152,7 @@ jobs:
             - run:
                 name: 🚀 Release the Kraken
                 working_directory: << parameters.package_name >>
-                command: yarn semantic-release
+                command: yarn semantic-release --debug
 
   build-storybook:
     parameters:
