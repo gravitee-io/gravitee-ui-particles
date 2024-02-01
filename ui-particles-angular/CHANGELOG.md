@@ -1,3 +1,11 @@
+## [9.0.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.0.1...v9.0.2) (2024-02-01)
+
+
+### Bug Fixes
+
+* gio-license-expiration-notification formatting ([858d9b2](https://github.com/gravitee-io/gravitee-ui-particles/commit/858d9b216dbf1b70911c3efba0588123cdf2cd1a))
+* style gio-menu-selector drop-down menu + handle oem customization ([0295f0f](https://github.com/gravitee-io/gravitee-ui-particles/commit/0295f0f2058028f665089e0bf1f70c53e8780f8a))
+
 ## [9.0.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.0.0...v9.0.1) (2024-01-29)
 
 
