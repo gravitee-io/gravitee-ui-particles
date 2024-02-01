@@ -42,6 +42,41 @@ const computeStylesForStory = (args: Args): string => {
     .join(' ');
 };
 
+/**
+ * Mimics how styles are injected in Console.
+ * It is necessary in order to apply styles to gio-menu-selector drop-down overlay.
+ * @param args
+ * @param document
+ */
+const computeAndInjectStylesForStory = (args: Args, document: Document): void => {
+  if (!document) {
+    return;
+  }
+
+  resetStoryStyleInjection(args);
+
+  const styles = computeStyles({
+    menuBackground: args.menuBackground,
+    menuActive: args.menuActive,
+  });
+  styles.forEach(style => {
+    document.documentElement.style.setProperty(style.key, style.value);
+  });
+};
+
+const resetStoryStyleInjection = (args: Args): void => {
+  if (!args?.menuBackground) {
+    document.documentElement.style.removeProperty('--gio-oem-palette--background');
+    document.documentElement.style.removeProperty('--gio-oem-palette--background-contrast');
+    document.documentElement.style.removeProperty('--gio-oem-palette--sub-menu');
+  }
+
+  if (!args?.menuActive) {
+    document.documentElement.style.removeProperty('--gio-oem-palette--active');
+    document.documentElement.style.removeProperty('--gio-oem-palette--active-contrast');
+  }
+};
+
 const computeStyles = (theme: OemTheme): { key: string; value: string }[] => {
   const backgroundStyle = computeStyleAndContrastByPrefix('background', theme.menuBackground);
   const activeStyle = computeStyleAndContrastByPrefix('active', theme.menuActive);
@@ -61,4 +96,4 @@ const computeStyleAndContrastByPrefix = (prefix: string, color: string): { key: 
   const paletteColorContrast = { key: `--gio-oem-palette--${prefix}-contrast`, value: '#fff' };
   return [paletteColor, paletteColorContrast];
 };
-export { computeStyles, computeStylesForStory };
+export { computeStyles, computeStylesForStory, computeAndInjectStylesForStory, resetStoryStyleInjection };

@@ -16,7 +16,7 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 import { GioSubmenuModule } from '../gio-submenu';
-import { OEM_THEME_ARG_TYPES, computeStylesForStory, OEM_DEFAULT_LOGO } from '../oem-theme.service';
+import { OEM_THEME_ARG_TYPES, OEM_DEFAULT_LOGO, computeAndInjectStylesForStory } from '../oem-theme.service';
 
 import { GioMenuModule } from './gio-menu.module';
 import { GioMenuItemComponent } from './gio-menu-item/gio-menu-item.component';
@@ -57,9 +57,10 @@ export const Default: StoryObj = {
     logo: OEM_DEFAULT_LOGO,
   },
   render: args => {
+    computeAndInjectStylesForStory(args, document);
     return {
       template: `
-        <div id="sidenav" [style]="style">
+        <div id="sidenav">
           <gio-menu [reduced]="false">
             ${gioMenuContent}
           </gio-menu>
@@ -74,7 +75,6 @@ export const Default: StoryObj = {
           { value: 'prod', displayValue: '🚀 Prod' },
           { value: 'dev', displayValue: '🧪 Development' },
         ],
-        style: computeStylesForStory(args),
       },
       styles: [
         ` 
@@ -98,9 +98,10 @@ export const Reduced: StoryObj = {
     logo: OEM_DEFAULT_LOGO,
   },
   render: args => {
+    computeAndInjectStylesForStory(args, document);
     return {
       template: `
-        <div id="sidenav"  [style]="style">
+        <div id="sidenav">
           <gio-menu [reduced]="true">
             ${gioMenuContent}
           </gio-menu>
@@ -115,7 +116,6 @@ export const Reduced: StoryObj = {
           { value: 'prod', displayValue: '🚀 Prod' },
           { value: 'dev', displayValue: '🧪 Development' },
         ],
-        style: computeStylesForStory(args),
       },
       styles: [
         ` 
@@ -139,9 +139,10 @@ export const WithOneItemInSelector: StoryObj = {
     logo: OEM_DEFAULT_LOGO,
   },
   render: args => {
+    computeAndInjectStylesForStory(args, document);
     return {
       template: `
-        <div id="sidenav"  [style]="style">
+        <div id="sidenav">
           <gio-menu [reduced]="false">
             ${gioMenuContent}
           </gio-menu>
@@ -153,7 +154,6 @@ export const WithOneItemInSelector: StoryObj = {
         isActive: (target: string) => (route != target ? null : true),
         selectedItemValue: 'onlyOne',
         selectorItems: [{ value: 'onlyOne', displayValue: '🧪 Only Env' }],
-        style: computeStylesForStory(args),
       },
       styles: [
         ` 
@@ -177,9 +177,10 @@ export const SmallMenu: StoryObj = {
     logo: OEM_DEFAULT_LOGO,
   },
   render: args => {
+    computeAndInjectStylesForStory(args, document);
     return {
       template: `
-        <div id="sidenav"  [style]="style">
+        <div id="sidenav">
           <gio-menu>
             <gio-menu-header>    
               <gio-menu-selector tabindex="1" [selectedItemValue]="selectedItemValue" selectorTitle="Environment" [selectorItems]="selectorItems" (selectChange)="selectedItemValue=$event"></gio-menu-selector>
@@ -201,7 +202,6 @@ export const SmallMenu: StoryObj = {
         isActive: (target: string) => (route != target ? null : true),
         selectedItemValue: 'onlyOne',
         selectorItems: [{ value: 'onlyOne', displayValue: '🧪 Only Env' }],
-        style: computeStylesForStory(args),
       },
       styles: [
         ` 
@@ -251,9 +251,10 @@ export const WithSubMenu: StoryObj = {
     logo: OEM_DEFAULT_LOGO,
   },
   render: args => {
+    computeAndInjectStylesForStory(args, document);
     return {
       template: `
-        <div id="sidenav"  [style]="style">
+        <div id="sidenav">
           <gio-menu [reduced]="false">
             ${gioMenuContent}
           </gio-menu>
@@ -270,7 +271,6 @@ export const WithSubMenu: StoryObj = {
         isSubActive: (target: string) => (subRoute != target ? null : true),
         selectedItemValue: 'onlyOne',
         selectorItems: [{ value: 'onlyOne', displayValue: '🧪 Only Env' }],
-        style: computeStylesForStory(args),
       },
       styles: [
         ` 
@@ -294,9 +294,10 @@ export const ReducedWithSubMenu: StoryObj = {
     logo: OEM_DEFAULT_LOGO,
   },
   render: args => {
+    computeAndInjectStylesForStory(args, document);
     return {
       template: `
-        <div id="sidenav" [style]="style">
+        <div id="sidenav">
           <gio-menu [reduced]="true">
             ${gioMenuContent}
           </gio-menu>
@@ -313,7 +314,6 @@ export const ReducedWithSubMenu: StoryObj = {
         isSubActive: (target: string) => (subRoute != target ? null : true),
         selectedItemValue: 'onlyOne',
         selectorItems: [{ value: 'onlyOne', displayValue: '🧪 Only Env' }],
-        style: computeStylesForStory(args),
       },
       styles: [
         ` 

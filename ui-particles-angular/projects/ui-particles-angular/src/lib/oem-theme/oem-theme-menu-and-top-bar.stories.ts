@@ -22,7 +22,7 @@ import { GioSubmenuModule } from './gio-submenu';
 import { GioMenuModule } from './gio-menu';
 import { GioMenuItemComponent } from './gio-menu/gio-menu-item/gio-menu-item.component';
 import { GioTopBarLinkModule, GioTopBarMenuModule, GioTopBarModule } from './gio-top-bar';
-import { OEM_THEME_ARG_TYPES, computeStylesForStory, OEM_DEFAULT_LOGO } from './oem-theme.service';
+import { OEM_THEME_ARG_TYPES, OEM_DEFAULT_LOGO, computeAndInjectStylesForStory } from './oem-theme.service';
 
 export default {
   title: 'OEM Theme / Menu + Top Bar',
@@ -118,9 +118,11 @@ export const Default: StoryObj = {
     logo: OEM_DEFAULT_LOGO,
   },
   render: args => {
+    computeAndInjectStylesForStory(args, document);
     return {
       template: `
-<div [style]="style">
+
+<div>
         ${gioTopBarContent(args)}
     <div id="sidenav" >
         <gio-menu [reduced]="false">
@@ -144,10 +146,9 @@ export const Default: StoryObj = {
           { value: 'prod', displayValue: '🚀 Prod' },
           { value: 'dev', displayValue: '🧪 Development' },
         ],
-        style: computeStylesForStory(args),
       },
       styles: [
-        ` 
+        `         
         #sidenav {
             height: 956px;
             display: flex;
@@ -191,6 +192,8 @@ export const Default: StoryObj = {
           border-left: 1px solid var(--gio-oem-palette--background-contrast, #fff); 
           padding-left: 12px;
         }
+        
+       
         `,
       ],
     };

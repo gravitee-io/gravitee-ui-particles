@@ -16,7 +16,7 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { GioSubmenuGroupComponent } from '@gravitee/ui-particles-angular';
 
-import { OEM_THEME_ARG_TYPES, computeStylesForStory, OEM_DEFAULT_LOGO } from '../oem-theme.service';
+import { OEM_THEME_ARG_TYPES, computeStylesForStory, OEM_DEFAULT_LOGO, resetStoryStyleInjection } from '../oem-theme.service';
 
 import { GioSubmenuModule } from './gio-submenu.module';
 
@@ -39,6 +39,8 @@ export const Default: StoryObj = {
     logo: OEM_DEFAULT_LOGO,
   },
   render: args => {
+    resetStoryStyleInjection(args);
+
     return {
       template: `
 <div [style]="style">
@@ -85,6 +87,8 @@ export const Light: StoryObj = {
     logo: OEM_DEFAULT_LOGO,
   },
   render: args => {
+    resetStoryStyleInjection(args);
+
     return {
       template: `
 <div [style]="style">
