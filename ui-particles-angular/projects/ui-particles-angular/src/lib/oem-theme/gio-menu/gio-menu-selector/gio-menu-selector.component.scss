@@ -51,5 +51,15 @@
   .mdc-menu-surface.mat-mdc-select-panel.gio-menu-selector-custom-width {
     width: 192px;
     margin: 10px -16px 0;
+
+    mat-option[aria-selected='true'] {
+      > span {
+        color: oem.$oem-menu-environment-selected;
+      }
+
+      .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after {
+        color: oem.$oem-menu-environment-selected;
+      }
+    }
   }
 }

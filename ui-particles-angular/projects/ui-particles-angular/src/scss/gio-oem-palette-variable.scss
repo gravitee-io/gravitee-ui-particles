@@ -27,6 +27,7 @@ $oem-menu-hover-text: map.get(palette.$mat-oem-palette, active-contrast);
 $oem-menu-background: map.get(palette.$mat-oem-palette, background);
 $oem-menu-text: map.get(palette.$mat-oem-palette, background-contrast);
 $oem-menu-border: color-mix(in srgb, $oem-menu-background 75%, $oem-menu-text);
+$oem-menu-environment-selected: var(--gio-oem-palette--active, map.get(gio.$mat-primary-palette, default));
 
 // Sub Menu
 $oem-sub-menu-background: var(--gio-oem-palette--sub-menu, map.get(gio.$mat-space-palette, default));

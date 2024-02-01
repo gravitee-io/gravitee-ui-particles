@@ -18,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 import { GioIconsModule } from '../../gio-icons/gio-icons.module';
-import { OEM_THEME_ARG_TYPES, computeStylesForStory, OEM_DEFAULT_LOGO } from '../oem-theme.service';
+import { OEM_THEME_ARG_TYPES, computeStylesForStory, OEM_DEFAULT_LOGO, resetStoryStyleInjection } from '../oem-theme.service';
 
 import { GioTopBarComponent } from './gio-top-bar.component';
 import { GioTopBarModule } from './gio-top-bar.module';
@@ -42,6 +42,8 @@ export const Default: StoryObj = {
     logo: OEM_DEFAULT_LOGO,
   },
   render: args => {
+    resetStoryStyleInjection(args);
+
     return {
       template: `
         <div id="main" [style]="style">

@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 import { moduleMetadata, Meta, Args, StoryObj } from '@storybook/angular';
-import { computeStylesForStory, GioMenuModule } from '@gravitee/ui-particles-angular';
+import { GioMenuModule } from '@gravitee/ui-particles-angular';
+
+import { computeStylesForStory, resetStoryStyleInjection } from '../oem-theme/oem-theme.service';
 
 import { GioLicenseExpirationNotificationComponent } from './gio-license-expiration-notification.component';
 import { GioLicenseExpirationNotificationModule } from './gio-license-expiration-notification.module';
@@ -92,6 +94,7 @@ const gioMenuContent = `
 
 export const InMenu: StoryObj = {
   render: args => {
+    resetStoryStyleInjection(args);
     return {
       template: `
         <div id="sidenav"  [style]="style">
