@@ -22,7 +22,7 @@
   }
 
   // Mat card MDC
-  .mat-mdc-card:not(.mat-mdc-card .mat-mdc-card, [class*='mat-mdc-elevation-z'], [class*='mat-elevation-z']) {
+  .mat-mdc-card:not(.mat-mdc-card .mat-mdc-card, [class*='mat-mdc-elevation-z'], [class*='mat-elevation-z'], [appearance='outlined']) {
     @include mat.elevation(3);
   }
 }
