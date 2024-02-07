@@ -15,6 +15,7 @@
  */
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { GioSubmenuGroupComponent } from '@gravitee/ui-particles-angular';
+import { MatButtonModule } from '@angular/material/button';
 
 import { OEM_THEME_ARG_TYPES, computeStylesForStory, OEM_DEFAULT_LOGO, resetStoryStyleInjection } from '../oem-theme.service';
 
@@ -25,7 +26,7 @@ export default {
   component: GioSubmenuGroupComponent,
   decorators: [
     moduleMetadata({
-      imports: [GioSubmenuModule],
+      imports: [GioSubmenuModule, MatButtonModule],
     }),
   ],
   render: () => ({}),
@@ -93,7 +94,7 @@ export const Light: StoryObj = {
       template: `
 <div [style]="style">
         <gio-submenu theme="light" >
-            <div gioSubmenuTitle>Submenu title</div>   
+            <button gioSubmenuTitle mat-button>Submenu title</button>   
             <gio-submenu-item (click)="onClick('message')" [active]="isActive('message')">Message</gio-submenu-item>
             <gio-submenu-group title="Portal" theme="light">
               <gio-submenu-item (click)="onClick('general')" [active]="isActive('general')">General</gio-submenu-item>

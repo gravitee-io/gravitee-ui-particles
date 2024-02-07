@@ -65,3 +65,13 @@
     display: none;
   }
 }
+
+::ng-deep {
+  gio-submenu {
+    .gio-submenu__title {
+      .mdc-button {
+        color: oem.$oem-menu-text;
+      }
+    }
+  }
+}
