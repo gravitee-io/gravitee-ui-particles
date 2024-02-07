@@ -64,6 +64,10 @@ export const All: StoryObj = {
       <div style='margin: 10px'>
         <span class="gio-badge-error">Lock<mat-icon class="gio-right">lock</mat-icon></span>
       </div>  
+            
+      <div style='margin: 10px'>
+        <span class="gio-badge-neutral">1</span> <span class="gio-badge-neutral">2</span>
+      </div> 
     `,
   }),
 };
