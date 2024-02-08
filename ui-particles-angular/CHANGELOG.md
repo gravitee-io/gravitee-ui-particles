@@ -1,3 +1,13 @@
+## [9.0.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.0.2...v9.0.3) (2024-02-08)
+
+
+### Bug Fixes
+
+* do not add default elevation to mat-card with appearance="outlined" ([b3e56af](https://github.com/gravitee-io/gravitee-ui-particles/commit/b3e56af171d69fcccc9b0c3d30b9bf2af587ad7e))
+* force OEM color with new material button ([4704f6e](https://github.com/gravitee-io/gravitee-ui-particles/commit/4704f6e07a20023354a9f170db6241659bc2276d))
+* improve badge display with only one char ([2bc886e](https://github.com/gravitee-io/gravitee-ui-particles/commit/2bc886e66d33a2cbb1125a94739be826a3f4fdd6))
+* increase the size of a single icon in a button ([d738f19](https://github.com/gravitee-io/gravitee-ui-particles/commit/d738f19f123b6175e6ab2efcb02e5caf85fe5ace))
+
 ## [9.0.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.0.1...v9.0.2) (2024-02-01)
 
 
