@@ -1,3 +1,10 @@
+# [9.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.1.0...v9.2.0) (2024-02-09)
+
+
+### Features
+
+* add support for html language into MonacoEditor ([3cf2505](https://github.com/gravitee-io/gravitee-ui-particles/commit/3cf25052921e47b0ad54411003429e074ac73d2c))
+
 # [9.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.0.3...v9.1.0) (2024-02-09)
 
 
