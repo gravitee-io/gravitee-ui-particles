@@ -1,3 +1,10 @@
+# [9.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.0.3...v9.1.0) (2024-02-09)
+
+
+### Features
+
+* **ui-angular:** add scope to License object ([eda598b](https://github.com/gravitee-io/gravitee-ui-particles/commit/eda598b1028453da82b9accb82ddb482eecd9769))
+
 ## [9.0.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.0.2...v9.0.3) (2024-02-08)
 
 
