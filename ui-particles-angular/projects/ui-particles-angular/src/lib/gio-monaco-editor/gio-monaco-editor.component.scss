@@ -17,6 +17,7 @@
   display: block;
   height: 100%;
   min-height: 150px;
+  pointer-events: auto;
   transition: opacity 0.2s ease-out;
 }
 

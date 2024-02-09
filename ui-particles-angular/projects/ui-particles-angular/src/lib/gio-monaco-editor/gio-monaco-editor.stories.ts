@@ -194,6 +194,28 @@ export const LanguageMarkdown: StoryObj = {
   },
 };
 
+export const LanguageHTML: StoryObj = {
+  args: {
+    languageConfig: {
+      language: 'html',
+    },
+    value: `<html>
+  <body style="text-align: center;">
+    <header>
+      <#include "header.html" />
+    </header>
+    <div style="margin-top: 50px; color: #424e5a;">
+      <h3>Hi,</h3>
+      <p>
+        The API <b><code>{api.name}</code></b> was updated by {user.displayName}.
+      </p>
+    </div>
+  </body>
+</html>`,
+    disableMiniMap: true,
+  },
+};
+
 export const DisableMiniMap: StoryObj = {
   args: {
     languageConfig: {
