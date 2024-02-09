@@ -17,6 +17,9 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { GioIconsModule } from '../../gio-icons/gio-icons.module';
 
@@ -27,6 +30,7 @@ import { GioMenuListComponent } from './gio-menu-list/gio-menu-list.component';
 import { GioMenuSelectorComponent } from './gio-menu-selector/gio-menu-selector.component';
 import { GioMenuHeaderComponent } from './gio-menu-header/gio-menu-header.component';
 import { GioMenuLicenseExpirationNotificationComponent } from './gio-menu-license-expiration-notification/gio-menu-license-expiration-notification.component';
+import { GioMenuSearchComponent } from './gio-menu-search/gio-menu-search.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +39,7 @@ import { GioMenuLicenseExpirationNotificationComponent } from './gio-menu-licens
     GioMenuFooterComponent,
     GioMenuListComponent,
     GioMenuHeaderComponent,
+    GioMenuSearchComponent,
     GioMenuSelectorComponent,
     GioMenuLicenseExpirationNotificationComponent,
   ],
@@ -44,9 +49,10 @@ import { GioMenuLicenseExpirationNotificationComponent } from './gio-menu-licens
     GioMenuFooterComponent,
     GioMenuListComponent,
     GioMenuHeaderComponent,
+    GioMenuSearchComponent,
     GioMenuSelectorComponent,
     GioMenuLicenseExpirationNotificationComponent,
   ],
-  imports: [CommonModule, MatIconModule, GioIconsModule, MatSelectModule],
+  imports: [CommonModule, MatAutocompleteModule, MatIconModule, MatInputModule, GioIconsModule, MatSelectModule, ReactiveFormsModule],
 })
 export class GioMenuModule {}
