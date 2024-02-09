@@ -38,11 +38,14 @@ import { GioMonacoEditorService } from './services/gio-monaco-editor.service';
 
 export type MonacoEditorLanguageConfig =
   | {
-      language: 'json' | 'markdown';
+      language: 'json';
       schemas: { uri: string; schema: unknown }[];
     }
   | {
       language: 'markdown';
+    }
+  | {
+      language: 'html';
     };
 
 @Component({
