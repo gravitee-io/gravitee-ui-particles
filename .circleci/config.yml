@@ -34,7 +34,7 @@ commands:
 jobs:
   lint-test:
     executor:
-      class: large
+      class: xlarge
       name: node-lts
     steps:
       - checkout
