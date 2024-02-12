@@ -1,3 +1,10 @@
+# [9.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.2.0...v9.3.0) (2024-02-12)
+
+
+### Features
+
+* add menu search component ([ac4b10f](https://github.com/gravitee-io/gravitee-ui-particles/commit/ac4b10fe24d40f8e1b950ab5e924f1a43d46e1cc))
+
 # [9.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.1.0...v9.2.0) (2024-02-09)
 
 
