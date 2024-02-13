@@ -1,3 +1,10 @@
+# [9.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.3.0...v9.4.0) (2024-02-13)
+
+
+### Features
+
+* add new icons ([107ffc9](https://github.com/gravitee-io/gravitee-ui-particles/commit/107ffc9b9e1d03a7d5b4f7c14c9b049ee3d1ccb6))
+
 # [9.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.2.0...v9.3.0) (2024-02-12)
 
 
