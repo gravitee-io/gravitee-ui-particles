@@ -1,3 +1,10 @@
+## [9.4.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.4.0...v9.4.1) (2024-02-14)
+
+
+### Bug Fixes
+
+* use current color in cloud-settings icon circle ([a34029b](https://github.com/gravitee-io/gravitee-ui-particles/commit/a34029b68cfc368718d1a72f8f55bfa9fa50c361))
+
 # [9.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.3.0...v9.4.0) (2024-02-13)
 
 
