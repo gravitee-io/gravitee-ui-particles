@@ -16,8 +16,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
+import { isEmpty } from 'lodash';
 
 import { GioLicenseDialogComponent, GioLicenseDialogData } from './gio-license-dialog/gio-license-dialog.component';
 
@@ -46,7 +47,6 @@ export interface UTM {
 export interface LicenseOptions {
   // We used feature name as utm_medium
   feature?: string;
-  deployed?: boolean;
   // Optional, useful if need a context in utm campaign (utm_content)
   context?: string;
 }
@@ -79,26 +79,33 @@ export class GioLicenseService {
   }
 
   public isMissingFeature$(licenseOptions: LicenseOptions | undefined): Observable<boolean> {
-    if (licenseOptions?.deployed === false) {
-      return of(true);
-    }
-    if (licenseOptions?.feature == null || licenseOptions?.deployed === true) {
+    if (licenseOptions?.feature == null || !licenseOptions?.feature) {
       return of(false);
     }
-    return this.getLicense$().pipe(
-      map(license => license == null || license.features.find(feat => feat === licenseOptions.feature) == null),
+    return this.isExpired$().pipe(
+      switchMap(isExpired => {
+        if (isExpired) {
+          return of(isExpired);
+        }
+        return this.getLicense$().pipe(map(license => license == null || !license.features.some(feat => feat === licenseOptions.feature)));
+      }),
     );
   }
 
   public hasAllFeatures$(licenseOptions: LicenseOptions[] | undefined): Observable<boolean> {
-    if (!licenseOptions) {
+    if (!licenseOptions || isEmpty(licenseOptions)) {
       return of(true);
     }
-    if (licenseOptions?.find(o => o.feature != null && o.deployed === false) != null) {
-      return of(false);
-    }
-    return this.getLicense$().pipe(
-      map(license => license != null && licenseOptions?.every(o => license.features.find(feat => feat === o.feature) != null)),
+    return this.isExpired$().pipe(
+      switchMap(isExpired => {
+        const featuresDefined = licenseOptions.some(o => !!o.feature);
+        if (isExpired && featuresDefined) {
+          return of(false);
+        }
+        return this.getLicense$().pipe(
+          map(license => license != null && licenseOptions.every(o => license.features.some(feat => feat === o.feature))),
+        );
+      }),
     );
   }
 
@@ -151,5 +158,9 @@ export class GioLicenseService {
 
   public getExpiresAt$(): Observable<Date | undefined> {
     return this.getLicense$().pipe(map(license => (license.expiresAt ? new Date(license.expiresAt) : undefined)));
+  }
+
+  public isExpired$(): Observable<boolean> {
+    return this.getExpiresAt$().pipe(map(expiresAt => !!expiresAt && expiresAt.valueOf() < Date.now()));
   }
 }

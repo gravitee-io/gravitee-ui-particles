@@ -45,191 +45,35 @@ describe('GioLicenseService', () => {
       httpTestingController.verify();
     });
 
-    const mockLicense: License = {
-      tier: 'tier',
-      packs: [],
-      features: ['foobar'],
-    };
-
-    it('should call the API', done => {
-      gioLicenseService.getLicense$().subscribe(response => {
-        expect(response).toMatchObject(mockLicense);
-        done();
-      });
-
-      const req = httpTestingController.expectOne({
-        method: 'GET',
-        url: `https://url.test:3000/license`,
-      });
-
-      req.flush(mockLicense);
-    });
-
-    it('should get license', done => {
-      gioLicenseService
-        .getLicense$()
-        .pipe(
-          switchMap(() => gioLicenseService.getLicense$()),
-          tap(license => {
-            expect(license).toMatchObject(mockLicense);
-            done();
-          }),
-        )
-        .subscribe();
-
-      const req = httpTestingController.expectOne({
-        method: 'GET',
-        url: `https://url.test:3000/license`,
-      });
-
-      req.flush(mockLicense);
-    });
-
-    it('should check if feature is not missing', done => {
-      gioLicenseService
-        .isMissingFeature$({ feature: 'foobar' })
-        .pipe(
-          tap(isMissing => {
-            expect(isMissing).toBeFalsy();
-            done();
-          }),
-        )
-        .subscribe();
-
-      const req = httpTestingController.expectOne({
-        method: 'GET',
-        url: `https://url.test:3000/license`,
-      });
-
-      req.flush(mockLicense);
-    });
-
-    it('should check if feature is not missing with deployed plugin', done => {
-      gioLicenseService
-        .isMissingFeature$({ deployed: true })
-        .pipe(
-          tap(isMissing => {
-            expect(isMissing).toBeFalsy();
-            done();
-          }),
-        )
-        .subscribe();
-    });
-
-    it('should check if feature is missing with deployed plugin', done => {
-      gioLicenseService
-        .isMissingFeature$({ deployed: false })
-        .pipe(
-          tap(isMissing => {
-            expect(isMissing).toBeTruthy();
-            done();
-          }),
-        )
-        .subscribe();
-    });
-
-    it('should check if feature is missing', done => {
-      gioLicenseService
-        .isMissingFeature$({ feature: 'missing' })
-        .pipe(
-          tap(isMissing => {
-            expect(isMissing).toBeTruthy();
-            done();
-          }),
-        )
-        .subscribe();
-
-      const req = httpTestingController.expectOne({
-        method: 'GET',
-        url: `https://url.test:3000/license`,
-      });
-
-      req.flush(mockLicense);
-    });
-
-    it('should use isMissingFeature$ with undefined options', done => {
-      gioLicenseService
-        .isMissingFeature$(undefined)
-        .pipe(
-          tap(isMissing => {
-            expect(isMissing).toBeFalsy();
-            done();
-          }),
-        )
-        .subscribe();
-    });
-
-    it('should get feature more information', () => {
-      expect(gioLicenseService.getFeatureInfo({ feature: 'foobar' })).not.toBeNull();
-    });
-
-    it('should throw error when get more information with wrong feature', () => {
-      expect(() => gioLicenseService.getFeatureInfo({ feature: 'bad' })).toThrow();
-    });
-
-    it('should return trial URL from UTM medium', () => {
-      const expected =
-        'https://url.test:3000/trial?utm_source=oss_utm_source_test&utm_medium=feature_debugmode_v2&utm_campaign=oss_utm_campaign_test';
-      expect(gioLicenseService.getTrialURL({ feature: 'feature_debugmode_v2' })).toEqual(expected);
-    });
-
-    it('should return trial URL from UTM medium and UTM content', () => {
-      const expected =
-        'https://url.test:3000/trial?utm_source=oss_utm_source_test&utm_medium=feature_debugmode_v2&utm_campaign=oss_utm_campaign_test&utm_content=organization';
-      expect(
-        gioLicenseService.getTrialURL({
-          feature: 'feature_debugmode_v2',
-          context: 'organization',
-        }),
-      ).toEqual(expected);
-    });
-
-    it('should check if license is OEM', done => {
-      const oemLicense: License = {
-        tier: '',
+    describe('with valid license', () => {
+      const mockLicense: License = {
+        tier: 'tier',
         packs: [],
-        features: ['not-oem'],
+        features: ['foobar'],
+        expiresAt: new Date(new Date().valueOf() + 3600000),
       };
 
-      gioLicenseService
-        .isOEM$()
-        .pipe(
-          tap(isOEM => {
-            expect(isOEM).toEqual(false);
-            done();
-          }),
-        )
-        .subscribe();
+      it('should call the API', done => {
+        gioLicenseService.getLicense$().subscribe(response => {
+          expect(response).toMatchObject(mockLicense);
+          done();
+        });
 
-      const req = httpTestingController.expectOne({
-        method: 'GET',
-        url: `https://url.test:3000/license`,
+        const req = httpTestingController.expectOne({
+          method: 'GET',
+          url: `https://url.test:3000/license`,
+        });
+
+        req.flush(mockLicense);
       });
 
-      req.flush(oemLicense);
-    });
-
-    // Need a workaround to be able to use both it.each and done callback https://github.com/DefinitelyTyped/DefinitelyTyped/issues/34617#issuecomment-497760008
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    it.each<any>([
-      [['A', 'B', 'C'], [{ feature: 'A' }], true],
-      [['A', 'B', 'C'], [{ feature: 'A' }, { feature: 'B' }, { feature: 'C' }], true],
-      [['A', 'B', 'C'], [{ feature: 'D' }], false],
-      [['A', 'B', 'C'], [{ feature: 'A' }, { feature: 'B' }, { feature: 'D' }], false],
-    ] as [string[], LicenseOptions[], boolean][])(
-      'Check license has all features',
-      (licenseFeatures: string[], expectedFeatures: LicenseOptions[], expectedResult: boolean, done: jest.DoneCallback) => {
-        const license: License = {
-          tier: 'tier',
-          packs: [],
-          features: licenseFeatures,
-        };
-
+      it('should get license', done => {
         gioLicenseService
-          .hasAllFeatures$(expectedFeatures)
+          .getLicense$()
           .pipe(
-            tap(ok => {
-              expect(ok).toEqual(expectedResult);
+            switchMap(() => gioLicenseService.getLicense$()),
+            tap(license => {
+              expect(license).toMatchObject(mockLicense);
               done();
             }),
           )
@@ -240,95 +84,341 @@ describe('GioLicenseService', () => {
           url: `https://url.test:3000/license`,
         });
 
-        req.flush(license);
-      },
-    );
+        req.flush(mockLicense);
+      });
 
-    it('undeployed feature', (done: jest.DoneCallback) => {
-      gioLicenseService
-        .hasAllFeatures$([{ feature: 'A', deployed: false }, { feature: 'B' }])
-        .pipe(
-          tap(ok => {
-            expect(ok).toEqual(false);
-            done();
+      it('should check if feature is not missing', done => {
+        gioLicenseService
+          .isMissingFeature$({ feature: 'foobar' })
+          .pipe(
+            tap(isMissing => {
+              expect(isMissing).toBeFalsy();
+              done();
+            }),
+          )
+          .subscribe();
+
+        const req = httpTestingController.expectOne({
+          method: 'GET',
+          url: `https://url.test:3000/license`,
+        });
+
+        req.flush(mockLicense);
+      });
+
+      it('should check if feature is missing', done => {
+        gioLicenseService
+          .isMissingFeature$({ feature: 'missing' })
+          .pipe(
+            tap(isMissing => {
+              expect(isMissing).toBeTruthy();
+              done();
+            }),
+          )
+          .subscribe();
+
+        const req = httpTestingController.expectOne({
+          method: 'GET',
+          url: `https://url.test:3000/license`,
+        });
+
+        req.flush(mockLicense);
+      });
+
+      it('should use isMissingFeature$ with undefined options', done => {
+        gioLicenseService
+          .isMissingFeature$(undefined)
+          .pipe(
+            tap(isMissing => {
+              expect(isMissing).toBeFalsy();
+              done();
+            }),
+          )
+          .subscribe();
+      });
+
+      it('should get feature more information', () => {
+        expect(gioLicenseService.getFeatureInfo({ feature: 'foobar' })).not.toBeNull();
+      });
+
+      it('should throw error when get more information with wrong feature', () => {
+        expect(() => gioLicenseService.getFeatureInfo({ feature: 'bad' })).toThrow();
+      });
+
+      it('should return trial URL from UTM medium', () => {
+        const expected =
+          'https://url.test:3000/trial?utm_source=oss_utm_source_test&utm_medium=feature_debugmode_v2&utm_campaign=oss_utm_campaign_test';
+        expect(gioLicenseService.getTrialURL({ feature: 'feature_debugmode_v2' })).toEqual(expected);
+      });
+
+      it('should return trial URL from UTM medium and UTM content', () => {
+        const expected =
+          'https://url.test:3000/trial?utm_source=oss_utm_source_test&utm_medium=feature_debugmode_v2&utm_campaign=oss_utm_campaign_test&utm_content=organization';
+        expect(
+          gioLicenseService.getTrialURL({
+            feature: 'feature_debugmode_v2',
+            context: 'organization',
           }),
-        )
-        .subscribe();
-    });
+        ).toEqual(expected);
+      });
 
-    it('undefined feature', (done: jest.DoneCallback) => {
-      gioLicenseService
-        .hasAllFeatures$(undefined)
-        .pipe(
-          tap(ok => {
-            expect(ok).toEqual(true);
-            done();
-          }),
-        )
-        .subscribe();
-    });
+      it('should check if license is OEM', done => {
+        const oemLicense: License = {
+          tier: '',
+          packs: [],
+          features: ['not-oem'],
+        };
 
-    describe('getExpiresAt$', () => {
-      /* eslint-disable @typescript-eslint/no-explicit-any */
-      it.each<any>([[1706092042001], ['2023-03-14T12:55:39.954Z']] as [any][])(
-        'Check date is returned when expiration date is truthy',
-        (date: any, done: jest.DoneCallback) => {
-          const expiringLicense = {
-            tier: '',
+        gioLicenseService
+          .isOEM$()
+          .pipe(
+            tap(isOEM => {
+              expect(isOEM).toEqual(false);
+              done();
+            }),
+          )
+          .subscribe();
+
+        const req = httpTestingController.expectOne({
+          method: 'GET',
+          url: `https://url.test:3000/license`,
+        });
+
+        req.flush(oemLicense);
+      });
+
+      // Need a workaround to be able to use both it.each and done callback https://github.com/DefinitelyTyped/DefinitelyTyped/issues/34617#issuecomment-497760008
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      it.each<any>([
+        [['A', 'B', 'C'], [{ feature: 'A' }], true],
+        [['A', 'B', 'C'], [{ feature: 'A' }, { feature: 'B' }, { feature: 'C' }], true],
+        [['A', 'B', 'C'], [{ feature: 'D' }], false],
+        [['A', 'B', 'C'], [{ feature: 'A' }, { feature: 'B' }, { feature: 'D' }], false],
+        [['A', 'B', 'C'], [], true],
+      ] as [string[], LicenseOptions[], boolean][])(
+        'Check license has all features',
+        (licenseFeatures: string[], expectedFeatures: LicenseOptions[], expectedResult: boolean, done: jest.DoneCallback) => {
+          const license: License = {
+            tier: 'tier',
             packs: [],
-            features: [],
-            expiresAt: date,
+            features: licenseFeatures,
+            expiresAt: new Date(new Date().valueOf() + 3600000),
           };
 
           gioLicenseService
-            .getExpiresAt$()
+            .hasAllFeatures$(expectedFeatures)
             .pipe(
-              tap(expirationDate => {
-                expect(expirationDate instanceof Date).toEqual(true);
-                expect(expirationDate).toEqual(new Date(expiringLicense.expiresAt));
+              tap(ok => {
+                expect(ok).toEqual(expectedResult);
                 done();
               }),
             )
             .subscribe();
 
-          const req = httpTestingController.expectOne({
-            method: 'GET',
-            url: `https://url.test:3000/license`,
-          });
+          if (expectedFeatures.length > 0) {
+            const req = httpTestingController.expectOne({
+              method: 'GET',
+              url: `https://url.test:3000/license`,
+            });
 
-          req.flush(expiringLicense);
+            req.flush(license);
+          }
         },
       );
 
-      it.each<any>([[undefined], [null]] as [any][])(
-        'Check undefined is returned when expiration date is falsy',
-        (date: any, done: jest.DoneCallback) => {
-          const expiringLicense = {
-            tier: '',
-            packs: [],
-            features: [],
-            expiresAt: date,
-          };
+      it('undefined feature', (done: jest.DoneCallback) => {
+        gioLicenseService
+          .hasAllFeatures$(undefined)
+          .pipe(
+            tap(ok => {
+              expect(ok).toEqual(true);
+              done();
+            }),
+          )
+          .subscribe();
+      });
 
-          gioLicenseService
-            .getExpiresAt$()
-            .pipe(
-              tap(expirationDate => {
-                expect(expirationDate).toEqual(undefined);
-                done();
-              }),
-            )
-            .subscribe();
+      it('should check if license is expired', done => {
+        gioLicenseService
+          .isExpired$()
+          .pipe(
+            tap(isExpired => {
+              expect(isExpired).toBeFalsy();
+              done();
+            }),
+          )
+          .subscribe();
 
-          const req = httpTestingController.expectOne({
-            method: 'GET',
-            url: `https://url.test:3000/license`,
-          });
+        const req = httpTestingController.expectOne({
+          method: 'GET',
+          url: `https://url.test:3000/license`,
+        });
 
-          req.flush(expiringLicense);
-        },
-      );
-      /* eslint-enable @typescript-eslint/no-explicit-any */
+        req.flush(mockLicense);
+      });
+
+      describe('getExpiresAt$', () => {
+        /* eslint-disable @typescript-eslint/no-explicit-any */
+        it.each<any>([[1706092042001], ['2023-03-14T12:55:39.954Z']] as [any][])(
+          'Check date is returned when expiration date is truthy',
+          (date: any, done: jest.DoneCallback) => {
+            const expiringLicense = {
+              tier: '',
+              packs: [],
+              features: [],
+              expiresAt: date,
+            };
+
+            gioLicenseService
+              .getExpiresAt$()
+              .pipe(
+                tap(expirationDate => {
+                  expect(expirationDate instanceof Date).toEqual(true);
+                  expect(expirationDate).toEqual(new Date(expiringLicense.expiresAt));
+                  done();
+                }),
+              )
+              .subscribe();
+
+            const req = httpTestingController.expectOne({
+              method: 'GET',
+              url: `https://url.test:3000/license`,
+            });
+
+            req.flush(expiringLicense);
+          },
+        );
+
+        it.each<any>([[undefined], [null]] as [any][])(
+          'Check undefined is returned when expiration date is falsy',
+          (date: any, done: jest.DoneCallback) => {
+            const expiringLicense = {
+              tier: '',
+              packs: [],
+              features: [],
+              expiresAt: date,
+            };
+
+            gioLicenseService
+              .getExpiresAt$()
+              .pipe(
+                tap(expirationDate => {
+                  expect(expirationDate).toEqual(undefined);
+                  done();
+                }),
+              )
+              .subscribe();
+
+            const req = httpTestingController.expectOne({
+              method: 'GET',
+              url: `https://url.test:3000/license`,
+            });
+
+            req.flush(expiringLicense);
+          },
+        );
+        /* eslint-enable @typescript-eslint/no-explicit-any */
+      });
+    });
+
+    describe('with expired license', () => {
+      const expiredLicense: License = {
+        tier: 'tier',
+        packs: [],
+        features: ['foobar'],
+        expiresAt: new Date(-3600000),
+      };
+
+      it('should declare feature missing if license is expired', done => {
+        gioLicenseService.isMissingFeature$({ feature: 'foobar' }).subscribe(isMissing => {
+          expect(isMissing).toEqual(true);
+          done();
+        });
+
+        const req = httpTestingController.expectOne({
+          method: 'GET',
+          url: `https://url.test:3000/license`,
+        });
+
+        req.flush(expiredLicense);
+      });
+
+      it('should check if license is expired', done => {
+        gioLicenseService
+          .isExpired$()
+          .pipe(
+            tap(isExpired => {
+              expect(isExpired).toBeTruthy();
+              done();
+            }),
+          )
+          .subscribe();
+
+        const req = httpTestingController.expectOne({
+          method: 'GET',
+          url: `https://url.test:3000/license`,
+        });
+
+        req.flush(expiredLicense);
+      });
+
+      it('should not have all features if license is expired and features defined', done => {
+        gioLicenseService
+          .hasAllFeatures$([{ feature: 'foobar' }])
+          .pipe(
+            tap(ok => {
+              expect(ok).toEqual(false);
+              done();
+            }),
+          )
+          .subscribe();
+
+        const req = httpTestingController.expectOne({
+          method: 'GET',
+          url: `https://url.test:3000/license`,
+        });
+
+        req.flush(expiredLicense);
+      });
+
+      it('should have all features if no features in parameters', done => {
+        gioLicenseService
+          .hasAllFeatures$(undefined)
+          .pipe(
+            tap(ok => {
+              expect(ok).toEqual(true);
+              done();
+            }),
+          )
+          .subscribe();
+      });
+    });
+
+    describe('with license without expiry date', () => {
+      const licenseNoExpiryDate: License = {
+        tier: 'tier',
+        packs: [],
+        features: ['foobar'],
+      };
+
+      it('should check if license is expired', done => {
+        gioLicenseService
+          .isExpired$()
+          .pipe(
+            tap(isExpired => {
+              expect(isExpired).toEqual(false);
+              done();
+            }),
+          )
+          .subscribe();
+
+        const req = httpTestingController.expectOne({
+          method: 'GET',
+          url: `https://url.test:3000/license`,
+        });
+
+        req.flush(licenseNoExpiryDate);
+      });
     });
   });
 
