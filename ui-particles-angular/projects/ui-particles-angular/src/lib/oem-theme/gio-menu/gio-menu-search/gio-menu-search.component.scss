@@ -24,7 +24,7 @@ $typography: map.get(gio.$mat-theme, typography);
 .gio-menu-search {
   display: flex;
   flex-direction: row;
-  border: 1px solid oem.$oem-menu-border;
+  border: 3px solid oem.$oem-menu-border;
   border-radius: 4px;
   margin-bottom: 16px;
 
