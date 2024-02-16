@@ -106,3 +106,5 @@ export * from './gio-radio-button/gio-radio-button-content.component';
 export * from './gio-radio-button/gio-radio-button.module';
 
 export * from './oem-theme/public-api';
+
+export * from './gio-card-empty-state';
