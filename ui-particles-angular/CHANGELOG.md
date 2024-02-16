@@ -1,3 +1,10 @@
+## [9.5.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.5.0...v9.5.1) (2024-02-16)
+
+
+### Bug Fixes
+
+* increase search border size ([e1feb61](https://github.com/gravitee-io/gravitee-ui-particles/commit/e1feb61dadf96a73f5af1bf7faaf8b0997497b8b))
+
 # [9.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.4.1...v9.5.0) (2024-02-16)
 
 
