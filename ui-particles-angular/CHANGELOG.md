@@ -1,3 +1,15 @@
+# [9.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.4.1...v9.5.0) (2024-02-16)
+
+
+### Bug Fixes
+
+* decrease search border size ([6737b84](https://github.com/gravitee-io/gravitee-ui-particles/commit/6737b84300eb854cbc987b25fd451863aaa3fb38))
+
+
+### Features
+
+* add gio-empty-state component ([c819244](https://github.com/gravitee-io/gravitee-ui-particles/commit/c819244a54d88e61578d539b7047abdf8fe1fdc4))
+
 ## [9.4.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.4.0...v9.4.1) (2024-02-14)
 
 
