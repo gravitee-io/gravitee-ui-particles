@@ -1,3 +1,10 @@
+## [9.5.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.5.1...v9.5.2) (2024-02-19)
+
+
+### Bug Fixes
+
+* use same border size for selector and search in the menu ([d350971](https://github.com/gravitee-io/gravitee-ui-particles/commit/d350971f04b2b19df23cfba4decb2f2c1a5bf216))
+
 ## [9.5.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.5.0...v9.5.1) (2024-02-16)
 
 
