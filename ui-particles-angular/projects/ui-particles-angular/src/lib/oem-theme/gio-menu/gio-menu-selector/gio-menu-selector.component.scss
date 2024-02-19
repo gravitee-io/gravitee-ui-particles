@@ -20,8 +20,7 @@
 .gio-menu-selector {
   width: 192px;
   padding: 4px 14px 10px;
-  border-style: solid;
-  border-color: oem.$oem-menu-border;
+  border: 3px solid oem.$oem-menu-border;
   border-radius: 4px;
   margin-bottom: 8px;
   color: oem.$oem-menu-text;
