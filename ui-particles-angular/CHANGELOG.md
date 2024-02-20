@@ -1,3 +1,10 @@
+# [9.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.5.2...v9.6.0) (2024-02-20)
+
+
+### Features
+
+* remove deployed from LicenseOptions + calculate missing features with expiry date ([4e04e55](https://github.com/gravitee-io/gravitee-ui-particles/commit/4e04e553916bb0600e460de180cfa4e4adcd97ab))
+
 ## [9.5.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.5.1...v9.5.2) (2024-02-19)
 
 
