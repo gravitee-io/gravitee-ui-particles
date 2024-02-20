@@ -16,6 +16,7 @@ module.exports = {
       name: '@storybook/addon-docs',
       options: { transcludeMarkdown: true },
     },
+    getAbsolutePath('@storybook/addon-mdx-gfm'),
   ],
 
   features: {
