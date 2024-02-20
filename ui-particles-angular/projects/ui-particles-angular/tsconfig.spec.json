@@ -3,7 +3,8 @@
   "compilerOptions": {
     "outDir": "../../out-tsc/spec",
     "types": ["jest", "node"],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "target": "ES2016"
   },
   "include": ["**/*.spec.ts", "**/*.d.ts"]
 }

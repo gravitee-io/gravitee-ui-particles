@@ -15,9 +15,9 @@
  */
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { MatCardModule } from '@angular/material/card';
+import { GioIconsModule } from '@gravitee/ui-particles-angular';
 
 import { ShowcaseTypographyComponent } from './showcase-typography.component';
-import { GioIconsModule } from '@gravitee/ui-particles-angular';
 
 export default {
   title: 'Theme / Typography ',
