@@ -17,12 +17,13 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { MatCardModule } from '@angular/material/card';
 
 import { ShowcaseTypographyComponent } from './showcase-typography.component';
+import { GioIconsModule } from '@gravitee/ui-particles-angular';
 
 export default {
   title: 'Theme / Typography ',
   decorators: [
     moduleMetadata({
-      imports: [MatCardModule],
+      imports: [MatCardModule, GioIconsModule],
       declarations: [ShowcaseTypographyComponent],
     }),
   ],
