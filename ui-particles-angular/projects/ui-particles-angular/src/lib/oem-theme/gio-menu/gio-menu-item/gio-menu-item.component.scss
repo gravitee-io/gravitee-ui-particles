@@ -75,15 +75,15 @@
   }
 }
 
+.gio-menu-item:hover:not(.gio-menu-item__active) {
+  background: oem.$oem-menu-hover;
+  color: oem.$oem-menu-hover-text;
+}
+
 :host-context(.gio-menu__reduced .gio-menu-footer) .gio-menu-item {
   margin: 20px 0;
 }
 
 :host-context(.gio-menu__reduced .gio-menu-footer) .gio-menu-item__outlined {
   margin: 20px 0;
-}
-
-.gio-menu-item:hover:not(.gio-menu-item__active) {
-  background: oem.$oem-menu-hover;
-  color: oem.$oem-menu-hover-text;
 }

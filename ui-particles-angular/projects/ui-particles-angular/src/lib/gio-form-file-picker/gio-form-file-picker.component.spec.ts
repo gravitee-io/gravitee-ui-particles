@@ -58,6 +58,10 @@ describe('FilePickerInputComponent', () => {
   let fixture: ComponentFixture<TestFilePickerInputComponent>;
   let component: TestFilePickerInputComponent;
 
+  beforeAll(() => {
+    GioFormFilePickerInputHarness.forceImageOnload(['file.json']);
+  });
+
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, GioFormFilePickerModule, MatIconTestingModule],
@@ -69,8 +73,6 @@ describe('FilePickerInputComponent', () => {
     fixture = TestBed.createComponent(TestFilePickerInputComponent);
     component = fixture.componentInstance;
     loader = TestbedHarnessEnvironment.loader(fixture);
-
-    GioFormFilePickerInputHarness.forceImageOnload(['file.json']);
   });
 
   it('should have accept input', async () => {
