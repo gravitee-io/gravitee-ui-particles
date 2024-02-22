@@ -1,3 +1,20 @@
+# [10.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.6.0...v10.0.0) (2024-02-22)
+
+
+### Bug Fixes
+
+* add of Material colour codes based on the GIO colour code ([aebac1c](https://github.com/gravitee-io/gravitee-ui-particles/commit/aebac1c8f9ce46c1da6bca843066cfc1be4cd103))
+
+
+### chore
+
+* update to angular 16 ([f49c421](https://github.com/gravitee-io/gravitee-ui-particles/commit/f49c42186db542b61fe62ef5a9c48c59a8040d62))
+
+
+### BREAKING CHANGES
+
+* Upgrade to Angular 16
+
 # [9.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.5.2...v9.6.0) (2024-02-20)
 
 
