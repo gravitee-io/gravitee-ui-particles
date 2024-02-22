@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Inject, Input, Type } from '@angular/core';
+import { Component, Input, Type } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { tap } from 'rxjs/operators';
 import { action } from '@storybook/addon-actions';
@@ -70,9 +70,6 @@ export class ConfirmAndValidateDialogStoryComponent {
   template: ` <div>{{ title }}</div> `,
 })
 export class ConfirmAndValidateContentDialogStoryComponent {
-  public title: string;
-
-  constructor(@Inject('contentComponentInputs') contentComponentInputs: { title: string }) {
-    this.title = contentComponentInputs.title;
-  }
+  @Input()
+  public title?: string;
 }

@@ -22,7 +22,7 @@
   <p class="confirm-dialog__body__content" *ngIf="content" [innerHTML]="content"></p>
 
   <div class="confirm-dialog__body__content" *ngIf="contentComponentOutlet">
-    <ng-container *ngComponentOutlet="contentComponentOutlet; injector: contentComponentInjector"></ng-container>
+    <ng-container *ngComponentOutlet="contentComponentOutlet; inputs: contentComponentInputs"></ng-container>
   </div>
 
   <p class="confirm-dialog__body__validate-message" [innerHTML]="validationMessage"></p>

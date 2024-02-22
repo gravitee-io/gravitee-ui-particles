@@ -61,11 +61,7 @@ export class GioConfirmAndValidateDialogComponent {
       this.content = confirmDialogData?.content as string;
     } else if (isObject(confirmDialogData?.content)) {
       this.contentComponentOutlet = confirmDialogData?.content.componentOutlet;
-      // TODO: When Angular 16 ready use ngComponentOutletInputs
-      this.contentComponentInjector = Injector.create({
-        providers: [{ provide: 'contentComponentInputs', useValue: confirmDialogData?.content.componentInputs }],
-        parent: parentInjector,
-      });
+      this.contentComponentInputs = confirmDialogData?.content.componentInputs;
     }
 
     this.validationMessage = extendValidationMessage(
