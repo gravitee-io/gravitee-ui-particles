@@ -16,19 +16,9 @@
 
 @use '@angular/material' as mat;
 
-@use '../gio-mat-legacy-theme-variable' as theme-legacy;
 @use '../gio-mat-theme-variable' as theme;
 
 @mixin mat-option() {
-  // Legacy mat-option
-  .mat-option,
-  .mat-typography .mat-option {
-    height: 40px;
-    font-size: mat.font-size(theme-legacy.$mat-legacy-typography, input);
-    line-height: mat.line-height(theme-legacy.$mat-legacy-typography, input);
-  }
-
-  // MDC mat-option
   .mat-typography .mat-mdc-option {
     min-height: 40px;
     @include mat.typography-level(theme.$mat-typography, 'body-2');

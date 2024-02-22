@@ -16,11 +16,6 @@
 @use '@angular/material' as mat;
 
 @mixin mat-card() {
-  // Legacy mat-card
-  .mat-card:not(.mat-card .mat-card, [class*='mat-elevation-z']) {
-    @include mat.elevation(3);
-  }
-
   // Mat card MDC
   .mat-mdc-card:not(.mat-mdc-card .mat-mdc-card, [class*='mat-mdc-elevation-z'], [class*='mat-elevation-z'], [appearance='outlined']) {
     @include mat.elevation(3);

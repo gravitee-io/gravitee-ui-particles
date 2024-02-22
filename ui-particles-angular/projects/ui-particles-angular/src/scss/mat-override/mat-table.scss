@@ -21,37 +21,6 @@
 $background: map.get(theme.$mat-theme, background);
 
 @mixin mat-table() {
-  // Legacy mat-table
-  .mat-table {
-    tbody tr:hover {
-      background-color: mat.get-color-from-palette($background, hover);
-    }
-
-    // Remove bottom padding on mat-form-field inside mat-cell
-    // Note: In Angular 15, we should be able to use SubscriptSizing option for that
-    .mat-cell {
-      // appearance=outline
-      .mat-form-field.mat-form-field-appearance-outline:not(:has(mat-hint), :has(mat-error)) {
-        padding-bottom: 0;
-
-        .mat-form-field-wrapper {
-          padding-bottom: 0;
-        }
-      }
-
-      // appearance=standard
-      .mat-form-field.mat-form-field-appearance-standard:not(:has(mat-hint), :has(mat-error)) {
-        padding-bottom: 0;
-
-        .mat-form-field-wrapper {
-          // stylelint-disable-next-line number-max-precision
-          margin-bottom: -1.34375em;
-        }
-      }
-    }
-  }
-
-  // MDC mat-table
   .mat-mdc-table {
     tbody tr.mat-mdc-row:hover {
       background-color: mat.get-color-from-palette($background, hover);
