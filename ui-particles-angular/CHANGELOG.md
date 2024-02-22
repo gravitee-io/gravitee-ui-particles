@@ -1,3 +1,10 @@
+# [10.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v10.0.0...v10.1.0) (2024-02-22)
+
+
+### Features
+
+* improve confirm dialog with last angular 16 feature ([3e78ac1](https://github.com/gravitee-io/gravitee-ui-particles/commit/3e78ac1dbbdf084d901d9726edec770db2eb305a))
+
 # [10.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.6.0...v10.0.0) (2024-02-22)
 
 
