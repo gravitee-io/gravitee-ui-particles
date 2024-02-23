@@ -1,3 +1,15 @@
+# [10.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v10.1.0...v10.2.0) (2024-02-23)
+
+
+### Bug Fixes
+
+* manage Plugin in license directive ([f7a46f2](https://github.com/gravitee-io/gravitee-ui-particles/commit/f7a46f26c3970cb74314c82f845509aed20756c5))
+
+
+### Features
+
+* use isExpired from server instead of calculating it ([c0f68b0](https://github.com/gravitee-io/gravitee-ui-particles/commit/c0f68b03e4e35e392e6eb0966782aaaa2c8df941))
+
 # [10.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v10.0.0...v10.1.0) (2024-02-22)
 
 
