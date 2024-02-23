@@ -18,7 +18,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
-import { isEmpty } from 'lodash';
+import { has, isEmpty } from 'lodash';
 
 import { GioLicenseDialogComponent, GioLicenseDialogData } from './gio-license-dialog/gio-license-dialog.component';
 
@@ -44,12 +44,22 @@ export interface UTM {
   campaign: string;
 }
 
-export interface LicenseOptions {
+export type LicenseOptionsBase = {
   // We used feature name as utm_medium
   feature?: string;
   // Optional, useful if need a context in utm campaign (utm_content)
   context?: string;
-}
+};
+
+export type LicensePluginOptions = LicenseOptionsBase & {
+  // When is deployed, the plugin is included in license
+  deployed: boolean;
+};
+
+export type LicenseOptions = LicenseOptionsBase | LicensePluginOptions;
+
+export const isLicensePluginOptions = (licenseOptions: LicenseOptions): licenseOptions is LicensePluginOptions =>
+  has(licenseOptions, 'deployed');
 
 export interface FeatureInfo {
   image?: string;
