@@ -28,6 +28,7 @@ export type License = {
   features: Array<string>;
   expiresAt?: Date;
   scope?: string;
+  isExpired?: boolean;
 };
 
 export interface LicenseConfiguration {
@@ -171,6 +172,6 @@ export class GioLicenseService {
   }
 
   public isExpired$(): Observable<boolean> {
-    return this.getExpiresAt$().pipe(map(expiresAt => !!expiresAt && expiresAt.valueOf() < Date.now()));
+    return this.getLicense$().pipe(map(license => license?.isExpired === true));
   }
 }
