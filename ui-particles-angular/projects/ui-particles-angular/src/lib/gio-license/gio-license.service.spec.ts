@@ -327,6 +327,7 @@ describe('GioLicenseService', () => {
         packs: [],
         features: ['foobar'],
         expiresAt: new Date(-3600000),
+        isExpired: true,
       };
 
       it('should declare feature missing if license is expired', done => {
