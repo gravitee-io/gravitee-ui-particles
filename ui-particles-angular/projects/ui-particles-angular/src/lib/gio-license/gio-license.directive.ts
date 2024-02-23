@@ -16,9 +16,9 @@
 import { Directive, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { filter, map, takeUntil, tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
-import { Subject } from 'rxjs';
+import { of, Subject } from 'rxjs';
 
-import { FeatureInfo, GioLicenseService, LicenseOptions } from './gio-license.service';
+import { FeatureInfo, GioLicenseService, isLicensePluginOptions, LicenseOptions, LicensePluginOptions } from './gio-license.service';
 import { GioLicenseDialogComponent, GioLicenseDialogData } from './gio-license-dialog/gio-license-dialog.component';
 
 @Directive({
@@ -26,7 +26,7 @@ import { GioLicenseDialogComponent, GioLicenseDialogData } from './gio-license-d
 })
 export class GioLicenseDirective implements OnInit, OnDestroy {
   @Input()
-  public gioLicense: LicenseOptions = {};
+  public gioLicense: LicenseOptions | LicensePluginOptions = {};
 
   private featureInfo: FeatureInfo = {};
   private trialURL = '';
@@ -37,8 +37,7 @@ export class GioLicenseDirective implements OnInit, OnDestroy {
   constructor(private readonly licenseService: GioLicenseService, private readonly matDialog: MatDialog, private elRef: ElementRef) {}
 
   public ngOnInit(): void {
-    this.licenseService
-      .isMissingFeature$(this.gioLicense)
+    this.isMissingFeature$()
       .pipe(
         tap(() => {
           this.elRef.nativeElement.removeEventListener('click', this.onClick, true);
@@ -56,6 +55,13 @@ export class GioLicenseDirective implements OnInit, OnDestroy {
     if (this.gioLicense?.feature) {
       this.trialURL = this.licenseService.getTrialURL(this.gioLicense);
     }
+  }
+
+  private isMissingFeature$() {
+    if (isLicensePluginOptions(this.gioLicense)) {
+      return of(!this.gioLicense.deployed);
+    }
+    return this.licenseService.isMissingFeature$(this.gioLicense);
   }
 
   public ngOnDestroy(): void {

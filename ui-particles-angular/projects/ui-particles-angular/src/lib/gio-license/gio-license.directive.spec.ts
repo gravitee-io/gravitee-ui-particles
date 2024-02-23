@@ -54,11 +54,33 @@ describe('GioLicenseDirective', () => {
 
       expect(onClickSpy).toHaveBeenCalledTimes(0);
     });
+
+    it('should override click if plugin is not deployed', () => {
+      prepareTestLicenseComponent({ feature: 'foobar', deployed: false }, true);
+      const onClickSpy = jest.spyOn(component, 'onClick');
+      fixture.detectChanges();
+
+      const element = fixture.nativeElement.querySelector('div');
+      element.click();
+
+      expect(onClickSpy).toHaveBeenCalledTimes(0);
+    });
   });
 
   describe('Not override click & not open dialog', () => {
     it('should not override click if license is allowed', () => {
       prepareTestLicenseComponent({ feature: 'foobar' }, true);
+      const onClickSpy = jest.spyOn(component, 'onClick');
+      fixture.detectChanges();
+
+      const element = fixture.nativeElement.querySelector('div');
+      element.click();
+
+      expect(onClickSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not override click if plugin is deployed', () => {
+      prepareTestLicenseComponent({ feature: 'foobar', deployed: true }, false);
       const onClickSpy = jest.spyOn(component, 'onClick');
       fixture.detectChanges();
 
