@@ -89,8 +89,8 @@ export class GioLicenseService {
     return this.loadLicense$;
   }
 
-  public isMissingFeature$(licenseOptions: LicenseOptions | undefined): Observable<boolean> {
-    if (licenseOptions?.feature == null || !licenseOptions?.feature) {
+  public isMissingFeature$(feature: string | undefined): Observable<boolean> {
+    if (feature == null) {
       return of(false);
     }
     return this.isExpired$().pipe(
@@ -98,7 +98,7 @@ export class GioLicenseService {
         if (isExpired) {
           return of(isExpired);
         }
-        return this.getLicense$().pipe(map(license => license == null || !license.features.some(feat => feat === licenseOptions.feature)));
+        return this.getLicense$().pipe(map(license => license == null || !license.features.some(feat => feat === feature)));
       }),
     );
   }

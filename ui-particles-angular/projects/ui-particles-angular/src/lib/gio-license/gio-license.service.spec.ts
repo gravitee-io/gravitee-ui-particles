@@ -89,7 +89,7 @@ describe('GioLicenseService', () => {
 
       it('should check if feature is not missing', done => {
         gioLicenseService
-          .isMissingFeature$({ feature: 'foobar' })
+          .isMissingFeature$('foobar')
           .pipe(
             tap(isMissing => {
               expect(isMissing).toBeFalsy();
@@ -108,7 +108,7 @@ describe('GioLicenseService', () => {
 
       it('should check if feature is missing', done => {
         gioLicenseService
-          .isMissingFeature$({ feature: 'missing' })
+          .isMissingFeature$('missing')
           .pipe(
             tap(isMissing => {
               expect(isMissing).toBeTruthy();
@@ -331,7 +331,7 @@ describe('GioLicenseService', () => {
       };
 
       it('should declare feature missing if license is expired', done => {
-        gioLicenseService.isMissingFeature$({ feature: 'foobar' }).subscribe(isMissing => {
+        gioLicenseService.isMissingFeature$('foobar').subscribe(isMissing => {
           expect(isMissing).toEqual(true);
           done();
         });
