@@ -61,7 +61,7 @@ export class GioLicenseDirective implements OnInit, OnDestroy {
     if (isLicensePluginOptions(this.gioLicense)) {
       return of(!this.gioLicense.deployed);
     }
-    return this.licenseService.isMissingFeature$(this.gioLicense);
+    return this.licenseService.isMissingFeature$(this.gioLicense.feature);
   }
 
   public ngOnDestroy(): void {
