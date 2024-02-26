@@ -1,3 +1,16 @@
+# [11.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v10.2.0...v11.0.0) (2024-02-26)
+
+
+### Features
+
+* change signature of isMissingFeature$ in license service ([3fedb0e](https://github.com/gravitee-io/gravitee-ui-particles/commit/3fedb0e82b51cadd9a244fa092fa574e69dcd92b))
+
+
+### BREAKING CHANGES
+
+* The GioLicenseService+isMissingFeature$ signature is modified to accept
+the feature as a string parameter instead of LicenseOptions object.
+
 # [10.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v10.1.0...v10.2.0) (2024-02-23)
 
 
