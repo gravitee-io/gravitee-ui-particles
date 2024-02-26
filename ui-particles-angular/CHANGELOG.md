@@ -1,3 +1,10 @@
+## [9.6.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.6.0...v9.6.1) (2024-02-26)
+
+
+### Bug Fixes
+
+* manage Plugin in license directive ([d746893](https://github.com/gravitee-io/gravitee-ui-particles/commit/d7468935b0a91d1b070846b65400963951926c0f))
+
 # [9.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v9.5.2...v9.6.0) (2024-02-20)
 
 
