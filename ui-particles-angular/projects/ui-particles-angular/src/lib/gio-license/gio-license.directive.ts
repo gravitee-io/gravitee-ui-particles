@@ -17,6 +17,7 @@ import { Directive, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { filter, map, takeUntil, tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { of, Subject } from 'rxjs';
+import { isNil } from 'lodash';
 
 import { FeatureInfo, GioLicenseService, isLicensePluginOptions, LicenseOptions, LicensePluginOptions } from './gio-license.service';
 import { GioLicenseDialogComponent, GioLicenseDialogData } from './gio-license-dialog/gio-license-dialog.component';
@@ -25,8 +26,11 @@ import { GioLicenseDialogComponent, GioLicenseDialogData } from './gio-license-d
   selector: '[gioLicense]',
 })
 export class GioLicenseDirective implements OnInit, OnDestroy {
+  /**
+   * The license to check. Must be defined when the directive is initialised, otherwise the value will not be taken into account.
+   */
   @Input()
-  public gioLicense: LicenseOptions | LicensePluginOptions = {};
+  public gioLicense?: LicenseOptions | LicensePluginOptions;
 
   private featureInfo: FeatureInfo = {};
   private trialURL = '';
@@ -37,13 +41,20 @@ export class GioLicenseDirective implements OnInit, OnDestroy {
   constructor(private readonly licenseService: GioLicenseService, private readonly matDialog: MatDialog, private elRef: ElementRef) {}
 
   public ngOnInit(): void {
-    this.isMissingFeature$()
+    const gioLicense = this.gioLicense;
+
+    // If the license is not defined, we do not need to check anything
+    if (isNil(gioLicense)) {
+      return;
+    }
+
+    this.isNotAllowed$(gioLicense)
       .pipe(
         tap(() => {
           this.elRef.nativeElement.removeEventListener('click', this.onClick, true);
         }),
-        filter(notAllowed => this.gioLicense != null && notAllowed),
-        map(() => this.licenseService.getFeatureInfo(this.gioLicense)),
+        filter(notAllowed => notAllowed),
+        map(() => this.licenseService.getFeatureInfo(gioLicense)),
         tap(featureInfo => {
           this.featureInfo = featureInfo;
           this.elRef.nativeElement.addEventListener('click', this.onClick, true);
@@ -52,16 +63,16 @@ export class GioLicenseDirective implements OnInit, OnDestroy {
       )
       .subscribe();
 
-    if (this.gioLicense?.feature) {
-      this.trialURL = this.licenseService.getTrialURL(this.gioLicense);
+    if (gioLicense.feature) {
+      this.trialURL = this.licenseService.getTrialURL(gioLicense);
     }
   }
 
-  private isMissingFeature$() {
-    if (isLicensePluginOptions(this.gioLicense)) {
-      return of(!this.gioLicense.deployed);
+  private isNotAllowed$(gioLicense: LicenseOptions | LicensePluginOptions) {
+    if (isLicensePluginOptions(gioLicense)) {
+      return of(!gioLicense.deployed);
     }
-    return this.licenseService.isMissingFeature$(this.gioLicense.feature);
+    return this.licenseService.isMissingFeature$(gioLicense.feature);
   }
 
   public ngOnDestroy(): void {

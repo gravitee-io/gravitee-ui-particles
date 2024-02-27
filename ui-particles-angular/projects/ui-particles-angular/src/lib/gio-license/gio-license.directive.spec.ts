@@ -24,7 +24,7 @@ import { GioLicenseModule } from './gio-license.module';
 @Component({ template: `<div [gioLicense]="license" (click)="onClick()">A Content</div>` })
 class TestLicenseComponent {
   @Input()
-  public license: LicenseOptions = {};
+  public license?: LicenseOptions = {};
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   public onClick() {}
@@ -33,7 +33,7 @@ class TestLicenseComponent {
 describe('GioLicenseDirective', () => {
   let fixture: ComponentFixture<TestLicenseComponent>;
   let component: TestLicenseComponent;
-  function prepareTestLicenseComponent(licenseOptions: LicenseOptions, license: boolean) {
+  function prepareTestLicenseComponent(licenseOptions: LicenseOptions | undefined, license: boolean) {
     fixture = TestBed.configureTestingModule({
       declarations: [TestLicenseComponent],
       imports: [HttpClientTestingModule, GioLicenseModule, GioLicenseTestingModule.with(license)],
@@ -81,6 +81,17 @@ describe('GioLicenseDirective', () => {
 
     it('should not override click if plugin is deployed', () => {
       prepareTestLicenseComponent({ feature: 'foobar', deployed: true }, false);
+      const onClickSpy = jest.spyOn(component, 'onClick');
+      fixture.detectChanges();
+
+      const element = fixture.nativeElement.querySelector('div');
+      element.click();
+
+      expect(onClickSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not override click if no license defined', () => {
+      prepareTestLicenseComponent(undefined, false);
       const onClickSpy = jest.spyOn(component, 'onClick');
       fixture.detectChanges();
 
