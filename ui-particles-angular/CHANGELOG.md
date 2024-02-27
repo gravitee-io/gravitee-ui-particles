@@ -1,3 +1,10 @@
+## [11.0.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v11.0.0...v11.0.1) (2024-02-27)
+
+
+### Bug Fixes
+
+* allow license directive input with undefined license ([bd196a7](https://github.com/gravitee-io/gravitee-ui-particles/commit/bd196a7e2c58e85ba10ced79b95e66ee4770caab))
+
 # [11.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v10.2.0...v11.0.0) (2024-02-26)
 
 
