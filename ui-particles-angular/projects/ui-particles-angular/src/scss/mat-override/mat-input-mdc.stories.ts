@@ -107,7 +107,7 @@ export const MatInputMDC: StoryObj = {
           
           <mat-form-field>
             <mat-label>Input with text prefix</mat-label>
-            <span matTextPrefix>http://</span>
+            <span matTextPrefix>http://&nbsp;</span>
             <input matInput>
           </mat-form-field>
   
