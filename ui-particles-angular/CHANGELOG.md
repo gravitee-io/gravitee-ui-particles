@@ -1,3 +1,10 @@
+# [11.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v11.0.1...v11.1.0) (2024-02-28)
+
+
+### Features
+
+* increase body line-height ([4599ff3](https://github.com/gravitee-io/gravitee-ui-particles/commit/4599ff38997c17c188cf6f75480ec6b10b5e4671))
+
 ## [11.0.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v11.0.0...v11.0.1) (2024-02-27)
 
 
