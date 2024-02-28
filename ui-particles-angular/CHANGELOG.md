@@ -1,3 +1,10 @@
+# [11.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v11.1.0...v11.2.0) (2024-02-28)
+
+
+### Features
+
+* remove all use of material legacy stuff ([3fb574d](https://github.com/gravitee-io/gravitee-ui-particles/commit/3fb574d538554eaef9c369cf5e990ae5f0ba3dc8))
+
 # [11.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v11.0.1...v11.1.0) (2024-02-28)
 
 
