@@ -24,6 +24,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { MatSelectHarness } from '@angular/material/select/testing';
+import { get } from 'lodash';
 
 import { GioJsonSchema } from './model/GioJsonSchema';
 import { GioFormJsonSchemaModule } from './gio-form-json-schema.module';
@@ -278,8 +279,8 @@ describe('GioFormJsonSchema', () => {
 
       try {
         await loader.getHarness(MatInputHarness.with({ selector: '[id*="deprecatedString"]' }));
-      } catch ({ message }) {
-        expect(message).toContain('Failed to find element matching one of the following queries');
+      } catch (error) {
+        expect(get(error, 'message')).toContain('Failed to find element matching one of the following queries');
       }
     });
 

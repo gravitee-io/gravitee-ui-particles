@@ -4,11 +4,6 @@ module.exports = {
   overrides: [
     {
       files: ['*.ts'],
-      parserOptions: {
-        tsconfigRootDir: __dirname,
-        project: ['./tsconfig.lib.json', './tsconfig.spec.json'],
-        createDefaultProgram: true,
-      },
       rules: {
         '@angular-eslint/directive-selector': [
           'error',
