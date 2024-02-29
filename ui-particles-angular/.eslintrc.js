@@ -8,7 +8,6 @@ module.exports = {
       files: ['*.ts'],
       parser: '@typescript-eslint/parser',
       parserOptions: {
-        ecmaVersion: 2019,
         tsconfigRootDir: __dirname,
         project: ['./tsconfig.json'],
         createDefaultProgram: true,

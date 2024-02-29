@@ -127,7 +127,7 @@
             "compodoc": false,
             "port": 9008,
             "stylePreprocessorOptions": {
-              "includePaths": [".storybook/projects-style-link"]
+              "includePaths": [".storybook/projects-style-link", "../node_modules"]
             }
           }
         },
@@ -137,7 +137,7 @@
             "styles": [".storybook/index.scss"],
             "compodoc": false,
             "stylePreprocessorOptions": {
-              "includePaths": [".storybook/projects-style-link"]
+              "includePaths": [".storybook/projects-style-link", "../node_modules"]
             }
           }
         }

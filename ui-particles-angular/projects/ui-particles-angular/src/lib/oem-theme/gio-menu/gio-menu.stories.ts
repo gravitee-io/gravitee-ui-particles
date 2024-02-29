@@ -193,7 +193,7 @@ export const SmallMenu: StoryObj = {
     return {
       template: `
         <div id="sidenav">
-          <gio-menu>
+          <gio-menu [reduced]="false">
             <gio-menu-header>    
               <gio-menu-selector tabindex="1" [selectedItemValue]="selectedItemValue" selectorTitle="Environment" [selectorItems]="selectorItems" (selectChange)="selectedItemValue=$event"></gio-menu-selector>
             </gio-menu-header>
