@@ -15,7 +15,7 @@
  */
 import { Component, Input } from '@angular/core';
 
-export type GioTopBarProductTypes = 'am' | 'apim' | 'cockpit';
+export type GioTopBarProductTypes = 'am' | 'apim' | 'cockpit' | 'cloud';
 
 @Component({
   selector: 'gio-top-bar-content',
