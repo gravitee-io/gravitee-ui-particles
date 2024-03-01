@@ -42,7 +42,8 @@ $typography: map.get(gio.$mat-theme, typography);
     color: oem.$oem-menu-text;
   }
 
-  &.cockpit {
+  &.cockpit,
+  &.cloud {
     background: rgb(135 111 236 / 40%);
     color: map.get(gio.$mat-accent-palette, default-contrast);
   }

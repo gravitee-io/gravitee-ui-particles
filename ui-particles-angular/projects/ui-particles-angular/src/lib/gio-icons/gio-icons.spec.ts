@@ -235,6 +235,7 @@ const icons = [
   'product-am',
   'product-apim',
   'product-cockpit',
+  'product-cloud',
   'prohibition',
   'puzzle',
   'question-mark-circle',
