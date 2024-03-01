@@ -1,3 +1,10 @@
+# [11.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v11.2.0...v11.3.0) (2024-03-01)
+
+
+### Features
+
+* add product cloud icon ([14b4d82](https://github.com/gravitee-io/gravitee-ui-particles/commit/14b4d82a79582f004defd1e1e3aafdda22655c29))
+
 # [11.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v11.1.0...v11.2.0) (2024-02-28)
 
 
