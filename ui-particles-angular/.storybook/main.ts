@@ -29,7 +29,6 @@ module.exports = {
   },
 
   staticDirs: [
-    { from: '../../node_modules/@gravitee/ui-components/assets', to: '/' },
     { from: './favicon.ico', to: '/favicon.ico' },
     { from: '../projects/ui-particles-angular/assets/gio-icons.svg', to: '/assets/gio-icons.svg' },
     {
