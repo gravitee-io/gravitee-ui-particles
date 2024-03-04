@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 import { APP_ID, Component, ElementRef, Inject, Input, OnChanges, OnDestroy, SecurityContext, SimpleChanges } from '@angular/core';
-import { Asciidoctor } from 'asciidoctor';
 import { takeUntil } from 'rxjs/operators';
 import { ReplaySubject, Subject, forkJoin } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
-
-import { GioPrismJsService } from '../gio-prismjs/gio-prismjs.service';
+import { Asciidoctor, Options } from '@asciidoctor/core';
+import { GioPrismJsService } from '@gravitee/ui-particles-angular';
 
 import { GioAsciidoctorService } from './gio-asciidoctor.service';
 
@@ -36,7 +35,7 @@ export class GioAsciidoctorComponent implements OnChanges, OnDestroy {
   @Input()
   public src?: string;
 
-  private options: Asciidoctor.Options = {
+  private options: Options = {
     header_footer: false,
     attributes: {
       showtitle: true,

@@ -16,10 +16,6 @@
 /*
  * Public API Surface
  */
-export * from './gio-asciidoctor/gio-asciidoctor.module';
-export * from './gio-asciidoctor/gio-asciidoctor.component';
-export * from './gio-asciidoctor/gio-asciidoctor.service';
-
 export * from './gio-save-bar/gio-save-bar.component';
 export * from './gio-save-bar/gio-save-bar.module';
 export * from './gio-save-bar/gio-save-bar.harness';

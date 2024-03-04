@@ -2,10 +2,11 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/spec",
-    "types": ["jest"],
+    "types": ["jest", "node"],
     "esModuleInterop": true,
     "paths": {
       "@gravitee/ui-particles-angular": ["projects/ui-particles-angular/src/public-api.ts"],
+      "@gravitee/ui-particles-angular/*": ["projects/ui-particles-angular/*/public-api.ts"],
       "@gravitee/ui-particles-angular/testing": ["projects/ui-particles-angular/testing/public-api.ts"]
     },
     "target": "ES2016"

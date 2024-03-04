@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 @use 'sass:map';
-@use '@angular/material' as mat;
+@use '../../../../node_modules/@angular/material/index' as mat;
 
-@use '../../scss' as gio;
+@use '../src/scss/index' as gio;
 
 $typography: map.get(gio.$mat-theme, typography);
 
 // Default Asciidoctor CSS
-@import '@asciidoctor/core/dist/css/asciidoctor';
+@import '../../../../node_modules/@asciidoctor/core/dist/css/asciidoctor.css';
 
-@import 'prismjs/themes/prism-okaidia';
+@import '../../../../node_modules/prismjs/themes/prism-okaidia.css';
 
 // Override Asciidoctor CSS
 
