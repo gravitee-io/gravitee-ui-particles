@@ -17,9 +17,7 @@ module.exports = {
   preset: 'jest-preset-angular',
   roots: [__dirname + '/src'],
   setupFilesAfterEnv: [__dirname + '/src/setup-jest.ts'],
-  transformIgnorePatterns: [
-    '/node_modules/(?!(.*\\.mjs$)|(@gravitee/ui-components/.*?\\.js)|@asciidoctor/core|lit|@lit/reactive-element|(lit-element/.*?\\.js)|(lit-html/.*?\\.js)|(resize-observer-polyfill/.*?\\.js)|(date-fns/.*?\\.js)$)',
-  ],
+  transformIgnorePatterns: ['/node_modules/(?!(.*\\.mjs$)|(@asciidoctor/core))'],
   moduleNameMapper: {
     // 📝 Order is important
     '@gravitee/ui-particles-angular/testing': __dirname + '/../ui-particles-angular/testing/public-api.ts',
