@@ -23,6 +23,7 @@ import {
   GioIconsModule,
   GioLoaderModule,
 } from '@gravitee/ui-particles-angular';
+import { GioAsciidoctorModule } from '@gravitee/ui-particles-angular/gio-asciidoctor';
 import { CommonModule } from '@angular/common';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -33,7 +34,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatMenuModule } from '@angular/material/menu';
-import { GioAsciidoctorModule } from '@gravitee/ui-particles-angular';
 import { MatChipsModule } from '@angular/material/chips';
 
 import { GioPolicyStudioFlowMessageFormDialogComponent } from './components/flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';

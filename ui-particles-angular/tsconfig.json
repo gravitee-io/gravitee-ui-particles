@@ -18,6 +18,7 @@
     "lib": ["es2018", "dom"],
     "paths": {
       "@gravitee/ui-particles-angular": ["dist/ui-particles-angular", "projects/ui-particles-angular/src/public-api.ts"],
+      "@gravitee/ui-particles-angular/*": ["dist/ui-particles-angular/*", "projects/ui-particles-angular/*/public-api.ts"],
       "@gravitee/ui-particles-angular/testing": ["dist/ui-particles-angular/testing", "projects/ui-particles-angular/testing/public-api.ts"]
     },
     "resolveJsonModule": true,

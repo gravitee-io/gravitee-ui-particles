@@ -23,6 +23,7 @@ module.exports = {
   moduleNameMapper: {
     // 📝 Order is important
     '@gravitee/ui-particles-angular/testing': __dirname + '/../ui-particles-angular/testing/public-api.ts',
+    '@gravitee/ui-particles-angular/(.*)': __dirname + '/../ui-particles-angular/$1/public-api.ts',
     '@gravitee/ui-particles-angular': __dirname + '/../ui-particles-angular/src/public-api.ts',
   },
 };

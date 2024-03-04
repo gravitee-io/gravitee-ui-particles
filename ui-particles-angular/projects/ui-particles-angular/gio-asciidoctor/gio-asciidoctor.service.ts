@@ -14,17 +14,13 @@
  * limitations under the License.
  */
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Asciidoctor } from 'asciidoctor';
+import { from, Observable, of } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
-
-import type AsciidoctorProcessor from 'asciidoctor';
-
-type AsciidoctorProcessor = typeof AsciidoctorProcessor;
+import asciidoctor, { Asciidoctor } from '@asciidoctor/core';
 
 declare global {
   interface Window {
-    Asciidoctor: AsciidoctorProcessor;
+    Asciidoctor: Asciidoctor;
   }
 }
 
@@ -40,22 +36,15 @@ export class GioAsciidoctorService {
   }
 
   private loadAsciidoctor(): Observable<Asciidoctor> {
-    return new Observable<Asciidoctor>(observer => {
-      const onGotAsciidoctor = () => {
-        observer.next(window.Asciidoctor());
-        observer.complete();
+    if (!window.Asciidoctor) {
+      const loadAsciidoctor = async () => {
+        window.Asciidoctor = asciidoctor();
+        return window.Asciidoctor;
       };
 
-      if (!window.Asciidoctor) {
-        const loaderScript = document.createElement('script');
-        loaderScript.type = 'text/javascript';
-        loaderScript.src = 'assets/asciidoctor/asciidoctor.js';
-        loaderScript.addEventListener('load', onGotAsciidoctor);
-        loaderScript.addEventListener('error', err => observer.error(err));
-        document.body.appendChild(loaderScript);
-      } else {
-        onGotAsciidoctor();
-      }
-    });
+      return from(loadAsciidoctor());
+    } else {
+      return of(window.Asciidoctor);
+    }
   }
 }
