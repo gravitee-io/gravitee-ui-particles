@@ -138,7 +138,8 @@
             "compodoc": false,
             "stylePreprocessorOptions": {
               "includePaths": [".storybook/projects-style-link", "../node_modules"]
-            }
+            },
+            "webpackStatsJson": true
           }
         }
       }

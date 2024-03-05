@@ -34,7 +34,7 @@
     "@commitlint/cli": "17.4.2",
     "@commitlint/config-conventional": "17.4.2",
     "@types/svg-parser": "2.0.3",
-    "chromatic": "7.3.0",
+    "chromatic": "11.0.0",
     "husky": "8.0.3",
     "license-check-and-add": "4.0.5",
     "lint-staged": "13.1.0",
