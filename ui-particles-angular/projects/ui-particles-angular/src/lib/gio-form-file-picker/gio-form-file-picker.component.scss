@@ -94,9 +94,8 @@ $typography: map.get(gio.$mat-theme, typography);
       display: flex;
       flex: 1 1 auto;
       flex-direction: column;
-      align-content: center;
+      place-content: center center;
       align-items: center;
-      justify-content: center;
       text-align: center;
       @include mat.typography-level($typography, 'caption');
 
