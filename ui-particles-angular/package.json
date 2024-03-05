@@ -86,11 +86,11 @@
     "react-dom": "^18.2.0",
     "semantic-release": "18.0.1",
     "storybook": "7.6.17",
-    "stylelint": "14.16.1",
-    "stylelint-config-idiomatic-order": "^9.0.0",
-    "stylelint-config-prettier-scss": "^0.0.1",
-    "stylelint-config-standard-scss": "^6.1.0",
-    "stylelint-order": "^6.0.1",
+    "stylelint": "16.2.1",
+    "stylelint-config-idiomatic-order": "^10.0.0",
+    "stylelint-config-prettier-scss": "^1.0.0",
+    "stylelint-config-standard-scss": "^13.0.0",
+    "stylelint-order": "^6.0.4",
     "typescript": "5.3.3"
   }
 }
