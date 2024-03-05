@@ -54,7 +54,7 @@ export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
   private hover = false;
   @ViewChild('gioSubmenu', { static: false })
   private gioSubmenu!: ElementRef<HTMLDivElement>;
-  private unsubscribe$ = new Subject();
+  private unsubscribe$ = new Subject<void>();
 
   constructor(private readonly gioMenuService: GioMenuService, private readonly changeDetectorRef: ChangeDetectorRef) {}
 
