@@ -350,6 +350,8 @@ describe('GioFormJsonSchema', () => {
         fixture.detectChanges();
 
         expect(await selectField.isDisabled()).toEqual(false);
+
+        tick();
       }));
     });
   });

@@ -4405,27 +4405,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ngx-formly/core@npm:6.2.2":
-  version: 6.2.2
-  resolution: "@ngx-formly/core@npm:6.2.2"
+"@ngx-formly/core@npm:6.3.0":
+  version: 6.3.0
+  resolution: "@ngx-formly/core@npm:6.3.0"
   dependencies:
     tslib: ^2.0.0
   peerDependencies:
     "@angular/forms": ">=13.2.0"
     rxjs: ^6.5.3 || ^7.0.0
-  checksum: 4c28ba3b458cf525989e18b06b79a4599c3e99e66a4cf9fdec14a59c8b6ce42860cdee23830b3def4f03589cf37b605f3d223b23834dcc96878587d256036c71
+  checksum: 33563800c562653452570c1502ef76a1221cc22305ba5343fb7c2a727c3758ed3f6ac935cd7e75e0c431343f3e56dff4666e3fee4dbe2849f6746f0b69ff214d
   languageName: node
   linkType: hard
 
-"@ngx-formly/material@npm:6.2.2":
-  version: 6.2.2
-  resolution: "@ngx-formly/material@npm:6.2.2"
+"@ngx-formly/material@npm:6.3.0":
+  version: 6.3.0
+  resolution: "@ngx-formly/material@npm:6.3.0"
   dependencies:
     tslib: ^2.0.0
   peerDependencies:
     "@angular/material": ">=13.0.0"
-    "@ngx-formly/core": 6.2.2
-  checksum: 0fdd0a796a2949600aa1989c5bef103028f069ebefe67421bcae4866ecc8515fbed0f7a3a2c7da27be24c4c2d394fa8cd52e9fe1769d97ecfbb97eadbd216ebc
+    "@ngx-formly/core": 6.3.0
+  checksum: 3be164d065a1039a8e4595dcb68ac4b69b702eb0712e77cddb7cafd74b5b2a40cb11718d4616c9b6b60fc498c33d5632cd5b5dc9a70400df38f6017e3532746c
   languageName: node
   linkType: hard
 
@@ -9886,7 +9886,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cronstrue@npm:^2.32.0":
+"cronstrue@npm:^2.48.0":
   version: 2.48.0
   resolution: "cronstrue@npm:2.48.0"
   bin:
@@ -16383,10 +16383,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"monaco-editor@npm:^0.36.1":
-  version: 0.36.1
-  resolution: "monaco-editor@npm:0.36.1"
-  checksum: 75e7cfbe03b4cb964e550c8021d6b2cc4f5265ee17703ddda7a63a26492a95fdbfaf34aa3e50004930ff8afb1422ae2b1dc0b9d3f122d558bdf1a335403937fd
+"monaco-editor@npm:^0.46.0":
+  version: 0.46.0
+  resolution: "monaco-editor@npm:0.46.0"
+  checksum: be7aaa2747b8d3a3537f56c9353ebe779b188eb1480f6453fa1e346d8ccdd27068cb4508c8f6f3b8cc07ac0f792a3d6df36168d54cd6e074742182525115be86
   languageName: node
   linkType: hard
 
@@ -20969,8 +20969,8 @@ __metadata:
     "@fontsource/fira-mono": 4.5.10
     "@fontsource/golos-ui": ^4.5.3
     "@fontsource/material-icons": 4.5.4
-    "@ngx-formly/core": 6.2.2
-    "@ngx-formly/material": 6.2.2
+    "@ngx-formly/core": 6.3.0
+    "@ngx-formly/material": 6.3.0
     "@semantic-release/changelog": 6.0.2
     "@semantic-release/exec": 6.0.3
     "@semantic-release/git": 10.0.1
@@ -20986,7 +20986,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^6.10.0
     "@typescript-eslint/parser": ^6.10.0
     ajv: ^8.12.0
-    cronstrue: ^2.32.0
+    cronstrue: ^2.48.0
     eslint: ^8.53.0
     eslint-config-prettier: 8.6.0
     eslint-plugin-import: 2.27.4
@@ -20999,7 +20999,7 @@ __metadata:
     jest-preset-angular: 14.0.3
     json-schema: ^0.4.0
     lodash: ^4.17.21
-    monaco-editor: ^0.36.1
+    monaco-editor: ^0.46.0
     ng-packagr: 17.2.1
     ngx-file-helpers: 11.0.0
     prettier: 2.8.8
