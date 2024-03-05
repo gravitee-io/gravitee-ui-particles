@@ -12,7 +12,7 @@
     "@fontsource/golos-ui": "^4.5.1",
     "@fontsource/material-icons": "4.5.1",
     "cronstrue": "^2.48.0",
-    "tslib": "2.3.1"
+    "tslib": "^2.6.2"
   },
   "peerDependencies": {
     "@angular/animations": "^16.0.0 || ^17.0.0",
