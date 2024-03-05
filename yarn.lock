@@ -9170,14 +9170,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:7.3.0":
-  version: 7.3.0
-  resolution: "chromatic@npm:7.3.0"
+"chromatic@npm:11.0.0":
+  version: 11.0.0
+  resolution: "chromatic@npm:11.0.0"
+  peerDependencies:
+    "@chromatic-com/cypress": ^0.5.2 || ^1.0.0
+    "@chromatic-com/playwright": ^0.5.2 || ^1.0.0
+  peerDependenciesMeta:
+    "@chromatic-com/cypress":
+      optional: true
+    "@chromatic-com/playwright":
+      optional: true
   bin:
     chroma: dist/bin.js
     chromatic: dist/bin.js
     chromatic-cli: dist/bin.js
-  checksum: 0f8bc34aa0cb7f20398ef64c9dbdd2abdd8f33546495b805773e054b2f3eac1902b15608eaabd98b7fca6c1a4ac366976d2aa8eceecfeb8a24fa194eab524750
+  checksum: 0bffdc5d1218ea941bd1cad04430a50240f2bbf38f89d08e8c00ce385865d758f54ab331647202d040f42a84bec16901cf844c4997dcc97f1b412e886b9ade5c
   languageName: node
   linkType: hard
 
@@ -12589,7 +12597,7 @@ __metadata:
     "@commitlint/cli": 17.4.2
     "@commitlint/config-conventional": 17.4.2
     "@types/svg-parser": 2.0.3
-    chromatic: 7.3.0
+    chromatic: 11.0.0
     husky: 8.0.3
     license-check-and-add: 4.0.5
     lint-staged: 13.1.0
