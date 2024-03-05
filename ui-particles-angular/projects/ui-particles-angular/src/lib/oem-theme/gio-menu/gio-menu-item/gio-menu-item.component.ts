@@ -30,7 +30,7 @@ export class GioMenuItemComponent implements OnDestroy {
   @Input() public active = false;
   @Input() public outlined = false;
 
-  private unsubscribe$ = new Subject();
+  private unsubscribe$ = new Subject<void>();
 
   constructor(private readonly gioMenuService: GioMenuService) {}
 
