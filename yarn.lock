@@ -3170,10 +3170,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/fira-mono@npm:4.5.10":
-  version: 4.5.10
-  resolution: "@fontsource/fira-mono@npm:4.5.10"
-  checksum: 0bf058ff1d6f4dcd0bedb4d459ed21124ffd93b7ca1c540068f98057fd7cf96320c69126e88caf1bc5e318c920d9157a2b0b30fd0835573ea6808ffa63c16fad
+"@fontsource/fira-mono@npm:5.0.12":
+  version: 5.0.12
+  resolution: "@fontsource/fira-mono@npm:5.0.12"
+  checksum: 86f3d21e7d48b5c6dfce171d1d2ecb05341ec9206c5276a8d9d9e8fe38124ef65b632f8ca5dcbc1b2f0deabc2ef68d6d6cafb1e7dc6e749b0a4c3db7aabdda2e
   languageName: node
   linkType: hard
 
@@ -3184,10 +3184,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/material-icons@npm:4.5.4":
-  version: 4.5.4
-  resolution: "@fontsource/material-icons@npm:4.5.4"
-  checksum: 681f05a3b3fcf236b01827d25bd09a5d646f05c3c161808c26a796a655131f585d1a124a27e79f676c79a815e85869b9c4280a21a904f7c36a41c920bfec6582
+"@fontsource/material-icons@npm:5.0.14":
+  version: 5.0.14
+  resolution: "@fontsource/material-icons@npm:5.0.14"
+  checksum: 50a3d0263fd0eb32e0899edc7c7efc8d0a1db50456d7ce2374abaeb4375b7d2a32bb90c595cf1d8455d6953b828a4af0af98d0b3d5e7fa22c8b5a0dab3b1130e
   languageName: node
   linkType: hard
 
@@ -21037,9 +21037,9 @@ __metadata:
     "@angular/platform-browser-dynamic": 17.2.3
     "@angular/router": 17.2.3
     "@asciidoctor/core": 3.0.4
-    "@fontsource/fira-mono": 4.5.10
+    "@fontsource/fira-mono": 5.0.12
     "@fontsource/golos-ui": ^4.5.3
-    "@fontsource/material-icons": 4.5.4
+    "@fontsource/material-icons": 5.0.14
     "@ngx-formly/core": 6.3.0
     "@ngx-formly/material": 6.3.0
     "@semantic-release/changelog": 6.0.2
