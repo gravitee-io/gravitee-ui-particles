@@ -32,7 +32,10 @@ export class GioLicenseDialogComponent {
   public featureInfo: FeatureInfo;
   public trialURL: string;
 
-  constructor(private readonly dialogRef: MatDialogRef<GioLicenseDialogData>, @Inject(MAT_DIALOG_DATA) dialogData: GioLicenseDialogData) {
+  constructor(
+    private readonly dialogRef: MatDialogRef<GioLicenseDialogData>,
+    @Inject(MAT_DIALOG_DATA) dialogData: GioLicenseDialogData,
+  ) {
     this.featureInfo = dialogData?.featureInfo;
     this.trialURL = dialogData?.trialURL;
   }

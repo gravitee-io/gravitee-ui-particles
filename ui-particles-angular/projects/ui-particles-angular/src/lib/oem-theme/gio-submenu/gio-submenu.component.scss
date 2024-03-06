@@ -52,7 +52,9 @@
   &__overlay,
   &:hover {
     opacity: 1;
-    transition: opacity 150ms, visibility 150ms;
+    transition:
+      opacity 150ms,
+      visibility 150ms;
     visibility: visible;
   }
 

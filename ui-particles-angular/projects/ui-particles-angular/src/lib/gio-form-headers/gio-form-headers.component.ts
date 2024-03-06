@@ -156,7 +156,10 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor, Va
 
   private filteredHeaderNames: Observable<string[]>[] = [];
 
-  constructor(private readonly fm: FocusMonitor, private readonly elRef: ElementRef) {
+  constructor(
+    private readonly fm: FocusMonitor,
+    private readonly elRef: ElementRef,
+  ) {
     this.mainForm = new UntypedFormGroup({
       headers: this.headersFormArray,
     });

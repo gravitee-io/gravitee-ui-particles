@@ -31,11 +31,14 @@ export class GioPolicyStudioDetailsInfoBarHarness extends ComponentHarness {
       }),
     );
 
-    return allKeyValue.reduce((acc, curr) => {
-      if (curr.label) {
-        return { ...acc, [curr.label]: curr.value };
-      }
-      return acc;
-    }, {} as Record<string, (string | null)[]>);
+    return allKeyValue.reduce(
+      (acc, curr) => {
+        if (curr.label) {
+          return { ...acc, [curr.label]: curr.value };
+        }
+        return acc;
+      },
+      {} as Record<string, (string | null)[]>,
+    );
   }
 }

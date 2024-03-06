@@ -52,7 +52,10 @@ export class GioConfirmAndValidateDialogComponent {
   public confirmValue?: string;
   public isValid = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) confirmDialogData: GioConfirmAndValidateDialogData, private readonly parentInjector: Injector) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) confirmDialogData: GioConfirmAndValidateDialogData,
+    private readonly parentInjector: Injector,
+  ) {
     this.title = confirmDialogData?.title ?? 'Are you sure?';
     this.warning = confirmDialogData?.warning;
     this.contentComponentInjector = parentInjector;

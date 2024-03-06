@@ -43,7 +43,10 @@ import { GioPolicyStudioFlowProxyHarnessData, GioPolicyStudioFlowProxyFormDialog
 class TestComponent {
   public flow?: FlowVM;
   public flowToEdit?: FlowVM;
-  constructor(private readonly matDialog: MatDialog, private readonly changeDetectorRef: ChangeDetectorRef) {}
+  constructor(
+    private readonly matDialog: MatDialog,
+    private readonly changeDetectorRef: ChangeDetectorRef,
+  ) {}
 
   public openDialog() {
     this.matDialog

@@ -39,40 +39,46 @@ export class ShowcaseColorComponent {
       .map(text => text.split(':'))
       .map(parts => parts[0].trim() + ':  ' + parts[1].trim())
       .filter(text => text.startsWith('--gp'))
-      .reduce((acc, variable) => {
-        const [key, value] = variable.split(':');
+      .reduce(
+        (acc, variable) => {
+          const [key, value] = variable.split(':');
 
-        acc.push({
-          key: `${key.replace('--gp--', '')}`.trim(),
-          value: `${value}`.trim(),
-        });
+          acc.push({
+            key: `${key.replace('--gp--', '')}`.trim(),
+            value: `${value}`.trim(),
+          });
 
-        return acc;
-      }, [] as { key: string; value: string }[])
+          return acc;
+        },
+        [] as { key: string; value: string }[],
+      )
 
-      .reduce((prev, { key, value }) => {
-        const [paletteName, fullColorName] = key.split('__');
-        const colorName = fullColorName.split('-contrast')[0];
+      .reduce(
+        (prev, { key, value }) => {
+          const [paletteName, fullColorName] = key.split('__');
+          const colorName = fullColorName.split('-contrast')[0];
 
-        let palette = prev.find(p => p.name === paletteName);
-        if (!palette) {
-          palette = { name: paletteName, colors: [] };
-          prev.push(palette);
-        }
+          let palette = prev.find(p => p.name === paletteName);
+          if (!palette) {
+            palette = { name: paletteName, colors: [] };
+            prev.push(palette);
+          }
 
-        let color = palette.colors.find(p => p.name === colorName);
-        if (!color) {
-          color = { name: colorName };
-          palette.colors.push(color);
-        }
+          let color = palette.colors.find(p => p.name === colorName);
+          if (!color) {
+            color = { name: colorName };
+            palette.colors.push(color);
+          }
 
-        if (fullColorName.endsWith('-contrast')) {
-          color.contrast = value;
-        } else {
-          color.color = value;
-        }
+          if (fullColorName.endsWith('-contrast')) {
+            color.contrast = value;
+          } else {
+            color.color = value;
+          }
 
-        return prev;
-      }, [] as { name: string; colors: { name: string; color?: string; contrast?: string }[] }[]);
+          return prev;
+        },
+        [] as { name: string; colors: { name: string; color?: string; contrast?: string }[] }[],
+      );
   }
 }

@@ -57,7 +57,10 @@ export class GioFormFilePickerComponent implements OnInit, ControlValueAccessor 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onTouchedCallback = () => {};
 
-  constructor(private changeDetectorRef: ChangeDetectorRef, @Self() @Optional() public ngControl?: NgControl) {
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    @Self() @Optional() public ngControl?: NgControl,
+  ) {
     if (ngControl) {
       // Setting the value accessor directly (instead of using
       // the providers `NG_VALUE_ACCESSOR`) to avoid running into a circular import.

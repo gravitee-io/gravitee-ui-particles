@@ -15,5 +15,9 @@
  */
 
 export class NewFile {
-  constructor(public readonly name: string, public readonly dataUrl: string, public readonly file?: File) {}
+  constructor(
+    public readonly name: string,
+    public readonly dataUrl: string,
+    public readonly file?: File,
+  ) {}
 }

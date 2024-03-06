@@ -38,7 +38,11 @@ export class GioLicenseDirective implements OnInit, OnDestroy {
   private unsubscribe$: Subject<boolean> = new Subject<boolean>();
   private onClick = this.click.bind(this);
 
-  constructor(private readonly licenseService: GioLicenseService, private readonly matDialog: MatDialog, private elRef: ElementRef) {}
+  constructor(
+    private readonly licenseService: GioLicenseService,
+    private readonly matDialog: MatDialog,
+    private elRef: ElementRef,
+  ) {}
 
   public ngOnInit(): void {
     const gioLicense = this.gioLicense;

@@ -56,7 +56,10 @@ export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
   private gioSubmenu!: ElementRef<HTMLDivElement>;
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private readonly gioMenuService: GioMenuService, private readonly changeDetectorRef: ChangeDetectorRef) {}
+  constructor(
+    private readonly gioMenuService: GioMenuService,
+    private readonly changeDetectorRef: ChangeDetectorRef,
+  ) {}
 
   public ngAfterViewInit(): void {
     // When the menu is reduced
