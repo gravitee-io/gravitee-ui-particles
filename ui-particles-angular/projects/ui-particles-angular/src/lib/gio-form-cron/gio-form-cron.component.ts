@@ -76,7 +76,11 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
   private unsubscribe$ = new Subject<void>();
   private resizeObserver?: ResizeObserver;
 
-  constructor(private readonly elRef: ElementRef, private readonly fm: FocusMonitor, private readonly ngZone: NgZone) {
+  constructor(
+    private readonly elRef: ElementRef,
+    private readonly fm: FocusMonitor,
+    private readonly ngZone: NgZone,
+  ) {
     fm.monitor(elRef.nativeElement, true).subscribe(origin => {
       this.focused = !!origin;
       this._onTouched();

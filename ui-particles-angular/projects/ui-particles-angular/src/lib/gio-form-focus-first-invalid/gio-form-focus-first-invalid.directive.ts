@@ -20,7 +20,10 @@ import { GIO_FORM_FOCUS_INVALID_IGNORE_SELECTOR } from './gio-form-focus-first-i
 
 @Directive()
 export class GioBaseFormFocusInvalidDirective {
-  constructor(private readonly hostElement: ElementRef, @Optional() protected readonly formGroupDirective: FormGroupDirective) {}
+  constructor(
+    private readonly hostElement: ElementRef,
+    @Optional() protected readonly formGroupDirective: FormGroupDirective,
+  ) {}
 
   protected focusOnFirstInvalid() {
     const selector = '.ng-invalid[formControlName],input.ng-invalid,mat-select.ng-invalid,textarea.ng-invalid,.gio-ng-invalid';

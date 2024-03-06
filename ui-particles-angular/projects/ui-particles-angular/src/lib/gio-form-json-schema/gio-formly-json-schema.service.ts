@@ -23,7 +23,10 @@ import { GioJsonSchema } from './model/GioJsonSchema';
 
 @Injectable()
 export class GioFormlyJsonSchemaService {
-  constructor(private readonly formlyJsonschema: FormlyJsonschema, private readonly builder: FormlyFormBuilder) {}
+  constructor(
+    private readonly formlyJsonschema: FormlyJsonschema,
+    private readonly builder: FormlyFormBuilder,
+  ) {}
 
   public toFormlyFieldConfig(jsonSchema: GioJsonSchema): FormlyFieldConfig {
     return this.formlyJsonschema.toFieldConfig(jsonSchema, {
