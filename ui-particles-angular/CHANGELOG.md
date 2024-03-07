@@ -1,3 +1,16 @@
+# [12.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v11.3.0...v12.0.0) (2024-03-07)
+
+
+### Features
+
+* improve use of Asciidoctor ([466341a](https://github.com/gravitee-io/gravitee-ui-particles/commit/466341a1437e2f63254c9bec10b1825ce60eea2a))
+* update to Angular 17 ([b759247](https://github.com/gravitee-io/gravitee-ui-particles/commit/b75924779116bd35d6d70d148cb0b88546dc2067))
+
+
+### BREAKING CHANGES
+
+* Upgrade to Angular 17
+
 # [11.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v11.2.0...v11.3.0) (2024-03-01)
 
 
