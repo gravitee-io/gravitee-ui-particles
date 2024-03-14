@@ -1,0 +1,428 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "SSLPrincipal": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "businessCategory": {
+          "type": "string"
+        },
+        "c": {
+          "type": "string"
+        },
+        "cn": {
+          "type": "string"
+        },
+        "countryOfCitizenship": {
+          "type": "string"
+        },
+        "countryOfResidence": {
+          "type": "string"
+        },
+        "dateOfBirth": {
+          "type": "string"
+        },
+        "dc": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "dmdName": {
+          "type": "string"
+        },
+        "dn": {
+          "type": "string"
+        },
+        "dnQualifier": {
+          "type": "string"
+        },
+        "e": {
+          "type": "string"
+        },
+        "emailAddress": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "generation": {
+          "type": "string"
+        },
+        "givenname": {
+          "type": "string"
+        },
+        "initials": {
+          "type": "string"
+        },
+        "l": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "nameAtBirth": {
+          "type": "string"
+        },
+        "o": {
+          "type": "string"
+        },
+        "organizationIdentifier": {
+          "type": "string"
+        },
+        "ou": {
+          "type": "string"
+        },
+        "placeOfBirth": {
+          "type": "string"
+        },
+        "postalAddress": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "pseudonym": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "serialnumber": {
+          "type": "string"
+        },
+        "st": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "surname": {
+          "type": "string"
+        },
+        "t": {
+          "type": "string"
+        },
+        "telephoneNumber": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "uniqueIdentifier": {
+          "type": "string"
+        },
+        "unstructuredAddress": {
+          "type": "string"
+        }
+      }
+    },
+    "HttpHeaders": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "enum": [
+          "Accept",
+          "Accept-Charset",
+          "Accept-Encoding",
+          "Accept-Language",
+          "Accept-Ranges",
+          "Access-Control-Allow-Credentials",
+          "Access-Control-Allow-Headers",
+          "Access-Control-Allow-Methods",
+          "Access-Control-Allow-Origin",
+          "Access-Control-Expose-Headers",
+          "Access-Control-Max-Age",
+          "Access-Control-Request-Headers",
+          "Access-Control-Request-Method",
+          "Age",
+          "Allow",
+          "Authorization",
+          "Cache-Control",
+          "Connection",
+          "Content-Disposition",
+          "Content-Encoding",
+          "Content-ID",
+          "Content-Language",
+          "Content-Length",
+          "Content-Location",
+          "Content-MD5",
+          "Content-Range",
+          "Content-Type",
+          "Cookie",
+          "Date",
+          "ETag",
+          "Expires",
+          "Expect",
+          "Forwarded",
+          "From",
+          "Host",
+          "If-Match",
+          "If-Modified-Since",
+          "If-None-Match",
+          "If-Unmodified-Since",
+          "Keep-Alive",
+          "Last-Modified",
+          "Location",
+          "Link",
+          "Max-Forwards",
+          "MIME-Version",
+          "Origin",
+          "Pragma",
+          "Proxy-Authenticate",
+          "Proxy-Authorization",
+          "Proxy-Connection",
+          "Range",
+          "Referer",
+          "Retry-After",
+          "Server",
+          "Set-Cookie",
+          "Set-Cookie2",
+          "TE",
+          "Trailer",
+          "Transfer-Encoding",
+          "Upgrade",
+          "User-Agent",
+          "Vary",
+          "Via",
+          "Warning",
+          "WWW-Authenticate",
+          "X-Forwarded-For",
+          "X-Forwarded-Proto",
+          "X-Forwarded-Server",
+          "X-Forwarded-Host",
+          "X-Forwarded-Port",
+          "X-Forwarded-Prefix"
+        ]
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "api": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "dictionaries": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        }
+      }
+    },
+    "node": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "shardingTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tenant": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "zone": {
+          "type": "string"
+        }
+      }
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "contextPath": {
+          "type": "string"
+        },
+        "headers": {
+          "$ref": "#/$defs/HttpHeaders"
+        },
+        "host": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "jsonContent": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "localAddress": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        },
+        "params": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "path": {
+          "type": "string"
+        },
+        "pathInfo": {
+          "type": "string"
+        },
+        "pathInfos": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pathParams": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "remoteAddress": {
+          "type": "string"
+        },
+        "scheme": {
+          "type": "string"
+        },
+        "ssl": {
+          "type": "object",
+          "properties": {
+            "client": {
+              "$ref": "#/$defs/SSLPrincipal"
+            },
+            "clientHost": {
+              "type": "string"
+            },
+            "clientPort": {
+              "type": "integer"
+            },
+            "server": {
+              "$ref": "#/$defs/SSLPrincipal"
+            }
+          }
+        },
+        "timestamp": {
+          "type": "integer"
+        },
+        "transactionId": {
+          "type": "string"
+        },
+        "uri": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "xmlContent": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "headers": {
+          "$ref": "#/$defs/HttpHeaders"
+        },
+        "jsonContent": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "status": {
+          "type": "integer"
+        },
+        "xmlContent": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "subscription": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "type": "string",
+          "enum": ["STANDARD", "PUSH"]
+        }
+      }
+    }
+  }
+}
