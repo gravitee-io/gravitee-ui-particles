@@ -35,6 +35,8 @@ import { takeUntil } from 'rxjs/operators';
 import { GioMonacoEditorConfig, GIO_MONACO_EDITOR_CONFIG } from './models/GioMonacoEditorConfig';
 import { GioLanguageJsonService } from './services/gio-language-json.service';
 import { GioMonacoEditorService } from './services/gio-monaco-editor.service';
+import { GioLanguageElService } from './services/gio-language-el.service';
+import { JSONSchema } from './models/JSONSchemaAutoComplete';
 
 export type MonacoEditorLanguageConfig =
   | {
@@ -46,6 +48,10 @@ export type MonacoEditorLanguageConfig =
     }
   | {
       language: 'html';
+    }
+  | {
+      language: 'spel';
+      schema?: JSONSchema;
     };
 
 @Component({
@@ -91,6 +97,7 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
     @Inject(GIO_MONACO_EDITOR_CONFIG) private readonly config: GioMonacoEditorConfig,
     private readonly monacoEditorService: GioMonacoEditorService,
     private readonly languageJsonService: GioLanguageJsonService,
+    private readonly languageSpelService: GioLanguageElService,
     private readonly changeDetectorRef: ChangeDetectorRef,
     private readonly ngZone: NgZone,
     @Optional() @Self() public readonly ngControl: NgControl,
@@ -222,6 +229,11 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
       case 'json':
         if (languageConfig.schemas) {
           this.languageJsonService.addSchemas(uri, languageConfig.schemas);
+        }
+        break;
+      case 'spel':
+        if (languageConfig.schema) {
+          this.languageSpelService.setSchema(languageConfig.schema);
         }
         break;
       default:

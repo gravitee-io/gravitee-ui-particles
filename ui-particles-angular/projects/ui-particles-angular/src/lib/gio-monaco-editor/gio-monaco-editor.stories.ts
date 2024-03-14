@@ -20,6 +20,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import GioJsonSchema from '../gio-form-json-schema/model/GioJsonSchema.json';
 
+import ElSchema from './data/el-schema.json';
 import { GioMonacoEditorComponent } from './gio-monaco-editor.component';
 import { GioMonacoEditorModule } from './gio-monaco-editor.module';
 
@@ -92,6 +93,16 @@ export const LanguageJson: StoryObj = {
         },
       ],
     },
+  },
+};
+
+export const LanguageEL: StoryObj = {
+  args: {
+    languageConfig: {
+      language: 'spel',
+      schema: ElSchema,
+    },
+    value: `{#request.headers['x-story'] == 'true'}`,
   },
 };
 
