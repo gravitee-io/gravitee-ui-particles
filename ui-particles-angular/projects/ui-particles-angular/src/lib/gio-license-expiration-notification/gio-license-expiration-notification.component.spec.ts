@@ -109,6 +109,17 @@ describe('GioLicenseExpirationNotificationComponent', () => {
       expect(await harness.getTitleText()).toEqual('Your license will expire in 10 days');
     });
 
+    it('should display countdown message of whole number', async () => {
+      const expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + 29);
+
+      component.expirationDate = expirationDate;
+      fixture.detectChanges();
+
+      const harness = await loader.getHarness(GioLicenseExpirationNotificationHarness);
+      expect(await harness.getTitleText()).toEqual('Your license will expire in 29 days');
+    });
+
     it('should display call to action', async () => {
       component.showCallToAction = true;
       fixture.detectChanges();

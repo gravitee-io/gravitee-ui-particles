@@ -52,7 +52,7 @@ export class GioLicenseExpirationNotificationComponent implements OnInit, OnChan
 
     const date = new Date();
     const timeRemaining = this.transformDateWithoutHours(this.expirationDate) - this.transformDateWithoutHours(date);
-    this.daysRemaining = timeRemaining / (1000 * 3600 * 24);
+    this.daysRemaining = Math.round(timeRemaining / (1000 * 3600 * 24));
 
     if (this.expirationDate.getTime() - date.getTime() < 0) {
       this.title = 'Your license has expired';
