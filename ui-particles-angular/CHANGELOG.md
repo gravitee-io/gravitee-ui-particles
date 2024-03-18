@@ -1,3 +1,10 @@
+# [7.59.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.58.0...v7.59.0) (2024-03-18)
+
+
+### Features
+
+* force new release ([9708ff6](https://github.com/gravitee-io/gravitee-ui-particles/commit/9708ff673444188aeaf7db7373ebb855b6208a62))
+
 # [7.58.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.57.0...v7.58.0) (2024-03-18)
 
 
