@@ -15,6 +15,7 @@
  */
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -31,7 +32,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, UntypedFormGroup, NgControl } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
-import { cloneDeep, isEmpty, isObject } from 'lodash';
+import { cloneDeep, isEmpty, isEqual, isObject } from 'lodash';
 import { debounceTime, delay, distinctUntilChanged, filter, map, startWith, take, takeUntil, tap } from 'rxjs/operators';
 import { merge, ReplaySubject, Subject } from 'rxjs';
 import { FocusMonitor } from '@angular/cdk/a11y';
@@ -45,6 +46,7 @@ import { GioFormlyJsonSchemaService } from './gio-formly-json-schema.service';
   selector: 'gio-form-json-schema',
   template: `<formly-form *ngIf="formGroup" [fields]="fields" [options]="options" [form]="formGroup" [model]="model"></formly-form>`,
   styleUrls: ['./gio-form-json-schema.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnChanges, OnInit, AfterViewInit, OnDestroy {
   public static isDisplayable(jsonSchema: GioJsonSchema): boolean {
@@ -150,12 +152,20 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnChang
       );
     });
 
-    // Init control value with default value without emit event
-    this.formGroup.valueChanges.pipe(take(1), takeUntil(this.unsubscribe$)).subscribe(value => {
-      this.ngControl?.control?.reset(value, { emitEvent: false });
-      this.changeDetectorRef.markForCheck();
-      this.changeDetectorRef.detectChanges();
-    });
+    // Sync control value with default value (without emit event) as long as the component is not ready
+    // When formly is initialised, it emits several values as it builds up step by step.
+    this.formGroup.valueChanges
+      .pipe(
+        distinctUntilChanged(isEqual),
+        tap(value => {
+          this.ngControl?.control?.reset(value, { emitEvent: false });
+        }),
+        takeUntil(this.ready),
+        takeUntil(this.unsubscribe$),
+      )
+      .subscribe();
+
+    // Avoid ExpressionChangedAfterItHasBeenCheckedError on project
     this.changeDetectorRef.markForCheck();
     this.changeDetectorRef.detectChanges();
 
