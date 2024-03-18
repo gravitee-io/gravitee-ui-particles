@@ -1,3 +1,17 @@
+# [7.58.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.57.0...v7.58.0) (2024-03-18)
+
+
+### Bug Fixes
+
+* am-2140 contact link in notification banner ([c6bf1d8](https://github.com/gravitee-io/gravitee-ui-particles/commit/c6bf1d8c6ffab50e5c2cbed4912955b117899bd2))
+* **gio-form-tags-input:** refresh on form control changes ([93ac0e8](https://github.com/gravitee-io/gravitee-ui-particles/commit/93ac0e8bb56531761852911d97a5e5f284211bbf))
+* json-schema - Set initial control value when fomly has more stable ([d744a95](https://github.com/gravitee-io/gravitee-ui-particles/commit/d744a952de412f14c5fd56e3a585e1703adb1681))
+
+
+### Features
+
+* apim-3748 notification banner when expire today ([72bd984](https://github.com/gravitee-io/gravitee-ui-particles/commit/72bd9847f653c305ad5012401be27ca4aec317aa))
+
 # [7.57.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.56.1...v7.57.0) (2024-01-22)
 
 
