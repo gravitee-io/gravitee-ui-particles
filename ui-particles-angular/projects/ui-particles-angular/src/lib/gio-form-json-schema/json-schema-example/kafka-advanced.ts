@@ -19,20 +19,7 @@ import { GioJsonSchema } from '../model/GioJsonSchema';
 export const kafkaAdvancedExample: GioJsonSchema = {
   $schema: 'http://json-schema.org/draft-07/schema#',
   type: 'object',
-
   definitions: {
-    bootstrapServers: {
-      title: 'Bootstrap servers (bootstrap.servers)',
-      description: 'This list should be in the form host1:port1,host2:port2,...',
-      type: 'string',
-      gioConfig: {
-        banner: {
-          title: 'Bootstrap servers',
-          text: 'A list of host/port pairs, separated by a comma, to use for establishing the initial connection to the Kafka cluster. The client will make use of all servers irrespective of which servers are specified here for bootstrapping—this list only impacts the initial hosts used to discover the full set of servers. ',
-        },
-      },
-    },
-
     security: {
       type: 'object',
       title: 'Security configuration',
@@ -67,7 +54,7 @@ export const kafkaAdvancedExample: GioJsonSchema = {
               const: 'SASL_SSL',
             },
             sasl: {
-              $ref: '#/definitions/securityProtocolSasl',
+              $ref: '#/definitions/securityProtocolSaslSsl',
             },
             ssl: {
               $ref: '#/definitions/securityProtocolSsl',
@@ -116,6 +103,31 @@ export const kafkaAdvancedExample: GioJsonSchema = {
       additionalProperties: false,
       required: ['saslMechanism', 'saslJaasConfig'],
     },
+    securityProtocolSaslSsl: {
+      type: 'object',
+      title: 'SASL configuration',
+      properties: {
+        saslMechanism: {
+          type: 'string',
+          title: 'SASL mechanism (sasl.mechanism)',
+          description: 'SASL mechanism used for client connections.',
+          default: 'GSSAPI',
+          enum: ['GSSAPI', 'OAUTHBEARER', 'PLAIN', 'SCRAM-SHA-256', 'SCRAM-SHA-512', 'AWS_MSK_IAM'],
+        },
+        saslJaasConfig: {
+          type: 'string',
+          title: 'SASL JAAS Config  (sasl.jaas.config)',
+          gioConfig: {
+            banner: {
+              title: 'SASL JAAS Config',
+              text: 'JAAS login context parameters for SASL connections in the format used by JAAS configuration files. JAAS configuration file format is described here. The format for the value is: loginModuleClass controlFlag (optionName=optionValue)*;',
+            },
+          },
+        },
+      },
+      additionalProperties: false,
+      required: ['saslMechanism', 'saslJaasConfig'],
+    },
     securityProtocolSsl: {
       type: 'object',
       title: 'SSL configuration',
@@ -124,6 +136,15 @@ export const kafkaAdvancedExample: GioJsonSchema = {
           type: 'object',
           title: 'Truststore',
           oneOf: [
+            {
+              title: 'None',
+              properties: {
+                type: {
+                  const: 'NONE',
+                },
+              },
+              additionalProperties: false,
+            },
             {
               title: 'PEM with location',
               properties: {
@@ -222,6 +243,15 @@ export const kafkaAdvancedExample: GioJsonSchema = {
           title: 'KeyStore',
           oneOf: [
             {
+              title: 'None',
+              properties: {
+                type: {
+                  const: 'NONE',
+                },
+              },
+              additionalProperties: false,
+            },
+            {
               title: 'PEM with Location',
               properties: {
                 type: {
@@ -254,7 +284,7 @@ export const kafkaAdvancedExample: GioJsonSchema = {
                 },
               },
               additionalProperties: false,
-              required: ['certificateChain', 'key', 'keyPassword'],
+              required: ['certificateChain', 'key'],
             },
             {
               title: 'JKS with Location',
@@ -332,15 +362,14 @@ export const kafkaAdvancedExample: GioJsonSchema = {
       },
       required: ['trustStore'],
     },
-
     sslTrustStoreCertificates: {
       title: 'Certificates (ssl.trustStore.certificates)',
       type: 'string',
       format: 'text',
       gioConfig: {
         banner: {
-          title: 'SSL truststore certificated',
-          text: "Trusted certificates in the format specified by 'ssl.truststore.type'. Default SSL engine factory supports only PEM format with X.509 certificates.",
+          title: 'SSL truststore certificates',
+          text: 'Trusted certificates. Supports only PEM format with X.509 certificates.',
         },
       },
     },
@@ -360,14 +389,14 @@ export const kafkaAdvancedExample: GioJsonSchema = {
         },
       },
     },
-
     sslKeyStoreCertificateChain: {
       title: 'Certificate chain (ssl.keystore.certificate.chain)',
       type: 'string',
+      format: 'text',
       gioConfig: {
         banner: {
           title: 'SSL keystore certificate chain',
-          text: "Certificate chain in the format specified by 'ssl.keystore.type'. Default SSL engine factory supports only PEM format with a list of X.509 certificates.",
+          text: 'Certificate chain. Supports only PEM format with a list of X.509 certificates.',
         },
       },
     },
@@ -383,7 +412,7 @@ export const kafkaAdvancedExample: GioJsonSchema = {
       gioConfig: {
         banner: {
           title: 'SSL keystore private key',
-          text: "Private key in the format specified by 'ssl.keystore.type'. Default SSL engine factory supports only PEM format with PKCS#8 keys. If the key is encrypted, key password must be specified using 'ssl.key.password'.",
+          text: "Private key. Supports only PEM format with PKCS#8 keys. If the key is encrypted, key password must be specified using 'ssl.key.password'.",
         },
       },
     },
@@ -404,22 +433,12 @@ export const kafkaAdvancedExample: GioJsonSchema = {
         },
       },
     },
-
     consumer: {
       type: 'object',
       title: 'Consumer',
       properties: {
         enabled: {
           const: true,
-        },
-        topics: {
-          title: 'Topics',
-          description: 'A list of kafka topics to use.',
-          type: 'array',
-          items: {
-            type: 'string',
-          },
-          minItems: 1,
         },
         encodeMessageId: {
           title: 'Encode message Id',
@@ -439,9 +458,47 @@ export const kafkaAdvancedExample: GioJsonSchema = {
             },
           },
         },
+        checkTopicExistence: {
+          title: 'Check Topic Existence',
+          type: 'boolean',
+          default: false,
+          gioConfig: {
+            banner: {
+              title: 'Check Topic Existence',
+              text: "Check whether the topic exists before attempting to consume messages from the topic. If the topic does not exist, the API returns a '404 - Not Found' to the entrypoint before consuming any data. The status code can be overridden with a response template (using key FAILURE_TOPIC_NOT_FOUND). Note that checking for the topic existence adds latency to the API.",
+            },
+          },
+        },
       },
-      additionalProperties: false,
-      required: ['enabled', 'topics'],
+      oneOf: [
+        {
+          title: 'Specify List of topics',
+          properties: {
+            topics: {
+              type: 'array',
+              title: 'Topics',
+              description: 'A list of Kafka topics to use.',
+              items: {
+                type: 'string',
+              },
+              minItems: 1,
+            },
+          },
+          required: ['topics'],
+        },
+        {
+          title: 'Specify Topic expression',
+          properties: {
+            topicPattern: {
+              title: 'Topic Expression (use Java regular expression)',
+              type: 'string',
+            },
+          },
+          required: ['topicPattern'],
+        },
+      ],
+      additionalProperties: true,
+      required: ['enabled'],
     },
     producer: {
       type: 'object',
@@ -452,26 +509,34 @@ export const kafkaAdvancedExample: GioJsonSchema = {
         },
         topics: {
           title: 'Topics',
-          description: 'A list of kafka topics to use.',
+          description: 'A list of Kafka topics to use.',
           type: 'array',
           items: {
             type: 'string',
           },
           minItems: 1,
         },
+        compressionType: {
+          title: 'Compression type (compression.type)',
+          type: 'string',
+          default: 'none',
+          enum: ['none', 'gzip', 'snappy', 'lz4', 'zstd'],
+          gioConfig: {
+            banner: {
+              title: 'Compression type',
+              text: 'The compression type for all data generated by the producer. The default is none (i.e. no compression). Valid values are: <ul><li>none<li>gzip</li><li>snappy</li><li>lz4</li><li>zstd</li><li>anything else: throw exception to the consumer.</li></ul>. Compression is of full batches of data, so the efficacy of batching will also impact the compression ratio (more batching means better compression).',
+            },
+          },
+        },
       },
       additionalProperties: false,
       required: ['enabled', 'topics'],
     },
   },
-
   oneOf: [
     {
       title: 'Use Consumer',
       properties: {
-        bootstrapServers: {
-          $ref: '#/definitions/bootstrapServers',
-        },
         security: {
           $ref: '#/definitions/security',
         },
@@ -479,15 +544,12 @@ export const kafkaAdvancedExample: GioJsonSchema = {
           $ref: '#/definitions/consumer',
         },
       },
-      required: ['bootstrapServers', 'consumer'],
+      required: ['consumer'],
       additionalProperties: false,
     },
     {
       title: 'Use Producer',
       properties: {
-        bootstrapServers: {
-          $ref: '#/definitions/bootstrapServers',
-        },
         security: {
           $ref: '#/definitions/security',
         },
@@ -495,15 +557,12 @@ export const kafkaAdvancedExample: GioJsonSchema = {
           $ref: '#/definitions/producer',
         },
       },
-      required: ['bootstrapServers', 'producer'],
+      required: ['producer'],
       additionalProperties: false,
     },
     {
       title: 'Use Consumer and Producer',
       properties: {
-        bootstrapServers: {
-          $ref: '#/definitions/bootstrapServers',
-        },
         security: {
           $ref: '#/definitions/security',
         },
@@ -514,7 +573,7 @@ export const kafkaAdvancedExample: GioJsonSchema = {
           $ref: '#/definitions/consumer',
         },
       },
-      required: ['bootstrapServers', 'producer', 'consumer'],
+      required: ['producer', 'consumer'],
       additionalProperties: false,
     },
   ],
