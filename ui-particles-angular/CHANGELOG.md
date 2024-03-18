@@ -1,3 +1,11 @@
+## [12.0.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.0.0...v12.0.1) (2024-03-18)
+
+
+### Bug Fixes
+
+* **angular:** round license expiration countdown number ([799e7f3](https://github.com/gravitee-io/gravitee-ui-particles/commit/799e7f3f20bee5cd8b69e78bff06453b22953cd5))
+* fill for cloud icon ([f0dfd15](https://github.com/gravitee-io/gravitee-ui-particles/commit/f0dfd15043f7393a7e7f66005319aca358b430dd))
+
 # [12.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v11.3.0...v12.0.0) (2024-03-07)
 
 
