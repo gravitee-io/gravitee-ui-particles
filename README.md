@@ -16,6 +16,7 @@ It currently contains the following components:
 [![CircleCI](https://circleci.com/gh/gravitee-io/gravitee-ui-particles/tree/main.svg?style=svg)](https://circleci.com/gh/gravitee-io/gravitee-ui-particles/tree/main)
 [![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)](https://particles.gravitee.io/)
 
+
 #### Overview
 
 Workspace project for the Angular framework
