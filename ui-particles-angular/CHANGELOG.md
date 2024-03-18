@@ -1,3 +1,10 @@
+## [12.0.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.0.1...v12.0.2) (2024-03-18)
+
+
+### Bug Fixes
+
+* json-schema - Set initial control value when fomly has more stable ([08c304d](https://github.com/gravitee-io/gravitee-ui-particles/commit/08c304d6bb90c6636ff7ca348792aed1b8661539))
+
 ## [12.0.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.0.0...v12.0.1) (2024-03-18)
 
 
