@@ -1,0 +1,29 @@
+{
+  "angularCompilerOptions": {
+    "compilationMode": "partial"
+  },
+  "compilerOptions": {
+    "baseUrl": ".",
+    "lib": ["es2018", "dom"],
+    "declaration": true,
+    "declarationMap": false,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "rootDir": "schematics",
+    "outDir": "../../dist/ui-schematics/schematics",
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "target": "es6",
+    "types": ["node"]
+  },
+  "include": ["schematics/**/*"],
+  "exclude": ["schematics/*/files/**/*"]
+}

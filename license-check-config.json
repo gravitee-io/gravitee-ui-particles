@@ -25,7 +25,8 @@
     "LICENSE.txt",
     "yarn.lock",
     ".gitignore",
-    ".prettierignore"
+    ".prettierignore",
+    "**/*.html.template"
   ],
   "license": "LICENSE_TEMPLATE.txt",
   "licenseFormats": {
