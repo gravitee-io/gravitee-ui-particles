@@ -2,8 +2,11 @@
   "name": "ui-particles-angular",
   "version": "0.0.0-semantically-released",
   "private": true,
+  "workspaces": [
+    "projects/ui-schematics"
+  ],
   "scripts": {
-    "build": "NODE_OPTIONS=--max_old_space_size=4096 ng build ui-analytics && ng build ui-particles-angular && ng build ui-policy-studio-angular",
+    "build": "NODE_OPTIONS=--max_old_space_size=4096 ng build ui-analytics && ng build ui-particles-angular && ng build ui-policy-studio-angular && yarn workspace @gravitee/ui-schematics schematics:build",
     "lint": "yarn lint:eslint && yarn lint:prettier && yarn lint:styles",
     "lint:eslint": "ng lint --max-warnings=0",
     "lint:eslint:fix": "ng lint  --max-warnings=0 --fix",

@@ -1,0 +1,31 @@
+{
+  "name": "@gravitee/ui-schematics",
+  "version": "0.0.0-semantically-released",
+  "description": "Gravitee.io - UI Schematics",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gravitee-io/gravitee-ui-particles.git"
+  },
+  "license": "Apache-2.0",
+  "sideEffects": false,
+  "scripts": {
+    "schematics:build": "yarn schematics:clean && tsc -p tsconfig.schematics.json && yarn schematics:copyfiles",
+    "schematics:clean": "rm -rf ../../dist/ui-schematics",
+    "schematics:copyfiles": "copyfiles schematics/**/*/schema.json schematics/**/*/files/** schematics/collection.json package.json LICENSE.txt README.md ../../dist/ui-schematics/"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "copyfiles": "2.4.1",
+    "typescript": "5.3.3"
+  },
+  "peerDependencies": {
+    "@angular/common": "^17.2.0",
+    "@angular/core": "^17.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "schematics": "./schematics/collection.json"
+}

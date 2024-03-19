@@ -1,0 +1,11 @@
+{
+  "$schema": "../../../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "component-with-card": {
+      "description": "Generate a component with a mat-card in the project.",
+      "factory": "./components/component-with-card/index#createComponentWithCard",
+      "schema": "./components/component-with-card/schema.json",
+      "aliases": ["cwc"]
+    }
+  }
+}
