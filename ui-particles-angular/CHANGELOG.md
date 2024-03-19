@@ -1,3 +1,10 @@
+## [11.3.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v11.3.0...v11.3.1) (2024-03-19)
+
+
+### Bug Fixes
+
+* **angular:** round license expiration countdown number ([2c455cf](https://github.com/gravitee-io/gravitee-ui-particles/commit/2c455cf26e853444c4420df0ed352b48f4891c8a))
+
 # [11.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v11.2.0...v11.3.0) (2024-03-01)
 
 
