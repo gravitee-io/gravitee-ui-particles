@@ -264,6 +264,20 @@ workflows:
           context: cicd-orchestrator
           requires:
             - Build Angular
+      - prerelease:
+          name: Prerelease ui-schematics
+          package_name: ui-particles-angular
+          angular_package_name: ui-schematics
+          pre-steps:
+            - keeper/env-export:
+                secret-url: keeper://hyuyfd_i5JChvc8OgSoxgg/field/password
+                var-name: NPM_TOKEN
+            - keeper/env-export:
+                secret-url: keeper://TIlcGPFq4rN5GvgnZb9hng/field/password
+                var-name: GITHUB_TOKEN
+          context: cicd-orchestrator
+          requires:
+            - Build Angular
       - release:
           name: '[Dry Run] Release Angular'
           package_name: ui-particles-angular
