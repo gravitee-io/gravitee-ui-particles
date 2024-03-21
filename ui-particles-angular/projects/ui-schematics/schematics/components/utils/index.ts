@@ -78,6 +78,7 @@ export function createComponent(options: Schema): Rule {
       applyTemplates({
         classify: strings.classify,
         dasherize: strings.dasherize,
+        camelize: strings.camelize,
         ...options,
       }),
       move(options.path),
