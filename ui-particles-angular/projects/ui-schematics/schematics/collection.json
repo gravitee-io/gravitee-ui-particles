@@ -12,6 +12,12 @@
       "factory": "./components/component-with-form/index#createComponentWithForm",
       "schema": "./components/component-with-form/schema.json",
       "aliases": ["cwf"]
+    },
+    "component-with-table": {
+      "description": "Generate a component with a table in the project.",
+      "factory": "./components/component-with-table/index#createComponentWithTable",
+      "schema": "./components/component-with-table/schema.json",
+      "aliases": ["cwt"]
     }
   }
 }
