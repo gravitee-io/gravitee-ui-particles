@@ -1,3 +1,10 @@
+# [12.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.0.2...v12.1.0) (2024-03-26)
+
+
+### Features
+
+* add spel language support to monaco editor ([6b5ae88](https://github.com/gravitee-io/gravitee-ui-particles/commit/6b5ae887cc06db1c1d34b975f76fd1be5bdc8026))
+
 ## [12.0.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.0.1...v12.0.2) (2024-03-18)
 
 
