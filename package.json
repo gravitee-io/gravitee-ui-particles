@@ -33,13 +33,13 @@
   "devDependencies": {
     "@commitlint/cli": "17.4.2",
     "@commitlint/config-conventional": "17.4.2",
-    "@types/svg-parser": "2.0.3",
-    "chromatic": "11.0.0",
+    "@types/svg-parser": "2.0.6",
+    "chromatic": "11.2.0",
     "husky": "8.0.3",
     "license-check-and-add": "4.0.5",
-    "lint-staged": "13.1.0",
+    "lint-staged": "13.3.0",
     "prettier": "2.8.8",
-    "sort-package-json": "2.1.0",
+    "sort-package-json": "2.9.0",
     "svg-parser": "2.0.4"
   },
   "packageManager": "yarn@3.2.4"
