@@ -1,3 +1,12 @@
+# [12.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.1.0...v12.2.0) (2024-03-27)
+
+
+### Features
+
+* add a schematic to generate a component with a form by default ([9c8bc8f](https://github.com/gravitee-io/gravitee-ui-particles/commit/9c8bc8f52dd88af51b370bcf1b12f4d81eb04eb1))
+* add a schematic to generate a component with table ([ff91aac](https://github.com/gravitee-io/gravitee-ui-particles/commit/ff91aacf2d2925ab825b295969823e172267746b))
+* init schematics ([9e32ff9](https://github.com/gravitee-io/gravitee-ui-particles/commit/9e32ff97d0414578aa6bb4571389d28914206a5d))
+
 # [12.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.0.2...v12.1.0) (2024-03-26)
 
 
