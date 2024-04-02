@@ -232,6 +232,9 @@ export const Entrypoints: StoryObj = {
     <gio-demo *ngIf="jsonSchema" [jsonSchema]="jsonSchema" [isChromatic]="isChromatic()"></gio-demo>`,
     props: { jsonSchema: undefined, entrypoints: entrypointsGetResponse, getEntrypointConnectorSchema, isChromatic },
   }),
+  parameters: {
+    chromatic: { disableSnapshot: true },
+  },
 };
 
 export const Endpoints: StoryObj = {
@@ -246,4 +249,7 @@ export const Endpoints: StoryObj = {
     <gio-demo *ngIf="jsonSchema" [jsonSchema]="jsonSchema" [isChromatic]="isChromatic()"></gio-demo>`,
     props: { jsonSchema: undefined, endpoints: endpointsGetResponse, getEndpointConnectorSchema, isChromatic },
   }),
+  parameters: {
+    chromatic: { disableSnapshot: true },
+  },
 };

@@ -59,6 +59,12 @@ export const stringExample: GioJsonSchema = {
       type: 'string',
       format: 'gio-code-editor',
     },
+    cron: {
+      title: 'Cron editor',
+      description: 'String with cron editor',
+      type: 'string',
+      format: 'gio-cron',
+    },
   },
-  required: ['requiredString'],
+  required: ['requiredString', 'cron'],
 };
