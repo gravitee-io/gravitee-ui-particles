@@ -21,7 +21,7 @@ $typography: map.get(gio.$mat-theme, typography);
 
 :host {
   display: flex;
-  min-width: 356px;
+  min-width: 342px;
   flex-direction: column;
 }
 
@@ -35,7 +35,7 @@ $typography: map.get(gio.$mat-theme, typography);
   @include mat.typography-level($typography, caption);
 
   padding-left: 10px;
-  color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker50');
+  color: var(--mdc-outlined-text-field-label-text-color);
 
   &:empty {
     display: none;
@@ -46,16 +46,18 @@ $typography: map.get(gio.$mat-theme, typography);
   display: inline-flex;
   flex-direction: column;
   padding: 8px;
-  border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, 'darker20');
-  border-radius: 8px;
+  border: 1px solid var(--mdc-outlined-text-field-outline-color);
+  border-radius: 4px;
 
   &:hover:not(.disabled) {
-    padding: 7px;
-    border: 2px solid mat.get-color-from-palette(gio.$mat-dove-palette, 'darker80');
+    padding: 8px;
+    border: 1px solid var(--mdc-outlined-text-field-hover-outline-color);
   }
 
   .menu {
     display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 4px;
 
     &__mode {
@@ -97,7 +99,7 @@ $typography: map.get(gio.$mat-theme, typography);
     flex-direction: column;
     align-items: center;
     padding: 8px;
-    border-radius: 8px;
+    border-radius: 4px;
     background-color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker10');
     color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker10-contrast');
   }
@@ -125,7 +127,6 @@ $typography: map.get(gio.$mat-theme, typography);
 
   padding-top: 2px;
   padding-left: 10px;
-  color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker50');
 
   &:empty {
     display: none;
@@ -135,14 +136,19 @@ $typography: map.get(gio.$mat-theme, typography);
 /* stylelint-disable no-descending-specificity */
 :host(.ng-invalid.ng-touched) {
   .wrapper {
-    padding: 7px;
-    border-width: 2px;
-    border-color: mat.get-color-from-palette(gio.$mat-error-palette, 'default');
+    padding: 8px;
+    border-width: 1px;
+    border-color: var(--mdc-outlined-text-field-error-outline-color);
 
     .preview,
     .placeholder {
       color: mat.get-color-from-palette(gio.$mat-error-palette, 'default');
     }
+  }
+
+  .label,
+  .hint {
+    color: var(--mdc-outlined-text-field-error-outline-color);
   }
 }
 

@@ -15,7 +15,7 @@
  */
 
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { Component, ElementRef, HostBinding, NgZone, OnDestroy, OnInit, forwardRef } from '@angular/core';
+import { Component, ElementRef, HostBinding, NgZone, OnDestroy, OnInit, forwardRef, ChangeDetectorRef } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -80,12 +80,15 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
     private readonly elRef: ElementRef,
     private readonly fm: FocusMonitor,
     private readonly ngZone: NgZone,
+    private readonly cdr: ChangeDetectorRef,
   ) {
-    fm.monitor(elRef.nativeElement, true).subscribe(origin => {
-      this.focused = !!origin;
-      this._onTouched();
-      this.touched = true;
-    });
+    fm.monitor(elRef.nativeElement, true)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(origin => {
+        this.focused = !!origin;
+        this._onTouched();
+        this.touched = true;
+      });
   }
 
   public ngOnInit(): void {
@@ -94,6 +97,7 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
         this.ngZone.run(() => {
           const width = entries[0].contentRect.width;
           this.smallDisplay = width < 580;
+          this.cdr.markForCheck();
         });
       });
       this.resizeObserver.observe(this.elRef.nativeElement);
