@@ -27,6 +27,7 @@ import { GioIconsModule } from '../gio-icons/gio-icons.module';
 import { GioFormSlideToggleModule } from '../gio-form-slide-toggle/gio-form-slide-toggle.module';
 import { GioFormHeadersModule } from '../gio-form-headers/gio-form-headers.module';
 import { GioMonacoEditorModule } from '../gio-monaco-editor/gio-monaco-editor.module';
+import { GioFormCronModule } from '../gio-form-cron/gio-form-cron.module';
 
 import { GioFjsNullTypeComponent } from './type-component/null-type.component';
 import { GioFjsObjectTypeComponent } from './type-component/object-type.component';
@@ -53,6 +54,7 @@ import { GioFjsToggleTypeComponent } from './type-component/toggle-type.componen
 import { GioFjsHeadersTypeComponent } from './type-component/headers-type.component';
 import { GioPasswordEyeWrapperComponent, passwordEyeExtension } from './wrappers/gio-password-eye.component';
 import { GioFjsCodeEditorTypeComponent } from './type-component/code-editor-type.component';
+import { GioFjsCronTypeComponent } from './type-component/cron-type.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,7 @@ import { GioFjsCodeEditorTypeComponent } from './type-component/code-editor-type
     GioFjsToggleTypeComponent,
     GioFjsHeadersTypeComponent,
     GioFjsCodeEditorTypeComponent,
+    GioFjsCronTypeComponent,
     GioBannerWrapperComponent,
     GioPasswordEyeWrapperComponent,
   ],
@@ -110,6 +113,10 @@ import { GioFjsCodeEditorTypeComponent } from './type-component/code-editor-type
           name: 'gio-headers-array',
           component: GioFjsHeadersTypeComponent,
         },
+        {
+          name: 'gio-cron',
+          component: GioFjsCronTypeComponent,
+        },
       ],
       extensions: [
         { name: 'banner', extension: { onPopulate: bannerExtension } },
@@ -126,6 +133,7 @@ import { GioFjsCodeEditorTypeComponent } from './type-component/code-editor-type
     GioFormSlideToggleModule,
     GioFormHeadersModule,
     GioMonacoEditorModule,
+    GioFormCronModule,
 
     MatSlideToggleModule,
     MatButtonModule,
