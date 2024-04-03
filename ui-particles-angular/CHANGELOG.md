@@ -1,3 +1,11 @@
+# [12.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.2.0...v12.3.0) (2024-04-03)
+
+
+### Features
+
+* allow json-schema to use gio-cron as string format ([d63756e](https://github.com/gravitee-io/gravitee-ui-particles/commit/d63756ea0bfefc27628ed28aeb000f5ccdf45daf))
+* improve cron style with last material version ([0e25f59](https://github.com/gravitee-io/gravitee-ui-particles/commit/0e25f590fbae0e15a59095936cada04e27d5857b))
+
 # [12.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.1.0...v12.2.0) (2024-03-27)
 
 
