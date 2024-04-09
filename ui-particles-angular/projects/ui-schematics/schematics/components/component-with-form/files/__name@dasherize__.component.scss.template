@@ -14,11 +14,4 @@
  * limitations under the License.
  */
 .<%= dasherize(name) %> {
-  &__header {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
 }

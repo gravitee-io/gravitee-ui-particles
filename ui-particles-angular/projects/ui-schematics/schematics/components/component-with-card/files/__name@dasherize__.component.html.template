@@ -18,11 +18,10 @@
 <% if (isEmptyState) {%>
 <mat-card class="<%= dasherize(name) %>">
   <mat-card-header>
-    <div class="<%= dasherize(name) %>__header">
-      <div class="<%= dasherize(name) %>__header__titles">
-        <mat-card-title>Hello <%= name %> !</mat-card-title>
-        <mat-card-subtitle>Add a description here</mat-card-subtitle>
-      </div>
+    <mat-card-title>Hello <%= name %> !</mat-card-title>
+    <mat-card-subtitle>Add a description here</mat-card-subtitle>
+    <div class="<%= dasherize(name) %>__headerRightBtn">
+      <button mat-button>Right button</button>
     </div>
   </mat-card-header>
   <mat-card-content>
