@@ -1,0 +1,98 @@
+/*
+ * Copyright (C) 2015 The Gravitee team (http://gravitee.io)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '../../scss' as gio;
+
+$foreground: map.get(gio.$mat-theme, foreground);
+$accent: map.get(gio.$mat-theme, accent);
+
+:host {
+  display: flex;
+  flex: 1 0 0%;
+}
+
+.card {
+  min-width: 64px;
+  min-height: 40px;
+  flex: 1 1 auto;
+  border: 1px solid var(--mdc-outlined-text-field-outline-color);
+  border-radius: 4px;
+  margin: 6px;
+  cursor: pointer;
+
+  .selection-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    height: 24px;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 100%;
+    gap: 4px;
+
+    &__lock-icon {
+      height: 22px;
+      cursor: pointer;
+    }
+
+    &__lock-icon,
+    &__radio-icon {
+      color: var(--mdc-outlined-text-field-outline-color);
+    }
+  }
+
+  &.selected {
+    border: 2px solid mat.get-color-from-palette($accent);
+    margin: 5px;
+    color: mat.get-color-from-palette($accent);
+
+    .selection-icon__radio-icon {
+      color: mat.get-color-from-palette($accent);
+    }
+  }
+
+  &.disabled {
+    border-color: mat.get-color-from-palette($foreground, disabled, 0.2);
+    color: mat.get-color-from-palette($foreground, disabled);
+    cursor: auto;
+
+    &__content {
+      opacity: 0.4;
+    }
+
+    .selection-icon__radio-icon {
+      color: mat.get-color-from-palette($foreground, disabled, 0.2);
+    }
+
+    .selection-icon__lock-icon {
+      color: mat.get-color-from-palette($accent);
+    }
+  }
+
+  &:hover:not(.disabled, .selected) {
+    border-color: var(--mdc-outlined-text-field-hover-outline-color);
+
+    .selection-icon__radio-icon {
+      color: var(--mdc-outlined-text-field-hover-outline-color);
+    }
+  }
+
+  &__content {
+    padding: 16px;
+  }
+}

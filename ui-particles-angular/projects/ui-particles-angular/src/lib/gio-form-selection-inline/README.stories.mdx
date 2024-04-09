@@ -1,0 +1,44 @@
+import { Meta, Story } from '@storybook/addon-docs';
+
+<Meta title="Components / Form selection inline / README" />
+
+# Form card group
+
+Form selection inline is a component that allows to display a horizontal selection of cards with a form control.
+
+## Demo
+
+<Story id="components-form-selection-inline--with-content" />
+
+## Usage
+
+**Inputs**
+
+- Work with ReactiveFormsModule
+
+**Output**
+
+
+Example:
+
+Simple example
+```html
+<gio-form-selection-inline [formControl]="selectControl">
+    <gio-form-selection-inline-card value="fox">Fox</gio-form-selection-inline-card>
+    <gio-form-selection-inline-card value="dog">Dog</gio-form-selection-inline-card>
+    ...
+</gio-form-selection-inline>
+```
+
+With gio-form-selection-inline-card-content
+```html
+<gio-form-selection-inline [formControl]="selectControl">
+    <gio-form-selection-inline-card value="fox">
+        <gio-form-selection-inline-card-content icon="gio:gitlab">
+            <gio-card-content-title>Fox</gio-card-content-title>
+            <gio-card-content-subtitle>This is a fox icon</gio-card-content-subtitle>
+        </gio-form-selection-inline-card-content>
+    </gio-form-selection-inline-card>
+    ...
+</gio-form-selection-inline>
+```
