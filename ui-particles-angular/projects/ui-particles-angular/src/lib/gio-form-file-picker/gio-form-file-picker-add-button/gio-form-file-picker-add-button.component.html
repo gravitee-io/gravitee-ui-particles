@@ -17,8 +17,8 @@
 -->
 <div class="add-button" matRipple>
   <div #content><ng-content></ng-content></div>
-  <span *ngIf="!content.children.length">
-    <mat-icon class="add-button__image" svgIcon="gio:upload"></mat-icon>
-    <span class="add-button__content">Drag your file</span>
-  </span>
+  <div class="add-button__content" *ngIf="!content.children.length">
+    <mat-icon class="add-button__content__image" svgIcon="gio:upload"></mat-icon>
+    <span class="add-button__content__text">Drag your file</span>
+  </div>
 </div>

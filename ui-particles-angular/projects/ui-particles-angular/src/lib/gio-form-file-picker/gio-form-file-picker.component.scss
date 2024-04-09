@@ -24,17 +24,21 @@ $accent: mat.get-color-from-palette(gio.$mat-accent-palette, 'default');
 $typography: map.get(gio.$mat-theme, typography);
 
 :host {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
 }
 
 .file-picker {
-  display: flex;
+  display: inline-flex;
   flex: 1 1 auto;
   flex-flow: row wrap;
+  justify-content: center;
   padding: 4px;
 
   &__add-button {
+    min-width: $card-size-default;
+    min-height: $card-size-default;
+    flex: 1 1 auto;
     border: 2px dashed mat.get-color-from-palette(gio.$mat-space-palette, lighter40);
     border-radius: $radius;
     margin: 4px;

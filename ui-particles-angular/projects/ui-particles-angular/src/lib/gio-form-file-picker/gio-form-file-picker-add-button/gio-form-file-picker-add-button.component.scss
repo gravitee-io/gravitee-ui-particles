@@ -17,14 +17,10 @@
 @use '@angular/material' as mat;
 @use '../../../scss' as gio;
 
-@use '../gio-form-file-picker.component.scss' as main;
-
 $typography: map.get(gio.$mat-theme, typography);
 
 :host {
   display: block;
-  width: main.$card-size-default;
-  height: main.$card-size-default;
 }
 
 .add-button {
@@ -32,12 +28,19 @@ $typography: map.get(gio.$mat-theme, typography);
   padding: 6px;
   text-align: center;
 
-  &__image {
-    width: 100%;
-    height: 54px;
-  }
-
   &__content {
-    @include mat.typography-level($typography, 'caption');
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    &__image {
+      width: 48px;
+      height: 48px;
+    }
+
+    &__text {
+      @include mat.typography-level($typography, 'caption');
+    }
   }
 }
