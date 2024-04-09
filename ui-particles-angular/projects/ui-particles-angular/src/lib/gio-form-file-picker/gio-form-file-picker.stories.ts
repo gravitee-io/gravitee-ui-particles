@@ -65,6 +65,14 @@ export const WithCustomContent: StoryObj = () => ({
 
       <br>
 
+      <p>With full width</p>
+      <gio-form-file-picker (ngModelChange)="onChange($event)" [multiple]="true" style="width: 100%">
+        <gio-form-file-picker-label>Avatar</gio-form-file-picker-label>
+        <gio-form-file-picker-add-button style="width:200px; text-align:center;"><span>Glissez votre fichier</span><p>250x250 px minimum</p></gio-form-file-picker-add-button>
+      </gio-form-file-picker>
+
+      <br>
+
       <p>Disabled with a custom empty text</p>
       <gio-form-file-picker (ngModelChange)="onChange($event)" [disabled]="true">
         <gio-form-file-picker-label>Avatar</gio-form-file-picker-label>
