@@ -98,9 +98,6 @@ export * from './gio-form-cron/gio-form-cron-hint.component';
 export * from './gio-form-cron/gio-form-cron.module';
 export * from './gio-form-cron/gio-form-cron.harness';
 
-export * from './gio-radio-button/gio-radio-button-content.component';
-export * from './gio-radio-button/gio-radio-button.module';
-
 export * from './gio-form-selection-inline/public-api';
 
 export * from './oem-theme/public-api';
