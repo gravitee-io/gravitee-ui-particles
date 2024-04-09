@@ -38,5 +38,6 @@ describe('<%= classify(name) %>Component', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    expect(componentHarness).toBeTruthy();
   });
 });

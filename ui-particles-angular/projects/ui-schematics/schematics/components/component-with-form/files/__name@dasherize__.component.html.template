@@ -17,12 +17,8 @@
 -->
 <mat-card class="<%= dasherize(name) %>">
   <mat-card-header>
-    <div class="<%= dasherize(name) %>__header">
-      <div class="<%= dasherize(name) %>__header__titles">
-        <mat-card-title>Hello <%= name %> !</mat-card-title>
-        <mat-card-subtitle>Add a description here</mat-card-subtitle>
-      </div>
-    </div>
+    <mat-card-title>Hello <%= name %> !</mat-card-title>
+    <mat-card-subtitle>Add a description here</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
      <form *ngIf="<%= camelize(name) %>Form" [formGroup]="<%= camelize(name) %>Form">
