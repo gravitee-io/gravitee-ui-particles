@@ -29,7 +29,7 @@ module.exports = {
   },
 
   staticDirs: [
-    { from: './favicon.ico', to: '/favicon.ico' },
+    { from: './favicon.ico', to: 'favicon.svg' },
     { from: '../projects/ui-particles-angular/assets/gio-icons.svg', to: '/assets/gio-icons.svg' },
     {
       from: '../projects/ui-particles-angular/assets/license-expiration-notification-background.svg',
