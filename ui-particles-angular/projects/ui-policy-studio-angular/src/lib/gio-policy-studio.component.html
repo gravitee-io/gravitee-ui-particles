@@ -47,6 +47,7 @@
 <div class="wrapper">
   <div class="wrapper__flowsMenu">
     <gio-ps-flows-menu
+      [readOnly]="readOnly"
       [loading]="loading"
       [apiType]="apiType"
       [flowExecution]="flowExecution"
@@ -60,6 +61,7 @@
 
   <div class="wrapper__flowDetails">
     <gio-ps-flow-details
+      [readOnly]="readOnly"
       [loading]="loading"
       [apiType]="apiType"
       [flow]="selectedFlow"

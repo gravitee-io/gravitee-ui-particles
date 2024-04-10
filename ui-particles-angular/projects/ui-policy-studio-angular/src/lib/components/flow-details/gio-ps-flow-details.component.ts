@@ -38,6 +38,9 @@ import { GioPolicyStudioFlowFormDialogResult } from '../flow-form-dialog/gio-ps-
 })
 export class GioPolicyStudioDetailsComponent implements OnChanges {
   @Input()
+  public readOnly = false;
+
+  @Input()
   public loading = false;
 
   @Input()

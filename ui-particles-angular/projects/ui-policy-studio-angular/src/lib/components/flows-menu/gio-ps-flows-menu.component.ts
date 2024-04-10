@@ -57,6 +57,9 @@ interface FlowMenuVM extends FlowVM {
 })
 export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
   @Input()
+  public readOnly = false;
+
+  @Input()
   public loading = false;
 
   @Input()
@@ -229,6 +232,7 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
         {
           data: {
             flowExecution,
+            readOnly: this.readOnly,
           },
           role: 'alertdialog',
           id: 'gioPsFlowExecutionFormDialog',

@@ -30,6 +30,9 @@ import { Policy, Step } from '../../models';
 })
 export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDestroy {
   @Input()
+  public readOnly = false;
+
+  @Input()
   public step?: Step;
 
   @Input()
@@ -54,7 +57,9 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
       this.policySchema$ = this.policyStudioService.getPolicySchema(this.policy).pipe(
         map(schema => {
           if (GioFormJsonSchemaComponent.isDisplayable(schema as GioJsonSchema)) {
-            return schema as GioJsonSchema;
+            const gioJsonSchema = schema as GioJsonSchema;
+            gioJsonSchema.readOnly = this.readOnly;
+            return gioJsonSchema;
           }
           return {};
         }),
@@ -94,6 +99,10 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
     this.stepForm.statusChanges.pipe(takeUntil(this.unsubscribe$)).subscribe(valid => {
       this.isValid.emit(valid === 'VALID');
     });
+
+    if (this.readOnly) {
+      this.stepForm.disable({ emitEvent: false });
+    }
   }
 
   public onJsonSchemaReady(isReady: boolean) {

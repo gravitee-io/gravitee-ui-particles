@@ -31,6 +31,9 @@ import {
 })
 export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
   @Input()
+  public readOnly = false;
+
+  @Input()
   public step!: Step;
 
   @Input()
@@ -55,7 +58,7 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
     }
   }
 
-  public onEdit() {
+  public onEditOrView() {
     if (!this.policy) {
       // TODO: Handle UseCase when policy is not found. (Like if the plugin is removed from the BackEnd)
       return;
@@ -66,6 +69,7 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
         GioPolicyStudioStepEditDialogComponent,
         {
           data: {
+            readOnly: this.readOnly,
             policy: this.policy,
             step: this.step,
           },

@@ -22,6 +22,7 @@ import { FlowExecution } from '../../models';
 
 export type GioPolicyStudioFlowExecutionFormDialogData = {
   flowExecution?: FlowExecution;
+  readOnly?: boolean;
 };
 
 @Component({
@@ -34,6 +35,8 @@ export class GioPolicyStudioFlowExecutionFormDialogComponent {
 
   public existingFlowExecution?: FlowExecution;
 
+  public readOnly = false;
+
   constructor(
     public dialogRef: MatDialogRef<GioPolicyStudioFlowExecutionFormDialogComponent, FlowExecution | undefined>,
     @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioFlowExecutionFormDialogData,
@@ -44,6 +47,12 @@ export class GioPolicyStudioFlowExecutionFormDialogComponent {
       mode: new UntypedFormControl(flowDialogData?.flowExecution?.mode ?? 'DEFAULT'),
       matchRequired: new UntypedFormControl(flowDialogData?.flowExecution?.matchRequired ?? false),
     });
+
+    this.readOnly = Boolean(flowDialogData.readOnly);
+
+    if (this.readOnly) {
+      this.flowExecutionFormGroup.disable({ emitEvent: false });
+    }
   }
 
   public onSubmit(): void {

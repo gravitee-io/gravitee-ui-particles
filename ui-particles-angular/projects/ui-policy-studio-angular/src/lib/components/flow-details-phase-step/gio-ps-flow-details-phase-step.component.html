@@ -29,17 +29,17 @@
 <button class="menuBtn" mat-icon-button [matMenuTriggerFor]="policyMenu"><mat-icon svgIcon="gio:more-vertical"></mat-icon></button>
 
 <mat-menu #policyMenu="matMenu">
-  <button mat-menu-item (click)="onEdit()">
-    <mat-icon svgIcon="gio:edit-pencil"></mat-icon>
-    <span>Edit</span>
+  <button mat-menu-item (click)="onEditOrView()">
+    <mat-icon [svgIcon]="readOnly ? 'gio:eye-empty' : 'gio:edit-pencil'"></mat-icon>
+    <span>{{ readOnly ? 'View' : 'Edit' }}</span>
   </button>
 
-  <button mat-menu-item (click)="onDisable()">
+  <button [disabled]="readOnly" mat-menu-item (click)="onDisable()">
     <mat-icon [svgIcon]="step.enabled ? 'gio:prohibition' : 'gio:check-circled-outline'"></mat-icon>
     <span>{{ step.enabled ? 'Disable' : 'Enable' }}</span>
   </button>
 
-  <button mat-menu-item (click)="onDelete()">
+  <button [disabled]="readOnly" mat-menu-item (click)="onDelete()">
     <mat-icon svgIcon="gio:trash"></mat-icon>
     <span>Delete</span>
   </button>

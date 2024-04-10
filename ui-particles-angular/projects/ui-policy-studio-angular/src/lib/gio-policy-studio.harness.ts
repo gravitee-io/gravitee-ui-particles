@@ -35,6 +35,11 @@ export class GioPolicyStudioHarness extends ComponentHarness {
 
   private phaseHarness = (phaseType: PhaseType) => this.locatorFor(GioPolicyStudioDetailsPhaseHarness.with({ type: phaseType }))();
 
+  public async isReadOnly(): Promise<boolean> {
+    const host = await this.host();
+    return Boolean(host.getAttribute('readOnly'));
+  }
+
   /**
    * Add a flow to a plan or to "Common flows"
    *
