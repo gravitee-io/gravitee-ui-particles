@@ -1,3 +1,11 @@
+# [12.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.4.1...v12.5.0) (2024-04-10)
+
+
+### Features
+
+* add GioFormSelectionInline component ([42f9f8e](https://github.com/gravitee-io/gravitee-ui-particles/commit/42f9f8efa80a5d92367957f089bc4e658d869124))
+* remove GioRadioButtonModule ([0c2ef92](https://github.com/gravitee-io/gravitee-ui-particles/commit/0c2ef921ca165232e17e22b8990e291bd6d875d8))
+
 ## [12.4.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.4.0...v12.4.1) (2024-04-10)
 
 
