@@ -38,6 +38,12 @@ import { GioPolicyStudioService } from './gio-policy-studio.service';
 })
 export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
   /**
+   * May be set to `true` if the API is not manageable from the UI (e.g. kubernetes operator APIs)
+   */
+  @Input()
+  public readOnly = false;
+
+  /**
    * API type (required)
    */
   @Input()

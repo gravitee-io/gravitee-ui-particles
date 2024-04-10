@@ -46,6 +46,9 @@ type StepVM =
 })
 export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
   @Input()
+  public readOnly = false;
+
+  @Input()
   public steps: Step[] = [];
 
   @Input()

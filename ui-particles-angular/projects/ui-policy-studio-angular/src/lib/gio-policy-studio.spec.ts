@@ -90,6 +90,22 @@ describe('GioPolicyStudioModule', () => {
       fixture.detectChanges();
     });
 
+    describe('with readOnly mode', () => {
+      beforeEach(() => {
+        component.readOnly = true;
+      });
+
+      it('should have readOnly attribute', async () => {
+        const attribute = await policyStudioHarness.isReadOnly();
+        expect(attribute).toBe(true);
+      });
+
+      it('should disable save button', async () => {
+        const state = await policyStudioHarness.getSaveButtonState();
+        expect(state).toBe('DISABLED');
+      });
+    });
+
     describe('with entrypointsInfo & endpointsInfo', () => {
       beforeEach(() => {
         component.entrypointsInfo = [fakeWebhookMessageEntrypoint()];

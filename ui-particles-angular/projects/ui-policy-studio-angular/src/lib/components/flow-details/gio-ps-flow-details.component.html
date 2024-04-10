@@ -23,10 +23,10 @@
     <div class="header">
       <div class="header__label">Flow details</div>
       <div class="header__configBtn">
-        <button class="header__configBtn__edit" mat-stroked-button (click)="onEditFlow()">
+        <button [disabled]="readOnly" class="header__configBtn__edit" mat-stroked-button (click)="onEditFlow()">
           <mat-icon svgIcon="gio:edit-pencil"></mat-icon>
         </button>
-        <button class="header__configBtn__delete" mat-stroked-button (click)="onDeleteFlow()">
+        <button [disabled]="readOnly" class="header__configBtn__delete" mat-stroked-button (click)="onDeleteFlow()">
           <mat-icon svgIcon="gio:trash"></mat-icon>
         </button>
       </div>
@@ -40,6 +40,7 @@
             class="content__phase"
             name="Request phase"
             description="Policies will be applied during the connection establishment"
+            [readOnly]="readOnly"
             [startConnector]="messageFlowEntrypointsInfo"
             [endConnector]="endpointsInfo"
             [steps]="flow.request ?? []"
@@ -53,6 +54,7 @@
             class="content__phase"
             name="Response phase"
             description="Policies will be applied to the response from the initial connection"
+            [readOnly]="readOnly"
             [startConnector]="endpointsInfo"
             [endConnector]="messageFlowEntrypointsInfo"
             [steps]="flow.response ?? []"
@@ -68,6 +70,7 @@
             class="content__phase"
             name="Publish phase"
             description="Policies will be applied on messages sent to the endpoint"
+            [readOnly]="readOnly"
             [startConnector]="messageFlowEntrypointsInfo | gioFilterConnectorsByMode: 'PUBLISH' : operations"
             [endConnector]="endpointsInfo | gioFilterConnectorsByMode: 'PUBLISH' : operations"
             [steps]="flow.publish ?? []"
@@ -81,6 +84,7 @@
             class="content__phase"
             name="Subscribe phase"
             description="Policies will be applied on messages received by the entrypoint"
+            [readOnly]="readOnly"
             [startConnector]="endpointsInfo | gioFilterConnectorsByMode: 'SUBSCRIBE' : operations"
             [endConnector]="messageFlowEntrypointsInfo | gioFilterConnectorsByMode: 'SUBSCRIBE' : operations"
             [steps]="flow.subscribe ?? []"
@@ -98,6 +102,7 @@
           class="content__phase"
           name="Request phase"
           description="Policies will be applied during the connection establishment"
+          [readOnly]="readOnly"
           [startConnector]="entrypointsInfo | gioFilterConnectorsByMode: 'REQUEST_RESPONSE'"
           [endConnector]="endpointsInfo | gioFilterConnectorsByMode: 'REQUEST_RESPONSE'"
           [steps]="flow.request ?? []"
@@ -111,6 +116,7 @@
           class="content__phase"
           name="Response phase"
           description="Policies will be applied during the connection termination"
+          [readOnly]="readOnly"
           [startConnector]="endpointsInfo | gioFilterConnectorsByMode: 'REQUEST_RESPONSE'"
           [endConnector]="entrypointsInfo | gioFilterConnectorsByMode: 'REQUEST_RESPONSE'"
           [steps]="flow.response ?? []"

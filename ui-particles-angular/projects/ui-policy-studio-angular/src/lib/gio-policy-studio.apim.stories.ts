@@ -58,6 +58,7 @@ export default {
 
   render: props => ({
     template: `<div style="height:calc(100vh - 2rem);"><gio-policy-studio
+    [readOnly]="readOnly"
     [loading]="loading"
     [apiType]="apiType"
     [flowExecution]="flowExecution"
@@ -231,6 +232,39 @@ export const MessageWithAllPhases: StoryObj = {
   },
 };
 
+export const ReadonlyMessageWithAllPhases: StoryObj = {
+  name: 'Read only message API with All phases',
+  args: {
+    readOnly: true,
+    apiType: 'MESSAGE',
+    entrypointsInfo: [
+      fakeSSEMessageEntrypoint(),
+      fakeSSEMessageEntrypoint(),
+      fakeWebsocketMessageEntrypoint(),
+      fakeHTTPPostMessageEntrypoint(),
+      fakeHTTPGetMessageEntrypoint(),
+      fakeWebhookMessageEntrypoint(),
+    ],
+    endpointsInfo: [fakeMockMessageEndpoint(), fakeKafkaMessageEndpoint()],
+    commonFlows: [
+      fakeChannelFlow(base => {
+        const channelSelector = base.selectors?.find(selector => selector.type === 'CHANNEL') as ChannelSelector;
+        channelSelector.entrypoints = [];
+        channelSelector.operations = [];
+        return {
+          ...base,
+          name: 'Flow',
+          request: [fakeTestPolicyStep()],
+          response: [fakeTestPolicyStep()],
+          publish: [fakeTestPolicyStep()],
+          subscribe: [fakeTestPolicyStep()],
+        };
+      }),
+    ],
+    plans: [],
+  },
+};
+
 export const MessageWithDisabledPhase: StoryObj = {
   name: 'Message API with disabled phase',
   args: {
@@ -324,6 +358,81 @@ export const MessageWithConditionalExpressionLanguageStep: StoryObj = {
 export const ProxyWithFlowsAndPlans: StoryObj = {
   name: 'Proxy API with flows & plans',
   args: {
+    apiType: 'PROXY',
+    flowExecution: {
+      mode: 'BEST_MATCH',
+      matchRequired: false,
+    },
+    entrypointsInfo: [fakeHTTPProxyEntrypoint()],
+    endpointsInfo: [fakeHTTPProxyEndpoint()],
+    commonFlows: [
+      fakeHttpFlow(),
+      fakeHttpFlow({
+        name: 'Extra long flow name to test overflow Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      }),
+      fakeHttpFlow({
+        name: '',
+      }),
+    ],
+    plans: [
+      fakePlan({
+        name: 'Plan without flow and with a very long name to test overflow Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        flows: [
+          fakeHttpFlow({
+            name: '',
+          }),
+
+          fakeHttpFlow({
+            name: 'plan flow 1',
+          }),
+        ],
+      }),
+      fakePlan({
+        name: 'Second plan',
+        flows: [
+          fakeHttpFlow({
+            name: 'Flow 1',
+            selectors: [
+              {
+                type: 'HTTP',
+                methods: ['GET'],
+                path: '/path1',
+                pathOperator: 'EQUALS',
+              },
+            ],
+          }),
+          fakeHttpFlow({
+            name: 'Flow 2',
+            selectors: [
+              {
+                type: 'HTTP',
+                methods: ['GET', 'PUT', 'POST', 'DELETE'],
+                path: '/path1',
+                pathOperator: 'STARTS_WITH',
+              },
+            ],
+          }),
+          fakeHttpFlow({
+            name: 'Flow 3',
+            selectors: [
+              {
+                type: 'HTTP',
+                methods: [],
+                path: '/path3',
+                pathOperator: 'EQUALS',
+              },
+            ],
+          }),
+        ],
+      }),
+    ],
+  },
+};
+
+export const ReadOnlyProxyWithFlowsAndPlans: StoryObj = {
+  name: 'Read only proxy API with flows & plans',
+  args: {
+    readOnly: true,
     apiType: 'PROXY',
     flowExecution: {
       mode: 'BEST_MATCH',

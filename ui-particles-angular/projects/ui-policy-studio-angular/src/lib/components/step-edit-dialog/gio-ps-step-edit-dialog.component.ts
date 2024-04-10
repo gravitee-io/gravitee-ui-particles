@@ -21,6 +21,7 @@ import { Policy, Step } from '../../models';
 export type GioPolicyStudioStepEditDialogData = {
   policy: Policy;
   step: Step;
+  readOnly?: boolean;
 };
 
 export type GioPolicyStudioStepEditDialogResult = undefined | Step;
@@ -35,6 +36,7 @@ export class GioPolicyStudioStepEditDialogComponent {
   public step!: Step;
 
   public isValid = false;
+  public readOnly = false;
 
   constructor(
     public dialogRef: MatDialogRef<GioPolicyStudioStepEditDialogComponent, GioPolicyStudioStepEditDialogResult>,
@@ -42,6 +44,7 @@ export class GioPolicyStudioStepEditDialogComponent {
   ) {
     this.policy = flowDialogData.policy;
     this.step = flowDialogData.step;
+    this.readOnly = Boolean(flowDialogData.readOnly);
   }
 
   public onSave(): void {
