@@ -1,3 +1,10 @@
+# [12.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.3.0...v12.4.0) (2024-04-10)
+
+
+### Features
+
+* add read only option to policy studio ([7e3a8b3](https://github.com/gravitee-io/gravitee-ui-particles/commit/7e3a8b3ebcd03a4707dfaa8d8e89cce73ea56f76))
+
 # [12.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.2.0...v12.3.0) (2024-04-03)
 
 
