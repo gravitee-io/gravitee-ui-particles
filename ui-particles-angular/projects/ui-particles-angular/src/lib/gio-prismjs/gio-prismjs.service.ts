@@ -15,7 +15,7 @@
  */
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, shareReplay, switchMap } from 'rxjs/operators';
+import { catchError, delay, shareReplay, switchMap } from 'rxjs/operators';
 
 declare global {
   interface Window {
@@ -33,6 +33,8 @@ export class GioPrismJsService {
     return this.loadPrimeJsCore().pipe(
       // Then load PrismJs components
       switchMap(() => this.loadPrismJsComponent('json')),
+      // Small delay to ensure PrismJs take language into account
+      delay(100),
       // If already loaded, we don't want to load it again
       shareReplay(1),
       // Ignore error

@@ -99,7 +99,7 @@ export class GioAsciidoctorComponent implements OnChanges, OnDestroy {
       for (const element of highlights) {
         element.setAttribute('class', 'prismjs highlight');
         if (window.Prism) {
-          window.Prism.highlightAllUnder(element);
+          window.Prism.highlightAllUnder(element, false);
         }
       }
 
