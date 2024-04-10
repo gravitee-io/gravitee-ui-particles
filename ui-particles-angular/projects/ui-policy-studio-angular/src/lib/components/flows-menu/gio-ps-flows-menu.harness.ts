@@ -93,6 +93,17 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
     }
   }
 
+  public async isReadOnly(): Promise<boolean> {
+    const flowsGroups = await this.locateFlowsGroups();
+    const flowGroup = flowsGroups.pop();
+    if (!flowGroup) {
+      throw new Error('A flow group is required to test that menu is readonly');
+    }
+    const addBtn = await flowGroup.childLocatorFor(MatButtonHarness.with({ ancestor: '.list__flowsGroup__header__addBtn' }))();
+
+    return await addBtn.isDisabled();
+  }
+
   public async openFlowExecutionConfig(): Promise<void> {
     await (await this.locatorFor(MatButtonHarness.with({ selector: '.header__configBtn_edit' }))())?.click();
   }

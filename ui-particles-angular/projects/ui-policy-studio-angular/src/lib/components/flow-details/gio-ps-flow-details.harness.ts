@@ -36,6 +36,14 @@ export class GioPolicyStudioDetailsHarness extends ComponentHarness {
     return matcher.test(hostText);
   }
 
+  public async isReadOnly(): Promise<boolean> {
+    const editFlowBtn = await this.locatorFor(MatButtonHarness.with({ selector: '.header__configBtn__edit' }))();
+    const editBtnDisabled = await editFlowBtn.isDisabled();
+    const deleteFlowBtn = await this.locatorFor(MatButtonHarness.with({ selector: '.header__configBtn__delete' }))();
+    const deleteBtnDisabled = await deleteFlowBtn.isDisabled();
+    return editBtnDisabled && deleteBtnDisabled;
+  }
+
   public async clickEditFlowBtn(): Promise<void> {
     const editFlowBtn = await this.locatorFor(MatButtonHarness.with({ selector: '.header__configBtn__edit' }))();
     await editFlowBtn.click();

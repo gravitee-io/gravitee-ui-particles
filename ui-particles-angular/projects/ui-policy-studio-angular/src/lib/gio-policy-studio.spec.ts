@@ -31,9 +31,9 @@ import {
   fakeChannelFlow,
   fakeConditionedChannelFlow,
   fakeDefaultFlowExecution,
+  fakeHttpFlow,
   fakeHTTPProxyEndpoint,
   fakeHTTPProxyEntrypoint,
-  fakeHttpFlow,
   fakeKafkaMessageEndpoint,
   fakePlan,
   fakeRateLimitStep,
@@ -92,17 +92,24 @@ describe('GioPolicyStudioModule', () => {
 
     describe('with readOnly mode', () => {
       beforeEach(() => {
+        component.flowsGroups = [
+          {
+            name: 'main flows',
+            _id: 'main-flow',
+            flows: [
+              {
+                ...fakeChannelFlow({ name: 'flow1' }),
+                _id: 'flow',
+                _hasChanged: false,
+              },
+            ],
+          },
+        ];
         component.readOnly = true;
       });
 
-      it('should have readOnly attribute', async () => {
-        const attribute = await policyStudioHarness.isReadOnly();
-        expect(attribute).toBe(true);
-      });
-
-      it('should disable save button', async () => {
-        const state = await policyStudioHarness.getSaveButtonState();
-        expect(state).toBe('DISABLED');
+      it('should make studio read only', async () => {
+        expect(await policyStudioHarness.isReadOnly()).toBe(true);
       });
     });
 

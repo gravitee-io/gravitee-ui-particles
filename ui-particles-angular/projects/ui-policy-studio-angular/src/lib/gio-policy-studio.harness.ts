@@ -36,8 +36,21 @@ export class GioPolicyStudioHarness extends ComponentHarness {
   private phaseHarness = (phaseType: PhaseType) => this.locatorFor(GioPolicyStudioDetailsPhaseHarness.with({ type: phaseType }))();
 
   public async isReadOnly(): Promise<boolean> {
-    const host = await this.host();
-    return Boolean(host.getAttribute('readOnly'));
+    const menu = await this.menuHarness();
+    const readOnlyMenu = await menu.isReadOnly();
+
+    await this.selectFlowInMenu('.+');
+
+    const details = await this.detailsHarness();
+    const emptyDetails = await details.isDisplayEmptyFlow();
+
+    if (!emptyDetails) {
+      await this.selectFlowInMenu('.+');
+      const readOnlyDetails = await details.isReadOnly();
+      return readOnlyMenu && readOnlyDetails;
+    }
+
+    return readOnlyMenu;
   }
 
   /**
