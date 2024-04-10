@@ -1,3 +1,10 @@
+## [12.4.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.4.0...v12.4.1) (2024-04-10)
+
+
+### Bug Fixes
+
+* isReadOnly method from policy studio harness ([a1c82ef](https://github.com/gravitee-io/gravitee-ui-particles/commit/a1c82ef7986fa628b37603d88b1bdf5574ec0b16))
+
 # [12.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.3.0...v12.4.0) (2024-04-10)
 
 
