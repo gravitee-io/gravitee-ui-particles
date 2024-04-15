@@ -20,6 +20,7 @@
 @use './gio-link/gio-link';
 @use './gio-caption-2/gio-caption-2';
 @use './gio-button-toggle-group/gio-button-toggle-group';
+@use './gio-description-list/gio-description-list';
 
 // All Gravitee.io SCSS components to add globally in main.scss
 @mixin all-components() {
@@ -30,4 +31,5 @@
   @include gio-link.theme;
   @include gio-caption-2.theme;
   @include gio-button-toggle-group.theme;
+  @include gio-description-list.theme;
 }
