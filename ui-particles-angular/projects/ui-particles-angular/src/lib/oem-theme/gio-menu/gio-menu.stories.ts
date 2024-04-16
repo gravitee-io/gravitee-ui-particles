@@ -16,6 +16,7 @@
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { CommonModule } from '@angular/common';
 import { action } from '@storybook/addon-actions';
+import { cleanLocalStorageReduceState } from '@gravitee/ui-particles-angular';
 
 import { GioSubmenuModule } from '../gio-submenu';
 import { computeAndInjectStylesForStory, OEM_DEFAULT_LOGO, OEM_THEME_ARG_TYPES } from '../oem-theme.service';
@@ -57,6 +58,10 @@ export default {
         },
       ],
     }),
+    story => {
+      cleanLocalStorageReduceState();
+      return story();
+    },
   ],
   render: () => ({}),
 } as Meta;
@@ -106,7 +111,7 @@ export const Default: StoryObj = {
     return {
       template: `
         <div id="sidenav">
-          <gio-menu [reduced]="false">
+          <gio-menu>
             ${gioMenuContent}
           </gio-menu>
           <h1>Selected env: {{ selectedItemValue }}</h1>
