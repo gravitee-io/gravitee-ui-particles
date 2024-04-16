@@ -19,7 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 import { GioSubmenuModule } from './gio-submenu';
-import { GioMenuModule } from './gio-menu';
+import { cleanLocalStorageReduceState, GioMenuModule } from './gio-menu';
 import { GioMenuItemComponent } from './gio-menu/gio-menu-item/gio-menu-item.component';
 import { GioTopBarLinkModule, GioTopBarMenuModule, GioTopBarModule } from './gio-top-bar';
 import { OEM_THEME_ARG_TYPES, OEM_DEFAULT_LOGO, computeAndInjectStylesForStory } from './oem-theme.service';
@@ -40,6 +40,10 @@ export default {
         GioTopBarMenuModule,
       ],
     }),
+    story => {
+      cleanLocalStorageReduceState();
+      return story();
+    },
   ],
   render: () => ({}),
 } as Meta;

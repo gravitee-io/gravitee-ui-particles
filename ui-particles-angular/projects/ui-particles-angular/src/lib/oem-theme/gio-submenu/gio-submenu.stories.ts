@@ -18,6 +18,7 @@ import { GioSubmenuGroupComponent } from '@gravitee/ui-particles-angular';
 import { MatButtonModule } from '@angular/material/button';
 
 import { OEM_THEME_ARG_TYPES, computeStylesForStory, OEM_DEFAULT_LOGO, resetStoryStyleInjection } from '../oem-theme.service';
+import { cleanLocalStorageReduceState } from '../gio-menu';
 
 import { GioSubmenuModule } from './gio-submenu.module';
 
@@ -28,6 +29,10 @@ export default {
     moduleMetadata({
       imports: [GioSubmenuModule, MatButtonModule],
     }),
+    story => {
+      cleanLocalStorageReduceState();
+      return story();
+    },
   ],
   render: () => ({}),
 } as Meta;

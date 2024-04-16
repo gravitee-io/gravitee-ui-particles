@@ -50,3 +50,4 @@ export class GioMenuService {
     this.overlaySubject.next(overlayOptions);
   }
 }
+export const cleanLocalStorageReduceState = () => localStorage?.removeItem(REDUCE_STATE_KEY);
