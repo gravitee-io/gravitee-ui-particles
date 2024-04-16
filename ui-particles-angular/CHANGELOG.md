@@ -1,3 +1,10 @@
+# [12.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.5.0...v12.6.0) (2024-04-16)
+
+
+### Features
+
+* add gio-description-list component ([bd4c050](https://github.com/gravitee-io/gravitee-ui-particles/commit/bd4c05094ce8214e71814704320ec039a835afea))
+
 # [12.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.4.1...v12.5.0) (2024-04-10)
 
 
