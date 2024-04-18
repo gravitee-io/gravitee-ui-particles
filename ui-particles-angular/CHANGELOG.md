@@ -1,3 +1,10 @@
+## [12.6.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.6.0...v12.6.1) (2024-04-18)
+
+
+### Bug Fixes
+
+* fix strange behaviour with [@for](https://github.com/for) + OnPush ([860cba1](https://github.com/gravitee-io/gravitee-ui-particles/commit/860cba1be1869d258f9b55cc0fed3266dcc5bdf3))
+
 # [12.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.5.0...v12.6.0) (2024-04-16)
 
 
