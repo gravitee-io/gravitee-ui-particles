@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ChangeDetectorRef, Component, HostBinding, HostListener, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, HostListener, Input } from '@angular/core';
 
 @Component({
   selector: 'gio-form-selection-inline-card',
@@ -28,6 +28,7 @@ import { ChangeDetectorRef, Component, HostBinding, HostListener, Input } from '
     </div>
   `,
   styleUrls: ['./gio-form-selection-inline-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GioFormSelectionInlineCardComponent {
   @Input()
@@ -68,5 +69,6 @@ export class GioFormSelectionInlineCardComponent {
     // When group value changes, the button will not be notified. Use `markForCheck` to explicit
     // update radio button's status
     this.changeDetector.markForCheck();
+    this.changeDetector.detectChanges();
   }
 }

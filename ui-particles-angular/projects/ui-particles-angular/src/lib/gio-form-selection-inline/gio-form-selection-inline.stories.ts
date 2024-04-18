@@ -78,6 +78,8 @@ export const ReactiveForms: StoryObj = {
         <gio-form-selection-inline-card value="D">Hello</gio-form-selection-inline-card>
         <gio-form-selection-inline-card [lock]="true" value="E">Locked</gio-form-selection-inline-card>
       </gio-form-selection-inline>
+      ---<br>
+      Touched: {{ selectControl.touched }} Dirty: {{ selectControl.dirty }}
       `,
       props: {
         selectControl,
