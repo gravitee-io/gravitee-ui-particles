@@ -1,0 +1,9 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/ui-policy-studio-angular",
+  "lib": {
+    "entryFile": "src/public-api.ts",
+    "styleIncludePaths": ["../../../node_modules", "../../.storybook/projects-style-link"]
+  },
+  "assets": ["index.scss", "LICENSE.txt"]
+}
