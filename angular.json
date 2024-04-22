@@ -1,0 +1,156 @@
+{
+  "$schema": "node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "cli": {
+    "analytics": false,
+    "packageManager": "yarn",
+    "schematicCollections": ["@angular-eslint/schematics"]
+  },
+  "newProjectRoot": "projects",
+  "projects": {
+    "ui-analytics": {
+      "projectType": "library",
+      "root": "projects/ui-analytics",
+      "sourceRoot": "projects/ui-analytics/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ui-analytics/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ui-analytics/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ui-analytics/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "configPath": "jest.config.js",
+            "tsConfig": "tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["projects/ui-analytics/**/*.ts", "projects/ui-analytics/**/*.html"]
+          }
+        }
+      }
+    },
+    "ui-particles-angular": {
+      "projectType": "library",
+      "root": "projects/ui-particles-angular",
+      "sourceRoot": "projects/ui-particles-angular/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ui-particles-angular/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ui-particles-angular/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ui-particles-angular/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "configPath": "jest.config.js",
+            "tsConfig": "tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["projects/ui-particles-angular/**/*.ts", "projects/ui-particles-angular/**/*.html"]
+          }
+        }
+      }
+    },
+    "ui-policy-studio-angular": {
+      "projectType": "library",
+      "root": "projects/ui-policy-studio-angular",
+      "sourceRoot": "projects/ui-policy-studio-angular/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ui-policy-studio-angular/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ui-policy-studio-angular/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ui-policy-studio-angular/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "configPath": "jest.config.js",
+            "tsConfig": "tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["projects/ui-policy-studio-angular/**/*.ts", "projects/ui-policy-studio-angular/**/*.html"]
+          }
+        }
+      }
+    },
+    "storybook": {
+      "projectType": "library",
+      "root": "./",
+      "architect": {
+        "start": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "styles": [".storybook/index.scss"],
+            "compodoc": false,
+            "port": 9008,
+            "stylePreprocessorOptions": {
+              "includePaths": [".storybook/projects-style-link"]
+            }
+          }
+        },
+        "build": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "styles": [".storybook/index.scss"],
+            "compodoc": false,
+            "stylePreprocessorOptions": {
+              "includePaths": [".storybook/projects-style-link"]
+            },
+            "webpackStatsJson": true
+          }
+        }
+      }
+    }
+  },
+  "schematics": {
+    "@angular-eslint/schematics:application": {
+      "setParserOptionsProject": true
+    },
+    "@angular-eslint/schematics:library": {
+      "setParserOptionsProject": true
+    }
+  }
+}

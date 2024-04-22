@@ -47,9 +47,6 @@ jobs:
           command: yarn test
 
   build:
-    parameters:
-      package_name:
-        type: string
     executor:
       class: large
       name: node-lts
@@ -59,17 +56,15 @@ jobs:
       - run:
           name: Build
           command: yarn build
-          working_directory: << parameters.package_name >>
+          working_directory: .
       - persist_to_workspace:
           root: .
           paths:
-            - << parameters.package_name >>/dist
+            - dist
             - node_modules
 
   prerelease:
     parameters:
-      package_name:
-        type: string
       angular_package_name:
         type: string
     executor:
@@ -82,7 +77,7 @@ jobs:
       - gh/setup
       - run:
           name: 🐙 Prerelease the Kraken
-          working_directory: << parameters.package_name >>/dist/<< parameters.angular_package_name >>
+          working_directory: dist/<< parameters.angular_package_name >>
           command: |
             export version=$(git describe --tags --abbrev=0 | tr -d v)
             export commit=$(git rev-parse --short HEAD)
@@ -123,8 +118,6 @@ jobs:
             gh pr edit --body "$CLEAN_BODY$PR_BODY_PRERELEASE_SECTION"
   release:
     parameters:
-      package_name:
-        type: string
       dry_run:
         type: boolean
         default: true
@@ -143,7 +136,7 @@ jobs:
           steps:
             - run:
                 name: 🧑‍🔬 dry-run release
-                working_directory: << parameters.package_name >>
+                working_directory: .
                 command: yarn semantic-release --debug --no-ci --dry-run
       - when:
           condition:
@@ -151,13 +144,10 @@ jobs:
           steps:
             - run:
                 name: 🚀 Release the Kraken
-                working_directory: << parameters.package_name >>
+                working_directory: .
                 command: yarn semantic-release --debug
 
   build-storybook:
-    parameters:
-      package_name:
-        type: string
     executor:
       class: large
       name: node-lts
@@ -169,19 +159,16 @@ jobs:
       - run:
           name: Build
           command: yarn storybook:build
-          working_directory: << parameters.package_name >>
+          working_directory: .
           environment:
             NODE_OPTIONS: --max_old_space_size=3072
       - persist_to_workspace:
           root: .
           paths:
-            - << parameters.package_name >>/storybook-static
+            - storybook-static
             - node_modules
 
   chromatic-deployment:
-    parameters:
-      package_name:
-        type: string
     executor:
       class: small
       name: node-lts
@@ -194,7 +181,7 @@ jobs:
           # TODO:
           #  - Handle npx chromatic command failure, make the job fails
           command: |
-            SB_URL=$(npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN --exit-once-uploaded -d=<< parameters.package_name >>/storybook-static | grep -o "View your Storybook at https:\/\/[0-9a-z-]*\.chromatic\.com" | grep -o "https:.*")
+            SB_URL=$(npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN --exit-once-uploaded -d=storybook-static | grep -o "View your Storybook at https:\/\/[0-9a-z-]*\.chromatic\.com" | grep -o "https:.*")
             echo "export SB_URL=$SB_URL" >> $BASH_ENV
       - gh/setup
       - run:
@@ -235,10 +222,8 @@ workflows:
           name: Lint & Test
       - build:
           name: Build Angular
-          package_name: ui-particles-angular
       - prerelease:
           name: Prerelease ui-particles-angular
-          package_name: ui-particles-angular
           angular_package_name: ui-particles-angular
           pre-steps:
             - keeper/env-export:
@@ -252,7 +237,6 @@ workflows:
             - Build Angular
       - prerelease:
           name: Prerelease ui-policy-studio-angular
-          package_name: ui-particles-angular
           angular_package_name: ui-policy-studio-angular
           pre-steps:
             - keeper/env-export:
@@ -266,7 +250,6 @@ workflows:
             - Build Angular
       - prerelease:
           name: Prerelease ui-schematics
-          package_name: ui-particles-angular
           angular_package_name: ui-schematics
           pre-steps:
             - keeper/env-export:
@@ -280,7 +263,6 @@ workflows:
             - Build Angular
       - release:
           name: '[Dry Run] Release Angular'
-          package_name: ui-particles-angular
           dry_run: true
           pre-steps:
             - keeper/env-export:
@@ -306,13 +288,11 @@ workflows:
             - Build Angular
       - build-storybook:
           name: Build Angular Storybook
-          package_name: ui-particles-angular
           requires:
             - Build Angular
       - chromatic-deployment:
           name: Chromatic deployment for Angular
           context: cicd-orchestrator
-          package_name: ui-particles-angular
           requires:
             - Build Angular Storybook
           pre-steps:
@@ -334,20 +314,17 @@ workflows:
     jobs:
       - build:
           name: Build Angular
-          package_name: ui-particles-angular
       - lint-test:
           name: Lint & Test
           requires:
             - Build Angular
       - build-storybook:
           name: Build Angular Storybook
-          package_name: ui-particles-angular
           requires:
             - Lint & Test
       - chromatic-deployment:
           name: Chromatic deployment for Angular
           context: cicd-orchestrator
-          package_name: ui-particles-angular
           requires:
             - Build Angular Storybook
           pre-steps:
@@ -359,7 +336,6 @@ workflows:
                 var-name: CHROMATIC_PROJECT_TOKEN
       - release:
           name: Release Angular
-          package_name: ui-particles-angular
           dry_run: false
           pre-steps:
             - keeper/env-export:

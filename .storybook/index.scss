@@ -1,0 +1,16 @@
+@use 'projects/ui-particles-angular/index' as gio;
+
+@include gio.import-fonts();
+
+@include gio.mat-theme();
+
+@include gio.all-components();
+
+/**
+ * Reset `box-sizing` for all elements
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
