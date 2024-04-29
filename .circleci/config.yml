@@ -122,8 +122,7 @@ jobs:
         type: boolean
         default: true
     docker:
-      #        TODO: Try to fix. Hack because npm publish + semantic-release is not working as before with 18.10 node version
-      - image: cimg/node:16.13
+      - image: cimg/node:20.11
     steps:
       - add_ssh_keys:
           fingerprints:
