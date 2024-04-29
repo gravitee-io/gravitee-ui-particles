@@ -1,3 +1,10 @@
+## [12.6.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.6.1...v12.6.2) (2024-04-29)
+
+
+### Bug Fixes
+
+* ci update release job to node 20 ([43f4fd3](https://github.com/gravitee-io/gravitee-ui-particles/commit/43f4fd33e59f9017c0948727ed72f7f5ab3f334d))
+
 ## [12.6.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.6.0...v12.6.1) (2024-04-18)
 
 
