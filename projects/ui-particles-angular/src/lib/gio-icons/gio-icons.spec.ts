@@ -138,6 +138,8 @@ const icons = [
   'folder-minus',
   'folder-move',
   'folder-plus',
+  'gateway-cloud',
+  'gateway-self-hosted',
   'gift',
   'git-branch',
   'git-commit',
