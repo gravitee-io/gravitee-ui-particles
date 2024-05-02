@@ -1,3 +1,10 @@
+# [12.7.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.6.2...v12.7.0) (2024-05-02)
+
+
+### Features
+
+* add gateway cloud and self-hosted icons ([fcfb17f](https://github.com/gravitee-io/gravitee-ui-particles/commit/fcfb17f75f7a24f5f93e6e49435bb0e78d18f80c))
+
 ## [12.6.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.6.1...v12.6.2) (2024-04-29)
 
 
