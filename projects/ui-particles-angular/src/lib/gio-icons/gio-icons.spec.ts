@@ -222,6 +222,7 @@ const icons = [
   'off-rounded',
   'on-rounded',
   'open-id',
+  'open-api',
   'open-vpn',
   'page',
   'palette',
