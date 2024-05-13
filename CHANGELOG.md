@@ -1,3 +1,10 @@
+# [12.8.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.7.0...v12.8.0) (2024-05-13)
+
+
+### Features
+
+* add open api icon ([d6f20a3](https://github.com/gravitee-io/gravitee-ui-particles/commit/d6f20a3ff87ffd485a537b26b34351996180ec05))
+
 # [12.7.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.6.2...v12.7.0) (2024-05-02)
 
 
