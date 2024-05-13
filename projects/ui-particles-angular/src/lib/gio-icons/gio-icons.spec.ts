@@ -307,6 +307,7 @@ const icons = [
   'user-circle-alt',
   'user-minus',
   'user-plus',
+  'user-service',
   'user-x',
   'users',
   'verified',
