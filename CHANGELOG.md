@@ -1,3 +1,10 @@
+# [12.9.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.8.0...v12.9.0) (2024-05-15)
+
+
+### Features
+
+* added user-service icon ([8ee4461](https://github.com/gravitee-io/gravitee-ui-particles/commit/8ee4461c5366dee9156c9be931c7c667370b64a3))
+
 # [12.8.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.7.0...v12.8.0) (2024-05-13)
 
 
