@@ -65,6 +65,7 @@ const icons = [
   'chat-bubble-warning',
   'chat-lines',
   'check',
+  'check-circle',
   'check-circled-outline',
   'check-square',
   'chevrons-down',
