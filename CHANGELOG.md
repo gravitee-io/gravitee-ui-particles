@@ -1,3 +1,10 @@
+# [12.10.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.9.0...v12.10.0) (2024-05-28)
+
+
+### Features
+
+* add check-circle icon ([045d9f2](https://github.com/gravitee-io/gravitee-ui-particles/commit/045d9f2fdc84e6a8aa0cc91d8fc78e72c2c9b041))
+
 # [12.9.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.8.0...v12.9.0) (2024-05-15)
 
 
