@@ -18,6 +18,12 @@
       "factory": "./components/component-with-table/index#createComponentWithTable",
       "schema": "./components/component-with-table/schema.json",
       "aliases": ["cwt"]
+    },
+    "component-for-dialog": {
+      "description": "Generate a component to use with MatDialog in the project.",
+      "factory": "./components/component-for-dialog/index#createComponentForDialog",
+      "schema": "./components/component-for-dialog/schema.json",
+      "aliases": ["cfd"]
     }
   }
 }
