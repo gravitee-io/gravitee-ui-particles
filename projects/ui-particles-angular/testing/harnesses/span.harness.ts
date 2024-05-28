@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { AsyncFactoryFn, BaseHarnessFilters, ComponentHarness, HarnessPredicate, HarnessQuery, TestElement } from '@angular/cdk/testing';
+import { BaseHarnessFilters, ComponentHarness, HarnessPredicate, TestElement } from '@angular/cdk/testing';
 
 export type SpanHarnessFilters = BaseHarnessFilters & {
   /** Filters based on the text */
@@ -35,13 +35,11 @@ export class SpanHarness extends ComponentHarness {
     );
   }
 
-  public childLocatorFor<T extends ComponentHarness>(query: HarnessQuery<T>): AsyncFactoryFn<T> {
-    return this.locatorFor(query);
-  }
+  public childLocatorFor = this.locatorFor;
 
-  public childLocatorForAll<T extends ComponentHarness>(query: HarnessQuery<T>): AsyncFactoryFn<T[]> {
-    return this.locatorForAll(query);
-  }
+  public childLocatorForOptional = this.locatorForOptional;
+
+  public childLocatorForAll = this.locatorForAll;
 
   public async getText(option?: { childSelector?: string }): Promise<string | null> {
     let element: TestElement | null = await this.host();
