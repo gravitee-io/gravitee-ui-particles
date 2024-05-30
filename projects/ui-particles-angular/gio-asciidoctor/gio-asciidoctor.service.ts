@@ -20,7 +20,7 @@ import asciidoctor, { Asciidoctor } from '@asciidoctor/core';
 
 declare global {
   interface Window {
-    Asciidoctor: Asciidoctor;
+    _gioAsciidoctor: Asciidoctor;
   }
 }
 
@@ -36,15 +36,15 @@ export class GioAsciidoctorService {
   }
 
   private loadAsciidoctor(): Observable<Asciidoctor> {
-    if (!window.Asciidoctor) {
+    if (!window._gioAsciidoctor) {
       const loadAsciidoctor = async () => {
-        window.Asciidoctor = asciidoctor();
-        return window.Asciidoctor;
+        window._gioAsciidoctor = asciidoctor();
+        return window._gioAsciidoctor;
       };
 
       return from(loadAsciidoctor());
     } else {
-      return of(window.Asciidoctor);
+      return of(window._gioAsciidoctor);
     }
   }
 }
