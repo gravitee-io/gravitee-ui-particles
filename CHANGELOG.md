@@ -1,3 +1,11 @@
+# [12.11.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.10.0...v12.11.0) (2024-05-30)
+
+
+### Features
+
+* add schematics to generate a component to use with MatDialog ([69b59a1](https://github.com/gravitee-io/gravitee-ui-particles/commit/69b59a12573fcc30ef1088e4da5fbc84d4fff225))
+* remove outlined apparence for gio-card-empty-state ([1423cbe](https://github.com/gravitee-io/gravitee-ui-particles/commit/1423cbeeec3763a5adca83068bb177e786f128f4))
+
 # [12.10.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.9.0...v12.10.0) (2024-05-28)
 
 
