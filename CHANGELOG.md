@@ -1,3 +1,10 @@
+## [12.11.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.11.0...v12.11.1) (2024-05-30)
+
+
+### Bug Fixes
+
+* rename to `window._gioAsciidoctor` to avoid conflict ([44a6344](https://github.com/gravitee-io/gravitee-ui-particles/commit/44a63444a1c993ccd209130b9330e533bc839f37))
+
 # [12.11.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.10.0...v12.11.0) (2024-05-30)
 
 
