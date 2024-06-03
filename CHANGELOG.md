@@ -1,3 +1,10 @@
+## [12.11.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.11.1...v12.11.2) (2024-06-03)
+
+
+### Bug Fixes
+
+* schematics - improve the code to add Dialog suffix ([c17d651](https://github.com/gravitee-io/gravitee-ui-particles/commit/c17d6516b4d381c91caac2fa139c0ae1a2efcece))
+
 ## [12.11.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.11.0...v12.11.1) (2024-05-30)
 
 
