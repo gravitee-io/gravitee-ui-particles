@@ -19,20 +19,20 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { action } from '@storybook/addon-actions';
 
-import { <%= classify(name) %>DialogComponent, <%= classify(name) %>DialogData, <%= classify(name) %>DialogResult } from './<%= dasherize(name) %>-dialog.component';
+import { <%= classify(name) %>Component, <%= classify(name) %>Data, <%= classify(name) %>Result } from './<%= dasherize(name) %>.component';
 
 @Component({
   selector: 'story-component',
   template: `<button id="open-dialog" (click)="open()">Open dialog</button>`,
-  imports: [<%= classify(name) %>DialogComponent, MatDialogModule, MatIconTestingModule],
+  imports: [<%= classify(name) %>Component, MatDialogModule, MatIconTestingModule],
   standalone: true,
 })
 class StoryDialogComponent {
   constructor(private readonly matDialog: MatDialog) {}
 
-  public open(data?: <%= classify(name) %>DialogData) {
+  public open(data?: <%= classify(name) %>Data) {
     return this.matDialog
-      .open<<%= classify(name) %>DialogComponent, <%= classify(name) %>DialogData, <%= classify(name) %>DialogResult>(<%= classify(name) %>DialogComponent, {
+      .open<<%= classify(name) %>Component, <%= classify(name) %>Data, <%= classify(name) %>Result>(<%= classify(name) %>Component, {
         data,
         role: 'dialog',
         id: 'test-story-dialog',
@@ -45,7 +45,7 @@ class StoryDialogComponent {
 }
 
 export default {
-  title: '<%= classify(name) %>DialogComponent story',
+  title: '<%= classify(name) %>Component story',
   component: StoryDialogComponent,
 } as Meta;
 

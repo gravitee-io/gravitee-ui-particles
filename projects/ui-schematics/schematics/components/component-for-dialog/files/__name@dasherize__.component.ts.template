@@ -17,21 +17,21 @@ import { Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
-export interface <%= classify(name) %>DialogData {}
+export interface <%= classify(name) %>Data {}
 
-export type <%= classify(name) %>DialogResult = boolean;
+export type <%= classify(name) %>Result = boolean;
 
 @Component({
-  selector: '<%= dasherize(name) %>-dialog',
-  templateUrl: './<%= dasherize(name) %>-dialog.component.html',
-  styleUrls: ['./<%= dasherize(name) %>-dialog.component.scss'],
+  selector: '<%= dasherize(name) %>',
+  templateUrl: './<%= dasherize(name) %>.component.html',
+  styleUrls: ['./<%= dasherize(name) %>.component.scss'],
   standalone: true,
   imports: [MatDialogModule, MatButtonModule],
 })
-export class <%= classify(name) %>DialogComponent {
+export class <%= classify(name) %>Component {
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data: <%= classify(name) %>DialogData,
-    public dialogRef: MatDialogRef<<%= classify(name) %>DialogComponent, <%= classify(name) %>DialogResult>,
+    public data: <%= classify(name) %>Data,
+    public dialogRef: MatDialogRef<<%= classify(name) %>Component, <%= classify(name) %>Result>,
   ) {}
 }

@@ -17,13 +17,13 @@ import { BaseHarnessFilters, ComponentHarness, HarnessPredicate } from '@angular
 import { MatDialogSection } from '@angular/material/dialog/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 
-export interface <%= classify(name) %>DialogHarnessOptions extends BaseHarnessFilters {}
+export interface <%= classify(name) %>HarnessOptions extends BaseHarnessFilters {}
 
-export class <%= classify(name) %>DialogHarness extends ComponentHarness {
-  public static readonly hostSelector = `<%= dasherize(name) %>-dialog`;
+export class <%= classify(name) %>Harness extends ComponentHarness {
+  public static readonly hostSelector = `<%= dasherize(name) %>`;
 
-  public static with(options: <%= classify(name) %>DialogHarnessOptions): HarnessPredicate<<%= classify(name) %>DialogHarness> {
-    return new HarnessPredicate(<%= classify(name) %>DialogHarness, options);
+  public static with(options: <%= classify(name) %>HarnessOptions): HarnessPredicate<<%= classify(name) %>Harness> {
+    return new HarnessPredicate(<%= classify(name) %>Harness, options);
   }
 
   protected _title = this.locatorForOptional(MatDialogSection.TITLE);

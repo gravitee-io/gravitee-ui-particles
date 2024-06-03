@@ -15,7 +15,7 @@
     limitations under the License.
 
 -->
-<span mat-dialog-title><%= name %> Dialog</span>
+<span mat-dialog-title><%= name %></span>
 
 <mat-dialog-content>
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel odio nec mi

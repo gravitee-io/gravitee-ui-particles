@@ -13,21 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/*
- * Copyright (C) 2015 The Gravitee team (http://gravitee.io)
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *         http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,20 +21,20 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
-import { <%= classify(name) %>DialogHarness } from './<%= dasherize(name) %>-dialog.harness';
-import { <%= classify(name) %>DialogComponent, <%= classify(name) %>DialogData, <%= classify(name) %>DialogResult } from './<%= dasherize(name) %>-dialog.component';
+import { <%= classify(name) %>Harness } from './<%= dasherize(name) %>.harness';
+import { <%= classify(name) %>Component, <%= classify(name) %>Data, <%= classify(name) %>Result } from './<%= dasherize(name) %>.component';
 
 @Component({
   selector: 'test-component',
   template: ``,
-  imports: [<%= classify(name) %>DialogComponent, MatDialogModule, MatIconTestingModule],
+  imports: [<%= classify(name) %>Component, MatDialogModule, MatIconTestingModule],
   standalone: true,
 })
 class SpecDialogComponent {
   constructor(private readonly matDialog: MatDialog) {}
 
-  public open(data?: <%= classify(name) %>DialogData) {
-    return this.matDialog.open<<%= classify(name) %>DialogComponent, <%= classify(name) %>DialogData, <%= classify(name) %>DialogResult>(<%= classify(name) %>DialogComponent, {
+  public open(data?: <%= classify(name) %>Data) {
+    return this.matDialog.open<<%= classify(name) %>Component, <%= classify(name) %>Data, <%= classify(name) %>Result>(<%= classify(name) %>Component, {
       data,
       role: 'dialog',
       id: 'test-dialog',
@@ -57,7 +42,7 @@ class SpecDialogComponent {
   }
 }
 
-describe('<%= classify(name) %>DialogComponent', () => {
+describe('<%= classify(name) %>Component', () => {
   let fixture: ComponentFixture<SpecDialogComponent>;
   let loader: HarnessLoader;
 
@@ -74,9 +59,9 @@ describe('<%= classify(name) %>DialogComponent', () => {
   it('should open dialog', async () => {
     fixture.componentInstance.open();
 
-    const dialog = await loader.getHarness(<%= classify(name) %>DialogHarness);
+    const dialog = await loader.getHarness(<%= classify(name) %>Harness);
 
-    expect(await dialog.getTitleText()).toEqual('<%= classify(name) %> Dialog');
+    expect(await dialog.getTitleText()).toEqual('<%= name %>');
     expect(await dialog.getContentText()).toContain('Lorem');
     expect(await dialog.getActionsText()).toContain('My action');
   });
@@ -88,7 +73,7 @@ describe('<%= classify(name) %>DialogComponent', () => {
       .afterClosed()
       .subscribe(result => (dialogResult = result));
 
-    const dialog = await loader.getHarness(<%= classify(name) %>DialogHarness);
+    const dialog = await loader.getHarness(<%= classify(name) %>Harness);
 
     await dialog.close();
     expect(dialogResult).toEqual(false);
@@ -101,7 +86,7 @@ describe('<%= classify(name) %>DialogComponent', () => {
       .afterClosed()
       .subscribe(result => (dialogResult = result));
 
-    const dialog = await loader.getHarness(<%= classify(name) %>DialogHarness);
+    const dialog = await loader.getHarness(<%= classify(name) %>Harness);
 
     await dialog.confirmMyAction();
     expect(dialogResult).toEqual(true);

@@ -13,11 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Rule } from '@angular-devkit/schematics';
+import { Rule, SchematicsException } from '@angular-devkit/schematics';
 
 import { createComponent } from '../utils';
 import { Schema } from '../schema';
 
 export function createComponentForDialog(options: Schema): Rule {
+  if (options.name.includes('dialog')) {
+    throw new SchematicsException('Component name should not contain "dialog". Dialog suffix will be added automatically.');
+  }
+
+  options.name = `${options.name}-dialog`;
   return createComponent(options);
 }
