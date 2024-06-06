@@ -16,5 +16,6 @@
 
 :host {
   display: grid;
+  gap: 6px;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
 }
