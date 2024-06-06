@@ -31,7 +31,7 @@ $accent: map.get(gio.$mat-theme, accent);
   flex: 1 1 auto;
   border: 1px solid var(--mdc-outlined-text-field-outline-color);
   border-radius: 4px;
-  margin: 6px;
+  margin: 6px 0;
   cursor: pointer;
 
   .selection-icon {
@@ -58,7 +58,7 @@ $accent: map.get(gio.$mat-theme, accent);
 
   &.selected {
     border: 2px solid mat.get-color-from-palette($accent);
-    margin: 5px;
+    margin: 5px 0;
     color: mat.get-color-from-palette($accent);
 
     .selection-icon__radio-icon {
