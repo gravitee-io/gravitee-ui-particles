@@ -72,6 +72,6 @@
 <ng-template #filePreview let-fileValue="fileValue">
   <div class="file-picker__preview__image" *ngIf="fileValue.isImage" [style.background-image]="'url(' + fileValue.dataUrl + ')'"></div>
   <div class="file-picker__preview__file" *ngIf="!fileValue.isImage">
-    <p>{{ fileValue.name }}</p>
+    <span class="file-picker__preview__file__name">{{ fileValue.name }}</span>
   </div>
 </ng-template>
