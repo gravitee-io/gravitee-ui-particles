@@ -106,6 +106,12 @@ $typography: map.get(gio.$mat-theme, typography);
       code {
         @include mat.typography-level($typography, 'caption');
       }
+
+      &__name {
+        position: absolute;
+        padding: 4px;
+        overflow-wrap: anywhere;
+      }
     }
 
     &.disabled {
