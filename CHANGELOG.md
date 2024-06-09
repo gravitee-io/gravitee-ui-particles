@@ -1,3 +1,11 @@
+## [12.11.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.11.2...v12.11.3) (2024-06-09)
+
+
+### Bug Fixes
+
+* improve form-file-picker with long file name ([456ede4](https://github.com/gravitee-io/gravitee-ui-particles/commit/456ede4863d85e56d5fa00be59ef7cb7b312f197))
+* remove default fist left marring ([5624201](https://github.com/gravitee-io/gravitee-ui-particles/commit/5624201339fe9bb86a0fad391f805e4661f620c6))
+
 ## [12.11.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.11.1...v12.11.2) (2024-06-03)
 
 
