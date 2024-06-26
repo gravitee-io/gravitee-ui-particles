@@ -1,3 +1,10 @@
+## [7.59.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.59.0...v7.59.1) (2024-06-26)
+
+
+### Bug Fixes
+
+* add pattern default error message ([6a618d5](https://github.com/gravitee-io/gravitee-ui-particles/commit/6a618d59c30d4d99f9fced3fd4cf647bcc5c8c84))
+
 # [7.59.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.58.0...v7.59.0) (2024-03-18)
 
 
