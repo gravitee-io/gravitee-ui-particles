@@ -65,6 +65,12 @@ export const stringExample: GioJsonSchema = {
       type: 'string',
       format: 'gio-cron',
     },
+    pattern: {
+      title: 'A string with a pattern validator',
+      description: 'Should not contains or ends with spaces',
+      type: 'string',
+      pattern: '^\\S+$',
+    },
   },
   required: ['requiredString', 'cron'],
 };

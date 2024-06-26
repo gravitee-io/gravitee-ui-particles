@@ -58,3 +58,8 @@ export function constValidationMessage(error: unknown, field: FormlyFieldConfig)
 export function typeValidationMessage({ schemaType }: { schemaType: unknown[] }): string {
   return `Should be "${schemaType[0]}".`;
 }
+
+export function patternValidationMessage(error: unknown, field: FormlyFieldConfig): string {
+  const key = field?.key?.toString() ?? 'Field';
+  return `${key.charAt(0).toUpperCase() + key.slice(1)} value does not respect the pattern: ${field?.props?.pattern}`;
+}
