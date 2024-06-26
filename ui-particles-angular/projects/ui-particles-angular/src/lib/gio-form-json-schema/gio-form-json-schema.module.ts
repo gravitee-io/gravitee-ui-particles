@@ -43,6 +43,7 @@ import {
   minItemsValidationMessage,
   maxItemsValidationMessage,
   constValidationMessage,
+  patternValidationMessage,
 } from './util/validation-message.util';
 import { GioFormJsonSchemaComponent } from './gio-form-json-schema.component';
 import { GioBannerWrapperComponent as GioBannerWrapperComponent } from './wrappers/gio-banner-wrapper.component';
@@ -87,6 +88,7 @@ import { GioFjsCodeEditorTypeComponent } from './type-component/code-editor-type
         { name: 'maxItems', message: maxItemsValidationMessage },
         { name: 'uniqueItems', message: 'Should NOT have duplicate items' },
         { name: 'const', message: constValidationMessage },
+        { name: 'pattern', message: patternValidationMessage },
       ],
       wrappers: [
         { name: 'gio-with-banner', component: GioBannerWrapperComponent },
