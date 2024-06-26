@@ -1,3 +1,10 @@
+## [12.11.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.11.3...v12.11.4) (2024-06-26)
+
+
+### Bug Fixes
+
+* add pattern default error message ([a9667db](https://github.com/gravitee-io/gravitee-ui-particles/commit/a9667dbb1cad4fbe821ed2cdb753f505acf0e248))
+
 ## [12.11.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.11.2...v12.11.3) (2024-06-09)
 
 
