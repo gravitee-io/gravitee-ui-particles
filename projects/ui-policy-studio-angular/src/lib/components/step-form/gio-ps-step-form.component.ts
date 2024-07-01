@@ -88,12 +88,7 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
     });
 
     this.stepForm.valueChanges.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
-      this.stepChange.emit({
-        ...this.step,
-        description: this.stepForm?.get('description')?.value,
-        condition: this.stepForm?.get('condition')?.value ?? undefined,
-        configuration: this.stepForm?.get('configuration')?.value,
-      });
+      this.emitStepChange();
     });
 
     this.stepForm.statusChanges.pipe(takeUntil(this.unsubscribe$)).subscribe(valid => {
@@ -107,8 +102,21 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
 
   public onJsonSchemaReady(isReady: boolean) {
     // When ready and if the form is valid, emit
-    if (isReady && this.stepForm?.status === 'VALID') {
-      this.isValid.emit(true);
+    if (isReady) {
+      this.emitStepChange();
+
+      if (this.stepForm?.status === 'VALID') {
+        this.isValid.emit(true);
+      }
     }
+  }
+
+  public emitStepChange(): void {
+    this.stepChange.emit({
+      ...this.step,
+      description: this.stepForm?.get('description')?.value,
+      condition: this.stepForm?.get('condition')?.value ?? undefined,
+      configuration: this.stepForm?.get('configuration')?.value,
+    });
   }
 }
