@@ -3905,7 +3905,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/stream-parser@npm:^0.19.0, @codemirror/stream-parser@npm:^0.19.3":
+"@codemirror/stream-parser@npm:^0.19.0":
   version: 0.19.3
   resolution: "@codemirror/stream-parser@npm:0.19.3"
   dependencies:
@@ -3916,6 +3916,20 @@ __metadata:
     "@lezer/common": ^0.15.0
     "@lezer/lr": ^0.15.0
   checksum: 4652120324d664e96f80cefdfd587a228e1de5676b6250e8deda0376f382b6c42b054be87f2bc2039e75e9b05a0794c115de2ccacd4ad3bffacb3264a1925856
+  languageName: node
+  linkType: hard
+
+"@codemirror/stream-parser@npm:^0.19.9":
+  version: 0.19.9
+  resolution: "@codemirror/stream-parser@npm:0.19.9"
+  dependencies:
+    "@codemirror/highlight": ^0.19.0
+    "@codemirror/language": ^0.19.0
+    "@codemirror/state": ^0.19.0
+    "@codemirror/text": ^0.19.0
+    "@lezer/common": ^0.15.0
+    "@lezer/lr": ^0.15.0
+  checksum: af2da2bdb7cbec1b70c303b6725118a8c1063a16f6a4cdab9b24d04242b5d0c06f4b250b9cd667352eb5c09b5bbd81d038b55e4652ed2fc05a6ea98ecf9672a9
   languageName: node
   linkType: hard
 
@@ -4782,29 +4796,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gravitee/ui-components@npm:^3.38.4":
-  version: 3.38.4
-  resolution: "@gravitee/ui-components@npm:3.38.4"
+"@gravitee/ui-components@npm:4.2.3-apim-5483-policy-studio-83d9ba0":
+  version: 4.2.3-apim-5483-policy-studio-83d9ba0
+  resolution: "@gravitee/ui-components@npm:4.2.3-apim-5483-policy-studio-83d9ba0"
   dependencies:
     "@codemirror/basic-setup": ^0.19.1
     "@codemirror/language-data": ^0.19.1
-    "@codemirror/stream-parser": ^0.19.3
+    "@codemirror/stream-parser": ^0.19.9
     "@formatjs/intl-locale": ^2.4.40
     "@formatjs/intl-relativetimeformat": ^9.3.2
+    "@messageformat/core": 3.3.0
+    "@popperjs/core": ^2.11.7
     clipboard-copy: ^4.0.0
     codemirror-asciidoc: ^2.0.0
     date-fns: ^2.26.0
+    dompurify: ^3.0.3
     jdenticon: ^3.1.0
     jsonschema: ^1.4.0
     lit: ^2.0.2
-    messageformat: ^2.3.0
     object-path: ^0.11.8
     resize-observer-polyfill: ^1.5.1
-    whatwg-fetch: ^3.4.1
+    whatwg-fetch: ^3.6.17
   peerDependencies:
-    "@asciidoctor/core": ^2.2.4
+    "@asciidoctor/core": ^3.0.2
     "@highcharts/map-collection": ^1.0.0 || ^2.0.0
-    asciidoctor: ^2.2.4
+    asciidoctor: ^3.0.2
     asciidoctor-highlight.js: ^0.3.0 || ^0.4.0
     highcharts: ^8.0.0 || ^9.0.0 || ^10.0.0
     highlight.js: ^10.7.0 || ^11.1.0
@@ -4821,7 +4837,7 @@ __metadata:
       optional: true
     highlight.js:
       optional: true
-  checksum: 8dd449fa6da3daa44e4d0fe672344735674ba557ddaa69ffefeb89c89df22985a0e44d39035519c0a8c132e52fb420f2567640641cd7246a3d35674d45d92459
+  checksum: 0616e7de5d24a90cdb59a7aba7d94177fef1dbf60ac6e22b3d0dc04726c91f2001d167e9474b9bc5f66d0983f6fc9da42ed27987817bdc87f27af860d2363b34
   languageName: node
   linkType: hard
 
@@ -5520,6 +5536,52 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@messageformat/core@npm:3.3.0":
+  version: 3.3.0
+  resolution: "@messageformat/core@npm:3.3.0"
+  dependencies:
+    "@messageformat/date-skeleton": ^1.0.0
+    "@messageformat/number-skeleton": ^1.0.0
+    "@messageformat/parser": ^5.1.0
+    "@messageformat/runtime": ^3.0.1
+    make-plural: ^7.0.0
+    safe-identifier: ^0.4.1
+  checksum: 9c4e8cb878567711b132305ba798358751f5db43cdbcd450469dd6bc880fcf7edb313bf3f0eb8ad3e78c86aeaa7c32050b611dfd3b8ec2ae4e58373973082ea0
+  languageName: node
+  linkType: hard
+
+"@messageformat/date-skeleton@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "@messageformat/date-skeleton@npm:1.0.1"
+  checksum: 0832029a18ae54c81d4473eaa764cebbabe084d1a3253a6d4975e5802bff7416a51d43522aad9292eb9663735282a7667e2818efc92905c497ca87424d822ceb
+  languageName: node
+  linkType: hard
+
+"@messageformat/number-skeleton@npm:^1.0.0":
+  version: 1.2.0
+  resolution: "@messageformat/number-skeleton@npm:1.2.0"
+  checksum: deb38fc45248a774e142437c5687a4ba452ab4064ac7ac985da26376238a9f54bd43e6e90ab0756fedd35d4d83e36d2dfc336abf643d52ff3850f5d1eae59e0c
+  languageName: node
+  linkType: hard
+
+"@messageformat/parser@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "@messageformat/parser@npm:5.1.0"
+  dependencies:
+    moo: ^0.5.1
+  checksum: e5c53d1328f90bcf4bf01321c996e4aa18bff95e30b4bb508284a7f290bbaf496adffec20407596aaf6556467cbd82bee8931ca0982a4254ded651569d356da2
+  languageName: node
+  linkType: hard
+
+"@messageformat/runtime@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "@messageformat/runtime@npm:3.0.1"
+  dependencies:
+    make-plural: ^7.0.0
+  checksum: e69c3b0b372e15af88c285f6884ac0e3ba5fc7227b8ddc7f4bef94cb5675057126dc0ae9001e2a623d7ec61727d9b5e69b8e61be8618afe0baf40081ad3b0568
+  languageName: node
+  linkType: hard
+
 "@mrmlnc/readdir-enhanced@npm:^2.2.1":
   version: 2.2.1
   resolution: "@mrmlnc/readdir-enhanced@npm:2.2.1"
@@ -6086,6 +6148,13 @@ __metadata:
     node-gyp: latest
     node-gyp-build: ^4.3.0
   checksum: 890bdc69a52942791b276caa2cd65ef816576d6b5ada91aa28cf302b35d567c801dafe167f2525dcb313f5b420986ea11bd56228dd7ddde1116944d8f924a0a1
+  languageName: node
+  linkType: hard
+
+"@popperjs/core@npm:^2.11.7":
+  version: 2.11.8
+  resolution: "@popperjs/core@npm:2.11.8"
+  checksum: e5c69fdebf52a4012f6a1f14817ca8e9599cb1be73dd1387e1785e2ed5e5f0862ff817f420a87c7fc532add1f88a12e25aeb010ffcbdc98eace3d55ce2139cf0
   languageName: node
   linkType: hard
 
@@ -12831,6 +12900,13 @@ __metadata:
   dependencies:
     domelementtype: ^2.2.0
   checksum: 4c665ceed016e1911bf7d1dadc09dc888090b64dee7851cccd2fcf5442747ec39c647bb1cb8c8919f8bbdd0f0c625a6bafeeed4b2d656bbecdbae893f43ffaaa
+  languageName: node
+  linkType: hard
+
+"dompurify@npm:^3.0.3":
+  version: 3.1.5
+  resolution: "dompurify@npm:3.1.5"
+  checksum: 18ae2930cba3c260889b99e312c382c344d219bd113bc39fbb665a61987d25849021768f490395e6954aab94448a24b3c3721c160b53550547110c37cebe9feb
   languageName: node
   linkType: hard
 
@@ -19694,17 +19770,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"make-plural@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "make-plural@npm:4.3.0"
-  dependencies:
-    minimist: ^1.2.0
-  dependenciesMeta:
-    minimist:
-      optional: true
-  bin:
-    make-plural: ./bin/make-plural
-  checksum: 1702556e988d7f0b64f10260bf897be3b32e973fbb21b59175ba2ece75ad4d49b9d8caea2ef633dd573e6009051f221fe350907d9f2a904a21e9c9b7b964fba4
+"make-plural@npm:^7.0.0":
+  version: 7.4.0
+  resolution: "make-plural@npm:7.4.0"
+  checksum: f2e58b6efd3e099ebc076d6c6b60854740886006a7af9cfcb1d4478409efbdd41f6ae14921b8eef4f1cbc0702ff7a29f159199d7ac0831784d0bbfcfded39558
   languageName: node
   linkType: hard
 
@@ -19991,31 +20060,6 @@ __metadata:
   version: 1.4.1
   resolution: "merge2@npm:1.4.1"
   checksum: 7268db63ed5169466540b6fb947aec313200bcf6d40c5ab722c22e242f651994619bcd85601602972d3c85bd2cc45a358a4c61937e9f11a061919a1da569b0c2
-  languageName: node
-  linkType: hard
-
-"messageformat-formatters@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "messageformat-formatters@npm:2.0.1"
-  checksum: 847d034aaf354abd6af2dc8ff3d0f98b165242545916fa060714201afa14b60a4d246951ef354fc8511de9dde36c16b69ca348ed6c79116840f9f0511cf61ab4
-  languageName: node
-  linkType: hard
-
-"messageformat-parser@npm:^4.1.2":
-  version: 4.1.3
-  resolution: "messageformat-parser@npm:4.1.3"
-  checksum: d5a72581116b1813460241672ffb6ff3e2f05c311d48c7d81daf368f5254447dda095756e53830664383c51c707dbf387c21b35cd341b7edd4f2945656ac476f
-  languageName: node
-  linkType: hard
-
-"messageformat@npm:^2.3.0":
-  version: 2.3.0
-  resolution: "messageformat@npm:2.3.0"
-  dependencies:
-    make-plural: ^4.3.0
-    messageformat-formatters: ^2.0.1
-    messageformat-parser: ^4.1.2
-  checksum: 9c336657cbd60c968a64b1895e84d19cb53634124814cdb60a5a87803b9d66844820fe5dae0c823f1d9b7c7776c8b5cfe434c5c45633f5ce3702c5d7a294c9da
   languageName: node
   linkType: hard
 
@@ -20481,6 +20525,13 @@ __metadata:
   version: 0.36.1
   resolution: "monaco-editor@npm:0.36.1"
   checksum: 75e7cfbe03b4cb964e550c8021d6b2cc4f5265ee17703ddda7a63a26492a95fdbfaf34aa3e50004930ff8afb1422ae2b1dc0b9d3f122d558bdf1a335403937fd
+  languageName: node
+  linkType: hard
+
+"moo@npm:^0.5.1":
+  version: 0.5.2
+  resolution: "moo@npm:0.5.2"
+  checksum: 5a41ddf1059fd0feb674d917c4774e41c877f1ca980253be4d3aae1a37f4bc513f88815041243f36f5cf67a62fb39324f3f997cf7fb17b6cb00767c165e7c499
   languageName: node
   linkType: hard
 
@@ -24780,6 +24831,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"safe-identifier@npm:^0.4.1":
+  version: 0.4.2
+  resolution: "safe-identifier@npm:0.4.2"
+  checksum: 67e28ed89a74cf20b827419003d3cb60a0ebaec0771c2c818f4b2239bf4f96e01ad90aa8db6dc57ee90c0c438b6f46323e4b5a3d955d18d8c4e158ea035cabdd
+  languageName: node
+  linkType: hard
+
 "safe-regex-test@npm:^1.0.0":
   version: 1.0.0
   resolution: "safe-regex-test@npm:1.0.0"
@@ -27461,7 +27519,7 @@ __metadata:
     "@fontsource/fira-mono": 4.5.10
     "@fontsource/golos-ui": ^4.5.3
     "@fontsource/material-icons": 4.5.4
-    "@gravitee/ui-components": ^3.38.4
+    "@gravitee/ui-components": 4.2.3-apim-5483-policy-studio-83d9ba0
     "@highcharts/map-collection": ^1.1.4
     "@ngx-formly/core": 6.1.8
     "@ngx-formly/material": 6.1.8
@@ -28611,10 +28669,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"whatwg-fetch@npm:^3.4.1":
-  version: 3.6.2
-  resolution: "whatwg-fetch@npm:3.6.2"
-  checksum: ee976b7249e7791edb0d0a62cd806b29006ad7ec3a3d89145921ad8c00a3a67e4be8f3fb3ec6bc7b58498724fd568d11aeeeea1f7827e7e1e5eae6c8a275afed
+"whatwg-fetch@npm:^3.6.17":
+  version: 3.6.20
+  resolution: "whatwg-fetch@npm:3.6.20"
+  checksum: c58851ea2c4efe5c2235f13450f426824cf0253c1d45da28f45900290ae602a20aff2ab43346f16ec58917d5562e159cd691efa368354b2e82918c2146a519c5
   languageName: node
   linkType: hard
 

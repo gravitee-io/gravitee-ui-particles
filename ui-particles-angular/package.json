@@ -33,7 +33,7 @@
     "@fontsource/fira-mono": "4.5.10",
     "@fontsource/golos-ui": "^4.5.3",
     "@fontsource/material-icons": "4.5.4",
-    "@gravitee/ui-components": "^3.38.4",
+    "@gravitee/ui-components": "4.2.3-apim-5483-policy-studio-83d9ba0",
     "@highcharts/map-collection": "^1.1.4",
     "@ngx-formly/core": "6.1.8",
     "@ngx-formly/material": "6.1.8",
