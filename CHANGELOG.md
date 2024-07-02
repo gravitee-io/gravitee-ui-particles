@@ -1,3 +1,10 @@
+# [12.12.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.11.4...v12.12.0) (2024-07-02)
+
+
+### Features
+
+* send policy default values on init ([579d449](https://github.com/gravitee-io/gravitee-ui-particles/commit/579d44992fbd34195de7830aa0d10d5c26707179))
+
 ## [12.11.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.11.3...v12.11.4) (2024-06-26)
 
 
