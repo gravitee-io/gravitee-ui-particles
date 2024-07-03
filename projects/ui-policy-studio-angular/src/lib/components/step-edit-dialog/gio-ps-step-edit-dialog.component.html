@@ -30,7 +30,13 @@
 </h2>
 
 <mat-dialog-content class="content">
-  <gio-ps-step-form [readOnly]="readOnly" [policy]="policy" [(step)]="step" (isValid)="isValid = $event"></gio-ps-step-form>
+  <gio-ps-step-form
+    [readOnly]="readOnly"
+    [policy]="policy"
+    [executionPhase]="executionPhase"
+    [(step)]="step"
+    (isValid)="isValid = $event"
+  ></gio-ps-step-form>
 </mat-dialog-content>
 
 <mat-dialog-actions class="actions" align="end">

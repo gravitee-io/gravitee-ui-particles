@@ -36,6 +36,7 @@
       <gio-form-json-schema
         *ngIf="policySchema"
         [jsonSchema]="$any(policySchema)"
+        [context]="context"
         (ready)="onJsonSchemaReady($event)"
         formControlName="configuration"
       ></gio-form-json-schema>

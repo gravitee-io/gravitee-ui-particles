@@ -50,6 +50,7 @@ type PolicyVM = Policy & {
 export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy {
   public policies: PolicyVM[] = [];
 
+  public executionPhase!: ExecutionPhase;
   public executionPhaseLabel!: string;
 
   public selectedPolicy?: Policy;
@@ -79,6 +80,7 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
     public dialogRef: MatDialogRef<GioPolicyStudioPoliciesCatalogDialogComponent, GioPolicyStudioPoliciesCatalogDialogResult>,
     @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioPoliciesCatalogDialogData,
   ) {
+    this.executionPhase = flowDialogData.executionPhase;
     this.executionPhaseLabel = executionPhaseLabels[flowDialogData.executionPhase];
 
     this.allPolicies = flowDialogData.policies

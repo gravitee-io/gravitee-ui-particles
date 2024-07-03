@@ -97,6 +97,7 @@ describe('GioPolicyStudioStepEditDialogComponent', () => {
     component.dialogData = {
       policy,
       step,
+      executionPhase: 'REQUEST',
     };
     loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
   };
