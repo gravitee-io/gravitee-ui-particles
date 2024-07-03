@@ -62,9 +62,7 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
       this.policySchema$ = this.policyStudioService.getPolicySchema(this.policy).pipe(
         map(schema => {
           if (GioFormJsonSchemaComponent.isDisplayable(schema as GioJsonSchema)) {
-            const gioJsonSchema = schema as GioJsonSchema;
-            gioJsonSchema.readOnly = this.readOnly;
-            return gioJsonSchema;
+            return schema as GioJsonSchema;
           }
           return {};
         }),
@@ -92,9 +90,9 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
 
   private initStepForm(): void {
     this.stepForm = new UntypedFormGroup({
-      description: new UntypedFormControl(this.step?.description),
-      condition: new UntypedFormControl(this.step?.condition),
-      configuration: new UntypedFormControl(this.step?.configuration ?? {}),
+      description: new UntypedFormControl({ value: this.step?.description, disabled: this.readOnly }),
+      condition: new UntypedFormControl({ value: this.step?.condition, disabled: this.readOnly }),
+      configuration: new UntypedFormControl({ value: this.step?.configuration, disabled: this.readOnly }),
     });
 
     this.stepForm.valueChanges.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
@@ -104,10 +102,6 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
     this.stepForm.statusChanges.pipe(takeUntil(this.unsubscribe$)).subscribe(valid => {
       this.isValid.emit(valid === 'VALID');
     });
-
-    if (this.readOnly) {
-      this.stepForm.disable({ emitEvent: false });
-    }
   }
 
   public onJsonSchemaReady(isReady: boolean) {
