@@ -23,6 +23,7 @@ import { CommonModule } from '@angular/common';
 
 import GioJsonSchema from './model/GioJsonSchema.json';
 import { FormlyJSONSchema7 } from './model/FormlyJSONSchema7';
+import { GioJsonSchemaContext } from './model/GioJsonSchemaContext';
 
 const ajv = new Ajv({ strict: false, logger: false });
 @Component({
@@ -48,6 +49,9 @@ export class DemoComponent implements OnChanges, OnDestroy {
 
   @Input()
   public withToggle = false;
+
+  @Input()
+  public context?: GioJsonSchemaContext;
 
   public form?: UntypedFormGroup;
   public options: FormlyFormOptions = {};

@@ -53,6 +53,7 @@ export * from './gio-mat-config';
 export * from './gio-form-json-schema/gio-form-json-schema.component';
 export * from './gio-form-json-schema/gio-form-json-schema.module';
 export * from './gio-form-json-schema/model/GioJsonSchema';
+export * from './gio-form-json-schema/model/GioJsonSchemaContext';
 
 export * from './gio-form-slide-toggle/gio-form-slide-toggle.component';
 export * from './gio-form-slide-toggle/gio-form-slide-toggle.module';

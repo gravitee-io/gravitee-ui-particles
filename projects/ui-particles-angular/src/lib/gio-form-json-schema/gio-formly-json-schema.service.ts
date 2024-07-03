@@ -17,9 +17,10 @@ import { Injectable } from '@angular/core';
 import { FormlyFieldConfig, FormlyFormBuilder } from '@ngx-formly/core';
 import { FormlyJsonschema } from '@ngx-formly/core/json-schema';
 import { JSONSchema7 } from 'json-schema';
-import { isArray, isEmpty } from 'lodash';
+import { castArray, get, isArray, isEmpty, isNil, isObject } from 'lodash';
 
-import { GioJsonSchema } from './model/GioJsonSchema';
+import { GioIfConfig, GioJsonSchema } from './model/GioJsonSchema';
+import { GioJsonSchemaContext } from './model/GioJsonSchemaContext';
 
 @Injectable()
 export class GioFormlyJsonSchemaService {
@@ -28,20 +29,48 @@ export class GioFormlyJsonSchemaService {
     private readonly builder: FormlyFormBuilder,
   ) {}
 
-  public toFormlyFieldConfig(jsonSchema: GioJsonSchema): FormlyFieldConfig {
+  public toFormlyFieldConfig(jsonSchema: GioJsonSchema, context?: GioJsonSchemaContext): FormlyFieldConfig {
     return this.formlyJsonschema.toFieldConfig(jsonSchema, {
       map: (mappedField: FormlyFieldConfig, mapSource: JSONSchema7) => {
+        mappedField = this.displayIfMap(mappedField, mapSource, context);
         mappedField = this.uiTypeMap(mappedField, mapSource);
         mappedField = this.formatMap(mappedField, mapSource);
         mappedField = this.bannerMap(mappedField, mapSource);
         mappedField = this.toggleMap(mappedField, mapSource);
-        mappedField = this.disabledMap(mappedField, mapSource);
+        mappedField = this.disableIfMap(mappedField, mapSource, context);
         mappedField = this.enumLabelMap(mappedField, mapSource);
         mappedField = this.deprecatedMap(mappedField, mapSource);
 
         return mappedField;
       },
     });
+  }
+
+  private displayIfMap(mappedField: FormlyFieldConfig, mapSource: JSONSchema7, context?: GioJsonSchemaContext): FormlyFieldConfig {
+    const displayIf = getGioIf(mapSource.gioConfig?.displayIf);
+    if (displayIf) {
+      mappedField.expressions = {
+        ...mappedField.expressions,
+        hide: field => {
+          let parentField = field;
+          while (parentField.parent) {
+            parentField = parentField.parent;
+          }
+
+          try {
+            return !displayIf({
+              value: parentField.model,
+              context,
+            });
+          } catch (e) {
+            // Ignore the error and display the field
+            return false;
+          }
+        },
+      };
+    }
+
+    return mappedField;
   }
 
   private uiTypeMap(mappedField: FormlyFieldConfig, mapSource: JSONSchema7): FormlyFieldConfig {
@@ -105,11 +134,41 @@ export class GioFormlyJsonSchemaService {
     return mappedField;
   }
 
-  private disabledMap(mappedField: FormlyFieldConfig, _mapSource: JSONSchema7): FormlyFieldConfig {
-    mappedField.expressions = {
-      ...mappedField.expressions,
-      'props.disabled': field => field.options?.formState.disabled === true || field.props?.disabled === true,
-    };
+  private disableIfMap(mappedField: FormlyFieldConfig, mapSource: JSONSchema7, context?: GioJsonSchemaContext): FormlyFieldConfig {
+    const disableIf = getGioIf(mapSource.gioConfig?.disableIf);
+    if (disableIf) {
+      mappedField.expressions = {
+        ...mappedField.expressions,
+        'props.disabled': field => {
+          const isReadOnly = field.props?.readonly === true;
+          const isParentDisabled = field.options?.formState?.parentDisabled === true;
+          if (isParentDisabled || isReadOnly) {
+            // Useful when field is readonly to avoid to enable it
+            field.formControl?.disable({ emitEvent: false });
+            return true;
+          }
+
+          let parentField = field;
+          while (parentField.parent) {
+            parentField = parentField.parent;
+          }
+
+          try {
+            const isDisabled = disableIf({
+              value: parentField.model,
+              context,
+            });
+            // Useful when full form is re-enabled to sync the fromControl enable/disable state
+            isDisabled ? field.formControl?.disable({ emitEvent: false }) : field.formControl?.enable({ emitEvent: false });
+            return isDisabled;
+          } catch (e) {
+            // Ignore the error and keep default value
+            return field.props?.disabled;
+          }
+        },
+      };
+    }
+
     return mappedField;
   }
 
@@ -156,5 +215,28 @@ const getBannerProperties = (banner: { title: string; text: string } | { text: s
   return {
     bannerText: banner.text,
     bannerTitle: 'title' in banner ? banner.title : undefined,
+  };
+};
+
+const getGioIf = (
+  gioIf?: GioIfConfig,
+): ((objectToCheck?: { value?: FormlyFieldConfig['model']; context?: Record<string, unknown> }) => boolean) | undefined => {
+  const $eq = gioIf?.$eq;
+  if (isNil($eq) || !isObject($eq)) {
+    return undefined;
+  }
+
+  return objectToCheck => {
+    if (isEmpty(objectToCheck)) {
+      return false;
+    }
+
+    return Object.entries($eq)
+      .map(([k, v]) => ({ path: k, eqValue: castArray(v) }))
+      .every(({ path, eqValue }) => {
+        const value = get(objectToCheck, path);
+
+        return eqValue.includes(value);
+      });
   };
 };

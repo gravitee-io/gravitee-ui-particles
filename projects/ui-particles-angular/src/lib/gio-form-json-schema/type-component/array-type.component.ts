@@ -40,14 +40,14 @@ import { FieldArrayType } from '@ngx-formly/core';
         <div *ngFor="let field of field.fieldGroup; let i = index" class="wrapper__rows__row">
           <formly-field class="wrapper__rows__row__field" [field]="field"></formly-field>
           <div class="wrapper__rows__row__remove">
-            <button type="button" mat-icon-button aria-label="Remove" [disabled]="this.form?.disabled ?? false" (click)="remove(i)">
+            <button type="button" mat-icon-button aria-label="Remove" [disabled]="this.formControl?.disabled ?? false" (click)="remove(i)">
               <mat-icon svgIcon="gio:cancel"></mat-icon>
             </button>
           </div>
         </div>
 
         <div>
-          <button type="button" mat-stroked-button aria-label="Add" [disabled]="this.form?.disabled ?? false" (click)="add()">
+          <button type="button" mat-stroked-button aria-label="Add" [disabled]="this.formControl?.disabled ?? false" (click)="add()">
             <mat-icon svgIcon="gio:plus"></mat-icon> Add
           </button>
         </div>

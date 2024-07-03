@@ -14,11 +14,17 @@
  * limitations under the License.
  */
 
+import { JSONSchema7 } from 'json-schema';
+
+import { GioMonacoEditorConfig } from '../type-component/code-editor-type.component';
+
 /**
  * GioConfig is used to add some custom configuration to the JSONSchema7
  * ⚠️ Keep updated with the GioJsonSchema.json to have the same interface ⚠️
  */
 export interface GioConfig extends GioUiTypeConfig {
+  displayIf?: GioIfConfig;
+  disableIf?: GioIfConfig;
   banner?: GioBannerConfig;
   monacoEditorConfig?: GioMonacoEditorConfig;
   enumLabelMap?: Record<string, string>;
@@ -40,6 +46,15 @@ type GioUiTypeConfig = {
   uiTypeProps?: Record<string, unknown>;
 };
 
+/*
+ * Condition
+ * The condition is a JSON object with the context key and the value to compare.
+ * Example: { $eq: { 'field': 'value' } }
+ */
+export type GioIfConfig = {
+  $eq: Record<string, string | number | boolean | Array<string | number | boolean>>;
+};
+
 /**
  * Override the JSONSchema7 interface to add gioConfig
  * Use this way because the JSONSchema7 interface is recursive
@@ -51,9 +66,5 @@ declare module 'json-schema' {
     deprecated?: boolean;
   }
 }
-
-import { JSONSchema7 } from 'json-schema';
-
-import { GioMonacoEditorConfig } from '../type-component/code-editor-type.component';
 
 export type GioJsonSchema = JSONSchema7;
