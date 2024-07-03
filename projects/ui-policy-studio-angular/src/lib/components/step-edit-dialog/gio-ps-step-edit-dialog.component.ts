@@ -16,11 +16,12 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { Policy, Step } from '../../models';
+import { ExecutionPhase, Policy, Step } from '../../models';
 
 export type GioPolicyStudioStepEditDialogData = {
   policy: Policy;
   step: Step;
+  executionPhase: ExecutionPhase;
   readOnly?: boolean;
 };
 
@@ -34,6 +35,7 @@ export type GioPolicyStudioStepEditDialogResult = undefined | Step;
 export class GioPolicyStudioStepEditDialogComponent {
   public policy!: Policy;
   public step!: Step;
+  public executionPhase!: ExecutionPhase;
 
   public isValid = false;
   public readOnly = false;
@@ -42,6 +44,7 @@ export class GioPolicyStudioStepEditDialogComponent {
     public dialogRef: MatDialogRef<GioPolicyStudioStepEditDialogComponent, GioPolicyStudioStepEditDialogResult>,
     @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioStepEditDialogData,
   ) {
+    this.executionPhase = flowDialogData.executionPhase;
     this.policy = flowDialogData.policy;
     this.step = flowDialogData.step;
     this.readOnly = Boolean(flowDialogData.readOnly);

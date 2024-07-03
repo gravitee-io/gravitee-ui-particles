@@ -17,7 +17,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import { MatDialog } from '@angular/material/dialog';
 import { GIO_DIALOG_WIDTH } from '@gravitee/ui-particles-angular';
 
-import { Policy, Step } from '../../models';
+import { ExecutionPhase, Policy, Step } from '../../models';
 import {
   GioPolicyStudioStepEditDialogComponent,
   GioPolicyStudioStepEditDialogData,
@@ -38,6 +38,9 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
 
   @Input()
   public policies: Policy[] = [];
+
+  @Input({ required: true })
+  public executionPhase!: ExecutionPhase;
 
   @Output()
   public stepChange = new EventEmitter<Step>();
@@ -72,6 +75,7 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
             readOnly: this.readOnly,
             policy: this.policy,
             step: this.step,
+            executionPhase: this.executionPhase,
           },
           role: 'alertdialog',
           id: 'gioPolicyStudioPolicyFormDialog',

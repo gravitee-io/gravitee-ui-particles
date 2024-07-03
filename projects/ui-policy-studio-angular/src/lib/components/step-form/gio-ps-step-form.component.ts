@@ -17,11 +17,11 @@ import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, S
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { map, takeUntil } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
-import { GioFormJsonSchemaComponent, GioJsonSchema } from '@gravitee/ui-particles-angular';
+import { GioFormJsonSchemaComponent, GioJsonSchema, GioJsonSchemaContext } from '@gravitee/ui-particles-angular';
 import { isEmpty } from 'lodash';
 
 import { GioPolicyStudioService } from '../../gio-policy-studio.service';
-import { Policy, Step } from '../../models';
+import { ExecutionPhase, Policy, Step } from '../../models';
 
 @Component({
   selector: 'gio-ps-step-form',
@@ -34,6 +34,9 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
 
   @Input()
   public step?: Step;
+
+  @Input({ required: true })
+  public executionPhase!: ExecutionPhase;
 
   @Input()
   public policy!: Policy;
@@ -48,6 +51,8 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
   public policyDocumentation$?: Observable<string>;
 
   public stepForm?: UntypedFormGroup;
+
+  public context?: GioJsonSchemaContext;
 
   private unsubscribe$ = new Subject<void>();
   constructor(private readonly policyStudioService: GioPolicyStudioService) {}
@@ -68,6 +73,11 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
       this.policyDocumentation$ = this.policyStudioService
         .getPolicyDocumentation(this.policy)
         .pipe(map(doc => (isEmpty(doc) ? 'No documentation available.' : doc)));
+    }
+    if (changes.executionPhase) {
+      this.context = {
+        executionPhase: this.executionPhase,
+      };
     }
   }
 
