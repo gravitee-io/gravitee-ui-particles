@@ -23,13 +23,13 @@
     <ng-container *ngIf="stepForm && (policySchema$ | async) as policySchema; else loadingTmpl" [formGroup]="stepForm">
       <mat-form-field>
         <mat-label>Description</mat-label>
-        <textarea [disabled]="readOnly" matInput formControlName="description" cdkFocusInitial></textarea>
+        <textarea matInput formControlName="description" cdkFocusInitial></textarea>
         <mat-hint>Describe how your policy works.</mat-hint>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Trigger condition</mat-label>
-        <input [disabled]="readOnly" matInput formControlName="condition" />
+        <input matInput formControlName="condition" />
         <mat-hint>The condition to execute this policy. Supports Expression Language.</mat-hint>
       </mat-form-field>
 
