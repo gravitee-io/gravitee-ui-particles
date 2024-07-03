@@ -25,6 +25,16 @@ export const codeEditorExample: GioJsonSchema = {
       type: 'string',
       format: 'gio-code-editor',
     },
+    jsonCodeEditor: {
+      title: 'Json code editor',
+      type: 'string',
+      format: 'gio-code-editor',
+      gioConfig: {
+        monacoEditorConfig: {
+          language: 'json',
+        },
+      },
+    },
   },
   required: ['codeEditor'],
 };

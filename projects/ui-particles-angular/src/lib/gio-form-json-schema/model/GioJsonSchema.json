@@ -151,6 +151,15 @@
         },
         "uiType": {
           "type": "string"
+        },
+        "monacoEditorConfig": {
+          "type": "object"
+        },
+        "enumLabelMap": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     }

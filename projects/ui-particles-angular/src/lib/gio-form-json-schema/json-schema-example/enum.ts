@@ -93,12 +93,19 @@ export const enumExample: GioJsonSchema = {
         $ref: '#/definitions/locations',
       },
     },
-    checkboxes: {
-      title: 'Locations Checkboxes',
+    multipleSelectCustomLabel: {
       type: 'array',
+      title: 'Multiple Select with custom label',
       uniqueItems: true,
       items: {
-        $ref: '#/definitions/locations',
+        enum: [null, 'joe', 'jane', 'mary'],
+        gioConfig: {
+          enumLabelMap: {
+            joe: 'Joe Smith',
+            jane: 'Jane Doe',
+            mary: 'Mary Johnson',
+          },
+        },
       },
     },
   },
