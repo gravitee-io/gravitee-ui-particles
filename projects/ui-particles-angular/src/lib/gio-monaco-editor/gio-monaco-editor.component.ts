@@ -41,13 +41,16 @@ import { JSONSchema } from './models/JSONSchemaAutoComplete';
 export type MonacoEditorLanguageConfig =
   | {
       language: 'json';
-      schemas: { uri: string; schema: unknown }[];
+      schemas?: { uri: string; schema: unknown }[];
     }
   | {
       language: 'markdown';
     }
   | {
       language: 'html';
+    }
+  | {
+      language: 'yaml';
     }
   | {
       language: 'spel';

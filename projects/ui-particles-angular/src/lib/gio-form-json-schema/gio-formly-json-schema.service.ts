@@ -114,12 +114,26 @@ export class GioFormlyJsonSchemaService {
   }
 
   private enumLabelMap(mappedField: FormlyFieldConfig, mapSource: JSONSchema7): FormlyFieldConfig {
-    if (mapSource.enum && !isEmpty(mapSource.enum) && mapSource.gioConfig?.enumLabelMap && isArray(mappedField.props?.options)) {
+    if (!isArray(mappedField.props?.options)) {
+      return mappedField;
+    }
+
+    const enumLabelMapInObject =
+      mapSource.enum && !isEmpty(mapSource.enum) && mapSource.gioConfig?.enumLabelMap ? mapSource.gioConfig?.enumLabelMap : null;
+    const enumLabelMapInArrayItem =
+      mapSource.items &&
+      mapSource.type === 'array' &&
+      !isEmpty((mapSource.items as JSONSchema7).enum) &&
+      (mapSource.items as JSONSchema7)?.gioConfig?.enumLabelMap
+        ? (mapSource.items as JSONSchema7)?.gioConfig?.enumLabelMap
+        : null;
+
+    if (enumLabelMapInObject || enumLabelMapInArrayItem) {
       mappedField.props = {
         ...mappedField.props,
         options: mappedField.props?.options?.map(({ value }) => {
           return {
-            label: value ? mapSource.gioConfig?.enumLabelMap?.[value] : value,
+            label: (enumLabelMapInObject || enumLabelMapInArrayItem)?.[value] ?? value,
             value: value,
           };
         }),
