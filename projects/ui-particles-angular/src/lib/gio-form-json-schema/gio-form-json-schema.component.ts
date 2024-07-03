@@ -32,7 +32,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, UntypedFormGroup, NgControl } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
-import { cloneDeep, isEmpty, isEqual, isObject } from 'lodash';
+import { cloneDeep, isEmpty, isEqual, isObject, set } from 'lodash';
 import { debounceTime, delay, distinctUntilChanged, filter, map, startWith, take, takeUntil, tap } from 'rxjs/operators';
 import { merge, ReplaySubject, Subject } from 'rxjs';
 import { FocusMonitor } from '@angular/cdk/a11y';
@@ -41,6 +41,7 @@ import { GIO_FORM_FOCUS_INVALID_IGNORE_SELECTOR } from '../gio-form-focus-first-
 
 import { GioJsonSchema } from './model/GioJsonSchema';
 import { GioFormlyJsonSchemaService } from './gio-formly-json-schema.service';
+import { GioJsonSchemaContext } from './model/GioJsonSchemaContext';
 
 @Component({
   selector: 'gio-form-json-schema',
@@ -59,12 +60,11 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnChang
   @HostBinding(`attr.${GIO_FORM_FOCUS_INVALID_IGNORE_SELECTOR}`)
   private gioFormFocusInvalidIgnore = true;
 
+  @Input({ required: true })
+  public jsonSchema!: GioJsonSchema;
+
   @Input()
-  public set jsonSchema(jsonSchema: GioJsonSchema) {
-    if (isObject(jsonSchema)) {
-      this.fields = [this.gioFormlyJsonSchema.toFormlyFieldConfig(jsonSchema)];
-    }
-  }
+  public context?: GioJsonSchemaContext;
 
   public formGroup: UntypedFormGroup = new UntypedFormGroup({});
 
@@ -123,6 +123,10 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnChang
     if (changes.jsonSchema) {
       this.isReady = false;
       this.ready.next(false);
+    }
+
+    if (changes.jsonSchema || changes.context) {
+      this.fields = [this.gioFormlyJsonSchema.toFormlyFieldConfig(this.jsonSchema, this.context)];
     }
   }
 
@@ -256,6 +260,7 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnChang
 
     this.isDisabled = isDisabled;
 
+    set(this.options, 'formState.parentDisabled', isDisabled);
     setTimeout(() => {
       isDisabled ? this.formGroup.disable({ emitEvent: false }) : this.formGroup.enable({ emitEvent: false });
       this.changeDetectorRef.markForCheck();

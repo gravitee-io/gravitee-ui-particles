@@ -33,7 +33,12 @@
           <mat-card-title>UI Preview</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <gio-form-json-schema [jsonSchema]="jsonSchema" [options]="options" formControlName="schemaValue"></gio-form-json-schema>
+          <gio-form-json-schema
+            [jsonSchema]="jsonSchema"
+            [options]="options"
+            [context]="context"
+            formControlName="schemaValue"
+          ></gio-form-json-schema>
         </mat-card-content>
 
         <mat-card-actions align="end">

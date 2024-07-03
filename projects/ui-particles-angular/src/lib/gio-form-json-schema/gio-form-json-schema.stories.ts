@@ -47,6 +47,8 @@ import { mqttAdvancedExample } from './json-schema-example/mqtt-advanced';
 import { httpProxyExample } from './json-schema-example/http-proxy';
 import { webhookAdvancedExample } from './json-schema-example/webhook-advanced';
 import { codeEditorExample } from './json-schema-example/code-editor';
+import { displayIfExample } from './json-schema-example/displayIf';
+import { disableIfExample } from './json-schema-example/disableIf';
 
 @NgModule({
   declarations: [DemoComponent],
@@ -82,14 +84,15 @@ export default {
       disable: true,
     },
   },
-  render: ({ jsonSchema, initialValue, disabled }) => ({
+  render: ({ jsonSchema, initialValue, disabled, context }) => ({
     template: `<gio-demo 
                     [jsonSchema]="jsonSchema" 
                     [initialValue]="initialValue"
                     [isChromatic]="isChromatic()" 
                     [disabled]="disabled"
+                    [context]="context"
                 ></gio-demo>`,
-    props: { jsonSchema, initialValue, isChromatic, disabled },
+    props: { jsonSchema, initialValue, isChromatic, disabled, context },
   }),
 } as Meta;
 
@@ -161,6 +164,22 @@ export const WithBanner: StoryObj = {
       },
     },
     initialValue: { sample: 'sample value' },
+  },
+};
+
+export const WithDisplayIf: StoryObj = {
+  name: 'With displayIf',
+  args: {
+    jsonSchema: displayIfExample,
+    context: { currentUser: 'foo' },
+  },
+};
+
+export const WithDisableIf: StoryObj = {
+  name: 'With disableIf',
+  args: {
+    jsonSchema: disableIfExample,
+    context: { currentUser: 'foo' },
   },
 };
 

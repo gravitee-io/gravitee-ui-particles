@@ -23,6 +23,25 @@
       "items": { "type": "string" },
       "uniqueItems": true,
       "default": []
+    },
+    "gioIfConfig": {
+      "type": "object",
+      "required": ["$eq"],
+      "properties": {
+        "$eq": {
+          "type": "object",
+          "additionalProperties": {
+            "oneOf": [
+              { "type": "string" },
+              { "type": "number" },
+              { "type": "boolean" },
+              { "type": "array", "items": { "type": "string" } },
+              { "type": "array", "items": { "type": "number" } },
+              { "type": "array", "items": { "type": "boolean" } }
+            ]
+          }
+        }
+      }
     }
   },
   "type": ["object", "boolean"],
@@ -160,6 +179,14 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "displayIf": {
+          "type": "object",
+          "$ref": "#/definitions/gioIfConfig"
+        },
+        "disableIf": {
+          "type": "object",
+          "$ref": "#/definitions/gioIfConfig"
         }
       }
     }
