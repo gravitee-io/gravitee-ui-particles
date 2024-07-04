@@ -1,3 +1,16 @@
+# [12.13.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.12.0...v12.13.0) (2024-07-04)
+
+
+### Bug Fixes
+
+* json-schema better work with enum & monaco-editor ([05ee3d0](https://github.com/gravitee-io/gravitee-ui-particles/commit/05ee3d02d9de14269099c422b7f124ebd9b5a2f9))
+
+
+### Features
+
+* impl displayIf & disableIf for json-schema to hide UI field regarding value & external context ([61fb899](https://github.com/gravitee-io/gravitee-ui-particles/commit/61fb899c18775f8dad147414df6d6c67dd7c945f))
+* studio - add executionPhase into policy json-schema context ([b40b39e](https://github.com/gravitee-io/gravitee-ui-particles/commit/b40b39eca4f70042d16e442d311e018983882719))
+
 # [12.12.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.11.4...v12.12.0) (2024-07-02)
 
 
