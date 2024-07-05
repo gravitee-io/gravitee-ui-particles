@@ -1,3 +1,10 @@
+## [12.13.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.13.0...v12.13.1) (2024-07-05)
+
+
+### Bug Fixes
+
+* do not compute FormlyField if no jsonSchema defined ([96f74cd](https://github.com/gravitee-io/gravitee-ui-particles/commit/96f74cdc163dcf469736c6171c40418a40951b4c))
+
 # [12.13.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.12.0...v12.13.0) (2024-07-04)
 
 
