@@ -126,7 +126,9 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnChang
     }
 
     if (changes.jsonSchema || changes.context) {
-      this.fields = [this.gioFormlyJsonSchema.toFormlyFieldConfig(this.jsonSchema, this.context)];
+      if (!isEmpty(this.jsonSchema)) {
+        this.fields = [this.gioFormlyJsonSchema.toFormlyFieldConfig(this.jsonSchema, this.context)];
+      }
     }
   }
 
