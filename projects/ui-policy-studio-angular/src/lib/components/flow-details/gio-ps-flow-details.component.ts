@@ -19,7 +19,7 @@ import { tap } from 'rxjs/operators';
 import { isEmpty } from 'lodash';
 import { GIO_DIALOG_WIDTH } from '@gravitee/ui-particles-angular';
 
-import { FlowVM } from '../../gio-policy-studio.model';
+import { FlowVM } from '../../policy-studio/gio-policy-studio.model';
 import {
   GioPolicyStudioFlowMessageFormDialogComponent,
   GioPolicyStudioFlowMessageFormDialogData,

@@ -23,7 +23,7 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { InteractivityChecker } from '@angular/cdk/a11y';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 
-import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
+import { GioPolicyStudioModule } from '../../policy-studio/gio-policy-studio.module';
 import { FlowExecution } from '../../models';
 import { fakeBestMatchFlowExecution, fakeDefaultFlowExecution } from '../../models/flow/FlowExecution.fixture';
 

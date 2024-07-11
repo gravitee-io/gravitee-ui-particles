@@ -22,9 +22,9 @@ import { of } from 'rxjs';
 import { GIO_DIALOG_WIDTH } from '@gravitee/ui-particles-angular';
 
 import { POLICIES_V4_UNREGISTERED_ICON, fakeAllPolicies } from '../../models/index-testing';
-import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
+import { GioPolicyStudioModule } from '../../policy-studio/gio-policy-studio.module';
 import { matIconRegisterProvider } from '../../../storybook-utils/mat-icon-register.provider';
-import { GioPolicyStudioService } from '../../gio-policy-studio.service';
+import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.service';
 import { fakePolicyDocumentation, fakePolicySchema } from '../../models/policy/PolicySchema.fixture';
 
 import {

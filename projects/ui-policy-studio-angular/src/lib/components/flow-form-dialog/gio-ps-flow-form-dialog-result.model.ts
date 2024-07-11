@@ -13,6 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { FlowVM } from '../../gio-policy-studio.model';
+import { FlowVM } from '../../policy-studio/gio-policy-studio.model';
 
 export type GioPolicyStudioFlowFormDialogResult = FlowVM | false;

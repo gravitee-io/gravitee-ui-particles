@@ -18,9 +18,7 @@ import { action } from '@storybook/addon-actions';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-import { matIconRegisterProvider } from '../storybook-utils/mat-icon-register.provider';
-
-import { GioPolicyStudioModule } from './gio-policy-studio.module';
+import { matIconRegisterProvider } from '../../storybook-utils/mat-icon-register.provider';
 import {
   POLICIES_V4_UNREGISTERED_ICON,
   fakeAllPolicies,
@@ -41,12 +39,14 @@ import {
   fakeWebsocketMessageEntrypoint,
   fakeSSEMessageEntrypoint,
   fakeMockMessageEndpoint,
-} from './models/index-testing';
-import { ChannelSelector, HttpSelector, Policy, SaveOutput } from './models';
-import { fakePolicyDocumentation, fakePolicySchema } from './models/policy/PolicySchema.fixture';
+} from '../models/index-testing';
+import { ChannelSelector, HttpSelector, Policy, SaveOutput } from '../models';
+import { fakePolicyDocumentation, fakePolicySchema } from '../models/policy/PolicySchema.fixture';
+
+import { GioPolicyStudioModule } from './gio-policy-studio.module';
 
 export default {
-  title: 'Policy Studio / APIM',
+  title: 'Policy Studio / APIM - Policy Studio',
   decorators: [
     moduleMetadata({
       imports: [GioPolicyStudioModule],

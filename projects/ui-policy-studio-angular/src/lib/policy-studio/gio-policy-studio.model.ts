@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Flow } from './models';
+import { Flow } from '../models';
 
 // Model used internally by the component and it's children
 export interface FlowVM extends Flow {

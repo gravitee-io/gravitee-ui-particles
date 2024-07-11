@@ -18,7 +18,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { cloneDeep, uniqueId } from 'lodash';
 
-import { FlowVM } from '../../../gio-policy-studio.model';
+import { FlowVM } from '../../../policy-studio/gio-policy-studio.model';
 import { ConditionSelector, HttpMethod, HttpMethods, HttpSelector } from '../../../models';
 import { GioPolicyStudioFlowFormDialogResult } from '../gio-ps-flow-form-dialog-result.model';
 

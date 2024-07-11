@@ -16,7 +16,7 @@
 import { Component, Input } from '@angular/core';
 import { isEmpty } from 'lodash';
 
-import { FlowVM } from '../../gio-policy-studio.model';
+import { FlowVM } from '../../policy-studio/gio-policy-studio.model';
 import { ChannelSelector, ConditionSelector, ConnectorInfo, HttpSelector, Operation } from '../../models';
 
 @Component({

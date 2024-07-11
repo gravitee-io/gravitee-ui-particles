@@ -23,14 +23,14 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { InteractivityChecker } from '@angular/cdk/a11y';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 
-import { GioPolicyStudioModule } from '../../../gio-policy-studio.module';
+import { GioPolicyStudioModule } from '../../../policy-studio/gio-policy-studio.module';
 import {
   fakeChannelFlow,
   fakeHTTPGetMessageEntrypoint,
   fakeSSEMessageEntrypoint,
   fakeWebhookMessageEntrypoint,
 } from '../../../models/index-testing';
-import { FlowVM } from '../../../gio-policy-studio.model';
+import { FlowVM } from '../../../policy-studio/gio-policy-studio.model';
 import { GioPolicyStudioFlowFormDialogResult } from '../gio-ps-flow-form-dialog-result.model';
 
 import {
