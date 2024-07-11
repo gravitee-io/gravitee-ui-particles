@@ -23,7 +23,7 @@ import {
   GioPolicyStudioFlowMessageFormDialogComponent,
   GioPolicyStudioFlowMessageFormDialogData,
 } from '../flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
-import { FlowGroupVM, FlowVM } from '../../gio-policy-studio.model';
+import { FlowGroupVM, FlowVM } from '../../policy-studio/gio-policy-studio.model';
 import { ApiType, ChannelSelector, ConditionSelector, ConnectorInfo, FlowExecution, HttpSelector, Operation } from '../../models';
 import {
   GioPolicyStudioFlowProxyFormDialogComponent,

@@ -36,19 +36,20 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatChipsModule } from '@angular/material/chips';
 
-import { GioPolicyStudioFlowMessageFormDialogComponent } from './components/flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
-import { GioPolicyStudioDetailsComponent } from './components/flow-details/gio-ps-flow-details.component';
-import { GioPolicyStudioFlowsMenuComponent } from './components/flows-menu/gio-ps-flows-menu.component';
+import { GioPolicyStudioFlowMessageFormDialogComponent } from '../components/flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
+import { GioPolicyStudioDetailsComponent } from '../components/flow-details/gio-ps-flow-details.component';
+import { GioPolicyStudioFlowsMenuComponent } from '../components/flows-menu/gio-ps-flows-menu.component';
+import { GioPolicyStudioFlowProxyFormDialogComponent } from '../components/flow-form-dialog/flow-proxy-form-dialog/gio-ps-flow-proxy-form-dialog.component';
+import { GioPolicyStudioDetailsInfoBarComponent } from '../components/flow-details-info-bar/gio-ps-flow-details-info-bar.component';
+import { GioPolicyStudioDetailsPhaseStepComponent } from '../components/flow-details-phase-step/gio-ps-flow-details-phase-step.component';
+import { GioPolicyStudioDetailsPhaseComponent } from '../components/flow-details-phase/gio-ps-flow-details-phase.component';
+import { GioPolicyStudioFlowExecutionFormDialogComponent } from '../components/flow-execution-form-dialog/gio-ps-flow-execution-form-dialog.component';
+import { GioFilterConnectorsByModePipe } from '../components/filter-pipe/gio-flter-connectors-by-mode.pipe';
+import { GioPolicyStudioPoliciesCatalogDialogComponent } from '../components/policies-catalog-dialog/gio-ps-policies-catalog-dialog.component';
+import { GioPolicyStudioStepEditDialogComponent } from '../components/step-edit-dialog/gio-ps-step-edit-dialog.component';
+import { GioPolicyStudioStepFormComponent } from '../components/step-form/gio-ps-step-form.component';
+
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
-import { GioPolicyStudioFlowProxyFormDialogComponent } from './components/flow-form-dialog/flow-proxy-form-dialog/gio-ps-flow-proxy-form-dialog.component';
-import { GioPolicyStudioDetailsInfoBarComponent } from './components/flow-details-info-bar/gio-ps-flow-details-info-bar.component';
-import { GioPolicyStudioDetailsPhaseStepComponent } from './components/flow-details-phase-step/gio-ps-flow-details-phase-step.component';
-import { GioPolicyStudioDetailsPhaseComponent } from './components/flow-details-phase/gio-ps-flow-details-phase.component';
-import { GioPolicyStudioFlowExecutionFormDialogComponent } from './components/flow-execution-form-dialog/gio-ps-flow-execution-form-dialog.component';
-import { GioFilterConnectorsByModePipe } from './components/filter-pipe/gio-flter-connectors-by-mode.pipe';
-import { GioPolicyStudioPoliciesCatalogDialogComponent } from './components/policies-catalog-dialog/gio-ps-policies-catalog-dialog.component';
-import { GioPolicyStudioStepEditDialogComponent } from './components/step-edit-dialog/gio-ps-step-edit-dialog.component';
-import { GioPolicyStudioStepFormComponent } from './components/step-form/gio-ps-step-form.component';
 
 @NgModule({
   declarations: [

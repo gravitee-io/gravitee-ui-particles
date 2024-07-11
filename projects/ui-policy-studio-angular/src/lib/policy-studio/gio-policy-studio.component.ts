@@ -27,7 +27,8 @@ import {
   PolicyDocumentationFetcher,
   PolicySchemaFetcher,
   SaveOutput,
-} from './models';
+} from '../models';
+
 import { FlowGroupVM, FlowVM } from './gio-policy-studio.model';
 import { GioPolicyStudioService } from './gio-policy-studio.service';
 

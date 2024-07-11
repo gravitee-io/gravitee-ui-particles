@@ -41,15 +41,15 @@ import {
   fakeTestPolicyStep,
   fakeWebhookMessageEntrypoint,
   fakeWebsocketMessageEntrypoint,
-} from '../public-testing-api';
+} from '../../public-testing-api';
+import { GioPolicyStudioDetailsHarness } from '../components/flow-details/gio-ps-flow-details.harness';
+import { GioPolicyStudioFlowsMenuHarness } from '../components/flows-menu/gio-ps-flows-menu.harness';
+import { ChannelSelector, SaveOutput } from '../models';
+import { fakePolicySchema } from '../models/policy/PolicySchema.fixture';
 
-import { GioPolicyStudioModule } from './gio-policy-studio.module';
-import { GioPolicyStudioComponent } from './gio-policy-studio.component';
-import { GioPolicyStudioDetailsHarness } from './components/flow-details/gio-ps-flow-details.harness';
-import { GioPolicyStudioFlowsMenuHarness } from './components/flows-menu/gio-ps-flows-menu.harness';
-import { ChannelSelector, SaveOutput } from './models';
 import { GioPolicyStudioHarness } from './gio-policy-studio.harness';
-import { fakePolicySchema } from './models/policy/PolicySchema.fixture';
+import { GioPolicyStudioComponent } from './gio-policy-studio.component';
+import { GioPolicyStudioModule } from './gio-policy-studio.module';
 
 describe('GioPolicyStudioModule', () => {
   let loader: HarnessLoader;

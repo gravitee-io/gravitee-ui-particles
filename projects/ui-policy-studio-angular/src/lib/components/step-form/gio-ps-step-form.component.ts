@@ -20,7 +20,7 @@ import { Observable, Subject } from 'rxjs';
 import { GioFormJsonSchemaComponent, GioJsonSchema, GioJsonSchemaContext } from '@gravitee/ui-particles-angular';
 import { isEmpty } from 'lodash';
 
-import { GioPolicyStudioService } from '../../gio-policy-studio.service';
+import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.service';
 import { ExecutionPhase, Policy, Step } from '../../models';
 
 @Component({

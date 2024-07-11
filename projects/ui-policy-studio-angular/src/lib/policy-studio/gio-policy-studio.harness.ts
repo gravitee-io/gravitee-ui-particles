@@ -18,13 +18,13 @@ import { ComponentHarness } from '@angular/cdk/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatTabGroupHarness } from '@angular/material/tabs/testing';
 
-import { ChannelSelector, ConditionSelector, Flow, FlowExecution, HttpSelector } from './models';
-import { GioPolicyStudioFlowsMenuHarness } from './components/flows-menu/gio-ps-flows-menu.harness';
-import { GioPolicyStudioDetailsHarness } from './components/flow-details/gio-ps-flow-details.harness';
-import { GioPolicyStudioFlowProxyFormDialogHarness } from './components/flow-form-dialog/flow-proxy-form-dialog/gio-ps-flow-proxy-form-dialog.harness';
-import { GioPolicyStudioFlowMessageFormDialogHarness } from './components/flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.harness';
-import { GioPolicyStudioFlowExecutionFormDialogHarness } from './components/flow-execution-form-dialog/gio-ps-flow-execution-form-dialog.harness';
-import { GioPolicyStudioDetailsPhaseHarness, PhaseType } from './components/flow-details-phase/gio-ps-flow-details-phase.harness';
+import { ChannelSelector, ConditionSelector, Flow, FlowExecution, HttpSelector } from '../models';
+import { GioPolicyStudioFlowsMenuHarness } from '../components/flows-menu/gio-ps-flows-menu.harness';
+import { GioPolicyStudioDetailsHarness } from '../components/flow-details/gio-ps-flow-details.harness';
+import { GioPolicyStudioFlowProxyFormDialogHarness } from '../components/flow-form-dialog/flow-proxy-form-dialog/gio-ps-flow-proxy-form-dialog.harness';
+import { GioPolicyStudioFlowMessageFormDialogHarness } from '../components/flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.harness';
+import { GioPolicyStudioFlowExecutionFormDialogHarness } from '../components/flow-execution-form-dialog/gio-ps-flow-execution-form-dialog.harness';
+import { GioPolicyStudioDetailsPhaseHarness, PhaseType } from '../components/flow-details-phase/gio-ps-flow-details-phase.harness';
 
 export class GioPolicyStudioHarness extends ComponentHarness {
   public static hostSelector = 'gio-policy-studio';

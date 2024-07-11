@@ -18,7 +18,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { Policy, PolicyDocumentationFetcher, PolicySchemaFetcher } from './models';
+import { Policy, PolicyDocumentationFetcher, PolicySchemaFetcher } from '../models';
 
 @Injectable({
   providedIn: 'root',

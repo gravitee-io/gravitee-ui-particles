@@ -27,9 +27,9 @@ import { MatInputHarness } from '@angular/material/input/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { fakeAllPolicies } from '../../models/index-testing';
-import { GioPolicyStudioModule } from '../../gio-policy-studio.module';
+import { GioPolicyStudioModule } from '../../policy-studio/gio-policy-studio.module';
 import { ApiType, ExecutionPhase, Policy } from '../../models';
-import { GioPolicyStudioService } from '../../gio-policy-studio.service';
+import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.service';
 import { fakePolicyDocumentation, fakePolicySchema } from '../../models/policy/PolicySchema.fixture';
 
 import {
