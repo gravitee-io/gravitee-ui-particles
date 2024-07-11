@@ -15,14 +15,13 @@
  */
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { Component, Input } from '@angular/core';
+import { Component, importProvidersFrom, Input } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { action } from '@storybook/addon-actions';
 import { of } from 'rxjs';
-import { GIO_DIALOG_WIDTH } from '@gravitee/ui-particles-angular';
+import { GIO_DIALOG_WIDTH, GioFormJsonSchemaModule } from '@gravitee/ui-particles-angular';
 
 import { POLICIES_V4_UNREGISTERED_ICON, fakeTestPolicyStep, fakeTestPolicy } from '../../models/index-testing';
-import { GioPolicyStudioModule } from '../../policy-studio/gio-policy-studio.module';
 import { matIconRegisterProvider } from '../../../storybook-utils/mat-icon-register.provider';
 import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.service';
 import { fakePolicyDocumentation, fakePolicySchema } from '../../models/policy/PolicySchema.fixture';
@@ -78,7 +77,7 @@ export default {
   decorators: [
     moduleMetadata({
       declarations: [GioPolicyStudioStepEditDialogStoryComponent],
-      imports: [GioPolicyStudioModule, MatDialogModule],
+      imports: [MatDialogModule],
     }),
     applicationConfig({
       providers: [
@@ -92,6 +91,7 @@ export default {
             return service;
           },
         },
+        importProvidersFrom(GioFormJsonSchemaModule),
       ],
     }),
   ],

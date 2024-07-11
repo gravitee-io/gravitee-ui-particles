@@ -19,6 +19,7 @@ import { filter, isEmpty } from 'lodash';
 import { ConnectorInfo, ConnectorMode } from '../../models';
 
 @Pipe({
+  standalone: true,
   name: 'gioFilterConnectorsByMode',
 })
 export class GioFilterConnectorsByModePipe implements PipeTransform {

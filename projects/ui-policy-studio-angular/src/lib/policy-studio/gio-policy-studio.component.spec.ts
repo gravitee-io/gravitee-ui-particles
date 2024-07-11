@@ -18,13 +18,14 @@ import { MatTooltipHarness } from '@angular/material/tooltip/testing';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
-import { SimpleChange } from '@angular/core';
+import { importProvidersFrom, SimpleChange } from '@angular/core';
 import { InteractivityChecker } from '@angular/cdk/a11y';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { of } from 'rxjs';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { GioFormJsonSchemaModule } from '@gravitee/ui-particles-angular';
 
 import {
   fakeAllPolicies,
@@ -49,9 +50,8 @@ import { fakePolicySchema } from '../models/policy/PolicySchema.fixture';
 
 import { GioPolicyStudioHarness } from './gio-policy-studio.harness';
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
-import { GioPolicyStudioModule } from './gio-policy-studio.module';
 
-describe('GioPolicyStudioModule', () => {
+describe('GioPolicyStudioComponent', () => {
   let loader: HarnessLoader;
   let component: GioPolicyStudioComponent;
   let fixture: ComponentFixture<GioPolicyStudioComponent>;
@@ -59,7 +59,8 @@ describe('GioPolicyStudioModule', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, HttpClientTestingModule, GioPolicyStudioModule, MatIconTestingModule],
+      imports: [NoopAnimationsModule, HttpClientTestingModule, GioPolicyStudioComponent, MatIconTestingModule],
+      providers: [importProvidersFrom(GioFormJsonSchemaModule)],
     })
       .overrideProvider(InteractivityChecker, {
         useValue: {

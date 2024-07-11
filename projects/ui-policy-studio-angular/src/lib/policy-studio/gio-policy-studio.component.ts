@@ -16,6 +16,10 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { cloneDeep, differenceBy, flatten, isEqual, omit, unionBy, uniqueId } from 'lodash';
 import { EMPTY, Subscription, timer } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { GioIconsModule } from '@gravitee/ui-particles-angular';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
 
 import {
   ApiType,
@@ -28,11 +32,22 @@ import {
   PolicySchemaFetcher,
   SaveOutput,
 } from '../models';
+import { GioPolicyStudioFlowsMenuComponent } from '../components/flows-menu/gio-ps-flows-menu.component';
+import { GioPolicyStudioDetailsComponent } from '../components/flow-details/gio-ps-flow-details.component';
 
 import { FlowGroupVM, FlowVM } from './gio-policy-studio.model';
 import { GioPolicyStudioService } from './gio-policy-studio.service';
 
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatTooltipModule,
+    MatButtonModule,
+    GioIconsModule,
+    GioPolicyStudioFlowsMenuComponent,
+    GioPolicyStudioDetailsComponent,
+  ],
   selector: 'gio-policy-studio',
   templateUrl: './gio-policy-studio.component.html',
   styleUrls: ['./gio-policy-studio.component.scss'],

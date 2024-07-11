@@ -14,16 +14,36 @@
  * limitations under the License.
  */
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { map, takeUntil } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
-import { GioFormJsonSchemaComponent, GioJsonSchema, GioJsonSchemaContext } from '@gravitee/ui-particles-angular';
+import {
+  GioFormJsonSchemaComponent,
+  GioFormJsonSchemaModule,
+  GioJsonSchema,
+  GioJsonSchemaContext,
+  GioLoaderModule,
+} from '@gravitee/ui-particles-angular';
 import { isEmpty } from 'lodash';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { GioAsciidoctorModule } from '@gravitee/ui-particles-angular/gio-asciidoctor';
 
-import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.service';
 import { ExecutionPhase, Policy, Step } from '../../models';
+import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.service';
 
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    GioFormJsonSchemaModule,
+    GioAsciidoctorModule,
+    GioLoaderModule,
+  ],
   selector: 'gio-ps-step-form',
   templateUrl: './gio-ps-step-form.component.html',
   styleUrls: ['./gio-ps-step-form.component.scss'],

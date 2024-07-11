@@ -16,14 +16,18 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { isEmpty } from 'lodash';
 import { MatDialog } from '@angular/material/dialog';
-import { GIO_DIALOG_WIDTH } from '@gravitee/ui-particles-angular';
+import { GIO_DIALOG_WIDTH, GioBannerModule, GioIconsModule } from '@gravitee/ui-particles-angular';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
-import { ApiType, ConnectorInfo, ExecutionPhase, Policy, Step } from '../../models';
 import {
   GioPolicyStudioPoliciesCatalogDialogComponent,
   GioPolicyStudioPoliciesCatalogDialogData,
   GioPolicyStudioPoliciesCatalogDialogResult,
 } from '../policies-catalog-dialog/gio-ps-policies-catalog-dialog.component';
+import { ApiType, ConnectorInfo, ExecutionPhase, Policy, Step } from '../../models';
+import { GioPolicyStudioDetailsPhaseStepComponent } from '../flow-details-phase-step/gio-ps-flow-details-phase-step.component';
 
 type StepVM =
   | {
@@ -40,6 +44,8 @@ type StepVM =
     };
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, MatTooltipModule, MatButtonModule, GioPolicyStudioDetailsPhaseStepComponent, GioIconsModule, GioBannerModule],
   selector: 'gio-ps-flow-details-phase',
   templateUrl: './gio-ps-flow-details-phase.component.html',
   styleUrls: ['./gio-ps-flow-details-phase.component.scss'],

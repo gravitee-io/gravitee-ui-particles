@@ -23,7 +23,6 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { InteractivityChecker } from '@angular/cdk/a11y';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 
-import { GioPolicyStudioModule } from '../../../policy-studio/gio-policy-studio.module';
 import { fakeChannelFlow, fakeHttpFlow } from '../../../models/index-testing';
 import { FlowVM } from '../../../policy-studio/gio-policy-studio.model';
 import { GioPolicyStudioFlowFormDialogResult } from '../gio-ps-flow-form-dialog-result.model';
@@ -78,7 +77,7 @@ describe('GioPolicyStudioFlowProxyFormDialogComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      imports: [GioPolicyStudioModule, MatDialogModule, NoopAnimationsModule, MatIconTestingModule],
+      imports: [GioPolicyStudioFlowProxyFormDialogComponent, MatDialogModule, NoopAnimationsModule, MatIconTestingModule],
     }).overrideProvider(InteractivityChecker, {
       useValue: {
         isFocusable: () => true, // This traps focus checks and so avoid warnings when dealing with

@@ -17,7 +17,10 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import { MatDialog } from '@angular/material/dialog';
 import { tap } from 'rxjs/operators';
 import { cloneDeep, isEmpty } from 'lodash';
-import { GIO_DIALOG_WIDTH } from '@gravitee/ui-particles-angular';
+import { GIO_DIALOG_WIDTH, GioIconsModule, GioLoaderModule } from '@gravitee/ui-particles-angular';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 import {
   GioPolicyStudioFlowMessageFormDialogComponent,
@@ -51,6 +54,8 @@ interface FlowMenuVM extends FlowVM {
 }
 
 @Component({
+  standalone: true,
+  imports: [GioIconsModule, MatTooltipModule, MatButtonModule, CommonModule, GioLoaderModule],
   selector: 'gio-ps-flows-menu',
   templateUrl: './gio-ps-flows-menu.component.html',
   styleUrls: ['./gio-ps-flows-menu.component.scss'],

@@ -14,13 +14,20 @@
  * limitations under the License.
  */
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { cloneDeep, uniqueId } from 'lodash';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { GioBannerModule, GioFormSlideToggleModule, GioFormTagsInputModule, GioIconsModule } from '@gravitee/ui-particles-angular';
 
-import { FlowVM } from '../../../policy-studio/gio-policy-studio.model';
-import { ConditionSelector, HttpMethod, HttpMethods, HttpSelector } from '../../../models';
 import { GioPolicyStudioFlowFormDialogResult } from '../gio-ps-flow-form-dialog-result.model';
+import { ConditionSelector, HttpMethod, HttpMethods, HttpSelector } from '../../../models';
+import { FlowVM } from '../../../policy-studio/gio-policy-studio.model';
 
 export type GioPolicyStudioFlowProxyFormDialogData = {
   flow?: FlowVM;
@@ -31,6 +38,21 @@ type HttpMethodVM = HttpMethod | 'ALL';
 const METHODS_AUTOCOMPLETE: HttpMethodVM[] = ['ALL', ...HttpMethods];
 
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatSlideToggleModule,
+    GioFormSlideToggleModule,
+    GioBannerModule,
+    GioIconsModule,
+    GioFormTagsInputModule,
+  ],
   selector: 'gio-ps-flow-proxy-form-dialog',
   templateUrl: './gio-ps-flow-proxy-form-dialog.component.html',
   styleUrls: ['./gio-ps-flow-proxy-form-dialog.component.scss'],

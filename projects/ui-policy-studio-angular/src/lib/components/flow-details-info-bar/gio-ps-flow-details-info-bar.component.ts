@@ -15,11 +15,16 @@
  */
 import { Component, Input } from '@angular/core';
 import { isEmpty } from 'lodash';
+import { GioIconsModule } from '@gravitee/ui-particles-angular';
+import { MatCommonModule } from '@angular/material/core';
+import { CommonModule } from '@angular/common';
 
-import { FlowVM } from '../../policy-studio/gio-policy-studio.model';
 import { ChannelSelector, ConditionSelector, ConnectorInfo, HttpSelector, Operation } from '../../models';
+import { FlowVM } from '../../policy-studio/gio-policy-studio.model';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, GioIconsModule, MatCommonModule],
   selector: 'gio-ps-flow-details-info-bar',
   templateUrl: './gio-ps-flow-details-info-bar.component.html',
   styleUrls: ['./gio-ps-flow-details-info-bar.component.scss'],

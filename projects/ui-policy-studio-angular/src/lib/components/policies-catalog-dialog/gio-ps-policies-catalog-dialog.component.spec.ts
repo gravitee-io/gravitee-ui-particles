@@ -27,7 +27,6 @@ import { MatInputHarness } from '@angular/material/input/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { fakeAllPolicies } from '../../models/index-testing';
-import { GioPolicyStudioModule } from '../../policy-studio/gio-policy-studio.module';
 import { ApiType, ExecutionPhase, Policy } from '../../models';
 import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.service';
 import { fakePolicyDocumentation, fakePolicySchema } from '../../models/policy/PolicySchema.fixture';
@@ -74,7 +73,13 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
   const createTestingComponent = (apiType: ApiType, executionPhase: ExecutionPhase) => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      imports: [GioPolicyStudioModule, HttpClientTestingModule, MatDialogModule, NoopAnimationsModule, MatIconTestingModule],
+      imports: [
+        GioPolicyStudioPoliciesCatalogDialogComponent,
+        HttpClientTestingModule,
+        MatDialogModule,
+        NoopAnimationsModule,
+        MatIconTestingModule,
+      ],
       providers: [
         {
           provide: GioPolicyStudioService,

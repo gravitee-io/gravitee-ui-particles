@@ -14,13 +14,20 @@
  * limitations under the License.
  */
 import { Component, Inject, OnDestroy } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { toLower, uniq } from 'lodash';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { GioBannerModule, GioIconsModule } from '@gravitee/ui-particles-angular';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { ApiType, ExecutionPhase, Policy, Step } from '../../models';
+import { GioPolicyStudioStepFormComponent } from '../step-form/gio-ps-step-form.component';
 
 export type GioPolicyStudioPoliciesCatalogDialogData = {
   policies: Policy[];
@@ -43,6 +50,19 @@ type PolicyVM = Policy & {
 };
 
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatChipsModule,
+    MatInputModule,
+    GioBannerModule,
+    GioIconsModule,
+    GioPolicyStudioStepFormComponent,
+  ],
   selector: 'gio-ps-policies-catalog-dialog',
   templateUrl: './gio-ps-policies-catalog-dialog.component.html',
   styleUrls: ['./gio-ps-policies-catalog-dialog.component.scss'],

@@ -15,16 +15,21 @@
  */
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { GIO_DIALOG_WIDTH } from '@gravitee/ui-particles-angular';
+import { GIO_DIALOG_WIDTH, GioIconsModule } from '@gravitee/ui-particles-angular';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { CommonModule } from '@angular/common';
 
-import { ExecutionPhase, Policy, Step } from '../../models';
 import {
   GioPolicyStudioStepEditDialogComponent,
   GioPolicyStudioStepEditDialogData,
   GioPolicyStudioStepEditDialogResult,
 } from '../step-edit-dialog/gio-ps-step-edit-dialog.component';
+import { ExecutionPhase, Policy, Step } from '../../models';
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, GioIconsModule, MatButtonModule, MatMenuModule],
   selector: 'gio-ps-flow-details-phase-step',
   templateUrl: './gio-ps-flow-details-phase-step.component.html',
   styleUrls: ['./gio-ps-flow-details-phase-step.component.scss'],

@@ -14,9 +14,13 @@
  * limitations under the License.
  */
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { GioIconsModule } from '@gravitee/ui-particles-angular';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 import { ExecutionPhase, Policy, Step } from '../../models';
+import { GioPolicyStudioStepFormComponent } from '../step-form/gio-ps-step-form.component';
 
 export type GioPolicyStudioStepEditDialogData = {
   policy: Policy;
@@ -28,6 +32,8 @@ export type GioPolicyStudioStepEditDialogData = {
 export type GioPolicyStudioStepEditDialogResult = undefined | Step;
 
 @Component({
+  standalone: true,
+  imports: [CommonModule, MatButtonModule, MatDialogModule, GioIconsModule, GioPolicyStudioStepFormComponent],
   selector: 'gio-ps-step-edit-dialog',
   templateUrl: './gio-ps-step-edit-dialog.component.html',
   styleUrls: ['./gio-ps-step-edit-dialog.component.scss'],
