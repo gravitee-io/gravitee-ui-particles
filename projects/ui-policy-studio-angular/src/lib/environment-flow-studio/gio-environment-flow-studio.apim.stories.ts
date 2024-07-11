@@ -13,7 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { moduleMetadata } from '@storybook/angular';
+import { applicationConfig, moduleMetadata } from '@storybook/angular';
+import { action } from '@storybook/addon-actions';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
+import { importProvidersFrom } from '@angular/core';
+import { GioFormJsonSchemaModule } from '@gravitee/ui-particles-angular';
+
+import { fakeAllPolicies, POLICIES_V4_UNREGISTERED_ICON } from '../models/policy/Policy.fixture';
+import { matIconRegisterProvider } from '../../storybook-utils/mat-icon-register.provider';
+import { Policy } from '../models';
+import { fakePolicyDocumentation, fakePolicySchema } from '../models/policy/PolicySchema.fixture';
 
 import { GioEnvironmentFlowStudioComponent } from './gio-environment-flow-studio.component';
 
@@ -23,8 +33,21 @@ export default {
     moduleMetadata({
       imports: [GioEnvironmentFlowStudioComponent],
     }),
+    applicationConfig({
+      providers: [
+        matIconRegisterProvider(POLICIES_V4_UNREGISTERED_ICON.map(policy => ({ id: policy.id, svg: policy.icon }))),
+        importProvidersFrom(GioFormJsonSchemaModule),
+      ],
+    }),
   ],
   component: GioEnvironmentFlowStudioComponent,
 };
 
-export const Simple = () => ({});
+export const RequestPhase = () => ({
+  props: {
+    environmentFlowChange: action('environmentFlowChange'),
+    policies: fakeAllPolicies(),
+    policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)).pipe(delay(600)),
+    policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)).pipe(delay(600)),
+  },
+});

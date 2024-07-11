@@ -15,4 +15,18 @@
     limitations under the License.
 
 -->
-<p>gio-environment-flow-studio works!</p>
+
+<gio-ps-flow-details-phase
+  class="content__phase"
+  name="Request phase"
+  description="Policies will be applied during the connection establishment"
+  [readOnly]="readOnly"
+  [startConnector]="startConnector"
+  [endConnector]="endConnector"
+  [steps]="steps"
+  [apiType]="apiType"
+  [policies]="policies"
+  [trialUrl]="trialUrl"
+  policyExecutionPhase="REQUEST"
+  (stepsChange)="onStepsChange('request', $event)"
+></gio-ps-flow-details-phase>
