@@ -18,7 +18,11 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'gio-form-selection-inline-card-content',
   template: `<div class="content">
-    <mat-icon class="content__icon" [svgIcon]="icon" *ngIf="icon"></mat-icon>
+    @if (icon) {
+      <mat-icon class="content__icon" [svgIcon]="icon"></mat-icon>
+    } @else if (img) {
+      <img class="content__icon" [src]="img" />
+    }
     <div class="content__title">
       <ng-content select="gio-card-content-title"></ng-content>
     </div>
@@ -31,6 +35,9 @@ import { Component, Input } from '@angular/core';
 export class GioFormSelectionInlineCardContentComponent {
   @Input()
   public icon: string | undefined;
+
+  @Input()
+  public img: string | undefined;
 }
 
 @Component({

@@ -150,6 +150,13 @@ export const WithContent: StoryObj = {
           </gio-form-selection-inline-card-content>
         </gio-form-selection-inline-card>
 
+        <gio-form-selection-inline-card value="img">
+          <gio-form-selection-inline-card-content img="https://via.placeholder.com/300">
+            <gio-card-content-title>With image</gio-card-content-title>
+            <gio-card-content-subtitle>This card uses an &lt;img&gt; tag</gio-card-content-subtitle>
+          </gio-form-selection-inline-card-content>
+        </gio-form-selection-inline-card>
+
         <gio-form-selection-inline-card [disabled]="true" value="no-title">
           <gio-form-selection-inline-card-content icon="gio:off-rounded">
             <gio-card-content-subtitle>Only subtitle</gio-card-content-subtitle>
