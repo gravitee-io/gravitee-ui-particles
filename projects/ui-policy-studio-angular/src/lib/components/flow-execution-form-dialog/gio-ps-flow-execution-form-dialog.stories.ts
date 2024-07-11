@@ -20,7 +20,6 @@ import { tap } from 'rxjs/operators';
 import { action } from '@storybook/addon-actions';
 import { GIO_DIALOG_WIDTH } from '@gravitee/ui-particles-angular';
 
-import { GioPolicyStudioModule } from '../../policy-studio/gio-policy-studio.module';
 import { FlowExecution } from '../../models';
 import { fakeBestMatchFlowExecution } from '../../models/flow/FlowExecution.fixture';
 
@@ -75,7 +74,7 @@ export default {
   decorators: [
     moduleMetadata({
       declarations: [GioPolicyStudioFlowExecutionFormDialogStoryComponent],
-      imports: [GioPolicyStudioModule, MatDialogModule],
+      imports: [MatDialogModule],
     }),
   ],
   argTypes: {},

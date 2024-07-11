@@ -20,7 +20,6 @@ import { tap } from 'rxjs/operators';
 import { action } from '@storybook/addon-actions';
 import { GIO_DIALOG_WIDTH } from '@gravitee/ui-particles-angular';
 
-import { GioPolicyStudioModule } from '../../../policy-studio/gio-policy-studio.module';
 import { FlowVM } from '../../../policy-studio/gio-policy-studio.model';
 import { GioPolicyStudioFlowFormDialogResult } from '../gio-ps-flow-form-dialog-result.model';
 import { fakeHttpFlow } from '../../../models/flow/Flow.fixture';
@@ -76,7 +75,7 @@ export default {
   decorators: [
     moduleMetadata({
       declarations: [GioPolicyStudioFlowProxyFormDialogStoryComponent],
-      imports: [GioPolicyStudioModule, MatDialogModule],
+      imports: [GioPolicyStudioFlowProxyFormDialogComponent, MatDialogModule],
     }),
   ],
   argTypes: {},

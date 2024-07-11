@@ -17,7 +17,10 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import { MatDialog } from '@angular/material/dialog';
 import { tap } from 'rxjs/operators';
 import { isEmpty } from 'lodash';
-import { GIO_DIALOG_WIDTH } from '@gravitee/ui-particles-angular';
+import { GIO_DIALOG_WIDTH, GioIconsModule, GioLoaderModule } from '@gravitee/ui-particles-angular';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 import { FlowVM } from '../../policy-studio/gio-policy-studio.model';
 import {
@@ -30,8 +33,22 @@ import {
   GioPolicyStudioFlowProxyFormDialogData,
 } from '../flow-form-dialog/flow-proxy-form-dialog/gio-ps-flow-proxy-form-dialog.component';
 import { GioPolicyStudioFlowFormDialogResult } from '../flow-form-dialog/gio-ps-flow-form-dialog-result.model';
+import { GioPolicyStudioDetailsPhaseComponent } from '../flow-details-phase/gio-ps-flow-details-phase.component';
+import { GioFilterConnectorsByModePipe } from '../filter-pipe/gio-flter-connectors-by-mode.pipe';
+import { GioPolicyStudioDetailsInfoBarComponent } from '../flow-details-info-bar/gio-ps-flow-details-info-bar.component';
 
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatTabsModule,
+    MatButtonModule,
+    GioIconsModule,
+    GioPolicyStudioDetailsPhaseComponent,
+    GioFilterConnectorsByModePipe,
+    GioLoaderModule,
+    GioPolicyStudioDetailsInfoBarComponent,
+  ],
   selector: 'gio-ps-flow-details',
   templateUrl: './gio-ps-flow-details.component.html',
   styleUrls: ['./gio-ps-flow-details.component.scss'],

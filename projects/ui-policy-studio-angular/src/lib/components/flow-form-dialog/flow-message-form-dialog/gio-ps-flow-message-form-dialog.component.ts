@@ -14,13 +14,20 @@
  * limitations under the License.
  */
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { cloneDeep, uniqueId } from 'lodash';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { GioBannerModule, GioFormSlideToggleModule, GioIconsModule } from '@gravitee/ui-particles-angular';
+import { MatInputModule } from '@angular/material/input';
 
-import { FlowVM } from '../../../policy-studio/gio-policy-studio.model';
-import { ChannelSelector, ConditionSelector, ConnectorInfo } from '../../../models';
 import { GioPolicyStudioFlowFormDialogResult } from '../gio-ps-flow-form-dialog-result.model';
+import { ChannelSelector, ConditionSelector, ConnectorInfo } from '../../../models';
+import { FlowVM } from '../../../policy-studio/gio-policy-studio.model';
 
 export type GioPolicyStudioFlowMessageFormDialogData = {
   flow?: FlowVM;
@@ -28,6 +35,20 @@ export type GioPolicyStudioFlowMessageFormDialogData = {
 };
 
 @Component({
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatSlideToggleModule,
+    GioFormSlideToggleModule,
+    GioBannerModule,
+    GioIconsModule,
+  ],
   selector: 'gio-ps-flow-message-form-dialog',
   templateUrl: './gio-ps-flow-message-form-dialog.component.html',
   styleUrls: ['./gio-ps-flow-message-form-dialog.component.scss'],
