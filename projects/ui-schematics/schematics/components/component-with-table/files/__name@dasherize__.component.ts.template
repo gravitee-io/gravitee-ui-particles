@@ -26,6 +26,7 @@ import { GioIconsModule, GioLoaderModule } from "@gravitee/ui-particles-angular"
   styleUrls: ['./<%= dasherize(name) %>.component.scss'],
   imports: [CommonModule, GioIconsModule, GioLoaderModule, MatButtonModule, MatTableModule, MatTooltipModule],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class <%= classify(name) %>Component {
   public displayedColumns = ['name', 'actions'];

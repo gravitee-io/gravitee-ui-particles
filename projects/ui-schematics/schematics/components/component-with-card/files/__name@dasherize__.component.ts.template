@@ -25,5 +25,6 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./<%= dasherize(name) %>.component.scss'],
   imports: [CommonModule,<% if (isEmptyState) {%> GioCardEmptyStateModule, GioIconsModule,<% } %> MatCardModule, MatButtonModule],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class <%= classify(name) %>Component {}

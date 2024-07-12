@@ -26,6 +26,7 @@ export type <%= classify(name) %>Result = boolean;
   templateUrl: './<%= dasherize(name) %>.component.html',
   styleUrls: ['./<%= dasherize(name) %>.component.scss'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MatDialogModule, MatButtonModule],
 })
 export class <%= classify(name) %>Component {
