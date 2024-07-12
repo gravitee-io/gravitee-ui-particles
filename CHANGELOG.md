@@ -1,3 +1,10 @@
+# [12.14.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.13.1...v12.14.0) (2024-07-12)
+
+
+### Features
+
+* **monaco-editor:** add CSS language ([71ea1f7](https://github.com/gravitee-io/gravitee-ui-particles/commit/71ea1f72d9691741e9a841770c1e2feed9093462))
+
 ## [12.13.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.13.0...v12.13.1) (2024-07-05)
 
 
