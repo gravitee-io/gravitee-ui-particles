@@ -55,6 +55,9 @@ export type MonacoEditorLanguageConfig =
   | {
       language: 'spel';
       schema?: JSONSchema;
+    }
+  | {
+      language: 'css';
     };
 
 @Component({

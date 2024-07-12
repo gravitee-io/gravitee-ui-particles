@@ -96,6 +96,17 @@ export const LanguageJson: StoryObj = {
   },
 };
 
+export const LanguageCss: StoryObj = {
+  args: {
+    languageConfig: {
+      language: 'css',
+    },
+    value: `.style {
+  border: 1px solid black;
+}`,
+  },
+};
+
 export const LanguageEL: StoryObj = {
   args: {
     languageConfig: {
