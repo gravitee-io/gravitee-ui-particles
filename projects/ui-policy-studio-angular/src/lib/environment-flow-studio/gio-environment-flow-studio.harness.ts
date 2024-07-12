@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import { ComponentHarness } from '@angular/cdk/testing';
-import { MatTabGroupHarness } from '@angular/material/tabs/testing';
 import { DivHarness } from '@gravitee/ui-particles-angular/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 
@@ -31,15 +30,8 @@ export class GioEnvironmentFlowStudioHarness extends ComponentHarness {
    * Get flow phase harness
    * @param phaseType Phase type to get
    */
-  public async getFlowPhase(phaseType: PhaseType): Promise<GioPolicyStudioDetailsPhaseHarness | undefined> {
-    if (phaseType === 'PUBLISH' || phaseType === 'SUBSCRIBE') {
-      const matTabsHarness = await this.locatorFor(MatTabGroupHarness.with({ selector: '.content__tabs' }))();
-      await matTabsHarness.selectTab({ label: 'Event messages' });
-    }
-
-    const steps = await this.phaseHarness(phaseType);
-
-    return steps ? steps : undefined;
+  public async getFlowPhase(phaseType: PhaseType): Promise<GioPolicyStudioDetailsPhaseHarness> {
+    return this.phaseHarness(phaseType);
   }
 
   public async clickAddStep(index: number): Promise<void> {

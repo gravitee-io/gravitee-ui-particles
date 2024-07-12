@@ -13,64 +13,132 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { EMPTY } from 'rxjs';
-import { GioFormJsonSchemaModule } from '@gravitee/ui-particles-angular';
+import { GioFormJsonSchemaModule, GioLoaderModule } from '@gravitee/ui-particles-angular';
 
 import { GioPolicyStudioDetailsPhaseComponent } from '../components/flow-details-phase/gio-ps-flow-details-phase.component';
-import { ApiType, ConnectorInfo, Policy, PolicyDocumentationFetcher, PolicySchemaFetcher, Step } from '../models';
+import { ApiType, ConnectorInfo, ExecutionPhase, Policy, PolicyDocumentationFetcher, PolicySchemaFetcher, Step } from '../models';
 import { GioPolicyStudioService } from '../policy-studio/gio-policy-studio.service';
 
 export type EnvironmentFlowOutput = Step[];
 
+type PhaseVM = {
+  name: string;
+  description: string;
+  startConnectorName: string;
+  endConnectorName: string;
+};
+
 @Component({
   selector: 'gio-environment-flow-studio',
   standalone: true,
-  imports: [GioPolicyStudioDetailsPhaseComponent, GioFormJsonSchemaModule],
+  imports: [GioPolicyStudioDetailsPhaseComponent, GioFormJsonSchemaModule, GioLoaderModule],
   templateUrl: './gio-environment-flow-studio.component.html',
   styleUrl: './gio-environment-flow-studio.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GioEnvironmentFlowStudioComponent implements OnChanges {
+  /**
+   * List of policies usable in the studio
+   */
   @Input()
   public policies: Policy[] = [];
+
+  /**
+   * Type of the API targeted by the environment flow
+   */
+  @Input({ required: true })
+  public apiType!: ApiType;
+
+  /**
+   * Execution phase targeted by the environment flow
+   */
+  @Input({ required: true })
+  public executionPhase!: ExecutionPhase;
 
   /**
    * Called when Environment-flow Studio needs to fetch the policy schema
    * @returns Observable of the policy schema
    */
-  @Input()
+  @Input({ required: true })
   public policySchemaFetcher: PolicySchemaFetcher = () => EMPTY;
 
   /**
    * Called when Environment-flow Studio needs to fetch the policy documentation
    * @returns Observable of the policy documentation
    */
-  @Input()
+  @Input({ required: true })
   public policyDocumentationFetcher: PolicyDocumentationFetcher = () => EMPTY;
 
+  /**
+   * Output event when the environment flow changes
+   */
   @Output()
   public environmentFlowChange: EventEmitter<EnvironmentFlowOutput> = new EventEmitter<EnvironmentFlowOutput>();
 
+  protected isLoading = true;
   protected readOnly = false;
-  protected startConnector: ConnectorInfo[] = [
+  protected startConnector: (name: string) => ConnectorInfo[] = name => [
     {
-      name: 'Incoming request',
+      name,
       icon: 'gio:arrow-right',
       type: 'start',
-      supportedModes: ['REQUEST_RESPONSE'],
+      supportedModes: [],
     },
   ];
-  protected endConnector: ConnectorInfo[] = [
+  protected endConnector: (name: string) => ConnectorInfo[] = name => [
     {
-      name: 'Outgoing request',
+      name,
       icon: 'gio:arrow-right',
       type: 'end',
-      supportedModes: ['REQUEST_RESPONSE'],
+      supportedModes: [],
     },
   ];
+  protected phase?: PhaseVM;
   protected steps: Step[] = [];
-  protected apiType: ApiType = 'MESSAGE';
   protected trialUrl: string | undefined;
+
+  private phases: Record<`${ApiType}__${ExecutionPhase}`, PhaseVM | null> = {
+    PROXY__REQUEST: {
+      name: 'Request phase',
+      description: 'Policies will be applied during the connection establishment',
+      startConnectorName: 'Incoming request',
+      endConnectorName: 'Outgoing request',
+    },
+    PROXY__RESPONSE: {
+      name: 'Response phase',
+      description: 'Policies will be applied to the response from the initial connection.',
+      startConnectorName: 'Incoming response',
+      endConnectorName: 'Outgoing response',
+    },
+    PROXY__MESSAGE_REQUEST: null, // n/a
+    PROXY__MESSAGE_RESPONSE: null, // n/a
+    MESSAGE__REQUEST: {
+      name: 'Request phase',
+      description: 'Policies will be applied during the connection establishment',
+      startConnectorName: 'Incoming request',
+      endConnectorName: 'Outgoing request',
+    },
+    MESSAGE__RESPONSE: {
+      name: 'Response phase',
+      description: 'Policies will be applied during the connection termination',
+      startConnectorName: 'Incoming response',
+      endConnectorName: 'Outgoing response',
+    },
+    MESSAGE__MESSAGE_REQUEST: {
+      name: 'Publish phase',
+      description: 'Policies will be applied on messages sent to the endpoint',
+      startConnectorName: 'Incoming message request',
+      endConnectorName: 'Outgoing message request',
+    },
+    MESSAGE__MESSAGE_RESPONSE: {
+      name: 'Subscribe phase',
+      description: 'Policies will be applied on messages received by the entrypoint',
+      startConnectorName: 'Incoming message response',
+      endConnectorName: 'Outgoing message response',
+    },
+  };
 
   constructor(private readonly policyStudioService: GioPolicyStudioService) {}
 
@@ -82,9 +150,15 @@ export class GioEnvironmentFlowStudioComponent implements OnChanges {
     if (changes.policyDocumentationFetcher) {
       this.policyStudioService.setPolicyDocumentationFetcher(this.policyDocumentationFetcher);
     }
+    if (changes.policies) {
+      this.isLoading = false;
+    }
+    if (changes.executionPhase) {
+      this.phase = this.phases[`${this.apiType}__${this.executionPhase}`] ?? undefined;
+    }
   }
 
-  protected onStepsChange(flowPhase: 'request' | 'response' | 'publish' | 'subscribe', steps: Step[]): void {
+  protected onStepsChange(steps: Step[]): void {
     this.steps = steps;
     this.environmentFlowChange.emit(steps);
   }

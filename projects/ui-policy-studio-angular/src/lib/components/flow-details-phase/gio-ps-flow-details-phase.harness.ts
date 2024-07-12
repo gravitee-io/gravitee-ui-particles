@@ -62,9 +62,9 @@ export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
    * @return a `HarnessPredicate` configured with the given options.
    */
   public static with(options: GioPolicyStudioDetailsPhaseHarnessFilters = {}): HarnessPredicate<GioPolicyStudioDetailsPhaseHarness> {
-    return new HarnessPredicate(GioPolicyStudioDetailsPhaseHarness, options).addOption('type', options.type, async (harness, type) =>
-      HarnessPredicate.stringMatches(harness.getHeaderName(), TYPE_TO_TEXT[type]),
-    );
+    return new HarnessPredicate(GioPolicyStudioDetailsPhaseHarness, options).addOption('type', options.type, async (harness, type) => {
+      return HarnessPredicate.stringMatches(harness.getHeaderName(), TYPE_TO_TEXT[type]);
+    });
   }
 
   public async getSteps(): Promise<StepCard[] | 'DISABLED'> {

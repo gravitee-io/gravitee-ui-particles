@@ -43,11 +43,78 @@ export default {
   component: GioEnvironmentFlowStudioComponent,
 };
 
-export const RequestPhase = () => ({
+export const Loading = () => ({
+  props: {
+    environmentFlowChange: action('environmentFlowChange'),
+    policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)).pipe(delay(600)),
+    policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)).pipe(delay(600)),
+    executionPhase: 'REQUEST',
+    apiType: 'PROXY',
+  },
+});
+
+export const ProxyAPIRequestPhase = () => ({
   props: {
     environmentFlowChange: action('environmentFlowChange'),
     policies: fakeAllPolicies(),
     policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)).pipe(delay(600)),
     policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)).pipe(delay(600)),
+    executionPhase: 'REQUEST',
+    apiType: 'PROXY',
+  },
+});
+
+export const ProxyAPIResponsePhase = () => ({
+  props: {
+    environmentFlowChange: action('environmentFlowChange'),
+    policies: fakeAllPolicies(),
+    policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)).pipe(delay(600)),
+    policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)).pipe(delay(600)),
+    executionPhase: 'RESPONSE',
+    apiType: 'PROXY',
+  },
+});
+
+export const MessageAPIRequestPhase = () => ({
+  props: {
+    environmentFlowChange: action('environmentFlowChange'),
+    policies: fakeAllPolicies(),
+    policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)).pipe(delay(600)),
+    policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)).pipe(delay(600)),
+    executionPhase: 'REQUEST',
+    apiType: 'MESSAGE',
+  },
+});
+
+export const MessageAPIMessageRequestPhase = () => ({
+  props: {
+    environmentFlowChange: action('environmentFlowChange'),
+    policies: fakeAllPolicies(),
+    policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)).pipe(delay(600)),
+    policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)).pipe(delay(600)),
+    executionPhase: 'MESSAGE_REQUEST',
+    apiType: 'MESSAGE',
+  },
+});
+
+export const MessageAPIMessageResponsePhase = () => ({
+  props: {
+    environmentFlowChange: action('environmentFlowChange'),
+    policies: fakeAllPolicies(),
+    policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)).pipe(delay(600)),
+    policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)).pipe(delay(600)),
+    executionPhase: 'MESSAGE_RESPONSE',
+    apiType: 'MESSAGE',
+  },
+});
+
+export const MessageAPIResponsePhase = () => ({
+  props: {
+    environmentFlowChange: action('environmentFlowChange'),
+    policies: fakeAllPolicies(),
+    policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)).pipe(delay(600)),
+    policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)).pipe(delay(600)),
+    executionPhase: 'RESPONSE',
+    apiType: 'MESSAGE',
   },
 });

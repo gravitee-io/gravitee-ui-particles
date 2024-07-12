@@ -81,8 +81,6 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
 
   public isValid = false;
 
-  public selectedCategoriesControl?: UntypedFormControl;
-
   public filtersForm = new UntypedFormGroup({
     categories: new UntypedFormControl([]),
     search: new UntypedFormControl(''),
