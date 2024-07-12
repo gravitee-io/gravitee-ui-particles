@@ -28,6 +28,7 @@ import { GioSaveBarModule } from "@gravitee/ui-particles-angular";
   styleUrls: ['./<%= dasherize(name) %>.component.scss'],
   imports: [CommonModule, GioSaveBarModule, MatCardModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class <%= classify(name) %>Component {
   public <%= camelize(name) %>Form = new FormGroup({
