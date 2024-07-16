@@ -41,6 +41,7 @@
         mat-flat-button
         color="primary"
         [type]="form ? 'submit' : 'button'"
+        [disabled]="disableSaveButton"
         (click)="onSubmitClicked()"
       >
         {{ creationMode ? 'Create' : 'Save' }}

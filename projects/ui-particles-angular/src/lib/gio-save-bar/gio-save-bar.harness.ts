@@ -15,6 +15,7 @@
  */
 
 import { ComponentHarness } from '@angular/cdk/testing';
+import { MatButtonHarness } from '@angular/material/button/testing';
 
 export class GioSaveBarHarness extends ComponentHarness {
   public static hostSelector = 'gio-save-bar';
@@ -23,7 +24,7 @@ export class GioSaveBarHarness extends ComponentHarness {
   private readonly resetButtonSelector = '.save-bar__content__actions__reset-button';
   private readonly submitButtonSelector = '.save-bar__content__actions__submit-button';
 
-  protected getSubmitButton = this.locatorFor(this.submitButtonSelector);
+  protected getSubmitButton = this.locatorFor(MatButtonHarness.with({ selector: this.submitButtonSelector }));
   protected getResetButton = this.locatorFor(this.resetButtonSelector);
 
   public async isVisible(): Promise<boolean> {
@@ -40,7 +41,13 @@ export class GioSaveBarHarness extends ComponentHarness {
 
   public async isSubmitButtonInvalid(): Promise<boolean> {
     const submitButton = await this.getSubmitButton();
-    return submitButton.hasClass('invalid');
+    const submitButtonHost = await submitButton.host();
+    return submitButtonHost.hasClass('invalid');
+  }
+
+  public async isSubmitButtonDisabled(): Promise<boolean> {
+    const submitButton = await this.getSubmitButton();
+    return submitButton.isDisabled();
   }
 
   public async isSubmitButtonVisible(): Promise<boolean> {
