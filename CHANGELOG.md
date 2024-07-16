@@ -1,3 +1,14 @@
+# [12.15.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.14.0...v12.15.0) (2024-07-16)
+
+
+### Features
+
+* add support of img for gio-form-selection-inline ([b04c334](https://github.com/gravitee-io/gravitee-ui-particles/commit/b04c334a216b1053158331673dd595b35d35c955))
+* impl phase for relevant API Type & Execution Phase ([9ea9ecf](https://github.com/gravitee-io/gravitee-ui-particles/commit/9ea9ecf8f06cb2dcbd8dd4e28fe178cfb430b501))
+* impl simple REQUEST phase for GioEnvironmentFlowStudioComponent ([1b74fda](https://github.com/gravitee-io/gravitee-ui-particles/commit/1b74fdabf775b8c01891e539aa358eae2abb1d6f))
+* init empty environment-flow-studio component ([64f7c5d](https://github.com/gravitee-io/gravitee-ui-particles/commit/64f7c5da3971ced7f044ae2ec096d8065c248a4a))
+* set ChangeDetectionStrategy.OnPush by default ([a341ace](https://github.com/gravitee-io/gravitee-ui-particles/commit/a341acea7807eadd9d33ca02237f91631a361f7b))
+
 # [12.14.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.13.1...v12.14.0) (2024-07-12)
 
 
