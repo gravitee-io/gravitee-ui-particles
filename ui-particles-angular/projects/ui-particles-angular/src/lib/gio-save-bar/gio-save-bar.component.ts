@@ -70,6 +70,9 @@ export class GioSaveBarComponent {
   @Input()
   public hideDiscardButton = false;
 
+  @Input()
+  public disableSaveButton = false;
+
   @Output()
   public resetClicked = new EventEmitter<void>();
 

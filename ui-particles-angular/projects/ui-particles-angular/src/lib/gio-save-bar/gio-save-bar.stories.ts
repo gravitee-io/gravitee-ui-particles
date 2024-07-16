@@ -183,3 +183,22 @@ export const CreationMode: Story = {
     },
   }),
 };
+
+export const SaveButtonDisabled: Story = {
+  name: 'Creation Mode / Save Button Disabled',
+  render: () => ({
+    template: `
+    <div style="padding-bottom: 400px">
+      <gio-save-bar
+        [creationMode]="true"
+        [disableSaveButton]="true"
+        (resetClicked)="onReset($event)"
+        (submitted)="onSubmit($event)"
+      ></gio-save-bar>
+    </div>
+    `,
+    props: {
+      onSubmit: (e: unknown) => action('Submit')(e),
+    },
+  }),
+};
