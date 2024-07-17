@@ -89,7 +89,7 @@ export const ReactiveForm: Story = {
 
     return {
       template: `
-      <form style="padding-bottom: 400px" [formGroup]="form" >
+      <form style="padding-bottom: 400px" [formGroup]="form" (ngSubmit)="ngSubmit($event)" >
         <div>A long form, with many many fields</div>
         <div style="display: flex; flex-direction: column;"
            *ngFor="let item of [].constructor(40)">
@@ -104,6 +104,7 @@ export const ReactiveForm: Story = {
       </form>
       `,
       props: {
+        ngSubmit: (e: unknown) => action('Submit')(e),
         form,
         formInitialValues,
       },
