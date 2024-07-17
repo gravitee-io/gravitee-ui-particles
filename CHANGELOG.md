@@ -1,3 +1,10 @@
+## [12.15.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.15.0...v12.15.1) (2024-07-17)
+
+
+### Bug Fixes
+
+* make public GioEnvironmentFlowStudioComponent ([06da770](https://github.com/gravitee-io/gravitee-ui-particles/commit/06da7701fef23bf5560ba14ee9a4caf4abcd9053))
+
 # [12.15.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.14.0...v12.15.0) (2024-07-16)
 
 
