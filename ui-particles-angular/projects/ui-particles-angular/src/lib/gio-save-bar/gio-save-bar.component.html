@@ -37,9 +37,10 @@
         mat-flat-button
         color="primary"
         [type]="form ? 'submit' : 'button'"
+        [disabled]="isSubmitted"
         (click)="onSubmitClicked()"
       >
-        {{ creationMode ? 'Create' : 'Save' }}
+        {{ creationMode ? 'Create' : 'Save' }}{{ isSubmitted ? '...' : '' }}
       </button>
     </div>
   </mat-card>
