@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, HostListener, Input, OnDestroy, Output } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
-import { timer } from 'rxjs';
+import { of, Subscription } from 'rxjs';
+import { delay, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'gio-save-bar',
@@ -35,7 +36,7 @@ import { timer } from 'rxjs';
     ]),
   ],
 })
-export class GioSaveBarComponent {
+export class GioSaveBarComponent implements OnDestroy {
   public isSubmitted = false;
 
   @HostBinding('class.save-bar-sticky')
@@ -60,6 +61,7 @@ export class GioSaveBarComponent {
   public form?: UntypedFormGroup;
 
   private hasSubmitLock = true;
+  private submitLockSubscription?: Subscription;
 
   @Input()
   public formInitialValues?: unknown;
@@ -91,6 +93,10 @@ export class GioSaveBarComponent {
     return this.opened;
   }
 
+  public ngOnDestroy() {
+    this.submitLockSubscription?.unsubscribe();
+  }
+
   public onResetClicked(): void {
     if (this.form) {
       this.form.reset(this.formInitialValues);
@@ -117,8 +123,15 @@ export class GioSaveBarComponent {
 
     this.submitted.emit();
     if (this.hasSubmitLock) {
-      this.isSubmitted = true;
-      timer(2000).subscribe(() => (this.isSubmitted = false));
+      this.submitLockSubscription = of(undefined)
+        .pipe(
+          // Arrange js microtask queue to be sure that the disabled button state is set after triggering the ngSubmit event
+          delay(0),
+          tap(() => (this.isSubmitted = true)),
+          delay(2000),
+          tap(() => (this.isSubmitted = false)),
+        )
+        .subscribe();
     }
   }
 }
