@@ -17,21 +17,20 @@ import { ComponentHarness } from '@angular/cdk/testing';
 import { DivHarness } from '@gravitee/ui-particles-angular/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 
-import { GioPolicyStudioDetailsPhaseHarness, PhaseType } from '../components/flow-details-phase/gio-ps-flow-details-phase.harness';
+import { GioPolicyStudioDetailsPhaseHarness } from '../components/flow-details-phase/gio-ps-flow-details-phase.harness';
 import { StepForm } from '../components/step-form/gio-ps-step-form.harness';
 import { GioPolicyStudioPoliciesCatalogDialogHarness } from '../components/policies-catalog-dialog/gio-ps-policies-catalog-dialog.harness';
 
-export class GioEnvironmentFlowStudioHarness extends ComponentHarness {
-  public static hostSelector = 'gio-environment-flow-studio';
+export class GioPolicyGroupStudioHarness extends ComponentHarness {
+  public static hostSelector = 'gio-policy-group-studio';
 
-  private phaseHarness = (phaseType: PhaseType) => this.locatorFor(GioPolicyStudioDetailsPhaseHarness.with({ type: phaseType }))();
+  private phaseHarness = () => this.locatorFor(GioPolicyStudioDetailsPhaseHarness)();
 
   /**
-   * Get flow phase harness
-   * @param phaseType Phase type to get
+   * Get Policy Group phase harness
    */
-  public async getFlowPhase(phaseType: PhaseType): Promise<GioPolicyStudioDetailsPhaseHarness> {
-    return this.phaseHarness(phaseType);
+  public async getPolicyGroupPhase(): Promise<GioPolicyStudioDetailsPhaseHarness> {
+    return this.phaseHarness();
   }
 
   public async clickAddStep(index: number): Promise<void> {
@@ -43,7 +42,7 @@ export class GioEnvironmentFlowStudioHarness extends ComponentHarness {
   }
 
   /**
-   * Add a step to a phase
+   * Add a step to a policy-group
    * @param index Index where to add the step. (Add button index)
    * @param stepConfig Step to add
    */

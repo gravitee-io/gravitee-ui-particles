@@ -18,4 +18,4 @@
  */
 export * from './lib/models';
 export { GioPolicyStudioComponent } from './lib/policy-studio/gio-policy-studio.component';
-export * from './lib/environment-flow-studio/gio-environment-flow-studio.component';
+export * from './lib/policy-group-studio/gio-policy-group-studio.component';

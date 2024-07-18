@@ -16,4 +16,4 @@
 export * from './lib/models/index-testing';
 
 export * from './lib/policy-studio/gio-policy-studio.harness';
-export * from './lib/environment-flow-studio/gio-environment-flow-studio.harness';
+export * from './lib/policy-group-studio/gio-policy-group-studio.harness';
