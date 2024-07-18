@@ -20,7 +20,7 @@ import { delay } from 'rxjs/operators';
 import { importProvidersFrom } from '@angular/core';
 import { GioFormJsonSchemaModule } from '@gravitee/ui-particles-angular';
 
-import { fakeAllPolicies, POLICIES_V4_UNREGISTERED_ICON } from '../models/policy/Policy.fixture';
+import { fakeAllPolicies, fakeTestPolicy, POLICIES_V4_UNREGISTERED_ICON } from '../models/policy/Policy.fixture';
 import { matIconRegisterProvider } from '../../storybook-utils/mat-icon-register.provider';
 import { Policy } from '../models';
 import { fakePolicyDocumentation, fakePolicySchema } from '../models/policy/PolicySchema.fixture';
@@ -61,6 +61,12 @@ export const ProxyAPIRequestPhase = () => ({
     policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)).pipe(delay(600)),
     executionPhase: 'REQUEST',
     apiType: 'PROXY',
+    policyGroup: [
+      {
+        policy: fakeTestPolicy().id,
+        name: 'Policy Test',
+      },
+    ],
   },
 });
 

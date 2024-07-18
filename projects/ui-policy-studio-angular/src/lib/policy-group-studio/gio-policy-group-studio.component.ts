@@ -22,6 +22,7 @@ import { ApiType, ConnectorInfo, ExecutionPhase, Policy, PolicyDocumentationFetc
 import { GioPolicyStudioService } from '../policy-studio/gio-policy-studio.service';
 
 export type PolicyGroupOutput = Step[];
+export type PolicyGroupInput = Step[];
 
 type PolicyGroupVM = {
   name: string;
@@ -71,6 +72,9 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
   @Input({ required: true })
   public policyDocumentationFetcher: PolicyDocumentationFetcher = () => EMPTY;
 
+  @Input()
+  public policyGroup: PolicyGroupInput = [];
+
   /**
    * Output event when the Policy Group Studio changes
    */
@@ -95,7 +99,7 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
       supportedModes: [],
     },
   ];
-  protected policyGroup?: PolicyGroupVM;
+  protected policyGroupVM?: PolicyGroupVM;
   protected steps: Step[] = [];
   protected trialUrl: string | undefined;
 
@@ -154,7 +158,10 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
       this.isLoading = false;
     }
     if (changes.executionPhase) {
-      this.policyGroup = this.phases[`${this.apiType}__${this.executionPhase}`] ?? undefined;
+      this.policyGroupVM = this.phases[`${this.apiType}__${this.executionPhase}`] ?? undefined;
+    }
+    if (changes.policyGroup) {
+      this.steps = this.policyGroup;
     }
   }
 
