@@ -22,6 +22,8 @@ export type StepForm = {
   condition?: string;
   // Callback to allow to fill the fields of the jsonSchemaForm specific to each policy, if necessary. Useful if some are required.
   waitForPolicyFormCompletionCb?: (locator: LocatorFactory) => Promise<void>;
+  // Callback to allow to fill init http request fields. Useful for httpTestingController.expectOne() onn `/schema` & ``/documentation` requests.
+  waitForInitHttpRequestCompletionCb?: () => void;
 };
 export class GioPolicyStudioStepFormHarness extends ComponentHarness {
   public static hostSelector = 'gio-ps-step-form';
@@ -31,6 +33,10 @@ export class GioPolicyStudioStepFormHarness extends ComponentHarness {
   private getConditionInput = this.locatorFor(MatInputHarness.with({ selector: '[formControlName="condition"]' }));
 
   public async setStepForm(stepForm: StepForm): Promise<void> {
+    if (stepForm.waitForInitHttpRequestCompletionCb) {
+      stepForm.waitForInitHttpRequestCompletionCb();
+    }
+
     if (stepForm.description) {
       const descriptionInput = await this.getDescriptionInput();
       await descriptionInput.setValue(stepForm.description);
