@@ -26,22 +26,22 @@ import { fakePolicySchema } from '../models/policy/PolicySchema.fixture';
 import { fakeAllPolicies, fakeTestPolicy } from '../models/policy/Policy.fixture';
 import { ApiType, ExecutionPhase } from '../models';
 
-import { GioEnvironmentFlowStudioHarness } from './gio-environment-flow-studio.harness';
-import { EnvironmentFlowOutput, GioEnvironmentFlowStudioComponent } from './gio-environment-flow-studio.component';
+import { GioPolicyGroupStudioHarness } from './gio-policy-group-studio.harness';
+import { PolicyGroupOutput, GioPolicyGroupStudioComponent } from './gio-policy-group-studio.component';
 
-describe('GioEnvironmentFlowStudioComponent', () => {
-  let component: GioEnvironmentFlowStudioComponent;
-  let fixture: ComponentFixture<GioEnvironmentFlowStudioComponent>;
-  let environmentFlowStudioHarness: GioEnvironmentFlowStudioHarness;
+describe('GioPolicyGroupStudioComponent', () => {
+  let component: GioPolicyGroupStudioComponent;
+  let fixture: ComponentFixture<GioPolicyGroupStudioComponent>;
+  let PolicyGroupStudioHarness: GioPolicyGroupStudioHarness;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GioEnvironmentFlowStudioComponent, NoopAnimationsModule, HttpClientTestingModule, MatIconTestingModule],
+      imports: [GioPolicyGroupStudioComponent, NoopAnimationsModule, HttpClientTestingModule, MatIconTestingModule],
     }).compileComponents();
   });
 
   async function initComponent(apiType: ApiType, executionPhase: ExecutionPhase) {
-    fixture = TestBed.createComponent(GioEnvironmentFlowStudioComponent);
+    fixture = TestBed.createComponent(GioPolicyGroupStudioComponent);
     component = fixture.componentInstance;
 
     component.policies = fakeAllPolicies();
@@ -56,7 +56,7 @@ describe('GioEnvironmentFlowStudioComponent', () => {
       apiType: new SimpleChange(null, null, true),
       executionPhase: new SimpleChange(null, null, true),
     });
-    environmentFlowStudioHarness = await TestbedHarnessEnvironment.harnessForFixture(fixture, GioEnvironmentFlowStudioHarness);
+    PolicyGroupStudioHarness = await TestbedHarnessEnvironment.harnessForFixture(fixture, GioPolicyGroupStudioHarness);
   }
 
   describe('PROXY API - REQUEST phase', () => {
@@ -64,11 +64,11 @@ describe('GioEnvironmentFlowStudioComponent', () => {
       await initComponent('PROXY', 'REQUEST');
     });
 
-    it('should display empty flow phase', async () => {
-      const flowPhase = await environmentFlowStudioHarness.getFlowPhase('REQUEST');
+    it('should display empty Policy Group', async () => {
+      const phase = await PolicyGroupStudioHarness.getPolicyGroupPhase();
 
-      expect(flowPhase).toBeDefined();
-      const steps = await flowPhase.getSteps();
+      expect(phase).toBeDefined();
+      const steps = await phase.getSteps();
 
       expect(steps).toEqual([
         {
@@ -82,14 +82,14 @@ describe('GioEnvironmentFlowStudioComponent', () => {
       ]);
     });
 
-    it('should add flow to phase', async () => {
-      const flowPhase = await environmentFlowStudioHarness.getFlowPhase('REQUEST');
+    it('should add policy to Policy Group', async () => {
+      const phase = await PolicyGroupStudioHarness.getPolicyGroupPhase();
 
-      let expectedEnvironmentFlowOutput: EnvironmentFlowOutput | undefined = undefined;
+      let expectedEnvironmentFlowOutput: PolicyGroupOutput | undefined = undefined;
 
-      component.environmentFlowChange.subscribe(environmentFlow => (expectedEnvironmentFlowOutput = environmentFlow));
+      component.policyGroupChange.subscribe(environmentFlow => (expectedEnvironmentFlowOutput = environmentFlow));
 
-      await environmentFlowStudioHarness?.addStep(0, {
+      await PolicyGroupStudioHarness?.addStep(0, {
         policyName: fakeTestPolicy().name,
         description: 'What does the 🦊 say?',
         async waitForPolicyFormCompletionCb(locator) {
@@ -99,7 +99,7 @@ describe('GioEnvironmentFlowStudioComponent', () => {
         },
       });
 
-      expect(await flowPhase.getSteps()).toEqual([
+      expect(await phase.getSteps()).toEqual([
         {
           name: 'Incoming request',
           type: 'connector',
@@ -134,8 +134,8 @@ describe('GioEnvironmentFlowStudioComponent', () => {
       await initComponent('MESSAGE', 'MESSAGE_REQUEST');
     });
 
-    it('should display empty flow phase', async () => {
-      const flowPhase = await environmentFlowStudioHarness.getFlowPhase('PUBLISH');
+    it('should display empty Policy Group', async () => {
+      const flowPhase = await PolicyGroupStudioHarness.getPolicyGroupPhase();
 
       expect(flowPhase).toBeDefined();
       const steps = await flowPhase.getSteps();
@@ -152,14 +152,14 @@ describe('GioEnvironmentFlowStudioComponent', () => {
       ]);
     });
 
-    it('should add flow to phase', async () => {
-      const flowPhase = await environmentFlowStudioHarness.getFlowPhase('PUBLISH');
+    it('should add policy to Policy Group', async () => {
+      const flowPhase = await PolicyGroupStudioHarness.getPolicyGroupPhase();
 
-      let expectedEnvironmentFlowOutput: EnvironmentFlowOutput | undefined = undefined;
+      let expectedEnvironmentFlowOutput: PolicyGroupOutput | undefined = undefined;
 
-      component.environmentFlowChange.subscribe(environmentFlow => (expectedEnvironmentFlowOutput = environmentFlow));
+      component.policyGroupChange.subscribe(environmentFlow => (expectedEnvironmentFlowOutput = environmentFlow));
 
-      await environmentFlowStudioHarness?.addStep(0, {
+      await PolicyGroupStudioHarness?.addStep(0, {
         policyName: fakeTestPolicy().name,
         description: 'What does the 🦊 say?',
         async waitForPolicyFormCompletionCb(locator) {

@@ -21,9 +21,9 @@ import { GioPolicyStudioDetailsPhaseComponent } from '../components/flow-details
 import { ApiType, ConnectorInfo, ExecutionPhase, Policy, PolicyDocumentationFetcher, PolicySchemaFetcher, Step } from '../models';
 import { GioPolicyStudioService } from '../policy-studio/gio-policy-studio.service';
 
-export type EnvironmentFlowOutput = Step[];
+export type PolicyGroupOutput = Step[];
 
-type PhaseVM = {
+type PolicyGroupVM = {
   name: string;
   description: string;
   startConnectorName: string;
@@ -31,14 +31,14 @@ type PhaseVM = {
 };
 
 @Component({
-  selector: 'gio-environment-flow-studio',
+  selector: 'gio-policy-group-studio',
   standalone: true,
   imports: [GioPolicyStudioDetailsPhaseComponent, GioFormJsonSchemaModule, GioLoaderModule],
-  templateUrl: './gio-environment-flow-studio.component.html',
-  styleUrl: './gio-environment-flow-studio.component.scss',
+  templateUrl: './gio-policy-group-studio.component.html',
+  styleUrl: './gio-policy-group-studio.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GioEnvironmentFlowStudioComponent implements OnChanges {
+export class GioPolicyGroupStudioComponent implements OnChanges {
   /**
    * List of policies usable in the studio
    */
@@ -46,36 +46,36 @@ export class GioEnvironmentFlowStudioComponent implements OnChanges {
   public policies: Policy[] = [];
 
   /**
-   * Type of the API targeted by the environment flow
+   * Type of the API targeted by the Policy Group Studio
    */
   @Input({ required: true })
   public apiType!: ApiType;
 
   /**
-   * Execution phase targeted by the environment flow
+   * Execution phase targeted by the Policy Group Studio
    */
   @Input({ required: true })
   public executionPhase!: ExecutionPhase;
 
   /**
-   * Called when Environment-flow Studio needs to fetch the policy schema
+   * Called when Policy Group Studio needs to fetch the policy schema
    * @returns Observable of the policy schema
    */
   @Input({ required: true })
   public policySchemaFetcher: PolicySchemaFetcher = () => EMPTY;
 
   /**
-   * Called when Environment-flow Studio needs to fetch the policy documentation
+   * Called when Policy Group Studio needs to fetch the policy documentation
    * @returns Observable of the policy documentation
    */
   @Input({ required: true })
   public policyDocumentationFetcher: PolicyDocumentationFetcher = () => EMPTY;
 
   /**
-   * Output event when the environment flow changes
+   * Output event when the Policy Group Studio changes
    */
   @Output()
-  public environmentFlowChange: EventEmitter<EnvironmentFlowOutput> = new EventEmitter<EnvironmentFlowOutput>();
+  public policyGroupChange: EventEmitter<PolicyGroupOutput> = new EventEmitter<PolicyGroupOutput>();
 
   protected isLoading = true;
   protected readOnly = false;
@@ -95,11 +95,11 @@ export class GioEnvironmentFlowStudioComponent implements OnChanges {
       supportedModes: [],
     },
   ];
-  protected phase?: PhaseVM;
+  protected policyGroup?: PolicyGroupVM;
   protected steps: Step[] = [];
   protected trialUrl: string | undefined;
 
-  private phases: Record<`${ApiType}__${ExecutionPhase}`, PhaseVM | null> = {
+  private phases: Record<`${ApiType}__${ExecutionPhase}`, PolicyGroupVM | null> = {
     PROXY__REQUEST: {
       name: 'Request phase',
       description: 'Policies will be applied during the connection establishment',
@@ -154,12 +154,12 @@ export class GioEnvironmentFlowStudioComponent implements OnChanges {
       this.isLoading = false;
     }
     if (changes.executionPhase) {
-      this.phase = this.phases[`${this.apiType}__${this.executionPhase}`] ?? undefined;
+      this.policyGroup = this.phases[`${this.apiType}__${this.executionPhase}`] ?? undefined;
     }
   }
 
   protected onStepsChange(steps: Step[]): void {
     this.steps = steps;
-    this.environmentFlowChange.emit(steps);
+    this.policyGroupChange.emit(steps);
   }
 }

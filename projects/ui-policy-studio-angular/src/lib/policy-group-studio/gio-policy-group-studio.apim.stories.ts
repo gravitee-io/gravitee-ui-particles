@@ -25,13 +25,13 @@ import { matIconRegisterProvider } from '../../storybook-utils/mat-icon-register
 import { Policy } from '../models';
 import { fakePolicyDocumentation, fakePolicySchema } from '../models/policy/PolicySchema.fixture';
 
-import { GioEnvironmentFlowStudioComponent } from './gio-environment-flow-studio.component';
+import { GioPolicyGroupStudioComponent } from './gio-policy-group-studio.component';
 
 export default {
-  title: 'Policy Studio / APIM - Environment Flow Studio',
+  title: 'Policy Studio / APIM - Policy Group Studio',
   decorators: [
     moduleMetadata({
-      imports: [GioEnvironmentFlowStudioComponent],
+      imports: [GioPolicyGroupStudioComponent],
     }),
     applicationConfig({
       providers: [
@@ -40,12 +40,12 @@ export default {
       ],
     }),
   ],
-  component: GioEnvironmentFlowStudioComponent,
+  component: GioPolicyGroupStudioComponent,
 };
 
 export const Loading = () => ({
   props: {
-    environmentFlowChange: action('environmentFlowChange'),
+    policyGroupChange: action('policyGroupChange'),
     policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)).pipe(delay(600)),
     policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)).pipe(delay(600)),
     executionPhase: 'REQUEST',
@@ -55,7 +55,7 @@ export const Loading = () => ({
 
 export const ProxyAPIRequestPhase = () => ({
   props: {
-    environmentFlowChange: action('environmentFlowChange'),
+    policyGroupChange: action('policyGroupChange'),
     policies: fakeAllPolicies(),
     policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)).pipe(delay(600)),
     policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)).pipe(delay(600)),
@@ -66,7 +66,7 @@ export const ProxyAPIRequestPhase = () => ({
 
 export const ProxyAPIResponsePhase = () => ({
   props: {
-    environmentFlowChange: action('environmentFlowChange'),
+    policyGroupChange: action('policyGroupChange'),
     policies: fakeAllPolicies(),
     policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)).pipe(delay(600)),
     policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)).pipe(delay(600)),
@@ -77,7 +77,7 @@ export const ProxyAPIResponsePhase = () => ({
 
 export const MessageAPIRequestPhase = () => ({
   props: {
-    environmentFlowChange: action('environmentFlowChange'),
+    policyGroupChange: action('policyGroupChange'),
     policies: fakeAllPolicies(),
     policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)).pipe(delay(600)),
     policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)).pipe(delay(600)),
@@ -88,7 +88,7 @@ export const MessageAPIRequestPhase = () => ({
 
 export const MessageAPIMessageRequestPhase = () => ({
   props: {
-    environmentFlowChange: action('environmentFlowChange'),
+    policyGroupChange: action('policyGroupChange'),
     policies: fakeAllPolicies(),
     policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)).pipe(delay(600)),
     policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)).pipe(delay(600)),
@@ -99,7 +99,7 @@ export const MessageAPIMessageRequestPhase = () => ({
 
 export const MessageAPIMessageResponsePhase = () => ({
   props: {
-    environmentFlowChange: action('environmentFlowChange'),
+    policyGroupChange: action('policyGroupChange'),
     policies: fakeAllPolicies(),
     policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)).pipe(delay(600)),
     policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)).pipe(delay(600)),
@@ -110,7 +110,7 @@ export const MessageAPIMessageResponsePhase = () => ({
 
 export const MessageAPIResponsePhase = () => ({
   props: {
-    environmentFlowChange: action('environmentFlowChange'),
+    policyGroupChange: action('policyGroupChange'),
     policies: fakeAllPolicies(),
     policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)).pipe(delay(600)),
     policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)).pipe(delay(600)),
