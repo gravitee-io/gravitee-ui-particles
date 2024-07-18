@@ -1,3 +1,16 @@
+# [12.16.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.15.1...v12.16.0) (2024-07-18)
+
+
+### Bug Fixes
+
+* make all export ts type public for gio-environment-flow-studio ([8d3b5b1](https://github.com/gravitee-io/gravitee-ui-particles/commit/8d3b5b1b89c9d4f6319c31b764fa36476b312cb7))
+* make edit step menu work with policy group studio ([ad4aa53](https://github.com/gravitee-io/gravitee-ui-particles/commit/ad4aa53f763cd4f77c51bc3df5b89e15e302ca05))
+
+
+### Features
+
+* add policyGroup input like output ([80512da](https://github.com/gravitee-io/gravitee-ui-particles/commit/80512da498d97322f62f230aab90a53d6f9678c4))
+
 ## [12.15.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.15.0...v12.15.1) (2024-07-17)
 
 
