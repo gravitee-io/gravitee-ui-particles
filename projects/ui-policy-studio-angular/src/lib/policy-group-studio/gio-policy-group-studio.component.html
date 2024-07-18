@@ -15,14 +15,14 @@
     limitations under the License.
 
 -->
-@if (!isLoading && policyGroup) {
+@if (!isLoading && policyGroupVM) {
   <gio-ps-flow-details-phase
     class="content__phase"
-    [name]="policyGroup.name"
-    [description]="policyGroup.description"
+    [name]="policyGroupVM.name"
+    [description]="policyGroupVM.description"
     [readOnly]="readOnly"
-    [startConnector]="startConnector(policyGroup.startConnectorName)"
-    [endConnector]="endConnector(policyGroup.endConnectorName)"
+    [startConnector]="startConnector(policyGroupVM.startConnectorName)"
+    [endConnector]="endConnector(policyGroupVM.endConnectorName)"
     [steps]="steps"
     [apiType]="apiType"
     [policies]="policies"
