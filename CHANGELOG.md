@@ -1,3 +1,10 @@
+# [12.17.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.16.0...v12.17.0) (2024-07-19)
+
+
+### Features
+
+* add developer portal to gio top bar ([ee5d917](https://github.com/gravitee-io/gravitee-ui-particles/commit/ee5d917902e8b8f6071627523c96edb1ecaea059))
+
 # [12.16.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.15.1...v12.16.0) (2024-07-18)
 
 
