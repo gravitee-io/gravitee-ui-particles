@@ -95,6 +95,21 @@ export const Default: StoryObj = {
           </gio-top-bar>
           <gio-top-bar>
             <button mat-icon-button>
+              <mat-icon svgIcon="gio:gravitee" (click)="click('portal')"></mat-icon>
+            </button>
+            <gio-top-bar-content type="portal" productName="Developer Portal"></gio-top-bar-content>
+            <gio-top-bar-menu>
+              <button mat-icon-button>
+                <mat-icon svgIcon="gio:question-mark-circle"></mat-icon>
+              </button>
+              <button mat-icon-button>
+                <mat-icon svgIcon="gio:bell"></mat-icon>
+              </button>
+              <div class="image"></div>
+            </gio-top-bar-menu>
+          </gio-top-bar>
+          <gio-top-bar>
+            <button mat-icon-button>
               <img src="${args.logo}" alt="custom logo" style="height: 36px; width: 36px">
             </button>
             <gio-top-bar-content type="apim" productName="API Management"></gio-top-bar-content>

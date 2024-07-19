@@ -46,4 +46,9 @@ $typography: map.get(gio.$mat-theme, typography);
     background: rgb(135 111 236 / 40%);
     color: map.get(gio.$mat-accent-palette, default-contrast);
   }
+
+  &.portal {
+    background: rgb(0 200 200 / 40%);
+    color: map.get(gio.$mat-accent-palette, default-contrast);
+  }
 }

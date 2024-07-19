@@ -240,6 +240,7 @@ const icons = [
   'product-apim',
   'product-cockpit',
   'product-cloud',
+  'product-portal',
   'prohibition',
   'puzzle',
   'question-mark-circle',
