@@ -51,8 +51,11 @@ export default {
     disableMiniMap: {
       control: { type: 'boolean' },
     },
+    disableAutoFormat: {
+      control: { type: 'boolean' },
+    },
   },
-  render: ({ value, disabled, languageConfig, disableMiniMap }) => {
+  render: ({ value, disabled, languageConfig, disableMiniMap, disableAutoFormat }) => {
     const control = new UntypedFormControl({ value, disabled });
     control.valueChanges.subscribe(value => {
       action('valueChanges')(value);
@@ -62,7 +65,7 @@ export default {
     });
     return {
       template: `
-      <gio-monaco-editor [formControl]="control" [languageConfig]="languageConfig" [disableMiniMap]="disableMiniMap"></gio-monaco-editor>
+      <gio-monaco-editor [formControl]="control" [languageConfig]="languageConfig" [disableMiniMap]="disableMiniMap" [disableAutoFormat]="disableAutoFormat"></gio-monaco-editor>
       <br>
       <pre>{{ control.status }}</pre>
       <pre>{{ control.dirty ? 'DIRTY' : 'PRISTINE' }}</pre>
@@ -73,6 +76,7 @@ export default {
         control,
         languageConfig,
         disableMiniMap,
+        disableAutoFormat,
       },
     };
   },
@@ -80,41 +84,6 @@ export default {
 
 export const Default: StoryObj = {
   args: {},
-};
-
-export const LanguageJson: StoryObj = {
-  args: {
-    languageConfig: {
-      language: 'json',
-      schemas: [
-        {
-          uri: 'http://myserver/foo-schema.json',
-          schema: GioJsonSchema,
-        },
-      ],
-    },
-  },
-};
-
-export const LanguageCss: StoryObj = {
-  args: {
-    languageConfig: {
-      language: 'css',
-    },
-    value: `.style {
-  border: 1px solid black;
-}`,
-  },
-};
-
-export const LanguageEL: StoryObj = {
-  args: {
-    languageConfig: {
-      language: 'spel',
-      schema: ElSchema,
-    },
-    value: `{#request.headers['x-story'] == 'true'}`,
-  },
 };
 
 export const Disabled: StoryObj = {
@@ -199,6 +168,104 @@ export const FormControlName: StoryObj = {
     };
   },
   args: {},
+};
+
+export const LanguageAutoDetectJSON: StoryObj = {
+  args: {
+    value: `{
+      "type": "object",
+      "properties": { "firstName": { "type": "string" } }
+    }`,
+  },
+};
+
+export const LanguageJson: StoryObj = {
+  args: {
+    languageConfig: {
+      language: 'json',
+      schemas: [
+        {
+          uri: 'http://myserver/foo-schema.json',
+          schema: GioJsonSchema,
+        },
+      ],
+    },
+  },
+};
+
+export const LanguageCss: StoryObj = {
+  args: {
+    languageConfig: {
+      language: 'css',
+    },
+    value: `.style {
+  border: 1px solid black;
+}`,
+  },
+};
+
+export const LanguageEL: StoryObj = {
+  args: {
+    languageConfig: {
+      language: 'spel',
+      schema: ElSchema,
+    },
+    value: `{#request.headers['x-story'] == 'true'}`,
+  },
+};
+
+export const LanguageJsonAutoFormat: StoryObj = {
+  args: {
+    languageConfig: {
+      language: 'json',
+    },
+    value: `{
+      "type": "object",
+      "properties": { "firstName": { "type": "string" } }
+    }`,
+  },
+};
+
+export const LanguageJsonDisableAutoFormat: StoryObj = {
+  args: {
+    languageConfig: {
+      language: 'json',
+    },
+    disableAutoFormat: true,
+    value: `{
+      "type": "object",
+      "properties": { "firstName": { "type": "string" } }
+    }`,
+  },
+};
+
+export const LanguageJsonWithSchemaValidation: StoryObj = {
+  args: {
+    languageConfig: {
+      language: 'json',
+      schemas: [
+        {
+          uri: 'http://myserver/foo-schema.json',
+          schema: GioJsonSchema,
+        },
+      ],
+    },
+    value: `{
+      "type": "object",
+      "properties": { "firstName": { "type": "string" } }
+    }`,
+  },
+};
+
+export const LanguageYaml: StoryObj = {
+  args: {
+    languageConfig: {
+      language: 'yaml',
+    },
+    value: `openapi: 3.0.0
+info:
+  title: Sample API`,
+  },
 };
 
 export const LanguageMarkdown: StoryObj = {
