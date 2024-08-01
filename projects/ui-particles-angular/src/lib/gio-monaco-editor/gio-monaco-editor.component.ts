@@ -76,6 +76,9 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
   @Input()
   public disableMiniMap = false;
 
+  @Input()
+  public disableAutoFormat = false;
+
   public loaded$ = new ReplaySubject<boolean>(1);
 
   private defaultOptions: editor.IStandaloneEditorConstructionOptions = {
@@ -182,9 +185,10 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
 
     const settings = {
       value: this.value,
-      language: this.languageConfig?.language ?? 'text',
+      language: this.languageConfig?.language ?? (isJsonString(this.value) ? 'json' : 'plaintext'),
       uri: `code-${uniqueId()}`,
     };
+
     this.ngZone.runOutsideAngular(() => {
       this.textModel = monaco.editor.createModel(settings.value, settings.language, monaco.Uri.parse(settings.uri));
     });
@@ -201,6 +205,12 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
     this.standaloneCodeEditor = monaco.editor.create(domElement, {
       ...options,
     });
+
+    if (!this.disableAutoFormat) {
+      setTimeout(() => {
+        this.standaloneCodeEditor?.getAction('editor.action.formatDocument')?.run();
+      }, 80);
+    }
 
     const onDidChangeContent = this.textModel?.onDidChangeContent(() => {
       const newValue = this.textModel?.getValue();
@@ -247,3 +257,12 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
     }
   }
 }
+
+const isJsonString = (str: string): boolean => {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return true;
+};
