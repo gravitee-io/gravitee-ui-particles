@@ -1,3 +1,15 @@
+# [12.18.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.17.0...v12.18.0) (2024-08-02)
+
+
+### Bug Fixes
+
+* avoid temporary error in console on init sometime ([62412da](https://github.com/gravitee-io/gravitee-ui-particles/commit/62412dac6c76f383a6a9092e7089a7e6ffc7fe46))
+
+
+### Features
+
+* add auto-format & autodetect json on init for Monaco editor ([72d2c2e](https://github.com/gravitee-io/gravitee-ui-particles/commit/72d2c2e7a5ca9d917b844148cfc145238659d9a9))
+
 # [12.17.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.16.0...v12.17.0) (2024-07-19)
 
 
