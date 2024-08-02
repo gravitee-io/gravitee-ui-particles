@@ -19,6 +19,7 @@ import { GIO_DIALOG_WIDTH, GioIconsModule } from '@gravitee/ui-particles-angular
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
+import { isEmpty, isNil } from 'lodash';
 
 import {
   GioPolicyStudioStepEditDialogComponent,
@@ -61,7 +62,7 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
   constructor(private readonly matDialog: MatDialog) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.policies || changes.step) {
+    if ((changes.policies || changes.step) && !isEmpty(this.policies) && !isNil(this.step.policy)) {
       this.policy = this.policies.find(policy => policy.id === this.step.policy);
     }
   }
