@@ -13,6 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+::ng-deep {
+  gio-form-tags-input {
+    .mat-mdc-standard-chip {
+      height: unset !important;
+      min-height: var(--mdc-chip-container-height);
+    }
+
+    .mat-mdc-standard-chip .mdc-evolution-chip__text-label {
+      white-space: normal;
+    }
+  }
+}
+
 .loader-option {
   display: flex;
 
