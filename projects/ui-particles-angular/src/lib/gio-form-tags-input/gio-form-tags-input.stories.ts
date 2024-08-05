@@ -329,3 +329,31 @@ export const WithAsyncAutocompleteOnly: StoryObj = {
     },
   },
 };
+
+export const WithLimitedWidth: StoryObj = {
+  render: ({ tags, disabled }) => {
+    const tagsControl = new UntypedFormControl({ value: tags, disabled });
+
+    tagsControl.valueChanges.subscribe(value => {
+      action('Tags')(value);
+    });
+
+    return {
+      template: `
+      <mat-form-field appearance="fill" style="width:200px">
+        <gio-form-tags-input
+          [formControl]="tagsControl">
+        </gio-form-tags-input>
+      </mat-form-field>
+      `,
+      props: {
+        tags,
+        tagsControl,
+      },
+    };
+  },
+  args: {
+    tags: ['lorem ipsum dolor sit amet'],
+    disabled: false,
+  },
+};
