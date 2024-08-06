@@ -41,9 +41,11 @@ import {
   fakeWebsocketMessageEntrypoint,
   fakeSSEMessageEntrypoint,
   fakeMockMessageEndpoint,
+  fakeSharedPolicyGroupPolicyStep,
 } from '../models/index-testing';
 import { ChannelSelector, HttpSelector, Policy, SaveOutput } from '../models';
 import { fakePolicyDocumentation, fakePolicySchema } from '../models/policy/PolicySchema.fixture';
+import { fakeAllSharedPolicyGroupPolicies } from '../models/policy/SharedPolicyGroupPolicy.fixture';
 
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
 
@@ -72,6 +74,7 @@ export default {
     [commonFlows]="commonFlows"
     [plans]="plans"
     [policies]="policies"
+    [sharedPolicyGroupPolicies]="sharedPolicyGroupPolicies"
     [policySchemaFetcher]="policySchemaFetcher"
     [policyDocumentationFetcher]="policyDocumentationFetcher"
     [trialUrl]="trialUrl"
@@ -81,6 +84,7 @@ export default {
     props: {
       ...props,
       policies: fakeAllPolicies(),
+      sharedPolicyGroupPolicies: fakeAllSharedPolicyGroupPolicies(),
       trialUrl: 'https://gravitee.io/self-hosted-trial',
       // Simulate a get policy schema http fetcher.
       policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)).pipe(delay(600)),
@@ -427,6 +431,34 @@ export const ProxyWithFlowsAndPlans: StoryObj = {
                 pathOperator: 'EQUALS',
               },
             ],
+          }),
+        ],
+      }),
+    ],
+  },
+};
+
+export const ProxyWithSharedPolicyGroup: StoryObj = {
+  name: 'Proxy API with SharedPolicyGroup',
+  args: {
+    apiType: 'PROXY',
+    flowExecution: {
+      mode: 'BEST_MATCH',
+      matchRequired: false,
+    },
+    entrypointsInfo: [fakeHTTPProxyEntrypoint()],
+    endpointsInfo: [fakeHTTPProxyEndpoint()],
+    commonFlows: [
+      fakeHttpFlow({
+        request: [fakeSharedPolicyGroupPolicyStep()],
+      }),
+    ],
+    plans: [
+      fakePlan({
+        name: 'Second plan',
+        flows: [
+          fakeHttpFlow({
+            request: [fakeSharedPolicyGroupPolicyStep()],
           }),
         ],
       }),

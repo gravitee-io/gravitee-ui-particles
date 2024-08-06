@@ -100,7 +100,7 @@ export default {
     component: GioPolicyStudioStepEditDialogStoryComponent,
     props: {
       dialogData: {
-        policy: args.policy,
+        genericPolicy: args.genericPolicy,
         step: args.step,
         executionPhase: 'REQUEST',
       },
@@ -113,9 +113,14 @@ export default {
 
 export const Default: StoryObj = {
   args: {
-    policy: fakeTestPolicy({
-      description: 'This is a test policy',
-    }),
+    genericPolicy: {
+      ...fakeTestPolicy({
+        description: 'This is a test policy',
+      }),
+      _id: 'test',
+      policyId: fakeTestPolicy().id,
+      type: 'POLICY',
+    },
     step: fakeTestPolicyStep(),
   },
   play: context => {

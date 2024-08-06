@@ -100,7 +100,12 @@ describe('GioPolicyStudioStepEditDialogComponent', () => {
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
     component.dialogData = {
-      policy,
+      genericPolicy: {
+        ...policy,
+        _id: 'test',
+        policyId: policy.id,
+        type: 'POLICY',
+      },
       step,
       executionPhase: 'REQUEST',
     };

@@ -27,9 +27,10 @@ import { MatInputHarness } from '@angular/material/input/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { fakeAllPolicies } from '../../models/index-testing';
-import { ApiType, ExecutionPhase, Policy } from '../../models';
+import { ApiType, ExecutionPhase, isPolicy, isSharedPolicyGroupPolicy, toGenericPolicies, GenericPolicy } from '../../models';
 import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.service';
 import { fakePolicyDocumentation, fakePolicySchema } from '../../models/policy/PolicySchema.fixture';
+import { fakeAllSharedPolicyGroupPolicies } from '../../models/policy/SharedPolicyGroupPolicy.fixture';
 
 import {
   GioPolicyStudioPoliciesCatalogDialogComponent,
@@ -102,7 +103,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
     component = fixture.componentInstance;
     component.dialogData = {
       apiType,
-      policies: fakeAllPolicies(),
+      genericPolicies: toGenericPolicies(fakeAllPolicies(), fakeAllSharedPolicyGroupPolicies()),
       executionPhase,
       trialUrl: 'https://gravitee.io/self-hosted-trial',
     };
@@ -117,7 +118,9 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
     it('should display policies catalog', async () => {
       await componentTestingOpenDialog();
 
-      await expectPoliciesCatalogContent('Request', p => p.message?.includes('REQUEST'));
+      await expectPoliciesCatalogContent('Request', p => isPolicy(p) && p.message?.includes('REQUEST'));
+
+      await expectPoliciesCatalogContent('Request', p => isSharedPolicyGroupPolicy(p) && p.apiType === 'MESSAGE' && p.phase === 'REQUEST');
     });
 
     it('should select a policy and add it', async () => {
@@ -207,7 +210,11 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
     it('should display policies catalog', async () => {
       await componentTestingOpenDialog();
 
-      await expectPoliciesCatalogContent('Response', p => p.message?.includes('RESPONSE'));
+      await expectPoliciesCatalogContent('Response', p => isPolicy(p) && p.message?.includes('RESPONSE'));
+      await expectPoliciesCatalogContent(
+        'Response',
+        p => isSharedPolicyGroupPolicy(p) && p.apiType === 'MESSAGE' && p.phase === 'RESPONSE',
+      );
     });
   });
 
@@ -219,7 +226,11 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
     it('should display policies catalog', async () => {
       await componentTestingOpenDialog();
 
-      await expectPoliciesCatalogContent('Publish', p => p.message?.includes('MESSAGE_REQUEST'));
+      await expectPoliciesCatalogContent('Publish', p => isPolicy(p) && p.message?.includes('MESSAGE_REQUEST'));
+      await expectPoliciesCatalogContent(
+        'Publish',
+        p => isSharedPolicyGroupPolicy(p) && p.apiType === 'MESSAGE' && p.phase === 'MESSAGE_REQUEST',
+      );
     });
   });
 
@@ -231,7 +242,11 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
     it('should display policies catalog', async () => {
       await componentTestingOpenDialog();
 
-      await expectPoliciesCatalogContent('Subscribe', p => p.message?.includes('MESSAGE_RESPONSE'));
+      await expectPoliciesCatalogContent('Subscribe', p => isPolicy(p) && p.message?.includes('MESSAGE_RESPONSE'));
+      await expectPoliciesCatalogContent(
+        'Subscribe',
+        p => isSharedPolicyGroupPolicy(p) && p.apiType === 'MESSAGE' && p.phase === 'MESSAGE_RESPONSE',
+      );
     });
   });
 
@@ -243,7 +258,8 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
     it('should display policies catalog', async () => {
       await componentTestingOpenDialog();
 
-      await expectPoliciesCatalogContent('Request', p => p.proxy?.includes('REQUEST'));
+      await expectPoliciesCatalogContent('Request', p => isPolicy(p) && p.proxy?.includes('REQUEST'));
+      await expectPoliciesCatalogContent('Request', p => isSharedPolicyGroupPolicy(p) && p.apiType === 'PROXY' && p.phase === 'REQUEST');
     });
 
     it('should display a banner with a "Request upgrade" button when policy is not deployed (enterprise license)', async () => {
@@ -265,18 +281,21 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
     it('should display policies catalog', async () => {
       await componentTestingOpenDialog();
 
-      await expectPoliciesCatalogContent('Response', p => p.proxy?.includes('RESPONSE'));
+      await expectPoliciesCatalogContent('Response', p => isPolicy(p) && p.proxy?.includes('RESPONSE'));
+      await expectPoliciesCatalogContent('Response', p => isSharedPolicyGroupPolicy(p) && p.apiType === 'PROXY' && p.phase === 'RESPONSE');
     });
   });
 
-  async function expectPoliciesCatalogContent(phaseLabel: string, policiesFilter: (policy: Policy) => boolean | undefined) {
+  async function expectPoliciesCatalogContent(phaseLabel: string, policiesFilter: (genericPolicy: GenericPolicy) => boolean | undefined) {
     const phaseDialog = await loader.getHarness(GioPolicyStudioPoliciesCatalogDialogHarness);
 
     expect(await phaseDialog.getPhase()).toEqual(phaseLabel);
-    expect(await phaseDialog.getPoliciesName()).toEqual(
-      fakeAllPolicies()
-        .filter(policiesFilter)
-        .map(policy => policy.name),
+    expect(await phaseDialog.getPoliciesName()).toStrictEqual(
+      expect.arrayContaining(
+        toGenericPolicies(fakeAllPolicies(), fakeAllSharedPolicyGroupPolicies())
+          .filter(policiesFilter)
+          .map(policy => policy.name),
+      ),
     );
   }
 

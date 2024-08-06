@@ -38,6 +38,7 @@ import {
   fakeKafkaMessageEndpoint,
   fakePlan,
   fakeRateLimitStep,
+  fakeSharedPolicyGroupPolicyStep,
   fakeTestPolicy,
   fakeTestPolicyStep,
   fakeWebhookMessageEntrypoint,
@@ -47,6 +48,11 @@ import { GioPolicyStudioDetailsHarness } from '../components/flow-details/gio-ps
 import { GioPolicyStudioFlowsMenuHarness } from '../components/flows-menu/gio-ps-flows-menu.harness';
 import { ChannelSelector, SaveOutput } from '../models';
 import { fakePolicySchema } from '../models/policy/PolicySchema.fixture';
+import {
+  fakeAllSharedPolicyGroupPolicies,
+  fakeProxyRequestSharedPolicyGroupPolicy,
+  fakeProxyResponseSharedPolicyGroupPolicy,
+} from '../models/policy/SharedPolicyGroupPolicy.fixture';
 
 import { GioPolicyStudioHarness } from './gio-policy-studio.harness';
 import { GioPolicyStudioComponent } from './gio-policy-studio.component';
@@ -75,10 +81,12 @@ describe('GioPolicyStudioComponent', () => {
     policyStudioHarness = await TestbedHarnessEnvironment.harnessForFixture(fixture, GioPolicyStudioHarness);
 
     component.policies = fakeAllPolicies();
+    component.sharedPolicyGroupPolicies = fakeAllSharedPolicyGroupPolicies();
     component.policySchemaFetcher = policy => of(fakePolicySchema(policy.id));
     component.policyDocumentationFetcher = policy => of(`${policy.id} documentation`);
     component.ngOnChanges({
       policies: new SimpleChange(null, null, true),
+      sharedPolicyGroupPolicies: new SimpleChange(null, null, true),
       policySchemaFetcher: new SimpleChange(null, null, true),
       policyDocumentationFetcher: new SimpleChange(null, null, true),
     });
@@ -1434,6 +1442,107 @@ describe('GioPolicyStudioComponent', () => {
         expect(commonFlow?.request).toEqual([fakeTestPolicyStep({ description: 'A' })]);
 
         expect(commonFlow?.response).toEqual([fakeTestPolicyStep({ description: 'A' })]);
+      });
+
+      it('should add step with SPG into phase', async () => {
+        const commonFlows = [
+          fakeHttpFlow({
+            name: 'Alphabetical policy',
+            request: [fakeSharedPolicyGroupPolicyStep({ description: 'B' })],
+            response: [
+              fakeSharedPolicyGroupPolicyStep({
+                description: 'B',
+                configuration: { sharedPolicyGroupId: '4d4c1b3b-3b1b-4b3b-8b3b-response' },
+              }),
+            ],
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        // Add step A before B and C after B into REQUEST phase
+        const requestPhase = await policyStudioHarness.getSelectedFlowPhase('REQUEST');
+        await requestPhase?.addStep(0, {
+          policyName: fakeProxyRequestSharedPolicyGroupPolicy().name,
+          description: 'A',
+        });
+        await requestPhase?.addStep(2, {
+          policyName: fakeProxyRequestSharedPolicyGroupPolicy().name,
+          description: 'C',
+        });
+
+        // Add step A before B into RESPONSE phase
+        const responsePhase = await policyStudioHarness.getSelectedFlowPhase('RESPONSE');
+        await responsePhase?.addStep(0, {
+          policyName: fakeProxyResponseSharedPolicyGroupPolicy().name,
+          description: 'A',
+        });
+
+        // Save
+        let saveOutputToExpect: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutputToExpect = value));
+        await policyStudioHarness.save();
+
+        expect(saveOutputToExpect?.commonFlows).toBeDefined();
+        const commonFlow = saveOutputToExpect?.commonFlows?.[0];
+        expect(commonFlow).toBeDefined();
+        expect(commonFlow?.request).toEqual([
+          fakeSharedPolicyGroupPolicyStep({ description: 'A' }),
+          fakeSharedPolicyGroupPolicyStep({ description: 'B' }),
+          fakeSharedPolicyGroupPolicyStep({ description: 'C' }),
+        ]);
+
+        expect(commonFlow?.response).toEqual([
+          fakeSharedPolicyGroupPolicyStep({ description: 'A', configuration: { sharedPolicyGroupId: '4d4c1b3b-3b1b-4b3b-8b3b-response' } }),
+          fakeSharedPolicyGroupPolicyStep({ description: 'B', configuration: { sharedPolicyGroupId: '4d4c1b3b-3b1b-4b3b-8b3b-response' } }),
+        ]);
+      });
+
+      it('should edit step with SPG into phase', async () => {
+        const commonFlows = [
+          fakeHttpFlow({
+            name: 'Alphabetical policy',
+            request: [fakeSharedPolicyGroupPolicyStep({ description: 'B' })],
+            response: [
+              fakeSharedPolicyGroupPolicyStep({
+                description: 'B',
+                configuration: { sharedPolicyGroupId: '4d4c1b3b-3b1b-4b3b-8b3b-response' },
+              }),
+            ],
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        // Edit step B into REQUEST phase
+        const requestPhase = await policyStudioHarness.getSelectedFlowPhase('REQUEST');
+        await requestPhase?.editStep(0, {
+          description: 'A',
+        });
+
+        // Edit step B into RESPONSE phase
+        const responsePhase = await policyStudioHarness.getSelectedFlowPhase('RESPONSE');
+        await responsePhase?.editStep(0, {
+          description: 'A',
+        });
+
+        // Save
+        let saveOutputToExpect: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutputToExpect = value));
+        await policyStudioHarness.save();
+
+        expect(saveOutputToExpect?.commonFlows).toBeDefined();
+        const commonFlow = saveOutputToExpect?.commonFlows?.[0];
+        expect(commonFlow).toBeDefined();
+        expect(commonFlow?.request).toEqual([fakeSharedPolicyGroupPolicyStep({ description: 'A' })]);
+
+        expect(commonFlow?.response).toEqual([
+          fakeSharedPolicyGroupPolicyStep({ description: 'A', configuration: { sharedPolicyGroupId: '4d4c1b3b-3b1b-4b3b-8b3b-response' } }),
+        ]);
       });
     });
   });

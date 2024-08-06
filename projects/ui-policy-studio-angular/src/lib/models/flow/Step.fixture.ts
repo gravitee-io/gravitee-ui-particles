@@ -83,3 +83,24 @@ export function fakeJsonToXmlStep(modifier?: Partial<Step> | ((base: Step) => St
     ...modifier,
   };
 }
+
+export function fakeSharedPolicyGroupPolicyStep(modifier?: Partial<Step> | ((base: Step) => Step)): Step {
+  const base: Step = {
+    name: 'Test PROXY SPG',
+    description: 'Shared Policy Group',
+    enabled: true,
+    policy: 'shared-policy-group-policy',
+    configuration: {
+      sharedPolicyGroupId: '4d4c1b3b-3b1b-4b3b-8b3b-request',
+    },
+  };
+
+  if (isFunction(modifier)) {
+    return modifier(base);
+  }
+
+  return {
+    ...base,
+    ...modifier,
+  };
+}

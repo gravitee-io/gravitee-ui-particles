@@ -13,6 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './Policy';
-export * from './SharedPolicyGroupPolicy';
-export * from './GenericPolicy';
+
+import { ApiType } from '../flow';
+
+import { ExecutionPhase } from './Policy';
+
+export type SharedPolicyGroupPolicy = {
+  id: string;
+  policyId: string;
+  name: string;
+  description?: string;
+  apiType: ApiType;
+  phase: ExecutionPhase;
+};

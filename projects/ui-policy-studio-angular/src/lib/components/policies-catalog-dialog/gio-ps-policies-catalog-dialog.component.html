@@ -46,9 +46,9 @@
         multiple
         formControlName="categories"
       >
-        <mat-chip-option *ngFor="let category of categories" [selected]="category" [value]="category">{{
-          category | titlecase
-        }}</mat-chip-option>
+        <mat-chip-option *ngFor="let category of categories" [selected]="category" [value]="category"
+          >{{ category | titlecase }}
+        </mat-chip-option>
       </mat-chip-listbox>
     </div>
 
@@ -58,6 +58,13 @@
           <mat-icon class="policiesCatalog__list__policy__head__icon" [svgIcon]="policy.icon ?? 'gio:puzzle'"></mat-icon>
 
           <span *ngIf="policy.name" class="policiesCatalog__list__policy__head__name">{{ policy.name }}</span>
+
+          <span
+            *ngIf="policy.genericPolicy.type === 'SHARED_POLICY_GROUP'"
+            class="gio-badge-neutral policiesCatalog__list__policy__head__badge"
+          >
+            <mat-icon svgIcon="gio:users"></mat-icon>&nbsp;Shared Policy Group
+          </span>
         </div>
 
         <div class="policiesCatalog__list__policy__enterprise" *ngIf="policy.deployed === false">
@@ -101,13 +108,17 @@
       <mat-icon class="policyForm__info__head__icon" [svgIcon]="selectedPolicy.icon ?? 'gio:puzzle'"></mat-icon>
 
       <span *ngIf="selectedPolicy.name" class="policyForm__info__head__name">{{ selectedPolicy.name }}</span>
+
+      <span *ngIf="selectedPolicy.type === 'SHARED_POLICY_GROUP'" class="gio-badge-neutral policiesCatalog__list__policy__head__badge">
+        <mat-icon svgIcon="gio:users"></mat-icon>&nbsp;Shared Policy Group
+      </span>
     </div>
 
     <div *ngIf="selectedPolicy.description" class="policyForm__info__description">{{ selectedPolicy.description }}</div>
   </div>
 
   <gio-ps-step-form
-    [policy]="selectedPolicy"
+    [genericPolicy]="selectedPolicy"
     [executionPhase]="executionPhase"
     (stepChange)="onStepChange($event)"
     (isValid)="onIsValid($event)"

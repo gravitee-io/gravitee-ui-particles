@@ -25,6 +25,8 @@ import { POLICIES_V4_UNREGISTERED_ICON, fakeAllPolicies } from '../../models/ind
 import { matIconRegisterProvider } from '../../../storybook-utils/mat-icon-register.provider';
 import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.service';
 import { fakePolicyDocumentation, fakePolicySchema } from '../../models/policy/PolicySchema.fixture';
+import { toGenericPolicies } from '../../models';
+import { fakeAllSharedPolicyGroupPolicies } from '../../models/policy/SharedPolicyGroupPolicy.fixture';
 
 import {
   GioPolicyStudioPoliciesCatalogDialogComponent,
@@ -77,7 +79,8 @@ export default {
   component: GioPolicyStudioPoliciesCatalogDialogStoryComponent,
   decorators: [
     moduleMetadata({
-      imports: [GioPolicyStudioPoliciesCatalogDialogStoryComponent, MatDialogModule],
+      declarations: [GioPolicyStudioPoliciesCatalogDialogStoryComponent],
+      imports: [MatDialogModule],
     }),
     applicationConfig({
       providers: [
@@ -101,7 +104,7 @@ export default {
       dialogData: {
         apiType: args.apiType,
         executionPhase: args.executionPhase,
-        policies: fakeAllPolicies(),
+        genericPolicies: toGenericPolicies(fakeAllPolicies(), fakeAllSharedPolicyGroupPolicies()),
         trialUrl: 'https://gravitee.io/self-hosted-trial',
       },
     },

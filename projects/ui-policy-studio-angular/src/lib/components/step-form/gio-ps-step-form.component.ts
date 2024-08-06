@@ -16,7 +16,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { map, takeUntil } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import {
   GioFormJsonSchemaComponent,
   GioFormJsonSchemaModule,
@@ -30,7 +30,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { GioAsciidoctorModule } from '@gravitee/ui-particles-angular/gio-asciidoctor';
 
-import { ExecutionPhase, Policy, Step } from '../../models';
+import { ExecutionPhase, isPolicy, isSharedPolicyGroupPolicy, Step, toPolicy, GenericPolicy } from '../../models';
 import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.service';
 
 @Component({
@@ -59,7 +59,7 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
   public executionPhase!: ExecutionPhase;
 
   @Input()
-  public policy!: Policy;
+  public genericPolicy!: GenericPolicy;
 
   @Output()
   public stepChange = new EventEmitter<Step>();
@@ -78,19 +78,26 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
   constructor(private readonly policyStudioService: GioPolicyStudioService) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.policy) {
-      this.policySchema$ = this.policyStudioService.getPolicySchema(this.policy).pipe(
-        map(schema => {
-          if (GioFormJsonSchemaComponent.isDisplayable(schema as GioJsonSchema)) {
-            return schema as GioJsonSchema;
-          }
-          return {};
-        }),
-      );
+    if (changes.genericPolicy) {
+      if (isPolicy(this.genericPolicy)) {
+        this.policySchema$ = this.policyStudioService.getPolicySchema(toPolicy(this.genericPolicy)).pipe(
+          map(schema => {
+            if (GioFormJsonSchemaComponent.isDisplayable(schema as GioJsonSchema)) {
+              return schema as GioJsonSchema;
+            }
+            return {};
+          }),
+        );
 
-      this.policyDocumentation$ = this.policyStudioService
-        .getPolicyDocumentation(this.policy)
-        .pipe(map(doc => (isEmpty(doc) ? 'No documentation available.' : doc)));
+        this.policyDocumentation$ = this.policyStudioService
+          .getPolicyDocumentation(toPolicy(this.genericPolicy))
+          .pipe(map(doc => (isEmpty(doc) ? 'No documentation available.' : doc)));
+      }
+      if (isSharedPolicyGroupPolicy(this.genericPolicy)) {
+        this.policySchema$ = of({});
+
+        this.policyDocumentation$ = of('No documentation available.');
+      }
     }
     if (changes.executionPhase) {
       this.context = {
@@ -136,11 +143,17 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
   }
 
   public emitStepChange(): void {
+    let configuration = this.stepForm?.get('configuration')?.value;
+
+    if (isSharedPolicyGroupPolicy(this.genericPolicy)) {
+      configuration = { sharedPolicyGroupId: this.genericPolicy.sharedPolicyGroupId };
+    }
+
     this.stepChange.emit({
       ...this.step,
       description: this.stepForm?.get('description')?.value,
       condition: this.stepForm?.get('condition')?.value ?? undefined,
-      configuration: this.stepForm?.get('configuration')?.value,
+      configuration,
     });
   }
 }
