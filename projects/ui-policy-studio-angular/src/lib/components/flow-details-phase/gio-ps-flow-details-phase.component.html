@@ -65,7 +65,7 @@
               class="content__step__step"
               [readOnly]="readOnly"
               [class.disabled]="readOnly || !stepVM.step.enabled"
-              [policies]="policies"
+              [genericPolicies]="genericPolicies"
               [step]="stepVM.step"
               [executionPhase]="policyExecutionPhase"
               (stepChange)="onStepChange(stepVM.index, $event)"

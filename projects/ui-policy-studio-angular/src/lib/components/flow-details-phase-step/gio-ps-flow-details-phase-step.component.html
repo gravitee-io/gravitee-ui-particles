@@ -18,9 +18,13 @@
 
 <div class="info">
   <div class="info__head">
-    <mat-icon class="info__head__icon" [svgIcon]="policy?.icon ?? 'gio:puzzle'"></mat-icon>
+    <mat-icon class="info__head__icon" [svgIcon]="genericPolicy?.icon ?? 'gio:puzzle'"></mat-icon>
 
     <span *ngIf="step.name" class="info__head__name">{{ step.name }}</span>
+
+    <span *ngIf="genericPolicy?.type === 'SHARED_POLICY_GROUP'" class="gio-badge-neutral" matTooltip="Shared Policy Group"
+      ><mat-icon svgIcon="gio:users"></mat-icon
+    ></span>
   </div>
 
   <div *ngIf="step.description" class="info__description">{{ step.description }}</div>

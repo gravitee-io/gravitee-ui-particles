@@ -25,12 +25,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { GioBannerModule, GioIconsModule } from '@gravitee/ui-particles-angular';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatTooltip } from '@angular/material/tooltip';
 
-import { ApiType, ExecutionPhase, Policy, Step } from '../../models';
+import { ApiType, ExecutionPhase, GenericPolicy, isPolicy, isSharedPolicyGroupPolicy, Step } from '../../models';
 import { GioPolicyStudioStepFormComponent } from '../step-form/gio-ps-step-form.component';
 
 export type GioPolicyStudioPoliciesCatalogDialogData = {
-  policies: Policy[];
+  genericPolicies: GenericPolicy[];
   executionPhase: ExecutionPhase;
   apiType: ApiType;
   trialUrl?: string;
@@ -45,7 +46,13 @@ const executionPhaseLabels: Record<ExecutionPhase, string> = {
   MESSAGE_RESPONSE: 'Subscribe',
 };
 
-type PolicyVM = Policy & {
+type PolicyVM = {
+  _id: string;
+  genericPolicy: GenericPolicy;
+  name: string;
+  description?: string;
+  icon?: string;
+  deployed?: boolean;
   category: string;
 };
 
@@ -62,6 +69,7 @@ type PolicyVM = Policy & {
     GioBannerModule,
     GioIconsModule,
     GioPolicyStudioStepFormComponent,
+    MatTooltip,
   ],
   selector: 'gio-ps-policies-catalog-dialog',
   templateUrl: './gio-ps-policies-catalog-dialog.component.html',
@@ -73,7 +81,7 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
   public executionPhase!: ExecutionPhase;
   public executionPhaseLabel!: string;
 
-  public selectedPolicy?: Policy;
+  public selectedPolicy?: GenericPolicy;
 
   public stepToAdd?: Step;
 
@@ -101,16 +109,28 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
     this.executionPhase = flowDialogData.executionPhase;
     this.executionPhaseLabel = executionPhaseLabels[flowDialogData.executionPhase];
 
-    this.allPolicies = flowDialogData.policies
-      .filter(policy => {
-        if (flowDialogData.apiType === 'PROXY') {
-          return policy.proxy?.includes(flowDialogData.executionPhase);
+    this.allPolicies = flowDialogData.genericPolicies
+      .filter(genericPolicy => {
+        if (isPolicy(genericPolicy)) {
+          if (flowDialogData.apiType === 'PROXY') {
+            return genericPolicy.proxy?.includes(flowDialogData.executionPhase);
+          }
+          return genericPolicy.message?.includes(flowDialogData.executionPhase);
         }
-        return policy.message?.includes(flowDialogData.executionPhase);
+        if (isSharedPolicyGroupPolicy(genericPolicy)) {
+          return genericPolicy.apiType === flowDialogData.apiType && genericPolicy.phase === flowDialogData.executionPhase;
+        }
+        // Not expected
+        throw new Error('Unknown policy type');
       })
       .map(policy => ({
-        ...policy,
         category: policy.category ?? 'Others',
+        _id: policy._id,
+        name: policy.name,
+        description: policy.description,
+        icon: isPolicy(policy) ? policy.icon : undefined,
+        deployed: isPolicy(policy) ? policy.deployed : undefined,
+        genericPolicy: policy,
       }));
 
     this.categories = uniq(this.allPolicies.map(policy => policy.category.toLowerCase())).sort((a, b) => a.localeCompare(b));
@@ -140,11 +160,11 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
     this.unsubscribe$.complete();
   }
 
-  public onSelectPolicy(policy: Policy) {
+  public onSelectPolicy(policy: PolicyVM) {
     if (policy.deployed === false) {
       this.isUnlicensed = true;
     }
-    this.selectedPolicy = policy;
+    this.selectedPolicy = policy.genericPolicy;
   }
 
   public onStepChange(step: Step) {
@@ -160,7 +180,7 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
       ...this.stepToAdd,
       name: this.selectedPolicy?.name,
       enabled: true,
-      policy: this.selectedPolicy?.id,
+      policy: this.selectedPolicy?.policyId,
     });
   }
 

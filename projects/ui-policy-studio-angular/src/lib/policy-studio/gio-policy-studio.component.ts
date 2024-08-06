@@ -31,6 +31,9 @@ import {
   PolicyDocumentationFetcher,
   PolicySchemaFetcher,
   SaveOutput,
+  SharedPolicyGroupPolicy,
+  toGenericPolicies,
+  GenericPolicy,
 } from '../models';
 import { GioPolicyStudioFlowsMenuComponent } from '../components/flows-menu/gio-ps-flows-menu.component';
 import { GioPolicyStudioDetailsComponent } from '../components/flow-details/gio-ps-flow-details.component';
@@ -102,6 +105,12 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
   public policies: Policy[] = [];
 
   /**
+   * List of SharedPolicyGroups usable in the studio
+   */
+  @Input()
+  public sharedPolicyGroupPolicies: SharedPolicyGroupPolicy[] = [];
+
+  /**
    * When a policy is not available with the current license,
    * this URL is used to redirect the user to the trial page.
    */
@@ -152,6 +161,8 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
   private unSavingButtonSubscription?: Subscription;
   public enableSavingTimer = true;
 
+  protected genericPolicies: GenericPolicy[] = [];
+
   constructor(private readonly policyStudioService: GioPolicyStudioService) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -182,6 +193,10 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
 
     if (changes.policyDocumentationFetcher) {
       this.policyStudioService.setPolicyDocumentationFetcher(this.policyDocumentationFetcher);
+    }
+
+    if (changes.policies || changes.sharedPolicyGroupPolicies) {
+      this.initGenericPolicies();
     }
   }
 
@@ -246,6 +261,10 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
         this.saving = false;
       });
     }
+  }
+
+  private initGenericPolicies(): void {
+    this.genericPolicies = toGenericPolicies(this.policies ?? [], this.sharedPolicyGroupPolicies ?? []);
   }
 }
 

@@ -26,8 +26,9 @@ import {
   GioPolicyStudioPoliciesCatalogDialogData,
   GioPolicyStudioPoliciesCatalogDialogResult,
 } from '../policies-catalog-dialog/gio-ps-policies-catalog-dialog.component';
-import { ApiType, ConnectorInfo, ExecutionPhase, Policy, Step } from '../../models';
+import { ApiType, ConnectorInfo, ExecutionPhase, Step } from '../../models';
 import { GioPolicyStudioDetailsPhaseStepComponent } from '../flow-details-phase-step/gio-ps-flow-details-phase-step.component';
+import { GenericPolicy } from '../../models/policy/GenericPolicy';
 
 type StepVM =
   | {
@@ -73,7 +74,7 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
   public apiType!: ApiType;
 
   @Input()
-  public policies: Policy[] = [];
+  public genericPolicies: GenericPolicy[] = [];
 
   @Input()
   public policyExecutionPhase!: ExecutionPhase;
@@ -129,7 +130,7 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
         GioPolicyStudioPoliciesCatalogDialogResult
       >(GioPolicyStudioPoliciesCatalogDialogComponent, {
         data: {
-          policies: this.policies,
+          genericPolicies: this.genericPolicies,
           executionPhase: this.policyExecutionPhase,
           apiType: this.apiType,
           trialUrl: this.trialUrl,

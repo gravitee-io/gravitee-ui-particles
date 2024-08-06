@@ -66,12 +66,12 @@ $typography: map.get(gio.$mat-theme, typography);
 
       &__head {
         display: flex;
-        max-width: 95%;
         align-items: center;
+        align-self: stretch;
 
         &__icon {
           min-width: 24px;
-          flex: 1 1 24px;
+          flex: 0 0 24px;
           margin-right: 8px;
         }
 
@@ -80,6 +80,10 @@ $typography: map.get(gio.$mat-theme, typography);
           flex: 1 1 auto;
           text-overflow: ellipsis;
           white-space: nowrap;
+        }
+
+        &__badge {
+          float: left;
         }
       }
 

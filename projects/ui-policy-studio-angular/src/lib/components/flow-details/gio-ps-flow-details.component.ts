@@ -27,7 +27,7 @@ import {
   GioPolicyStudioFlowMessageFormDialogComponent,
   GioPolicyStudioFlowMessageFormDialogData,
 } from '../flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
-import { ApiType, ChannelSelector, ConnectorInfo, Operation, Policy, Step } from '../../models';
+import { ApiType, ChannelSelector, ConnectorInfo, Operation, Policy, Step, GenericPolicy } from '../../models';
 import {
   GioPolicyStudioFlowProxyFormDialogComponent,
   GioPolicyStudioFlowProxyFormDialogData,
@@ -74,6 +74,9 @@ export class GioPolicyStudioDetailsComponent implements OnChanges {
 
   @Input()
   public policies: Policy[] = [];
+
+  @Input()
+  public genericPolicies: GenericPolicy[] = [];
 
   @Input()
   public trialUrl?: string;

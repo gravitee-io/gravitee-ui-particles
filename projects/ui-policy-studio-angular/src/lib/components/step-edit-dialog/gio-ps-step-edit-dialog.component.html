@@ -16,23 +16,28 @@
 
 -->
 <h2 mat-dialog-title class="title">
-  <mat-icon class="title__icon" [svgIcon]="policy.icon ?? 'gio:puzzle'"></mat-icon>
+  <mat-icon class="title__icon" [svgIcon]="genericPolicy.icon ?? 'gio:puzzle'"></mat-icon>
 
-  <span *ngIf="step.name" class="title__name">{{ step.name }}</span>
+  <span *ngIf="step.name" class="title__name">
+    {{ step.name }}
+    <span *ngIf="genericPolicy.type === 'SHARED_POLICY_GROUP'" class="gio-badge-neutral policiesCatalog__list__policy__head__badge">
+      <mat-icon svgIcon="gio:users"></mat-icon>&nbsp;Shared Policy Group
+    </span></span
+  >
 
   <button class="title__closeBtn" mat-icon-button aria-label="Close dialog" [mat-dialog-close]="">
     <mat-icon svgIcon="gio:cancel"></mat-icon>
   </button>
 
   <div class="title__description">
-    {{ policy.description }}
+    {{ genericPolicy.description }}
   </div>
 </h2>
 
 <mat-dialog-content class="content">
   <gio-ps-step-form
     [readOnly]="readOnly"
-    [policy]="policy"
+    [genericPolicy]="genericPolicy"
     [executionPhase]="executionPhase"
     [(step)]="step"
     (isValid)="isValid = $event"

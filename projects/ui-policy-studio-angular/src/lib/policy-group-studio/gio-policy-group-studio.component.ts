@@ -18,7 +18,17 @@ import { EMPTY } from 'rxjs';
 import { GioFormJsonSchemaModule, GioLoaderModule } from '@gravitee/ui-particles-angular';
 
 import { GioPolicyStudioDetailsPhaseComponent } from '../components/flow-details-phase/gio-ps-flow-details-phase.component';
-import { ApiType, ConnectorInfo, ExecutionPhase, Policy, PolicyDocumentationFetcher, PolicySchemaFetcher, Step } from '../models';
+import {
+  ApiType,
+  ConnectorInfo,
+  ExecutionPhase,
+  GenericPolicy,
+  Policy,
+  PolicyDocumentationFetcher,
+  PolicySchemaFetcher,
+  Step,
+  toGenericPolicies,
+} from '../models';
 import { GioPolicyStudioService } from '../policy-studio/gio-policy-studio.service';
 
 export type PolicyGroupOutput = Step[];
@@ -102,6 +112,7 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
   protected policyGroupVM?: PolicyGroupVM;
   protected steps: Step[] = [];
   protected trialUrl: string | undefined;
+  protected genericPolicies: GenericPolicy[] = [];
 
   private phases: Record<`${ApiType}__${ExecutionPhase}`, PolicyGroupVM | null> = {
     PROXY__REQUEST: {
@@ -156,6 +167,7 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
     }
     if (changes.policies) {
       this.isLoading = false;
+      this.genericPolicies = toGenericPolicies(this.policies);
     }
     if (changes.executionPhase) {
       this.policyGroupVM = this.phases[`${this.apiType}__${this.executionPhase}`] ?? undefined;

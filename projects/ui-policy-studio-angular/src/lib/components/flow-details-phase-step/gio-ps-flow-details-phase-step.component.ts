@@ -19,18 +19,19 @@ import { GIO_DIALOG_WIDTH, GioIconsModule } from '@gravitee/ui-particles-angular
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
-import { isEmpty, isNil } from 'lodash';
+import { get, isEmpty, isNil } from 'lodash';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import {
   GioPolicyStudioStepEditDialogComponent,
   GioPolicyStudioStepEditDialogData,
   GioPolicyStudioStepEditDialogResult,
 } from '../step-edit-dialog/gio-ps-step-edit-dialog.component';
-import { ExecutionPhase, Policy, Step } from '../../models';
+import { ExecutionPhase, isPolicy, isSharedPolicyGroupPolicy, Step, GenericPolicy } from '../../models';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, GioIconsModule, MatButtonModule, MatMenuModule],
+  imports: [CommonModule, GioIconsModule, MatButtonModule, MatMenuModule, MatTooltipModule],
   selector: 'gio-ps-flow-details-phase-step',
   templateUrl: './gio-ps-flow-details-phase-step.component.html',
   styleUrls: ['./gio-ps-flow-details-phase-step.component.scss'],
@@ -43,7 +44,7 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
   public step!: Step;
 
   @Input()
-  public policies: Policy[] = [];
+  public genericPolicies: GenericPolicy[] = [];
 
   @Input({ required: true })
   public executionPhase!: ExecutionPhase;
@@ -57,18 +58,29 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
   @Output()
   public disabled = new EventEmitter<void>();
 
-  public policy?: Policy;
+  public genericPolicy?: GenericPolicy;
+  protected policyIcon?: string;
 
   constructor(private readonly matDialog: MatDialog) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if ((changes.policies || changes.step) && !isEmpty(this.policies) && !isNil(this.step.policy)) {
-      this.policy = this.policies.find(policy => policy.id === this.step.policy);
+    if ((changes.policies || changes.step) && !isEmpty(this.genericPolicies) && !isNil(this.step.policy)) {
+      this.genericPolicy = this.genericPolicies.find(policy => {
+        if (isPolicy(policy)) {
+          return policy.policyId === this.step.policy;
+        }
+
+        if (isSharedPolicyGroupPolicy(policy)) {
+          return policy.sharedPolicyGroupId === get(this.step.configuration, 'sharedPolicyGroupId');
+        }
+        // Not expected
+        throw new Error('Unknown policy type');
+      });
     }
   }
 
   public onEditOrView() {
-    if (!this.policy) {
+    if (!this.genericPolicy) {
       // TODO: Handle UseCase when policy is not found. (Like if the plugin is removed from the BackEnd)
       return;
     }
@@ -79,7 +91,7 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
         {
           data: {
             readOnly: this.readOnly,
-            policy: this.policy,
+            genericPolicy: this.genericPolicy,
             step: this.step,
             executionPhase: this.executionPhase,
           },
