@@ -1,3 +1,10 @@
+## [7.60.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.60.0...v7.60.1) (2024-08-07)
+
+
+### Bug Fixes
+
+* fix app name text overflow under API Plan Subscriptions ([ac8f3bc](https://github.com/gravitee-io/gravitee-ui-particles/commit/ac8f3bccf2d821131e5f1993190b4e135d14c1f9))
+
 # [7.60.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v7.59.1...v7.60.0) (2024-07-04)
 
 
