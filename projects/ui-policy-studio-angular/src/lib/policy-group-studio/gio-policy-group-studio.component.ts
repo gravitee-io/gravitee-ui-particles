@@ -53,7 +53,9 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
   /**
    * List of policies usable in the studio
    */
-  @Input()
+  @Input({
+    transform: (policies: unknown) => policies ?? [],
+  })
   public policies: Policy[] = [];
 
   /**
