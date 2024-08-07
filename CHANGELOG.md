@@ -1,3 +1,16 @@
+# [12.19.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.18.0...v12.19.0) (2024-08-07)
+
+
+### Bug Fixes
+
+* fix app name text overflow under API Plan Subscriptions ([ab07d9e](https://github.com/gravitee-io/gravitee-ui-particles/commit/ab07d9e800756c461f955f35103188e8352daaed))
+* spg studio - make sure policies input is an array ([deb8053](https://github.com/gravitee-io/gravitee-ui-particles/commit/deb80532729c35d647693e3af7f7329e915587d1))
+
+
+### Features
+
+* ps - allow to add steps with Shared Policy Groups ([241938e](https://github.com/gravitee-io/gravitee-ui-particles/commit/241938e629ad6ebc34bbd40c50fd37ef73bb69d2))
+
 # [12.18.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.17.0...v12.18.0) (2024-08-02)
 
 
