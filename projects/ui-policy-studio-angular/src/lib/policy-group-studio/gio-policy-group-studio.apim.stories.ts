@@ -53,6 +53,24 @@ export const Loading = () => ({
   },
 });
 
+export const ReadOnly = () => ({
+  props: {
+    policyGroupChange: action('policyGroupChange'),
+    policies: fakeAllPolicies(),
+    policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)).pipe(delay(600)),
+    policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)).pipe(delay(600)),
+    executionPhase: 'REQUEST',
+    apiType: 'PROXY',
+    policyGroup: [
+      {
+        policy: fakeTestPolicy().id,
+        name: 'Policy Test',
+      },
+    ],
+    readOnly: true,
+  },
+});
+
 export const ProxyAPIRequestPhase = () => ({
   props: {
     policyGroupChange: action('policyGroupChange'),
