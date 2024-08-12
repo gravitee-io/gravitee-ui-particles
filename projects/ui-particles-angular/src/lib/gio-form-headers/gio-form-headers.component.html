@@ -38,6 +38,7 @@
             cdkTextareaAutosize
             cdkAutosizeMinRows="1"
             [matAutocomplete]="headerNamesAutocomplete"
+            [matAutocompleteDisabled]="autocompleteDisabled"
           ></textarea>
         </div>
         <mat-error *ngIf="control.get('key')?.hasError('pattern')">
