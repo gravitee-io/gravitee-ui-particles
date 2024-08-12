@@ -137,6 +137,9 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor, Va
     valueName: 'value',
   };
 
+  @Input()
+  public autocompleteDisabled?: boolean = false;
+
   public mainForm: UntypedFormGroup;
   public headersFormArray = new UntypedFormArray([
     new UntypedFormGroup({
