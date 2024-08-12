@@ -59,6 +59,12 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
   public policies: Policy[] = [];
 
   /**
+   * Whether the Policy Group Studio is in read-only mode
+   */
+  @Input()
+  public readOnly = false;
+
+  /**
    * Type of the API targeted by the Policy Group Studio
    */
   @Input({ required: true })
@@ -94,7 +100,6 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
   public policyGroupChange: EventEmitter<PolicyGroupOutput> = new EventEmitter<PolicyGroupOutput>();
 
   protected isLoading = true;
-  protected readOnly = false;
   protected startConnector: (name: string) => ConnectorInfo[] = name => [
     {
       name,
