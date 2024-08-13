@@ -1,3 +1,12 @@
+# [12.20.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.19.0...v12.20.0) (2024-08-13)
+
+
+### Features
+
+* add an option `disableCancel` to allow ConfirmDialog to be used just to notify ([7d918c2](https://github.com/gravitee-io/gravitee-ui-particles/commit/7d918c29ceb340178dd0f2c14b18684beb2820ea))
+* add readOnly input for Policy Group Studio ([ff00b3b](https://github.com/gravitee-io/gravitee-ui-particles/commit/ff00b3b63fc2212fa1fa19adfc1e80a908106738))
+* handle the case when policy or SPG is not found ([429e7ae](https://github.com/gravitee-io/gravitee-ui-particles/commit/429e7aed139fa4a59a477c3e799e6ef4a0937d0d))
+
 # [12.19.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.18.0...v12.19.0) (2024-08-07)
 
 
