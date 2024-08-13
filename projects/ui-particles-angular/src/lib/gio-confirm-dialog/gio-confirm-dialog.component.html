@@ -26,9 +26,11 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end" class="confirm-dialog__actions">
-  <button class="confirm-dialog__cancel-button" mat-flat-button [mat-dialog-close]="false">
-    {{ cancelButton }}
-  </button>
+  @if (!disableCancel) {
+    <button class="confirm-dialog__cancel-button" mat-flat-button [mat-dialog-close]="false">
+      {{ cancelButton }}
+    </button>
+  }
   <button
     class="confirm-dialog__confirm-button"
     color="warn"

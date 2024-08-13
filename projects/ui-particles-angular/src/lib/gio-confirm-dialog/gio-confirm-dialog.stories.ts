@@ -42,6 +42,9 @@ export default {
     cancelButton: {
       type: { name: 'string', required: false },
     },
+    disableCancel: {
+      type: { name: 'boolean', required: false },
+    },
   },
   parameters: {
     chromatic: { delay: 2000 },
@@ -84,4 +87,17 @@ CustomContentComponent.args = {
   },
   confirmButton: 'Yes, I want',
   cancelButton: 'Nope',
+};
+
+export const OnlyConfirmChoice: StoryObj = {
+  play: context => {
+    const button = context.canvasElement.querySelector('#open-confirm-dialog') as HTMLButtonElement;
+    button.click();
+  },
+};
+OnlyConfirmChoice.args = {
+  title: 'For your information',
+  content: 'This is an information message.',
+  confirmButton: 'OK',
+  disableCancel: true,
 };
