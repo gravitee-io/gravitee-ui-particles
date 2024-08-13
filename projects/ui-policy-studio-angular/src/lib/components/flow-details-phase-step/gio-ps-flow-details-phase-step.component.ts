@@ -15,11 +15,11 @@
  */
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { GIO_DIALOG_WIDTH, GioIconsModule } from '@gravitee/ui-particles-angular';
+import { GIO_DIALOG_WIDTH, GioConfirmDialogComponent, GioConfirmDialogData, GioIconsModule } from '@gravitee/ui-particles-angular';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
-import { get, isEmpty, isNil } from 'lodash';
+import { get, isEmpty, isNil, has } from 'lodash';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import {
@@ -58,7 +58,8 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
   @Output()
   public disabled = new EventEmitter<void>();
 
-  public genericPolicy?: GenericPolicy;
+  protected genericPolicy?: GenericPolicy;
+  protected policyNotFound: false | 'SHARED_POLICY_GROUP' | 'POLICY' = false;
   protected policyIcon?: string;
 
   constructor(private readonly matDialog: MatDialog) {}
@@ -76,12 +77,32 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
         // Not expected
         throw new Error('Unknown policy type');
       });
+
+      // if this.genericPolicy is not found, it means that the policy has been deleted or the shared policy group no longer exists (or deployed)
+      if (!this.genericPolicy) {
+        this.policyNotFound = has(this.step.configuration, 'sharedPolicyGroupId') ? 'SHARED_POLICY_GROUP' : 'POLICY';
+      }
     }
   }
 
   public onEditOrView() {
-    if (!this.genericPolicy) {
-      // TODO: Handle UseCase when policy is not found. (Like if the plugin is removed from the BackEnd)
+    if (!this.genericPolicy || this.policyNotFound != false) {
+      this.matDialog
+        .open<GioConfirmDialogComponent, GioConfirmDialogData, boolean>(GioConfirmDialogComponent, {
+          data: {
+            title: `${this.policyNotFound === 'SHARED_POLICY_GROUP' ? 'Shared Policy Group' : 'Policy'} not found`,
+            content: `This step is linked to a ${this.policyNotFound === 'SHARED_POLICY_GROUP' ? 'Shared Policy Group' : 'Policy'} that no longer exists.<br>
+${this.policyNotFound === 'SHARED_POLICY_GROUP' ? 'Note: The Gateway will ignore this step.' : 'Note: The Gateway will throw an error on deployment.'}
+`,
+            confirmButton: 'OK',
+            disableCancel: true,
+          },
+          role: 'alertdialog',
+          id: 'gioPolicyNotFoundDialog',
+          width: GIO_DIALOG_WIDTH.MEDIUM,
+        })
+        .afterClosed()
+        .subscribe();
       return;
     }
 

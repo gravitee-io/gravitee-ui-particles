@@ -25,7 +25,7 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { of } from 'rxjs';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { GioFormJsonSchemaModule } from '@gravitee/ui-particles-angular';
+import { GioConfirmDialogHarness, GioFormJsonSchemaModule } from '@gravitee/ui-particles-angular';
 
 import {
   fakeAllPolicies,
@@ -59,6 +59,7 @@ import { GioPolicyStudioComponent } from './gio-policy-studio.component';
 
 describe('GioPolicyStudioComponent', () => {
   let loader: HarnessLoader;
+  let rootLoader: HarnessLoader;
   let component: GioPolicyStudioComponent;
   let fixture: ComponentFixture<GioPolicyStudioComponent>;
   let policyStudioHarness: GioPolicyStudioHarness;
@@ -78,6 +79,7 @@ describe('GioPolicyStudioComponent', () => {
     fixture = TestBed.createComponent(GioPolicyStudioComponent);
     component = fixture.componentInstance;
     loader = TestbedHarnessEnvironment.loader(fixture);
+    rootLoader = TestbedHarnessEnvironment.documentRootLoader(fixture);
     policyStudioHarness = await TestbedHarnessEnvironment.harnessForFixture(fixture, GioPolicyStudioHarness);
 
     component.policies = fakeAllPolicies();
@@ -1543,6 +1545,56 @@ describe('GioPolicyStudioComponent', () => {
         expect(commonFlow?.response).toEqual([
           fakeSharedPolicyGroupPolicyStep({ description: 'A', configuration: { sharedPolicyGroupId: '4d4c1b3b-3b1b-4b3b-8b3b-response' } }),
         ]);
+      });
+
+      it('should edit step with not found SPG into phase', async () => {
+        const commonFlows = [
+          fakeHttpFlow({
+            name: 'Alphabetical policy',
+            request: [fakeSharedPolicyGroupPolicyStep({ description: 'B', configuration: { sharedPolicyGroupId: 'notExist' } })],
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        // Edit step B into REQUEST phase
+        const requestPhase = await policyStudioHarness.getSelectedFlowPhase('REQUEST');
+
+        const step = await requestPhase?.getStep(0);
+        await step?.clickOnEdit();
+
+        const confirmDialog = await rootLoader.getHarness(GioConfirmDialogHarness);
+        expect(await (await confirmDialog.host()).text()).toContain(
+          'Shared Policy Group not foundThis step is linked to a Shared Policy Group that no longer exists.\n' +
+            'Note: The Gateway will ignore this step.',
+        );
+      });
+
+      it('should edit step with not found Policy into phase', async () => {
+        const commonFlows = [
+          fakeHttpFlow({
+            name: 'Alphabetical policy',
+            request: [fakeTestPolicyStep({ policy: 'notExist' })],
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        // Edit step B into REQUEST phase
+        const requestPhase = await policyStudioHarness.getSelectedFlowPhase('REQUEST');
+
+        const step = await requestPhase?.getStep(0);
+        await step?.clickOnEdit();
+
+        const confirmDialog = await rootLoader.getHarness(GioConfirmDialogHarness);
+        expect(await (await confirmDialog.host()).text()).toContain(
+          'Policy not foundThis step is linked to a Policy that no longer exists.\n' +
+            'Note: The Gateway will throw an error on deployment.',
+        );
       });
     });
   });

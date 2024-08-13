@@ -458,7 +458,15 @@ export const ProxyWithSharedPolicyGroup: StoryObj = {
         name: 'Second plan',
         flows: [
           fakeHttpFlow({
-            request: [fakeSharedPolicyGroupPolicyStep()],
+            request: [
+              fakeSharedPolicyGroupPolicyStep(),
+              fakeSharedPolicyGroupPolicyStep({
+                name: 'SPG Not found',
+                configuration: {
+                  sharedPolicyGroupId: 'undefined',
+                },
+              }),
+            ],
           }),
         ],
       }),

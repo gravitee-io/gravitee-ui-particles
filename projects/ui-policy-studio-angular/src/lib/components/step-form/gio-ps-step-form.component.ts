@@ -15,7 +15,7 @@
  */
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { map, takeUntil } from 'rxjs/operators';
+import { catchError, map, takeUntil } from 'rxjs/operators';
 import { Observable, of, Subject } from 'rxjs';
 import {
   GioFormJsonSchemaComponent,
@@ -89,9 +89,10 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
           }),
         );
 
-        this.policyDocumentation$ = this.policyStudioService
-          .getPolicyDocumentation(toPolicy(this.genericPolicy))
-          .pipe(map(doc => (isEmpty(doc) ? 'No documentation available.' : doc)));
+        this.policyDocumentation$ = this.policyStudioService.getPolicyDocumentation(toPolicy(this.genericPolicy)).pipe(
+          map(doc => (isEmpty(doc) ? 'No documentation available.' : doc)),
+          catchError(() => of('No documentation available.')),
+        );
       }
       if (isSharedPolicyGroupPolicy(this.genericPolicy)) {
         this.policySchema$ = of({});
