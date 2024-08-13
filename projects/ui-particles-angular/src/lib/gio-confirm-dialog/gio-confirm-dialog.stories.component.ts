@@ -18,7 +18,7 @@ import { Component, Inject, Input, Type } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { action } from '@storybook/addon-actions';
 
-import { GioConfirmDialogComponent, GioConfirmDialogData } from './gio-confirm-dialog.component';
+import { GioConfirmDialogComponent, GioConfirmDialogData, GioConfirmDialogResult } from './gio-confirm-dialog.component';
 
 @Component({
   selector: 'gio-confirm-dialog-story',
@@ -34,17 +34,19 @@ export class ConfirmDialogStoryComponent {
       };
   @Input() public confirmButton?: string;
   @Input() public cancelButton?: string;
+  @Input() public disableCancel?: boolean;
 
   constructor(private readonly matDialog: MatDialog) {}
 
   public openConfirmDialog() {
     this.matDialog
-      .open<GioConfirmDialogComponent, GioConfirmDialogData, boolean>(GioConfirmDialogComponent, {
+      .open<GioConfirmDialogComponent, GioConfirmDialogData, GioConfirmDialogResult>(GioConfirmDialogComponent, {
         data: {
           title: this.title,
           content: this.content,
           confirmButton: this.confirmButton,
           cancelButton: this.cancelButton,
+          disableCancel: this.disableCancel,
         },
         role: 'alertdialog',
         id: 'confirmDialog',

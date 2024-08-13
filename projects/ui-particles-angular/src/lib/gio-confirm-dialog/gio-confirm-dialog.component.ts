@@ -27,7 +27,10 @@ export type GioConfirmDialogData = {
       };
   confirmButton?: string;
   cancelButton?: string;
+  disableCancel?: boolean;
 };
+
+export type GioConfirmDialogResult = boolean;
 
 @Component({
   selector: 'gio-confirm-dialog',
@@ -42,9 +45,10 @@ export class GioConfirmDialogComponent {
   public contentComponentInjector: Injector;
   public confirmButton: string;
   public cancelButton: string;
+  public disableCancel: boolean;
 
   constructor(
-    public dialogRef: MatDialogRef<GioConfirmDialogComponent>,
+    public dialogRef: MatDialogRef<GioConfirmDialogComponent, GioConfirmDialogResult>,
     @Inject(MAT_DIALOG_DATA) confirmDialogData: GioConfirmDialogData,
     private readonly parentInjector: Injector,
   ) {
@@ -64,5 +68,6 @@ export class GioConfirmDialogComponent {
 
     this.confirmButton = confirmDialogData?.confirmButton ?? 'Confirm';
     this.cancelButton = confirmDialogData?.cancelButton ?? 'Cancel';
+    this.disableCancel = confirmDialogData?.disableCancel ?? false;
   }
 }
