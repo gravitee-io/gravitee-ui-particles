@@ -25,6 +25,9 @@
     <span *ngIf="genericPolicy?.type === 'SHARED_POLICY_GROUP'" class="gio-badge-neutral" matTooltip="Shared Policy Group">
       <mat-icon svgIcon="gio:users"></mat-icon>
     </span>
+    @if (getPrerequisiteMessage) {
+      <mat-icon class="info__head__info" svgIcon="gio:info" [matTooltip]="getPrerequisiteMessage"></mat-icon>
+    }
     <span
       *ngIf="policyNotFound !== false"
       class="gio-badge-error"

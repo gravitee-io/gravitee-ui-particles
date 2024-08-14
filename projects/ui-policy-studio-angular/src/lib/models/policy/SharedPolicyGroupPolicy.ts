@@ -23,6 +23,7 @@ export type SharedPolicyGroupPolicy = {
   policyId: string;
   name: string;
   description?: string;
+  prerequisiteMessage?: string;
   apiType: ApiType;
   phase: ExecutionPhase;
 };
