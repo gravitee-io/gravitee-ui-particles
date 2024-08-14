@@ -1,3 +1,10 @@
+## [12.21.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.21.0...v12.21.1) (2024-08-14)
+
+
+### Bug Fixes
+
+* avoid double-clicking and disable the save/create button during lock time ([e1c2114](https://github.com/gravitee-io/gravitee-ui-particles/commit/e1c21148a68af86079426ac11751cf9130410b06))
+
 # [12.21.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.20.0...v12.21.0) (2024-08-14)
 
 
