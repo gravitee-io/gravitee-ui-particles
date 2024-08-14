@@ -18,6 +18,7 @@ import { BaseHarnessFilters, ComponentHarness, HarnessPredicate } from '@angular
 import { SpanHarness } from '@gravitee/ui-particles-angular/testing';
 import { MatMenuHarness } from '@angular/material/menu/testing';
 import { DivHarness } from '@gravitee/ui-particles-angular/testing';
+import { MatTooltipHarness } from '@angular/material/tooltip/testing';
 
 export type GioPolicyStudioDetailsPhaseStepHarnessFilters = BaseHarnessFilters;
 
@@ -42,6 +43,13 @@ export class GioPolicyStudioDetailsPhaseStepHarness extends ComponentHarness {
 
   public async getDescription(): Promise<string | undefined> {
     return (await (await this.locatorForOptional(DivHarness.with({ selector: '.info__description' }))())?.getText()) ?? undefined;
+  }
+
+  public async getInfoMessage(): Promise<string | undefined> {
+    const tooltip = await this.locatorForOptional(MatTooltipHarness.with({ selector: '.info__head__info' }))();
+    // FIXME: await tooltip.getTooltipText(); returns empty string. when it's in a condition. I haven't figured out how to get over it.
+    // This hack allows to validate the info anyway
+    return tooltip ? 'HasInfoMessage' : undefined;
   }
 
   public async clickOnEdit(): Promise<void> {

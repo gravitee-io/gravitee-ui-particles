@@ -48,6 +48,10 @@
   <div class="documentation__header">Documentation</div>
 
   <div class="documentation__content">
+    <gio-banner-warning *ngIf="infoBanner">
+      Prerequisite message
+      <span gioBannerBody>{{ infoBanner }}</span>
+    </gio-banner-warning>
     <ng-container *ngIf="policyDocumentation$ | async as policyDocumentation; else loadingTmpl">
       <gio-asciidoctor [content]="policyDocumentation"></gio-asciidoctor>
     </ng-container>

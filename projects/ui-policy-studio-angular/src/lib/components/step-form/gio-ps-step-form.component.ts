@@ -18,6 +18,7 @@ import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angu
 import { catchError, map, takeUntil } from 'rxjs/operators';
 import { Observable, of, Subject } from 'rxjs';
 import {
+  GioBannerModule,
   GioFormJsonSchemaComponent,
   GioFormJsonSchemaModule,
   GioJsonSchema,
@@ -43,6 +44,7 @@ import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.se
     GioFormJsonSchemaModule,
     GioAsciidoctorModule,
     GioLoaderModule,
+    GioBannerModule,
   ],
   selector: 'gio-ps-step-form',
   templateUrl: './gio-ps-step-form.component.html',
@@ -69,6 +71,7 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
 
   public policySchema$?: Observable<GioJsonSchema | null | undefined>;
   public policyDocumentation$?: Observable<string>;
+  public infoBanner?: string;
 
   public stepForm?: UntypedFormGroup;
 
@@ -97,7 +100,9 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
       if (isSharedPolicyGroupPolicy(this.genericPolicy)) {
         this.policySchema$ = of({});
 
-        this.policyDocumentation$ = of('No documentation available.');
+        this.policyDocumentation$ = of(' ');
+
+        this.infoBanner = this.genericPolicy.prerequisiteMessage;
       }
     }
     if (changes.executionPhase) {

@@ -26,6 +26,7 @@ export function fakeProxyRequestSharedPolicyGroupPolicy(
     policyId: 'shared-policy-group-policy',
     name: 'Test PROXY SPG',
     description: 'Test Shared Policy Group request phase',
+    prerequisiteMessage: 'The resource cache "my-cache" is required',
     apiType: 'PROXY',
     phase: 'REQUEST',
   };

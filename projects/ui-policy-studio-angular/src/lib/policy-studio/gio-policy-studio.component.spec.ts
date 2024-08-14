@@ -1317,7 +1317,7 @@ describe('GioPolicyStudioComponent', () => {
         const commonFlows = [
           fakeHttpFlow({
             name: 'Flow 1',
-            request: [fakeRateLimitStep()],
+            request: [fakeRateLimitStep(), fakeSharedPolicyGroupPolicyStep()],
             response: [fakeTestPolicyStep()],
           }),
         ];
@@ -1332,6 +1332,7 @@ describe('GioPolicyStudioComponent', () => {
         expect(await requestPhase?.getSteps()).toStrictEqual([
           { name: 'HTTP Proxy', type: 'connector' },
           { name: 'Rate Limit', description: 'Step description', hasCondition: false, type: 'step' },
+          { name: 'Test PROXY SPG', description: 'Shared Policy Group', hasCondition: false, type: 'step', infoMessage: 'HasInfoMessage' },
           { name: 'HTTP Proxy', type: 'connector' },
         ]);
 

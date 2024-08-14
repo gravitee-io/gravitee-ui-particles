@@ -60,7 +60,13 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
 
   protected genericPolicy?: GenericPolicy;
   protected policyNotFound: false | 'SHARED_POLICY_GROUP' | 'POLICY' = false;
-  protected policyIcon?: string;
+
+  protected get getPrerequisiteMessage(): string | undefined {
+    if (!this.genericPolicy || !isSharedPolicyGroupPolicy(this.genericPolicy) || isEmpty(this.genericPolicy.prerequisiteMessage)) {
+      return;
+    }
+    return this.genericPolicy.description;
+  }
 
   constructor(private readonly matDialog: MatDialog) {}
 

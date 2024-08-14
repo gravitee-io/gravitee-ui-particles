@@ -91,12 +91,14 @@ export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
         const step = await stepDiv.childLocatorFor(GioPolicyStudioDetailsPhaseStepHarness)();
         const conditionDiv = await stepDiv.childLocatorForOptional(DivHarness.with({ selector: '.content__step__policy__condition' }))();
         const description = await step.getDescription();
+        const infoMessage = await step.getInfoMessage();
 
         return {
           type: 'step',
           name: await step.getName(),
           hasCondition: !!conditionDiv,
           ...(description ? { description } : {}),
+          ...(infoMessage ? { infoMessage } : {}),
         };
       }),
     );
