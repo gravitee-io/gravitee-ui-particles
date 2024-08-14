@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { isEmpty } from 'lodash';
+import { isEmpty, uniqueId } from 'lodash';
 import { MatDialog } from '@angular/material/dialog';
 import { GIO_DIALOG_WIDTH, GioBannerModule, GioIconsModule } from '@gravitee/ui-particles-angular';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -32,6 +32,7 @@ import { GenericPolicy } from '../../models/policy/GenericPolicy';
 
 type StepVM =
   | {
+      _id: string;
       type: 'connectors';
       connectors: {
         name?: string;
@@ -39,6 +40,7 @@ type StepVM =
       }[];
     }
   | {
+      _id: string;
       type: 'step';
       step: Step;
       index: number;
@@ -95,6 +97,7 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
     if (changes.steps || changes.startConnector || changes.endConnector) {
       this.stepsVM = [
         {
+          _id: 'start',
           type: 'connectors',
           connectors: this.startConnector.map(connector => ({
             name: connector.name,
@@ -103,12 +106,14 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
         },
 
         ...(this.steps ?? []).map((step, index) => ({
+          _id: uniqueId('step_'),
           type: 'step' as const,
           step: step,
           index,
         })),
 
         {
+          _id: 'end',
           type: 'connectors',
           connectors: this.endConnector.map(connector => ({
             name: connector.name,

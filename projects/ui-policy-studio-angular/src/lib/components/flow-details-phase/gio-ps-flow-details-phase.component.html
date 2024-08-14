@@ -31,7 +31,7 @@
 
 <div *ngIf="!isDisabled; else disabledPhaseContent" class="wrapper">
   <div class="content">
-    @for (stepVM of stepsVM; track $index; let isFirst = $first) {
+    @for (stepVM of stepsVM; track stepVM._id; let isFirst = $first) {
       <div class="content__step">
         <!-- Connector -->
         <ng-container *ngIf="stepVM.type === 'connectors'">
