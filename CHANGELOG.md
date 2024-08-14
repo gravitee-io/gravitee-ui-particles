@@ -1,3 +1,10 @@
+# [12.22.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.21.1...v12.22.0) (2024-08-14)
+
+
+### Features
+
+* add optional autocomplete for form header table ([18d11ca](https://github.com/gravitee-io/gravitee-ui-particles/commit/18d11cafc21f340729935b0afca8f1bec226cf61))
+
 ## [12.21.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.21.0...v12.21.1) (2024-08-14)
 
 
