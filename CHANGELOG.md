@@ -1,3 +1,10 @@
+## [12.22.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.22.0...v12.22.1) (2024-08-14)
+
+
+### Bug Fixes
+
+* policy-studio - fix a display problem by forcing Angular to instantiate components for each ([a3a50b0](https://github.com/gravitee-io/gravitee-ui-particles/commit/a3a50b05c00259978a24e4c4f9d52a2b9c15709b))
+
 # [12.22.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.21.1...v12.22.0) (2024-08-14)
 
 
