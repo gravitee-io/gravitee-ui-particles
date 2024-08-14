@@ -1,3 +1,10 @@
+# [12.21.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.20.0...v12.21.0) (2024-08-14)
+
+
+### Features
+
+* policy studio - add prerequisiteMessage for SPG ([4e488e1](https://github.com/gravitee-io/gravitee-ui-particles/commit/4e488e15c653953a2d828a76505c2bfc8f4e717c))
+
 # [12.20.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.19.0...v12.20.0) (2024-08-13)
 
 
