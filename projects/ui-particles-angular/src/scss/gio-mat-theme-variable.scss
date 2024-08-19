@@ -19,25 +19,25 @@
 @use './gio-mat-palettes' as palettes;
 
 // Config mat Typography
-$mat-typography: mat.define-typography-config(
+$mat-typography: mat.m2-define-typography-config(
   $font-family: '"Golos UI", Roboto, "Helvetica Neue", sans-serif',
-  $headline-1: mat.define-typography-level(112px, 112px, 400, $letter-spacing: -0.05em),
-  $headline-2: mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
-  $headline-3: mat.define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
-  $headline-4: mat.define-typography-level(60px, 66px, 600, $letter-spacing: -0.5px),
-  $headline-5: mat.define-typography-level(34px, 44px, 600),
-  $headline-6: mat.define-typography-level(26px, 36px, 600),
-  $subtitle-1: mat.define-typography-level(18px, 24px, 600, $letter-spacing: 0.4px),
-  $subtitle-2: mat.define-typography-level(14px, 20px, 500, $letter-spacing: 0.4px),
-  $body-1: mat.define-typography-level(14px, 22px, 500, $letter-spacing: 0.4px),
-  $body-2: mat.define-typography-level(14px, 22px, 400, $letter-spacing: 0.4px),
-  $caption: mat.define-typography-level(12px, 16px, 400),
-  $button: mat.define-typography-level(14px, 14px, 500),
-  $overline: mat.define-typography-level(inherit, 1.125, 400),
+  $headline-1: mat.m2-define-typography-level(112px, 112px, 400, $letter-spacing: -0.05em),
+  $headline-2: mat.m2-define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
+  $headline-3: mat.m2-define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
+  $headline-4: mat.m2-define-typography-level(60px, 66px, 600, $letter-spacing: -0.5px),
+  $headline-5: mat.m2-define-typography-level(34px, 44px, 600),
+  $headline-6: mat.m2-define-typography-level(26px, 36px, 600),
+  $subtitle-1: mat.m2-define-typography-level(18px, 24px, 600, $letter-spacing: 0.4px),
+  $subtitle-2: mat.m2-define-typography-level(14px, 20px, 500, $letter-spacing: 0.4px),
+  $body-1: mat.m2-define-typography-level(14px, 22px, 500, $letter-spacing: 0.4px),
+  $body-2: mat.m2-define-typography-level(14px, 22px, 400, $letter-spacing: 0.4px),
+  $caption: mat.m2-define-typography-level(12px, 16px, 400),
+  $button: mat.m2-define-typography-level(14px, 14px, 500),
+  $overline: mat.m2-define-typography-level(inherit, 1.125, 400),
 );
 
 // Mat default light theme
-$mat-theme-default: mat.define-light-theme(
+$mat-theme-default: mat.m2-define-light-theme(
   (
     color: (
       primary: palettes.$mat-primary-palette,
@@ -50,7 +50,7 @@ $mat-theme-default: mat.define-light-theme(
 );
 
 // Mat default dark theme
-$mat-theme-dark: mat.define-dark-theme(
+$mat-theme-dark: mat.m2-define-dark-theme(
   (
     color: (
       primary: palettes.$mat-primary-palette,
@@ -69,8 +69,8 @@ $mat-foreground: map.get($mat-theme-default, foreground);
 $gio-background: map.merge(
   $mat-background,
   (
-    background: mat.get-color-from-palette(palettes.$mat-dove-palette, default),
-    tooltip: mat.get-color-from-palette(palettes.$mat-space-palette, default),
+    background: mat.m2-get-color-from-palette(palettes.$mat-dove-palette, default),
+    tooltip: mat.m2-get-color-from-palette(palettes.$mat-space-palette, default),
   )
 );
 
@@ -78,8 +78,8 @@ $gio-background: map.merge(
 $gio-foreground: map.merge(
   $mat-foreground,
   (
-    text: mat.get-color-from-palette(palettes.$mat-space-palette, default),
-    slider-min: mat.get-color-from-palette(palettes.$mat-space-palette, default),
+    text: mat.m2-get-color-from-palette(palettes.$mat-space-palette, default),
+    slider-min: mat.m2-get-color-from-palette(palettes.$mat-space-palette, default),
   )
 );
 $gio-background-foreground: (

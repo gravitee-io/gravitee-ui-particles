@@ -11,8 +11,8 @@
     "tslib": "^2.6.2"
   },
   "peerDependencies": {
-    "@angular/common": "^16.0.0 || ^17.0.0",
-    "@angular/core": "^16.0.0 || ^17.0.0"
+    "@angular/common": "^18.0.0",
+    "@angular/core": "^18.0.0"
   },
   "publishConfig": {
     "access": "public"

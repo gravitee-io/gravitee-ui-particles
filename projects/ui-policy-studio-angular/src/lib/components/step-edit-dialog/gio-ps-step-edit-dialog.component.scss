@@ -31,8 +31,8 @@ $typography: map.get(gio.$mat-theme, typography);
   }
 
   &__description {
-    @include mat.typography-level($typography, caption);
+    @include mat.m2-typography-level($typography, caption);
 
-    color: mat.get-color-from-palette(gio.$mat-space-palette, lighter40);
+    color: mat.m2-get-color-from-palette(gio.$mat-space-palette, lighter40);
   }
 }

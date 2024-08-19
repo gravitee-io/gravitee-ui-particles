@@ -48,7 +48,7 @@ $typography: map.get(gio.$mat-theme, typography);
   padding: 16px 24px;
 
   &__label {
-    @include mat.typography-level($typography, body-2);
+    @include mat.m2-typography-level($typography, body-2);
   }
 
   &__actions {
@@ -57,12 +57,12 @@ $typography: map.get(gio.$mat-theme, typography);
 
     &__submit-button {
       &.invalid {
-        background-color: mat.get-color-from-palette(gio.$mat-primary-palette, 'lighter');
-        color: mat.get-color-from-palette(gio.$mat-primary-palette, 'lighter-contrast');
+        background-color: mat.m2-get-color-from-palette(gio.$mat-primary-palette, 'lighter');
+        color: mat.m2-get-color-from-palette(gio.$mat-primary-palette, 'lighter-contrast');
 
         &:hover:enabled {
-          background-color: mat.get-color-from-palette(gio.$mat-primary-palette, 'default');
-          color: mat.get-color-from-palette(gio.$mat-primary-palette, 'default-contrast');
+          background-color: mat.m2-get-color-from-palette(gio.$mat-primary-palette, 'default');
+          color: mat.m2-get-color-from-palette(gio.$mat-primary-palette, 'default-contrast');
         }
       }
     }

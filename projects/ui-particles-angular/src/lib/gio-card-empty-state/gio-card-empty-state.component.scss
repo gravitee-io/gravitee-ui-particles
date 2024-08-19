@@ -24,7 +24,7 @@
     align-items: center;
 
     &__subtitle {
-      color: mat.get-color-from-palette(gio.$mat-space-palette, 'lighter40');
+      color: mat.m2-get-color-from-palette(gio.$mat-space-palette, 'lighter40');
       text-align: center;
     }
 
@@ -34,8 +34,8 @@
       padding: inherit;
       border-radius: 30px;
       margin-bottom: 10px;
-      background-color: mat.get-color-from-palette(gio.$mat-primary-palette, 'lighter');
-      color: mat.get-color-from-palette(gio.$mat-primary-palette, 'darker20');
+      background-color: mat.m2-get-color-from-palette(gio.$mat-primary-palette, 'lighter');
+      color: mat.m2-get-color-from-palette(gio.$mat-primary-palette, 'darker20');
     }
   }
 }

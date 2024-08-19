@@ -11,12 +11,12 @@
     "tslib": "^2.6.2"
   },
   "peerDependencies": {
-    "@angular/animations": "^16.0.0 || ^17.0.0",
-    "@angular/cdk": "^16.0.0 || ^17.0.0",
-    "@angular/common": "^16.0.0 || ^17.0.0",
-    "@angular/core": "^16.0.0 || ^17.0.0",
-    "@angular/forms": "^16.0.0 || ^17.0.0",
-    "@angular/material": "^16.0.0 || ^17.0.0",
+    "@angular/animations": "^18.0.0",
+    "@angular/cdk": "^18.0.0",
+    "@angular/common": "^18.0.0",
+    "@angular/core": "^18.0.0",
+    "@angular/forms": "^18.0.0",
+    "@angular/material": "^18.0.0",
     "@gravitee/ui-particles-angular": "*",
     "lodash": "^4.17.21"
   },

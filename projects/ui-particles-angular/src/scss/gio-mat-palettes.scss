@@ -22,7 +22,7 @@
  */
 
 // Primary
-$mat-primary-palette: mat.define-palette(
+$mat-primary-palette: mat.m2-define-palette(
   (
     // Keep sync GIO color token with Material color token
     darker80: #001f1f,
@@ -72,7 +72,7 @@ $mat-primary-palette: mat.define-palette(
 );
 
 // Accent
-$mat-accent-palette: mat.define-palette(
+$mat-accent-palette: mat.m2-define-palette(
   (
     darker80: #1b162f,
     900: #1b162f,
@@ -121,7 +121,7 @@ $mat-accent-palette: mat.define-palette(
 );
 
 // Success color
-$mat-success-palette: mat.define-palette(
+$mat-success-palette: mat.m2-define-palette(
   (
     darker80: #002c1c,
     darker60: #056946,
@@ -150,7 +150,7 @@ $mat-success-palette: mat.define-palette(
 );
 
 // Warning color
-$mat-warning-palette: mat.define-palette(
+$mat-warning-palette: mat.m2-define-palette(
   (
     darker80: #2c0c01,
     darker60: #551c07,
@@ -179,7 +179,7 @@ $mat-warning-palette: mat.define-palette(
 );
 
 // Error color
-$mat-error-palette: mat.define-palette(
+$mat-error-palette: mat.m2-define-palette(
   (
     darker80: #2c0015,
     900: #2c0015,
@@ -228,7 +228,7 @@ $mat-error-palette: mat.define-palette(
 );
 
 // Basic color
-$mat-basic-palette: mat.define-palette(
+$mat-basic-palette: mat.m2-define-palette(
   (
     black: #000,
     white: #fff,
@@ -248,7 +248,7 @@ $mat-basic-palette: mat.define-palette(
 );
 
 // Space color
-$mat-space-palette: mat.define-palette(
+$mat-space-palette: mat.m2-define-palette(
   (
     default: #100c27,
     lighter10: #1c1e39,
@@ -277,7 +277,7 @@ $mat-space-palette: mat.define-palette(
 );
 
 // Space color
-$mat-dove-palette: mat.define-palette(
+$mat-dove-palette: mat.m2-define-palette(
   (
     darker80: #313133,
     darker70: #49494c,
@@ -306,7 +306,7 @@ $mat-dove-palette: mat.define-palette(
 );
 
 // Cyan color
-$mat-cyan-palette: mat.define-palette(
+$mat-cyan-palette: mat.m2-define-palette(
   (
     default: #006fb9,
     lighter20: #389adb,
@@ -327,7 +327,7 @@ $mat-cyan-palette: mat.define-palette(
 );
 
 // Blue palette
-$mat-blue-palette: mat.define-palette(
+$mat-blue-palette: mat.m2-define-palette(
   (
     default: #313fbf,
     lighter20: #6978ff,
@@ -348,29 +348,29 @@ $mat-blue-palette: mat.define-palette(
 );
 
 // Method color
-$mat-method-palette: mat.define-palette(
+$mat-method-palette: mat.m2-define-palette(
   (
-    patch: mat.get-color-from-palette($mat-accent-palette, lighter80),
-    post: mat.get-color-from-palette($mat-warning-palette, lighter80),
-    put: mat.get-color-from-palette($mat-dove-palette, darker10),
-    get: mat.get-color-from-palette($mat-primary-palette, lighter80),
-    delete: mat.get-color-from-palette($mat-error-palette, lighter80),
-    option: mat.get-color-from-palette($mat-success-palette, lighter80),
-    trace: mat.get-color-from-palette($mat-cyan-palette, lighter80),
-    head: mat.get-color-from-palette($mat-blue-palette, lighter80),
-    connect: mat.get-color-from-palette($mat-blue-palette, lighter80),
-    other: mat.get-color-from-palette($mat-blue-palette, lighter80),
+    patch: mat.m2-get-color-from-palette($mat-accent-palette, lighter80),
+    post: mat.m2-get-color-from-palette($mat-warning-palette, lighter80),
+    put: mat.m2-get-color-from-palette($mat-dove-palette, darker10),
+    get: mat.m2-get-color-from-palette($mat-primary-palette, lighter80),
+    delete: mat.m2-get-color-from-palette($mat-error-palette, lighter80),
+    option: mat.m2-get-color-from-palette($mat-success-palette, lighter80),
+    trace: mat.m2-get-color-from-palette($mat-cyan-palette, lighter80),
+    head: mat.m2-get-color-from-palette($mat-blue-palette, lighter80),
+    connect: mat.m2-get-color-from-palette($mat-blue-palette, lighter80),
+    other: mat.m2-get-color-from-palette($mat-blue-palette, lighter80),
     contrast: (
-      patch: mat.get-color-from-palette($mat-accent-palette, darker40),
-      post: mat.get-color-from-palette($mat-warning-palette, darker20),
-      put: mat.get-color-from-palette($mat-dove-palette, lighter70),
-      get: mat.get-color-from-palette($mat-primary-palette, darker60),
-      delete: mat.get-color-from-palette($mat-error-palette, darker20),
-      option: mat.get-color-from-palette($mat-success-palette, darker60),
-      trace: mat.get-color-from-palette($mat-cyan-palette, default),
-      head: mat.get-color-from-palette($mat-blue-palette, default),
-      connect: mat.get-color-from-palette($mat-blue-palette, default),
-      other: mat.get-color-from-palette($mat-blue-palette, default),
+      patch: mat.m2-get-color-from-palette($mat-accent-palette, darker40),
+      post: mat.m2-get-color-from-palette($mat-warning-palette, darker20),
+      put: mat.m2-get-color-from-palette($mat-dove-palette, lighter70),
+      get: mat.m2-get-color-from-palette($mat-primary-palette, darker60),
+      delete: mat.m2-get-color-from-palette($mat-error-palette, darker20),
+      option: mat.m2-get-color-from-palette($mat-success-palette, darker60),
+      trace: mat.m2-get-color-from-palette($mat-cyan-palette, default),
+      head: mat.m2-get-color-from-palette($mat-blue-palette, default),
+      connect: mat.m2-get-color-from-palette($mat-blue-palette, default),
+      other: mat.m2-get-color-from-palette($mat-blue-palette, default),
     ),
   ),
   patch,

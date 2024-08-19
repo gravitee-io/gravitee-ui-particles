@@ -20,7 +20,7 @@
 $card-size-default: 130px;
 $radius: 6px;
 $background: map.get(gio.$mat-theme, 'background');
-$accent: mat.get-color-from-palette(gio.$mat-accent-palette, 'default');
+$accent: mat.m2-get-color-from-palette(gio.$mat-accent-palette, 'default');
 $typography: map.get(gio.$mat-theme, typography);
 
 :host {
@@ -40,7 +40,7 @@ $typography: map.get(gio.$mat-theme, typography);
     min-width: $card-size-default;
     min-height: $card-size-default;
     flex: 1 1 auto;
-    border: 2px dashed mat.get-color-from-palette(gio.$mat-space-palette, lighter40);
+    border: 2px dashed mat.m2-get-color-from-palette(gio.$mat-space-palette, lighter40);
     border-radius: $radius;
     margin: 4px 0;
     cursor: pointer;
@@ -48,7 +48,7 @@ $typography: map.get(gio.$mat-theme, typography);
     &:hover,
     &.drag-hover {
       border: 2px dashed $accent;
-      background-color: mat.get-color-from-palette($background, 'hover');
+      background-color: mat.m2-get-color-from-palette($background, 'hover');
     }
 
     &.drag-hover {
@@ -62,7 +62,7 @@ $typography: map.get(gio.$mat-theme, typography);
     }
 
     &.error {
-      border: 2px dashed mat.get-color-from-palette(gio.$mat-error-palette, 'default');
+      border: 2px dashed mat.m2-get-color-from-palette(gio.$mat-error-palette, 'default');
     }
   }
 
@@ -76,7 +76,7 @@ $typography: map.get(gio.$mat-theme, typography);
     flex-flow: column nowrap;
     justify-content: space-between;
     padding: 6px 0;
-    border: 2px solid mat.get-color-from-palette(gio.$mat-space-palette, 'lighter40');
+    border: 2px solid mat.m2-get-color-from-palette(gio.$mat-space-palette, 'lighter40');
     border-radius: $radius;
     margin: 4px 0;
     inline-size: fit-content;
@@ -102,10 +102,10 @@ $typography: map.get(gio.$mat-theme, typography);
       align-items: center;
       place-content: center center;
       text-align: center;
-      @include mat.typography-level($typography, 'caption');
+      @include mat.m2-typography-level($typography, 'caption');
 
       code {
-        @include mat.typography-level($typography, 'caption');
+        @include mat.m2-typography-level($typography, 'caption');
       }
 
       &__name {
@@ -116,13 +116,13 @@ $typography: map.get(gio.$mat-theme, typography);
     }
 
     &.disabled {
-      border: 2px solid mat.get-color-from-palette(gio.$mat-basic-palette, disabled);
+      border: 2px solid mat.m2-get-color-from-palette(gio.$mat-basic-palette, disabled);
     }
   }
 
   &__preview {
     &.error {
-      border: 2px solid mat.get-color-from-palette(gio.$mat-error-palette, 'default');
+      border: 2px solid mat.m2-get-color-from-palette(gio.$mat-error-palette, 'default');
     }
 
     &__delete {
@@ -133,12 +133,12 @@ $typography: map.get(gio.$mat-theme, typography);
       width: 24px;
       height: 24px;
       border-radius: calc($radius / 2);
-      background-color: mat.get-color-from-palette(gio.$mat-dove-palette, 'default', 0.7);
-      color: mat.get-color-from-palette(gio.$mat-space-palette, 'default');
+      background-color: mat.m2-get-color-from-palette(gio.$mat-dove-palette, 'default', 0.7);
+      color: mat.m2-get-color-from-palette(gio.$mat-space-palette, 'default');
       cursor: pointer;
 
       &:hover {
-        color: mat.get-color-from-palette(gio.$mat-warning-palette, 'default');
+        color: mat.m2-get-color-from-palette(gio.$mat-warning-palette, 'default');
       }
     }
   }

@@ -22,8 +22,8 @@ $expiration-notification-container-width: 192px;
 $expiration-notification-container-height: 152px;
 
 @mixin expiration-notification-container(
-  $color: mat.get-color-from-palette(gio.$mat-space-palette, default),
-  $bg-color: mat.get-color-from-palette(gio.$mat-basic-palette, white)
+  $color: mat.m2-get-color-from-palette(gio.$mat-space-palette, default),
+  $bg-color: mat.m2-get-color-from-palette(gio.$mat-basic-palette, white)
 ) {
   position: relative;
   display: flex;
@@ -50,7 +50,7 @@ $expiration-notification-container-height: 152px;
   @include expiration-notification-container;
 
   border: none;
-  background: mat.get-color-from-palette(gio.$mat-basic-palette, white);
+  background: mat.m2-get-color-from-palette(gio.$mat-basic-palette, white);
   text-decoration: none;
 
   &--disabled {
@@ -71,8 +71,8 @@ $expiration-notification-container-height: 152px;
 
     &.red {
       @include expiration-notification-title(
-        mat.get-color-from-palette(gio.$mat-error-palette, darker40),
-        mat.get-color-from-palette(gio.$mat-error-palette, lighter)
+        mat.m2-get-color-from-palette(gio.$mat-error-palette, darker40),
+        mat.m2-get-color-from-palette(gio.$mat-error-palette, lighter)
       );
 
       img {
@@ -82,8 +82,8 @@ $expiration-notification-container-height: 152px;
 
     &.blue {
       @include expiration-notification-title(
-        mat.get-color-from-palette(gio.$mat-cyan-palette, default),
-        mat.get-color-from-palette(gio.$mat-cyan-palette, lighter80)
+        mat.m2-get-color-from-palette(gio.$mat-cyan-palette, default),
+        mat.m2-get-color-from-palette(gio.$mat-cyan-palette, lighter80)
       );
 
       img {
@@ -93,8 +93,8 @@ $expiration-notification-container-height: 152px;
 
     &.orange {
       @include expiration-notification-title(
-        mat.get-color-from-palette(gio.$mat-warning-palette, darker40),
-        mat.get-color-from-palette(gio.$mat-warning-palette, lighter)
+        mat.m2-get-color-from-palette(gio.$mat-warning-palette, darker40),
+        mat.m2-get-color-from-palette(gio.$mat-warning-palette, lighter)
       );
 
       img {
@@ -103,7 +103,7 @@ $expiration-notification-container-height: 152px;
     }
 
     &__text {
-      @include mat.typography-level($typography, body-1);
+      @include mat.m2-typography-level($typography, body-1);
 
       margin: 24px 12px;
       text-align: left;
@@ -111,14 +111,14 @@ $expiration-notification-container-height: 152px;
   }
 
   &__action {
-    @include mat.typography-level($typography, caption);
+    @include mat.m2-typography-level($typography, caption);
 
     display: flex;
     width: 100%;
     align-items: center;
     justify-content: space-between;
     padding: 20px 12px;
-    color: mat.get-color-from-palette(gio.$mat-space-palette, lighter10);
+    color: mat.m2-get-color-from-palette(gio.$mat-space-palette, lighter10);
     font-weight: 700;
     text-decoration: none;
 

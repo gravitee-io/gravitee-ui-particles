@@ -57,18 +57,18 @@ $accent: map.get(gio.$mat-theme, accent);
   }
 
   &.selected {
-    border: 2px solid mat.get-color-from-palette($accent);
+    border: 2px solid mat.m2-get-color-from-palette($accent);
     margin: 5px 0;
-    color: mat.get-color-from-palette($accent);
+    color: mat.m2-get-color-from-palette($accent);
 
     .selection-icon__radio-icon {
-      color: mat.get-color-from-palette($accent);
+      color: mat.m2-get-color-from-palette($accent);
     }
   }
 
   &.disabled {
-    border-color: mat.get-color-from-palette($foreground, disabled, 0.2);
-    color: mat.get-color-from-palette($foreground, disabled);
+    border-color: mat.m2-get-color-from-palette($foreground, disabled, 0.2);
+    color: mat.m2-get-color-from-palette($foreground, disabled);
     cursor: auto;
 
     &__content {
@@ -76,11 +76,11 @@ $accent: map.get(gio.$mat-theme, accent);
     }
 
     .selection-icon__radio-icon {
-      color: mat.get-color-from-palette($foreground, disabled, 0.2);
+      color: mat.m2-get-color-from-palette($foreground, disabled, 0.2);
     }
 
     .selection-icon__lock-icon {
-      color: mat.get-color-from-palette($accent);
+      color: mat.m2-get-color-from-palette($accent);
     }
   }
 

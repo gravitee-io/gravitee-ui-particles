@@ -44,12 +44,12 @@ $types: (
 
   @each $typeName, $typePalette in $types {
     &.#{$typeName} {
-      border: 3px solid mat.get-color-from-palette($typePalette, default);
-      color: mat.get-color-from-palette($typePalette, darker);
+      border: 3px solid mat.m2-get-color-from-palette($typePalette, default);
+      color: mat.m2-get-color-from-palette($typePalette, darker);
 
       .banner__wrapper__icon {
         .mat-icon {
-          color: mat.get-color-from-palette($typePalette, default);
+          color: mat.m2-get-color-from-palette($typePalette, default);
         }
       }
 
@@ -66,7 +66,7 @@ $types: (
     display: flex;
     align-items: flex-start;
 
-    @include mat.typography-level($typography, subtitle-2);
+    @include mat.m2-typography-level($typography, subtitle-2);
 
     &__icon {
       display: flex;
@@ -116,7 +116,7 @@ $types: (
     }
 
     &__body {
-      @include mat.typography-level($typography, body-2);
+      @include mat.m2-typography-level($typography, body-2);
     }
 
     .hide {

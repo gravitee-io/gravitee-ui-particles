@@ -25,9 +25,9 @@ $typography: map.get(gio.$mat-theme, typography);
   min-height: 215px; // 200px - 1px border + 16px padding-top
   flex-direction: column;
   padding-top: 16px;
-  border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
+  border: 1px solid mat.m2-get-color-from-palette(gio.$mat-dove-palette, darker20);
   border-radius: 8px;
-  background-color: mat.get-color-from-palette(gio.$mat-basic-palette, white);
+  background-color: mat.m2-get-color-from-palette(gio.$mat-basic-palette, white);
 }
 
 .header {
@@ -37,14 +37,14 @@ $typography: map.get(gio.$mat-theme, typography);
 
   &__name {
     flex: 0 1 auto;
-    @include mat.typography-level($typography, subtitle-2);
+    @include mat.m2-typography-level($typography, subtitle-2);
   }
 
   &__description {
     flex: 1 1 auto;
-    @include mat.typography-level($typography, body-2);
+    @include mat.m2-typography-level($typography, body-2);
 
-    color: mat.get-color-from-palette(gio.$mat-space-palette, lighter40);
+    color: mat.m2-get-color-from-palette(gio.$mat-space-palette, lighter40);
   }
 }
 
@@ -72,7 +72,7 @@ $typography: map.get(gio.$mat-theme, typography);
       gap: 8px;
 
       &__badge {
-        border: 1px solid mat.get-color-from-palette(gio.$mat-accent-palette, default);
+        border: 1px solid mat.m2-get-color-from-palette(gio.$mat-accent-palette, default);
         border-radius: 16px;
 
         &__icon {
@@ -85,7 +85,7 @@ $typography: map.get(gio.$mat-theme, typography);
       width: 16px;
       height: 16px;
       margin: 0 8px;
-      color: mat.get-color-from-palette(gio.$mat-dove-palette, darker30);
+      color: mat.m2-get-color-from-palette(gio.$mat-dove-palette, darker30);
     }
 
     &__policy {

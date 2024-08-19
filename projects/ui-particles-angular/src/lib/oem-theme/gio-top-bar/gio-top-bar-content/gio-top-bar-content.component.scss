@@ -29,7 +29,7 @@ $typography: map.get(gio.$mat-theme, typography);
   border-radius: 4px;
   gap: 12px;
 
-  @include mat.typography-level($typography, subtitle-2);
+  @include mat.m2-typography-level($typography, subtitle-2);
 
   &.am {
     background: rgb(236 72 153 / 40%);

@@ -24,11 +24,11 @@ $typography: map.get(theme.$mat-theme, typography);
   width: fit-content;
   height: 44px;
   padding: 4px;
-  border: solid 1px mat.get-color-from-palette(palettes.$mat-dove-palette, 'darker20');
+  border: solid 1px mat.m2-get-color-from-palette(palettes.$mat-dove-palette, 'darker20');
   margin-bottom: 16px;
 
   .mat-button-toggle {
-    @include mat.typography-level($typography, subtitle-2);
+    @include mat.m2-typography-level($typography, subtitle-2);
 
     display: flex;
     flex-direction: row;
@@ -37,13 +37,13 @@ $typography: map.get(theme.$mat-theme, typography);
   }
 
   .mat-button-toggle.mat-button-toggle-checked:not(.mat-button-toggle-disabled) {
-    background-color: mat.get-color-from-palette(palettes.$mat-accent-palette, 'darker20');
-    color: mat.get-color-from-palette(palettes.$mat-accent-palette, default-contrast);
+    background-color: mat.m2-get-color-from-palette(palettes.$mat-accent-palette, 'darker20');
+    color: mat.m2-get-color-from-palette(palettes.$mat-accent-palette, default-contrast);
   }
 
   .mat-button-toggle.mat-button-toggle-checked.mat-button-toggle-disabled {
-    background-color: mat.get-color-from-palette(palettes.$mat-dove-palette, 'darker20');
-    color: mat.get-color-from-palette(palettes.$mat-dove-palette, darker20-contrast, 0.4);
+    background-color: mat.m2-get-color-from-palette(palettes.$mat-dove-palette, 'darker20');
+    color: mat.m2-get-color-from-palette(palettes.$mat-dove-palette, darker20-contrast, 0.4);
   }
 
   .mat-button-toggle.mat-button-toggle + .mat-button-toggle {

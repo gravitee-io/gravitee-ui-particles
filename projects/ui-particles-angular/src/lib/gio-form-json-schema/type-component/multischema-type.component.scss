@@ -23,7 +23,7 @@ $typography: map.get(gio.$mat-theme, typography);
 .wrapper {
   &__title {
     @include gio.subtitle-typography;
-    @include mat.typography-level($typography, subtitle-2);
+    @include mat.m2-typography-level($typography, subtitle-2);
 
     margin-bottom: 4px;
   }
@@ -33,8 +33,8 @@ $typography: map.get(gio.$mat-theme, typography);
   }
 
   &__error {
-    @include mat.typography-level($typography, 'caption');
+    @include mat.m2-typography-level($typography, 'caption');
 
-    color: mat.get-color-from-palette(gio.$mat-error-palette, 'default');
+    color: mat.m2-get-color-from-palette(gio.$mat-error-palette, 'default');
   }
 }

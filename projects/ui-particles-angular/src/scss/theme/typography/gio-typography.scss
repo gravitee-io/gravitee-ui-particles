@@ -33,12 +33,12 @@
 }
 
 @mixin link-typography() {
-  color: mat.get-color-from-palette(palettes.$mat-primary-palette, 'darker40');
+  color: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, 'darker40');
   cursor: pointer;
   text-decoration-thickness: 2px;
 
   &:hover {
-    color: mat.get-color-from-palette(palettes.$mat-primary-palette, 'darker20');
+    color: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, 'darker20');
   }
 }
 

@@ -17,9 +17,9 @@
 @use '@angular/material' as mat;
 @use '../../scss' as gio;
 
-$textColor: mat.get-color-from-palette(gio.$mat-space-palette, 'lighter40');
-$iconColor: mat.get-color-from-palette(gio.$mat-space-palette, 'lighter80');
-$lastTextColor: mat.get-color-from-palette(gio.$mat-accent-palette, 'darker20');
+$textColor: mat.m2-get-color-from-palette(gio.$mat-space-palette, 'lighter40');
+$iconColor: mat.m2-get-color-from-palette(gio.$mat-space-palette, 'lighter80');
+$lastTextColor: mat.m2-get-color-from-palette(gio.$mat-accent-palette, 'darker20');
 
 .gio-breadcrumb {
   display: flex;

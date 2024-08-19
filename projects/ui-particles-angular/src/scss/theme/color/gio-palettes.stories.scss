@@ -31,8 +31,8 @@ $palettes: (
   @each $paletteName, $palette in $palettes {
     @each $colorName in $colorNames {
       @if map.has-key($palette, $colorName) {
-        $color: mat.get-color-from-palette($palette, $colorName);
-        $color-contrast: mat.get-color-from-palette($palette, #{$colorName}-contrast);
+        $color: mat.m2-get-color-from-palette($palette, $colorName);
+        $color-contrast: mat.m2-get-color-from-palette($palette, #{$colorName}-contrast);
 
         --gp--#{$paletteName}__#{$colorName}: #{$color};
         --gp--#{$paletteName}__#{$colorName}-contrast: #{$color-contrast};
@@ -43,48 +43,48 @@ $palettes: (
   // Special palettes
 
   @each $colorName in (patch, post, put, get, delete, option, trace, head) {
-    $color: mat.get-color-from-palette(gio.$mat-method-palette, $colorName);
-    $color-contrast: mat.get-color-from-palette(gio.$mat-method-palette, #{$colorName}-contrast);
+    $color: mat.m2-get-color-from-palette(gio.$mat-method-palette, $colorName);
+    $color-contrast: mat.m2-get-color-from-palette(gio.$mat-method-palette, #{$colorName}-contrast);
 
     --gp--method__#{$colorName}: #{$color};
     --gp--method__#{$colorName}-contrast: #{$color-contrast};
   }
 
   @each $colorName in (white, black, disabled) {
-    $color: mat.get-color-from-palette(gio.$mat-basic-palette, $colorName);
-    $color-contrast: mat.get-color-from-palette(gio.$mat-basic-palette, #{$colorName}-contrast);
+    $color: mat.m2-get-color-from-palette(gio.$mat-basic-palette, $colorName);
+    $color-contrast: mat.m2-get-color-from-palette(gio.$mat-basic-palette, #{$colorName}-contrast);
 
     --gp--basic__#{$colorName}: #{$color};
     --gp--basic__#{$colorName}-contrast: #{$color-contrast};
   }
 
   @each $colorName in (lighter80, lighter70, lighter60, lighter50, lighter40, lighter30, lighter20, lighter10, default) {
-    $color: mat.get-color-from-palette(gio.$mat-space-palette, $colorName);
-    $color-contrast: mat.get-color-from-palette(gio.$mat-space-palette, #{$colorName}-contrast);
+    $color: mat.m2-get-color-from-palette(gio.$mat-space-palette, $colorName);
+    $color-contrast: mat.m2-get-color-from-palette(gio.$mat-space-palette, #{$colorName}-contrast);
 
     --gp--space__#{$colorName}: #{$color};
     --gp--space__#{$colorName}-contrast: #{$color-contrast};
   }
 
   @each $colorName in (darker80, darker70, darker60, darker50, darker40, darker30, darker20, darker10, default) {
-    $color: mat.get-color-from-palette(gio.$mat-dove-palette, $colorName);
-    $color-contrast: mat.get-color-from-palette(gio.$mat-dove-palette, #{$colorName}-contrast);
+    $color: mat.m2-get-color-from-palette(gio.$mat-dove-palette, $colorName);
+    $color-contrast: mat.m2-get-color-from-palette(gio.$mat-dove-palette, #{$colorName}-contrast);
 
     --gp--dove__#{$colorName}: #{$color};
     --gp--dove__#{$colorName}-contrast: #{$color-contrast};
   }
 
   @each $colorName in (lighter80, lighter60, lighter40, lighter20, default) {
-    $color: mat.get-color-from-palette(gio.$mat-cyan-palette, $colorName);
-    $color-contrast: mat.get-color-from-palette(gio.$mat-cyan-palette, #{$colorName}-contrast);
+    $color: mat.m2-get-color-from-palette(gio.$mat-cyan-palette, $colorName);
+    $color-contrast: mat.m2-get-color-from-palette(gio.$mat-cyan-palette, #{$colorName}-contrast);
 
     --gp--cyan__#{$colorName}: #{$color};
     --gp--cyan__#{$colorName}-contrast: #{$color-contrast};
   }
 
   @each $colorName in (lighter80, lighter60, lighter40, lighter20, default) {
-    $color: mat.get-color-from-palette(gio.$mat-blue-palette, $colorName);
-    $color-contrast: mat.get-color-from-palette(gio.$mat-blue-palette, #{$colorName}-contrast);
+    $color: mat.m2-get-color-from-palette(gio.$mat-blue-palette, $colorName);
+    $color-contrast: mat.m2-get-color-from-palette(gio.$mat-blue-palette, #{$colorName}-contrast);
 
     --gp--blue__#{$colorName}: #{$color};
     --gp--blue__#{$colorName}-contrast: #{$color-contrast};

@@ -22,7 +22,7 @@
   height: 100%;
   flex-direction: column;
   padding: 16px;
-  background-color: mat.get-color-from-palette(gio.$mat-basic-palette, white);
+  background-color: mat.m2-get-color-from-palette(gio.$mat-basic-palette, white);
 }
 
 ::ng-deep {
@@ -53,14 +53,14 @@
     min-width: 230px;
     max-width: 400px;
     flex: 1 1 33%;
-    border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
+    border: 1px solid mat.m2-get-color-from-palette(gio.$mat-dove-palette, darker20);
     border-radius: 8px;
   }
 
   &__flowDetails {
     overflow: hidden;
     flex: 1 1 66%;
-    border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
+    border: 1px solid mat.m2-get-color-from-palette(gio.$mat-dove-palette, darker20);
     border-radius: 8px;
   }
 }
