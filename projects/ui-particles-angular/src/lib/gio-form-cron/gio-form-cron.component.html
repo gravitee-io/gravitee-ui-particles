@@ -19,7 +19,13 @@
 <div class="wrapper" [class.smallDisplay]="smallDisplay" [class.disabled]="isDisabled">
   <ng-container *ngIf="internalFormGroup" [formGroup]="internalFormGroup">
     <div class="menu">
-      <mat-button-toggle-group class="gio-button-toggle-group menu__mode" name="mode" aria-label="Cron mode" formControlName="mode">
+      <mat-button-toggle-group
+        class="gio-button-toggle-group menu__mode"
+        name="mode"
+        aria-label="Cron mode"
+        formControlName="mode"
+        [hideSingleSelectionIndicator]="true"
+      >
         <mat-button-toggle value="secondly" matTooltip="Secondly" [matTooltipDisabled]="!smallDisplay">{{
           smallDisplay ? 's' : 'Secondly'
         }}</mat-button-toggle>
