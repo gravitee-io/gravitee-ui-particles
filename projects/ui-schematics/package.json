@@ -14,11 +14,11 @@
     "schematics:copyfiles": "copyfiles schematics/**/*/schema.json schematics/**/*/files/** schematics/collection.json package.json LICENSE.txt README.md ../../dist/ui-schematics/"
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": "^2.6.3"
   },
   "devDependencies": {
     "copyfiles": "2.4.1",
-    "typescript": "5.3.3"
+    "typescript": "5.5.4"
   },
   "peerDependencies": {
     "@angular/common": "^17.2.0",
