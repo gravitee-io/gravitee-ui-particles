@@ -1,6 +1,7 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/blocks';
+import * as ReadmeStories from './gio-confirm-and-validate-dialog.stories';
 
-<Meta title="Components / Confirm and validate dialog / README" />
+<Meta of={ReadmeStories} />
 
 # Confirm and validate dialog
 
@@ -8,19 +9,21 @@ Documentation and examples for Confirm and Validate dialog, a component to askin
 
 ## Demo
 
+{/* <Story id="components-confirm-and-validate-dialog--custom" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
+
 <Story id="components-confirm-and-validate-dialog--custom" />
 
 ## Usage
 
 **Inputs**
 
-- `title`: `string` - The dialog title.
-- `warning`: `string` - Add this string into warning banner
-- `content`: `string` | `{ componentOutlet: Type<unknown>; componentInputs?: Record<string, unknown>; }` - The dialog content override.
-- `validationMessage`: `string` - The action to do to validate. Default: `Please, type in <code>confirm</code> to confirm.`
-- `validationValue`: `string` - The dialog content override. Default: `confirm`
-- `confirmButton`: `string` - The dialog confirmation button override.
-- `confirmCancel`: `string` - The dialog cancel button override.
+* `title`: `string` - The dialog title.
+* `warning`: `string` - Add this string into warning banner
+* `content`: `string` | `{ componentOutlet: Type<unknown>; componentInputs?: Record<string, unknown>; }` - The dialog content override.
+* `validationMessage`: `string` - The action to do to validate. Default: `Please, type in <code>confirm</code> to confirm.`
+* `validationValue`: `string` - The dialog content override. Default: `confirm`
+* `confirmButton`: `string` - The dialog confirmation button override.
+* `confirmCancel`: `string` - The dialog cancel button override.
 
 Example:
 

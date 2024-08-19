@@ -1,8 +1,11 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/blocks';
+import * as ReadmeStories from './showcase.stories';
 
-<Meta title="Theme / Color / README" />
+<Meta of={ReadmeStories} />
 
-<Story id="theme-color--palettes"></Story>
+{/* <Story id="theme-color--palettes" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
+
+<Story id="theme-color--palettes" />
 
 ## Use it in SCSS
 

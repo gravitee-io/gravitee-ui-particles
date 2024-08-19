@@ -1,6 +1,7 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/blocks';
+import * as ReadmeStories from './gio-monaco-editor.stories';
 
-<Meta title="Components / Monaco editor / README" />
+<Meta of={ReadmeStories} />
 
 # Monaco editor
 
@@ -10,11 +11,14 @@ This component need specific configuration to work. See [Usage](#usage) for more
 
 ## Demo
 
+{/* <Story id="components-monaco-editor--default" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
+
 <Story id="components-monaco-editor--default" />
 
 ## Usage
 
 ### Install
+
 Add monaco-editor to your project
 
 ```bash
@@ -53,10 +57,10 @@ GioMonacoEditorModule.forRoot({
 
 **Inputs**
 
-- `formControl` - form control to bind to. Work with ReactiveFormsModule.
-- `languageConfig`: `object` - language configuration of the editor.
-- `options`: `IStandaloneEditorConstructionOptions` - options of the editor.
-- `disableMiniMap`: `boolean` - option to disable the minimap (mini view of the document displayed on the right)
+* `formControl` - form control to bind to. Work with ReactiveFormsModule.
+* `languageConfig`: `object` - language configuration of the editor.
+* `options`: `IStandaloneEditorConstructionOptions` - options of the editor.
+* `disableMiniMap`: `boolean` - option to disable the minimap (mini view of the document displayed on the right)
 
 Example:
 

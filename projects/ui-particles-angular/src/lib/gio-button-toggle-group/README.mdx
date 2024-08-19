@@ -1,0 +1,30 @@
+import { Meta, Story } from '@storybook/blocks';
+import * as ReadmeStories from './gio-button-toggle-group.stories';
+
+<Meta of={ReadmeStories} />
+
+# Gio Button Toggle (group)
+
+Custom style for Angular Material button toggle group.
+
+## Demo
+
+{/* <Story id="components-button-toggle-group--default" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
+
+<Story id="components-button-toggle-group--default" />
+
+## Usage
+
+Add class `gio-button-toggle-group` to `mat-button-toggle-group` component.
+
+OR
+
+Use include mixin `gio-button-toggle-group` in your own class like :
+
+```scss
+@use '@gravitee/ui-particles-angular' as gio;
+
+.my-class {
+  @include gio.gio-button-toggle-group()
+}
+```

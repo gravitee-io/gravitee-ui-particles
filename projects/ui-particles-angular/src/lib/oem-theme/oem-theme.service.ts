@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { Args } from '@storybook/angular';
+import { Args, ArgTypes } from '@storybook/angular';
 
-export const OEM_THEME_ARG_TYPES = {
+export const OEM_THEME_ARG_TYPES: ArgTypes = {
   menuBackground: {
     control: 'color',
   },

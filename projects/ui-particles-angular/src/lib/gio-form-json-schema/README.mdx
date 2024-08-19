@@ -1,6 +1,7 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/blocks';
+import * as ReadmeStories from './gio-form-json-schema.stories';
 
-<Meta title="Components / Form Json schema / README" />
+<Meta of={ReadmeStories} />
 
 # Form Json schema
 
@@ -35,6 +36,8 @@ The jsonSchema object passed to the component is of type `GioJsonSchema`, which 
 ### Banner
 
 In some case, we want to display some guidance to the user that would not fit in the `mat-hint` field in `mat-form-field`. For such cases, we can use banners like follows.
+
+{/* <Story id="components-form-json-schema--field-with-banner" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
 
 <Story id="components-form-json-schema--field-with-banner" />
 

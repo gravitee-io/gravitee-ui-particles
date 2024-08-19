@@ -35,12 +35,12 @@ export default {
   render: () => ({}),
   argTypes: {
     tags: {
-      control: { type: 'array' },
+      control: { type: 'object' },
       description: '',
       table: { type: { summary: 'string[]' }, defaultValue: [] },
     },
     placeholder: {
-      control: { type: 'string' },
+      control: { type: 'text' },
     },
     required: {
       defaultValue: false,
@@ -178,7 +178,7 @@ export const WithTagValidationHook: StoryObj = {
   },
   argTypes: {
     tagValidationHook: {
-      control: { type: 'function' },
+      control: { type: 'object' },
     },
   },
 };
@@ -265,7 +265,7 @@ export const WithAutocompleteOnly: StoryObj = {
   },
   argTypes: {
     tagValidationHook: {
-      control: { type: 'function' },
+      control: { type: 'object' },
     },
   },
 };
@@ -325,7 +325,7 @@ export const WithAsyncAutocompleteOnly: StoryObj = {
   },
   argTypes: {
     tagValidationHook: {
-      control: { type: 'function' },
+      control: { type: 'object' },
     },
   },
 };
