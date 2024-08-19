@@ -36,17 +36,17 @@ $typography: map.get(theme.$mat-theme, typography);
     }
 
     thead {
-      @include mat.typography-level($typography, 'subtitle-2');
+      @include mat.m2-typography-level($typography, 'subtitle-2');
 
-      background-color: mat.get-color-from-palette(palettes.$mat-dove-palette, default);
+      background-color: mat.m2-get-color-from-palette(palettes.$mat-dove-palette, default);
       text-align: left;
       text-transform: uppercase;
     }
 
     tbody {
-      @include mat.typography-level($typography, 'body-2');
+      @include mat.m2-typography-level($typography, 'body-2');
 
-      background-color: mat.get-color-from-palette(palettes.$mat-basic-palette, white);
+      background-color: mat.m2-get-color-from-palette(palettes.$mat-basic-palette, white);
 
       & > tr:last-child > td {
         border-bottom: 0;
@@ -57,12 +57,12 @@ $typography: map.get(theme.$mat-theme, typography);
       border-color: map.get(palettes.$mat-dove-palette, darker10);
 
       thead {
-        background-color: mat.get-color-from-palette(palettes.$mat-dove-palette, default, 0.6);
-        color: mat.get-color-from-palette(palettes.$mat-dove-palette, 'darker20');
+        background-color: mat.m2-get-color-from-palette(palettes.$mat-dove-palette, default, 0.6);
+        color: mat.m2-get-color-from-palette(palettes.$mat-dove-palette, 'darker20');
       }
 
       tbody {
-        color: mat.get-color-from-palette(palettes.$mat-dove-palette, 'darker20');
+        color: mat.m2-get-color-from-palette(palettes.$mat-dove-palette, 'darker20');
       }
     }
   }

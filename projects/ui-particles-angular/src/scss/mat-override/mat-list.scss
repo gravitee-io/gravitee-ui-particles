@@ -26,7 +26,7 @@ $background: map.get(theme.$mat-theme, background);
      */
   .mat-mdc-list-item {
     &:hover {
-      background-color: mat.get-color-from-palette($background, hover);
+      background-color: mat.m2-get-color-from-palette($background, hover);
     }
   }
 }

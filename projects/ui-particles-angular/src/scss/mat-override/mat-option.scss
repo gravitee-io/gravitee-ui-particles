@@ -21,6 +21,6 @@
 @mixin mat-option() {
   .mat-typography .mat-mdc-option {
     min-height: 40px;
-    @include mat.typography-level(theme.$mat-typography, 'body-2');
+    @include mat.m2-typography-level(theme.$mat-typography, 'body-2');
   }
 }

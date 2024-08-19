@@ -26,10 +26,10 @@ $typography: map.get(gio.$mat-theme, typography);
 }
 
 .label {
-  @include mat.typography-level($typography, caption);
+  @include mat.m2-typography-level($typography, caption);
 
   padding-left: 10px;
-  color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker50');
+  color: mat.m2-get-color-from-palette(gio.$mat-dove-palette, 'darker50');
 
   &:empty {
     display: none;
@@ -66,14 +66,14 @@ $typography: map.get(gio.$mat-theme, typography);
             outline: none;
             resize: none;
 
-            @include mat.typography-level($typography, body-2);
+            @include mat.m2-typography-level($typography, body-2);
           }
         }
 
         &__field:focus-within {
           z-index: 100;
           height: auto;
-          background-color: mat.get-color-from-palette(gio.$mat-basic-palette, white);
+          background-color: mat.m2-get-color-from-palette(gio.$mat-basic-palette, white);
 
           * {
             max-height: none;
@@ -98,7 +98,7 @@ $typography: map.get(gio.$mat-theme, typography);
     &__header-row:hover .gio-form-headers__table__header-row__td-value__button {
       z-index: 110;
       display: block;
-      background-color: mat.get-color-from-palette(gio.$mat-basic-palette, white);
+      background-color: mat.m2-get-color-from-palette(gio.$mat-basic-palette, white);
       opacity: 0.9;
     }
   }
@@ -106,6 +106,6 @@ $typography: map.get(gio.$mat-theme, typography);
 
 :host(.disabled) {
   .label {
-    color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker20');
+    color: mat.m2-get-color-from-palette(gio.$mat-dove-palette, 'darker20');
   }
 }

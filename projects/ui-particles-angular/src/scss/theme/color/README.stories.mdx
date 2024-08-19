@@ -11,13 +11,13 @@ import { Meta, Story } from '@storybook/addon-docs';
 @use '@gravitee/ui-particles-angular' as gio;
 
 .my-class {
-  background-color: mat.get-color-from-palette(gio.$mat-accent-palette);
-  color: mat.get-color-from-palette(gio.$mat-accent-palette, contrast);
+  background-color: mat.m2-get-color-from-palette(gio.$mat-accent-palette);
+  color: mat..m2-get-color-from-palette(gio.$mat-accent-palette, contrast);
 }
 
 .my-class-lighter {
-  background-color: mat.get-color-from-palette(gio.$mat-accent-palette, lighter);
-  color: mat.get-color-from-palette(gio.$mat-accent-palette, lighter-contrast);
+  background-color: mat..m2-get-color-from-palette(gio.$mat-accent-palette, lighter);
+  color: mat..m2-get-color-from-palette(gio.$mat-accent-palette, lighter-contrast);
 }
 ```
 
@@ -49,6 +49,6 @@ To get some spesific color only defined into material background or forground
 $background: map.get(gio.$mat-theme, background);
 
 .disabled {
-  background-color: mat.get-color-from-palette($background, disabled);
+  background-color: mat.m2-get-color-from-palette($background, disabled);
 }
 ```

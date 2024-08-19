@@ -30,20 +30,20 @@ $typography: map.get(theme.$mat-theme, typography);
     dt {
       flex: 1 1 30%;
       padding: 6px 8px;
-      color: mat.get-color-from-palette(palettes.$mat-space-palette, 'lighter40');
-      @include mat.typography-level($typography, body-1);
+      color: mat.m2-get-color-from-palette(palettes.$mat-space-palette, 'lighter40');
+      @include mat.m2-typography-level($typography, body-1);
     }
 
     dd {
       flex: 1 1 70%;
       padding: 6px 8px;
       margin: 0;
-      @include mat.typography-level($typography, subtitle-2);
+      @include mat.m2-typography-level($typography, subtitle-2);
     }
 
     dd ~ dd,
     dd ~ dt {
-      border-top: 1px solid mat.get-color-from-palette($foreground, divider);
+      border-top: 1px solid mat.m2-get-color-from-palette($foreground, divider);
     }
   }
 }

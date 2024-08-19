@@ -24,7 +24,7 @@ $primary: map.get(gio.$mat-theme, primary);
   border: none;
   margin-left: 4px;
   background: none;
-  color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker60');
+  color: mat.m2-get-color-from-palette(gio.$mat-dove-palette, 'darker60');
   cursor: pointer;
   outline: inherit;
 
@@ -33,7 +33,7 @@ $primary: map.get(gio.$mat-theme, primary);
   }
 
   &.clicked {
-    color: mat.get-color-from-palette($primary);
+    color: mat.m2-get-color-from-palette($primary);
     opacity: 1;
   }
 }
@@ -44,7 +44,7 @@ $primary: map.get(gio.$mat-theme, primary);
 
     &:hover,
     &:focus {
-      color: mat.get-color-from-palette($primary);
+      color: mat.m2-get-color-from-palette($primary);
     }
   }
 }

@@ -64,10 +64,10 @@ $typography: map.get(gio.$mat-theme, typography);
       align-items: center;
       padding: 8px 8px 8px 10px;
       border-radius: 8px;
-      background-color: mat.get-color-from-palette(gio.$mat-accent-palette, lighter60);
+      background-color: mat.m2-get-color-from-palette(gio.$mat-accent-palette, lighter60);
 
       &__label {
-        @include mat.typography-level($typography, subtitle-2);
+        @include mat.m2-typography-level($typography, subtitle-2);
 
         display: flex;
         overflow: hidden;
@@ -102,14 +102,14 @@ $typography: map.get(gio.$mat-theme, typography);
       flex-direction: column;
       justify-content: center;
       padding: 7px; // compensate the border. Total: 8px
-      border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
+      border: 1px solid mat.m2-get-color-from-palette(gio.$mat-dove-palette, darker20);
       border-radius: 8px;
       gap: 8px;
 
       &:hover,
       &.selected {
         padding: 6px; // compensate the border
-        border: 2px solid mat.get-color-from-palette(gio.$mat-accent-palette, default);
+        border: 2px solid mat.m2-get-color-from-palette(gio.$mat-accent-palette, default);
         cursor: pointer;
       }
 

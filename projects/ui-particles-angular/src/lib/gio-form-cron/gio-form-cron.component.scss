@@ -32,7 +32,7 @@ $typography: map.get(gio.$mat-theme, typography);
 }
 
 .label {
-  @include mat.typography-level($typography, caption);
+  @include mat.m2-typography-level($typography, caption);
 
   padding-left: 10px;
   color: var(--mdc-outlined-text-field-label-text-color);
@@ -100,18 +100,18 @@ $typography: map.get(gio.$mat-theme, typography);
     align-items: center;
     padding: 8px;
     border-radius: 4px;
-    background-color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker10');
-    color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker10-contrast');
+    background-color: mat.m2-get-color-from-palette(gio.$mat-dove-palette, 'darker10');
+    color: mat.m2-get-color-from-palette(gio.$mat-dove-palette, 'darker10-contrast');
   }
 
   .preview {
     &__hint {
-      @include mat.typography-level($typography, caption);
+      @include mat.m2-typography-level($typography, caption);
     }
   }
 
   .placeholder {
-    @include mat.typography-level($typography, caption);
+    @include mat.m2-typography-level($typography, caption);
   }
 
   &.disabled {
@@ -123,7 +123,7 @@ $typography: map.get(gio.$mat-theme, typography);
 }
 
 .hint {
-  @include mat.typography-level($typography, caption);
+  @include mat.m2-typography-level($typography, caption);
 
   padding-top: 2px;
   padding-left: 10px;
@@ -142,7 +142,7 @@ $typography: map.get(gio.$mat-theme, typography);
 
     .preview,
     .placeholder {
-      color: mat.get-color-from-palette(gio.$mat-error-palette, 'default');
+      color: mat.m2-get-color-from-palette(gio.$mat-error-palette, 'default');
     }
   }
 
@@ -154,12 +154,12 @@ $typography: map.get(gio.$mat-theme, typography);
 
 :host(.disabled) {
   .wrapper {
-    border-color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker10');
+    border-color: mat.m2-get-color-from-palette(gio.$mat-dove-palette, 'darker10');
   }
 
   .wrapper,
   .hint,
   .label {
-    color: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker20');
+    color: mat.m2-get-color-from-palette(gio.$mat-dove-palette, 'darker20');
   }
 }

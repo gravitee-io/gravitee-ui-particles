@@ -38,7 +38,7 @@ $typography: map.get(gio.$mat-theme, typography);
   padding: 8px;
   border-radius: 8px;
   margin-bottom: 8px;
-  background: mat.get-color-from-palette(gio.$mat-dove-palette, 'darker10');
+  background: mat.m2-get-color-from-palette(gio.$mat-dove-palette, 'darker10');
   gap: 8px;
 
   &__icon {
@@ -47,17 +47,17 @@ $typography: map.get(gio.$mat-theme, typography);
     mat-icon {
       width: 16px;
       height: 16px;
-      color: mat.get-color-from-palette(gio.$mat-accent-palette, 'darker20');
+      color: mat.m2-get-color-from-palette(gio.$mat-accent-palette, 'darker20');
     }
   }
 
   &__title {
-    @include mat.typography-level($typography, 'subtitle-2');
+    @include mat.m2-typography-level($typography, 'subtitle-2');
   }
 
   &__text {
-    @include mat.typography-level($typography, 'body-2');
+    @include mat.m2-typography-level($typography, 'body-2');
 
-    color: mat.get-color-from-palette(gio.$mat-space-palette, 'lighter40');
+    color: mat.m2-get-color-from-palette(gio.$mat-space-palette, 'lighter40');
   }
 }

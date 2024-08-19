@@ -33,10 +33,10 @@
     border-radius: 16px;
     margin-right: 4px;
     margin-left: 4px;
-    background-color: mat.get-color-from-palette(palettes.$mat-primary-palette, lighter);
-    color: mat.get-color-from-palette(palettes.$mat-primary-palette, lighter-contrast);
-    font-size: mat.font-size(theme.$mat-typography, caption);
-    font-weight: mat.font-weight(theme.$mat-typography, caption);
+    background-color: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, lighter);
+    color: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, lighter-contrast);
+    font-size: mat.m2-font-size(theme.$mat-typography, caption);
+    font-weight: mat.m2-font-weight(theme.$mat-typography, caption);
     line-height: 16px;
     text-align: center;
     text-transform: capitalize;
@@ -76,43 +76,43 @@
   .gio-badge-accent {
     @extend %gio-badge-base;
 
-    background-color: mat.get-color-from-palette(palettes.$mat-accent-palette, lighter);
-    color: mat.get-color-from-palette(palettes.$mat-accent-palette, lighter-contrast);
+    background-color: mat.m2-get-color-from-palette(palettes.$mat-accent-palette, lighter);
+    color: mat.m2-get-color-from-palette(palettes.$mat-accent-palette, lighter-contrast);
   }
 
   .gio-badge-neutral {
     @extend %gio-badge-base;
 
-    background-color: mat.get-color-from-palette(palettes.$mat-dove-palette, darker10);
-    color: mat.get-color-from-palette(palettes.$mat-dove-palette, darker10-contrast);
+    background-color: mat.m2-get-color-from-palette(palettes.$mat-dove-palette, darker10);
+    color: mat.m2-get-color-from-palette(palettes.$mat-dove-palette, darker10-contrast);
   }
 
   .gio-badge-white {
     @extend %gio-badge-base;
 
-    background-color: mat.get-color-from-palette(palettes.$mat-basic-palette, white);
-    color: mat.get-color-from-palette(palettes.$mat-basic-palette, white-contrast);
+    background-color: mat.m2-get-color-from-palette(palettes.$mat-basic-palette, white);
+    color: mat.m2-get-color-from-palette(palettes.$mat-basic-palette, white-contrast);
   }
 
   .gio-badge-success {
     @extend %gio-badge-base;
 
-    background-color: mat.get-color-from-palette(palettes.$mat-success-palette, lighter);
-    color: mat.get-color-from-palette(palettes.$mat-success-palette, lighter-contrast);
+    background-color: mat.m2-get-color-from-palette(palettes.$mat-success-palette, lighter);
+    color: mat.m2-get-color-from-palette(palettes.$mat-success-palette, lighter-contrast);
   }
 
   .gio-badge-error {
     @extend %gio-badge-base;
 
-    background-color: mat.get-color-from-palette(palettes.$mat-error-palette, lighter);
-    color: mat.get-color-from-palette(palettes.$mat-error-palette, lighter-contrast);
+    background-color: mat.m2-get-color-from-palette(palettes.$mat-error-palette, lighter);
+    color: mat.m2-get-color-from-palette(palettes.$mat-error-palette, lighter-contrast);
   }
 
   .gio-badge-warning {
     @extend %gio-badge-base;
 
-    background-color: mat.get-color-from-palette(palettes.$mat-warning-palette, lighter);
-    color: mat.get-color-from-palette(palettes.$mat-warning-palette, lighter-contrast);
+    background-color: mat.m2-get-color-from-palette(palettes.$mat-warning-palette, lighter);
+    color: mat.m2-get-color-from-palette(palettes.$mat-warning-palette, lighter-contrast);
   }
 }
 

@@ -23,12 +23,12 @@ $typography: map.get(gio.$mat-theme, typography);
   display: flex;
   align-items: center;
   padding: 8px;
-  border: 1px solid mat.get-color-from-palette(gio.$mat-accent-palette, darker20);
+  border: 1px solid mat.m2-get-color-from-palette(gio.$mat-accent-palette, darker20);
   border-radius: 8px;
 }
 
 :host-context(.disabled) {
-  border: 1px solid mat.get-color-from-palette(gio.$mat-dove-palette, darker20);
+  border: 1px solid mat.m2-get-color-from-palette(gio.$mat-dove-palette, darker20);
 }
 
 .info {
@@ -57,12 +57,12 @@ $typography: map.get(gio.$mat-theme, typography);
   }
 
   &__description {
-    @include mat.typography-level($typography, caption);
+    @include mat.m2-typography-level($typography, caption);
 
     display: -webkit-box;
     overflow: hidden;
     -webkit-box-orient: vertical;
-    color: mat.get-color-from-palette(gio.$mat-space-palette, lighter40);
+    color: mat.m2-get-color-from-palette(gio.$mat-space-palette, lighter40);
     -webkit-line-clamp: 2;
 
     &:empty {

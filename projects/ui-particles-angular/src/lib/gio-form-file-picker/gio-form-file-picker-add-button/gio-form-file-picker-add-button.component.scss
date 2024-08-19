@@ -40,7 +40,7 @@ $typography: map.get(gio.$mat-theme, typography);
     }
 
     &__text {
-      @include mat.typography-level($typography, 'caption');
+      @include mat.m2-typography-level($typography, 'caption');
     }
   }
 }

@@ -33,8 +33,8 @@
     border-radius: 6px;
     margin-right: 4px;
     margin-left: 4px;
-    font-size: mat.font-size(theme.$mat-typography, caption);
-    font-weight: mat.font-weight(theme.$mat-typography, caption);
+    font-size: mat.m2-font-size(theme.$mat-typography, caption);
+    font-weight: mat.m2-font-weight(theme.$mat-typography, caption);
     line-height: 16px;
     text-align: center;
     text-transform: uppercase;
@@ -49,70 +49,70 @@
   .gio-method-badge-post {
     @extend %gio-method-badge-base;
 
-    background-color: mat.get-color-from-palette(palettes.$mat-method-palette, post);
-    color: mat.get-color-from-palette(palettes.$mat-method-palette, post-contrast);
+    background-color: mat.m2-get-color-from-palette(palettes.$mat-method-palette, post);
+    color: mat.m2-get-color-from-palette(palettes.$mat-method-palette, post-contrast);
   }
 
   .gio-method-badge-get {
     @extend %gio-method-badge-base;
 
-    background-color: mat.get-color-from-palette(palettes.$mat-method-palette, get);
-    color: mat.get-color-from-palette(palettes.$mat-method-palette, get-contrast);
+    background-color: mat.m2-get-color-from-palette(palettes.$mat-method-palette, get);
+    color: mat.m2-get-color-from-palette(palettes.$mat-method-palette, get-contrast);
   }
 
   .gio-method-badge-patch {
     @extend %gio-method-badge-base;
 
-    background-color: mat.get-color-from-palette(palettes.$mat-method-palette, patch);
-    color: mat.get-color-from-palette(palettes.$mat-method-palette, patch-contrast);
+    background-color: mat.m2-get-color-from-palette(palettes.$mat-method-palette, patch);
+    color: mat.m2-get-color-from-palette(palettes.$mat-method-palette, patch-contrast);
   }
 
   .gio-method-badge-put {
     @extend %gio-method-badge-base;
 
-    background-color: mat.get-color-from-palette(palettes.$mat-method-palette, put);
-    color: mat.get-color-from-palette(palettes.$mat-method-palette, put-contrast);
+    background-color: mat.m2-get-color-from-palette(palettes.$mat-method-palette, put);
+    color: mat.m2-get-color-from-palette(palettes.$mat-method-palette, put-contrast);
   }
 
   .gio-method-badge-delete {
     @extend %gio-method-badge-base;
 
-    background-color: mat.get-color-from-palette(palettes.$mat-method-palette, delete);
-    color: mat.get-color-from-palette(palettes.$mat-method-palette, delete-contrast);
+    background-color: mat.m2-get-color-from-palette(palettes.$mat-method-palette, delete);
+    color: mat.m2-get-color-from-palette(palettes.$mat-method-palette, delete-contrast);
   }
 
   .gio-method-badge-options {
     @extend %gio-method-badge-base;
 
-    background-color: mat.get-color-from-palette(palettes.$mat-method-palette, option);
-    color: mat.get-color-from-palette(palettes.$mat-method-palette, option-contrast);
+    background-color: mat.m2-get-color-from-palette(palettes.$mat-method-palette, option);
+    color: mat.m2-get-color-from-palette(palettes.$mat-method-palette, option-contrast);
   }
 
   .gio-method-badge-trace {
     @extend %gio-method-badge-base;
 
-    background-color: mat.get-color-from-palette(palettes.$mat-method-palette, trace);
-    color: mat.get-color-from-palette(palettes.$mat-method-palette, trace-contrast);
+    background-color: mat.m2-get-color-from-palette(palettes.$mat-method-palette, trace);
+    color: mat.m2-get-color-from-palette(palettes.$mat-method-palette, trace-contrast);
   }
 
   .gio-method-badge-head {
     @extend %gio-method-badge-base;
 
-    background-color: mat.get-color-from-palette(palettes.$mat-method-palette, head);
-    color: mat.get-color-from-palette(palettes.$mat-method-palette, head-contrast);
+    background-color: mat.m2-get-color-from-palette(palettes.$mat-method-palette, head);
+    color: mat.m2-get-color-from-palette(palettes.$mat-method-palette, head-contrast);
   }
 
   .gio-method-badge-connect {
     @extend %gio-method-badge-base;
 
-    background-color: mat.get-color-from-palette(palettes.$mat-method-palette, connect);
-    color: mat.get-color-from-palette(palettes.$mat-method-palette, connect-contrast);
+    background-color: mat.m2-get-color-from-palette(palettes.$mat-method-palette, connect);
+    color: mat.m2-get-color-from-palette(palettes.$mat-method-palette, connect-contrast);
   }
 
   .gio-method-badge-other {
     @extend %gio-method-badge-base;
 
-    background-color: mat.get-color-from-palette(palettes.$mat-method-palette, other);
-    color: mat.get-color-from-palette(palettes.$mat-method-palette, other-contrast);
+    background-color: mat.m2-get-color-from-palette(palettes.$mat-method-palette, other);
+    color: mat.m2-get-color-from-palette(palettes.$mat-method-palette, other-contrast);
   }
 }

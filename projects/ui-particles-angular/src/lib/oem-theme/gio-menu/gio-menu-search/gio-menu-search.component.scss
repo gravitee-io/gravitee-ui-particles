@@ -51,7 +51,7 @@ $typography: map.get(gio.$mat-theme, typography);
     background-color: transparent;
     color: oem.$oem-menu-text;
     outline: none;
-    @include mat.typography-level($typography, body-2);
+    @include mat.m2-typography-level($typography, body-2);
 
     &::placeholder {
       color: oem.$oem-menu-text;
@@ -59,7 +59,7 @@ $typography: map.get(gio.$mat-theme, typography);
   }
 
   &__icon {
-    color: mat.get-color-from-palette(palettes.$mat-dove-palette, darker40);
+    color: mat.m2-get-color-from-palette(palettes.$mat-dove-palette, darker40);
   }
 
   &__item {
@@ -69,12 +69,12 @@ $typography: map.get(gio.$mat-theme, typography);
     justify-content: center;
 
     &__name {
-      @include mat.typography-level($typography, body-2);
+      @include mat.m2-typography-level($typography, body-2);
     }
 
     &__category {
-      color: mat.get-color-from-palette(palettes.$mat-accent-palette, lighter20);
-      @include mat.typography-level($typography, caption);
+      color: mat.m2-get-color-from-palette(palettes.$mat-accent-palette, lighter20);
+      @include mat.m2-typography-level($typography, caption);
     }
   }
 }
