@@ -1,6 +1,7 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/blocks';
+import * as ReadmeStories from './gio-banner.stories';
 
-<Meta title="Components / Banner / README" />
+<Meta of={ReadmeStories} />
 
 # Gio Banner
 
@@ -8,14 +9,16 @@ Documentation and examples for banner. Allows you to display banner in cards or 
 
 ## Demo
 
-<Story id="components-banner--default"></Story>
+{/* <Story id="components-banner--default" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
+
+<Story id="components-banner--default" />
 
 ## Usage
 
 **Inputs**
 
-- `type`: `string` - input to change its color and icon dynamically.
-- `collapsible`: `boolean` - Enable collapsible mode
+* `type`: `string` - input to change its color and icon dynamically.
+* `collapsible`: `boolean` - Enable collapsible mode
 
 **Template**
 

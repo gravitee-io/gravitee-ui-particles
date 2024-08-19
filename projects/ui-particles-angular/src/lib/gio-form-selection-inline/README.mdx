@@ -1,6 +1,7 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/blocks';
+import * as ReadmeStories from './gio-form-selection-inline.stories';
 
-<Meta title="Components / Form selection inline / README" />
+<Meta of={ReadmeStories} />
 
 # Form selection inline
 
@@ -8,21 +9,23 @@ Form selection inline is a component that allows to display a horizontal selecti
 
 ## Demo
 
+{/* <Story id="components-form-selection-inline--with-content" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
+
 <Story id="components-form-selection-inline--with-content" />
 
 ## Usage
 
 **Inputs**
 
-- Work with ReactiveFormsModule
-- Only one `gio-form-selection-inline-card` could be disabled with the input `[disabled]="true"`
-- `gio-form-selection-inline-card` could be locked with the input `[lock]="true"` (it will be displayed as disabled with a lock icon)
-**Output** : string
-
+* Work with ReactiveFormsModule
+* Only one `gio-form-selection-inline-card` could be disabled with the input `[disabled]="true"`
+* `gio-form-selection-inline-card` could be locked with the input `[lock]="true"` (it will be displayed as disabled with a lock icon)
+  **Output** : string
 
 Example:
 
 Simple example
+
 ```html
 <gio-form-selection-inline [formControl]="selectControl">
     <gio-form-selection-inline-card value="fox">Fox</gio-form-selection-inline-card>
@@ -32,6 +35,7 @@ Simple example
 ```
 
 With gio-form-selection-inline-card-content
+
 ```html
 <gio-form-selection-inline [formControl]="selectControl">
     <gio-form-selection-inline-card value="fox">

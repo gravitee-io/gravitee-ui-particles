@@ -1,6 +1,7 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/blocks';
+import * as ReadmeStories from './gio-badge.stories';
 
-<Meta title="Components / Badge / README" />
+<Meta of={ReadmeStories} />
 
 # Badges
 
@@ -8,7 +9,9 @@ Documentation and examples for badges, a small count and labeling component insp
 
 ## Demo
 
-<Story id="components-badge--all"></Story>
+{/* <Story id="components-badge--all" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
+
+<Story id="components-badge--all" />
 
 ## Usage
 
@@ -38,4 +41,3 @@ Here are some examples with simple `span` elements:
 <!-- ⚠ Material icons are also working BUT you should ALWAYS PREFER icons from the Gravitee lib (see Icons story)️  -->
 <span class="gio-badge-error">Lock<mat-icon class="gio-right">lock</mat-icon></span>
 ```
-

@@ -1,6 +1,7 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/blocks';
+import * as ReadmeStories from './gio-table-light.stories';
 
-<Meta title="Components / Table Light / README" />
+<Meta of={ReadmeStories} />
 
 # Badges
 
@@ -8,12 +9,13 @@ Documentation and example for simple table.
 
 ## Demo
 
-<Story id="components-table-light--http-headers"></Story>
+{/* <Story id="components-table-light--http-headers" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
+
+<Story id="components-table-light--http-headers" />
 
 ## Usage
 
 `gio-table-light` is a simple SCSS class that can be used on table element.
-
 
 ```html
 <table class="gio-table-light">
@@ -43,4 +45,3 @@ Documentation and example for simple table.
   </tbody>
 </table>
 ```
-

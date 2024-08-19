@@ -1,15 +1,18 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/blocks';
+import * as ReadmeStories from './gio-form-cron.stories';
 
-<Meta title="Components / Form Cron / README" />
+<Meta of={ReadmeStories} />
 
 # Form Cron
 
 Components to create a cron expression. Usable in angular forms.
 
-Cron expression is a string of 6 parts separated by space. Each part is a time definition. 
+Cron expression is a string of 6 parts separated by space. Each part is a time definition.
 This component are made for [Spring](https://spring.io/blog/2020/11/10/new-in-spring-5-3-improved-cron-expressions) [cron expression](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/scheduling/support/CronExpression.html) only.
 
 ## Demo
+
+{/* <Story id="components-form-cron--default" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
 
 <Story id="components-form-cron--default" />
 

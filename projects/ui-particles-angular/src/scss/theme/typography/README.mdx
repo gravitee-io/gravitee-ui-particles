@@ -1,6 +1,7 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/blocks';
+import * as ReadmeStories from './showcase.stories';
 
-<Meta title="Theme / Typography / README" />
+<Meta of={ReadmeStories} />
 
 # Typography
 
@@ -8,15 +9,17 @@ Typography to be used either with native elements or with an import in scss.
 
 ## Hierarchy
 
-<Story id="theme-typography--showcase"></Story>
+{/* <Story id="theme-typography--showcase" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
+
+<Story id="theme-typography--showcase" />
 
 ## About fonts
 
 Font family include with `gio.import-fonts()`:
 
-- Default : `'Golos UI'` with `400;500;600` weights
-- Code : `Fira Mono` with `400` weight
-- MatIcons : `Material Icons`
+* Default : `'Golos UI'` with `400;500;600` weights
+* Code : `Fira Mono` with `400` weight
+* MatIcons : `Material Icons`
 
 All this font come from https://fontsource.org/fonts to be self hosted
 

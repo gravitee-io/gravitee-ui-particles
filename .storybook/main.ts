@@ -1,7 +1,7 @@
 import { dirname, join } from 'path';
 module.exports = {
   framework: getAbsolutePath('@storybook/angular'),
-  stories: ['../projects/**/*.stories.@(ts|mdx)'],
+  stories: ['../projects/**/*.@(mdx|stories.@(ts))'],
 
   addons: [
     getAbsolutePath('@storybook/addon-a11y'),
@@ -17,11 +17,11 @@ module.exports = {
       options: { transcludeMarkdown: true },
     },
     getAbsolutePath('@storybook/addon-mdx-gfm'),
+    '@chromatic-com/storybook',
   ],
 
   features: {
     previewCsfV3: true,
-    storyStoreV7: true,
   },
 
   angularOptions: {

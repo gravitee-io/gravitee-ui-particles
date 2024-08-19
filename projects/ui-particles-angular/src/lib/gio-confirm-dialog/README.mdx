@@ -1,6 +1,7 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/blocks';
+import * as ReadmeStories from './gio-confirm-dialog.stories';
 
-<Meta title="Components / Confirm dialog / README" />
+<Meta of={ReadmeStories} />
 
 # Confirm dialog
 
@@ -8,16 +9,19 @@ Documentation and examples for Confirm dialog, a component to asking for confirm
 
 ## Demo
 
-<Story id="components-confirm-dialog--custom"/>
+{/* <Story id="components-confirm-dialog--custom" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
+
+<Story id="components-confirm-dialog--custom" />
 
 ## Usage
 
 **Inputs**
- - `title`: `string` - The dialog title.
- - `content`: `string` | `{ componentOutlet: Type<unknown>; componentInputs?: Record<string, unknown>; }` - The dialog content override.
- - `confirmButton`: `string` - The dialog confirmation button override.
- - `confirmCancel`: `string` - The dialog cancel button override.
- - `disableCancel`: `boolean` - Disable the cancel button.
+
+* `title`: `string` - The dialog title.
+* `content`: `string` | `{ componentOutlet: Type<unknown>; componentInputs?: Record<string, unknown>; }` - The dialog content override.
+* `confirmButton`: `string` - The dialog confirmation button override.
+* `confirmCancel`: `string` - The dialog cancel button override.
+* `disableCancel`: `boolean` - Disable the cancel button.
 
 Example:
 

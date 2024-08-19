@@ -1,6 +1,7 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/blocks';
+import * as ReadmeStories from './gio-form-headers.stories';
 
-<Meta title="Components / Form Headers / README" />
+<Meta of={ReadmeStories} />
 
 # Form Headers
 
@@ -9,15 +10,17 @@ Key autocomplete is provided for common headers.
 
 ## Demo
 
+{/* <Story id="components-form-headers--reactive-form" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
+
 <Story id="components-form-headers--reactive-form" />
 
 ## Usage
 
 **Inputs**
 
-- Work with ReactiveFormsModule
-- `headerFieldMapper` (optional): A mapping definition for the default key/value attributes in order to adapt the output of the component to the desired format. e.g. `{keyName: 'name', valueName: 'value'}`
-- `autocompleteDisabled` (optional): Used to disable autocomplete
+* Work with ReactiveFormsModule
+* `headerFieldMapper` (optional): A mapping definition for the default key/value attributes in order to adapt the output of the component to the desired format. e.g. `{keyName: 'name', valueName: 'value'}`
+* `autocompleteDisabled` (optional): Used to disable autocomplete
 
 **Output**
 

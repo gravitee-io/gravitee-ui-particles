@@ -1,15 +1,17 @@
-import { Meta, Story } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/blocks';
+import * as ReadmeStories from './gio-description-list.stories';
 
-<Meta title="Components / Description list (dl,dt,dd) / README" />
+<Meta of={ReadmeStories} />
 
 # Description list (dl,dt,dd)
 
 A description list is a list of items with a description of each item. This components is a css only for the html elements `dl`, `dt` and `dd`.
 
-
 ## Demo
 
-<Story id="components-description-list-dl-dt-dd--default"/>
+{/* <Story id="components-description-list-dl-dt-dd--default" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
+
+<Story id="components-description-list-dl-dt-dd--default" />
 
 ## Usage
 

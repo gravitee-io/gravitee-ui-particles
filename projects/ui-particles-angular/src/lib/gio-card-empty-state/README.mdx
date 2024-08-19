@@ -1,0 +1,18 @@
+import { Meta, Story } from '@storybook/blocks';
+import * as ReadmeStories from './gio-card-empty-state.stories';
+
+<Meta of={ReadmeStories} />
+
+# Empty state
+
+Documentation and illustrations for the card empty state component, which is used to present a message when there is no content to show on the page.
+
+## Demo
+
+{/* <Story id="components-empty-state--default" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
+
+<Story id="components-empty-state--default" />
+
+```html
+<gio-card-empty-state [icon]="search" title="No API found" subtitle="No API found. Please try again or create one."></gio-card-empty-state>
+```
