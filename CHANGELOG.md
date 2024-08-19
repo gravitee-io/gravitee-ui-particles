@@ -1,3 +1,11 @@
+## [12.22.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.22.1...v12.22.2) (2024-08-19)
+
+
+### Bug Fixes
+
+* add missing ChangeDetectionStrategy import ([6206be4](https://github.com/gravitee-io/gravitee-ui-particles/commit/6206be4973c7a08a17fe15185076bdddf8932dc5))
+* improve css fore some use case ([47b5528](https://github.com/gravitee-io/gravitee-ui-particles/commit/47b552811ab316cd3160e181d2b14e5f23d38cfd))
+
 ## [12.22.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.22.0...v12.22.1) (2024-08-14)
 
 
