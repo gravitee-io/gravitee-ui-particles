@@ -1,3 +1,20 @@
+# [13.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.22.2...v13.0.0) (2024-08-20)
+
+
+### Bug Fixes
+
+* fix ui next to angular material update ([6018fef](https://github.com/gravitee-io/gravitee-ui-particles/commit/6018fefabe708a3b0e8be917cf980e0b3143dd96))
+
+
+### chore
+
+* update to angular material 18 ([9a8e30d](https://github.com/gravitee-io/gravitee-ui-particles/commit/9a8e30d46c567b285d1b0472c7ccd30f2edbc34b))
+
+
+### BREAKING CHANGES
+
+* Needs angular & angular material ^18.0.0
+
 ## [12.22.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.22.1...v12.22.2) (2024-08-19)
 
 
