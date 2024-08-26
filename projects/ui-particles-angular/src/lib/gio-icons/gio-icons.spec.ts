@@ -295,6 +295,7 @@ const icons = [
   'text',
   'thumbs-down',
   'thumbs-up',
+  'top-bar',
   'trash',
   'trending-down',
   'trending-up',
