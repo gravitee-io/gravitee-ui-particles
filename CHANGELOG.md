@@ -1,3 +1,15 @@
+# [13.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.0.0...v13.1.0) (2024-08-27)
+
+
+### Bug Fixes
+
+* round corners of gio-table-light ([736255e](https://github.com/gravitee-io/gravitee-ui-particles/commit/736255e6ce69e87cc558836016e1db4c047d77f0))
+
+
+### Features
+
+* add top-bar icon ([e9f1ec1](https://github.com/gravitee-io/gravitee-ui-particles/commit/e9f1ec1d32a5f60a764efb6bceb5f66d19e055a4))
+
 # [13.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v12.22.2...v13.0.0) (2024-08-20)
 
 
