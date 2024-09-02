@@ -100,7 +100,7 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
   public policyGroupChange: EventEmitter<PolicyGroupOutput> = new EventEmitter<PolicyGroupOutput>();
 
   protected isLoading = true;
-  protected startConnector: (name: string) => ConnectorInfo[] = name => [
+  protected createStartConnector: (name: string) => ConnectorInfo[] = name => [
     {
       name,
       icon: 'gio:arrow-right',
@@ -108,7 +108,7 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
       supportedModes: [],
     },
   ];
-  protected endConnector: (name: string) => ConnectorInfo[] = name => [
+  protected createEndConnector: (name: string) => ConnectorInfo[] = name => [
     {
       name,
       icon: 'gio:arrow-right',
@@ -120,6 +120,8 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
   protected steps: Step[] = [];
   protected trialUrl: string | undefined;
   protected genericPolicies: GenericPolicy[] = [];
+  protected startConnector: ConnectorInfo[] = [];
+  protected endConnector: ConnectorInfo[] = [];
 
   private phases: Record<`${ApiType}__${ExecutionPhase}`, PolicyGroupVM | null> = {
     PROXY__REQUEST: {
@@ -178,6 +180,8 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
     }
     if (changes.executionPhase) {
       this.policyGroupVM = this.phases[`${this.apiType}__${this.executionPhase}`] ?? undefined;
+      this.startConnector = this.createStartConnector(this.policyGroupVM?.startConnectorName ?? '');
+      this.endConnector = this.createEndConnector(this.policyGroupVM?.endConnectorName ?? '');
     }
     if (changes.policyGroup) {
       this.steps = this.policyGroup;
