@@ -1,3 +1,10 @@
+## [13.1.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.1.0...v13.1.1) (2024-09-02)
+
+
+### Bug Fixes
+
+* moved start/end connectors in group policy studio from function to field ([b00d80c](https://github.com/gravitee-io/gravitee-ui-particles/commit/b00d80c4baed474044e0d6ebb53259a47067c8e0))
+
 # [13.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.0.0...v13.1.0) (2024-08-27)
 
 
