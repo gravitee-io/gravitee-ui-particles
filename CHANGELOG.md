@@ -1,3 +1,10 @@
+## [13.1.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.1.1...v13.1.2) (2024-09-04)
+
+
+### Bug Fixes
+
+* added messageCondition field to step editor in PS ([09ce80d](https://github.com/gravitee-io/gravitee-ui-particles/commit/09ce80d4c15669e60a0e52409cb15f4b49430e48))
+
 ## [13.1.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.1.0...v13.1.1) (2024-09-02)
 
 
