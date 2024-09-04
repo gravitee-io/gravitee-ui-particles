@@ -21,7 +21,7 @@ import { GioFormJsonSchemaComponent, GioJsonSchema } from '@gravitee/ui-particle
 import { isEmpty } from 'lodash';
 
 import { GioPolicyStudioService } from '../../gio-policy-studio.service';
-import { Policy, Step } from '../../models';
+import { ExecutionPhase, Policy, Step } from '../../models';
 
 @Component({
   selector: 'gio-ps-step-form',
@@ -35,6 +35,9 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
   @Input()
   public policy!: Policy;
 
+  @Input()
+  public phase!: ExecutionPhase;
+
   @Output()
   public stepChange = new EventEmitter<Step>();
 
@@ -47,6 +50,7 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
   public stepForm?: FormGroup;
 
   private unsubscribe$ = new Subject<void>();
+  public isMessagePhase = false;
   constructor(private readonly policyStudioService: GioPolicyStudioService) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -64,6 +68,10 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
         .getPolicyDocumentation(this.policy)
         .pipe(map(doc => (isEmpty(doc) ? 'No documentation available.' : doc)));
     }
+
+    if (changes.phase) {
+      this.isMessagePhase = this.phase === 'MESSAGE_REQUEST' || this.phase === 'MESSAGE_RESPONSE';
+    }
   }
 
   public ngOnInit(): void {
@@ -79,6 +87,7 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
     this.stepForm = new FormGroup({
       description: new FormControl(this.step?.description),
       condition: new FormControl(this.step?.condition),
+      messageCondition: new FormControl(this.step?.messageCondition),
       configuration: new FormControl(this.step?.configuration ?? {}),
     });
 
@@ -107,6 +116,7 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
       ...this.step,
       description: this.stepForm?.get('description')?.value,
       condition: this.stepForm?.get('condition')?.value ?? undefined,
+      messageCondition: this.stepForm?.get('messageCondition')?.value ?? undefined,
       configuration: this.stepForm?.get('configuration')?.value,
     });
   }

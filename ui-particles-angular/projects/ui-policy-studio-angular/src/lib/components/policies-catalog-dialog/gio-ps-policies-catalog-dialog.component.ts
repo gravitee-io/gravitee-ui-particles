@@ -75,6 +75,8 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
 
   public trialUrl?: string;
 
+  public phase: ExecutionPhase;
+
   constructor(
     public dialogRef: MatDialogRef<GioPolicyStudioPoliciesCatalogDialogComponent, GioPolicyStudioPoliciesCatalogDialogResult>,
     @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioPoliciesCatalogDialogData,
@@ -113,6 +115,7 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
       });
 
     this.trialUrl = flowDialogData.trialUrl;
+    this.phase = flowDialogData.executionPhase;
   }
 
   public ngOnDestroy(): void {
