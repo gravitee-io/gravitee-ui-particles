@@ -16,9 +16,10 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { Policy, Step } from '../../models';
+import { ExecutionPhase, Policy, Step } from '../../models';
 
 export type GioPolicyStudioStepEditDialogData = {
+  phase: ExecutionPhase;
   policy: Policy;
   step: Step;
 };
@@ -35,6 +36,7 @@ export class GioPolicyStudioStepEditDialogComponent {
   public step!: Step;
 
   public isValid = false;
+  public phase: ExecutionPhase;
 
   constructor(
     public dialogRef: MatDialogRef<GioPolicyStudioStepEditDialogComponent, GioPolicyStudioStepEditDialogResult>,
@@ -42,6 +44,7 @@ export class GioPolicyStudioStepEditDialogComponent {
   ) {
     this.policy = flowDialogData.policy;
     this.step = flowDialogData.step;
+    this.phase = flowDialogData.phase;
   }
 
   public onSave(): void {

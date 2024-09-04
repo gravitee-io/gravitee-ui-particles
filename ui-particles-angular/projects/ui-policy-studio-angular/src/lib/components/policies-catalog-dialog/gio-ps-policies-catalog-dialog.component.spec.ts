@@ -142,6 +142,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
         policy: 'test-policy',
         description: 'My step description',
         condition: 'test == true',
+        messageCondition: undefined,
         configuration: {
           test: '🦊',
         },
