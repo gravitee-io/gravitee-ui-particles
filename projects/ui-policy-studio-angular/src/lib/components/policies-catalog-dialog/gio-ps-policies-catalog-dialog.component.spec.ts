@@ -150,6 +150,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
         policy: 'test-policy',
         description: 'My step description',
         condition: 'test == true',
+        messageCondition: undefined,
         configuration: {
           test: '🦊',
         },
@@ -231,6 +232,41 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
         'Publish',
         p => isSharedPolicyGroupPolicy(p) && p.apiType === 'MESSAGE' && p.phase === 'MESSAGE_REQUEST',
       );
+    });
+
+    it('should select a policy and add it with messageCondition', async () => {
+      await componentTestingOpenDialog();
+
+      const policiesCatalogDialog = await loader.getHarness(GioPolicyStudioPoliciesCatalogDialogHarness);
+      await policiesCatalogDialog.selectPolicy('Policy to test UI');
+
+      expect(await policiesCatalogDialog.getSelectedPolicyName()).toEqual('Policy to test UI');
+
+      const stepForm = await policiesCatalogDialog.getStepForm();
+      await stepForm.setStepForm({
+        description: 'My step description',
+        condition: 'test == true',
+        messageCondition: '{#message.headers["content-type"] == "application/json"}',
+        async waitForPolicyFormCompletionCb() {
+          // "Policy to test UI" have required configuration fields. We need to fill them to be able to add the step.
+          const testPolicyConfigurationInput = await loader.getHarness(MatInputHarness.with({ selector: '[id*="test"]' }));
+          await testPolicyConfigurationInput.setValue('🦊');
+        },
+      });
+
+      await policiesCatalogDialog.clickAddPolicyButton();
+
+      expect(component.dialogResult).toStrictEqual({
+        enabled: true,
+        name: 'Policy to test UI',
+        policy: 'test-policy',
+        description: 'My step description',
+        condition: 'test == true',
+        messageCondition: '{#message.headers["content-type"] == "application/json"}',
+        configuration: {
+          test: '🦊',
+        },
+      });
     });
   });
 
