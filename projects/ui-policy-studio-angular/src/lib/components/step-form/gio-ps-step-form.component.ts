@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
-import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { catchError, map, takeUntil } from 'rxjs/operators';
 import { Observable, of, Subject } from 'rxjs';
 import {
@@ -78,6 +78,7 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
   public context?: GioJsonSchemaContext;
 
   private unsubscribe$ = new Subject<void>();
+  public isMessage = false;
   constructor(private readonly policyStudioService: GioPolicyStudioService) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -109,6 +110,7 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
       this.context = {
         executionPhase: this.executionPhase,
       };
+      this.isMessage = this.executionPhase === 'MESSAGE_REQUEST' || this.executionPhase === 'MESSAGE_RESPONSE';
     }
   }
 
@@ -125,6 +127,7 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
     this.stepForm = new UntypedFormGroup({
       description: new UntypedFormControl({ value: this.step?.description, disabled: this.readOnly }),
       condition: new UntypedFormControl({ value: this.step?.condition, disabled: this.readOnly }),
+      messageCondition: new FormControl<string | undefined>({ value: this.step?.messageCondition, disabled: this.readOnly }),
       configuration: new UntypedFormControl({ value: this.step?.configuration, disabled: this.readOnly }),
     });
 
@@ -159,6 +162,7 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
       ...this.step,
       description: this.stepForm?.get('description')?.value,
       condition: this.stepForm?.get('condition')?.value ?? undefined,
+      messageCondition: this.stepForm?.get('messageCondition')?.value ?? undefined,
       configuration,
     });
   }

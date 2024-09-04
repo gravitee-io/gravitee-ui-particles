@@ -20,6 +20,7 @@ import { MatInputHarness } from '@angular/material/input/testing';
 export type StepForm = {
   description?: string;
   condition?: string;
+  messageCondition?: string;
   // Callback to allow to fill the fields of the jsonSchemaForm specific to each policy, if necessary. Useful if some are required.
   waitForPolicyFormCompletionCb?: (locator: LocatorFactory) => Promise<void>;
   // Callback to allow to fill init http request fields. Useful for httpTestingController.expectOne() onn `/schema` & ``/documentation` requests.
@@ -44,6 +45,10 @@ export class GioPolicyStudioStepFormHarness extends ComponentHarness {
     if (stepForm.condition) {
       const conditionInput = await this.getConditionInput();
       await conditionInput.setValue(stepForm.condition);
+    }
+    if (stepForm.messageCondition) {
+      const messageConditionInput = await this.locatorFor(MatInputHarness.with({ selector: '[formControlName="messageCondition"]' }))();
+      await messageConditionInput.setValue(stepForm.messageCondition);
     }
 
     if (stepForm.waitForPolicyFormCompletionCb) {

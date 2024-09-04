@@ -33,6 +33,14 @@
         <mat-hint>The condition to execute this policy. Supports Expression Language.</mat-hint>
       </mat-form-field>
 
+      @if (isMessage) {
+        <mat-form-field>
+          <mat-label>Message trigger condition</mat-label>
+          <input matInput formControlName="messageCondition" />
+          <mat-hint>The condition to execute this policy on message. Supports Expression Language.</mat-hint>
+        </mat-form-field>
+      }
+
       <gio-form-json-schema
         *ngIf="policySchema"
         [jsonSchema]="$any(policySchema)"
