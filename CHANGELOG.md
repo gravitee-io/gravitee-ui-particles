@@ -1,3 +1,10 @@
+## [13.1.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.1.2...v13.1.3) (2024-09-09)
+
+
+### Bug Fixes
+
+* ps - display ALL if httpSelector.methods is undefined ([dddaf0e](https://github.com/gravitee-io/gravitee-ui-particles/commit/dddaf0e33938c60e90f35f44db98fa3bc399e0c8))
+
 ## [13.1.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.1.1...v13.1.2) (2024-09-04)
 
 
