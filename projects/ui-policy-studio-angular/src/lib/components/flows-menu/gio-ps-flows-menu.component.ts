@@ -132,7 +132,7 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
             if (httpSelector) {
               // Keep only 2 first http methods and add +X badge if there are more
               const httpMethodsToKeep = httpSelector.methods?.slice(0, 2);
-              const httpMethodsLength = httpSelector.methods?.length;
+              const httpMethodsLength = httpSelector.methods?.length ?? 0;
               httpMethodsToKeep &&
                 badges.push(...httpMethodsToKeep.map(method => ({ label: method, class: `gio-method-badge-${method.toLowerCase()}` })));
               if (httpMethodsLength && httpMethodsLength > 2) {
