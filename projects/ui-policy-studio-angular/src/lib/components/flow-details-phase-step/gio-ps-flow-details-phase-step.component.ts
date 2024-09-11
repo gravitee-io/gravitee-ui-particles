@@ -65,7 +65,7 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
     if (!this.genericPolicy || !isSharedPolicyGroupPolicy(this.genericPolicy) || isEmpty(this.genericPolicy.prerequisiteMessage)) {
       return;
     }
-    return this.genericPolicy.description;
+    return this.genericPolicy.prerequisiteMessage;
   }
 
   constructor(private readonly matDialog: MatDialog) {}
