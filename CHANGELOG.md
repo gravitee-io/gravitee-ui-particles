@@ -1,3 +1,10 @@
+## [13.1.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.1.3...v13.1.4) (2024-09-12)
+
+
+### Bug Fixes
+
+* ps - simple UI improvement for SPG ([d854723](https://github.com/gravitee-io/gravitee-ui-particles/commit/d854723212cd0287984f1ffd6a20264242641197))
+
 ## [13.1.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.1.2...v13.1.3) (2024-09-09)
 
 
