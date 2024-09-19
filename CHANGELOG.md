@@ -1,3 +1,10 @@
+## [13.1.5](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.1.4...v13.1.5) (2024-09-19)
+
+
+### Bug Fixes
+
+* when the menu is invisible, there's no need to give it a height ([efeef58](https://github.com/gravitee-io/gravitee-ui-particles/commit/efeef58b7efbfa546e6682f7f6ebf248b6c5d065))
+
 ## [13.1.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.1.3...v13.1.4) (2024-09-12)
 
 
