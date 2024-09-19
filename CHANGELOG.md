@@ -1,3 +1,10 @@
+## [13.1.6](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.1.5...v13.1.6) (2024-09-19)
+
+
+### Bug Fixes
+
+* error ExpressionChangedAfterItHasBeenCheckedError on console ([13d2b63](https://github.com/gravitee-io/gravitee-ui-particles/commit/13d2b6339856dc161c23e92102d943a176bfa236))
+
 ## [13.1.5](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.1.4...v13.1.5) (2024-09-19)
 
 
