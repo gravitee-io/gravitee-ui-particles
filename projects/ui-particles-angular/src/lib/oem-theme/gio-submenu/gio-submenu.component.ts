@@ -69,6 +69,7 @@ export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
         this.loaded = true;
         this.gioSubmenu.nativeElement.style.height = 'auto';
         this.gioSubmenu.nativeElement.style.maxHeight = `0vh`;
+        this.changeDetectorRef.detectChanges();
       }),
       // On hover root menu item, open the submenu with top position
       switchMap(() => this.gioMenuService.overlayObservable),
