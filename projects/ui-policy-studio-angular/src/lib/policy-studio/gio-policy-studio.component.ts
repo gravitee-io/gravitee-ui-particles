@@ -213,8 +213,11 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
   }
 
   public onFlowsGroupsChange(flowsGroups: FlowGroupVM[]): void {
-    this.flowsGroups = flowsGroups;
+    this.flowsGroups = cloneDeep(flowsGroups);
     this.disableSaveButton = false;
+    if (this.selectedFlow) {
+      this.onSelectFlow(this.selectedFlow._id);
+    }
   }
 
   public onSelectedFlowChange(flow: FlowVM): void {
@@ -224,6 +227,10 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
     }));
     this.selectedFlow = flow;
     this.disableSaveButton = false;
+  }
+
+  public onSelectFlow(flowId: string): void {
+    this.selectedFlow = flatten(this.flowsGroups.map(flowGroup => flowGroup.flows)).find(f => f._id === flowId);
   }
 
   public onDeleteSelectedFlow(flow: FlowVM): void {

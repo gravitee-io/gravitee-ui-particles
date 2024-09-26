@@ -99,12 +99,17 @@ $typography: map.get(gio.$mat-theme, typography);
       display: flex;
       overflow: hidden;
       height: 68px;
-      flex-direction: column;
-      justify-content: center;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
       padding: 7px; // compensate the border. Total: 8px
       border: 1px solid mat.m2-get-color-from-palette(gio.$mat-dove-palette, darker20);
       border-radius: 8px;
-      gap: 8px;
+
+      &.disabled {
+        border: 1px solid mat.m2-get-color-from-palette(gio.$mat-dove-palette, darker20, 0);
+        background-color: mat.m2-get-color-from-palette(gio.$mat-dove-palette, default, 0.8);
+      }
 
       &:hover,
       &.selected {
@@ -113,43 +118,51 @@ $typography: map.get(gio.$mat-theme, typography);
         cursor: pointer;
       }
 
-      &__name {
-        overflow: hidden;
-        padding-left: 4px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      &__infos {
+      &__left {
         display: flex;
-        align-items: center;
+        overflow: hidden;
+        flex: 1 1 auto;
+        flex-direction: column;
+        gap: 8px;
 
-        &__badges {
-          flex: 0 0 auto;
-
-          &__badge {
-            width: auto;
-          }
-        }
-
-        &__pathOrChannelLabel {
+        &__name {
           overflow: hidden;
-          flex: 1 1 auto;
-          direction: rtl;
-          text-align: left;
+          padding-left: 4px;
           text-overflow: ellipsis;
           white-space: nowrap;
-
-          span {
-            direction: ltr;
-
-            // Hack to have ellipsis on the left with special characters like /
-            unicode-bidi: bidi-override;
-          }
         }
 
-        &__conditionBadge {
-          flex: 0 0 auto;
+        &__infos {
+          display: flex;
+          align-items: center;
+
+          &__badges {
+            flex: 0 0 auto;
+
+            &__badge {
+              width: auto;
+            }
+          }
+
+          &__pathOrChannelLabel {
+            overflow: hidden;
+            flex: 1 1 auto;
+            direction: rtl;
+            text-align: left;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            span {
+              direction: ltr;
+
+              // Hack to have ellipsis on the left with special characters like /
+              unicode-bidi: bidi-override;
+            }
+          }
+
+          &__conditionBadge {
+            flex: 0 0 auto;
+          }
         }
       }
     }

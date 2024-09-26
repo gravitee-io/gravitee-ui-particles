@@ -45,31 +45,56 @@
       *ngFor="let flow of flowsGroup.flows"
       class="list__flowsGroup__flow"
       [class.selected]="flow.selected"
+      [class.disabled]="!flow.enabled"
       (click)="selectFlow(flowsGroup._id, flow._id)"
       (mouseout)="flow.mouseOver = false"
       (mouseover)="flow.mouseOver = true"
     >
-      <div *ngIf="flow.name" class="list__flowsGroup__flow__name" [attr.title]="flow.name">
-        {{ flow.name }}
-      </div>
-      <div class="list__flowsGroup__flow__infos">
-        <div class="list__flowsGroup__flow__infos__badges">
-          <span *ngFor="let badge of flow.badges" class="list__flowsGroup__flow__infos__badges__badge" [ngClass]="badge.class">{{
-            badge.label
-          }}</span>
+      <div class="list__flowsGroup__flow__left">
+        <div *ngIf="flow.name" class="list__flowsGroup__flow__left__name" [attr.title]="flow.name">
+          {{ flow.name }}
         </div>
-        <div class="list__flowsGroup__flow__infos__pathOrChannelLabel">
-          <span *ngIf="flow.pathOrChannelLabel; else emptyPathOrChannelLabel" [attr.title]="flow.pathOrChannelLabel">{{
-            flow.pathOrChannelLabel
-          }}</span>
-          <ng-template #emptyPathOrChannelLabel>
-            <em>Empty</em>
-          </ng-template>
-        </div>
+        <div class="list__flowsGroup__flow__left__infos">
+          <div class="list__flowsGroup__flow__left__infos__badges">
+            <span *ngFor="let badge of flow.badges" class="list__flowsGroup__flow__left__infos__badges__badge" [ngClass]="badge.class">{{
+              badge.label
+            }}</span>
+          </div>
+          <div class="list__flowsGroup__flow__left__infos__pathOrChannelLabel">
+            <span *ngIf="flow.pathOrChannelLabel; else emptyPathOrChannelLabel" [attr.title]="flow.pathOrChannelLabel">{{
+              flow.pathOrChannelLabel
+            }}</span>
+            <ng-template #emptyPathOrChannelLabel>
+              <em>Empty</em>
+            </ng-template>
+          </div>
 
-        <span *ngIf="flow.hasCondition" class="list__flowsGroup__flow__infos__conditionBadge gio-badge-neutral" matTooltip="Conditioned"
-          ><mat-icon svgIcon="gio:if"></mat-icon
-        ></span>
+          <span
+            *ngIf="flow.hasCondition"
+            class="list__flowsGroup__flow__left__infos__conditionBadge gio-badge-neutral"
+            matTooltip="Conditioned"
+            ><mat-icon svgIcon="gio:if"></mat-icon
+          ></span>
+        </div>
+      </div>
+      <div class="list__flowsGroup__flow__right">
+        <button
+          class="list__flowsGroup__flow__right__name__menu"
+          mat-button
+          [disabled]="readOnly"
+          [matMenuTriggerFor]="menu"
+          (click)="$event.stopPropagation()"
+        >
+          <mat-icon svgIcon="gio:more-vertical"></mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button [disabled]="readOnly" mat-menu-item (click)="onDisable(flowsGroup._id, flow._id)">
+            <mat-icon [svgIcon]="flow.enabled ? 'gio:prohibition' : 'gio:check-circled-outline'"></mat-icon>
+            <span>{{ flow.enabled ? 'Disable' : 'Enable' }}</span>
+          </button>
+          <button mat-menu-item><mat-icon svgIcon="gio:edit-pencil"></mat-icon> Edite</button>
+          <button mat-menu-item><mat-icon svgIcon="gio:trash"></mat-icon> Delete</button>
+        </mat-menu>
       </div>
     </div>
   </div>

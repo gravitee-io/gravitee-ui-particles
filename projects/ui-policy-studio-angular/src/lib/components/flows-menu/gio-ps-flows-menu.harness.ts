@@ -52,8 +52,8 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
         const flowsInfos = parallel(() =>
           flowsDiv.map(async flowDiv => {
             return {
-              name: await flowDiv.getText({ childSelector: '.list__flowsGroup__flow__name' }),
-              infos: await flowDiv.getText({ childSelector: '.list__flowsGroup__flow__infos' }),
+              name: await flowDiv.getText({ childSelector: '.list__flowsGroup__flow__left__name' }),
+              infos: await flowDiv.getText({ childSelector: '.list__flowsGroup__flow__left__infos' }),
               isSelected: await flowDiv.host().then(host => host.hasClass('selected')),
               hasCondition: !!(await flowDiv.childLocatorFor(MatIconHarness.with({ name: 'gio:if' }))),
             };
@@ -71,7 +71,7 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
   public async getSelectedFlow(): Promise<{ name: string | null } | null> {
     const selectedFlow = await this.locateSelectedFlow();
 
-    return selectedFlow ? { name: await selectedFlow.getText({ childSelector: '.list__flowsGroup__flow__name' }) } : null;
+    return selectedFlow ? { name: await selectedFlow.getText({ childSelector: '.list__flowsGroup__flow__left__name' }) } : null;
   }
 
   /**

@@ -109,7 +109,7 @@ export class GioPolicyStudioFlowMessageFormDialogComponent {
       // Add changes
       name: this.flowFormGroup?.get('name')?.value,
       selectors: conditionSelectorToSave ? [channelSelectorToSave, conditionSelectorToSave] : [channelSelectorToSave],
-      enabled: true,
+      enabled: this.existingFlow ? this.existingFlow.enabled : true,
     };
 
     this.dialogRef.close({

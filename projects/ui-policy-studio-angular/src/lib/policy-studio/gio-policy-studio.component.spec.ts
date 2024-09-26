@@ -1129,6 +1129,54 @@ describe('GioPolicyStudioComponent', () => {
         tick(5000);
         expect(await policyStudioHarness.getSaveButtonState()).toEqual('VISIBLE');
       }));
+
+      it('should disable flow', async () => {
+        component.commonFlows = [
+          fakeChannelFlow({
+            name: 'name',
+            enabled: true,
+          }),
+        ];
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        // Disable flow
+        await policyStudioHarness.enableDisableFlow('name');
+
+        let saveOutput: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutput = value));
+        await policyStudioHarness.save();
+
+        expect(saveOutput?.commonFlows).toBeDefined();
+        const firstSaveFlows = saveOutput?.commonFlows?.[0];
+        expect(firstSaveFlows).toBeDefined();
+        expect(firstSaveFlows?.enabled).toEqual(false);
+      });
+
+      it('should enable flow', async () => {
+        component.commonFlows = [
+          fakeChannelFlow({
+            name: 'name',
+            enabled: false,
+          }),
+        ];
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        // Enable flow
+        await policyStudioHarness.enableDisableFlow('name');
+
+        let saveOutput: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutput = value));
+        await policyStudioHarness.save();
+
+        expect(saveOutput?.commonFlows).toBeDefined();
+        const firstSaveFlows = saveOutput?.commonFlows?.[0];
+        expect(firstSaveFlows).toBeDefined();
+        expect(firstSaveFlows?.enabled).toEqual(true);
+      });
     });
   });
 
@@ -1596,6 +1644,30 @@ describe('GioPolicyStudioComponent', () => {
           'Policy not foundThis step is linked to a Policy that no longer exists.\n' +
             'Note: The Gateway will throw an error on deployment.',
         );
+      });
+
+      it('should disable flow', async () => {
+        component.commonFlows = [
+          fakeChannelFlow({
+            name: 'name',
+            enabled: true,
+          }),
+        ];
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        // Disable flow
+        await policyStudioHarness.enableDisableFlow('name');
+
+        let saveOutput: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutput = value));
+        await policyStudioHarness.save();
+
+        expect(saveOutput?.commonFlows).toBeDefined();
+        const firstSaveFlows = saveOutput?.commonFlows?.[0];
+        expect(firstSaveFlows).toBeDefined();
+        expect(firstSaveFlows?.enabled).toEqual(false);
       });
     });
   });

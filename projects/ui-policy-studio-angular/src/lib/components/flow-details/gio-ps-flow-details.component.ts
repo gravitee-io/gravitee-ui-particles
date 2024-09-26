@@ -21,6 +21,7 @@ import { GIO_DIALOG_WIDTH, GioIconsModule, GioLoaderModule } from '@gravitee/ui-
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { FlowVM } from '../../policy-studio/gio-policy-studio.model';
 import {
@@ -48,6 +49,7 @@ import { GioPolicyStudioDetailsInfoBarComponent } from '../flow-details-info-bar
     GioFilterConnectorsByModePipe,
     GioLoaderModule,
     GioPolicyStudioDetailsInfoBarComponent,
+    MatTooltipModule,
   ],
   selector: 'gio-ps-flow-details',
   templateUrl: './gio-ps-flow-details.component.html',
@@ -152,7 +154,6 @@ export class GioPolicyStudioDetailsComponent implements OnChanges {
           if (!createdOrEdited) {
             return;
           }
-
           this.flowChange.emit(createdOrEdited);
         }),
       )
@@ -161,6 +162,18 @@ export class GioPolicyStudioDetailsComponent implements OnChanges {
 
   public onDeleteFlow(): void {
     this.deleteFlow.emit(this.flow);
+  }
+
+  public onEnableDisableFlow(): void {
+    if (!this.flow) {
+      return;
+    }
+
+    this.flowChange.emit({
+      ...this.flow,
+      enabled: !this.flow.enabled,
+      _hasChanged: true,
+    });
   }
 
   public onStepsChange(flowPhase: 'request' | 'response' | 'publish' | 'subscribe', steps: Step[]): void {
