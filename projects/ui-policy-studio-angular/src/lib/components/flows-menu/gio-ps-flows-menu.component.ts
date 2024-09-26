@@ -22,6 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
+import { CdkDragDrop, DragDropModule, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 import {
   GioPolicyStudioFlowMessageFormDialogComponent,
@@ -56,7 +57,7 @@ interface FlowMenuVM extends FlowVM {
 
 @Component({
   standalone: true,
-  imports: [GioIconsModule, MatTooltipModule, MatButtonModule, CommonModule, GioLoaderModule, MatMenuModule],
+  imports: [GioIconsModule, MatTooltipModule, MatButtonModule, CommonModule, GioLoaderModule, MatMenuModule, DragDropModule],
   selector: 'gio-ps-flows-menu',
   templateUrl: './gio-ps-flows-menu.component.html',
   styleUrls: ['./gio-ps-flows-menu.component.scss'],
@@ -270,5 +271,27 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
     }
     flowToEdit.enabled = !flowToEdit.enabled;
     this.flowsGroupsChange.emit(this.flowsGroups);
+  }
+
+  public onDrop(event: CdkDragDrop<FlowGroupMenuVM>, flowGroupId: string): void {
+    if (event.previousContainer === event.container) {
+      // Move inside the same group
+      const flowsGroupToEdit = this.flowsGroups.find(fg => fg._id === event.container.data._id);
+      if (!flowsGroupToEdit) {
+        throw new Error(`Flow group ${flowGroupId} not found`);
+      }
+      moveItemInArray(flowsGroupToEdit.flows, event.previousIndex, event.currentIndex);
+      this.flowsGroupsChange.emit(this.flowsGroups);
+    } else {
+      // Move from a group to another
+      const previousFlowsGroupToEdit = this.flowsGroups.find(fg => fg._id === event.previousContainer.data._id);
+
+      const flowsGroupToEdit = this.flowsGroups.find(fg => fg._id === event.container.data._id);
+      if (!previousFlowsGroupToEdit || !flowsGroupToEdit) {
+        throw new Error(`Flow group ${flowGroupId} not found`);
+      }
+      transferArrayItem(previousFlowsGroupToEdit.flows, flowsGroupToEdit.flows, event.previousIndex, event.currentIndex);
+      this.flowsGroupsChange.emit(this.flowsGroups);
+    }
   }
 }

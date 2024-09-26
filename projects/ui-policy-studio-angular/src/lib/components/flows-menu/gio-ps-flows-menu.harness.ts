@@ -24,11 +24,11 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
 
   private locateFlowsGroups = this.locatorForAll(DivHarness.with({ selector: '.list__flowsGroup' }));
   private locateFlowByText = (text: string | RegExp) =>
-    this.locatorForOptional(DivHarness.with({ selector: '.list__flowsGroup__flow', text }));
+    this.locatorForOptional(DivHarness.with({ selector: '.list__flowsGroup__flows__flow', text }));
 
   public locateGroupByText = (text: string | RegExp) => this.locatorForOptional(DivHarness.with({ selector: '.list__flowsGroup', text }));
 
-  private locateSelectedFlow = this.locatorForOptional(DivHarness.with({ selector: '.list__flowsGroup__flow.selected' }));
+  private locateSelectedFlow = this.locatorForOptional(DivHarness.with({ selector: '.list__flowsGroup__flows__flow.selected' }));
 
   public async getAllFlowsGroups(): Promise<
     {
@@ -47,13 +47,13 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
       flowsGroups.map(async flowsGroup => {
         const flowsGroupName = await flowsGroup.getText({ childSelector: '.list__flowsGroup__header__label' });
 
-        const flowsDiv = await flowsGroup.childLocatorForAll(DivHarness.with({ selector: '.list__flowsGroup__flow' }))();
+        const flowsDiv = await flowsGroup.childLocatorForAll(DivHarness.with({ selector: '.list__flowsGroup__flows__flow' }))();
 
         const flowsInfos = parallel(() =>
           flowsDiv.map(async flowDiv => {
             return {
-              name: await flowDiv.getText({ childSelector: '.list__flowsGroup__flow__left__name' }),
-              infos: await flowDiv.getText({ childSelector: '.list__flowsGroup__flow__left__infos' }),
+              name: await flowDiv.getText({ childSelector: '.list__flowsGroup__flows__flow__left__name' }),
+              infos: await flowDiv.getText({ childSelector: '.list__flowsGroup__flows__flow__left__infos' }),
               isSelected: await flowDiv.host().then(host => host.hasClass('selected')),
               hasCondition: !!(await flowDiv.childLocatorFor(MatIconHarness.with({ name: 'gio:if' }))),
             };
@@ -71,7 +71,7 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
   public async getSelectedFlow(): Promise<{ name: string | null } | null> {
     const selectedFlow = await this.locateSelectedFlow();
 
-    return selectedFlow ? { name: await selectedFlow.getText({ childSelector: '.list__flowsGroup__flow__left__name' }) } : null;
+    return selectedFlow ? { name: await selectedFlow.getText({ childSelector: '.list__flowsGroup__flows__flow__left__name' }) } : null;
   }
 
   /**
