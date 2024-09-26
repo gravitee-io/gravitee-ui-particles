@@ -16,7 +16,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { tap } from 'rxjs/operators';
-import { cloneDeep, isEmpty } from 'lodash';
+import { cloneDeep, flatten, isEmpty, uniqueId } from 'lodash';
 import { GIO_DIALOG_WIDTH, GioIconsModule, GioLoaderModule } from '@gravitee/ui-particles-angular';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
@@ -84,6 +84,9 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
   @Input()
   public entrypoints: ConnectorInfo[] = [];
 
+  @Input()
+  public entrypointsInfo: ConnectorInfo[] = [];
+
   @Output()
   public selectedFlowIdChange = new EventEmitter<string>();
 
@@ -92,6 +95,9 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
 
   @Output()
   public flowExecutionChange = new EventEmitter<FlowExecution>();
+
+  @Output()
+  public deleteFlow = new EventEmitter<FlowVM>();
 
   public flowGroupMenuItems: FlowGroupMenuVM[] = [];
 
@@ -260,12 +266,8 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
       .subscribe();
   }
 
-  public onDisable(flowGroupId: string, flowId: string): void {
-    const flowsGroupToEdit = this.flowsGroups.find(fg => fg._id === flowGroupId);
-    if (!flowsGroupToEdit) {
-      throw new Error(`Flow group ${flowGroupId} not found`);
-    }
-    const flowToEdit = flowsGroupToEdit.flows.find(f => f._id === flowId);
+  public onDisableFlow(flowId: string): void {
+    const flowToEdit = flatten(this.flowsGroups.map(flowGroup => flowGroup.flows)).find(f => f._id === flowId);
     if (!flowToEdit) {
       throw new Error(`Flow ${flowId} not found`);
     }
@@ -273,25 +275,97 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
     this.flowsGroupsChange.emit(this.flowsGroups);
   }
 
-  public onDrop(event: CdkDragDrop<FlowGroupMenuVM>, flowGroupId: string): void {
+  public onDropFlow(event: CdkDragDrop<FlowGroupMenuVM>): void {
     if (event.previousContainer === event.container) {
       // Move inside the same group
       const flowsGroupToEdit = this.flowsGroups.find(fg => fg._id === event.container.data._id);
       if (!flowsGroupToEdit) {
-        throw new Error(`Flow group ${flowGroupId} not found`);
+        throw new Error(`Flow group ${event.container.data._id} not found`);
       }
       moveItemInArray(flowsGroupToEdit.flows, event.previousIndex, event.currentIndex);
       this.flowsGroupsChange.emit(this.flowsGroups);
     } else {
       // Move from a group to another
       const previousFlowsGroupToEdit = this.flowsGroups.find(fg => fg._id === event.previousContainer.data._id);
-
       const flowsGroupToEdit = this.flowsGroups.find(fg => fg._id === event.container.data._id);
       if (!previousFlowsGroupToEdit || !flowsGroupToEdit) {
-        throw new Error(`Flow group ${flowGroupId} not found`);
+        throw new Error(`Flow group ${event.previousContainer.data._id} or ${event.container.data._id} not found`);
       }
       transferArrayItem(previousFlowsGroupToEdit.flows, flowsGroupToEdit.flows, event.previousIndex, event.currentIndex);
       this.flowsGroupsChange.emit(this.flowsGroups);
     }
+  }
+
+  public onEditFlow(flowId: string): void {
+    const flowToEdit = flatten(this.flowsGroups.map(flowGroup => flowGroup.flows)).find(f => f._id === flowId);
+
+    const dialogResult =
+      this.apiType === 'MESSAGE'
+        ? this.matDialog
+            .open<
+              GioPolicyStudioFlowMessageFormDialogComponent,
+              GioPolicyStudioFlowMessageFormDialogData,
+              GioPolicyStudioFlowFormDialogResult
+            >(GioPolicyStudioFlowMessageFormDialogComponent, {
+              data: {
+                flow: flowToEdit,
+                entrypoints: this.entrypointsInfo ?? [],
+              },
+              role: 'alertdialog',
+              id: 'gioPsFlowMessageFormDialog',
+              width: GIO_DIALOG_WIDTH.MEDIUM,
+            })
+            .afterClosed()
+        : this.matDialog
+            .open<GioPolicyStudioFlowProxyFormDialogComponent, GioPolicyStudioFlowProxyFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+              GioPolicyStudioFlowProxyFormDialogComponent,
+              {
+                data: {
+                  flow: flowToEdit,
+                },
+                role: 'alertdialog',
+                id: 'gioPsFlowProxyFormDialog',
+                width: GIO_DIALOG_WIDTH.MEDIUM,
+              },
+            )
+            .afterClosed();
+
+    dialogResult
+      .pipe(
+        tap(editedFlow => {
+          if (!editedFlow) {
+            return;
+          }
+          this.flowsGroups = this.flowsGroups.map(fg => ({
+            ...fg,
+            flows: fg.flows.map(f => (f._id === editedFlow._id ? editedFlow : f)),
+          }));
+          this.flowsGroupsChange.emit(this.flowsGroups);
+        }),
+      )
+      .subscribe();
+  }
+
+  public onDeleteFlow(flowId: string): void {
+    const flowToEdit = flatten(this.flowsGroups.map(flowGroup => flowGroup.flows)).find(f => f._id === flowId);
+    this.deleteFlow.emit(flowToEdit);
+  }
+
+  public onDuplicateFlow(flowGroupId: string, flowId: string): void {
+    const flowsGroupToEdit = this.flowsGroups.find(fg => fg._id === flowGroupId);
+    if (!flowsGroupToEdit) {
+      throw new Error(`Flow group ${flowGroupId} not found`);
+    }
+    const flowToDuplicate = flowsGroupToEdit.flows.find(f => f._id === flowId);
+    if (!flowToDuplicate) {
+      throw new Error(`Flow ${flowId} not found`);
+    }
+    const duplicatedFlow = cloneDeep(flowToDuplicate);
+    duplicatedFlow._id = uniqueId('flow_');
+    duplicatedFlow.name = `${duplicatedFlow.name} - Copy`;
+    const index = flowsGroupToEdit.flows.indexOf(flowToDuplicate);
+    flowsGroupToEdit.flows.splice(index + 1, 0, duplicatedFlow);
+    this.flowsGroupsChange.emit(this.flowsGroups);
+    this.selectedFlowIdChange.emit(duplicatedFlow._id);
   }
 }
