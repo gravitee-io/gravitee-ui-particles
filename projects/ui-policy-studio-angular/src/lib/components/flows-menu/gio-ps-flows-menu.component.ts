@@ -21,6 +21,7 @@ import { GIO_DIALOG_WIDTH, GioIconsModule, GioLoaderModule } from '@gravitee/ui-
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { MatMenuModule } from '@angular/material/menu';
 
 import {
   GioPolicyStudioFlowMessageFormDialogComponent,
@@ -55,7 +56,7 @@ interface FlowMenuVM extends FlowVM {
 
 @Component({
   standalone: true,
-  imports: [GioIconsModule, MatTooltipModule, MatButtonModule, CommonModule, GioLoaderModule],
+  imports: [GioIconsModule, MatTooltipModule, MatButtonModule, CommonModule, GioLoaderModule, MatMenuModule],
   selector: 'gio-ps-flows-menu',
   templateUrl: './gio-ps-flows-menu.component.html',
   styleUrls: ['./gio-ps-flows-menu.component.scss'],
@@ -77,13 +78,13 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
   public flowsGroups: FlowGroupVM[] = [];
 
   @Input()
-  public selectedFlow?: FlowVM = undefined;
+  public selectedFlowId?: string = undefined;
 
   @Input()
   public entrypoints: ConnectorInfo[] = [];
 
   @Output()
-  public selectedFlowChange = new EventEmitter<FlowVM>();
+  public selectedFlowIdChange = new EventEmitter<string>();
 
   @Output()
   public flowsGroupsChange = new EventEmitter<FlowGroupVM[]>();
@@ -96,7 +97,7 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
   constructor(private readonly matDialog: MatDialog) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes.flowsGroups || changes.selectedFlow) {
+    if (changes.flowsGroups || changes.selectedFlowId) {
       this.flowGroupMenuItems = cloneDeep(this.flowsGroups).map(flowGroup => {
         return {
           ...flowGroup,
@@ -158,7 +159,7 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
 
             return {
               ...flow,
-              selected: this.selectedFlow?._id === flow._id,
+              selected: this.selectedFlowId === flow._id,
               mouseOver: false,
               badges,
               pathOrChannelLabel,
@@ -173,7 +174,7 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
   public selectFlow(groupId: string, flowId: string): void {
     const flow = this.flowsGroups.find(fg => fg._id === groupId)?.flows.find(f => f._id === flowId);
     if (flow) {
-      this.selectedFlowChange.emit(flow);
+      this.selectedFlowIdChange.emit(flow._id);
     }
   }
 
@@ -224,7 +225,7 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
           flowsGroupToEdit.flows.push(createdOrEdited);
 
           this.flowsGroupsChange.emit(editedFlowsGroups);
-          this.selectedFlowChange.emit(createdOrEdited);
+          this.selectedFlowIdChange.emit(createdOrEdited._id);
         }),
       )
       .subscribe();
@@ -256,5 +257,18 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
         }),
       )
       .subscribe();
+  }
+
+  public onDisable(flowGroupId: string, flowId: string): void {
+    const flowsGroupToEdit = this.flowsGroups.find(fg => fg._id === flowGroupId);
+    if (!flowsGroupToEdit) {
+      throw new Error(`Flow group ${flowGroupId} not found`);
+    }
+    const flowToEdit = flowsGroupToEdit.flows.find(f => f._id === flowId);
+    if (!flowToEdit) {
+      throw new Error(`Flow ${flowId} not found`);
+    }
+    flowToEdit.enabled = !flowToEdit.enabled;
+    this.flowsGroupsChange.emit(this.flowsGroups);
   }
 }

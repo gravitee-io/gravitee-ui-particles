@@ -27,6 +27,11 @@ export class GioPolicyStudioDetailsHarness extends ComponentHarness {
     return hostText.includes('No flows yet');
   }
 
+  public async isDisabledFlow(): Promise<boolean> {
+    const headerLabel = await this.locatorFor('.header__label')();
+    return await headerLabel.text().then(text => text.includes('Disabled'));
+  }
+
   public async getFlowInfos(): Promise<Record<string, (string | null)[]>> {
     return await (await this.locatorFor(GioPolicyStudioDetailsInfoBarHarness)()).getInfos();
   }
@@ -52,5 +57,10 @@ export class GioPolicyStudioDetailsHarness extends ComponentHarness {
   public async clickDeleteFlowBtn(): Promise<void> {
     const deleteFlowBtn = await this.locatorFor(MatButtonHarness.with({ selector: '.header__configBtn__delete' }))();
     await deleteFlowBtn.click();
+  }
+
+  public async clickEnableDisableFlowBtn(): Promise<void> {
+    const enableDisableFlowBtn = await this.locatorFor(MatButtonHarness.with({ selector: '.header__configBtn__enableDisable' }))();
+    await enableDisableFlowBtn.click();
   }
 }

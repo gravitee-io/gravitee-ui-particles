@@ -109,7 +109,7 @@ export class GioPolicyStudioFlowProxyFormDialogComponent {
       // Add changes
       name: this.flowFormGroup?.get('name')?.value,
       selectors: conditionSelectorToSave ? [httpSelectorToSave, conditionSelectorToSave] : [httpSelectorToSave],
-      enabled: true,
+      enabled: this.existingFlow ? this.existingFlow.enabled : true,
     };
 
     this.dialogRef.close({

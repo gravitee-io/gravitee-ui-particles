@@ -89,6 +89,14 @@ export class GioPolicyStudioHarness extends ComponentHarness {
   }
 
   /**
+   * Enable or disable a flow
+   */
+  public async enableDisableFlow(flowName: string): Promise<void> {
+    (await this.menuHarness()).selectFlow(new RegExp(flowName, 'i'));
+    await (await this.detailsHarness()).clickEnableDisableFlowBtn();
+  }
+
+  /**
    * Select a flow in the menu
    *
    * @param flowName Flow name to select

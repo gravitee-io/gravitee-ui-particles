@@ -55,7 +55,8 @@
       [entrypoints]="entrypointsInfo"
       (flowsGroupsChange)="onFlowsGroupsChange($event)"
       (flowExecutionChange)="onFlowExecutionChange($event)"
-      [(selectedFlow)]="selectedFlow"
+      [selectedFlowId]="selectedFlow?._id"
+      (selectedFlowIdChange)="onSelectFlow($event)"
     ></gio-ps-flows-menu>
   </div>
 

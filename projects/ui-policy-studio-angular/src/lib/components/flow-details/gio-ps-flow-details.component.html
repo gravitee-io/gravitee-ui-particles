@@ -21,12 +21,24 @@
 <ng-template #flowDetailsTpl>
   <ng-container *ngIf="flow; else emptyFlows">
     <div class="header">
-      <div class="header__label">Flow details</div>
+      <div class="header__label">
+        Flow details
+        <div *ngIf="!flow.enabled" class="gio-badge gio-badge-neutral">Disabled</div>
+      </div>
       <div class="header__configBtn">
-        <button [disabled]="readOnly" class="header__configBtn__edit" mat-stroked-button (click)="onEditFlow()">
+        <button
+          [disabled]="readOnly"
+          class="header__configBtn__enableDisable"
+          mat-stroked-button
+          [matTooltip]="flow.enabled ? 'Disable' : 'Enable'"
+          (click)="onEnableDisableFlow()"
+        >
+          <mat-icon [svgIcon]="flow.enabled ? 'gio:prohibition' : 'gio:check-circled-outline'"></mat-icon>
+        </button>
+        <button [disabled]="readOnly" class="header__configBtn__edit" mat-stroked-button (click)="onEditFlow()" matTooltip="Edit">
           <mat-icon svgIcon="gio:edit-pencil"></mat-icon>
         </button>
-        <button [disabled]="readOnly" class="header__configBtn__delete" mat-stroked-button (click)="onDeleteFlow()">
+        <button [disabled]="readOnly" class="header__configBtn__delete" mat-stroked-button (click)="onDeleteFlow()" matTooltip="Delete">
           <mat-icon svgIcon="gio:trash"></mat-icon>
         </button>
       </div>
