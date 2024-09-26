@@ -53,10 +53,12 @@
       [flowExecution]="flowExecution"
       [flowsGroups]="flowsGroups"
       [entrypoints]="entrypointsInfo"
+      [entrypointsInfo]="entrypointsInfo"
       (flowsGroupsChange)="onFlowsGroupsChange($event)"
       (flowExecutionChange)="onFlowExecutionChange($event)"
       [selectedFlowId]="selectedFlow?._id"
       (selectedFlowIdChange)="onSelectFlow($event)"
+      (deleteFlow)="onDeleteSelectedFlow($event)"
     ></gio-ps-flows-menu>
   </div>
 

@@ -33,7 +33,7 @@
     class="list__flowsGroup"
     cdkDropList
     [cdkDropListData]="flowsGroup"
-    (cdkDropListDropped)="onDrop($event)"
+    (cdkDropListDropped)="onDropFlow($event)"
   >
     <div class="list__flowsGroup__header">
       <div class="list__flowsGroup__header__label">
@@ -93,18 +93,21 @@
               class="list__flowsGroup__flows__flow__right__name__menu"
               mat-button
               [disabled]="readOnly"
-              [matMenuTriggerFor]="menu"
+              [matMenuTriggerFor]="flowMenu"
               (click)="$event.stopPropagation()"
             >
               <mat-icon svgIcon="gio:more-vertical"></mat-icon>
             </button>
-            <mat-menu #menu="matMenu">
-              <button [disabled]="readOnly" mat-menu-item (click)="onDisable(flowsGroup._id, flow._id)">
+            <mat-menu #flowMenu="matMenu">
+              <button [disabled]="readOnly" mat-menu-item (click)="onDisableFlow(flow._id)">
                 <mat-icon [svgIcon]="flow.enabled ? 'gio:prohibition' : 'gio:check-circled-outline'"></mat-icon>
                 <span>{{ flow.enabled ? 'Disable' : 'Enable' }}</span>
               </button>
-              <button mat-menu-item><mat-icon svgIcon="gio:edit-pencil"></mat-icon> Edite</button>
-              <button mat-menu-item><mat-icon svgIcon="gio:trash"></mat-icon> Delete</button>
+              <button mat-menu-item (click)="onEditFlow(flow._id)"><mat-icon svgIcon="gio:edit-pencil"></mat-icon> Edite</button>
+              <button mat-menu-item (click)="onDeleteFlow(flow._id)"><mat-icon svgIcon="gio:trash"></mat-icon> Delete</button>
+              <button mat-menu-item (click)="onDuplicateFlow(flowsGroup._id, flow._id)">
+                <mat-icon svgIcon="gio:copy"></mat-icon> Duplicate
+              </button>
             </mat-menu>
           </div>
         </div>
