@@ -1,3 +1,12 @@
+# [13.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.1.6...v13.2.0) (2024-09-27)
+
+
+### Features
+
+* ps - add drag & drop to order flow ([c8070fc](https://github.com/gravitee-io/gravitee-ui-particles/commit/c8070fc8ffc9760770fc0048d99d8f5a303f0326))
+* ps - allow to disable/enable a flow ([0fb21c5](https://github.com/gravitee-io/gravitee-ui-particles/commit/0fb21c515e27a460c9e20ca1944c90a3b7609436))
+* ps - impl more options into flow menu ([8e37a68](https://github.com/gravitee-io/gravitee-ui-particles/commit/8e37a68bbd8c64ba7924fb7358aca32887d301b6))
+
 ## [13.1.6](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.1.5...v13.1.6) (2024-09-19)
 
 
