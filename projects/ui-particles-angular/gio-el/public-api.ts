@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 The Gravitee team (http://gravitee.io)
+ * Copyright (C) 2024 The Gravitee team (http://gravitee.io)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,14 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-module.exports = {
-  preset: 'jest-preset-angular',
-  roots: [__dirname],
-  setupFilesAfterEnv: [__dirname + '/src/setup-jest.ts'],
-  moduleNameMapper: {
-    // 📝 Order is important
-    '@gravitee/ui-particles-angular/testing': __dirname + '/../ui-particles-angular/testing/public-api.ts',
-    '@gravitee/ui-particles-angular/(.*)': __dirname + '/../ui-particles-angular/$1/public-api.ts',
-    '@gravitee/ui-particles-angular': __dirname + '/../ui-particles-angular/src/public-api.ts',
-  },
-};
+export { GioElEditorComponent } from './gio-el-editor/gio-el-editor.component';
+export { GioElEditorHarness } from './gio-el-editor/gio-el-editor.harness';
+
+export * from './models/public-api';
