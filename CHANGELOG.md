@@ -1,3 +1,10 @@
+# [13.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.2.0...v13.3.0) (2024-10-07)
+
+
+### Features
+
+* init new gio-el-editor to build EL with UI ([6ca4fe5](https://github.com/gravitee-io/gravitee-ui-particles/commit/6ca4fe5ac6642b9715b8020b725eb6c853e76143))
+
 # [13.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.1.6...v13.2.0) (2024-09-27)
 
 
