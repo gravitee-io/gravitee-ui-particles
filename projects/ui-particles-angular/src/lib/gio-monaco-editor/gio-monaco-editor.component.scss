@@ -19,6 +19,10 @@
   min-height: 150px;
   pointer-events: auto;
   transition: opacity 0.2s ease-out;
+
+  &.single-line {
+    min-height: 20px;
+  }
 }
 
 :host-context(.hidden) {
