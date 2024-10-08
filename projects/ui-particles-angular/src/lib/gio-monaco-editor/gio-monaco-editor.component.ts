@@ -27,7 +27,7 @@ import {
   Self,
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { isString, uniqueId } from 'lodash';
+import { isEqual, isString, uniqueId } from 'lodash';
 import Monaco, { editor } from 'monaco-editor';
 import { ReplaySubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -215,7 +215,7 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
     const onDidChangeContent = this.textModel?.onDidChangeContent(() => {
       const newValue = this.textModel?.getValue();
       this.ngZone.run(() => {
-        if (!this.readOnly) {
+        if (!this.readOnly && !isEqual(this.value, newValue)) {
           setTimeout(() => {
             this.value = newValue ?? '';
             this._onChange(newValue ?? '');
