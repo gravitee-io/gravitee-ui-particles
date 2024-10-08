@@ -19,6 +19,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  HostBinding,
   Inject,
   Input,
   NgZone,
@@ -78,6 +79,10 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
 
   @Input()
   public disableAutoFormat = false;
+
+  @Input()
+  @HostBinding('class.single-line')
+  public singleLineMode = false;
 
   public loaded$ = new ReplaySubject<boolean>(1);
 
@@ -212,18 +217,70 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
       }, 80);
     }
 
+    if (this.singleLineMode) {
+      this.standaloneCodeEditor?.addAction({
+        id: 'custom.action',
+        label: 'custom action',
+        keybindings: [monaco.KeyCode.Enter],
+        precondition: '!suggestWidgetVisible && !renameInputVisible && !inSnippetMode && !quickFixWidgetVisible',
+        run: () => {
+          // Ignore Enter key in single line mode when writing
+          return;
+        },
+      });
+    }
+
     const onDidChangeContent = this.textModel?.onDidChangeContent(() => {
-      const newValue = this.textModel?.getValue();
-      this.ngZone.run(() => {
-        if (!this.readOnly && !isEqual(this.value, newValue)) {
+      const textModelValue = this.textModel?.getValue() ?? '';
+      if (this.singleLineMode) {
+        // If value has \n, \r or \r\n, remove them
+        // Useful to clear line breaks when pasting text
+        const hasLineBreak = new RegExp(/(\r\n|\n|\r)/gm);
+        if (hasLineBreak.test(textModelValue)) {
+          const currentPosition = this.standaloneCodeEditor?.getPosition();
           setTimeout(() => {
-            this.value = newValue ?? '';
-            this._onChange(newValue ?? '');
+            this.standaloneCodeEditor?.pushUndoStop();
+            this.textModel?.setValue(textModelValue.replace(/(\r\n|\n|\r)/gm, ''));
+            if (currentPosition) {
+              this.standaloneCodeEditor?.setPosition(currentPosition);
+            }
+            this.standaloneCodeEditor?.popUndoStop();
+          }, 0);
+          return;
+        }
+      }
+
+      this.ngZone.run(() => {
+        if (!this.readOnly && !isEqual(this.value, textModelValue)) {
+          setTimeout(() => {
+            this.value = textModelValue;
+            this._onChange(textModelValue);
             this._onTouched();
           }, 0);
         }
       });
     });
+
+    if (this.singleLineMode) {
+      this.standaloneCodeEditor?.updateOptions({
+        wordWrap: 'on',
+        minimap: {
+          enabled: false,
+        },
+        lineNumbers: 'off',
+        hideCursorInOverviewRuler: true,
+        overviewRulerBorder: false,
+        glyphMargin: false,
+        folding: false,
+        lineDecorationsWidth: 0,
+        lineNumbersMinChars: 0,
+        scrollbar: {
+          horizontal: 'hidden',
+          vertical: 'hidden',
+          alwaysConsumeMouseWheel: false,
+        },
+      });
+    }
 
     const onDidBlurEditorWidget = this.standaloneCodeEditor?.onDidBlurEditorWidget(() => {
       this.ngZone.run(() => {

@@ -54,8 +54,11 @@ export default {
     disableAutoFormat: {
       control: { type: 'boolean' },
     },
+    singleLineMode: {
+      control: { type: 'boolean' },
+    },
   },
-  render: ({ value, disabled, languageConfig, disableMiniMap, disableAutoFormat }) => {
+  render: ({ value, disabled, languageConfig, disableMiniMap, disableAutoFormat, singleLineMode }) => {
     const control = new UntypedFormControl({ value, disabled });
     control.valueChanges.subscribe(value => {
       action('valueChanges')(value);
@@ -65,7 +68,7 @@ export default {
     });
     return {
       template: `
-      <gio-monaco-editor [formControl]="control" [languageConfig]="languageConfig" [disableMiniMap]="disableMiniMap" [disableAutoFormat]="disableAutoFormat"></gio-monaco-editor>
+      <gio-monaco-editor [formControl]="control" [languageConfig]="languageConfig" [disableMiniMap]="disableMiniMap" [singleLineMode]="singleLineMode" [disableAutoFormat]="disableAutoFormat"></gio-monaco-editor>
       <br>
       <pre>{{ control.status }}</pre>
       <pre>{{ control.dirty ? 'DIRTY' : 'PRISTINE' }}</pre>
@@ -77,6 +80,7 @@ export default {
         languageConfig,
         disableMiniMap,
         disableAutoFormat,
+        singleLineMode,
       },
     };
   },
@@ -168,6 +172,42 @@ export const FormControlName: StoryObj = {
     };
   },
   args: {},
+};
+
+export const SingleLineMode: StoryObj = {
+  render: ({ value, disabled, languageConfig }) => {
+    const control = new UntypedFormControl({ value, disabled }, Validators.required);
+    control.valueChanges.subscribe(value => {
+      action('valueChanges')(value);
+    });
+    control.statusChanges.subscribe(status => {
+      action('statusChanges')(status);
+    });
+    const from = new UntypedFormGroup({ control });
+
+    return {
+      template: `
+      <mat-form-field style="width:100%;" [formGroup]="from">
+        <mat-label>Monaco editor</mat-label>
+        <gio-monaco-editor gioMonacoEditorFormField formControlName="control" [languageConfig]="languageConfig" [singleLineMode]="singleLineMode"></gio-monaco-editor>
+        <mat-error *ngIf="from.get('control').hasError('required')">This field is required</mat-error>
+      </mat-form-field>
+      <br>
+      <pre>{{ from.status }}</pre>
+      <pre>{{ from.dirty ? 'DIRTY' : 'PRISTINE' }}</pre>
+      <pre>{{ from.touched ? 'TOUCHED' : 'UNTOUCHED' }}</pre>
+      <pre>{{ from.get('control').value?.length < 1000 ? (from.get('control').value | json) : '...TL;TR...' }}</pre>
+      `,
+      props: {
+        from,
+        languageConfig,
+        singleLineMode: true,
+      },
+    };
+  },
+  args: {
+    singleLineMode: true,
+  },
 };
 
 export const LanguageAutoDetectJSON: StoryObj = {
