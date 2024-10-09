@@ -21,15 +21,17 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { action } from '@storybook/addon-actions';
 
-import { GioElEditorHelperInputDirective } from './gio-el-editor-helper-input.directive';
-import { GioElEditorHelperToggleComponent } from './gio-el-editor-helper-toggle.component';
+import { GioElEditorHelperToggleComponent } from '../gio-el-editor-helper/gio-el-editor-helper-toggle.component';
+import { GioElEditorHelperInputDirective } from '../gio-el-editor-helper/gio-el-editor-helper-input.directive';
+
+import { GioElEditorInputComponent } from './gio-el-editor-input.component';
 
 @Component({
   selector: 'gio-story-component',
   template: `
-    <mat-form-field>
+    <mat-form-field style="width: 100%">
       <mat-label>El condition</mat-label>
-      <input matInput [gioElEditorHelper]="elEditor" [formControl]="formControl" />
+      <gio-el-editor-input [gioElEditorHelper]="elEditor" [formControl]="formControl" />
       <gio-el-editor-helper-toggle matIconSuffix #elEditor></gio-el-editor-helper-toggle>
       <mat-hint>Accept EL</mat-hint>
     </mat-form-field>
@@ -45,13 +47,14 @@ import { GioElEditorHelperToggleComponent } from './gio-el-editor-helper-toggle.
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
-    GioElEditorHelperInputDirective,
-    GioElEditorHelperToggleComponent,
+    GioElEditorInputComponent,
     MatButtonModule,
+    GioElEditorHelperToggleComponent,
+    GioElEditorHelperInputDirective,
   ],
   standalone: true,
 })
-class StoryHelperComponent {
+class StoryInputComponent {
   public formControl = new FormControl();
   public disable = false;
 
@@ -66,8 +69,8 @@ class StoryHelperComponent {
 }
 
 export default {
-  title: 'Components / EL / Helper dialog for MatFormField',
-  component: StoryHelperComponent,
+  title: 'Components / EL / CodeEditor input for MatFormField',
+  component: StoryInputComponent,
 } as Meta;
 
-export const WithMatInput: StoryObj = {};
+export const Default: StoryObj = {};
