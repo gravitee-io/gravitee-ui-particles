@@ -68,6 +68,21 @@ describe('ExpressionLanguageBuilder', () => {
     expect(expression).toEqual('{ #field1 == "value1" || #field2 != "value2" || ( #field3 < "value3" && #field4 > "value4" ) }');
   });
 
+  it('should build a condition group with nested condition groups and single condition', () => {
+    // Arrange
+    const conditionGroup = new ConditionGroup('OR', [
+      new Condition('field1', 'string', 'EQUALS', 'value1'),
+      new ConditionGroup('AND', [new Condition('field2', 'string', 'NOT_EQUALS', 'value2')]),
+    ]);
+    const expressionLanguageBuilder = new ExpressionLanguageBuilder(conditionGroup);
+
+    // Act
+    const expression = expressionLanguageBuilder.build();
+
+    // Assert
+    expect(expression).toEqual('{ #field1 == "value1" || #field2 != "value2" }');
+  });
+
   it('should build a condition group all operators', () => {
     // Arrange
     const conditionGroup = new ConditionGroup('AND', [

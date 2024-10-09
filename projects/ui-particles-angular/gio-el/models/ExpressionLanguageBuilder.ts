@@ -39,9 +39,15 @@ export class ExpressionLanguageBuilder {
     let el = '';
     for (const condition of conditionGroup.conditions) {
       if (condition instanceof ConditionGroup) {
-        el += '( ';
+        const hasMultipleConditions = condition.conditions.length > 1;
+
+        if (hasMultipleConditions) {
+          el += '( ';
+        }
         el += ExpressionLanguageBuilder.buildConditionGroup(condition);
-        el += ' )';
+        if (hasMultipleConditions) {
+          el += ' )';
+        }
       } else {
         el += ExpressionLanguageBuilder.buildCondition(condition);
       }

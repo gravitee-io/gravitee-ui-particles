@@ -12,7 +12,7 @@
       "projectType": "library",
       "root": "projects/ui-analytics",
       "sourceRoot": "projects/ui-analytics/src",
-      "prefix": "lib",
+      "prefix": "gio",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
@@ -48,7 +48,7 @@
       "projectType": "library",
       "root": "projects/ui-particles-angular",
       "sourceRoot": "projects/ui-particles-angular/src",
-      "prefix": "lib",
+      "prefix": "gio",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
@@ -84,7 +84,7 @@
       "projectType": "library",
       "root": "projects/ui-policy-studio-angular",
       "sourceRoot": "projects/ui-policy-studio-angular/src",
-      "prefix": "lib",
+      "prefix": "gio",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
@@ -151,6 +151,10 @@
     },
     "@angular-eslint/schematics:library": {
       "setParserOptionsProject": true
+    },
+    "@schematics/angular:component": {
+      "prefix": "",
+      "style": "scss"
     }
   }
 }
