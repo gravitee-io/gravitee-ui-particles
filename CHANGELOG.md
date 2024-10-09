@@ -1,3 +1,10 @@
+## [13.3.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.3.0...v13.3.1) (2024-10-09)
+
+
+### Bug Fixes
+
+* avoid error when user clear editor value ([88d0c74](https://github.com/gravitee-io/gravitee-ui-particles/commit/88d0c748acf83c807b086efb3038c18f21d201bd))
+
 # [13.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.2.0...v13.3.0) (2024-10-07)
 
 
