@@ -262,7 +262,27 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
     });
 
     if (this.singleLineMode) {
+      // Source : https://farzadyz.com/blog/single-line-monaco-editor
       this.standaloneCodeEditor?.updateOptions({
+        // quickSuggestions: false,
+        fixedOverflowWidgets: true,
+        acceptSuggestionOnEnter: 'on',
+        hover: {
+          delay: 100,
+        },
+        roundedSelection: false,
+        contextmenu: false,
+        cursorStyle: 'line-thin',
+        links: false,
+        find: {
+          addExtraSpaceOnTop: false,
+          autoFindInSelection: 'never',
+          seedSearchStringFromSelection: 'never',
+        },
+        fontSize: 14,
+        fontWeight: 'normal',
+        overviewRulerLanes: 0,
+        scrollBeyondLastColumn: 0,
         wordWrap: 'on',
         minimap: {
           enabled: false,
@@ -274,6 +294,7 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
         folding: false,
         lineDecorationsWidth: 0,
         lineNumbersMinChars: 0,
+        renderLineHighlight: 'none',
         scrollbar: {
           horizontal: 'hidden',
           vertical: 'hidden',
