@@ -34,7 +34,7 @@ import { GioElEditorHelperToggleHarness } from './gio-el-editor-helper-toggle.ha
   selector: 'gio-story-component',
   template: `
     <mat-form-field>
-      <mat-label>Choose a date</mat-label>
+      <mat-label>El condition</mat-label>
       <input matInput [gioElEditorHelper]="elEditor" [formControl]="formControl" />
       <mat-hint>Accept EL</mat-hint>
       <gio-el-editor-helper-toggle matIconSuffix #elEditor></gio-el-editor-helper-toggle>
@@ -55,7 +55,7 @@ class TestHelperComponent {
   public disable = false;
 }
 
-describe('GioElEditorDialogComponent', () => {
+describe('GioElEditorHelperComponent', () => {
   let fixture: ComponentFixture<TestHelperComponent>;
   let loader: HarnessLoader;
 

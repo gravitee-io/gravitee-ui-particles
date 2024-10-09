@@ -28,10 +28,10 @@ import { GioElEditorHelperToggleComponent } from './gio-el-editor-helper-toggle.
   selector: 'gio-story-component',
   template: `
     <mat-form-field>
-      <mat-label>Choose a date</mat-label>
+      <mat-label>El condition</mat-label>
       <input matInput [gioElEditorHelper]="elEditor" [formControl]="formControl" />
-      <mat-hint>Accept EL</mat-hint>
       <gio-el-editor-helper-toggle matIconSuffix #elEditor></gio-el-editor-helper-toggle>
+      <mat-hint>Accept EL</mat-hint>
     </mat-form-field>
 
     <br />
@@ -67,8 +67,8 @@ class StoryHelperComponent {
 }
 
 export default {
-  title: 'Components / EL / Input + Helper',
+  title: 'Components / EL / Helper dialog for MatFormField',
   component: StoryHelperComponent,
 } as Meta;
 
-export const Default: StoryObj = {};
+export const WithMatInput: StoryObj = {};

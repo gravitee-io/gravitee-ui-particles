@@ -20,7 +20,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { GioElEditorHelperToggleComponent } from './gio-el-editor-helper-toggle.component';
 
 @Directive({
-  selector: 'input[gioElEditorHelper]',
+  selector: 'input[gioElEditorHelper], gio-el-editor-input[gioElEditorHelper]',
   standalone: true,
   providers: [],
 })
