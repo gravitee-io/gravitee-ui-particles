@@ -13,10 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export type ConditionModelBase<T extends 'string' | 'number' | 'date' | 'boolean'> = {
+
+export type ConditionType = 'string' | 'number' | 'date' | 'boolean';
+
+export type ConditionModelBase<T extends ConditionType> = {
   field: string;
   label: string;
   type: T;
+  map?:
+    | {
+        type: 'Map';
+        key1Values?: string[];
+        key1Value?: string | null;
+      }
+    | {
+        type: 'MultiMap';
+        key1Values?: string[];
+        key2Values?: string[];
+        key1Value?: string | null;
+        key2Value?: string | null;
+      };
 };
 
 export type StringConditionModel = ConditionModelBase<'string'> & {

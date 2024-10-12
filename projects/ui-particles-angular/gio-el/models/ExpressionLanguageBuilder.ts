@@ -13,9 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { isNil } from 'lodash';
+
 import { ConditionGroup } from './ConditionGroup';
 import { Operator } from './Operator';
 import { Condition } from './Condition';
+import { ConditionType } from './ConditionModel';
 
 export class ExpressionLanguageBuilder {
   private static CONDITION_MAP = {
@@ -23,16 +26,16 @@ export class ExpressionLanguageBuilder {
     AND: '&&',
   };
   private static OPERATOR_MAP: Record<Operator, (field: string, value: unknown) => string> = {
-    EQUALS: (field, value) => `#${field} == ${value}`,
-    NOT_EQUALS: (field, value) => `#${field} != ${value}`,
-    LESS_THAN: (field, value) => `#${field} < ${value}`,
-    LESS_THAN_OR_EQUALS: (field, value) => `#${field} <= ${value}`,
-    GREATER_THAN: (field, value) => `#${field} > ${value}`,
-    GREATER_THAN_OR_EQUALS: (field, value) => `#${field} >= ${value}`,
-    CONTAINS: (field, value) => `#${field} matches "${value}"`,
-    NOT_CONTAINS: (field, value) => `!#${field} matches "${value}"`,
-    STARTS_WITH: (field, value) => `#${field} matches "^${value}"`,
-    ENDS_WITH: (field, value) => `#${field} matches "${value}$"`,
+    EQUALS: (field, value) => `${field} == ${value}`,
+    NOT_EQUALS: (field, value) => `${field} != ${value}`,
+    LESS_THAN: (field, value) => `${field} < ${value}`,
+    LESS_THAN_OR_EQUALS: (field, value) => `${field} <= ${value}`,
+    GREATER_THAN: (field, value) => `${field} > ${value}`,
+    GREATER_THAN_OR_EQUALS: (field, value) => `${field} >= ${value}`,
+    CONTAINS: (field, value) => `${field} matches "${value}"`,
+    NOT_CONTAINS: (field, value) => `!${field} matches "${value}"`,
+    STARTS_WITH: (field, value) => `${field} matches "^${value}"`,
+    ENDS_WITH: (field, value) => `${field} matches "${value}$"`,
   };
 
   private static buildConditionGroup(conditionGroup: ConditionGroup): string {
@@ -62,12 +65,15 @@ export class ExpressionLanguageBuilder {
     return el;
   }
 
-  private static buildCondition(condition: Condition<'string' | 'number' | 'date' | 'boolean'>): string {
+  private static buildCondition(condition: Condition<ConditionType>): string {
     const operator = ExpressionLanguageBuilder.OPERATOR_MAP[condition.operator];
-    return operator(condition.field, ExpressionLanguageBuilder.valueToString(condition.type, condition.value));
+    return operator(
+      ExpressionLanguageBuilder.toFieldString(condition.field),
+      ExpressionLanguageBuilder.valueToString(condition.type, condition.value),
+    );
   }
 
-  private static valueToString<T extends 'string' | 'number' | 'date' | 'boolean'>(type: T, value: unknown): string {
+  private static valueToString<T extends ConditionType>(type: T, value: unknown): string {
     if (!type) {
       return '';
     }
@@ -80,6 +86,17 @@ export class ExpressionLanguageBuilder {
       default:
         return `${value}`;
     }
+  }
+
+  private static toFieldString(field: Condition<ConditionType>['field']): string {
+    if (field instanceof Object && !isNil(field.key1Value) && !isNil(field.key2Value)) {
+      return `#${field.field}?.["${field.key1Value}"]?.[${field.key2Value}]`;
+    } else if (field instanceof Object && !isNil(field.key1Value)) {
+      return `#${field.field}?.["${field.key1Value}"]`;
+    } else if (field instanceof Object) {
+      return `#${field.field}`;
+    }
+    return `#${field}`;
   }
 
   constructor(private conditionGroup: ConditionGroup) {}

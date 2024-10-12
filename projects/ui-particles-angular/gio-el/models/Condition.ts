@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import { Operator } from './Operator';
+import { ConditionType } from './ConditionModel';
 
 type ConditionValue<T> = T extends 'string'
   ? string
@@ -23,11 +24,17 @@ type ConditionValue<T> = T extends 'string'
       ? Date
       : T extends 'boolean'
         ? boolean
-        : never;
+        : unknown;
 
-export class Condition<T extends 'string' | 'number' | 'date' | 'boolean'> {
+export class Condition<T extends ConditionType> {
   constructor(
-    public field: string,
+    public field:
+      | string
+      | {
+          field: string;
+          key1Value?: string;
+          key2Value?: string;
+        },
     public type: T,
     public operator: Operator,
     public value?: ConditionValue<T>,
