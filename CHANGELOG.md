@@ -1,3 +1,13 @@
+# [13.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.3.1...v13.4.0) (2024-10-14)
+
+
+### Features
+
+* add singleLineMode display option ([5212256](https://github.com/gravitee-io/gravitee-ui-particles/commit/5212256204cf501b98a8b25bbff16400a2f7d6ca))
+* improve EL builder from ConditionGroup ([8734118](https://github.com/gravitee-io/gravitee-ui-particles/commit/87341183e7ac4168cb378e70bb7ad5811bced654))
+* init el editor helper directive + dialog ([51c52c4](https://github.com/gravitee-io/gravitee-ui-particles/commit/51c52c4a5fdc5b8bee613617d443caf96d0f3bb8))
+* init gio-el-editor-input to configure monaco editor for EL ([4aa8a6d](https://github.com/gravitee-io/gravitee-ui-particles/commit/4aa8a6dc9d2099fa720f6719ee20530e90482323))
+
 ## [13.3.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.3.0...v13.3.1) (2024-10-09)
 
 
