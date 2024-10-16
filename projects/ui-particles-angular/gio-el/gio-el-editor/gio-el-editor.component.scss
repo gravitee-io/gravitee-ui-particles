@@ -13,6 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '../../src/scss' as gio;
+
+$typography: map.get(gio.$mat-theme, typography);
 
 .conditionGroup {
   display: flex;
@@ -41,4 +46,14 @@
   &__removeBtn {
     align-self: center;
   }
+}
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: mat.m2-get-color-from-palette(gio.$mat-dove-palette, 'darker10');
+  color: mat.m2-get-color-from-palette(gio.$mat-dove-palette, 'darker10-contrast');
 }

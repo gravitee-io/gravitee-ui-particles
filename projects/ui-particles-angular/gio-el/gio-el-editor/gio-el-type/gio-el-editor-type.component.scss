@@ -20,5 +20,9 @@
     flex-direction: row;
     align-items: flex-start;
     gap: 8px;
+
+    &__operator {
+      width: 120px;
+    }
   }
 }
