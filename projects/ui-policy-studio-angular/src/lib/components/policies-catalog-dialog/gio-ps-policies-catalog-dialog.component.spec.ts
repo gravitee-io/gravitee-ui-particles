@@ -27,7 +27,7 @@ import { MatInputHarness } from '@angular/material/input/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { fakeAllPolicies } from '../../models/index-testing';
-import { ApiType, ExecutionPhase, isPolicy, isSharedPolicyGroupPolicy, toGenericPolicies, GenericPolicy } from '../../models';
+import { ApiType, FlowPhase, isPolicy, isSharedPolicyGroupPolicy, toGenericPolicies, GenericPolicy, fromPolicyInput } from '../../models';
 import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.service';
 import { fakePolicyDocumentation, fakePolicySchema } from '../../models/policy/PolicySchema.fixture';
 import { fakeAllSharedPolicyGroupPolicies } from '../../models/policy/SharedPolicyGroupPolicy.fixture';
@@ -71,7 +71,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
   let fixture: ComponentFixture<TestComponent>;
   let loader: HarnessLoader;
 
-  const createTestingComponent = (apiType: ApiType, executionPhase: ExecutionPhase) => {
+  const createTestingComponent = (apiType: ApiType, flowPhase: FlowPhase) => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
       imports: [
@@ -103,14 +103,14 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
     component = fixture.componentInstance;
     component.dialogData = {
       apiType,
-      genericPolicies: toGenericPolicies(fakeAllPolicies(), fakeAllSharedPolicyGroupPolicies()),
-      executionPhase,
+      genericPolicies: toGenericPolicies(fakeAllPolicies().map(fromPolicyInput), fakeAllSharedPolicyGroupPolicies()),
+      flowPhase,
       trialUrl: 'https://gravitee.io/self-hosted-trial',
     };
     loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
   };
 
-  describe('When ApiType = MESSAGE and ExecutionPhase = REQUEST', () => {
+  describe('When ApiType = MESSAGE and FlowPhase = REQUEST', () => {
     beforeEach(() => {
       createTestingComponent('MESSAGE', 'REQUEST');
     });
@@ -118,7 +118,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
     it('should display policies catalog', async () => {
       await componentTestingOpenDialog();
 
-      await expectPoliciesCatalogContent('Request', p => isPolicy(p) && p.message?.includes('REQUEST'));
+      await expectPoliciesCatalogContent('Request', p => isPolicy(p) && p.flowPhaseCompatibility?.HTTP_MESSAGE?.includes('REQUEST'));
 
       await expectPoliciesCatalogContent('Request', p => isSharedPolicyGroupPolicy(p) && p.apiType === 'MESSAGE' && p.phase === 'REQUEST');
     });
@@ -194,16 +194,16 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
 
       const policiesCatalogDialog = await loader.getHarness(GioPolicyStudioPoliciesCatalogDialogHarness);
 
-      expect(await policiesCatalogDialog.getPoliciesName()).toHaveLength(10);
+      expect(await policiesCatalogDialog.getPoliciesName()).toHaveLength(11);
       await policiesCatalogDialog.selectCategoryFilter('Others');
-      expect(await policiesCatalogDialog.getPoliciesName()).toHaveLength(4);
+      expect(await policiesCatalogDialog.getPoliciesName()).toHaveLength(5);
 
       await policiesCatalogDialog.searchFilter('Policy to test UI');
       expect(await policiesCatalogDialog.getPoliciesName()).toHaveLength(1);
     });
   });
 
-  describe('When ApiType = MESSAGE and ExecutionPhase = RESPONSE', () => {
+  describe('When ApiType = MESSAGE and FlowPhase = RESPONSE', () => {
     beforeEach(() => {
       createTestingComponent('MESSAGE', 'RESPONSE');
     });
@@ -211,7 +211,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
     it('should display policies catalog', async () => {
       await componentTestingOpenDialog();
 
-      await expectPoliciesCatalogContent('Response', p => isPolicy(p) && p.message?.includes('RESPONSE'));
+      await expectPoliciesCatalogContent('Response', p => isPolicy(p) && p.flowPhaseCompatibility?.HTTP_MESSAGE?.includes('RESPONSE'));
       await expectPoliciesCatalogContent(
         'Response',
         p => isSharedPolicyGroupPolicy(p) && p.apiType === 'MESSAGE' && p.phase === 'RESPONSE',
@@ -219,19 +219,16 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
     });
   });
 
-  describe('When ApiType = MESSAGE and ExecutionPhase = MESSAGE_REQUEST', () => {
+  describe('When ApiType = MESSAGE and FlowPhase = PUBLISH', () => {
     beforeEach(() => {
-      createTestingComponent('MESSAGE', 'MESSAGE_REQUEST');
+      createTestingComponent('MESSAGE', 'PUBLISH');
     });
 
     it('should display policies catalog', async () => {
       await componentTestingOpenDialog();
 
-      await expectPoliciesCatalogContent('Publish', p => isPolicy(p) && p.message?.includes('MESSAGE_REQUEST'));
-      await expectPoliciesCatalogContent(
-        'Publish',
-        p => isSharedPolicyGroupPolicy(p) && p.apiType === 'MESSAGE' && p.phase === 'MESSAGE_REQUEST',
-      );
+      await expectPoliciesCatalogContent('Publish', p => isPolicy(p) && p.flowPhaseCompatibility?.HTTP_MESSAGE?.includes('PUBLISH'));
+      await expectPoliciesCatalogContent('Publish', p => isSharedPolicyGroupPolicy(p) && p.apiType === 'MESSAGE' && p.phase === 'PUBLISH');
     });
 
     it('should select a policy and add it with messageCondition', async () => {
@@ -270,23 +267,23 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
     });
   });
 
-  describe('When ApiType = MESSAGE and ExecutionPhase = MESSAGE_RESPONSE', () => {
+  describe('When ApiType = MESSAGE and FlowPhase = SUBSCRIBE', () => {
     beforeEach(() => {
-      createTestingComponent('MESSAGE', 'MESSAGE_RESPONSE');
+      createTestingComponent('MESSAGE', 'SUBSCRIBE');
     });
 
     it('should display policies catalog', async () => {
       await componentTestingOpenDialog();
 
-      await expectPoliciesCatalogContent('Subscribe', p => isPolicy(p) && p.message?.includes('MESSAGE_RESPONSE'));
+      await expectPoliciesCatalogContent('Subscribe', p => isPolicy(p) && p.flowPhaseCompatibility?.HTTP_MESSAGE?.includes('SUBSCRIBE'));
       await expectPoliciesCatalogContent(
         'Subscribe',
-        p => isSharedPolicyGroupPolicy(p) && p.apiType === 'MESSAGE' && p.phase === 'MESSAGE_RESPONSE',
+        p => isSharedPolicyGroupPolicy(p) && p.apiType === 'MESSAGE' && p.phase === 'SUBSCRIBE',
       );
     });
   });
 
-  describe('When ApiType = PROXY and ExecutionPhase = REQUEST', () => {
+  describe('When ApiType = PROXY and FlowPhase = REQUEST', () => {
     beforeEach(() => {
       createTestingComponent('PROXY', 'REQUEST');
     });
@@ -294,7 +291,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
     it('should display policies catalog', async () => {
       await componentTestingOpenDialog();
 
-      await expectPoliciesCatalogContent('Request', p => isPolicy(p) && p.proxy?.includes('REQUEST'));
+      await expectPoliciesCatalogContent('Request', p => isPolicy(p) && p.flowPhaseCompatibility?.HTTP_PROXY?.includes('REQUEST'));
       await expectPoliciesCatalogContent('Request', p => isSharedPolicyGroupPolicy(p) && p.apiType === 'PROXY' && p.phase === 'REQUEST');
     });
 
@@ -309,7 +306,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
     });
   });
 
-  describe('When ApiType = PROXY and ExecutionPhase = RESPONSE', () => {
+  describe('When ApiType = PROXY and FlowPhase = RESPONSE', () => {
     beforeEach(() => {
       createTestingComponent('PROXY', 'RESPONSE');
     });
@@ -317,7 +314,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
     it('should display policies catalog', async () => {
       await componentTestingOpenDialog();
 
-      await expectPoliciesCatalogContent('Response', p => isPolicy(p) && p.proxy?.includes('RESPONSE'));
+      await expectPoliciesCatalogContent('Response', p => isPolicy(p) && p.flowPhaseCompatibility?.HTTP_PROXY?.includes('RESPONSE'));
       await expectPoliciesCatalogContent('Response', p => isSharedPolicyGroupPolicy(p) && p.apiType === 'PROXY' && p.phase === 'RESPONSE');
     });
   });
@@ -328,7 +325,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
     expect(await phaseDialog.getPhase()).toEqual(phaseLabel);
     expect(await phaseDialog.getPoliciesName()).toStrictEqual(
       expect.arrayContaining(
-        toGenericPolicies(fakeAllPolicies(), fakeAllSharedPolicyGroupPolicies())
+        toGenericPolicies(fakeAllPolicies().map(fromPolicyInput), fakeAllSharedPolicyGroupPolicies())
           .filter(policiesFilter)
           .map(policy => policy.name),
       ),

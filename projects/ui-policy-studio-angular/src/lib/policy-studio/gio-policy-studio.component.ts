@@ -22,7 +22,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 
 import {
-  ApiType,
   ConnectorInfo,
   Flow,
   FlowExecution,
@@ -34,6 +33,9 @@ import {
   SharedPolicyGroupPolicy,
   toGenericPolicies,
   GenericPolicy,
+  PolicyInput,
+  fromPolicyInput,
+  ApiType,
 } from '../models';
 import { GioPolicyStudioFlowsMenuComponent } from '../components/flows-menu/gio-ps-flows-menu.component';
 import { GioPolicyStudioDetailsComponent } from '../components/flow-details/gio-ps-flow-details.component';
@@ -101,8 +103,16 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
   /**
    * List of policies usable in the policy studio
    */
-  @Input()
-  public policies: Policy[] = [];
+  @Input({
+    transform: (policies: unknown) => policies ?? [],
+  })
+  public set policies(value: (PolicyInput | Policy)[]) {
+    this._policies = value.map(fromPolicyInput);
+  }
+  public get policies(): Policy[] {
+    return this._policies;
+  }
+  private _policies: Policy[] = [];
 
   /**
    * List of SharedPolicyGroups usable in the studio

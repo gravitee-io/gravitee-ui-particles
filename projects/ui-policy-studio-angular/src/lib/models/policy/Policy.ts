@@ -13,7 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export type ExecutionPhase = 'REQUEST' | 'RESPONSE' | 'MESSAGE_REQUEST' | 'MESSAGE_RESPONSE';
+
+import { get } from 'lodash';
+
+import { ApiProtocolType } from '../ApiProtocolType';
+
+export type FlowPhase = 'REQUEST' | 'RESPONSE' | 'INTERACT' | 'CONNECT' | 'PUBLISH' | 'SUBSCRIBE';
 
 export interface Policy {
   id: string;
@@ -22,7 +27,46 @@ export interface Policy {
   description?: string;
   category?: string;
   version?: string;
-  proxy?: ExecutionPhase[];
-  message?: ExecutionPhase[];
+  flowPhaseCompatibility?: Partial<Record<ApiProtocolType, FlowPhase[]>>;
   deployed?: boolean;
 }
+
+/**
+ * @Deprecated to keep as long as we support APIM < 4.6
+ */
+export type ExecutionPhase = 'REQUEST' | 'RESPONSE' | 'MESSAGE_REQUEST' | 'MESSAGE_RESPONSE';
+
+export type PolicyInput = Omit<Policy, 'proxy' | 'message'> & {
+  proxy?: ExecutionPhase[];
+  message?: ExecutionPhase[];
+};
+
+/**
+ * @Deprecated to keep as long as we support APIM < 4.6
+ */
+export const fromPolicyInput = (policy: PolicyInput | Policy): Policy => {
+  const getProxyPhase = get(policy, 'proxy')?.map(fromExecutionPhase);
+  const getMessagePhase = get(policy, 'message')?.map(fromExecutionPhase);
+
+  return {
+    ...policy,
+    flowPhaseCompatibility: {
+      ...(getProxyPhase && { HTTP_PROXY: getProxyPhase }),
+      ...(getMessagePhase && { HTTP_MESSAGE: getMessagePhase }),
+      ...policy.flowPhaseCompatibility,
+    },
+  };
+};
+
+/**
+ * @Deprecated to keep as long as we support APIM < 4.6
+ */
+export const fromExecutionPhase = (phase: ExecutionPhase | FlowPhase): FlowPhase => {
+  if (phase === 'MESSAGE_REQUEST') {
+    return 'PUBLISH';
+  }
+  if (phase === 'MESSAGE_RESPONSE') {
+    return 'SUBSCRIBE';
+  }
+  return phase;
+};

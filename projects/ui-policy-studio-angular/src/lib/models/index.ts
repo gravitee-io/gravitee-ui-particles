@@ -20,3 +20,5 @@ export * from './policy';
 export * from './ConnectorsInfo';
 export * from './SaveOutput';
 export * from './PolicySchemaFetcher';
+export * from './ApiProtocolType';
+export * from './ApiType';

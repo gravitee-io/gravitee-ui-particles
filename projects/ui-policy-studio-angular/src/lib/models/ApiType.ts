@@ -13,4 +13,5 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export type ApiType = 'MESSAGE' | 'PROXY';
+
+export type ApiType = 'MESSAGE' | 'PROXY' | 'NATIVE';
