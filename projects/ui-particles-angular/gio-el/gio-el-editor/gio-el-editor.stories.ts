@@ -16,6 +16,8 @@
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { provideNativeDateAdapter } from '@angular/material/core';
 
+import { ConditionsModel } from '../models/ConditionsModel';
+
 import { GioElEditorComponent } from './gio-el-editor.component';
 
 export default {
@@ -32,8 +34,8 @@ export default {
   }),
 } as Meta;
 
-export const Default: StoryObj = {};
-Default.args = {
+export const AllType: StoryObj = {};
+AllType.args = {
   conditionsModel: [
     {
       field: 'application',
@@ -58,4 +60,52 @@ Default.args = {
       type: 'date',
     },
   ],
+};
+
+export const MapAndMultiMapField: StoryObj = {};
+MapAndMultiMapField.args = {
+  conditionsModel: [
+    {
+      field: 'foo',
+      label: 'Foo',
+      type: 'string',
+    },
+    {
+      field: 'api',
+      label: 'Api',
+      conditions: [
+        {
+          field: 'id',
+          label: 'Id',
+          type: 'string',
+        },
+        {
+          field: 'name',
+          label: 'Name',
+          type: 'string',
+        },
+        {
+          field: 'properties',
+          label: 'Properties',
+          type: 'string',
+          map: {
+            type: 'Map',
+          },
+        },
+        {
+          field: 'multimap',
+          label: 'MultiMap',
+          type: 'string',
+          map: {
+            type: 'MultiMap',
+          },
+        },
+        {
+          field: 'version',
+          label: 'Version',
+          type: 'string',
+        },
+      ],
+    },
+  ] satisfies ConditionsModel,
 };

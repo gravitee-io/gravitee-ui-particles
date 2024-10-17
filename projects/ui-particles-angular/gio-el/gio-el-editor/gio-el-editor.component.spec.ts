@@ -59,6 +59,22 @@ describe('GioElEditorComponent', () => {
         label: 'Timestamp',
         type: 'date',
       },
+      {
+        field: 'properties',
+        label: 'Properties',
+        type: 'string',
+        map: {
+          type: 'Map',
+        },
+      },
+      {
+        field: 'multimap',
+        label: 'MultiMap',
+        type: 'string',
+        map: {
+          type: 'MultiMap',
+        },
+      },
     ];
     fixture.detectChanges();
 
@@ -90,7 +106,11 @@ describe('GioElEditorComponent', () => {
       condition: 'AND',
       conditions: [
         {
-          field: 'Application',
+          field: {
+            field: 'application',
+            key1: undefined,
+            key2: undefined,
+          },
           operator: 'Equals',
           value: 'Yolo',
         },
@@ -112,7 +132,9 @@ describe('GioElEditorComponent', () => {
       condition: 'AND',
       conditions: [
         {
-          field: 'Is Authenticated',
+          field: {
+            field: 'isAuthenticated',
+          },
           operator: 'Not equals',
           value: true,
         },
@@ -142,7 +164,9 @@ describe('GioElEditorComponent', () => {
       condition: 'AND',
       conditions: [
         {
-          field: 'Duration',
+          field: {
+            field: 'duration',
+          },
           operator: 'Less than',
           value: 5,
         },
@@ -172,7 +196,9 @@ describe('GioElEditorComponent', () => {
       condition: 'AND',
       conditions: [
         {
-          field: 'Timestamp',
+          field: {
+            field: 'timestamp',
+          },
           operator: 'Greater than',
           value: '2021-01-01T00:00:00.000Z',
         },
@@ -215,12 +241,16 @@ describe('GioElEditorComponent', () => {
       condition: 'OR',
       conditions: [
         {
-          field: 'Application',
+          field: {
+            field: 'application',
+          },
           operator: 'Equals',
           value: 'Yolo',
         },
         {
-          field: 'Application',
+          field: {
+            field: 'application',
+          },
           operator: 'Equals',
           value: 'Toto',
         },
@@ -253,7 +283,9 @@ describe('GioElEditorComponent', () => {
       condition: 'AND',
       conditions: [
         {
-          field: 'Application',
+          field: {
+            field: 'application',
+          },
           operator: 'Equals',
           value: 'Yolo',
         },
@@ -261,16 +293,73 @@ describe('GioElEditorComponent', () => {
           condition: 'OR',
           conditions: [
             {
-              field: 'Duration',
+              field: {
+                field: 'duration',
+              },
               operator: 'Equals',
               value: 42,
             },
             {
-              field: 'Duration',
+              field: {
+                field: 'duration',
+              },
               operator: 'Equals',
               value: 43,
             },
           ],
+        },
+      ],
+    });
+  });
+
+  it('should add new map condition', async () => {
+    const mainConditionGroup = await editorComponentHarness.getMainConditionGroup();
+    await mainConditionGroup.clickAddNewConditionButton();
+
+    await mainConditionGroup.selectConditionField(0, 'Properties', 'propA');
+    expect(await mainConditionGroup.getConditionAvailableOperators(0)).toEqual(['Equals', 'Not equals']);
+
+    await mainConditionGroup.selectConditionOperator(0, 'Equals');
+    await mainConditionGroup.setConditionValue(0, 'Bar');
+
+    const conditions = await mainConditionGroup.getConditions();
+    expect(conditions).toEqual({
+      condition: 'AND',
+      conditions: [
+        {
+          field: {
+            field: 'properties',
+            key1: 'propA',
+          },
+          operator: 'Equals',
+          value: 'Bar',
+        },
+      ],
+    });
+  });
+
+  it('should add new multimap condition', async () => {
+    const mainConditionGroup = await editorComponentHarness.getMainConditionGroup();
+    await mainConditionGroup.clickAddNewConditionButton();
+
+    await mainConditionGroup.selectConditionField(0, 'MultiMap', 'Foo', '42');
+    expect(await mainConditionGroup.getConditionAvailableOperators(0)).toEqual(['Equals', 'Not equals']);
+
+    await mainConditionGroup.selectConditionOperator(0, 'Equals');
+    await mainConditionGroup.setConditionValue(0, 'Bar');
+
+    const conditions = await mainConditionGroup.getConditions();
+    expect(conditions).toEqual({
+      condition: 'AND',
+      conditions: [
+        {
+          field: {
+            field: 'multimap',
+            key1: 'Foo',
+            key2: '42',
+          },
+          operator: 'Equals',
+          value: 'Bar',
         },
       ],
     });

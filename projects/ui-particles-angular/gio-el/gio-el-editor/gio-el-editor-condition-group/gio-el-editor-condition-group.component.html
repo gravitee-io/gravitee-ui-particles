@@ -51,7 +51,7 @@
         <gio-el-editor-condition-group
           class="conditionGroup__conditions__conditionGroup"
           [conditionGroupFormGroup]="condition"
-          [conditionModels]="conditionModels"
+          [conditionsModel]="conditionsModel"
           [nodeLvl]="nodeLvl + 1"
           (remove)="removeCondition(conditionIndex)"
         ></gio-el-editor-condition-group>
@@ -63,10 +63,7 @@
         >
           <mat-form-field class="conditionGroup__conditions__condition__field">
             <mat-label>Field</mat-label>
-
-            <mat-select formControlName="field" placeholder="Select Field">
-              <mat-option *ngFor="let field of conditionModels" [value]="field">{{ field.label }}</mat-option>
-            </mat-select>
+            <gio-el-field formControlName="field" [conditionsModel]="conditionsModel"></gio-el-field>
           </mat-form-field>
 
           @switch (condition.controls.field.value?.type) {

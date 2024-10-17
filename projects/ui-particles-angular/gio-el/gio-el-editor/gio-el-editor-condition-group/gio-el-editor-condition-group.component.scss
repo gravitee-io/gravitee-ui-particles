@@ -44,7 +44,8 @@
       gap: 8px;
 
       &__field {
-        flex: 0 0 auto;
+        min-width: 220px;
+        flex: auto;
       }
 
       &__removeBtn {
