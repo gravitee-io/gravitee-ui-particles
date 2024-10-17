@@ -27,8 +27,9 @@ import { GioElEditorTypeBooleanComponent } from '../gio-el-type/gio-el-editor-ty
 import { GioElEditorTypeDateComponent } from '../gio-el-type/gio-el-editor-type-date/gio-el-editor-type-date.component';
 import { GioElEditorTypeNumberComponent } from '../gio-el-type/gio-el-editor-type-number/gio-el-editor-type-number.component';
 import { GioElEditorTypeStringComponent } from '../gio-el-type/gio-el-editor-type-string/gio-el-editor-type-string.component';
-import { ConditionModel } from '../../models/ConditionModel';
 import { ConditionForm, ConditionGroupForm } from '../gio-el-editor.component';
+import { ConditionsModel } from '../../models/ConditionsModel';
+import { GioElFieldComponent } from '../gio-el-field/gio-el-field.component';
 
 @Component({
   selector: 'gio-el-editor-condition-group',
@@ -46,6 +47,7 @@ import { ConditionForm, ConditionGroupForm } from '../gio-el-editor.component';
     GioElEditorTypeDateComponent,
     GioElEditorTypeStringComponent,
     GioElEditorTypeNumberComponent,
+    GioElFieldComponent,
   ],
   templateUrl: './gio-el-editor-condition-group.component.html',
   styleUrl: './gio-el-editor-condition-group.component.scss',
@@ -57,12 +59,12 @@ export class GioElEditorConditionGroupComponent {
   public conditionGroupFormGroup!: FormGroup<ConditionGroupForm>;
 
   /**
-   * Condition models to generate the fields for the conditions.
+   * Conditions model to generate the fields for the conditions.
    */
   @Input({
     required: true,
   })
-  public conditionModels: ConditionModel[] = [];
+  public conditionsModel: ConditionsModel = [];
 
   /**
    * Level of the node in the tree. Useful for testing with Harness to limit the scope of the query.

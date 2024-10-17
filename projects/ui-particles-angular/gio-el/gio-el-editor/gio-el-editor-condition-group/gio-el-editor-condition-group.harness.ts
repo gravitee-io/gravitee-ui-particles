@@ -15,7 +15,6 @@
  */
 import { BaseHarnessFilters, ComponentHarness, HarnessPredicate, parallel } from '@angular/cdk/testing';
 import { MatMenuHarness } from '@angular/material/menu/testing';
-import { MatSelectHarness } from '@angular/material/select/testing';
 import { MatButtonToggleGroupHarness } from '@angular/material/button-toggle/testing';
 import { DivHarness } from '@gravitee/ui-particles-angular/testing';
 
@@ -23,13 +22,14 @@ import { GioElEditorTypeBooleanHarness } from '../gio-el-type/gio-el-editor-type
 import { GioElEditorTypeStringHarness } from '../gio-el-type/gio-el-editor-type-string/gio-el-editor-type-string.harness';
 import { GioElEditorTypeNumberHarness } from '../gio-el-type/gio-el-editor-type-number/gio-el-editor-type-number.harness';
 import { GioElEditorTypeDateHarness } from '../gio-el-type/gio-el-editor-type-date/gio-el-editor-type-date.harness';
+import { GioElFieldHarness } from '../gio-el-field/gio-el-field.harness';
 
 type ConditionGroupHarnessValues = {
   condition: 'AND' | 'OR';
   conditions: (ConditionGroupHarnessValues | ConditionHarnessValues)[];
 };
 type ConditionHarnessValues = {
-  field: string;
+  field: { field: string; key1?: string; key2?: string };
   operator?: string;
   value?: string | boolean | number;
 };
@@ -69,7 +69,7 @@ export class GioElEditorConditionGroupHarness extends ComponentHarness {
       GioElEditorTypeDateHarness,
     )();
   private getConditionField = (divHarness: DivHarness) =>
-    divHarness.childLocatorFor(MatSelectHarness.with({ selector: '[formControlName="field"]' }))();
+    divHarness.childLocatorFor(GioElFieldHarness.with({ selector: '[formControlName="field"]' }))();
 
   public async clickAddNewConditionButton(): Promise<void> {
     await (await this.getAddMenuButton()).clickItem({ text: /Add Condition/ });
@@ -102,14 +102,14 @@ export class GioElEditorConditionGroupHarness extends ComponentHarness {
     return toggles[0].check();
   }
 
-  public async selectConditionField(index: number, field: string): Promise<void> {
+  public async selectConditionField(index: number, field: string, key1?: string, key2?: string): Promise<void> {
     const conditionDiv = await this.getConditionHarness(index);
     if (!conditionDiv || !(conditionDiv instanceof DivHarness)) {
       throw new Error(`Condition with index ${index} not found`);
     }
 
-    const fieldSelect = await this.getConditionField(conditionDiv);
-    await fieldSelect.clickOptions({ text: field });
+    const conditionField = await this.getConditionField(conditionDiv);
+    await conditionField.setValue(field, key1, key2);
   }
 
   public async selectConditionOperator(index: number, operator: string): Promise<void> {
@@ -184,7 +184,7 @@ export class GioElEditorConditionGroupHarness extends ComponentHarness {
 
         const conditionType = await this.getConditionTypeHarness(condition);
         return {
-          field: await conditionField.getValueText(),
+          field: await conditionField.getValue(),
           operator: await conditionType?.getOperatorValue(),
           value: await conditionType?.getValue(),
         };
