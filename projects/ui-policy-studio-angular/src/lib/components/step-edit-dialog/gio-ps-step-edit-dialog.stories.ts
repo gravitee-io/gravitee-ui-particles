@@ -102,7 +102,7 @@ export default {
       dialogData: {
         genericPolicy: args.genericPolicy,
         step: args.step,
-        executionPhase: 'REQUEST',
+        flowPhase: 'REQUEST',
       },
     },
   }),

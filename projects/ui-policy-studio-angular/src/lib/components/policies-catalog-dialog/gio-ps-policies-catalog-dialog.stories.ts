@@ -25,7 +25,7 @@ import { POLICIES_V4_UNREGISTERED_ICON, fakeAllPolicies } from '../../models/ind
 import { matIconRegisterProvider } from '../../../storybook-utils/mat-icon-register.provider';
 import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.service';
 import { fakePolicyDocumentation, fakePolicySchema } from '../../models/policy/PolicySchema.fixture';
-import { toGenericPolicies } from '../../models';
+import { fromPolicyInput, toGenericPolicies } from '../../models';
 import { fakeAllSharedPolicyGroupPolicies } from '../../models/policy/SharedPolicyGroupPolicy.fixture';
 
 import {
@@ -103,8 +103,8 @@ export default {
     props: {
       dialogData: {
         apiType: args.apiType,
-        executionPhase: args.executionPhase,
-        genericPolicies: toGenericPolicies(fakeAllPolicies(), fakeAllSharedPolicyGroupPolicies()),
+        flowPhase: args.flowPhase,
+        genericPolicies: toGenericPolicies(fakeAllPolicies().map(fromPolicyInput), fakeAllSharedPolicyGroupPolicies()),
         trialUrl: 'https://gravitee.io/self-hosted-trial',
       },
     },
@@ -117,7 +117,7 @@ export default {
 export const NoPolicies: StoryObj = {
   name: 'No policies',
   args: {
-    executionPhase: 'UNKNOWN',
+    flowPhase: 'UNKNOWN',
     apiType: 'PROXY',
   },
   play: context => {
@@ -129,7 +129,7 @@ export const NoPolicies: StoryObj = {
 export const PROXY_REQUEST: StoryObj = {
   name: 'PROXY / REQUEST',
   args: {
-    executionPhase: 'REQUEST',
+    flowPhase: 'REQUEST',
     apiType: 'PROXY',
   },
   play: context => {
@@ -141,7 +141,7 @@ export const PROXY_REQUEST: StoryObj = {
 export const PROXY_RESPONSE: StoryObj = {
   name: 'PROXY / RESPONSE',
   args: {
-    executionPhase: 'RESPONSE',
+    flowPhase: 'RESPONSE',
     apiType: 'PROXY',
   },
   play: context => {
@@ -153,7 +153,7 @@ export const PROXY_RESPONSE: StoryObj = {
 export const MESSAGE_REQUEST: StoryObj = {
   name: 'MESSAGE / REQUEST',
   args: {
-    executionPhase: 'REQUEST',
+    flowPhase: 'REQUEST',
     apiType: 'MESSAGE',
   },
   play: context => {
@@ -165,7 +165,7 @@ export const MESSAGE_REQUEST: StoryObj = {
 export const MESSAGE_RESPONSE: StoryObj = {
   name: 'MESSAGE / RESPONSE',
   args: {
-    executionPhase: 'RESPONSE',
+    flowPhase: 'RESPONSE',
     apiType: 'MESSAGE',
   },
   play: context => {
@@ -174,10 +174,10 @@ export const MESSAGE_RESPONSE: StoryObj = {
   },
 };
 
-export const MESSAGE_MESSAGE_REQUEST: StoryObj = {
-  name: 'MESSAGE / MESSAGE_REQUEST',
+export const MESSAGE_PUBLISH: StoryObj = {
+  name: 'MESSAGE / PUBLISH',
   args: {
-    executionPhase: 'MESSAGE_REQUEST',
+    flowPhase: 'PUBLISH',
     apiType: 'MESSAGE',
   },
   play: context => {
@@ -186,10 +186,10 @@ export const MESSAGE_MESSAGE_REQUEST: StoryObj = {
   },
 };
 
-export const MESSAGE_MESSAGE_RESPONSE: StoryObj = {
-  name: 'MESSAGE / MESSAGE_RESPONSE',
+export const MESSAGE_SUBSCRIBE: StoryObj = {
+  name: 'MESSAGE / SUBSCRIBE',
   args: {
-    executionPhase: 'MESSAGE_RESPONSE',
+    flowPhase: 'SUBSCRIBE',
     apiType: 'MESSAGE',
   },
   play: context => {

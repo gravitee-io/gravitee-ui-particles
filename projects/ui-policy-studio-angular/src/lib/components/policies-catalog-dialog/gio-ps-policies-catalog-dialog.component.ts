@@ -27,23 +27,25 @@ import { GioBannerModule, GioIconsModule } from '@gravitee/ui-particles-angular'
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltip } from '@angular/material/tooltip';
 
-import { ApiType, ExecutionPhase, GenericPolicy, isPolicy, isSharedPolicyGroupPolicy, Step } from '../../models';
+import { ApiType, FlowPhase, GenericPolicy, isPolicy, isSharedPolicyGroupPolicy, Step } from '../../models';
 import { GioPolicyStudioStepFormComponent } from '../step-form/gio-ps-step-form.component';
 
 export type GioPolicyStudioPoliciesCatalogDialogData = {
   genericPolicies: GenericPolicy[];
-  executionPhase: ExecutionPhase;
+  flowPhase: FlowPhase;
   apiType: ApiType;
   trialUrl?: string;
 };
 
 export type GioPolicyStudioPoliciesCatalogDialogResult = undefined | Step;
 
-const executionPhaseLabels: Record<ExecutionPhase, string> = {
+const flowPhaseLabels: Record<FlowPhase, string> = {
   REQUEST: 'Request',
   RESPONSE: 'Response',
-  MESSAGE_REQUEST: 'Publish',
-  MESSAGE_RESPONSE: 'Subscribe',
+  PUBLISH: 'Publish',
+  SUBSCRIBE: 'Subscribe',
+  CONNECT: 'Connect',
+  INTERACT: 'Interact',
 };
 
 type PolicyVM = {
@@ -78,8 +80,8 @@ type PolicyVM = {
 export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy {
   public policies: PolicyVM[] = [];
 
-  public executionPhase!: ExecutionPhase;
-  public executionPhaseLabel!: string;
+  public flowPhase!: FlowPhase;
+  public flowPhaseLabel!: string;
 
   public selectedPolicy?: GenericPolicy;
 
@@ -106,19 +108,23 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
     public dialogRef: MatDialogRef<GioPolicyStudioPoliciesCatalogDialogComponent, GioPolicyStudioPoliciesCatalogDialogResult>,
     @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioPoliciesCatalogDialogData,
   ) {
-    this.executionPhase = flowDialogData.executionPhase;
-    this.executionPhaseLabel = executionPhaseLabels[flowDialogData.executionPhase];
+    this.flowPhase = flowDialogData.flowPhase;
+    this.flowPhaseLabel = flowPhaseLabels[flowDialogData.flowPhase];
 
     this.allPolicies = flowDialogData.genericPolicies
       .filter(genericPolicy => {
         if (isPolicy(genericPolicy)) {
           if (flowDialogData.apiType === 'PROXY') {
-            return genericPolicy.proxy?.includes(flowDialogData.executionPhase);
+            return genericPolicy.flowPhaseCompatibility?.HTTP_PROXY?.includes(flowDialogData.flowPhase);
+          } else if (flowDialogData.apiType === 'MESSAGE') {
+            return genericPolicy.flowPhaseCompatibility?.HTTP_MESSAGE?.includes(flowDialogData.flowPhase);
+          } else {
+            // TODO: Implement for NATIVE API
+            throw new Error('Not implemented');
           }
-          return genericPolicy.message?.includes(flowDialogData.executionPhase);
         }
         if (isSharedPolicyGroupPolicy(genericPolicy)) {
-          return genericPolicy.apiType === flowDialogData.apiType && genericPolicy.phase === flowDialogData.executionPhase;
+          return genericPolicy.apiType === flowDialogData.apiType && genericPolicy.phase === flowDialogData.flowPhase;
         }
         // Not expected
         throw new Error('Unknown policy type');

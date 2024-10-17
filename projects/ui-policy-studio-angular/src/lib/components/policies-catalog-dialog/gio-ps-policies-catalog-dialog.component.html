@@ -16,7 +16,7 @@
 
 -->
 <h2 mat-dialog-title class="title">
-  Policies for <span class="title__phase">{{ executionPhaseLabel }}</span> phase
+  Policies for <span class="title__phase">{{ flowPhaseLabel }}</span> phase
 
   <button class="title__closeBtn" mat-icon-button aria-label="Close dialog" [mat-dialog-close]="">
     <mat-icon svgIcon="gio:cancel"></mat-icon>
@@ -120,7 +120,7 @@
 
   <gio-ps-step-form
     [genericPolicy]="selectedPolicy"
-    [executionPhase]="executionPhase"
+    [flowPhase]="flowPhase"
     (stepChange)="onStepChange($event)"
     (isValid)="onIsValid($event)"
   ></gio-ps-step-form>

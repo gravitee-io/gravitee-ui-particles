@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { ApiType } from '../flow';
+import { ApiType } from '../ApiType';
 
-import { ExecutionPhase } from './Policy';
+import { FlowPhase } from './Policy';
 
 export type SharedPolicyGroupPolicy = {
   id: string;
@@ -25,5 +25,5 @@ export type SharedPolicyGroupPolicy = {
   description?: string;
   prerequisiteMessage?: string;
   apiType: ApiType;
-  phase: ExecutionPhase;
+  phase: FlowPhase;
 };

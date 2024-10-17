@@ -22,9 +22,13 @@ import {
   ApiType,
   ConnectorInfo,
   ExecutionPhase,
+  FlowPhase,
+  fromExecutionPhase,
+  fromPolicyInput,
   GenericPolicy,
   Policy,
   PolicyDocumentationFetcher,
+  PolicyInput,
   PolicySchemaFetcher,
   Step,
   toGenericPolicies,
@@ -56,7 +60,13 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
   @Input({
     transform: (policies: unknown) => policies ?? [],
   })
-  public policies: Policy[] = [];
+  public set policies(value: (PolicyInput | Policy)[]) {
+    this._policies = value.map(fromPolicyInput);
+  }
+  public get policies(): Policy[] {
+    return this._policies;
+  }
+  private _policies: Policy[] = [];
 
   /**
    * Whether the Policy Group Studio is in read-only mode
@@ -72,9 +82,18 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
 
   /**
    * Execution phase targeted by the Policy Group Studio
+   * @deprecated Use `flowPhase` instead. To keep as long as we support APIM < 4.6
    */
   @Input({ required: true })
-  public executionPhase!: ExecutionPhase;
+  public set executionPhase(value: ExecutionPhase) {
+    this.flowPhase = fromExecutionPhase(value);
+  }
+
+  /**
+   * Execution phase targeted by the Policy Group Studio
+   */
+  @Input({ required: true })
+  public flowPhase!: FlowPhase;
 
   /**
    * Called when Policy Group Studio needs to fetch the policy schema
@@ -123,7 +142,8 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
   protected startConnector: ConnectorInfo[] = [];
   protected endConnector: ConnectorInfo[] = [];
 
-  private phases: Record<`${ApiType}__${ExecutionPhase}`, PolicyGroupVM | null> = {
+  private phases: Record<`${ApiType}__${FlowPhase}`, PolicyGroupVM | null> = {
+    // HTTP Proxy
     PROXY__REQUEST: {
       name: 'Request phase',
       description: 'Policies will be applied during the connection establishment',
@@ -136,8 +156,11 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
       startConnectorName: 'Incoming response',
       endConnectorName: 'Outgoing response',
     },
-    PROXY__MESSAGE_REQUEST: null, // n/a
-    PROXY__MESSAGE_RESPONSE: null, // n/a
+    PROXY__PUBLISH: null, // n/a
+    PROXY__SUBSCRIBE: null, // n/a
+    PROXY__CONNECT: null, // n/a
+    PROXY__INTERACT: null, // n/a
+    // HTTP Message
     MESSAGE__REQUEST: {
       name: 'Request phase',
       description: 'Policies will be applied during the connection establishment',
@@ -150,18 +173,28 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
       startConnectorName: 'Incoming response',
       endConnectorName: 'Outgoing response',
     },
-    MESSAGE__MESSAGE_REQUEST: {
+    MESSAGE__PUBLISH: {
       name: 'Publish phase',
       description: 'Policies will be applied on messages sent to the endpoint',
       startConnectorName: 'Incoming message request',
       endConnectorName: 'Outgoing message request',
     },
-    MESSAGE__MESSAGE_RESPONSE: {
+    MESSAGE__SUBSCRIBE: {
       name: 'Subscribe phase',
       description: 'Policies will be applied on messages received by the entrypoint',
       startConnectorName: 'Incoming message response',
       endConnectorName: 'Outgoing message response',
     },
+    MESSAGE__CONNECT: null, // n/a
+    MESSAGE__INTERACT: null, // n/a
+    // NATIVE
+    // TODO: To implement we want to make PS compatible with the native API
+    NATIVE__CONNECT: null, // n/a
+    NATIVE__INTERACT: null, // n/a
+    NATIVE__PUBLISH: null, // n/a
+    NATIVE__SUBSCRIBE: null, // n/a
+    NATIVE__REQUEST: null, // n/a
+    NATIVE__RESPONSE: null, // n/a
   };
 
   constructor(private readonly policyStudioService: GioPolicyStudioService) {}
@@ -176,10 +209,10 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
     }
     if (changes.policies) {
       this.isLoading = false;
-      this.genericPolicies = toGenericPolicies(this.policies);
+      this.genericPolicies = toGenericPolicies(this._policies);
     }
     if (changes.executionPhase) {
-      this.policyGroupVM = this.phases[`${this.apiType}__${this.executionPhase}`] ?? undefined;
+      this.policyGroupVM = this.phases[`${this.apiType}__${this.flowPhase}`] ?? undefined;
       this.startConnector = this.createStartConnector(this.policyGroupVM?.startConnectorName ?? '');
       this.endConnector = this.createEndConnector(this.policyGroupVM?.endConnectorName ?? '');
     }

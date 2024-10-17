@@ -59,7 +59,7 @@
             [apiType]="apiType"
             [genericPolicies]="genericPolicies"
             [trialUrl]="trialUrl"
-            policyExecutionPhase="REQUEST"
+            policyFlowPhase="REQUEST"
             (stepsChange)="onStepsChange('request', $event)"
           ></gio-ps-flow-details-phase>
           <gio-ps-flow-details-phase
@@ -73,7 +73,7 @@
             [apiType]="apiType"
             [genericPolicies]="genericPolicies"
             [trialUrl]="trialUrl"
-            policyExecutionPhase="RESPONSE"
+            policyFlowPhase="RESPONSE"
             (stepsChange)="onStepsChange('response', $event)"
           ></gio-ps-flow-details-phase>
         </mat-tab>
@@ -89,7 +89,7 @@
             [apiType]="apiType"
             [genericPolicies]="genericPolicies"
             [trialUrl]="trialUrl"
-            policyExecutionPhase="MESSAGE_REQUEST"
+            policyFlowPhase="PUBLISH"
             (stepsChange)="onStepsChange('publish', $event)"
           ></gio-ps-flow-details-phase>
           <gio-ps-flow-details-phase
@@ -103,7 +103,7 @@
             [apiType]="apiType"
             [genericPolicies]="genericPolicies"
             [trialUrl]="trialUrl"
-            policyExecutionPhase="MESSAGE_RESPONSE"
+            policyFlowPhase="SUBSCRIBE"
             (stepsChange)="onStepsChange('subscribe', $event)"
           ></gio-ps-flow-details-phase>
         </mat-tab>
@@ -121,7 +121,7 @@
           [apiType]="apiType"
           [genericPolicies]="genericPolicies"
           [trialUrl]="trialUrl"
-          policyExecutionPhase="REQUEST"
+          policyFlowPhase="REQUEST"
           (stepsChange)="onStepsChange('request', $event)"
         ></gio-ps-flow-details-phase>
         <gio-ps-flow-details-phase
@@ -135,7 +135,7 @@
           [apiType]="apiType"
           [genericPolicies]="genericPolicies"
           [trialUrl]="trialUrl"
-          policyExecutionPhase="RESPONSE"
+          policyFlowPhase="RESPONSE"
           (stepsChange)="onStepsChange('response', $event)"
         ></gio-ps-flow-details-phase>
       </ng-container>
