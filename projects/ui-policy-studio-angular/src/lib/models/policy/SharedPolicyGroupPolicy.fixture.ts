@@ -75,9 +75,9 @@ export function fakeAllSharedPolicyGroupPolicies(): SharedPolicyGroupPolicy[] {
     fakeProxyRequestSharedPolicyGroupPolicy({
       id: '4d4c1b3b-3b1b-4b3b-8b3b-1b3b4c1b3b4e',
       name: 'Test SPG MESSAGE 4',
-      description: 'MESSAGE_REQUEST Phase',
+      description: 'PUBLISH Phase',
       apiType: 'MESSAGE',
-      phase: 'MESSAGE_REQUEST',
+      phase: 'PUBLISH',
     }),
   ];
 }

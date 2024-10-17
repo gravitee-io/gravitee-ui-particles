@@ -67,7 +67,7 @@
               [class.disabled]="readOnly || !stepVM.step.enabled"
               [genericPolicies]="genericPolicies"
               [step]="stepVM.step"
-              [executionPhase]="policyExecutionPhase"
+              [flowPhase]="policyFlowPhase"
               (stepChange)="onStepChange(stepVM.index, $event)"
               (deleted)="onStepDeleted(stepVM.index)"
               (disabled)="onStepDisabled(stepVM.index)"

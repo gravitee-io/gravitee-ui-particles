@@ -27,7 +27,7 @@ import {
   GioPolicyStudioStepEditDialogData,
   GioPolicyStudioStepEditDialogResult,
 } from '../step-edit-dialog/gio-ps-step-edit-dialog.component';
-import { ExecutionPhase, isPolicy, isSharedPolicyGroupPolicy, Step, GenericPolicy } from '../../models';
+import { FlowPhase, isPolicy, isSharedPolicyGroupPolicy, Step, GenericPolicy } from '../../models';
 
 @Component({
   standalone: true,
@@ -47,7 +47,7 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
   public genericPolicies: GenericPolicy[] = [];
 
   @Input({ required: true })
-  public executionPhase!: ExecutionPhase;
+  public flowPhase!: FlowPhase;
 
   @Output()
   public stepChange = new EventEmitter<Step>();
@@ -120,7 +120,7 @@ ${this.policyNotFound === 'SHARED_POLICY_GROUP' ? 'Note: The Gateway will ignore
             readOnly: this.readOnly,
             genericPolicy: this.genericPolicy,
             step: this.step,
-            executionPhase: this.executionPhase,
+            flowPhase: this.flowPhase,
           },
           role: 'alertdialog',
           id: 'gioPolicyStudioPolicyFormDialog',

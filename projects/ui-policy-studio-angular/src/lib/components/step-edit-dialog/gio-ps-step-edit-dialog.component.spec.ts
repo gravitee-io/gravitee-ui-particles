@@ -107,7 +107,7 @@ describe('GioPolicyStudioStepEditDialogComponent', () => {
         type: 'POLICY',
       },
       step,
-      executionPhase: 'REQUEST',
+      flowPhase: 'REQUEST',
     };
     loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
   };
