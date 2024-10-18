@@ -1,3 +1,10 @@
+## [13.5.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.5.1...v13.5.2) (2024-10-18)
+
+
+### Bug Fixes
+
+* ps - fix error with ngOnChanges + flowPhase ([7547c32](https://github.com/gravitee-io/gravitee-ui-particles/commit/7547c327aec6d72ad5f028f8c3006e09e7820c66))
+
 ## [13.5.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.5.0...v13.5.1) (2024-10-18)
 
 
