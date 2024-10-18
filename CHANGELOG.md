@@ -1,3 +1,10 @@
+# [13.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.4.0...v13.5.0) (2024-10-18)
+
+
+### Features
+
+* ps - rework executionPhase & policy to use FlowPhase ([9eab2b8](https://github.com/gravitee-io/gravitee-ui-particles/commit/9eab2b8deb7f7d36078305c86c935106558b2e58))
+
 # [13.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.3.1...v13.4.0) (2024-10-14)
 
 
