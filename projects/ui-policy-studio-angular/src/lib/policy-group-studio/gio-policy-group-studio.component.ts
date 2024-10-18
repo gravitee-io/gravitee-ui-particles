@@ -84,7 +84,7 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
    * Execution phase targeted by the Policy Group Studio
    * @deprecated Use `flowPhase` instead. To keep as long as we support APIM < 4.6
    */
-  @Input({ required: true })
+  @Input()
   public set executionPhase(value: ExecutionPhase) {
     this.flowPhase = fromExecutionPhase(value);
   }
@@ -92,7 +92,7 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
   /**
    * Execution phase targeted by the Policy Group Studio
    */
-  @Input({ required: true })
+  @Input()
   public flowPhase!: FlowPhase;
 
   /**
