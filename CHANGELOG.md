@@ -1,3 +1,10 @@
+## [13.5.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.5.0...v13.5.1) (2024-10-18)
+
+
+### Bug Fixes
+
+* ps - remove required for executionPhase and flowPhase ([2c6923c](https://github.com/gravitee-io/gravitee-ui-particles/commit/2c6923ce483553a3fe8b2e4389b81583b792998a))
+
 # [13.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.4.0...v13.5.0) (2024-10-18)
 
 
