@@ -211,7 +211,7 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
       this.isLoading = false;
       this.genericPolicies = toGenericPolicies(this._policies);
     }
-    if (changes.executionPhase) {
+    if (changes.executionPhase || changes.flowPhase) {
       this.policyGroupVM = this.phases[`${this.apiType}__${this.flowPhase}`] ?? undefined;
       this.startConnector = this.createStartConnector(this.policyGroupVM?.startConnectorName ?? '');
       this.endConnector = this.createEndConnector(this.policyGroupVM?.endConnectorName ?? '');
