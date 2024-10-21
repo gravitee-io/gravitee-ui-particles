@@ -41,7 +41,11 @@ describe('GioElEditorComponent', () => {
         field: 'application',
         label: 'Application',
         type: 'string',
-        values: ['a'],
+        values: [
+          { value: 'aId', label: 'A' },
+          { value: 'bId', label: 'B' },
+          { value: 'cId', label: 'C' },
+        ],
       },
       {
         field: 'isAuthenticated',

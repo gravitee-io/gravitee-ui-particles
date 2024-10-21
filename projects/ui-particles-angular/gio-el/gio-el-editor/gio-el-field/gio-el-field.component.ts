@@ -43,15 +43,17 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { ConditionModel } from '../../models/ConditionModel';
 import { ConditionsModel, isConditionModel, ParentConditionModel } from '../../models/ConditionsModel';
 
-type AutocompleteOption = ConditionModel;
+type FieldAutocompleteOption = ConditionModel;
 
-type AutocompleteGroup = {
+type FieldAutocompleteGroup = {
   field: string;
   label: string;
-  options: AutocompleteOption[];
+  options: FieldAutocompleteOption[];
 };
 
-type AutocompleteModel = (AutocompleteOption | AutocompleteGroup)[];
+type FieldAutocompleteModel = (FieldAutocompleteOption | FieldAutocompleteGroup)[];
+
+type Key1AutocompleteValue = { value: string; label: string };
 
 @Component({
   selector: 'gio-el-field',
@@ -67,8 +69,8 @@ export class GioElFieldComponent implements OnChanges, MatFormFieldControl<Condi
   @Input({ required: true })
   public conditionsModel: ConditionsModel = [];
 
-  protected autocompleteInput = new FormControl<string | null>(null);
-  protected filteredOptions$: Observable<AutocompleteModel> = new Observable<AutocompleteModel>();
+  protected fieldFilteredOptions$ = new Observable<FieldAutocompleteModel>();
+  protected key1FilteredOptions$ = new Observable<Key1AutocompleteValue[]>();
 
   protected selectedConditionModel: ConditionModel | null = null;
 
@@ -188,36 +190,44 @@ export class GioElFieldComponent implements OnChanges, MatFormFieldControl<Condi
       const flattenConditionsModelToOption = (
         conditions: ConditionsModel,
         parent: ParentConditionModel | null = null,
-      ): AutocompleteOption[] => {
+      ): FieldAutocompleteOption[] => {
         return conditions.flatMap(condition => {
           if (isConditionModel(condition)) {
             return {
               ...condition,
+              label: parent ? `${parent.label} > ${condition.label}` : condition.label,
               field: parent ? `${parent.field}.${condition.field}` : condition.field,
-            } satisfies AutocompleteOption;
+            } satisfies FieldAutocompleteOption;
           }
-          return flattenConditionsModelToOption(condition.conditions, condition);
+          return flattenConditionsModelToOption(condition.conditions, {
+            ...condition,
+            field: parent ? `${parent.field}.${condition.field}` : condition.field,
+            label: parent ? `${parent.label} > ${condition.label}` : condition.label,
+          });
         });
       };
 
-      const autocompleteModel: AutocompleteModel = this.conditionsModel.map(conditionModel => {
+      const autocompleteModel: FieldAutocompleteModel = this.conditionsModel.map(conditionModel => {
         if (isConditionModel(conditionModel)) {
           return {
             ...conditionModel,
-          } satisfies AutocompleteOption;
+          } satisfies FieldAutocompleteOption;
         }
         return {
           field: conditionModel.field,
           label: conditionModel.label,
-          options: flattenConditionsModelToOption(conditionModel.conditions, conditionModel),
-        } satisfies AutocompleteGroup;
+          options: flattenConditionsModelToOption(conditionModel.conditions).map(conditions => ({
+            ...conditions,
+            field: `${conditionModel.field}.${conditions.field}`,
+          })),
+        } satisfies FieldAutocompleteGroup;
       });
 
       if (autocompleteModel && !isEmpty(autocompleteModel)) {
-        this.filteredOptions$ = this.fieldFormControl.valueChanges.pipe(
+        this.fieldFilteredOptions$ = this.fieldFormControl.valueChanges.pipe(
           takeUntilDestroyed(this.destroyRef),
           startWith(''),
-          map(value => filterValues(autocompleteModel, toString(value) ?? '')),
+          map(value => fieldFilterValues(autocompleteModel, toString(value) ?? '')),
         );
       }
 
@@ -249,12 +259,24 @@ export class GioElFieldComponent implements OnChanges, MatFormFieldControl<Condi
     }
   }
 
-  public displayFn(option: AutocompleteOption | AutocompleteGroup): string {
+  public displayFn(option: FieldAutocompleteOption | FieldAutocompleteGroup): string {
     return option?.field;
   }
 
   public onFieldSelected($event: MatAutocompleteSelectedEvent) {
     this.selectedConditionModel = $event.option.value;
+
+    const key1AutocompleteValues = this.selectedConditionModel?.map?.key1Values?.map(value =>
+      typeof value === 'string' ? { value, label: value } : value,
+    );
+
+    if (key1AutocompleteValues && !isEmpty(key1AutocompleteValues)) {
+      this.key1FilteredOptions$ = this.key1FormControl.valueChanges.pipe(
+        takeUntilDestroyed(this.destroyRef),
+        startWith(''),
+        map(value => key1FilterValues(key1AutocompleteValues, toString(value) ?? '')),
+      );
+    }
   }
 
   // From ControlValueAccessor interface
@@ -295,7 +317,7 @@ export class GioElFieldComponent implements OnChanges, MatFormFieldControl<Condi
   }
 }
 
-const filterValues = (autocompleteModel: AutocompleteModel, value: string) => {
+const fieldFilterValues = (autocompleteModel: FieldAutocompleteModel, value: string) => {
   const filterValue = value.toLowerCase();
   return autocompleteModel.filter(option => {
     if ('options' in option) {
@@ -303,4 +325,9 @@ const filterValues = (autocompleteModel: AutocompleteModel, value: string) => {
     }
     return option.label.toLowerCase().includes(filterValue);
   });
+};
+
+const key1FilterValues = (values: Key1AutocompleteValue[], value: string) => {
+  const filterValue = value.toLowerCase();
+  return values.filter(option => option.label.toLowerCase().includes(filterValue) || option.value.toLowerCase().includes(filterValue));
 };

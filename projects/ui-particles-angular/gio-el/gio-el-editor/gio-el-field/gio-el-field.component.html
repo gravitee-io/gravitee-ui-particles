@@ -28,7 +28,7 @@
     [displayWith]="displayFn"
     (optionSelected)="onFieldSelected($event)"
   >
-    @for (option of filteredOptions$ | async; track option) {
+    @for (option of fieldFilteredOptions$ | async; track option) {
       @if (option.hasOwnProperty('options')) {
         <mat-optgroup [label]="option.label">
           @for (option of $any(option).options; track option) {
@@ -42,7 +42,13 @@
   </mat-autocomplete>
   @if (selectedConditionModel?.map) {
     <span class="text">["</span>
-    <input class="input key1" matInput [formControl]="key1FormControl" />
+    <input class="input key1" matInput [formControl]="key1FormControl" [matAutocomplete]="key1SelectAuto" />
+
+    <mat-autocomplete #key1SelectAuto="matAutocomplete" panelWidth="auto">
+      @for (option of key1FilteredOptions$ | async; track option) {
+        <mat-option [value]="option.value">{{ option.label }}</mat-option>
+      }
+    </mat-autocomplete>
 
     <span class="text">"]</span>
   }
@@ -53,9 +59,3 @@
     <span class="text">]</span>
   }
 </div>
-
-<!--    @if(selectedConditionModel) {-->
-<!--    <button mat-button class="clearBtn"  (click)="selectedConditionModel = null">-->
-<!--      <mat-icon svgIcon="gio:cancel"></mat-icon>-->
-<!--    </button>-->
-<!--    }-->

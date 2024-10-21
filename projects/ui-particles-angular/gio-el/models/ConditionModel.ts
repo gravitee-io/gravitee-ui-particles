@@ -23,20 +23,24 @@ export type ConditionModelBase<T extends ConditionType> = {
   map?:
     | {
         type: 'Map';
-        key1Values?: string[];
+        key1Values?: string[] | { value: string; label: string }[];
         key1Value?: string | null;
       }
     | {
         type: 'MultiMap';
-        key1Values?: string[];
-        key2Values?: string[];
         key1Value?: string | null;
+        key1Values?: string[];
         key2Value?: string | null;
       };
 };
 
 export type StringConditionModel = ConditionModelBase<'string'> & {
-  values?: string[];
+  values?:
+    | string[]
+    | {
+        value: string;
+        label: string;
+      }[];
 };
 
 export type NumberConditionModel = ConditionModelBase<'number'> & {
