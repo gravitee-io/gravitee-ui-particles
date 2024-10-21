@@ -62,6 +62,40 @@ AllType.args = {
   ],
 };
 
+export const DeepFieldTree: StoryObj = {};
+DeepFieldTree.args = {
+  conditionsModel: [
+    {
+      field: 'root',
+      label: 'Root',
+      conditions: [
+        {
+          field: 'foo',
+          label: 'Foo',
+          conditions: [
+            {
+              field: 'value',
+              label: 'Value',
+              type: 'string',
+            },
+            {
+              field: 'bar',
+              label: 'Bar',
+              conditions: [
+                {
+                  field: 'baz',
+                  label: 'Baz',
+                  type: 'string',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ] satisfies ConditionsModel,
+};
+
 export const MapAndMultiMapField: StoryObj = {};
 MapAndMultiMapField.args = {
   conditionsModel: [
@@ -77,11 +111,6 @@ MapAndMultiMapField.args = {
         {
           field: 'id',
           label: 'Id',
-          type: 'string',
-        },
-        {
-          field: 'name',
-          label: 'Name',
           type: 'string',
         },
         {
@@ -101,9 +130,13 @@ MapAndMultiMapField.args = {
           },
         },
         {
-          field: 'version',
-          label: 'Version',
+          field: 'mltimapWithValues',
+          label: 'MultiMap with values',
           type: 'string',
+          map: {
+            type: 'MultiMap',
+            key1Values: ['foo', 'bar', 'baz'],
+          },
         },
       ],
     },
