@@ -15,11 +15,17 @@
     limitations under the License.
 
 -->
-<span mat-dialog-title>gio-el-editor-dialog</span>
+<span mat-dialog-title>Build EL</span>
 
-<mat-dialog-content> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel odio nec mi </mat-dialog-content>
+<mat-dialog-content>
+  @if (conditionsModel$ | async; as conditionsModel) {
+    <gio-el-condition-builder [conditionsModel]="conditionsModel" (elChange)="elValue = $event"></gio-el-condition-builder>
+  } @else {
+    No config found
+  }
+</mat-dialog-content>
 
 <mat-dialog-actions align="end">
   <button mat-flat-button mat-dialog-close>Close</button>
-  <button mat-raised-button [mat-dialog-close]="'What the 🦊 say ?'">My action</button>
+  <button mat-raised-button color="primary" [disabled]="!elValue || elValue.length < 1" [mat-dialog-close]="elValue">Valid</button>
 </mat-dialog-actions>

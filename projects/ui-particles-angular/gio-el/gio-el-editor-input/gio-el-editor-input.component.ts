@@ -188,16 +188,17 @@ export class GioElEditorInputComponent implements MatFormFieldControl<string>, C
     }
   }
 
-  public ngOnDestroy() {
-    this.stateChanges.complete();
-    this.focusMonitor.stopMonitoring(this.elementRef);
-  }
-
+  // From ControlValueAccessor interface
   public onContainerClick(): void {
     try {
       this.focusMonitor.focusVia(this.elInput, 'program');
     } catch (e) {
       // Best effort
     }
+  }
+
+  public ngOnDestroy() {
+    this.stateChanges.complete();
+    this.focusMonitor.stopMonitoring(this.elementRef);
   }
 }

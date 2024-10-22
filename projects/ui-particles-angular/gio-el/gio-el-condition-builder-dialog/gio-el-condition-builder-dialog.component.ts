@@ -16,8 +16,16 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
-export interface GioElConditionBuilderDialogData {}
+import { ConditionsModel } from '../models/ConditionsModel';
+import { GioElConditionBuilderComponent } from '../gio-el-condition-builder/gio-el-condition-builder.component';
+
+export interface GioElConditionBuilderDialogData {
+  conditionsModel$?: Observable<ConditionsModel>;
+}
 
 export type GioElConditionBuilderDialogResult = string;
 
@@ -26,12 +34,16 @@ export type GioElConditionBuilderDialogResult = string;
   templateUrl: './gio-el-condition-builder-dialog.component.html',
   styleUrls: ['./gio-el-condition-builder-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatDialogModule, MatButtonModule],
+  imports: [MatDialogModule, MatButtonModule, GioElConditionBuilderComponent, AsyncPipe, ReactiveFormsModule],
 })
 export class GioElConditionBuilderDialogComponent {
+  public conditionsModel$?: Observable<ConditionsModel>;
+  public elValue = '';
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: GioElConditionBuilderDialogData,
     public dialogRef: MatDialogRef<GioElConditionBuilderDialogComponent, GioElConditionBuilderDialogResult>,
-  ) {}
+  ) {
+    this.conditionsModel$ = data.conditionsModel$;
+  }
 }

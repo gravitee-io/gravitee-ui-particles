@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 import { BaseHarnessFilters, ComponentHarness, HarnessPredicate } from '@angular/cdk/testing';
-import { MatDialogSection } from '@angular/material/dialog/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
+
+import { GioElConditionBuilderHarness } from '../gio-el-condition-builder/gio-el-condition-builder.harness';
 
 export interface GioElConditionBuilderDialogHarnessOptions extends BaseHarnessFilters {}
 
@@ -26,20 +27,8 @@ export class GioElConditionBuilderDialogHarness extends ComponentHarness {
     return new HarnessPredicate(GioElConditionBuilderDialogHarness, options);
   }
 
-  protected _title = this.locatorForOptional(MatDialogSection.TITLE);
-  protected _content = this.locatorForOptional(MatDialogSection.CONTENT);
-  protected _actions = this.locatorForOptional(MatDialogSection.ACTIONS);
-
-  public async getTitleText(): Promise<string> {
-    return (await this._title())?.text() ?? '';
-  }
-
-  public async getContentText(): Promise<string> {
-    return (await this._content())?.text() ?? '';
-  }
-
-  public async getActionsText(): Promise<string> {
-    return (await this._actions())?.text() ?? '';
+  public async getElConditionBuilderHarness() {
+    return this.locatorFor(GioElConditionBuilderHarness)();
   }
 
   public async close(): Promise<void> {
@@ -47,8 +36,8 @@ export class GioElConditionBuilderDialogHarness extends ComponentHarness {
     await closeButton.click();
   }
 
-  public async confirmMyAction(): Promise<void> {
-    const confirmButton = await this.locatorFor(MatButtonHarness.with({ text: /My action/ }))();
+  public async confirm(): Promise<void> {
+    const confirmButton = await this.locatorFor(MatButtonHarness.with({ text: /Valid/ }))();
     await confirmButton.click();
   }
 }

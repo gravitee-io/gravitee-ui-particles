@@ -21,6 +21,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { action } from '@storybook/addon-actions';
 
+import { GioElService } from '../gio-el.service';
+
 import { GioElEditorHelperInputDirective } from './gio-el-editor-helper-input.directive';
 import { GioElEditorHelperToggleComponent } from './gio-el-editor-helper-toggle.component';
 
@@ -54,7 +56,7 @@ class StoryHelperComponent {
   public formControl = new FormControl();
   public disable = false;
 
-  constructor() {
+  constructor(_gioElService: GioElService) {
     this.formControl.valueChanges.subscribe(value => action('El Value')(value));
   }
 

@@ -86,13 +86,18 @@ describe('GioElEditorHelperComponent', () => {
     expect(await elEditorHelperToggle.isDisabled()).toBe(false);
   });
 
-  it('should update form control value when el editor dialog is saved', async () => {
+  it('should update form control value when el condition builder dialog is saved', async () => {
     const elEditorHelperToggle = await loader.getHarness(GioElEditorHelperToggleHarness);
     await elEditorHelperToggle.open();
 
     const dialog = await loader.getHarness(GioElConditionBuilderDialogHarness);
-    await dialog.confirmMyAction();
+    const elEditor = await dialog.getElConditionBuilderHarness().then(elEditor => elEditor.getMainConditionGroup());
+    await elEditor.clickAddNewConditionButton();
+    await elEditor.selectConditionField(0, 'Id');
+    await elEditor.selectConditionOperator(0, 'Equals');
+    await elEditor.setConditionValue(0, 'What the 🦊 say ?');
+    await dialog.confirm();
 
-    expect(fixture.componentInstance.formControl.value).toEqual('What the 🦊 say ?');
+    expect(fixture.componentInstance.formControl.value).toEqual('{ #api.id == "What the 🦊 say ?" }');
   });
 });
