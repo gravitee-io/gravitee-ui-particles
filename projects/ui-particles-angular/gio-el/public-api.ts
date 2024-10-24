@@ -13,7 +13,5 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { GioElEditorComponent } from './gio-el-editor/gio-el-editor.component';
-export { GioElEditorHarness } from './gio-el-editor/gio-el-editor.harness';
 
 export * from './models/public-api';

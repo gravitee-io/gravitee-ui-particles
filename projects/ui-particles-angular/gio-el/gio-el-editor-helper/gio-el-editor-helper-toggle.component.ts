@@ -55,7 +55,7 @@ export class GioElEditorHelperToggleComponent {
           width: GIO_DIALOG_WIDTH.LARGE,
           minWidth: 800,
           data: {
-            conditionsModel$: this.gioElService?.conditionsModel$.pipe(filter(cm => !isNil(cm))),
+            conditionsModel$: this.gioElService?.conditionsModel$(['ALL']).pipe(filter(cm => !isNil(cm))),
           },
         },
       )

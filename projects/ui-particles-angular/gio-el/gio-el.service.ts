@@ -14,47 +14,62 @@
  * limitations under the License.
  */
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { ConditionsModel } from './models/ConditionsModel';
+import { ConditionsModel, isConditionModel } from './models/ConditionsModel';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GioElService {
-  public conditionsModel$ = new BehaviorSubject<ConditionsModel | null>(null);
+  private conditionsModelByScope$ = new BehaviorSubject<Record<string, ConditionsModel>>({});
 
-  constructor() {
-    this.conditionsModel$.next([
-      {
-        field: 'api',
-        label: 'Api',
-        conditions: [
-          {
-            field: 'id',
-            label: 'Id',
-            type: 'string',
-          },
-          {
-            field: 'name',
-            label: 'Name',
-            type: 'string',
-          },
-          {
-            field: 'properties',
-            label: 'Properties',
-            type: 'string',
-            map: {
-              type: 'Map',
-            },
-          },
-          {
-            field: 'version',
-            label: 'Version',
-            type: 'string',
-          },
-        ],
-      },
-    ]);
+  public conditionsModel$(scope: string[]): Observable<ConditionsModel> {
+    return this.conditionsModelByScope$.pipe(
+      map(conditionsModelByScope => {
+        return scope.reduce((acc, currentScope) => {
+          return [...acc, ...(conditionsModelByScope[currentScope] || [])];
+        }, [] as ConditionsModel);
+      }),
+    );
+  }
+
+  public getConditionsModelJsonSchema(scope: string[]): Observable<unknown> {
+    return this.conditionsModel$(scope).pipe(
+      map(conditionsModel => {
+        return toJsonObject(conditionsModel);
+      }),
+    );
+  }
+
+  public setConditionsModel(scope: string, conditionsModel: ConditionsModel) {
+    this.conditionsModelByScope$.next({
+      ...this.conditionsModelByScope$.value,
+      [scope]: conditionsModel,
+    });
   }
 }
+
+const toJsonObject = (conditionsModel: ConditionsModel): Record<string, unknown> => {
+  return conditionsModel.reduce((acc, condition) => {
+    if (isConditionModel(condition)) {
+      return {
+        ...acc,
+        [condition.field]: {
+          title: condition.label,
+          type: condition.type === 'date' ? 'string' : condition.type,
+        },
+      };
+    } else {
+      return {
+        ...acc,
+        [condition.field]: {
+          title: condition.label,
+          type: 'object',
+          properties: toJsonObject(condition.conditions),
+        },
+      };
+    }
+  }, {});
+};
