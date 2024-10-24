@@ -1,3 +1,10 @@
+## [13.5.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.5.2...v13.5.3) (2024-10-24)
+
+
+### Bug Fixes
+
+* corrects a spelling error ([b7ff6e5](https://github.com/gravitee-io/gravitee-ui-particles/commit/b7ff6e54085b95522859a110adf81ce85edc3760))
+
 ## [13.5.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.5.1...v13.5.2) (2024-10-18)
 
 
