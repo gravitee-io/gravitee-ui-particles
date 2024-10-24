@@ -103,7 +103,7 @@
                 <mat-icon [svgIcon]="flow.enabled ? 'gio:prohibition' : 'gio:check-circled-outline'"></mat-icon>
                 <span>{{ flow.enabled ? 'Disable' : 'Enable' }}</span>
               </button>
-              <button mat-menu-item (click)="onEditFlow(flow._id)"><mat-icon svgIcon="gio:edit-pencil"></mat-icon> Edite</button>
+              <button mat-menu-item (click)="onEditFlow(flow._id)"><mat-icon svgIcon="gio:edit-pencil"></mat-icon> Edit</button>
               <button mat-menu-item (click)="onDeleteFlow(flow._id)"><mat-icon svgIcon="gio:trash"></mat-icon> Delete</button>
               <button mat-menu-item (click)="onDuplicateFlow(flowsGroup._id, flow._id)">
                 <mat-icon svgIcon="gio:copy"></mat-icon> Duplicate
