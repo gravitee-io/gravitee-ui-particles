@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,11 +24,11 @@ import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
-import { has, isEmpty, isNil } from 'lodash';
+import { get, has, isEmpty, isNil } from 'lodash';
 import { GioIconsModule } from '@gravitee/ui-particles-angular';
 
-import { ConditionModel } from '../models/ConditionModel';
-import { ConditionsModel, isConditionModel } from '../models/ConditionsModel';
+import { ConditionModel, ConditionType } from '../models/ConditionModel';
+import { ConditionsModel } from '../models/ConditionsModel';
 import { ExpressionLanguageBuilder } from '../models/ExpressionLanguageBuilder';
 import { ConditionGroup } from '../models/ConditionGroup';
 import { Condition } from '../models/Condition';
@@ -80,21 +80,14 @@ export class GioElEditorComponent implements OnInit {
   @Input({ required: true })
   public conditionsModel: ConditionsModel = [];
 
-  protected conditionsGroupFormArray = new FormArray<FormGroup<ConditionGroupForm>>([]);
-  protected conditionGroupFormGroup = newConditionGroupFormGroup();
+  @Output()
+  public elChange = new EventEmitter<string>();
 
-  protected fields: ConditionModel[] = [];
+  protected conditionGroupFormGroup = newConditionGroupFormGroup();
 
   protected elOutput?: string;
 
   public ngOnInit() {
-    for (const conditionModel of this.conditionsModel) {
-      if (isConditionModel(conditionModel)) {
-        // TOTO: Impl Deep Tree for conditions Limit to fist Node for fist impl
-        this.fields.push(conditionModel);
-      }
-    }
-
     this.conditionGroupFormGroup.valueChanges
       .pipe(
         takeUntilDestroyed(this.destroyRef),
@@ -103,9 +96,7 @@ export class GioElEditorComponent implements OnInit {
           type ConditionGroupValue = typeof value;
           type ConditionValue = Exclude<ConditionGroupValue['conditions'], undefined>[number];
 
-          const toCondition = (
-            conditionValue: ConditionValue,
-          ): Condition<'string' | 'number' | 'date' | 'boolean'> | ConditionGroup | null => {
+          const toCondition = (conditionValue: ConditionValue): Condition<ConditionType> | ConditionGroup | null => {
             if (isConditionGroupValue(conditionValue)) {
               return toConditionGroup(conditionValue as ConditionGroupValue);
             }
@@ -117,7 +108,16 @@ export class GioElEditorComponent implements OnInit {
             ) {
               return null;
             }
-            return new Condition(conditionValue.field.field, conditionValue.field.type, conditionValue.operator, conditionValue.value);
+            let field: Condition<ConditionType>['field'] = conditionValue.field.field;
+            if (conditionValue.field.map) {
+              field = {
+                field: conditionValue.field.field,
+                key1Value: get(conditionValue.field.map, 'key1Value') ?? undefined,
+                key2Value: get(conditionValue.field.map, 'key2Value') ?? undefined,
+              };
+            }
+
+            return new Condition(field, conditionValue.field.type, conditionValue.operator, conditionValue.value);
           };
 
           const toConditionGroup = (conditionGroupValue: ConditionGroupValue): ConditionGroup | null => {
@@ -141,6 +141,7 @@ export class GioElEditorComponent implements OnInit {
           const conditionGroupValue = toConditionGroup(value);
           if (conditionGroupValue) {
             this.elOutput = new ExpressionLanguageBuilder(conditionGroupValue).build();
+            this.elChange.emit(this.elOutput);
           }
         }),
       )

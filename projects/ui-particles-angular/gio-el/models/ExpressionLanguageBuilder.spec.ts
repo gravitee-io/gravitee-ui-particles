@@ -119,4 +119,54 @@ describe('ExpressionLanguageBuilder', () => {
     // Assert
     expect(expression).toEqual('{ #field1 == 1609459200000l }');
   });
+
+  it('should build a condition group with boolean', () => {
+    // Arrange
+    const conditionGroup = new ConditionGroup('AND', [new Condition('field1', 'boolean', 'EQUALS', true)]);
+    const expressionLanguageBuilder = new ExpressionLanguageBuilder(conditionGroup);
+
+    // Act
+    const expression = expressionLanguageBuilder.build();
+
+    // Assert
+    expect(expression).toEqual('{ #field1 == true }');
+  });
+
+  it('should build a condition group with number', () => {
+    // Arrange
+    const conditionGroup = new ConditionGroup('AND', [new Condition('field1', 'number', 'EQUALS', 10)]);
+    const expressionLanguageBuilder = new ExpressionLanguageBuilder(conditionGroup);
+
+    // Act
+    const expression = expressionLanguageBuilder.build();
+
+    // Assert
+    expect(expression).toEqual('{ #field1 == 10 }');
+  });
+
+  it('should build a condition group two dimensional field', () => {
+    // Arrange
+    const conditionGroup = new ConditionGroup('AND', [
+      new Condition({ field: 'field1', key1Value: 'key1', key2Value: 'key2' }, 'string', 'EQUALS', 'value1'),
+    ]);
+    const expressionLanguageBuilder = new ExpressionLanguageBuilder(conditionGroup);
+
+    // Act
+    const expression = expressionLanguageBuilder.build();
+
+    // Assert
+    expect(expression).toEqual('{ #field1?.["key1"]?.[key2] == "value1" }');
+  });
+
+  it('should build a condition group one dimensional field', () => {
+    // Arrange
+    const conditionGroup = new ConditionGroup('AND', [new Condition({ field: 'field1', key1Value: 'key1' }, 'string', 'EQUALS', 'value1')]);
+    const expressionLanguageBuilder = new ExpressionLanguageBuilder(conditionGroup);
+
+    // Act
+    const expression = expressionLanguageBuilder.build();
+
+    // Assert
+    expect(expression).toEqual('{ #field1?.["key1"] == "value1" }');
+  });
 });

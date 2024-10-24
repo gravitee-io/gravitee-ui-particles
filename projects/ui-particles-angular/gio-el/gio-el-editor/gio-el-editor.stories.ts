@@ -16,6 +16,8 @@
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { provideNativeDateAdapter } from '@angular/material/core';
 
+import { ConditionsModel } from '../models/ConditionsModel';
+
 import { GioElEditorComponent } from './gio-el-editor.component';
 
 export default {
@@ -32,8 +34,8 @@ export default {
   }),
 } as Meta;
 
-export const Default: StoryObj = {};
-Default.args = {
+export const AllType: StoryObj = {};
+AllType.args = {
   conditionsModel: [
     {
       field: 'application',
@@ -58,4 +60,85 @@ Default.args = {
       type: 'date',
     },
   ],
+};
+
+export const DeepFieldTree: StoryObj = {};
+DeepFieldTree.args = {
+  conditionsModel: [
+    {
+      field: 'root',
+      label: 'Root',
+      conditions: [
+        {
+          field: 'foo',
+          label: 'Foo',
+          conditions: [
+            {
+              field: 'value',
+              label: 'Value',
+              type: 'string',
+            },
+            {
+              field: 'bar',
+              label: 'Bar',
+              conditions: [
+                {
+                  field: 'baz',
+                  label: 'Baz',
+                  type: 'string',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ] satisfies ConditionsModel,
+};
+
+export const MapAndMultiMapField: StoryObj = {};
+MapAndMultiMapField.args = {
+  conditionsModel: [
+    {
+      field: 'foo',
+      label: 'Foo',
+      type: 'string',
+    },
+    {
+      field: 'api',
+      label: 'Api',
+      conditions: [
+        {
+          field: 'id',
+          label: 'Id',
+          type: 'string',
+        },
+        {
+          field: 'properties',
+          label: 'Properties',
+          type: 'string',
+          map: {
+            type: 'Map',
+          },
+        },
+        {
+          field: 'multimap',
+          label: 'MultiMap',
+          type: 'string',
+          map: {
+            type: 'MultiMap',
+          },
+        },
+        {
+          field: 'mltimapWithValues',
+          label: 'MultiMap with values',
+          type: 'string',
+          map: {
+            type: 'MultiMap',
+            key1Values: ['foo', 'bar', 'baz'],
+          },
+        },
+      ],
+    },
+  ] satisfies ConditionsModel,
 };

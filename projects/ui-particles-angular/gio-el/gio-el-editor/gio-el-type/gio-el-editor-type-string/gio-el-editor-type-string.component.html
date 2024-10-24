@@ -17,7 +17,7 @@
 -->
 @if (conditionFormGroup) {
   <div [formGroup]="conditionFormGroup" class="condition">
-    <mat-form-field>
+    <mat-form-field class="condition__operator">
       <mat-label>Operator</mat-label>
 
       <mat-select formControlName="operator" placeholder="Select Operator">
@@ -33,7 +33,7 @@
 
       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
         @for (option of filteredOptions$ | async; track option) {
-          <mat-option [value]="option">{{ option }}</mat-option>
+          <mat-option [value]="option.value">{{ option.label }}</mat-option>
         }
       </mat-autocomplete>
     </mat-form-field>

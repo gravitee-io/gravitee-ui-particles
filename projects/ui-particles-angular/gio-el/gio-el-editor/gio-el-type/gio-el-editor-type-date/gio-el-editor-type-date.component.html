@@ -17,7 +17,7 @@
 -->
 @if (conditionFormGroup) {
   <div [formGroup]="conditionFormGroup" class="condition">
-    <mat-form-field>
+    <mat-form-field class="condition__operator">
       <mat-label>Operator</mat-label>
 
       <mat-select formControlName="operator" placeholder="Select Operator">

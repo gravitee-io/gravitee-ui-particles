@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ComponentHarness } from '@angular/cdk/testing';
+import { BaseHarnessFilters, ComponentHarness, HarnessPredicate } from '@angular/cdk/testing';
 
 import { GioElEditorConditionGroupHarness } from './gio-el-editor-condition-group/gio-el-editor-condition-group.harness';
 
@@ -21,4 +21,8 @@ export class GioElEditorHarness extends ComponentHarness {
   public static hostSelector = 'gio-el-editor';
 
   public getMainConditionGroup = this.locatorFor(GioElEditorConditionGroupHarness);
+
+  public static with(options: BaseHarnessFilters = {}): HarnessPredicate<GioElEditorHarness> {
+    return new HarnessPredicate(GioElEditorHarness, options);
+  }
 }

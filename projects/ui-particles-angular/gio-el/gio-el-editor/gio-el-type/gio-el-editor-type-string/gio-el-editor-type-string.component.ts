@@ -28,6 +28,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ConditionForm } from '../../gio-el-editor.component';
 import { Operator } from '../../../models/Operator';
 
+type AutocompleteValue = { value: string; label: string };
+
 @Component({
   selector: 'gio-el-editor-type-string',
   standalone: true,
@@ -48,7 +50,7 @@ export class GioElEditorTypeStringComponent implements OnChanges {
     { label: 'Not equals', value: 'NOT_EQUALS' },
   ];
 
-  protected filteredOptions$: Observable<string[]> = new Observable<string[]>();
+  protected filteredOptions$ = new Observable<AutocompleteValue[]>();
 
   public ngOnChanges(changes: SimpleChanges) {
     if (changes.conditionFormGroup) {
@@ -60,7 +62,7 @@ export class GioElEditorTypeStringComponent implements OnChanges {
       this.conditionFormGroup.addControl('operator', new FormControl(null));
       this.conditionFormGroup.addControl('value', new FormControl(null));
 
-      const values = field.values;
+      const values = field.values?.map(value => (typeof value === 'string' ? { value, label: value } : value));
       if (values && !isEmpty(values)) {
         this.filteredOptions$ = this.conditionFormGroup.get('value')!.valueChanges.pipe(
           takeUntilDestroyed(this.destroyRef),
@@ -72,7 +74,8 @@ export class GioElEditorTypeStringComponent implements OnChanges {
   }
 }
 
-const filterValues = (values: string[], value: string) => {
+const filterValues = (values: AutocompleteValue[], value: string) => {
   const filterValue = value.toLowerCase();
-  return values.filter(option => option.toLowerCase().includes(filterValue));
+
+  return values.filter(option => option.label.toLowerCase().includes(filterValue) || option.value.toLowerCase().includes(filterValue));
 };
