@@ -1,3 +1,14 @@
+# [13.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.5.3...v13.6.0) (2024-11-06)
+
+
+### Features
+
+* add css for tree ([59c8890](https://github.com/gravitee-io/gravitee-ui-particles/commit/59c889067bfa1afa55cd7a4cd31594856faebb97))
+* add support of Map & MultiMap java capacity ([45fb355](https://github.com/gravitee-io/gravitee-ui-particles/commit/45fb3556e85b04b094e5c08c5275014d3ea32a9c))
+* el - add el field with Map an MultiMap option ([c6d48b6](https://github.com/gravitee-io/gravitee-ui-particles/commit/c6d48b64f5f847837880da228b233eabe179d51f))
+* el - improve autocomplete to help to user ([ce5e909](https://github.com/gravitee-io/gravitee-ui-particles/commit/ce5e9094d337bdcde4cea9c0cbbd3a347bf5b66b))
+* small scss improvement ([2c5d92d](https://github.com/gravitee-io/gravitee-ui-particles/commit/2c5d92d44696dcb0b20a6d838bf32f3df9a7ded2))
+
 ## [13.5.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.5.2...v13.5.3) (2024-10-24)
 
 
