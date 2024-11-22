@@ -20,11 +20,11 @@ import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { ConditionsModel } from '../models/ConditionsModel';
+import { ElProperties } from '../models/ElProperties';
 import { GioElConditionBuilderComponent } from '../gio-el-condition-builder/gio-el-condition-builder.component';
 
 export interface GioElConditionBuilderDialogData {
-  conditionsModel$?: Observable<ConditionsModel>;
+  elProperties$?: Observable<ElProperties>;
 }
 
 export type GioElConditionBuilderDialogResult = string;
@@ -37,13 +37,13 @@ export type GioElConditionBuilderDialogResult = string;
   imports: [MatDialogModule, MatButtonModule, GioElConditionBuilderComponent, AsyncPipe, ReactiveFormsModule],
 })
 export class GioElConditionBuilderDialogComponent {
-  public conditionsModel$?: Observable<ConditionsModel>;
+  public elProperties$?: Observable<ElProperties>;
   public elValue = '';
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: GioElConditionBuilderDialogData,
     public dialogRef: MatDialogRef<GioElConditionBuilderDialogComponent, GioElConditionBuilderDialogResult>,
   ) {
-    this.conditionsModel$ = data.conditionsModel$;
+    this.elProperties$ = data.elProperties$;
   }
 }

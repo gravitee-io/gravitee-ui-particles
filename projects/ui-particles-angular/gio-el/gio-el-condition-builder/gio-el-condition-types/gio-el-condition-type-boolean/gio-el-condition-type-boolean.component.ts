@@ -21,7 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 
-import { Operator } from '../../../models/Operator';
+import { Operator } from '../../models/Operator';
 import { ConditionForm } from '../../gio-el-condition-builder.component';
 
 @Component({

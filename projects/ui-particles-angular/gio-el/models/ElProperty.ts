@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-export type ConditionType = 'string' | 'number' | 'date' | 'boolean';
+export type ElPropertyType = 'string' | 'number' | 'date' | 'boolean';
 
-export type ConditionModelBase<T extends ConditionType> = {
+export type ElPropertyBase<T extends ElPropertyType> = {
   field: string;
   label: string;
   type: T;
@@ -34,7 +34,7 @@ export type ConditionModelBase<T extends ConditionType> = {
       };
 };
 
-export type StringConditionModel = ConditionModelBase<'string'> & {
+export type StringElProperty = ElPropertyBase<'string'> & {
   values?:
     | string[]
     | {
@@ -43,13 +43,13 @@ export type StringConditionModel = ConditionModelBase<'string'> & {
       }[];
 };
 
-export type NumberConditionModel = ConditionModelBase<'number'> & {
+export type NumberElProperty = ElPropertyBase<'number'> & {
   min?: number;
   max?: number;
 };
 
-export type DateConditionModel = ConditionModelBase<'date'>;
+export type DateElProperty = ElPropertyBase<'date'>;
 
-export type BooleanConditionModel = ConditionModelBase<'boolean'>;
+export type BooleanElProperty = ElPropertyBase<'boolean'>;
 
-export type ConditionModel = StringConditionModel | NumberConditionModel | DateConditionModel | BooleanConditionModel;
+export type ElProperty = StringElProperty | NumberElProperty | DateElProperty | BooleanElProperty;

@@ -13,12 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ConditionModel } from './ConditionModel';
+import { ElPropertyType } from '../../models/ElProperty';
 
-export type ParentConditionModel = { field: string; label: string; conditions: (ParentConditionModel | ConditionModel)[] };
+import { Operator } from './Operator';
 
-export type ConditionsModel = (ParentConditionModel | ConditionModel)[];
+type ConditionValue<T> = T extends 'string'
+  ? string
+  : T extends 'number'
+    ? number
+    : T extends 'date'
+      ? Date
+      : T extends 'boolean'
+        ? boolean
+        : unknown;
 
-export const isConditionModel = (conditions: ParentConditionModel | ConditionModel): conditions is ConditionModel => {
-  return 'field' in conditions && 'label' in conditions && 'type' in conditions;
-};
+export class Condition<T extends ElPropertyType> {
+  constructor(
+    public field:
+      | string
+      | {
+          field: string;
+          key1Value?: string;
+          key2Value?: string;
+        },
+    public type: T,
+    public operator: Operator,
+    public value?: ConditionValue<T>,
+  ) {}
+}

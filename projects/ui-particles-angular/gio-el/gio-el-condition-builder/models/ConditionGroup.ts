@@ -13,5 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { ElPropertyType } from '../../models/ElProperty';
 
-export * from './gio-el-condition-builder/models/public-api';
+import { Condition } from './Condition';
+
+export class ConditionGroup {
+  constructor(
+    public condition: 'AND' | 'OR',
+    public conditions: (Condition<ElPropertyType> | ConditionGroup)[],
+  ) {}
+}

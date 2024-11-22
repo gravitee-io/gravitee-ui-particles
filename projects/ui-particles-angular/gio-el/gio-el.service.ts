@@ -17,57 +17,57 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ConditionsModel, isConditionModel } from './models/ConditionsModel';
+import { ElProperties, isElProperty } from './models/ElProperties';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GioElService {
-  private conditionsModelByScope$ = new BehaviorSubject<Record<string, ConditionsModel>>({});
+  private elPropertiesByScope$ = new BehaviorSubject<Record<string, ElProperties>>({});
 
-  public conditionsModel$(scope: string[]): Observable<ConditionsModel> {
-    return this.conditionsModelByScope$.pipe(
-      map(conditionsModelByScope => {
+  public elProperties$(scope: string[]): Observable<ElProperties> {
+    return this.elPropertiesByScope$.pipe(
+      map(elPropertiesByScope => {
         return scope.reduce((acc, currentScope) => {
-          return [...acc, ...(conditionsModelByScope[currentScope] || [])];
-        }, [] as ConditionsModel);
+          return [...acc, ...(elPropertiesByScope[currentScope] || [])];
+        }, [] as ElProperties);
       }),
     );
   }
 
-  public getConditionsModelJsonSchema(scope: string[]): Observable<unknown> {
-    return this.conditionsModel$(scope).pipe(
-      map(conditionsModel => {
-        return toJsonObject(conditionsModel);
+  public getElPropertiesJsonSchema(scope: string[]): Observable<unknown> {
+    return this.elProperties$(scope).pipe(
+      map(elProperties => {
+        return toJsonObject(elProperties);
       }),
     );
   }
 
-  public setConditionsModel(scope: string, conditionsModel: ConditionsModel) {
-    this.conditionsModelByScope$.next({
-      ...this.conditionsModelByScope$.value,
-      [scope]: conditionsModel,
+  public setElProperties(scope: string, elProperties: ElProperties) {
+    this.elPropertiesByScope$.next({
+      ...this.elPropertiesByScope$.value,
+      [scope]: elProperties,
     });
   }
 }
 
-const toJsonObject = (conditionsModel: ConditionsModel): Record<string, unknown> => {
-  return conditionsModel.reduce((acc, condition) => {
-    if (isConditionModel(condition)) {
+const toJsonObject = (elProperties: ElProperties): Record<string, unknown> => {
+  return elProperties.reduce((acc, elProperty) => {
+    if (isElProperty(elProperty)) {
       return {
         ...acc,
-        [condition.field]: {
-          title: condition.label,
-          type: condition.type === 'date' ? 'string' : condition.type,
+        [elProperty.field]: {
+          title: elProperty.label,
+          type: elProperty.type === 'date' ? 'string' : elProperty.type,
         },
       };
     } else {
       return {
         ...acc,
-        [condition.field]: {
-          title: condition.label,
+        [elProperty.field]: {
+          title: elProperty.label,
           type: 'object',
-          properties: toJsonObject(condition.conditions),
+          properties: toJsonObject(elProperty.properties),
         },
       };
     }

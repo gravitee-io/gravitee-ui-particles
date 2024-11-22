@@ -28,7 +28,7 @@ import { GioElConditionTypeDateComponent } from '../gio-el-condition-types/gio-e
 import { GioElConditionTypeNumberComponent } from '../gio-el-condition-types/gio-el-condition-type-number/gio-el-condition-type-number.component';
 import { GioElConditionTypeStringComponent } from '../gio-el-condition-types/gio-el-condition-type-string/gio-el-condition-type-string.component';
 import { ConditionForm, ConditionGroupForm } from '../gio-el-condition-builder.component';
-import { ConditionsModel } from '../../models/ConditionsModel';
+import { ElProperties } from '../../models/ElProperties';
 import { GioElFieldComponent } from '../gio-el-field/gio-el-field.component';
 
 @Component({
@@ -58,12 +58,12 @@ export class GioElConditionGroupComponent {
   public conditionGroupFormGroup!: FormGroup<ConditionGroupForm>;
 
   /**
-   * Conditions model to generate the fields for the conditions.
+   * El properties to generate the fields for the conditions.
    */
   @Input({
     required: true,
   })
-  public conditionsModel: ConditionsModel = [];
+  public elProperties: ElProperties = [];
 
   /**
    * Level of the node in the tree. Useful for testing with Harness to limit the scope of the query.

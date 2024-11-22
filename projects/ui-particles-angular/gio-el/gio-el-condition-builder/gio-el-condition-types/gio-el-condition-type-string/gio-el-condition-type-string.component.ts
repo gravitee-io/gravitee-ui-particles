@@ -26,7 +26,7 @@ import { map, startWith } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { ConditionForm } from '../../gio-el-condition-builder.component';
-import { Operator } from '../../../models/Operator';
+import { Operator } from '../../models/Operator';
 
 type AutocompleteValue = { value: string; label: string };
 

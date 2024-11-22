@@ -23,7 +23,7 @@ import { CommonModule } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { Operator } from '../../../models/Operator';
+import { Operator } from '../../models/Operator';
 import { ConditionForm } from '../../gio-el-condition-builder.component';
 
 @Component({

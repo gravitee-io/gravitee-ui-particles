@@ -13,12 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Condition } from './Condition';
-import { ConditionType } from './ConditionModel';
 
-export class ConditionGroup {
-  constructor(
-    public condition: 'AND' | 'OR',
-    public conditions: (Condition<ConditionType> | ConditionGroup)[],
-  ) {}
-}
+export * from './Condition';
+export * from './ExpressionLanguageBuilder';
+export * from './Operator';

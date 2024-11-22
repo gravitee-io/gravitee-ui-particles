@@ -22,7 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 
 import { ConditionForm } from '../../gio-el-condition-builder.component';
-import { Operator } from '../../../models/Operator';
+import { Operator } from '../../models/Operator';
 
 @Component({
   selector: 'gio-el-condition-type-number',

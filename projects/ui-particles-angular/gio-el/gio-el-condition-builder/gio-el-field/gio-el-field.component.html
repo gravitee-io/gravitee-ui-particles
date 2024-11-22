@@ -40,7 +40,7 @@
       }
     }
   </mat-autocomplete>
-  @if (selectedConditionModel?.map) {
+  @if (selectedElProperty?.map) {
     <span class="text">["</span>
     <input class="input key1" matInput [formControl]="key1FormControl" [matAutocomplete]="key1SelectAuto" />
 
@@ -52,7 +52,7 @@
 
     <span class="text">"]</span>
   }
-  @if (selectedConditionModel?.map?.type === 'MultiMap') {
+  @if (selectedElProperty?.map?.type === 'MultiMap') {
     <span class="text">[</span>
     <input class="input key2" type="number" min="0" matInput [formControl]="key2FormControl" />
 

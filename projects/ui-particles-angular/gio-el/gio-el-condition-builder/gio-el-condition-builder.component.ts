@@ -27,17 +27,17 @@ import { map } from 'rxjs/operators';
 import { get, has, isEmpty, isNil } from 'lodash';
 import { GioIconsModule } from '@gravitee/ui-particles-angular';
 
-import { ConditionModel, ConditionType } from '../models/ConditionModel';
-import { ConditionsModel } from '../models/ConditionsModel';
-import { ExpressionLanguageBuilder } from '../models/ExpressionLanguageBuilder';
-import { ConditionGroup } from '../models/ConditionGroup';
-import { Condition } from '../models/Condition';
-import { Operator } from '../models/Operator';
+import { ElProperty, ElPropertyType } from '../models/ElProperty';
+import { ElProperties } from '../models/ElProperties';
 
+import { ExpressionLanguageBuilder } from './models/ExpressionLanguageBuilder';
+import { ConditionGroup } from './models/ConditionGroup';
+import { Condition } from './models/Condition';
+import { Operator } from './models/Operator';
 import { GioElConditionGroupComponent } from './gio-el-condition-group/gio-el-condition-group.component';
 
 export type ConditionForm = {
-  field: FormControl<ConditionModel | null>;
+  field: FormControl<ElProperty | null>;
   operator: FormControl<Operator | null>;
   value: FormControl<string | boolean | Date | number | null>;
 };
@@ -69,7 +69,7 @@ export class GioElConditionBuilderComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
 
   @Input({ required: true })
-  public conditionsModel: ConditionsModel = [];
+  public elProperties: ElProperties = [];
 
   @Output()
   public elChange = new EventEmitter<string>();
@@ -87,7 +87,7 @@ export class GioElConditionBuilderComponent implements OnInit {
           type ConditionGroupValue = typeof value;
           type ConditionValue = Exclude<ConditionGroupValue['conditions'], undefined>[number];
 
-          const toCondition = (conditionValue: ConditionValue): Condition<ConditionType> | ConditionGroup | null => {
+          const toCondition = (conditionValue: ConditionValue): Condition<ElPropertyType> | ConditionGroup | null => {
             if (isConditionGroupValue(conditionValue)) {
               return toConditionGroup(conditionValue as ConditionGroupValue);
             }
@@ -99,7 +99,7 @@ export class GioElConditionBuilderComponent implements OnInit {
             ) {
               return null;
             }
-            let field: Condition<ConditionType>['field'] = conditionValue.field.field;
+            let field: Condition<ElPropertyType>['field'] = conditionValue.field.field;
             if (conditionValue.field.map) {
               field = {
                 field: conditionValue.field.field,
@@ -159,7 +159,7 @@ const isConditionGroupValue = (
 const isConditionValue = (
   value: unknown,
 ): value is {
-  field: ConditionModel;
+  field: ElProperty;
   operator: Operator;
   value: string | boolean | Date | number;
 } => {

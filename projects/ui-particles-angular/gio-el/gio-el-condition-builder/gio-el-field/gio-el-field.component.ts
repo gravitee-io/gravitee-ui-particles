@@ -40,10 +40,10 @@ import { GioIconsModule } from '@gravitee/ui-particles-angular';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { FocusMonitor } from '@angular/cdk/a11y';
 
-import { ConditionModel } from '../../models/ConditionModel';
-import { ConditionsModel, isConditionModel, ParentConditionModel } from '../../models/ConditionsModel';
+import { ElProperties, isElProperty, ObjectElProperty } from '../../models/ElProperties';
+import { ElProperty } from '../../models/ElProperty';
 
-type FieldAutocompleteOption = ConditionModel;
+type FieldAutocompleteOption = ElProperty;
 
 type FieldAutocompleteGroup = {
   field: string;
@@ -62,23 +62,23 @@ type Key1AutocompleteValue = { value: string; label: string };
   styleUrl: './gio-el-field.component.scss',
   providers: [{ provide: MatFormFieldControl, useExisting: GioElFieldComponent }],
 })
-export class GioElFieldComponent implements OnChanges, MatFormFieldControl<ConditionModel>, ControlValueAccessor, OnDestroy {
+export class GioElFieldComponent implements OnChanges, MatFormFieldControl<ElProperty>, ControlValueAccessor, OnDestroy {
   private readonly destroyRef = inject(DestroyRef);
 
   @Input({ required: true })
-  public conditionsModel: ConditionsModel = [];
+  public elProperties: ElProperties = [];
 
   protected fieldFilteredOptions$ = new Observable<FieldAutocompleteModel>();
   protected key1FilteredOptions$ = new Observable<Key1AutocompleteValue[]>();
 
-  protected selectedConditionModel: ConditionModel | null = null;
+  protected selectedElProperty: ElProperty | null = null;
 
-  protected fieldFormControl = new FormControl<ConditionModel | null>(null);
+  protected fieldFormControl = new FormControl<ElProperty | null>(null);
   protected key1FormControl = new FormControl<string | null>(null);
   protected key2FormControl = new FormControl<string | null>(null);
 
   // From MatFormFieldControl
-  public set value(_value: ConditionModel | null) {
+  public set value(_value: ElProperty | null) {
     // Not implemented. Only for select new value.
   }
 
@@ -159,7 +159,7 @@ export class GioElFieldComponent implements OnChanges, MatFormFieldControl<Condi
   // From MatFormFieldControl
   // disableAutomaticLabeling?: boolean | undefined;
 
-  protected _onChange: (_value: ConditionModel | null) => void = () => ({});
+  protected _onChange: (_value: ElProperty | null) => void = () => ({});
   protected _onTouched: () => void = () => ({});
 
   constructor(
@@ -185,39 +185,39 @@ export class GioElFieldComponent implements OnChanges, MatFormFieldControl<Condi
       });
   }
   public ngOnChanges(changes: SimpleChanges) {
-    if (changes.conditionsModel) {
-      const flattenConditionsModelToOption = (
-        conditions: ConditionsModel,
-        parent: ParentConditionModel | null = null,
+    if (changes.elProperties) {
+      const flattenElPropertiesToOption = (
+        elProperties: ElProperties,
+        parent: ObjectElProperty | null = null,
       ): FieldAutocompleteOption[] => {
-        return conditions.flatMap(condition => {
-          if (isConditionModel(condition)) {
+        return elProperties.flatMap(elProperty => {
+          if (isElProperty(elProperty)) {
             return {
-              ...condition,
-              label: parent ? `${parent.label} > ${condition.label}` : condition.label,
-              field: parent ? `${parent.field}.${condition.field}` : condition.field,
+              ...elProperty,
+              label: parent ? `${parent.label} > ${elProperty.label}` : elProperty.label,
+              field: parent ? `${parent.field}.${elProperty.field}` : elProperty.field,
             } satisfies FieldAutocompleteOption;
           }
-          return flattenConditionsModelToOption(condition.conditions, {
-            ...condition,
-            field: parent ? `${parent.field}.${condition.field}` : condition.field,
-            label: parent ? `${parent.label} > ${condition.label}` : condition.label,
+          return flattenElPropertiesToOption(elProperty.properties, {
+            ...elProperty,
+            field: parent ? `${parent.field}.${elProperty.field}` : elProperty.field,
+            label: parent ? `${parent.label} > ${elProperty.label}` : elProperty.label,
           });
         });
       };
 
-      const autocompleteModel: FieldAutocompleteModel = this.conditionsModel.map(conditionModel => {
-        if (isConditionModel(conditionModel)) {
+      const autocompleteModel: FieldAutocompleteModel = this.elProperties.map(elProperty => {
+        if (isElProperty(elProperty)) {
           return {
-            ...conditionModel,
+            ...elProperty,
           } satisfies FieldAutocompleteOption;
         }
         return {
-          field: conditionModel.field,
-          label: conditionModel.label,
-          options: flattenConditionsModelToOption(conditionModel.conditions).map(conditions => ({
-            ...conditions,
-            field: `${conditionModel.field}.${conditions.field}`,
+          field: elProperty.field,
+          label: elProperty.label,
+          options: flattenElPropertiesToOption(elProperty.properties).map(option => ({
+            ...option,
+            field: `${elProperty.field}.${option.field}`,
           })),
         } satisfies FieldAutocompleteGroup;
       });
@@ -245,7 +245,7 @@ export class GioElFieldComponent implements OnChanges, MatFormFieldControl<Condi
             map = { ...map, key1Value, key2Value };
           }
 
-          if (fieldValue && isConditionModel(fieldValue)) {
+          if (fieldValue && isElProperty(fieldValue)) {
             this._onChange({
               ...fieldValue,
               map,
@@ -263,9 +263,9 @@ export class GioElFieldComponent implements OnChanges, MatFormFieldControl<Condi
   }
 
   public onFieldSelected($event: MatAutocompleteSelectedEvent) {
-    this.selectedConditionModel = $event.option.value;
+    this.selectedElProperty = $event.option.value;
 
-    const key1AutocompleteValues = this.selectedConditionModel?.map?.key1Values?.map(value =>
+    const key1AutocompleteValues = this.selectedElProperty?.map?.key1Values?.map(value =>
       typeof value === 'string' ? { value, label: value } : value,
     );
 
@@ -284,7 +284,7 @@ export class GioElFieldComponent implements OnChanges, MatFormFieldControl<Condi
   }
 
   // From ControlValueAccessor interface
-  public registerOnChange(fn: (value: ConditionModel | null) => void): void {
+  public registerOnChange(fn: (value: ElProperty | null) => void): void {
     this._onChange = fn;
   }
 
@@ -320,7 +320,7 @@ const fieldFilterValues = (autocompleteModel: FieldAutocompleteModel, value: str
   const filterValue = value.toLowerCase();
   return autocompleteModel.filter(option => {
     if ('options' in option) {
-      return option.options.filter(condition => condition.label.toLowerCase().includes(filterValue));
+      return option.options.filter(property => property.label.toLowerCase().includes(filterValue));
     }
     return option.label.toLowerCase().includes(filterValue);
   });

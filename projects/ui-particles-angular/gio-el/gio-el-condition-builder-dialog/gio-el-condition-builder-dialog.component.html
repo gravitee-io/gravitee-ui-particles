@@ -15,11 +15,11 @@
     limitations under the License.
 
 -->
-<span mat-dialog-title>Build EL</span>
+<span mat-dialog-title>Build EL Condition</span>
 
 <mat-dialog-content>
-  @if (conditionsModel$ | async; as conditionsModel) {
-    <gio-el-condition-builder [conditionsModel]="conditionsModel" (elChange)="elValue = $event"></gio-el-condition-builder>
+  @if (elProperties$ | async; as elProperties) {
+    <gio-el-condition-builder [elProperties]="elProperties" (elChange)="elValue = $event"></gio-el-condition-builder>
   } @else {
     No config found
   }

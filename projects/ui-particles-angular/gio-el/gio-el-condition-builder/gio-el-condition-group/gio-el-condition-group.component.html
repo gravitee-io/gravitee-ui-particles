@@ -51,7 +51,7 @@
         <gio-el-condition-group
           class="conditionGroup__conditions__conditionGroup"
           [conditionGroupFormGroup]="condition"
-          [conditionsModel]="conditionsModel"
+          [elProperties]="elProperties"
           [nodeLvl]="nodeLvl + 1"
           (remove)="removeCondition(conditionIndex)"
         ></gio-el-condition-group>
@@ -63,7 +63,7 @@
         >
           <mat-form-field class="conditionGroup__conditions__condition__field">
             <mat-label>Field</mat-label>
-            <gio-el-field formControlName="field" [conditionsModel]="conditionsModel"></gio-el-field>
+            <gio-el-field formControlName="field" [elProperties]="elProperties"></gio-el-field>
           </mat-form-field>
 
           @switch (condition.controls.field.value?.type) {

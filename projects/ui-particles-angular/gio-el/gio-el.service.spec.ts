@@ -28,11 +28,11 @@ describe('GioElService', () => {
   });
 
   it('should convert conditions to jsonSchema', () => {
-    service.setConditionsModel('api', [
+    service.setElProperties('api', [
       {
         field: 'api',
         label: 'Api',
-        conditions: [
+        properties: [
           {
             field: 'id',
             label: 'Id',
@@ -59,11 +59,11 @@ describe('GioElService', () => {
         ],
       },
     ]);
-    service.setConditionsModel('context', [
+    service.setElProperties('context', [
       {
         field: 'context',
         label: 'Context',
-        conditions: [
+        properties: [
           {
             field: 'attributes',
             label: 'Attributes',
@@ -77,7 +77,7 @@ describe('GioElService', () => {
     ]);
 
     let toExpect;
-    service.getConditionsModelJsonSchema(['api', 'context']).subscribe(conditions => (toExpect = conditions));
+    service.getElPropertiesJsonSchema(['api', 'context']).subscribe(conditions => (toExpect = conditions));
 
     expect(toExpect).toEqual({
       api: {
@@ -117,6 +117,7 @@ describe('GioElService', () => {
   });
 });
 
+// eslint-disable-next-line
 const jsonOutput = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
   $defs: {

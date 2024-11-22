@@ -15,10 +15,11 @@
  */
 import { isNil } from 'lodash';
 
+import { ElPropertyType } from '../../models/ElProperty';
+
 import { ConditionGroup } from './ConditionGroup';
 import { Operator } from './Operator';
 import { Condition } from './Condition';
-import { ConditionType } from './ConditionModel';
 
 export class ExpressionLanguageBuilder {
   private static CONDITION_MAP = {
@@ -65,7 +66,7 @@ export class ExpressionLanguageBuilder {
     return el;
   }
 
-  private static buildCondition(condition: Condition<ConditionType>): string {
+  private static buildCondition(condition: Condition<ElPropertyType>): string {
     const operator = ExpressionLanguageBuilder.OPERATOR_MAP[condition.operator];
     return operator(
       ExpressionLanguageBuilder.toFieldString(condition.field),
@@ -73,7 +74,7 @@ export class ExpressionLanguageBuilder {
     );
   }
 
-  private static valueToString<T extends ConditionType>(type: T, value: unknown): string {
+  private static valueToString<T extends ElPropertyType>(type: T, value: unknown): string {
     if (!type) {
       return '';
     }
@@ -88,7 +89,7 @@ export class ExpressionLanguageBuilder {
     }
   }
 
-  private static toFieldString(field: Condition<ConditionType>['field']): string {
+  private static toFieldString(field: Condition<ElPropertyType>['field']): string {
     if (field instanceof Object && !isNil(field.key1Value) && !isNil(field.key2Value)) {
       return `#${field.field}?.["${field.key1Value}"]?.[${field.key2Value}]`;
     } else if (field instanceof Object && !isNil(field.key1Value)) {

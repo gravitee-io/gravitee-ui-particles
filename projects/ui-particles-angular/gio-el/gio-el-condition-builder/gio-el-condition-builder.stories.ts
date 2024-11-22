@@ -16,7 +16,7 @@
 import { applicationConfig, Meta, StoryObj } from '@storybook/angular';
 import { provideNativeDateAdapter } from '@angular/material/core';
 
-import { ConditionsModel } from '../models/ConditionsModel';
+import { ElProperties } from '../models/ElProperties';
 
 import { GioElConditionBuilderComponent } from './gio-el-condition-builder.component';
 
@@ -28,15 +28,15 @@ export default {
       providers: [provideNativeDateAdapter()],
     }),
   ],
-  render: ({ conditionsModel }) => ({
-    template: `<gio-el-condition-builder [conditionsModel]="conditionsModel" ></gio-el-condition-builder>`,
-    props: { conditionsModel },
+  render: ({ elProperties }) => ({
+    template: `<gio-el-condition-builder [elProperties]="elProperties" ></gio-el-condition-builder>`,
+    props: { elProperties },
   }),
 } as Meta;
 
 export const AllType: StoryObj = {};
 AllType.args = {
-  conditionsModel: [
+  elProperties: [
     {
       field: 'application',
       label: 'Application',
@@ -64,15 +64,15 @@ AllType.args = {
 
 export const DeepFieldTree: StoryObj = {};
 DeepFieldTree.args = {
-  conditionsModel: [
+  elProperties: [
     {
       field: 'root',
       label: 'Root',
-      conditions: [
+      properties: [
         {
           field: 'foo',
           label: 'Foo',
-          conditions: [
+          properties: [
             {
               field: 'value',
               label: 'Value',
@@ -81,7 +81,7 @@ DeepFieldTree.args = {
             {
               field: 'bar',
               label: 'Bar',
-              conditions: [
+              properties: [
                 {
                   field: 'baz',
                   label: 'Baz',
@@ -93,12 +93,12 @@ DeepFieldTree.args = {
         },
       ],
     },
-  ] satisfies ConditionsModel,
+  ] satisfies ElProperties,
 };
 
 export const MapAndMultiMapField: StoryObj = {};
 MapAndMultiMapField.args = {
-  conditionsModel: [
+  elProperties: [
     {
       field: 'foo',
       label: 'Foo',
@@ -107,7 +107,7 @@ MapAndMultiMapField.args = {
     {
       field: 'api',
       label: 'Api',
-      conditions: [
+      properties: [
         {
           field: 'id',
           label: 'Id',
@@ -140,5 +140,5 @@ MapAndMultiMapField.args = {
         },
       ],
     },
-  ] satisfies ConditionsModel,
+  ] satisfies ElProperties,
 };

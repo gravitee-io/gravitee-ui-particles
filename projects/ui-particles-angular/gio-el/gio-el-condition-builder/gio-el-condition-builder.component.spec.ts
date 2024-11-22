@@ -36,7 +36,7 @@ describe('GioElConditionBuilderComponent', () => {
     fixture = TestBed.createComponent(GioElConditionBuilderComponent);
     component = fixture.componentInstance;
 
-    component.conditionsModel = [
+    component.elProperties = [
       {
         field: 'application',
         label: 'Application',
