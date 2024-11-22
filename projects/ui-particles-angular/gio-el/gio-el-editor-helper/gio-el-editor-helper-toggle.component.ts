@@ -22,14 +22,14 @@ import { isEmpty, isNil } from 'lodash';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import {
-  GioElEditorDialogComponent,
-  GioElEditorDialogData,
-  GioElEditorDialogResult,
-} from '../gio-el-editor-dialog/gio-el-editor-dialog.component';
+  GioElConditionBuilderDialogComponent,
+  GioElConditionBuilderDialogData,
+  GioElConditionBuilderDialogResult,
+} from '../gio-el-condition-builder-dialog/gio-el-condition-builder-dialog.component';
 
 @Component({
   selector: 'gio-el-editor-helper-toggle',
-  imports: [MatButtonModule, GioIconsModule, GioElEditorDialogComponent, MatDialogModule],
+  imports: [MatButtonModule, GioIconsModule, GioElConditionBuilderDialogComponent, MatDialogModule],
   templateUrl: './gio-el-editor-helper-toggle.component.html',
   styleUrl: './gio-el-editor-helper-toggle.component.scss',
 })
@@ -44,10 +44,13 @@ export class GioElEditorHelperToggleComponent {
 
   public open() {
     return this.matDialog
-      .open<GioElEditorDialogComponent, GioElEditorDialogData, GioElEditorDialogResult>(GioElEditorDialogComponent, {
-        role: 'dialog',
-        id: 'test-story-dialog',
-      })
+      .open<GioElConditionBuilderDialogComponent, GioElConditionBuilderDialogData, GioElConditionBuilderDialogResult>(
+        GioElConditionBuilderDialogComponent,
+        {
+          role: 'dialog',
+          id: 'test-story-dialog',
+        },
+      )
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(result => {

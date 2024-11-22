@@ -24,7 +24,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { GioMonacoEditorHarness, GioMonacoEditorModule } from '@gravitee/ui-particles-angular';
 
-import { GioElEditorDialogHarness } from '../gio-el-editor-dialog/gio-el-editor-dialog.harness';
+import { GioElConditionBuilderDialogHarness } from '../gio-el-condition-builder-dialog/gio-el-condition-builder-dialog.harness';
 import { GioElEditorHelperInputDirective } from '../gio-el-editor-helper/gio-el-editor-helper-input.directive';
 import { GioElEditorHelperToggleComponent } from '../gio-el-editor-helper/gio-el-editor-helper-toggle.component';
 import { GioElEditorHelperToggleHarness } from '../gio-el-editor-helper/gio-el-editor-helper-toggle.harness';
@@ -96,7 +96,7 @@ describe('GioElEditorInputComponent', () => {
     const elEditorHelperToggle = await loader.getHarness(GioElEditorHelperToggleHarness);
     await elEditorHelperToggle.open();
 
-    const dialog = await loader.getHarness(GioElEditorDialogHarness);
+    const dialog = await loader.getHarness(GioElConditionBuilderDialogHarness);
     await dialog.confirmMyAction();
 
     expect(fixture.componentInstance.formControl.value).toEqual('What the 🦊 say ?');

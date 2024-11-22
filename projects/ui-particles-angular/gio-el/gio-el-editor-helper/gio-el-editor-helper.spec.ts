@@ -24,7 +24,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
-import { GioElEditorDialogHarness } from '../gio-el-editor-dialog/gio-el-editor-dialog.harness';
+import { GioElConditionBuilderDialogHarness } from '../gio-el-condition-builder-dialog/gio-el-condition-builder-dialog.harness';
 
 import { GioElEditorHelperToggleComponent } from './gio-el-editor-helper-toggle.component';
 import { GioElEditorHelperInputDirective } from './gio-el-editor-helper-input.directive';
@@ -73,7 +73,7 @@ describe('GioElEditorHelperComponent', () => {
     const elEditorHelperToggle = await loader.getHarness(GioElEditorHelperToggleHarness);
     await elEditorHelperToggle.open();
 
-    const dialog = await loader.getHarnessOrNull(GioElEditorDialogHarness);
+    const dialog = await loader.getHarnessOrNull(GioElConditionBuilderDialogHarness);
     expect(dialog).toBeTruthy();
   });
 
@@ -90,7 +90,7 @@ describe('GioElEditorHelperComponent', () => {
     const elEditorHelperToggle = await loader.getHarness(GioElEditorHelperToggleHarness);
     await elEditorHelperToggle.open();
 
-    const dialog = await loader.getHarness(GioElEditorDialogHarness);
+    const dialog = await loader.getHarness(GioElConditionBuilderDialogHarness);
     await dialog.confirmMyAction();
 
     expect(fixture.componentInstance.formControl.value).toEqual('What the 🦊 say ?');
