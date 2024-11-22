@@ -25,10 +25,44 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
 import { GioElConditionBuilderDialogHarness } from '../gio-el-condition-builder-dialog/gio-el-condition-builder-dialog.harness';
+import { GioElService } from '../gio-el.service';
+import { ElProperties } from '../models/ElProperties';
 
 import { GioElEditorHelperToggleComponent } from './gio-el-editor-helper-toggle.component';
 import { GioElEditorHelperInputDirective } from './gio-el-editor-helper-input.directive';
 import { GioElEditorHelperToggleHarness } from './gio-el-editor-helper-toggle.harness';
+
+const FAKE_EL_PROPERTIES: ElProperties = [
+  {
+    field: 'api',
+    label: 'Api',
+    properties: [
+      {
+        field: 'id',
+        label: 'Id',
+        type: 'string',
+      },
+      {
+        field: 'name',
+        label: 'Name',
+        type: 'string',
+      },
+      {
+        field: 'properties',
+        label: 'Properties',
+        type: 'string',
+        map: {
+          type: 'Map',
+        },
+      },
+      {
+        field: 'version',
+        label: 'Version',
+        type: 'string',
+      },
+    ],
+  },
+];
 
 @Component({
   selector: 'gio-story-component',
@@ -63,6 +97,9 @@ describe('GioElEditorHelperComponent', () => {
     await TestBed.configureTestingModule({
       imports: [NoopAnimationsModule, MatIconTestingModule],
     }).compileComponents();
+
+    const elService = TestBed.inject(GioElService);
+    elService.setElProperties('ALL', FAKE_EL_PROPERTIES);
 
     fixture = TestBed.createComponent(TestHelperComponent);
     fixture.detectChanges();

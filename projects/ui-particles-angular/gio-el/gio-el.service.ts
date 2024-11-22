@@ -16,6 +16,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { JSONSchema7 } from 'json-schema';
 
 import { ElProperties, isElProperty } from './models/ElProperties';
 
@@ -51,9 +52,32 @@ export class GioElService {
   }
 }
 
-const toJsonObject = (elProperties: ElProperties): Record<string, unknown> => {
+const toJsonObject = (elProperties: ElProperties): JSONSchema7 => {
   return elProperties.reduce((acc, elProperty) => {
     if (isElProperty(elProperty)) {
+      if (elProperty.map && elProperty.map.type === 'Map') {
+        return {
+          ...acc,
+          [elProperty.field]: {
+            title: elProperty.label,
+            type: 'object',
+            additionalProperties: { type: elProperty.type === 'date' ? 'string' : elProperty.type },
+          },
+        };
+      } else if (elProperty.map && elProperty.map.type === 'MultiMap') {
+        return {
+          ...acc,
+          [elProperty.field]: {
+            title: elProperty.label,
+            type: 'object',
+            additionalProperties: {
+              type: 'array',
+              items: { type: elProperty.type === 'date' ? 'string' : elProperty.type },
+            },
+          },
+        };
+      }
+
       return {
         ...acc,
         [elProperty.field]: {

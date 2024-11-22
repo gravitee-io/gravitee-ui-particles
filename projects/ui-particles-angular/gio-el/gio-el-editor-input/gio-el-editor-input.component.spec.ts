@@ -28,8 +28,42 @@ import { GioElConditionBuilderDialogHarness } from '../gio-el-condition-builder-
 import { GioElEditorHelperInputDirective } from '../gio-el-editor-helper/gio-el-editor-helper-input.directive';
 import { GioElEditorHelperToggleComponent } from '../gio-el-editor-helper/gio-el-editor-helper-toggle.component';
 import { GioElEditorHelperToggleHarness } from '../gio-el-editor-helper/gio-el-editor-helper-toggle.harness';
+import { ElProperties } from '../models/ElProperties';
+import { GioElService } from '../gio-el.service';
 
 import { GioElEditorInputComponent } from './gio-el-editor-input.component';
+
+const FAKE_EL_PROPERTIES: ElProperties = [
+  {
+    field: 'api',
+    label: 'Api',
+    properties: [
+      {
+        field: 'id',
+        label: 'Id',
+        type: 'string',
+      },
+      {
+        field: 'name',
+        label: 'Name',
+        type: 'string',
+      },
+      {
+        field: 'properties',
+        label: 'Properties',
+        type: 'string',
+        map: {
+          type: 'Map',
+        },
+      },
+      {
+        field: 'version',
+        label: 'Version',
+        type: 'string',
+      },
+    ],
+  },
+];
 
 @Component({
   selector: 'gio-story-component',
@@ -65,6 +99,9 @@ describe('GioElEditorInputComponent', () => {
       imports: [NoopAnimationsModule, MatIconTestingModule],
       providers: [importProvidersFrom(GioMonacoEditorModule)],
     }).compileComponents();
+
+    const elService = TestBed.inject(GioElService);
+    elService.setElProperties('ALL', FAKE_EL_PROPERTIES);
 
     fixture = TestBed.createComponent(TestHelperComponent);
     fixture.detectChanges();
