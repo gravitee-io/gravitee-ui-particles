@@ -181,3 +181,39 @@ export function fakeHTTPProxyEndpoint(modifier?: Partial<ConnectorInfo> | ((base
     ...modifier,
   };
 }
+
+export function fakeKafkaNativeEntrypoint(modifier?: Partial<ConnectorInfo> | ((base: ConnectorInfo) => ConnectorInfo)): ConnectorInfo {
+  const base: ConnectorInfo = {
+    type: 'native-kafka',
+    name: 'Native Kafka',
+    supportedModes: ['INTERACT', 'PUBLISH', 'SUBSCRIBE'],
+    icon: 'gio:kafka',
+  };
+
+  if (isFunction(modifier)) {
+    return modifier(base);
+  }
+
+  return {
+    ...base,
+    ...modifier,
+  };
+}
+
+export function fakeKafkaNativeEndpoint(modifier?: Partial<ConnectorInfo> | ((base: ConnectorInfo) => ConnectorInfo)): ConnectorInfo {
+  const base: ConnectorInfo = {
+    type: 'native-kafka',
+    name: 'Native Kafka',
+    supportedModes: ['INTERACT', 'PUBLISH', 'SUBSCRIBE'],
+    icon: 'gio:kafka',
+  };
+
+  if (isFunction(modifier)) {
+    return modifier(base);
+  }
+
+  return {
+    ...base,
+    ...modifier,
+  };
+}

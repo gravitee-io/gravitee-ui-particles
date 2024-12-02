@@ -20,11 +20,13 @@
   <div class="header__label">
     Flows <mat-icon svgIcon="gio:info" matTooltip="Flows allow you to apply different policies on your API event phases"></mat-icon>
   </div>
-  <div class="header__configBtn">
-    <button class="header__configBtn_edit" mat-stroked-button [disabled]="loading" (click)="onConfigureExecution(flowExecution)">
-      <mat-icon [svgIcon]="readOnly ? 'gio:eye-empty' : 'gio:settings'"></mat-icon>
-    </button>
-  </div>
+  @if (apiType !== 'NATIVE') {
+    <div class="header__configBtn">
+      <button class="header__configBtn_edit" mat-stroked-button [disabled]="loading" (click)="onConfigureExecution(flowExecution)">
+        <mat-icon [svgIcon]="readOnly ? 'gio:eye-empty' : 'gio:settings'"></mat-icon>
+      </button>
+    </div>
+  }
 </div>
 
 <div class="list" *ngIf="!loading; else loadingList" cdkDropListGroup>
@@ -33,6 +35,7 @@
     class="list__flowsGroup"
     cdkDropList
     [cdkDropListData]="flowsGroup"
+    [cdkDropListEnterPredicate]="enterPredicate"
     (cdkDropListDropped)="onDropFlow($event)"
   >
     <div class="list__flowsGroup__header">
@@ -41,9 +44,17 @@
         <span>{{ flowsGroup.name }}</span>
       </div>
       <div class="list__flowsGroup__header__addBtn">
-        <button mat-button [disabled]="readOnly" (click)="onAddFlow(flowsGroup)">
-          <mat-icon svgIcon="gio:plus" matTooltip="New flow"></mat-icon>
-        </button>
+        @if (apiType === 'NATIVE') {
+          <span [matTooltipDisabled]="flowsGroup.flows.length < 1" matTooltip="Only one flow is allowed for a native API">
+            <button mat-button [disabled]="readOnly || flowsGroup.flows.length > 0" (click)="onAddFlow(flowsGroup)">
+              <mat-icon svgIcon="gio:plus" matTooltip="New flow"></mat-icon>
+            </button>
+          </span>
+        } @else {
+          <button mat-button [disabled]="readOnly" (click)="onAddFlow(flowsGroup)">
+            <mat-icon svgIcon="gio:plus" matTooltip="New flow"></mat-icon>
+          </button>
+        }
       </div>
     </div>
 
@@ -62,31 +73,33 @@
             <div *ngIf="flow.name" class="list__flowsGroup__flows__flow__left__name" [attr.title]="flow.name">
               {{ flow.name }}
             </div>
-            <div class="list__flowsGroup__flows__flow__left__infos">
-              <div class="list__flowsGroup__flows__flow__left__infos__badges">
-                <span
-                  *ngFor="let badge of flow.badges"
-                  class="list__flowsGroup__flows__flow__left__infos__badges__badge"
-                  [ngClass]="badge.class"
-                  >{{ badge.label }}</span
-                >
-              </div>
-              <div class="list__flowsGroup__flows__flow__left__infos__pathOrChannelLabel">
-                <span *ngIf="flow.pathOrChannelLabel; else emptyPathOrChannelLabel" [attr.title]="flow.pathOrChannelLabel">{{
-                  flow.pathOrChannelLabel
-                }}</span>
-                <ng-template #emptyPathOrChannelLabel>
-                  <em>Empty</em>
-                </ng-template>
-              </div>
+            @if (apiType !== 'NATIVE') {
+              <div class="list__flowsGroup__flows__flow__left__infos">
+                <div class="list__flowsGroup__flows__flow__left__infos__badges">
+                  <span
+                    *ngFor="let badge of flow.badges"
+                    class="list__flowsGroup__flows__flow__left__infos__badges__badge"
+                    [ngClass]="badge.class"
+                    >{{ badge.label }}</span
+                  >
+                </div>
+                <div class="list__flowsGroup__flows__flow__left__infos__pathOrChannelLabel">
+                  <span *ngIf="flow.pathOrChannelLabel; else emptyPathOrChannelLabel" [attr.title]="flow.pathOrChannelLabel">{{
+                    flow.pathOrChannelLabel
+                  }}</span>
+                  <ng-template #emptyPathOrChannelLabel>
+                    <em>Empty</em>
+                  </ng-template>
+                </div>
 
-              <span
-                *ngIf="flow.hasCondition"
-                class="list__flowsGroup__flows__flow__left__infos__conditionBadge gio-badge-neutral"
-                matTooltip="Conditioned"
-                ><mat-icon svgIcon="gio:if"></mat-icon
-              ></span>
-            </div>
+                <span
+                  *ngIf="flow.hasCondition"
+                  class="list__flowsGroup__flows__flow__left__infos__conditionBadge gio-badge-neutral"
+                  matTooltip="Conditioned"
+                  ><mat-icon svgIcon="gio:if"></mat-icon
+                ></span>
+              </div>
+            }
           </div>
           <div class="list__flowsGroup__flows__flow__right">
             <button
@@ -105,9 +118,11 @@
               </button>
               <button mat-menu-item (click)="onEditFlow(flow._id)"><mat-icon svgIcon="gio:edit-pencil"></mat-icon> Edit</button>
               <button mat-menu-item (click)="onDeleteFlow(flow._id)"><mat-icon svgIcon="gio:trash"></mat-icon> Delete</button>
-              <button mat-menu-item (click)="onDuplicateFlow(flowsGroup._id, flow._id)">
-                <mat-icon svgIcon="gio:copy"></mat-icon> Duplicate
-              </button>
+              @if (apiType !== 'NATIVE') {
+                <button mat-menu-item (click)="onDuplicateFlow(flowsGroup._id, flow._id)">
+                  <mat-icon svgIcon="gio:copy"></mat-icon> Duplicate
+                </button>
+              }
             </mat-menu>
           </div>
         </div>

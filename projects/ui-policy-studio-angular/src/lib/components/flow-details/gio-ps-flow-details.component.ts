@@ -17,7 +17,7 @@ import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from
 import { MatDialog } from '@angular/material/dialog';
 import { tap } from 'rxjs/operators';
 import { isEmpty } from 'lodash';
-import { GIO_DIALOG_WIDTH, GioIconsModule, GioLoaderModule } from '@gravitee/ui-particles-angular';
+import { GIO_DIALOG_WIDTH, GioBannerModule, GioIconsModule, GioLoaderModule } from '@gravitee/ui-particles-angular';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
@@ -37,6 +37,10 @@ import { GioPolicyStudioFlowFormDialogResult } from '../flow-form-dialog/gio-ps-
 import { GioPolicyStudioDetailsPhaseComponent } from '../flow-details-phase/gio-ps-flow-details-phase.component';
 import { GioFilterConnectorsByModePipe } from '../filter-pipe/gio-flter-connectors-by-mode.pipe';
 import { GioPolicyStudioDetailsInfoBarComponent } from '../flow-details-info-bar/gio-ps-flow-details-info-bar.component';
+import {
+  GioPolicyStudioFlowNativeFormDialogComponent,
+  GioPolicyStudioFlowNativeFormDialogData,
+} from '../flow-form-dialog/flow-native-form-dialog/gio-ps-flow-native-form-dialog.component';
 
 @Component({
   standalone: true,
@@ -50,6 +54,7 @@ import { GioPolicyStudioDetailsInfoBarComponent } from '../flow-details-info-bar
     GioLoaderModule,
     GioPolicyStudioDetailsInfoBarComponent,
     MatTooltipModule,
+    GioBannerModule,
   ],
   selector: 'gio-ps-flow-details',
   templateUrl: './gio-ps-flow-details.component.html',
@@ -117,36 +122,59 @@ export class GioPolicyStudioDetailsComponent implements OnChanges {
   }
 
   public onEditFlow(): void {
-    const dialogResult =
-      this.apiType === 'MESSAGE'
-        ? this.matDialog
-            .open<
-              GioPolicyStudioFlowMessageFormDialogComponent,
-              GioPolicyStudioFlowMessageFormDialogData,
-              GioPolicyStudioFlowFormDialogResult
-            >(GioPolicyStudioFlowMessageFormDialogComponent, {
+    let dialogResult;
+    switch (this.apiType) {
+      case 'MESSAGE':
+        dialogResult = this.matDialog
+          .open<
+            GioPolicyStudioFlowMessageFormDialogComponent,
+            GioPolicyStudioFlowMessageFormDialogData,
+            GioPolicyStudioFlowFormDialogResult
+          >(GioPolicyStudioFlowMessageFormDialogComponent, {
+            data: {
+              flow: this.flow,
+              entrypoints: this.entrypointsInfo ?? [],
+            },
+            role: 'alertdialog',
+            id: 'gioPsFlowMessageFormDialog',
+            width: GIO_DIALOG_WIDTH.MEDIUM,
+          })
+          .afterClosed();
+        break;
+      case 'PROXY':
+        dialogResult = this.matDialog
+          .open<GioPolicyStudioFlowProxyFormDialogComponent, GioPolicyStudioFlowProxyFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+            GioPolicyStudioFlowProxyFormDialogComponent,
+            {
               data: {
                 flow: this.flow,
-                entrypoints: this.entrypointsInfo ?? [],
               },
               role: 'alertdialog',
-              id: 'gioPsFlowMessageFormDialog',
+              id: 'gioPsFlowProxyFormDialog',
               width: GIO_DIALOG_WIDTH.MEDIUM,
-            })
-            .afterClosed()
-        : this.matDialog
-            .open<GioPolicyStudioFlowProxyFormDialogComponent, GioPolicyStudioFlowProxyFormDialogData, GioPolicyStudioFlowFormDialogResult>(
-              GioPolicyStudioFlowProxyFormDialogComponent,
-              {
-                data: {
-                  flow: this.flow,
-                },
-                role: 'alertdialog',
-                id: 'gioPsFlowProxyFormDialog',
-                width: GIO_DIALOG_WIDTH.MEDIUM,
+            },
+          )
+          .afterClosed();
+        break;
+      case 'NATIVE':
+        dialogResult = this.matDialog
+          .open<GioPolicyStudioFlowNativeFormDialogComponent, GioPolicyStudioFlowNativeFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+            GioPolicyStudioFlowNativeFormDialogComponent,
+            {
+              data: {
+                flow: this.flow,
+                parentGroupName: this.flow!._parentFlowGroupName,
               },
-            )
-            .afterClosed();
+              role: 'alertdialog',
+              id: 'gioPsFlowNativeFormDialog',
+              width: GIO_DIALOG_WIDTH.MEDIUM,
+            },
+          )
+          .afterClosed();
+        break;
+      default:
+        throw new Error(`Unsupported API type ${this.apiType}`);
+    }
 
     dialogResult
       .pipe(
@@ -176,7 +204,7 @@ export class GioPolicyStudioDetailsComponent implements OnChanges {
     });
   }
 
-  public onStepsChange(flowPhase: 'request' | 'response' | 'publish' | 'subscribe', steps: Step[]): void {
+  public onStepsChange(flowPhase: 'connect' | 'interact' | 'request' | 'response' | 'publish' | 'subscribe', steps: Step[]): void {
     if (!this.flow) {
       return;
     }

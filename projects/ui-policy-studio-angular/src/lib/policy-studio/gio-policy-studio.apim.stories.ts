@@ -42,8 +42,11 @@ import {
   fakeSSEMessageEntrypoint,
   fakeMockMessageEndpoint,
   fakeSharedPolicyGroupPolicyStep,
+  fakeKafkaNativeEntrypoint,
+  fakeKafkaNativeEndpoint,
+  fakeNativeFlow,
 } from '../models/index-testing';
-import { ChannelSelector, HttpSelector, Policy, SaveOutput } from '../models';
+import { ApiType, ChannelSelector, HttpSelector, Policy, SaveOutput } from '../models';
 import { fakePolicyDocumentation, fakePolicySchema } from '../models/policy/PolicySchema.fixture';
 import { fakeAllSharedPolicyGroupPolicies } from '../models/policy/SharedPolicyGroupPolicy.fixture';
 
@@ -652,6 +655,32 @@ export const LongWorld: StoryObj = {
             return base;
           }),
         ],
+      }),
+    ],
+  },
+};
+
+export const NativeKafka: StoryObj = {
+  name: 'Native Kafka API',
+  args: {
+    apiType: 'NATIVE' satisfies ApiType,
+    entrypointsInfo: [fakeKafkaNativeEntrypoint()],
+    endpointsInfo: [fakeKafkaNativeEndpoint()],
+    commonFlows: [
+      fakeNativeFlow(base => {
+        return {
+          ...base,
+          name: 'Common flow',
+          interact: [fakeTestPolicyStep()],
+          publish: [fakeTestPolicyStep()],
+          subscribe: [fakeTestPolicyStep()],
+        };
+      }),
+    ],
+    plans: [
+      fakePlan({
+        name: 'Plan Alpha',
+        flows: [],
       }),
     ],
   },

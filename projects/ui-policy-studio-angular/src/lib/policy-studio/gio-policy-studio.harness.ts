@@ -25,6 +25,7 @@ import { GioPolicyStudioFlowProxyFormDialogHarness } from '../components/flow-fo
 import { GioPolicyStudioFlowMessageFormDialogHarness } from '../components/flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.harness';
 import { GioPolicyStudioFlowExecutionFormDialogHarness } from '../components/flow-execution-form-dialog/gio-ps-flow-execution-form-dialog.harness';
 import { GioPolicyStudioDetailsPhaseHarness, PhaseType } from '../components/flow-details-phase/gio-ps-flow-details-phase.harness';
+import { GioPolicyStudioFlowNativeFormDialogHarness } from '../components/flow-form-dialog/flow-native-form-dialog/gio-ps-flow-native-form-dialog.harness';
 
 export class GioPolicyStudioHarness extends ComponentHarness {
   public static hostSelector = 'gio-policy-studio';
@@ -210,6 +211,15 @@ export class GioPolicyStudioHarness extends ComponentHarness {
         condition: conditionSelector?.condition,
       });
 
+      await flowFormNewDialog.save();
+      return;
+    }
+
+    if (!channelSelector && !httpSelector) {
+      const flowFormNewDialog = await this.documentRootLocatorFactory().locatorFor(GioPolicyStudioFlowNativeFormDialogHarness)();
+      await flowFormNewDialog.setFlowFormValues({
+        name: flow.name,
+      });
       await flowFormNewDialog.save();
       return;
     }

@@ -186,7 +186,7 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
 
     if (changes.commonFlows || changes.plans) {
       this.disableSaveButton = true;
-      this.flowsGroups = getFlowsGroups(this.commonFlows, this.plans);
+      this.flowsGroups = getFlowsGroups(this.apiType, this.commonFlows, this.plans);
       this.initialFlowsGroups = cloneDeep(this.flowsGroups);
 
       // Select first flow by default on first load
@@ -264,7 +264,6 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
 
     // Emit plans only if they have been updated
     const plansToUpdate = getPlansChangeOutput(this.flowsGroups, this.initialFlowsGroups);
-
     this.save.emit({
       ...(commonFlows ? { commonFlows } : {}),
       ...(plansToUpdate ? { plansToUpdate } : {}),
@@ -285,11 +284,11 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
   }
 }
 
-const getFlowsGroups = (commonFlows: Flow[] = [], plans: Plan[] = []): FlowGroupVM[] => {
+const getFlowsGroups = (apiType: ApiType, commonFlows: Flow[] = [], plans: Plan[] = []): FlowGroupVM[] => {
   const commFlowsGroup: FlowGroupVM = {
     _id: 'flowsGroup_commonFlow',
-    name: 'Common flows',
-    flows: commonFlows.map(flow => ({ ...flow, _id: uniqueId('flow_'), _hasChanged: false })),
+    name: apiType === 'NATIVE' ? 'Common' : 'Common flows',
+    flows: commonFlows.map(flow => ({ ...flow, _id: uniqueId('flow_'), _hasChanged: false, _parentFlowGroupName: 'Common' })),
   };
 
   return [
@@ -298,7 +297,7 @@ const getFlowsGroups = (commonFlows: Flow[] = [], plans: Plan[] = []): FlowGroup
       _icon: 'gio:shield',
       _planId: plan.id,
       name: plan.name,
-      flows: plan.flows.map(flow => ({ ...flow, _id: uniqueId('flow_'), _hasChanged: false })),
+      flows: plan.flows.map(flow => ({ ...flow, _id: uniqueId('flow_'), _hasChanged: false, _parentFlowGroupName: plan.name })),
     })),
     commFlowsGroup,
   ];
@@ -313,7 +312,9 @@ const getCommonFlowsOutput = (flowsGroups: FlowGroupVM[], initialFlowsGroups: Fl
   // Check if common flows have been deleted
   const hasDeletedFlow = differenceBy(initialCommonFlowsGroup?.flows ?? [], commonFlowsGroup?.flows ?? [], '_id').length > 0;
 
-  return hasChanged || hasDeletedFlow ? (commonFlowsGroup?.flows ?? []).map(flow => omit(flow, '_id', '_hasChanged')) : null;
+  return hasChanged || hasDeletedFlow
+    ? (commonFlowsGroup?.flows ?? []).map(flow => omit(flow, '_id', '_hasChanged', '_parentFlowGroupName'))
+    : null;
 };
 
 const getPlansChangeOutput = (flowsGroups: FlowGroupVM[], initialFlowsGroups: FlowGroupVM[]): Plan[] | null => {
@@ -340,7 +341,7 @@ const getPlansChangeOutput = (flowsGroups: FlowGroupVM[], initialFlowsGroups: Fl
     ...omit(plan, '_id', '_icon', '_planId'),
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- planId is always defined
     id: plan._planId!,
-    flows: plan.flows.map(flow => omit(flow, '_id', '_hasChanged')),
+    flows: plan.flows.map(flow => omit(flow, '_id', '_hasChanged', '_parentFlowGroupName')),
   }));
 
   return plansWithChangedFlowsOutput.length > 0 ? plansWithChangedFlowsOutput : null;

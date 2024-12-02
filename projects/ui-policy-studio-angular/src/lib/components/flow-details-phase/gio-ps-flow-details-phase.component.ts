@@ -84,13 +84,15 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
   @Input()
   public trialUrl?: string;
 
+  @Input()
+  public disabledNotYetAvailable = false;
+
   @Output()
   public stepsChange = new EventEmitter<Step[]>();
 
   public stepsVM: StepVM[] = [];
 
-  public isDisabled = false;
-
+  public hasStartAndEndConnectors = true;
   constructor(private readonly matDialog: MatDialog) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -123,7 +125,7 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
       ];
 
       // Disable phase if there are no start & end connectors
-      this.isDisabled = this.stepsVM.filter(step => step.type === 'connectors' && !isEmpty(step.connectors)).length < 2;
+      this.hasStartAndEndConnectors = this.stepsVM.filter(step => step.type === 'connectors' && !isEmpty(step.connectors)).length >= 2;
     }
   }
 

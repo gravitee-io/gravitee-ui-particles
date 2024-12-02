@@ -20,6 +20,7 @@ import { Flow } from '../models';
 export interface FlowVM extends Flow {
   _id: string;
   _hasChanged: boolean;
+  _parentFlowGroupName?: string;
 }
 export interface FlowGroupVM {
   _id: string;

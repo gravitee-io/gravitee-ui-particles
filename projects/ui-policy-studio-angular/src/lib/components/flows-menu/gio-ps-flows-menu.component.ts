@@ -22,7 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
-import { CdkDragDrop, DragDropModule, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, CdkDropList, DragDropModule, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 import {
   GioPolicyStudioFlowMessageFormDialogComponent,
@@ -39,6 +39,10 @@ import {
   GioPolicyStudioFlowExecutionFormDialogComponent,
   GioPolicyStudioFlowExecutionFormDialogData,
 } from '../flow-execution-form-dialog/gio-ps-flow-execution-form-dialog.component';
+import {
+  GioPolicyStudioFlowNativeFormDialogComponent,
+  GioPolicyStudioFlowNativeFormDialogData,
+} from '../flow-form-dialog/flow-native-form-dialog/gio-ps-flow-native-form-dialog.component';
 
 interface FlowGroupMenuVM extends FlowGroupVM {
   flows: FlowMenuVM[];
@@ -100,6 +104,8 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
   public deleteFlow = new EventEmitter<FlowVM>();
 
   public flowGroupMenuItems: FlowGroupMenuVM[] = [];
+
+  public enterPredicate: (drag: CdkDrag<FlowGroupMenuVM>, drop: CdkDropList<FlowGroupMenuVM>) => boolean = () => true;
 
   constructor(private readonly matDialog: MatDialog) {}
 
@@ -175,6 +181,13 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
           }),
         };
       });
+
+      this.enterPredicate = (_drag: CdkDrag<FlowGroupMenuVM>, drop: CdkDropList<FlowGroupMenuVM>) => {
+        if (this.apiType === 'NATIVE') {
+          return isEmpty(drop.data.flows);
+        }
+        return true;
+      };
     }
   }
 
@@ -186,36 +199,60 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
   }
 
   public onAddFlow(flowGroup: FlowGroupVM): void {
-    const dialogResult =
-      this.apiType === 'MESSAGE'
-        ? this.matDialog
-            .open<
-              GioPolicyStudioFlowMessageFormDialogComponent,
-              GioPolicyStudioFlowMessageFormDialogData,
-              GioPolicyStudioFlowFormDialogResult
-            >(GioPolicyStudioFlowMessageFormDialogComponent, {
+    let dialogResult;
+
+    switch (this.apiType) {
+      case 'MESSAGE':
+        dialogResult = this.matDialog
+          .open<
+            GioPolicyStudioFlowMessageFormDialogComponent,
+            GioPolicyStudioFlowMessageFormDialogData,
+            GioPolicyStudioFlowFormDialogResult
+          >(GioPolicyStudioFlowMessageFormDialogComponent, {
+            data: {
+              flow: undefined,
+              entrypoints: this.entrypoints,
+            },
+            role: 'alertdialog',
+            id: 'gioPsFlowFormDialog',
+            width: GIO_DIALOG_WIDTH.MEDIUM,
+          })
+          .afterClosed();
+        break;
+      case 'PROXY':
+        dialogResult = this.matDialog
+          .open<GioPolicyStudioFlowProxyFormDialogComponent, GioPolicyStudioFlowProxyFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+            GioPolicyStudioFlowProxyFormDialogComponent,
+            {
               data: {
                 flow: undefined,
-                entrypoints: this.entrypoints,
               },
               role: 'alertdialog',
               id: 'gioPsFlowFormDialog',
               width: GIO_DIALOG_WIDTH.MEDIUM,
-            })
-            .afterClosed()
-        : this.matDialog
-            .open<GioPolicyStudioFlowProxyFormDialogComponent, GioPolicyStudioFlowProxyFormDialogData, GioPolicyStudioFlowFormDialogResult>(
-              GioPolicyStudioFlowProxyFormDialogComponent,
-              {
-                data: {
-                  flow: undefined,
-                },
-                role: 'alertdialog',
-                id: 'gioPsFlowFormDialog',
-                width: GIO_DIALOG_WIDTH.MEDIUM,
+            },
+          )
+          .afterClosed();
+        break;
+      case 'NATIVE':
+        dialogResult = this.matDialog
+          .open<GioPolicyStudioFlowNativeFormDialogComponent, GioPolicyStudioFlowNativeFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+            GioPolicyStudioFlowNativeFormDialogComponent,
+            {
+              data: {
+                parentGroupName: flowGroup.name,
+                flow: undefined,
               },
-            )
-            .afterClosed();
+              role: 'alertdialog',
+              id: 'gioPsFlowFormDialog',
+              width: GIO_DIALOG_WIDTH.MEDIUM,
+            },
+          )
+          .afterClosed();
+        break;
+      default:
+        throw new Error(`Unsupported API type ${this.apiType}`);
+    }
 
     dialogResult
       .pipe(
@@ -299,36 +336,60 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
   public onEditFlow(flowId: string): void {
     const flowToEdit = flatten(this.flowsGroups.map(flowGroup => flowGroup.flows)).find(f => f._id === flowId);
 
-    const dialogResult =
-      this.apiType === 'MESSAGE'
-        ? this.matDialog
-            .open<
-              GioPolicyStudioFlowMessageFormDialogComponent,
-              GioPolicyStudioFlowMessageFormDialogData,
-              GioPolicyStudioFlowFormDialogResult
-            >(GioPolicyStudioFlowMessageFormDialogComponent, {
+    let dialogResult;
+
+    switch (this.apiType) {
+      case 'MESSAGE':
+        dialogResult = this.matDialog
+          .open<
+            GioPolicyStudioFlowMessageFormDialogComponent,
+            GioPolicyStudioFlowMessageFormDialogData,
+            GioPolicyStudioFlowFormDialogResult
+          >(GioPolicyStudioFlowMessageFormDialogComponent, {
+            data: {
+              flow: flowToEdit,
+              entrypoints: this.entrypointsInfo ?? [],
+            },
+            role: 'alertdialog',
+            id: 'gioPsFlowMessageFormDialog',
+            width: GIO_DIALOG_WIDTH.MEDIUM,
+          })
+          .afterClosed();
+        break;
+      case 'PROXY':
+        dialogResult = this.matDialog
+          .open<GioPolicyStudioFlowProxyFormDialogComponent, GioPolicyStudioFlowProxyFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+            GioPolicyStudioFlowProxyFormDialogComponent,
+            {
               data: {
                 flow: flowToEdit,
-                entrypoints: this.entrypointsInfo ?? [],
               },
               role: 'alertdialog',
-              id: 'gioPsFlowMessageFormDialog',
+              id: 'gioPsFlowProxyFormDialog',
               width: GIO_DIALOG_WIDTH.MEDIUM,
-            })
-            .afterClosed()
-        : this.matDialog
-            .open<GioPolicyStudioFlowProxyFormDialogComponent, GioPolicyStudioFlowProxyFormDialogData, GioPolicyStudioFlowFormDialogResult>(
-              GioPolicyStudioFlowProxyFormDialogComponent,
-              {
-                data: {
-                  flow: flowToEdit,
-                },
-                role: 'alertdialog',
-                id: 'gioPsFlowProxyFormDialog',
-                width: GIO_DIALOG_WIDTH.MEDIUM,
+            },
+          )
+          .afterClosed();
+        break;
+      case 'NATIVE':
+        dialogResult = this.matDialog
+          .open<GioPolicyStudioFlowNativeFormDialogComponent, GioPolicyStudioFlowNativeFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+            GioPolicyStudioFlowNativeFormDialogComponent,
+            {
+              data: {
+                parentGroupName: flowToEdit!._parentFlowGroupName,
+                flow: flowToEdit,
               },
-            )
-            .afterClosed();
+              role: 'alertdialog',
+              id: 'gioPsFlowNativeFormDialog',
+              width: GIO_DIALOG_WIDTH.MEDIUM,
+            },
+          )
+          .afterClosed();
+        break;
+      default:
+        throw new Error(`Unsupported API type ${this.apiType}`);
+    }
 
     dialogResult
       .pipe(
