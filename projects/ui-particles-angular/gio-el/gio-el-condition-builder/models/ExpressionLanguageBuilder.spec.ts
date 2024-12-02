@@ -147,7 +147,7 @@ describe('ExpressionLanguageBuilder', () => {
   it('should build a condition group two dimensional field', () => {
     // Arrange
     const conditionGroup = new ConditionGroup('AND', [
-      new Condition({ field: 'field1', key1Value: 'key1', key2Value: 'key2' }, 'string', 'EQUALS', 'value1'),
+      new Condition({ field: 'field1', key1: 'key1', key2: 'key2' }, 'string', 'EQUALS', 'value1'),
     ]);
     const expressionLanguageBuilder = new ExpressionLanguageBuilder(conditionGroup);
 
@@ -160,7 +160,7 @@ describe('ExpressionLanguageBuilder', () => {
 
   it('should build a condition group one dimensional field', () => {
     // Arrange
-    const conditionGroup = new ConditionGroup('AND', [new Condition({ field: 'field1', key1Value: 'key1' }, 'string', 'EQUALS', 'value1')]);
+    const conditionGroup = new ConditionGroup('AND', [new Condition({ field: 'field1', key1: 'key1' }, 'string', 'EQUALS', 'value1')]);
     const expressionLanguageBuilder = new ExpressionLanguageBuilder(conditionGroup);
 
     // Act

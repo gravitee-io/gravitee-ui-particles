@@ -55,16 +55,16 @@ export class GioElService {
 const toJsonObject = (elProperties: ElProperties): JSONSchema7 => {
   return elProperties.reduce((acc, elProperty) => {
     if (isElProperty(elProperty)) {
-      if (elProperty.map && elProperty.map.type === 'Map') {
+      if (elProperty.type === 'Map') {
         return {
           ...acc,
           [elProperty.field]: {
             title: elProperty.label,
             type: 'object',
-            additionalProperties: { type: elProperty.type === 'date' ? 'string' : elProperty.type },
+            additionalProperties: { type: elProperty.valueProperty?.type === 'string' ? 'string' : 'object' },
           },
         };
-      } else if (elProperty.map && elProperty.map.type === 'MultiMap') {
+      } else if (elProperty.type === 'MultiMap') {
         return {
           ...acc,
           [elProperty.field]: {
@@ -72,7 +72,7 @@ const toJsonObject = (elProperties: ElProperties): JSONSchema7 => {
             type: 'object',
             additionalProperties: {
               type: 'array',
-              items: { type: elProperty.type === 'date' ? 'string' : elProperty.type },
+              items: { type: elProperty.valueProperty?.type === 'string' ? 'string' : 'object' },
             },
           },
         };

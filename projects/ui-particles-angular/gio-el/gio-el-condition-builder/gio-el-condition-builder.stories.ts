@@ -114,28 +114,43 @@ MapAndMultiMapField.args = {
           type: 'string',
         },
         {
+          field: 'name',
+          label: 'Name',
+          type: 'string',
+          values: ['foo', 'bar'],
+        },
+        {
+          field: 'number',
+          label: 'Number',
+          type: 'number',
+          max: 1,
+          min: 0,
+        },
+        {
           field: 'properties',
           label: 'Properties',
-          type: 'string',
-          map: {
-            type: 'Map',
+          type: 'Map',
+          valueProperty: {
+            type: 'string',
+            values: ['foo', 'bar'],
           },
         },
         {
           field: 'multimap',
           label: 'MultiMap',
-          type: 'string',
-          map: {
-            type: 'MultiMap',
+          type: 'MultiMap',
+          key1: 'key1',
+          valueProperty: {
+            type: 'string',
           },
         },
         {
           field: 'mltimapWithValues',
           label: 'MultiMap with values',
-          type: 'string',
-          map: {
-            type: 'MultiMap',
-            key1Values: ['foo', 'bar', 'baz'],
+          type: 'MultiMap',
+          key1Values: ['foo', 'bar', 'baz'],
+          valueProperty: {
+            type: 'string',
           },
         },
       ],

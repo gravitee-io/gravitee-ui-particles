@@ -33,8 +33,8 @@ export class Condition<T extends ElPropertyType> {
       | string
       | {
           field: string;
-          key1Value?: string;
-          key2Value?: string;
+          key1?: string;
+          key2?: string;
         },
     public type: T,
     public operator: Operator,

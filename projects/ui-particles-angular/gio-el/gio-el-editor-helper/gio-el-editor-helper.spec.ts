@@ -50,9 +50,9 @@ const FAKE_EL_PROPERTIES: ElProperties = [
       {
         field: 'properties',
         label: 'Properties',
-        type: 'string',
-        map: {
-          type: 'Map',
+        type: 'Map',
+        valueProperty: {
+          type: 'string',
         },
       },
       {

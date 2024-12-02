@@ -237,18 +237,11 @@ export class GioElFieldComponent implements OnChanges, MatFormFieldControl<ElPro
       ])
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(([fieldValue, key1Value, key2Value]) => {
-          let map = fieldValue?.map;
-          if (map?.type === 'Map') {
-            map = { ...map, key1Value };
-          }
-          if (map?.type === 'MultiMap') {
-            map = { ...map, key1Value, key2Value };
-          }
-
           if (fieldValue && isElProperty(fieldValue)) {
             this._onChange({
               ...fieldValue,
-              map,
+              ...(fieldValue?.type === 'Map' ? { key: key1Value } : {}),
+              ...(fieldValue?.type === 'MultiMap' ? { key1: key1Value, key2: key2Value } : {}),
             });
           } else {
             this._onChange(null);
@@ -265,16 +258,32 @@ export class GioElFieldComponent implements OnChanges, MatFormFieldControl<ElPro
   public onFieldSelected($event: MatAutocompleteSelectedEvent) {
     this.selectedElProperty = $event.option.value;
 
-    const key1AutocompleteValues = this.selectedElProperty?.map?.key1Values?.map(value =>
-      typeof value === 'string' ? { value, label: value } : value,
-    );
-
-    if (key1AutocompleteValues && !isEmpty(key1AutocompleteValues)) {
-      this.key1FilteredOptions$ = this.key1FormControl.valueChanges.pipe(
-        takeUntilDestroyed(this.destroyRef),
-        startWith(''),
-        map(value => key1FilterValues(key1AutocompleteValues, toString(value) ?? '')),
+    if (this.selectedElProperty && this.selectedElProperty?.type === 'Map') {
+      const key1AutocompleteValues = this.selectedElProperty.keyValues?.map(value =>
+        typeof value === 'string' ? { value, label: value } : value,
       );
+
+      if (key1AutocompleteValues && !isEmpty(key1AutocompleteValues)) {
+        this.key1FilteredOptions$ = this.key1FormControl.valueChanges.pipe(
+          takeUntilDestroyed(this.destroyRef),
+          startWith(''),
+          map(value => key1FilterValues(key1AutocompleteValues, toString(value) ?? '')),
+        );
+      }
+    }
+
+    if (this.selectedElProperty && this.selectedElProperty?.type === 'MultiMap') {
+      const key1AutocompleteValues = this.selectedElProperty.key1Values?.map(value =>
+        typeof value === 'string' ? { value, label: value } : value,
+      );
+
+      if (key1AutocompleteValues && !isEmpty(key1AutocompleteValues)) {
+        this.key1FilteredOptions$ = this.key1FormControl.valueChanges.pipe(
+          takeUntilDestroyed(this.destroyRef),
+          startWith(''),
+          map(value => key1FilterValues(key1AutocompleteValues, toString(value) ?? '')),
+        );
+      }
     }
   }
 

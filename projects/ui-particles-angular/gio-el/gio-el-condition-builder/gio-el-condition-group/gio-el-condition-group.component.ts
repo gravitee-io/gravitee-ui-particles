@@ -30,6 +30,7 @@ import { GioElConditionTypeStringComponent } from '../gio-el-condition-types/gio
 import { ConditionForm, ConditionGroupForm } from '../gio-el-condition-builder.component';
 import { ElProperties } from '../../models/ElProperties';
 import { GioElFieldComponent } from '../gio-el-field/gio-el-field.component';
+import { ElProperty } from '../../models/ElProperty';
 
 @Component({
   selector: 'gio-el-condition-group',
@@ -99,6 +100,13 @@ export class GioElConditionGroupComponent {
     formGroup: FormGroup<ConditionForm> | FormGroup<ConditionGroupForm>,
   ): formGroup is FormGroup<ConditionGroupForm> {
     return 'condition' in formGroup.controls && 'conditions' in formGroup.controls;
+  }
+
+  protected getFieldType(field: ElProperty | null): string | undefined {
+    if (field?.type === 'Map' || field?.type === 'MultiMap') {
+      return field?.valueProperty?.type;
+    }
+    return field?.type;
   }
 
   private checkMultipleCondition(): void {

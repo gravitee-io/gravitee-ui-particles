@@ -66,17 +66,17 @@ describe('GioElConditionBuilderComponent', () => {
       {
         field: 'properties',
         label: 'Properties',
-        type: 'string',
-        map: {
-          type: 'Map',
+        type: 'Map',
+        valueProperty: {
+          type: 'string',
         },
       },
       {
         field: 'multimap',
         label: 'MultiMap',
-        type: 'string',
-        map: {
-          type: 'MultiMap',
+        type: 'MultiMap',
+        valueProperty: {
+          type: 'string',
         },
       },
     ];

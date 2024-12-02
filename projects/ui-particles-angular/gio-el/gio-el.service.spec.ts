@@ -46,9 +46,9 @@ describe('GioElService', () => {
           {
             field: 'properties',
             label: 'Properties',
-            type: 'string',
-            map: {
-              type: 'Map',
+            type: 'Map',
+            valueProperty: {
+              type: 'string',
             },
           },
           {
@@ -68,9 +68,9 @@ describe('GioElService', () => {
           {
             field: 'attributes',
             label: 'Attributes',
-            type: 'string',
-            map: {
-              type: 'Map',
+            type: 'Map',
+            valueProperty: {
+              type: 'string',
             },
           },
         ],
@@ -81,9 +81,9 @@ describe('GioElService', () => {
       {
         field: 'dictionaries',
         label: 'Dictionaries',
-        type: 'string',
-        map: {
-          type: 'MultiMap',
+        type: 'MultiMap',
+        valueProperty: {
+          type: 'string',
         },
       },
     ]);
@@ -101,10 +101,10 @@ describe('GioElService', () => {
           {
             field: 'shardingTags',
             label: 'Shared Tags',
-            map: {
-              type: 'Map', // FIXME: Array ?
+            type: 'Map', // FIXME: Array ?
+            valueProperty: {
+              type: 'string',
             },
-            type: 'string',
           },
           {
             field: 'tenant',
@@ -148,10 +148,10 @@ describe('GioElService', () => {
           {
             field: 'headers',
             label: 'HTTP Headers',
-            map: {
-              type: 'MultiMap',
+            type: 'MultiMap',
+            valueProperty: {
+              type: 'string',
             },
-            type: 'string',
           },
           {
             field: 'host',
@@ -166,10 +166,10 @@ describe('GioElService', () => {
           {
             field: 'params',
             label: 'Params',
-            map: {
-              type: 'MultiMap',
+            type: 'MultiMap',
+            valueProperty: {
+              type: 'string',
             },
-            type: 'string',
           },
           {
             field: 'uri',
@@ -199,26 +199,26 @@ describe('GioElService', () => {
           {
             field: 'pathInfos',
             label: 'Path Infos',
-            map: {
-              type: 'Map', // FIXME: Array ?
-            },
-            type: 'string',
+            type: 'Map',
+            valueProperty: {
+              type: 'string',
+            }, // FIXME: Array ?
           },
           {
             field: 'pathParams',
             label: 'Path Params',
-            map: {
-              type: 'MultiMap',
+            type: 'MultiMap',
+            valueProperty: {
+              type: 'string',
             },
-            type: 'string',
           },
           {
             field: 'paths',
             label: 'Paths',
-            map: {
-              type: 'Map', // FIXME: Array ?
-            },
-            type: 'string',
+            type: 'Map',
+            valueProperty: {
+              type: 'string',
+            }, // FIXME: Array ?
           },
           {
             field: 'transactionId',
@@ -283,10 +283,10 @@ describe('GioElService', () => {
           {
             field: 'headers',
             label: 'HTTP Headers',
-            map: {
-              type: 'MultiMap',
+            type: 'MultiMap',
+            valueProperty: {
+              type: 'string',
             },
-            type: 'string',
           },
           {
             field: 'jsonContent',
@@ -301,10 +301,10 @@ describe('GioElService', () => {
           {
             field: 'xmlContent',
             label: 'XML Content',
-            map: {
-              type: 'Map',
-            },
-            type: 'string', // FIXME: this is an object ?
+            type: 'Map', // FIXME: this is an object ?
+            valueProperty: {
+              type: 'string',
+            }, // FIXME: this is an object ?
           },
         ],
       },
@@ -333,10 +333,10 @@ describe('GioElService', () => {
           {
             field: 'metadata',
             label: 'Metadata',
-            map: {
-              type: 'Map',
+            type: 'Map',
+            valueProperty: {
+              type: 'string',
             },
-            type: 'string',
           },
           {
             field: 'type',

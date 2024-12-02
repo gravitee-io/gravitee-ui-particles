@@ -38,6 +38,7 @@ export class GioElEditorInputComponent implements MatFormFieldControl<string>, C
     language: 'spel',
   };
 
+  @Input()
   public singleLineMode = true;
 
   @ViewChild('elInput')

@@ -90,10 +90,10 @@ export class ExpressionLanguageBuilder {
   }
 
   private static toFieldString(field: Condition<ElPropertyType>['field']): string {
-    if (field instanceof Object && !isNil(field.key1Value) && !isNil(field.key2Value)) {
-      return `#${field.field}?.["${field.key1Value}"]?.[${field.key2Value}]`;
-    } else if (field instanceof Object && !isNil(field.key1Value)) {
-      return `#${field.field}?.["${field.key1Value}"]`;
+    if (field instanceof Object && !isNil(field.key1) && !isNil(field.key2)) {
+      return `#${field.field}?.["${field.key1}"]?.[${field.key2}]`;
+    } else if (field instanceof Object && !isNil(field.key1)) {
+      return `#${field.field}?.["${field.key1}"]`;
     } else if (field instanceof Object) {
       return `#${field.field}`;
     }

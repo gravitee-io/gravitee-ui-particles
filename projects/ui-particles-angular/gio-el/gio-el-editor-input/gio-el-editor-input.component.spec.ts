@@ -51,9 +51,22 @@ const FAKE_EL_PROPERTIES: ElProperties = [
       {
         field: 'properties',
         label: 'Properties',
-        type: 'string',
-        map: {
+        type: 'Map',
+        valueProperty: {
+          type: 'string',
+          values: ['a', 'b', 'c'],
+        },
+      },
+      {
+        field: 'mapmap',
+        label: 'Map<Map<string>>',
+        type: 'Map',
+        valueProperty: {
           type: 'Map',
+          valueProperty: {
+            type: 'string',
+            values: ['a', 'b', 'c'],
+          },
         },
       },
       {

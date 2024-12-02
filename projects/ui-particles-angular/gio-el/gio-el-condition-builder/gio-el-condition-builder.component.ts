@@ -24,7 +24,7 @@ import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
-import { get, has, isEmpty, isNil } from 'lodash';
+import { has, isEmpty, isNil } from 'lodash';
 import { GioIconsModule } from '@gravitee/ui-particles-angular';
 
 import { ElProperty, ElPropertyType } from '../models/ElProperty';
@@ -100,11 +100,18 @@ export class GioElConditionBuilderComponent implements OnInit {
               return null;
             }
             let field: Condition<ElPropertyType>['field'] = conditionValue.field.field;
-            if (conditionValue.field.map) {
+
+            if (conditionValue.field.type === 'Map') {
               field = {
                 field: conditionValue.field.field,
-                key1Value: get(conditionValue.field.map, 'key1Value') ?? undefined,
-                key2Value: get(conditionValue.field.map, 'key2Value') ?? undefined,
+                key1: conditionValue.field.key ?? undefined,
+              };
+            }
+            if (conditionValue.field.type === 'MultiMap') {
+              field = {
+                field: conditionValue.field.field,
+                key1: conditionValue.field.key1 ?? undefined,
+                key2: conditionValue.field.key2 ?? undefined,
               };
             }
 

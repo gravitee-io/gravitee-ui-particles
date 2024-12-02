@@ -27,6 +27,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { ConditionForm } from '../../gio-el-condition-builder.component';
 import { Operator } from '../../models/Operator';
+import { ifMultiMapElProperty, isMapElProperty } from '../../../models/ElProperty';
 
 type AutocompleteValue = { value: string; label: string };
 
@@ -54,14 +55,21 @@ export class GioElConditionTypeStringComponent implements OnChanges {
   public ngOnChanges(changes: SimpleChanges) {
     if (changes.conditionFormGroup) {
       const field = this.conditionFormGroup.controls.field.value;
-      if (isEmpty(field) || field?.type !== 'string') {
+      if (
+        isEmpty(field) ||
+        !field ||
+        (!isMapElProperty(field, 'string') && !ifMultiMapElProperty(field, 'string') && field.type !== 'string')
+      ) {
         throw new Error('String field is required!');
       }
 
       this.conditionFormGroup.addControl('operator', new FormControl(null));
       this.conditionFormGroup.addControl('value', new FormControl(null));
 
-      const values = field.values?.map(value => (typeof value === 'string' ? { value, label: value } : value));
+      const fieldValues =
+        isMapElProperty(field, 'string') || ifMultiMapElProperty(field, 'string') ? field.valueProperty?.values : field.values;
+
+      const values = fieldValues?.map(value => (typeof value === 'string' ? { value, label: value } : value));
       if (values && !isEmpty(values)) {
         this.filteredOptions$ = this.conditionFormGroup.get('value')!.valueChanges.pipe(
           takeUntilDestroyed(this.destroyRef),
