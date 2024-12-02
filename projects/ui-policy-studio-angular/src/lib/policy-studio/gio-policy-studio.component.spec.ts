@@ -36,6 +36,9 @@ import {
   fakeHTTPProxyEndpoint,
   fakeHTTPProxyEntrypoint,
   fakeKafkaMessageEndpoint,
+  fakeKafkaNativeEndpoint,
+  fakeKafkaNativeEntrypoint,
+  fakeNativeFlow,
   fakePlan,
   fakeRateLimitStep,
   fakeSharedPolicyGroupPolicyStep,
@@ -1668,6 +1671,261 @@ describe('GioPolicyStudioComponent', () => {
         const firstSaveFlows = saveOutput?.commonFlows?.[0];
         expect(firstSaveFlows).toBeDefined();
         expect(firstSaveFlows?.enabled).toEqual(false);
+      });
+    });
+  });
+
+  describe('NATIVE Kafka API type', () => {
+    beforeEach(() => {
+      component.apiType = 'NATIVE';
+      fixture.detectChanges();
+    });
+
+    describe('with entrypointsInfo & endpointsInfo', () => {
+      beforeEach(() => {
+        component.entrypointsInfo = [fakeKafkaNativeEntrypoint()];
+        component.endpointsInfo = [fakeKafkaNativeEndpoint()];
+        component.ngOnChanges({
+          entrypointsInfo: new SimpleChange(null, null, true),
+          endpointsInfo: new SimpleChange(null, null, true),
+        });
+      });
+
+      it('should display top bar', async () => {
+        // Expect top bar tooltip
+        const tooltip = await loader.getHarness(
+          MatTooltipHarness.with({ selector: '[mattooltipclass="gio-policy-studio__tooltip-line-break"]' }),
+        );
+        await tooltip.show();
+        expect(await tooltip.getTooltipText()).toEqual(`Entrypoints: Native Kafka\nEndpoints: Native Kafka`);
+
+        expect(await (await loader.getHarness(MatButtonHarness.with({ text: /Save/ }))).isDisabled()).toEqual(true);
+      });
+
+      it('should display flow', async () => {
+        const commonFlows = [
+          fakeNativeFlow({
+            name: 'Flow 1',
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        expect(await policyStudioHarness.getFlowsMenu()).toMatchObject([
+          {
+            name: 'Common',
+            flows: [
+              {
+                name: 'Flow 1',
+                isSelected: true,
+                infos: null,
+              },
+            ],
+          },
+        ]);
+      });
+
+      it('should display flow detail info bar', async () => {
+        const commonFlows = [
+          fakeNativeFlow({
+            name: 'Flow 1',
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        const detailsHarness = await loader.getHarness(GioPolicyStudioDetailsHarness);
+
+        expect(await detailsHarness.getFlowInfos()).toEqual({
+          Name: ['Flow 1'],
+        });
+      });
+
+      it('should add flow into common flows', async () => {
+        component.commonFlows = [];
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        await policyStudioHarness.addFlow('Common', fakeNativeFlow({ name: '' }));
+
+        let saveOutputToExpect: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutputToExpect = value));
+
+        await policyStudioHarness.save();
+
+        expect(saveOutputToExpect?.commonFlows).toMatchObject([
+          {
+            name: 'Common flow',
+            enabled: true,
+          },
+        ]);
+      });
+
+      it('should edit flow into plan', async () => {
+        const planFooFlows = [fakeNativeFlow({ name: 'Foo flow 1' })];
+        const plans = [fakePlan({ name: 'Foo plan', flows: planFooFlows }), fakePlan({ name: 'Bar plan', flows: [] })];
+        component.plans = plans;
+        component.ngOnChanges({
+          entrypointsInfo: new SimpleChange(null, null, true),
+          plans: new SimpleChange(null, null, true),
+        });
+
+        const detailsHarness = await loader.getHarness(GioPolicyStudioDetailsHarness);
+
+        // Edit first selected flow
+        await policyStudioHarness.editFlowConfig('Foo flow 1', fakeNativeFlow({ name: 'Edited flow name' }));
+
+        let saveOutputToExpect: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutputToExpect = value));
+
+        await policyStudioHarness.save();
+
+        expect(saveOutputToExpect?.plansToUpdate).toStrictEqual([
+          fakePlan({
+            flows: [fakeNativeFlow({ name: 'Edited flow name' })],
+            name: 'Foo plan',
+          }),
+        ]);
+
+        expect(await detailsHarness.matchText(/Edited flow name/)).toEqual(true);
+      });
+
+      it('should display phases steps', async () => {
+        const commonFlows = [
+          fakeNativeFlow({
+            name: 'Flow 1',
+            interact: [fakeTestPolicyStep()],
+            publish: [fakeTestPolicyStep()],
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        const interactPhase = await policyStudioHarness.getSelectedFlowPhase('INTERACT');
+        const publishPhase = await policyStudioHarness.getSelectedFlowPhase('PUBLISH');
+
+        expect(await interactPhase?.getSteps()).toStrictEqual([
+          { name: 'Native Kafka', type: 'connector' },
+          { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
+          { name: 'Native Kafka', type: 'connector' },
+        ]);
+
+        expect(await publishPhase?.getSteps()).toStrictEqual([
+          { name: 'Native Kafka', type: 'connector' },
+          { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
+          { name: 'Native Kafka', type: 'connector' },
+        ]);
+      });
+
+      it('should add step into phase', async () => {
+        const commonFlows = [
+          fakeNativeFlow({
+            name: 'Alphabetical policy',
+            interact: [fakeTestPolicyStep({ description: 'B' })],
+            publish: [fakeTestPolicyStep({ description: 'B' })],
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        // Add step A before B and C after B into INTERACT phase
+        const interactPhase = await policyStudioHarness.getSelectedFlowPhase('INTERACT');
+        await interactPhase?.addStep(0, {
+          policyName: fakeTestPolicy().name,
+          description: 'A',
+          async waitForPolicyFormCompletionCb(locator) {
+            // "Policy to test UI" have required configuration fields. We need to fill them to be able to add the step.
+            const testPolicyConfigurationInput = await locator.locatorFor(MatInputHarness.with({ selector: '[id*="test"]' }))();
+            await testPolicyConfigurationInput.setValue('🦊');
+          },
+        });
+        await interactPhase?.addStep(2, {
+          policyName: fakeTestPolicy().name,
+          description: 'C',
+          async waitForPolicyFormCompletionCb(locator) {
+            // "Policy to test UI" have required configuration fields. We need to fill them to be able to add the step.
+            const testPolicyConfigurationInput = await locator.locatorFor(MatInputHarness.with({ selector: '[id*="test"]' }))();
+            await testPolicyConfigurationInput.setValue('🦊');
+          },
+        });
+
+        // Add step A before B into PUBLISH phase
+        const publishPhase = await policyStudioHarness.getSelectedFlowPhase('PUBLISH');
+        await publishPhase?.addStep(0, {
+          policyName: fakeTestPolicy().name,
+          description: 'A',
+          async waitForPolicyFormCompletionCb(locator) {
+            // "Policy to test UI" have required configuration fields. We need to fill them to be able to add the step.
+            const testPolicyConfigurationInput = await locator.locatorFor(MatInputHarness.with({ selector: '[id*="test"]' }))();
+            await testPolicyConfigurationInput.setValue('🦊');
+          },
+        });
+
+        // Save
+        let saveOutputToExpect: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutputToExpect = value));
+        await policyStudioHarness.save();
+
+        expect(saveOutputToExpect?.commonFlows).toBeDefined();
+        const commonFlow = saveOutputToExpect?.commonFlows?.[0];
+        expect(commonFlow).toBeDefined();
+        expect(commonFlow?.interact).toEqual([
+          fakeTestPolicyStep({ description: 'A', configuration: { test: '🦊' } }),
+          fakeTestPolicyStep({ description: 'B' }),
+          fakeTestPolicyStep({ description: 'C', configuration: { test: '🦊' } }),
+        ]);
+
+        expect(commonFlow?.publish).toEqual([
+          fakeTestPolicyStep({ description: 'A', configuration: { test: '🦊' } }),
+          fakeTestPolicyStep({ description: 'B' }),
+        ]);
+      });
+
+      it('should edit step into phase', async () => {
+        const commonFlows = [
+          fakeNativeFlow({
+            name: 'Alphabetical policy',
+            interact: [fakeTestPolicyStep({ description: 'B' })],
+            publish: [fakeTestPolicyStep({ description: 'B' })],
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        // Edit step B into INTERACT phase
+        const interactPhase = await policyStudioHarness.getSelectedFlowPhase('INTERACT');
+        await interactPhase?.editStep(0, {
+          description: 'A',
+        });
+
+        // Edit step B into RESPONSE phase
+        const publishPhase = await policyStudioHarness.getSelectedFlowPhase('PUBLISH');
+        await publishPhase?.editStep(0, {
+          description: 'A',
+        });
+
+        // Save
+        let saveOutputToExpect: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutputToExpect = value));
+        await policyStudioHarness.save();
+
+        expect(saveOutputToExpect?.commonFlows).toBeDefined();
+        const commonFlow = saveOutputToExpect?.commonFlows?.[0];
+        expect(commonFlow).toBeDefined();
+        expect(commonFlow?.interact).toEqual([fakeTestPolicyStep({ description: 'A' })]);
+
+        expect(commonFlow?.publish).toEqual([fakeTestPolicyStep({ description: 'A' })]);
       });
     });
   });

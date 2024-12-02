@@ -24,69 +24,81 @@
     {{ description }}
   </span>
 
-  <span *ngIf="isDisabled" class="header__infoIcon" matTooltip="Policies might not be evaluated" matTooltipPosition="before">
+  <span
+    *ngIf="!hasStartAndEndConnectors && !disabledNotYetAvailable"
+    class="header__infoIcon"
+    matTooltip="Policies might not be evaluated"
+    matTooltipPosition="before"
+  >
     <mat-icon svgIcon="gio:info"></mat-icon>
   </span>
 </div>
 
-<div *ngIf="!isDisabled; else disabledPhaseContent" class="wrapper">
-  <div class="content">
-    @for (stepVM of stepsVM; track stepVM._id; let isFirst = $first) {
-      <div class="content__step">
-        <!-- Connector -->
-        <ng-container *ngIf="stepVM.type === 'connectors'">
-          <div class="content__step__connector">
-            <span *ngFor="let connector of stepVM.connectors" class="gio-badge-white content__step__connector__badge">
-              <mat-icon *ngIf="connector.icon" [svgIcon]="connector.icon" class="content__step__connector__badge__icon"></mat-icon>
-              {{ connector.name }}
-            </span>
-          </div>
+@if (disabledNotYetAvailable) {
+  <div class="disabledContent">
+    <gio-banner-info>
+      Coming soon
+      <span gioBannerBody> This feature is not yet available in the current version of the API Studio. Stay tuned for updates. </span>
+    </gio-banner-info>
+  </div>
+} @else if (hasStartAndEndConnectors) {
+  <div class="wrapper">
+    <div class="content">
+      @for (stepVM of stepsVM; track stepVM._id; let isFirst = $first) {
+        <div class="content__step">
+          <!-- Connector -->
+          <ng-container *ngIf="stepVM.type === 'connectors'">
+            <div class="content__step__connector">
+              <span *ngFor="let connector of stepVM.connectors" class="gio-badge-white content__step__connector__badge">
+                <mat-icon *ngIf="connector.icon" [svgIcon]="connector.icon" class="content__step__connector__badge__icon"></mat-icon>
+                {{ connector.name }}
+              </span>
+            </div>
 
-          <!-- Add policy button after first connector -->
-          <ng-container *ngIf="isFirst">
+            <!-- Add policy button after first connector -->
+            <ng-container *ngIf="isFirst">
+              <mat-icon class="content__step__rightArrow" svgIcon="gio:arrow-right"></mat-icon>
+              <button [disabled]="readOnly" class="content__step__addBtn" mat-button (click)="onAddPolicy(-1)">
+                <mat-icon svgIcon="gio:plus"></mat-icon>
+              </button>
+              <mat-icon class="content__step__rightArrow" svgIcon="gio:arrow-right"></mat-icon>
+            </ng-container>
+          </ng-container>
+
+          <!-- Policy -->
+          @if (stepVM.type === 'step') {
+            <div class="content__step__policy">
+              <div *ngIf="stepVM.step?.condition" class="content__step__policy__condition">
+                <span class="gio-badge-neutral" [matTooltip]="'Condition: ' + stepVM.step.condition"
+                  ><mat-icon svgIcon="gio:if"></mat-icon> {{ stepVM.step.condition }}</span
+                >
+              </div>
+
+              <gio-ps-flow-details-phase-step
+                class="content__step__step"
+                [readOnly]="readOnly"
+                [class.disabled]="readOnly || !stepVM.step.enabled"
+                [genericPolicies]="genericPolicies"
+                [step]="stepVM.step"
+                [flowPhase]="policyFlowPhase"
+                (stepChange)="onStepChange(stepVM.index, $event)"
+                (deleted)="onStepDeleted(stepVM.index)"
+                (disabled)="onStepDisabled(stepVM.index)"
+              ></gio-ps-flow-details-phase-step>
+            </div>
+
+            <!-- Add policy button -->
             <mat-icon class="content__step__rightArrow" svgIcon="gio:arrow-right"></mat-icon>
-            <button [disabled]="readOnly" class="content__step__addBtn" mat-button (click)="onAddPolicy(-1)">
+            <button [disabled]="readOnly" class="content__step__addBtn" mat-button (click)="onAddPolicy(stepVM.index)">
               <mat-icon svgIcon="gio:plus"></mat-icon>
             </button>
             <mat-icon class="content__step__rightArrow" svgIcon="gio:arrow-right"></mat-icon>
-          </ng-container>
-        </ng-container>
-
-        <!-- Policy -->
-        @if (stepVM.type === 'step') {
-          <div class="content__step__policy">
-            <div *ngIf="stepVM.step?.condition" class="content__step__policy__condition">
-              <span class="gio-badge-neutral" [matTooltip]="'Condition: ' + stepVM.step.condition"
-                ><mat-icon svgIcon="gio:if"></mat-icon> {{ stepVM.step.condition }}</span
-              >
-            </div>
-
-            <gio-ps-flow-details-phase-step
-              class="content__step__step"
-              [readOnly]="readOnly"
-              [class.disabled]="readOnly || !stepVM.step.enabled"
-              [genericPolicies]="genericPolicies"
-              [step]="stepVM.step"
-              [flowPhase]="policyFlowPhase"
-              (stepChange)="onStepChange(stepVM.index, $event)"
-              (deleted)="onStepDeleted(stepVM.index)"
-              (disabled)="onStepDisabled(stepVM.index)"
-            ></gio-ps-flow-details-phase-step>
-          </div>
-
-          <!-- Add policy button -->
-          <mat-icon class="content__step__rightArrow" svgIcon="gio:arrow-right"></mat-icon>
-          <button [disabled]="readOnly" class="content__step__addBtn" mat-button (click)="onAddPolicy(stepVM.index)">
-            <mat-icon svgIcon="gio:plus"></mat-icon>
-          </button>
-          <mat-icon class="content__step__rightArrow" svgIcon="gio:arrow-right"></mat-icon>
-        }
-      </div>
-    }
+          }
+        </div>
+      }
+    </div>
   </div>
-</div>
-
-<ng-template #disabledPhaseContent>
+} @else {
   <div class="disabledContent">
     <gio-banner-warning>
       Policies might not be evaluated
@@ -96,4 +108,4 @@
       </span>
     </gio-banner-warning>
   </div>
-</ng-template>
+}

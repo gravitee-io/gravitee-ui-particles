@@ -120,3 +120,22 @@ export function fakeConditionedHttpFlow(modifier?: Partial<Flow> | ((baseApi: Fl
     ...modifier,
   };
 }
+
+export function fakeNativeFlow(modifier?: Partial<Flow> | ((baseApi: Flow) => Flow)): Flow {
+  const base: Flow = {
+    name: 'Flow name',
+    interact: [],
+    subscribe: [],
+    publish: [],
+    enabled: true,
+  };
+
+  if (isFunction(modifier)) {
+    return modifier(base);
+  }
+
+  return {
+    ...base,
+    ...modifier,
+  };
+}

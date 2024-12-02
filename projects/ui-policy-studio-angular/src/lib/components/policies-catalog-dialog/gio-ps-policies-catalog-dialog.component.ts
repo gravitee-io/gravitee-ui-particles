@@ -114,13 +114,15 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
     this.allPolicies = flowDialogData.genericPolicies
       .filter(genericPolicy => {
         if (isPolicy(genericPolicy)) {
-          if (flowDialogData.apiType === 'PROXY') {
-            return genericPolicy.flowPhaseCompatibility?.HTTP_PROXY?.includes(flowDialogData.flowPhase);
-          } else if (flowDialogData.apiType === 'MESSAGE') {
-            return genericPolicy.flowPhaseCompatibility?.HTTP_MESSAGE?.includes(flowDialogData.flowPhase);
-          } else {
-            // TODO: Implement for NATIVE API
-            throw new Error('Not implemented');
+          switch (flowDialogData.apiType) {
+            case 'PROXY':
+              return genericPolicy.flowPhaseCompatibility?.HTTP_PROXY?.includes(flowDialogData.flowPhase);
+            case 'MESSAGE':
+              return genericPolicy.flowPhaseCompatibility?.HTTP_MESSAGE?.includes(flowDialogData.flowPhase);
+            case 'NATIVE':
+              return genericPolicy.flowPhaseCompatibility?.NATIVE_KAFKA?.includes(flowDialogData.flowPhase);
+            default:
+              throw new Error('Unknown API type');
           }
         }
         if (isSharedPolicyGroupPolicy(genericPolicy)) {
