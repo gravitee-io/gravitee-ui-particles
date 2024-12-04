@@ -1,3 +1,10 @@
+# [13.7.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.6.0...v13.7.0) (2024-12-04)
+
+
+### Features
+
+* ps - support native api ([5140735](https://github.com/gravitee-io/gravitee-ui-particles/commit/51407354eb45e86225303179b756edb0738e8372))
+
 # [13.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.5.3...v13.6.0) (2024-11-06)
 
 
