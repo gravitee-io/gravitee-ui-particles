@@ -185,7 +185,7 @@ export function fakeHTTPProxyEndpoint(modifier?: Partial<ConnectorInfo> | ((base
 export function fakeKafkaNativeEntrypoint(modifier?: Partial<ConnectorInfo> | ((base: ConnectorInfo) => ConnectorInfo)): ConnectorInfo {
   const base: ConnectorInfo = {
     type: 'native-kafka',
-    name: 'Native Kafka',
+    name: 'Client',
     supportedModes: ['INTERACT', 'PUBLISH', 'SUBSCRIBE'],
     icon: 'gio:kafka',
   };
@@ -203,7 +203,7 @@ export function fakeKafkaNativeEntrypoint(modifier?: Partial<ConnectorInfo> | ((
 export function fakeKafkaNativeEndpoint(modifier?: Partial<ConnectorInfo> | ((base: ConnectorInfo) => ConnectorInfo)): ConnectorInfo {
   const base: ConnectorInfo = {
     type: 'native-kafka',
-    name: 'Native Kafka',
+    name: 'Broker',
     supportedModes: ['INTERACT', 'PUBLISH', 'SUBSCRIBE'],
     icon: 'gio:kafka',
   };

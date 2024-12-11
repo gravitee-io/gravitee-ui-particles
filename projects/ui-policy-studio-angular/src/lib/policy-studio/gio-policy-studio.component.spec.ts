@@ -1697,7 +1697,7 @@ describe('GioPolicyStudioComponent', () => {
           MatTooltipHarness.with({ selector: '[mattooltipclass="gio-policy-studio__tooltip-line-break"]' }),
         );
         await tooltip.show();
-        expect(await tooltip.getTooltipText()).toEqual(`Entrypoints: Native Kafka\nEndpoints: Native Kafka`);
+        expect(await tooltip.getTooltipText()).toEqual(`Entrypoints: Client\nEndpoints: Broker`);
 
         expect(await (await loader.getHarness(MatButtonHarness.with({ text: /Save/ }))).isDisabled()).toEqual(true);
       });
@@ -1812,15 +1812,15 @@ describe('GioPolicyStudioComponent', () => {
         const publishPhase = await policyStudioHarness.getSelectedFlowPhase('PUBLISH');
 
         expect(await interactPhase?.getSteps()).toStrictEqual([
-          { name: 'Native Kafka', type: 'connector' },
+          { name: 'Client', type: 'connector' },
           { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
-          { name: 'Native Kafka', type: 'connector' },
+          { name: 'Broker', type: 'connector' },
         ]);
 
         expect(await publishPhase?.getSteps()).toStrictEqual([
-          { name: 'Native Kafka', type: 'connector' },
+          { name: 'Client', type: 'connector' },
           { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
-          { name: 'Native Kafka', type: 'connector' },
+          { name: 'Broker', type: 'connector' },
         ]);
       });
 
