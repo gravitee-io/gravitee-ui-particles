@@ -1,3 +1,10 @@
+## [13.7.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.7.0...v13.7.1) (2024-12-11)
+
+
+### Bug Fixes
+
+* use right start end connector with native api ([ff36e76](https://github.com/gravitee-io/gravitee-ui-particles/commit/ff36e762c141eda7b4c8019fb0f48714fbc2fc28))
+
 # [13.7.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.6.0...v13.7.0) (2024-12-04)
 
 
