@@ -1,3 +1,10 @@
+# [13.8.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.7.1...v13.8.0) (2024-12-16)
+
+
+### Features
+
+* evaluate if license is native kafka ([849430e](https://github.com/gravitee-io/gravitee-ui-particles/commit/849430e0616c8cadb8fb96d31f64a3645e415499))
+
 ## [13.7.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.7.0...v13.7.1) (2024-12-11)
 
 
