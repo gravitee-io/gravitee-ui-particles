@@ -187,6 +187,31 @@ describe('GioLicenseService', () => {
         req.flush(oemLicense);
       });
 
+      it('should check if license is native kafka', done => {
+        const oemLicense: License = {
+          tier: '',
+          packs: ['not-native-kafka'],
+          features: [],
+        };
+
+        gioLicenseService
+          .isNativeKafka$()
+          .pipe(
+            tap(isNativeKafka => {
+              expect(isNativeKafka).toEqual(false);
+              done();
+            }),
+          )
+          .subscribe();
+
+        const req = httpTestingController.expectOne({
+          method: 'GET',
+          url: `https://url.test:3000/license`,
+        });
+
+        req.flush(oemLicense);
+      });
+
       // Need a workaround to be able to use both it.each and done callback https://github.com/DefinitelyTyped/DefinitelyTyped/issues/34617#issuecomment-497760008
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       it.each<any>([
@@ -471,6 +496,52 @@ describe('GioLicenseService', () => {
       });
 
       req.flush(oemLicense);
+    });
+  });
+
+  describe('With Native Kafka license', () => {
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule, MatDialogModule],
+        providers: [
+          {
+            provide: 'LicenseConfiguration',
+            useValue: OEM_LICENSE_CONFIGURATION_TESTING,
+          },
+        ],
+      });
+
+      httpTestingController = TestBed.inject(HttpTestingController);
+      gioLicenseService = TestBed.inject<GioLicenseService>(GioLicenseService);
+    });
+
+    afterEach(() => {
+      httpTestingController.verify();
+    });
+
+    it('should check if license is native kafka', done => {
+      const nativeKafkaLicense: License = {
+        tier: '',
+        packs: ['native-kafka'],
+        features: [],
+      };
+
+      gioLicenseService
+        .isNativeKafka$()
+        .pipe(
+          tap(isNativeKafka => {
+            expect(isNativeKafka).toEqual(true);
+            done();
+          }),
+        )
+        .subscribe();
+
+      const req = httpTestingController.expectOne({
+        method: 'GET',
+        url: `https://oem.test:3000/license`,
+      });
+
+      req.flush(nativeKafkaLicense);
     });
   });
 });
