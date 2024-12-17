@@ -149,10 +149,6 @@ export class GioLicenseService {
     return this.getLicense$().pipe(map(license => license !== null && license.features.includes('oem-customization')));
   }
 
-  public isNativeKafka$(): Observable<boolean> {
-    return this.getLicense$().pipe(map(license => license !== null && license.packs.includes('native-kafka')));
-  }
-
   public openDialog(licenseOptions: LicenseOptions, event?: Event) {
     event?.stopPropagation();
     event?.preventDefault();
