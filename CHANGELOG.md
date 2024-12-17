@@ -1,3 +1,10 @@
+## [13.8.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.8.0...v13.8.1) (2024-12-17)
+
+
+### Bug Fixes
+
+* remove isNativeKafka logic from license service ([0268493](https://github.com/gravitee-io/gravitee-ui-particles/commit/02684934adfdc5b76314d74971cd83a9bc974aca))
+
 # [13.8.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.7.1...v13.8.0) (2024-12-16)
 
 
