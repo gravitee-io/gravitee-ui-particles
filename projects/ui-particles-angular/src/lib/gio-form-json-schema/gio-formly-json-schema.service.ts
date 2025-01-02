@@ -35,6 +35,7 @@ export class GioFormlyJsonSchemaService {
       map: (mappedField: FormlyFieldConfig, mapSource: JSONSchema7) => {
         mappedField = this.displayIfMap(mappedField, mapSource, context);
         mappedField = this.uiTypeMap(mappedField, mapSource);
+        mappedField = this.uiBorder(mappedField, mapSource);
         mappedField = this.formatMap(mappedField, mapSource);
         mappedField = this.bannerMap(mappedField, mapSource);
         mappedField = this.toggleMap(mappedField, mapSource);
@@ -83,6 +84,20 @@ export class GioFormlyJsonSchemaService {
         props: {
           ...mappedField.props,
           ...mapSource.gioConfig?.uiTypeProps,
+        },
+      };
+    }
+
+    return mappedField;
+  }
+
+  private uiBorder(mappedField: FormlyFieldConfig, mapSource: JSONSchema7): FormlyFieldConfig {
+    if (mapSource.gioConfig?.uiBorder) {
+      mappedField = {
+        ...mappedField,
+        props: {
+          ...mappedField.props,
+          uiBorder: mapSource.gioConfig?.uiBorder,
         },
       };
     }

@@ -49,6 +49,7 @@ import { webhookAdvancedExample } from './json-schema-example/webhook-advanced';
 import { codeEditorExample } from './json-schema-example/code-editor';
 import { displayIfExample } from './json-schema-example/displayIf';
 import { disableIfExample } from './json-schema-example/disableIf';
+import { uiBorderExample } from './json-schema-example/uiBorder';
 
 @NgModule({
   declarations: [DemoComponent],
@@ -180,6 +181,13 @@ export const WithDisableIf: StoryObj = {
   args: {
     jsonSchema: disableIfExample,
     context: { currentUser: 'foo' },
+  },
+};
+
+export const WithUiBorder: StoryObj = {
+  name: 'With uiBorder',
+  args: {
+    jsonSchema: uiBorderExample,
   },
 };
 

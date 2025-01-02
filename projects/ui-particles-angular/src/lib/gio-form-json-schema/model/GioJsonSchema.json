@@ -187,6 +187,10 @@
         "disableIf": {
           "type": "object",
           "$ref": "#/definitions/gioIfConfig"
+        },
+        "uiBorder": {
+          "type": "string",
+          "enum": ["none", "full"]
         }
       }
     }
