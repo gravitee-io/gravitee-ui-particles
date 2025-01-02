@@ -18,6 +18,7 @@ import { FormlyFieldConfig, FormlyFormBuilder } from '@ngx-formly/core';
 import { FormlyJsonschema } from '@ngx-formly/core/json-schema';
 import { JSONSchema7 } from 'json-schema';
 import { castArray, get, isArray, isEmpty, isNil, isObject } from 'lodash';
+import { Observable } from 'rxjs';
 
 import { GioIfConfig, GioJsonSchema } from './model/GioJsonSchema';
 import { GioJsonSchemaContext } from './model/GioJsonSchemaContext';
@@ -137,35 +138,37 @@ export class GioFormlyJsonSchemaService {
   private disableIfMap(mappedField: FormlyFieldConfig, mapSource: JSONSchema7, context?: GioJsonSchemaContext): FormlyFieldConfig {
     const disableIf = getGioIf(mapSource.gioConfig?.disableIf);
     if (disableIf) {
+      const propsDisabled: ((field: FormlyFieldConfig) => boolean) | Observable<boolean> = field => {
+        const isReadOnly = field.props?.readonly === true;
+        const isParentDisabled = field.options?.formState?.parentDisabled === true;
+        if (isParentDisabled || isReadOnly) {
+          // Useful when field is readonly to avoid to enable it
+          field.formControl?.disable({ emitEvent: false });
+          return true;
+        }
+
+        let parentField = field;
+        while (parentField.parent) {
+          parentField = parentField.parent;
+        }
+
+        try {
+          const isDisabled = disableIf({
+            value: parentField.model,
+            context,
+          });
+          // Useful when full form is re-enabled to sync the fromControl enable/disable state
+          isDisabled ? field.formControl?.disable({ emitEvent: false }) : field.formControl?.enable({ emitEvent: false });
+          return isDisabled;
+        } catch (e) {
+          // Ignore the error and keep default value
+          return field.props?.disabled || false;
+        }
+      };
+
       mappedField.expressions = {
         ...mappedField.expressions,
-        'props.disabled': field => {
-          const isReadOnly = field.props?.readonly === true;
-          const isParentDisabled = field.options?.formState?.parentDisabled === true;
-          if (isParentDisabled || isReadOnly) {
-            // Useful when field is readonly to avoid to enable it
-            field.formControl?.disable({ emitEvent: false });
-            return true;
-          }
-
-          let parentField = field;
-          while (parentField.parent) {
-            parentField = parentField.parent;
-          }
-
-          try {
-            const isDisabled = disableIf({
-              value: parentField.model,
-              context,
-            });
-            // Useful when full form is re-enabled to sync the fromControl enable/disable state
-            isDisabled ? field.formControl?.disable({ emitEvent: false }) : field.formControl?.enable({ emitEvent: false });
-            return isDisabled;
-          } catch (e) {
-            // Ignore the error and keep default value
-            return field.props?.disabled;
-          }
-        },
+        'props.disabled': propsDisabled,
       };
     }
 
