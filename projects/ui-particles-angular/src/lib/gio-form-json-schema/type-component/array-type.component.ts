@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FieldArrayType } from '@ngx-formly/core';
 
 @Component({
   selector: 'gio-fjs-array-type',
   template: `
-    <div class="wrapper" [class.error]="formControl.touched && formControl.invalid">
+    <div class="wrapper" [class.error]="formControl.touched && formControl.invalid" [class.noUiBorder]="classNoUiBorder">
       <div class="wrapper__header">
         <div class="wrapper__header__text">
           <div class="wrapper__header__text__title" *ngIf="to.label">{{ to.label }}</div>
@@ -56,6 +56,11 @@ import { FieldArrayType } from '@ngx-formly/core';
   `,
   styleUrls: ['./array-type.component.scss'],
 })
-export class GioFjsArrayTypeComponent extends FieldArrayType {
+export class GioFjsArrayTypeComponent extends FieldArrayType implements OnInit {
   public collapse = false;
+  public classNoUiBorder = false;
+
+  public ngOnInit() {
+    this.classNoUiBorder = this.props.uiBorder === 'none';
+  }
 }
