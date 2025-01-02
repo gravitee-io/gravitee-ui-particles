@@ -17,7 +17,7 @@ import { Injectable } from '@angular/core';
 import { FormlyFieldConfig, FormlyFormBuilder } from '@ngx-formly/core';
 import { FormlyJsonschema } from '@ngx-formly/core/json-schema';
 import { JSONSchema7 } from 'json-schema';
-import { castArray, get, isArray, isEmpty, isNil, isObject } from 'lodash';
+import { castArray, get, isArray, isEmpty, isNil, isObject, set } from 'lodash';
 import { Observable } from 'rxjs';
 
 import { GioIfConfig, GioJsonSchema } from './model/GioJsonSchema';
@@ -41,6 +41,7 @@ export class GioFormlyJsonSchemaService {
         mappedField = this.toggleMap(mappedField, mapSource);
         mappedField = this.disableIfMap(mappedField, mapSource, context);
         mappedField = this.enumLabelMap(mappedField, mapSource);
+        mappedField = this.sanitizeOneOf(mappedField, mapSource);
         mappedField = this.deprecatedMap(mappedField, mapSource);
 
         return mappedField;
@@ -216,6 +217,31 @@ export class GioFormlyJsonSchemaService {
         }),
       };
     }
+
+    return mappedField;
+  }
+
+  /**
+   * Remove the label of the oneOf fields to avoid to display it twice (with the select and the object title)
+   */
+  private sanitizeOneOf(mappedField: FormlyFieldConfig, mapSource: JSONSchema7): FormlyFieldConfig {
+    if (!mapSource.oneOf || !mappedField.fieldGroup || mappedField.fieldGroup.length < 1) {
+      return mappedField;
+    }
+
+    const parentFieldGroup = mappedField.fieldGroup[mappedField.fieldGroup.length - 1];
+    if (!parentFieldGroup || parentFieldGroup?.type != 'multischema') {
+      return mappedField;
+    }
+
+    const contentFieldGroup = get(parentFieldGroup, 'fieldGroup[1]');
+    if (!contentFieldGroup) {
+      return mappedField;
+    }
+
+    contentFieldGroup.fieldGroup?.forEach((field: FormlyFieldConfig) => {
+      set(field, 'props.label', undefined);
+    });
 
     return mappedField;
   }
