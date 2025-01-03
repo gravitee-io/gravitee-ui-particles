@@ -329,6 +329,9 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
         throw new Error(`Flow group ${event.previousContainer.data._id} or ${event.container.data._id} not found`);
       }
       transferArrayItem(previousFlowsGroupToEdit.flows, flowsGroupToEdit.flows, event.previousIndex, event.currentIndex);
+
+      flowsGroupToEdit.flows[event.currentIndex]._hasChanged = true;
+      flowsGroupToEdit.flows[event.currentIndex]._parentFlowGroupName = flowsGroupToEdit.name;
       this.flowsGroupsChange.emit(this.flowsGroups);
     }
   }
