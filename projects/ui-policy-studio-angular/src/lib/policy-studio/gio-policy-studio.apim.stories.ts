@@ -388,6 +388,7 @@ export const ProxyWithFlowsAndPlans: StoryObj = {
     ],
     plans: [
       fakePlan({
+        id: 'plan1',
         name: 'Plan without flow and with a very long name to test overflow Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         flows: [
           fakeHttpFlow({
@@ -400,6 +401,7 @@ export const ProxyWithFlowsAndPlans: StoryObj = {
         ],
       }),
       fakePlan({
+        id: 'plan2',
         name: 'Second plan',
         flows: [
           fakeHttpFlow({
