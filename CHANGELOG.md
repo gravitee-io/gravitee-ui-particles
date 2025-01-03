@@ -1,3 +1,16 @@
+# [13.9.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.8.1...v13.9.0) (2025-01-03)
+
+
+### Bug Fixes
+
+* error when drag and drop plan between groups ([82b8baf](https://github.com/gravitee-io/gravitee-ui-particles/commit/82b8baf72d6bd0f7e951a89629b20b7cdf032954))
+
+
+### Features
+
+* add uiBorder to allow to disable json-schema object border ([5c44d0b](https://github.com/gravitee-io/gravitee-ui-particles/commit/5c44d0b0afc9c8c7e8a7d0262c5b0392bb2e14b9))
+* remove the label of the oneOf fields to avoid to display it twice ([515bb2c](https://github.com/gravitee-io/gravitee-ui-particles/commit/515bb2c53293b4f793e5dc105aba30da2b58da99))
+
 ## [13.8.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.8.0...v13.8.1) (2024-12-17)
 
 
