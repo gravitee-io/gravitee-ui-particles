@@ -1,3 +1,10 @@
+## [13.9.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.9.0...v13.9.1) (2025-01-09)
+
+
+### Bug Fixes
+
+* **gio-form-json-schema:** validation message for exclusive min and max ([ff61e1a](https://github.com/gravitee-io/gravitee-ui-particles/commit/ff61e1aa94b9c325e41e6d0a50614d9bce2c4aa4))
+
 # [13.9.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.8.1...v13.9.0) (2025-01-03)
 
 
