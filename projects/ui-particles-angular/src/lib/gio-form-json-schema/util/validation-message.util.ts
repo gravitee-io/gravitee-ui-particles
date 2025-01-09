@@ -44,11 +44,11 @@ export function multipleOfValidationMessage(error: unknown, field: FormlyFieldCo
 }
 
 export function exclusiveMinimumValidationMessage(error: unknown, field: FormlyFieldConfig): string {
-  return `Should be > ${field.props?.step}`;
+  return `Should be > ${field.props?.exclusiveMinimum}`;
 }
 
 export function exclusiveMaximumValidationMessage(error: unknown, field: FormlyFieldConfig): string {
-  return `Should be < ${field.props?.step}`;
+  return `Should be < ${field.props?.exclusiveMaximum}`;
 }
 
 export function constValidationMessage(error: unknown, field: FormlyFieldConfig): string {
