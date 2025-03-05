@@ -81,6 +81,7 @@
                 [genericPolicies]="genericPolicies"
                 [step]="stepVM.step"
                 [flowPhase]="policyFlowPhase"
+                [apiType]="apiType"
                 (stepChange)="onStepChange(stepVM.index, $event)"
                 (deleted)="onStepDeleted(stepVM.index)"
                 (disabled)="onStepDisabled(stepVM.index)"

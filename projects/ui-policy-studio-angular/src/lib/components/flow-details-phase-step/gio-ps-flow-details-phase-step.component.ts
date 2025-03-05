@@ -27,7 +27,7 @@ import {
   GioPolicyStudioStepEditDialogData,
   GioPolicyStudioStepEditDialogResult,
 } from '../step-edit-dialog/gio-ps-step-edit-dialog.component';
-import { FlowPhase, isPolicy, isSharedPolicyGroupPolicy, Step, GenericPolicy } from '../../models';
+import { FlowPhase, isPolicy, isSharedPolicyGroupPolicy, Step, GenericPolicy, ApiType } from '../../models';
 
 @Component({
   standalone: true,
@@ -48,6 +48,9 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
 
   @Input({ required: true })
   public flowPhase!: FlowPhase;
+
+  @Input({ required: true })
+  public apiType!: ApiType;
 
   @Output()
   public stepChange = new EventEmitter<Step>();
@@ -121,6 +124,7 @@ ${this.policyNotFound === 'SHARED_POLICY_GROUP' ? 'Note: The Gateway will ignore
             genericPolicy: this.genericPolicy,
             step: this.step,
             flowPhase: this.flowPhase,
+            apiType: this.apiType,
           },
           role: 'alertdialog',
           id: 'gioPolicyStudioPolicyFormDialog',

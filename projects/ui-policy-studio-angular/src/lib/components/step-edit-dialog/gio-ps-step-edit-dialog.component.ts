@@ -19,13 +19,14 @@ import { GioIconsModule } from '@gravitee/ui-particles-angular';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 
-import { FlowPhase, Step, GenericPolicy } from '../../models';
+import { FlowPhase, Step, GenericPolicy, ApiType } from '../../models';
 import { GioPolicyStudioStepFormComponent } from '../step-form/gio-ps-step-form.component';
 
 export type GioPolicyStudioStepEditDialogData = {
   genericPolicy: GenericPolicy;
   step: Step;
   flowPhase: FlowPhase;
+  apiType: ApiType;
   readOnly?: boolean;
 };
 
@@ -42,6 +43,7 @@ export class GioPolicyStudioStepEditDialogComponent {
   public genericPolicy!: GenericPolicy;
   public step!: Step;
   public flowPhase!: FlowPhase;
+  public apiType!: ApiType;
 
   public isValid = false;
   public readOnly = false;
@@ -51,6 +53,7 @@ export class GioPolicyStudioStepEditDialogComponent {
     @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioStepEditDialogData,
   ) {
     this.flowPhase = flowDialogData.flowPhase;
+    this.apiType = flowDialogData.apiType;
     this.genericPolicy = flowDialogData.genericPolicy;
     this.step = flowDialogData.step;
     this.readOnly = Boolean(flowDialogData.readOnly);

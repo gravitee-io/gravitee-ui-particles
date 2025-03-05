@@ -104,11 +104,14 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
 
   public trialUrl?: string;
 
+  public apiType: ApiType;
+
   constructor(
     public dialogRef: MatDialogRef<GioPolicyStudioPoliciesCatalogDialogComponent, GioPolicyStudioPoliciesCatalogDialogResult>,
     @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioPoliciesCatalogDialogData,
   ) {
     this.flowPhase = flowDialogData.flowPhase;
+    this.apiType = flowDialogData.apiType;
     this.flowPhaseLabel = flowPhaseLabels[flowDialogData.flowPhase];
 
     this.allPolicies = flowDialogData.genericPolicies

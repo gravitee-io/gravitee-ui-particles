@@ -103,6 +103,7 @@ export default {
         genericPolicy: args.genericPolicy,
         step: args.step,
         flowPhase: 'REQUEST',
+        apiType: 'PROXY',
       },
     },
   }),
