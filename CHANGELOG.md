@@ -1,3 +1,10 @@
+## [13.9.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.9.1...v13.9.2) (2025-03-05)
+
+
+### Bug Fixes
+
+* make monaco editor work with new angular version ([2b05293](https://github.com/gravitee-io/gravitee-ui-particles/commit/2b05293956a8a7992279145030aadc0b9e1b7ac4))
+
 ## [13.9.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.9.0...v13.9.1) (2025-01-09)
 
 
