@@ -48,7 +48,7 @@ export class GioMonacoEditorService {
 
       const onGotAmdLoader = () => {
         // Load Monaco
-        window.require.config({ paths: { vs: 'assets/monaco-editor/min/vs' } });
+        window.require.config({ paths: { vs: window.location.origin + '/assets/monaco-editor/min/vs' } });
 
         window.require(['vs/editor/editor.main'], () => {
           resolve();
