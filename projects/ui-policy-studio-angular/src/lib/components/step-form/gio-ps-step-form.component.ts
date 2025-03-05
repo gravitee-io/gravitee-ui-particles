@@ -31,7 +31,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { GioAsciidoctorModule } from '@gravitee/ui-particles-angular/gio-asciidoctor';
 
-import { FlowPhase, isPolicy, isSharedPolicyGroupPolicy, Step, toPolicy, GenericPolicy } from '../../models';
+import { FlowPhase, isPolicy, isSharedPolicyGroupPolicy, Step, toPolicy, GenericPolicy, ApiType } from '../../models';
 import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.service';
 
 @Component({
@@ -59,6 +59,9 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
 
   @Input({ required: true })
   public flowPhase!: FlowPhase;
+
+  @Input({ required: true })
+  public apiType!: ApiType;
 
   @Input()
   public genericPolicy!: GenericPolicy;
@@ -109,6 +112,7 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
     if (changes.flowPhase) {
       this.context = {
         flowPhase: this.flowPhase,
+        apiType: this.apiType,
       };
       this.isMessage = this.flowPhase === 'PUBLISH' || this.flowPhase === 'SUBSCRIBE';
     }

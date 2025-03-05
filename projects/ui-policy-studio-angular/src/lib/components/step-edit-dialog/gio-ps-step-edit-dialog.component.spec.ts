@@ -108,6 +108,7 @@ describe('GioPolicyStudioStepEditDialogComponent', () => {
       },
       step,
       flowPhase: 'REQUEST',
+      apiType: 'PROXY',
     };
     loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
   };
