@@ -326,6 +326,7 @@ const icons = [
   'zap',
   'zap-off',
   'universe',
+  'el',
 ];
 
 const data = fs.readFileSync(`${__dirname}/../../../assets/gio-icons.svg`, { encoding: 'utf8', flag: 'r' });
