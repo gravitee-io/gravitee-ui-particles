@@ -1,3 +1,10 @@
+## [13.10.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.10.0...v13.10.1) (2025-03-06)
+
+
+### Bug Fixes
+
+* new EL icon scale ([cb7393c](https://github.com/gravitee-io/gravitee-ui-particles/commit/cb7393ce2229c2c56545615c5942afe8af006f7e))
+
 # [13.10.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.9.2...v13.10.0) (2025-03-06)
 
 
