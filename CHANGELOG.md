@@ -1,3 +1,10 @@
+## [13.10.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.10.1...v13.10.2) (2025-03-06)
+
+
+### Bug Fixes
+
+* new EL icon color ([74cc570](https://github.com/gravitee-io/gravitee-ui-particles/commit/74cc5700f54b33293f97ad23cf5422c944826151))
+
 ## [13.10.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.10.0...v13.10.1) (2025-03-06)
 
 
