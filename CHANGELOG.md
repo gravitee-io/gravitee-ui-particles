@@ -1,3 +1,10 @@
+# [13.10.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.9.2...v13.10.0) (2025-03-06)
+
+
+### Features
+
+* add new EL icon ([db28f90](https://github.com/gravitee-io/gravitee-ui-particles/commit/db28f90d32795249d49f3ac2d19666884c07bb6a))
+
 ## [13.9.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.9.1...v13.9.2) (2025-03-05)
 
 
