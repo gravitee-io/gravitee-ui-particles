@@ -1,3 +1,10 @@
+# [13.11.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.10.2...v13.11.0) (2025-03-07)
+
+
+### Features
+
+* allow users to hide policy configuration according to the api type ([4902a70](https://github.com/gravitee-io/gravitee-ui-particles/commit/4902a7062d0fef49565be87b4b9543ef09a4b68c))
+
 ## [13.10.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.10.1...v13.10.2) (2025-03-06)
 
 
