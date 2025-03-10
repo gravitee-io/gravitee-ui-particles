@@ -85,6 +85,11 @@
                 (stepChange)="onStepChange(stepVM.index, $event)"
                 (deleted)="onStepDeleted(stepVM.index)"
                 (disabled)="onStepDisabled(stepVM.index)"
+                (duplicated)="onStepDuplicated(stepVM.index)"
+                [disableMoveRight]="stepVM.index !== this.steps.length - 1"
+                (movedRight)="onStepMovedRight(stepVM.index)"
+                [disableMoveLeft]="stepVM.index !== 0"
+                (movedLeft)="onStepMovedLeft(stepVM.index)"
               ></gio-ps-flow-details-phase-step>
             </div>
 

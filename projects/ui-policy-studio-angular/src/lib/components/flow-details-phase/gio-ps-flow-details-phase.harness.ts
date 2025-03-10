@@ -176,4 +176,31 @@ export class GioPolicyStudioDetailsPhaseHarness extends ComponentHarness {
     const step = await this.getStep(index);
     await step.clickOnDisableEnable();
   }
+
+  /**
+   * Duplicate a step
+   * @param index Index of the policy step to duplicate
+   */
+  public async duplicateStep(index: number): Promise<void> {
+    const step = await this.getStep(index);
+    await step.clickOnDuplicate();
+  }
+
+  /**
+   * Move a step to the right
+   * @param index Index of the policy step to move
+   */
+  public async moveStepRight(index: number): Promise<void> {
+    const step = await this.getStep(index);
+    await step.clickOnMoveRight();
+  }
+
+  /**
+   * Move a step to the left
+   * @param index Index of the policy step to move
+   */
+  public async moveStepLeft(index: number): Promise<void> {
+    const step = await this.getStep(index);
+    await step.clickOnMoveLeft();
+  }
 }

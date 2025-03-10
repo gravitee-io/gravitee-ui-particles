@@ -60,4 +60,16 @@
     <mat-icon svgIcon="gio:trash"></mat-icon>
     <span>Delete</span>
   </button>
+  <button [disabled]="readOnly" mat-menu-item (click)="onDuplicate()">
+    <mat-icon svgIcon="gio:copy"></mat-icon>
+    <span>Duplicate</span>
+  </button>
+  <button *ngIf="disableMoveRight" [disabled]="readOnly" mat-menu-item (click)="onMoveRight()">
+    <mat-icon svgIcon="gio:arrow-right"></mat-icon>
+    <span>Move right</span>
+  </button>
+  <button *ngIf="disableMoveLeft" [disabled]="readOnly" mat-menu-item (click)="onMoveLeft()">
+    <mat-icon svgIcon="gio:arrow-left"></mat-icon>
+    <span>Move left</span>
+  </button>
 </mat-menu>
