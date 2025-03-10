@@ -52,6 +52,12 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
   @Input({ required: true })
   public apiType!: ApiType;
 
+  @Input()
+  public disableMoveRight: boolean = false;
+
+  @Input()
+  public disableMoveLeft: boolean = false;
+
   @Output()
   public stepChange = new EventEmitter<Step>();
 
@@ -61,9 +67,17 @@ export class GioPolicyStudioDetailsPhaseStepComponent implements OnChanges {
   @Output()
   public disabled = new EventEmitter<void>();
 
+  @Output()
+  public duplicated = new EventEmitter<void>();
+
+  @Output()
+  public movedRight = new EventEmitter<void>();
+
+  @Output()
+  public movedLeft = new EventEmitter<void>();
+
   protected genericPolicy?: GenericPolicy;
   protected policyNotFound: false | 'SHARED_POLICY_GROUP' | 'POLICY' = false;
-
   protected get getPrerequisiteMessage(): string | undefined {
     if (!this.genericPolicy || !isSharedPolicyGroupPolicy(this.genericPolicy) || isEmpty(this.genericPolicy.prerequisiteMessage)) {
       return;
@@ -147,5 +161,17 @@ ${this.policyNotFound === 'SHARED_POLICY_GROUP' ? 'Note: The Gateway will ignore
 
   public onDelete() {
     this.deleted.emit();
+  }
+
+  public onDuplicate() {
+    this.duplicated.emit();
+  }
+
+  public onMoveRight() {
+    this.movedRight.emit();
+  }
+
+  public onMoveLeft() {
+    this.movedLeft.emit();
   }
 }

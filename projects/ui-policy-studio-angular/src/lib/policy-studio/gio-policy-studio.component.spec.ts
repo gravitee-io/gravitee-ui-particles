@@ -1046,6 +1046,103 @@ describe('GioPolicyStudioComponent', () => {
         expect(commonFlow?.subscribe).toEqual([]);
       });
 
+      it('should duplicate step into phase', async () => {
+        const channelSelector: ChannelSelector = {
+          type: 'CHANNEL',
+          channel: 'channel',
+          channelOperator: 'EQUALS',
+          entrypoints: ['webhook'],
+          operations: ['SUBSCRIBE'],
+        };
+        const commonFlows = [
+          fakeChannelFlow({
+            name: 'Alphabetical policy',
+            selectors: [channelSelector],
+            request: [fakeTestPolicyStep({ description: 'A' }), fakeTestPolicyStep({ description: 'B' })],
+            subscribe: [],
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        // Duplicate step B into REQUEST phase
+        const requestPhase = await policyStudioHarness.getSelectedFlowPhase('REQUEST');
+        await requestPhase?.duplicateStep(1);
+
+        // Save
+        let saveOutputToExpect: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutputToExpect = value));
+        await policyStudioHarness.save();
+
+        expect(saveOutputToExpect?.commonFlows).toBeDefined();
+        const commonFlow = saveOutputToExpect?.commonFlows?.[0];
+        expect(commonFlow).toBeDefined();
+        expect(commonFlow?.request).toEqual([
+          fakeTestPolicyStep({ description: 'A' }),
+          fakeTestPolicyStep({ description: 'B' }),
+          fakeTestPolicyStep({ description: 'B' }),
+        ]);
+
+        expect(commonFlow?.subscribe).toEqual([]);
+      });
+
+      it('should move step into phase', async () => {
+        const channelSelector: ChannelSelector = {
+          type: 'CHANNEL',
+          channel: 'channel',
+          channelOperator: 'EQUALS',
+          entrypoints: ['webhook'],
+          operations: ['SUBSCRIBE'],
+        };
+        const commonFlows = [
+          fakeChannelFlow({
+            name: 'Alphabetical policy',
+            selectors: [channelSelector],
+            request: [
+              fakeTestPolicyStep({ description: 'A' }),
+              fakeTestPolicyStep({ description: 'B' }),
+              fakeTestPolicyStep({ description: 'C' }),
+            ],
+            subscribe: [],
+          }),
+        ];
+        component.commonFlows = commonFlows;
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        const requestPhase = await policyStudioHarness.getSelectedFlowPhase('REQUEST');
+        // Move step B into REQUEST phase
+        await requestPhase?.moveStepLeft(1);
+        // Move step A into REQUEST phase
+        await requestPhase?.moveStepRight(1);
+        // Move step C into REQUEST phase
+        await requestPhase?.moveStepLeft(1);
+
+        // Do nothing, if step is already at the end
+        await requestPhase?.moveStepRight(2);
+        // Do nothing, if step is already at the beginning
+        await requestPhase?.moveStepLeft(0);
+
+        // Save
+        let saveOutputToExpect: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutputToExpect = value));
+        await policyStudioHarness.save();
+
+        expect(saveOutputToExpect?.commonFlows).toBeDefined();
+        const commonFlow = saveOutputToExpect?.commonFlows?.[0];
+        expect(commonFlow).toBeDefined();
+        expect(commonFlow?.request).toEqual([
+          fakeTestPolicyStep({ description: 'C' }),
+          fakeTestPolicyStep({ description: 'B' }),
+          fakeTestPolicyStep({ description: 'A' }),
+        ]);
+
+        expect(commonFlow?.subscribe).toEqual([]);
+      });
+
       it('should display conditioned flow and conditioned steps', async () => {
         const commonFlows = [
           fakeConditionedChannelFlow({
