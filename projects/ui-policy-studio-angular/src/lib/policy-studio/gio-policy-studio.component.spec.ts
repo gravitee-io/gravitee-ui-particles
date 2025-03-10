@@ -1121,10 +1121,10 @@ describe('GioPolicyStudioComponent', () => {
         // Move step C into REQUEST phase
         await requestPhase?.moveStepLeft(1);
 
-        // Do nothing, if step is already at the end
-        await requestPhase?.moveStepRight(2);
-        // Do nothing, if step is already at the beginning
-        await requestPhase?.moveStepLeft(0);
+        // If step is already at the end
+        await expect(requestPhase?.moveStepRight(2)).rejects.toThrow('Could not find item matching {"text":"Move right"}');
+        // If step is already at the beginning
+        await expect(requestPhase?.moveStepLeft(0)).rejects.toThrow('Could not find item matching {"text":"Move left"}');
 
         // Save
         let saveOutputToExpect: SaveOutput | undefined;
