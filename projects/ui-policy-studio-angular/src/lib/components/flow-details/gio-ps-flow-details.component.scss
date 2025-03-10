@@ -65,12 +65,20 @@ $typography: map.get(gio.$mat-theme, typography);
   &.loading {
     min-height: 52px;
   }
+
+  &.flowDisabled {
+    opacity: 0.5;
+  }
 }
 
 .content {
   overflow: auto;
   flex: 1 1 auto;
   background-color: mat.m2-get-color-from-palette(gio.$mat-dove-palette, default);
+
+  &.flowDisabled {
+    opacity: 0.5;
+  }
 
   &__tabs {
     min-height: 100%;

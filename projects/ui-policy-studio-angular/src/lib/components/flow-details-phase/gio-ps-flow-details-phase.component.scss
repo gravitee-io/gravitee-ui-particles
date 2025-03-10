@@ -102,6 +102,11 @@ $typography: map.get(gio.$mat-theme, typography);
         display: flex;
         flex-direction: column;
 
+        &.disabled {
+          opacity: 0.5;
+          text-decoration: line-through;
+        }
+
         span {
           display: inline-block;
           overflow: hidden;

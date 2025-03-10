@@ -185,4 +185,36 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
       ...this.steps.slice(index + 1),
     ]);
   }
+
+  public onStepDuplicated(index: number) {
+    if (!this.steps) {
+      return;
+    }
+
+    this.stepsChange.emit([...this.steps.slice(0, index + 1), this.steps[index], ...this.steps.slice(index + 1)]);
+  }
+
+  public onStepMovedRight(index: number) {
+    if (!this.steps) {
+      return;
+    }
+    // Check if the step is not the last one
+    if (index === this.steps.length - 1) {
+      return;
+    }
+
+    this.stepsChange.emit([...this.steps.slice(0, index), this.steps[index + 1], this.steps[index], ...this.steps.slice(index + 2)]);
+  }
+
+  public onStepMovedLeft(index: number) {
+    if (!this.steps) {
+      return;
+    }
+    // Check if the step is not the first one
+    if (index === 0) {
+      return;
+    }
+
+    this.stepsChange.emit([...this.steps.slice(0, index - 1), this.steps[index], this.steps[index - 1], ...this.steps.slice(index + 1)]);
+  }
 }

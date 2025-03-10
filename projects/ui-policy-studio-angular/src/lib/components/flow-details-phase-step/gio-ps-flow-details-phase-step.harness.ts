@@ -66,4 +66,19 @@ export class GioPolicyStudioDetailsPhaseStepHarness extends ComponentHarness {
     const matMenu = await this.locatorFor(MatMenuHarness)();
     await matMenu.clickItem({ text: /Disable|Enable/ });
   }
+
+  public async clickOnDuplicate(): Promise<void> {
+    const matMenu = await this.locatorFor(MatMenuHarness)();
+    await matMenu.clickItem({ text: 'Duplicate' });
+  }
+
+  public async clickOnMoveRight(): Promise<void> {
+    const matMenu = await this.locatorFor(MatMenuHarness)();
+    await matMenu.clickItem({ text: 'Move right' });
+  }
+
+  public async clickOnMoveLeft(): Promise<void> {
+    const matMenu = await this.locatorFor(MatMenuHarness)();
+    await matMenu.clickItem({ text: 'Move left' });
+  }
 }
