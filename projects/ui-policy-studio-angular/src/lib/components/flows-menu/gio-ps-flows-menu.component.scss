@@ -108,13 +108,14 @@ $typography: map.get(gio.$mat-theme, typography);
         align-items: center;
         justify-content: space-between;
         padding: 7px; // compensate the border. Total: 8px
-        border: 1px solid mat.m2-get-color-from-palette(gio.$mat-dove-palette, darker20);
+        border: 1px solid mat.m2-get-color-from-palette(gio.$mat-dove-palette, darker40);
         border-radius: 8px;
         background-color: mat.m2-get-color-from-palette(gio.$mat-basic-palette, white);
 
         &.disabled {
-          border: 1px solid mat.m2-get-color-from-palette(gio.$mat-dove-palette, darker20, 0);
-          background-color: mat.m2-get-color-from-palette(gio.$mat-dove-palette, default, 0.8);
+          border: 1px solid mat.m2-get-color-from-palette(gio.$mat-dove-palette, darker40, 0);
+          background-color: mat.m2-get-color-from-palette(gio.$mat-dove-palette, darker10, 0.8);
+          text-decoration: line-through;
         }
 
         &:hover,

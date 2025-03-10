@@ -68,7 +68,7 @@
           <!-- Policy -->
           @if (stepVM.type === 'step') {
             <div class="content__step__policy">
-              <div *ngIf="stepVM.step?.condition" class="content__step__policy__condition">
+              <div *ngIf="stepVM.step?.condition" class="content__step__policy__condition" [class.disabled]="!stepVM.step.enabled">
                 <span class="gio-badge-neutral" [matTooltip]="'Condition: ' + stepVM.step.condition"
                   ><mat-icon svgIcon="gio:if"></mat-icon> {{ stepVM.step.condition }}</span
                 >

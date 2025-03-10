@@ -28,7 +28,10 @@ $typography: map.get(gio.$mat-theme, typography);
 }
 
 :host-context(.disabled) {
-  border: 1px solid mat.m2-get-color-from-palette(gio.$mat-dove-palette, darker20);
+  border: 1px solid mat.m2-get-color-from-palette(gio.$mat-dove-palette, darker20, 0);
+  background-color: mat.m2-get-color-from-palette(gio.$mat-dove-palette, darker10);
+  opacity: 0.5;
+  text-decoration: line-through;
 }
 
 .info {
