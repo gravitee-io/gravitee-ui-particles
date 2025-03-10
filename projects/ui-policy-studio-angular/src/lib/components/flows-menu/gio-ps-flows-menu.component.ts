@@ -309,6 +309,7 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
       throw new Error(`Flow ${flowId} not found`);
     }
     flowToEdit.enabled = !flowToEdit.enabled;
+    flowToEdit._hasChanged = true;
     this.flowsGroupsChange.emit(this.flowsGroups);
   }
 
