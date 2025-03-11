@@ -1,3 +1,11 @@
+# [13.12.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.11.0...v13.12.0) (2025-03-11)
+
+
+### Features
+
+* ps - add duplicate and move action to step menu ([3b0f848](https://github.com/gravitee-io/gravitee-ui-particles/commit/3b0f8480cbf39b37e95328700554c4bbf1f16fd9))
+* ps - various improvement for the UI, mainly on disabled state ([c698855](https://github.com/gravitee-io/gravitee-ui-particles/commit/c6988557edddf78a11d32bc81fb13d337986bde9))
+
 # [13.11.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.10.2...v13.11.0) (2025-03-07)
 
 
