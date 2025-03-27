@@ -191,6 +191,7 @@ const icons = [
   'mail-opened',
   'maximize',
   'maximize-2',
+  'mcp',
   'megaphone',
   'menu',
   'message',
