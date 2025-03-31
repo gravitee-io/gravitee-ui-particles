@@ -49,7 +49,6 @@ import { GioElEditorHelperToggleComponent } from './gio-el-editor-helper-toggle.
     GioElEditorHelperToggleComponent,
     MatButtonModule,
   ],
-  standalone: true,
 })
 class StoryHelperComponent {
   public formControl = new FormControl();

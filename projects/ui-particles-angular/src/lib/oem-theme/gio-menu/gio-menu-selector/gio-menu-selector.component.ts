@@ -25,6 +25,7 @@ export type SelectorItem = {
   selector: 'gio-menu-selector',
   templateUrl: './gio-menu-selector.component.html',
   styleUrls: ['./gio-menu-selector.component.scss'],
+  standalone: false,
 })
 export class GioMenuSelectorComponent {
   @Input()

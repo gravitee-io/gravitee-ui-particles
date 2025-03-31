@@ -60,7 +60,6 @@ interface FlowMenuVM extends FlowVM {
 }
 
 @Component({
-  standalone: true,
   imports: [GioIconsModule, MatTooltipModule, MatButtonModule, CommonModule, GioLoaderModule, MatMenuModule, DragDropModule],
   selector: 'gio-ps-flows-menu',
   templateUrl: './gio-ps-flows-menu.component.html',

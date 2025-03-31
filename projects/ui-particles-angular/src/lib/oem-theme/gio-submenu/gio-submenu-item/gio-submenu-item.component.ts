@@ -19,6 +19,7 @@ import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/
   selector: 'gio-submenu-item',
   templateUrl: './gio-submenu-item.component.html',
   styleUrls: ['./gio-submenu-item.component.scss'],
+  standalone: false,
 })
 export class GioSubmenuItemComponent {
   @Input() public active = false;

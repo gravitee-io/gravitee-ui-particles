@@ -59,7 +59,6 @@ type PolicyVM = {
 };
 
 @Component({
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,

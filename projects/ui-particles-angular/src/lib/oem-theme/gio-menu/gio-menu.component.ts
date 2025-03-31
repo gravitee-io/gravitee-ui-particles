@@ -22,6 +22,7 @@ import { GioMenuService } from './gio-menu.service';
   templateUrl: './gio-menu.component.html',
   styleUrls: ['./gio-menu.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class GioMenuComponent implements OnChanges {
   @Input()

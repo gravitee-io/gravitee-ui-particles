@@ -44,6 +44,7 @@ import {
       }
     `,
   ],
+  standalone: false,
 })
 class GioPolicyStudioStepEditDialogStoryComponent {
   @Input()

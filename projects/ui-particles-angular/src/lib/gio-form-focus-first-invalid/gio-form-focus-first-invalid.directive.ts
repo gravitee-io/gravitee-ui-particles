@@ -61,6 +61,7 @@ export class GioBaseFormFocusInvalidDirective {
 
 @Directive({
   selector: 'form[gioFormFocusInvalid]',
+  standalone: false,
 })
 export class GioFormFocusInvalidFormDirective extends GioBaseFormFocusInvalidDirective {
   @HostListener('submit')
@@ -71,6 +72,7 @@ export class GioFormFocusInvalidFormDirective extends GioBaseFormFocusInvalidDir
 
 @Directive({
   selector: 'button[gioFormFocusInvalid]',
+  standalone: false,
 })
 export class GioButtonFocusInvalidButtonDirective extends GioBaseFormFocusInvalidDirective {
   @HostListener('click')

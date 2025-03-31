@@ -38,7 +38,6 @@ type HttpMethodVM = HttpMethod | 'ALL';
 const METHODS_AUTOCOMPLETE: HttpMethodVM[] = ['ALL', ...HttpMethods];
 
 @Component({
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,

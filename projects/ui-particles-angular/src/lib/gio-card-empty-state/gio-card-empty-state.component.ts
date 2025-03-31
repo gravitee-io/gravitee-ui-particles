@@ -19,6 +19,7 @@ import { Component, Input } from '@angular/core';
   selector: 'gio-card-empty-state',
   templateUrl: './gio-card-empty-state.component.html',
   styleUrls: ['./gio-card-empty-state.component.scss'],
+  standalone: false,
 })
 export class GioCardEmptyStateComponent {
   @Input() public icon: string | undefined;

@@ -40,6 +40,7 @@ import {
       }
     `,
   ],
+  standalone: false,
 })
 class GioPolicyStudioFlowExecutionFormDialogStoryComponent {
   @Input() public flowExecution?: FlowExecution = undefined;

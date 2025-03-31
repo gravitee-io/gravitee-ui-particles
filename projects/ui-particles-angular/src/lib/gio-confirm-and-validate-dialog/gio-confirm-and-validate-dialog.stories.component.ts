@@ -23,6 +23,7 @@ import { GioConfirmAndValidateDialogComponent, GioConfirmAndValidateDialogData }
 @Component({
   selector: 'gio-confirm-and-validate-dialog-story',
   template: `<button id="open-confirm-dialog" (click)="openConfirmDialog()">Open confirm dialog</button>`,
+  standalone: false,
 })
 export class ConfirmAndValidateDialogStoryComponent {
   @Input() public title?: string;
@@ -68,6 +69,7 @@ export class ConfirmAndValidateDialogStoryComponent {
 @Component({
   selector: 'gio-confirm-and-validate-content-dialog-story',
   template: ` <div>{{ title }}</div> `,
+  standalone: false,
 })
 export class ConfirmAndValidateContentDialogStoryComponent {
   @Input()

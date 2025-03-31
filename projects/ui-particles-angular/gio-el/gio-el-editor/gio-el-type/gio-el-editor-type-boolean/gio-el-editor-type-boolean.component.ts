@@ -26,7 +26,6 @@ import { ConditionForm } from '../../gio-el-editor.component';
 
 @Component({
   selector: 'gio-el-editor-type-boolean',
-  standalone: true,
   imports: [CommonModule, MatFormFieldModule, MatSelectModule, ReactiveFormsModule, MatSlideToggle],
   templateUrl: './gio-el-editor-type-boolean.component.html',
   styleUrl: './gio-el-editor-type-boolean.component.scss',

@@ -20,5 +20,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './gio-form-file-picker-add-button.component.html',
   styleUrls: ['./gio-form-file-picker-add-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class GioFormFilePickerAddButtonComponent {}

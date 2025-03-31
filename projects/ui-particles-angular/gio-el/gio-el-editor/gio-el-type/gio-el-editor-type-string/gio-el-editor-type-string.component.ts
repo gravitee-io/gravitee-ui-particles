@@ -32,7 +32,6 @@ type AutocompleteValue = { value: string; label: string };
 
 @Component({
   selector: 'gio-el-editor-type-string',
-  standalone: true,
   imports: [CommonModule, MatFormFieldModule, MatSelectModule, MatInputModule, ReactiveFormsModule, MatAutocompleteModule],
   templateUrl: './gio-el-editor-type-string.component.html',
   styleUrl: './gio-el-editor-type-string.component.scss',

@@ -18,15 +18,18 @@ import { Component, Directive } from '@angular/core';
 @Component({
   selector: 'gio-form-label',
   template: `<ng-content></ng-content>`,
+  standalone: false,
 })
 export class GioFormLabelComponent {}
 
 @Directive({
   selector: '[gioFormPrefix]',
+  standalone: false,
 })
 export class GioFormPrefixDirective {}
 
 @Directive({
   selector: '[gioFormSlideToggle]',
+  standalone: false,
 })
 export class GioFormSlideToggleDirective {}

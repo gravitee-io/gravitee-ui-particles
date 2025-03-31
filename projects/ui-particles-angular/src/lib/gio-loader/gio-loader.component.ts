@@ -19,5 +19,6 @@ import { Component } from '@angular/core';
   selector: 'gio-loader',
   templateUrl: './gio-loader.component.html',
   styleUrls: ['./gio-loader.component.scss'],
+  standalone: false,
 })
 export class GioLoaderComponent {}

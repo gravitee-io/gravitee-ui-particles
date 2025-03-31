@@ -36,6 +36,7 @@ import { GioPolicyStudioFlowExecutionFormDialogHarness } from './gio-ps-flow-exe
 @Component({
   selector: 'gio-dialog-test',
   template: `<button mat-button id="open-dialog" (click)="openDialog()">Open dialog</button>`,
+  standalone: false,
 })
 class TestComponent {
   public flowExecution?: FlowExecution;

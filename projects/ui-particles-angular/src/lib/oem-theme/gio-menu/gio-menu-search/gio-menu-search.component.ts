@@ -32,6 +32,7 @@ export interface MenuSearchItem {
   selector: 'gio-menu-search',
   templateUrl: './gio-menu-search.component.html',
   styleUrls: ['./gio-menu-search.component.scss'],
+  standalone: false,
 })
 export class GioMenuSearchComponent {
   protected control = new FormControl<string | MenuSearchItem>('');

@@ -27,6 +27,7 @@ import { FieldWrapper, FormlyFieldConfig } from '@ngx-formly/core';
       </button>
     </ng-template>
   `,
+  standalone: false,
 })
 export class GioPasswordEyeWrapperComponent extends FieldWrapper implements AfterViewInit {
   @ViewChild('matSuffix', { static: true })

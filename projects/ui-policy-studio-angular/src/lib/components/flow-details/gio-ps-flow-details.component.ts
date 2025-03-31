@@ -43,7 +43,6 @@ import {
 } from '../flow-form-dialog/flow-native-form-dialog/gio-ps-flow-native-form-dialog.component';
 
 @Component({
-  standalone: true,
   imports: [
     CommonModule,
     MatTabsModule,

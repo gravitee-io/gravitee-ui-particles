@@ -26,6 +26,7 @@ import { GioFormHeadersModule } from './gio-form-headers.module';
 
 @Component({
   template: `<gio-form-headers [formControl]="headersControl" [headerFieldMapper]="mapper"></gio-form-headers> `,
+  standalone: false,
 })
 class TestComponent {
   public headersControl = new UntypedFormControl([]);

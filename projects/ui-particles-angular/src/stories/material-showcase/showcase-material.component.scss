@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@use '@angular/material' as mat;
+
 .sc {
   display: flex;
   flex-flow: row wrap;
@@ -27,4 +29,10 @@
       text-align: center;
     }
   }
+}
+
+table {
+  @include mat.elevation(8);
+
+  width: 100%;
 }

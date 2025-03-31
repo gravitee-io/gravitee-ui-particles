@@ -35,7 +35,6 @@ import { FlowPhase, isPolicy, isSharedPolicyGroupPolicy, Step, toPolicy, Generic
 import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.service';
 
 @Component({
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,

@@ -44,7 +44,6 @@ import { FlowGroupVM, FlowVM } from './gio-policy-studio.model';
 import { GioPolicyStudioService } from './gio-policy-studio.service';
 
 @Component({
-  standalone: true,
   imports: [
     CommonModule,
     MatTooltipModule,

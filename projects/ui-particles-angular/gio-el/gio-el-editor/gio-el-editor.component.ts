@@ -53,7 +53,6 @@ export type ConditionGroupForm = {
 
 @Component({
   selector: 'gio-el-editor',
-  standalone: true,
   imports: [
     CommonModule,
     MatButtonToggleModule,

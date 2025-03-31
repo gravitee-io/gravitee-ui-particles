@@ -29,5 +29,6 @@ type CronProps = FormlyFieldProps;
   `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class GioFjsCronTypeComponent extends FieldType<FieldTypeConfig<CronProps>> {}

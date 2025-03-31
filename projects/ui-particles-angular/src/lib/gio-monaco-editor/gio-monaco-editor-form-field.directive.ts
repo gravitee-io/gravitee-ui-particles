@@ -45,6 +45,7 @@ import { GioMonacoEditorComponent } from './gio-monaco-editor.component';
       useExisting: forwardRef(() => GioMonacoEditorFormFieldDirective),
     },
   ],
+  standalone: false,
 })
 export class GioMonacoEditorFormFieldDirective implements OnInit, DoCheck, MatFormFieldControl<string>, OnDestroy {
   public static nextId = 0;

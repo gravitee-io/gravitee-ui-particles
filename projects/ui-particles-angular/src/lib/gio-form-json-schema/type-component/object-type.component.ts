@@ -33,6 +33,7 @@ import { FieldType } from '@ngx-formly/core';
     </div>
   `,
   styleUrls: ['./object-type.component.scss'],
+  standalone: false,
 })
 export class GioFjsObjectTypeComponent extends FieldType implements OnInit {
   public classNoUiBorder = false;

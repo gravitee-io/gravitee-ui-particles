@@ -18,5 +18,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'gio-form-cron-hint',
   template: `<ng-content></ng-content>`,
+  standalone: false,
 })
 export class GioFormCronHintComponent {}

@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/blocks';
+import { Meta, Story, Canvas } from '@storybook/blocks';
 import * as ReadmeStories from './gio-save-bar.stories';
 
 <Meta of={ReadmeStories} />
@@ -11,15 +11,11 @@ Documentation and examples for save bar, a card based component to use to submit
 
 Creation mode:
 
-{/* <Story id="components-save-bar--simple-usage-in-creation-mode" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
-
-<Story id="components-save-bar--simple-usage-in-creation-mode" />
+<Story of={ReadmeStories.SimpleUsageInCreationMode} />
 
 Update mode:
 
-{/* <Story id="components-save-bar--simple-usage-in-update-mode" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
-
-<Story id="components-save-bar--simple-usage-in-update-mode" />
+<Story of={ReadmeStories.SimpleUsageInUpdateMode} />
 
 ## Usage
 

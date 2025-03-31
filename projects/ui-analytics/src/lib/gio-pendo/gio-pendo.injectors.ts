@@ -13,18 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { APP_INITIALIZER, Provider } from '@angular/core';
+import { inject, provideAppInitializer, EnvironmentProviders } from '@angular/core';
 import { interval } from 'rxjs';
 
 import { GIO_PENDO_SETTINGS_TOKEN } from './gio-pendo.token';
 import { GioPendoSettings } from './GioPendoSettings';
 
-export const GIO_PENDO_INITIALIZER_PROVIDER: Provider = {
-  provide: APP_INITIALIZER,
-  multi: true,
-  useFactory: pendoInitializer,
-  deps: [GIO_PENDO_SETTINGS_TOKEN],
-};
+export const GIO_PENDO_INITIALIZER_PROVIDER: EnvironmentProviders = provideAppInitializer(() => {
+  const initializerFn = pendoInitializer(inject(GIO_PENDO_SETTINGS_TOKEN));
+  return initializerFn();
+});
 
 export function pendoInitializer(pendoSettings: GioPendoSettings): () => Promise<void> {
   return async () => {

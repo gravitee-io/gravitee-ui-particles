@@ -36,6 +36,7 @@ describe('GioLicenseExpirationNotificationComponent', () => {
         ></gio-license-expiration-notification>
       </div>
     `,
+    standalone: false,
   })
   class TestComponent {
     public expirationDate: Date = new Date();

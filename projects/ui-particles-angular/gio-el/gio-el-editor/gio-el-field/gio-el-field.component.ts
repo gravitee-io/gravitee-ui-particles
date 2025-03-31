@@ -57,7 +57,6 @@ type Key1AutocompleteValue = { value: string; label: string };
 
 @Component({
   selector: 'gio-el-field',
-  standalone: true,
   imports: [CommonModule, MatAutocompleteModule, MatInputModule, ReactiveFormsModule, MatButtonModule, GioIconsModule],
   templateUrl: './gio-el-field.component.html',
   styleUrl: './gio-el-field.component.scss',

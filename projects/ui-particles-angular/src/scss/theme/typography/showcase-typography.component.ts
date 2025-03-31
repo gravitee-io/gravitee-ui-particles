@@ -18,5 +18,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'gio-typography',
   templateUrl: './showcase-typography.component.html',
+  standalone: false,
 })
 export class ShowcaseTypographyComponent {}

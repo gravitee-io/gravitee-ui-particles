@@ -21,6 +21,7 @@ import { GioBreadcrumbItemDirective } from './gio-breadcrumb-item.directive';
   selector: 'gio-breadcrumb',
   templateUrl: './gio-breadcrumb.component.html',
   styleUrls: ['./gio-breadcrumb.component.scss'],
+  standalone: false,
 })
 export class GioBreadcrumbComponent {
   @ContentChildren(GioBreadcrumbItemDirective)

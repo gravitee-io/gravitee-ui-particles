@@ -28,7 +28,6 @@ import { ConditionForm } from '../../gio-el-editor.component';
 
 @Component({
   selector: 'gio-el-editor-type-date',
-  standalone: true,
   imports: [CommonModule, MatFormFieldModule, MatSelectModule, MatInputModule, ReactiveFormsModule, MatDatepickerModule],
   templateUrl: './gio-el-editor-type-date.component.html',
   styleUrl: './gio-el-editor-type-date.component.scss',

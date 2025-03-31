@@ -21,6 +21,7 @@ import { GioSubmenuTheme } from '../gio-submenu.component';
   selector: 'gio-submenu-group',
   templateUrl: './gio-submenu-group.component.html',
   styleUrls: ['./gio-submenu-group.component.scss'],
+  standalone: false,
 })
 export class GioSubmenuGroupComponent {
   @Input() public title = '';

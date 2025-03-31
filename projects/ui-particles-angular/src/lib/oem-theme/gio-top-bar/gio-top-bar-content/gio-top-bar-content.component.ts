@@ -21,6 +21,7 @@ export type GioTopBarProductTypes = 'am' | 'apim' | 'cockpit' | 'cloud' | 'porta
   selector: 'gio-top-bar-content',
   templateUrl: './gio-top-bar-content.component.html',
   styleUrls: ['./gio-top-bar-content.component.scss'],
+  standalone: false,
 })
 export class GioTopBarContentComponent {
   @Input()

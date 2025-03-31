@@ -20,6 +20,7 @@ import { toSvg } from 'jdenticon';
   selector: 'gio-avatar',
   templateUrl: './gio-avatar.component.html',
   styleUrls: ['./gio-avatar.component.scss'],
+  standalone: false,
 })
 export class GioAvatarComponent implements AfterViewInit, OnChanges {
   public imgSrc: string | null = null;

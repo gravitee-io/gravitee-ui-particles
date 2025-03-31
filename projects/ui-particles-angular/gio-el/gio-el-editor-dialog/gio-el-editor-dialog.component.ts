@@ -25,7 +25,6 @@ export type GioElEditorDialogResult = string;
   selector: 'gio-el-editor-dialog',
   templateUrl: './gio-el-editor-dialog.component.html',
   styleUrls: ['./gio-el-editor-dialog.component.scss'],
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MatDialogModule, MatButtonModule],
 })

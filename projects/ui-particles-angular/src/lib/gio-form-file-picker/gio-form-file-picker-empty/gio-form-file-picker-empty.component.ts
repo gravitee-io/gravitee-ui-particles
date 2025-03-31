@@ -19,5 +19,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'gio-form-file-picker-empty',
   templateUrl: './gio-form-file-picker-empty.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class GioFormFilePickerEmptyComponent {}

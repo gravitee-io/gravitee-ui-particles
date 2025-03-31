@@ -35,6 +35,7 @@ import { delay, tap } from 'rxjs/operators';
       ]),
     ]),
   ],
+  standalone: false,
 })
 export class GioSaveBarComponent implements OnDestroy {
   public isSubmitted = false;

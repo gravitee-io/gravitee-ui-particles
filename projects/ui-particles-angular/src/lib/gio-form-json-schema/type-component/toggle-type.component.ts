@@ -33,5 +33,6 @@ type ToggleProps = FormlyFieldProps;
       ></mat-slide-toggle>
     </gio-form-slide-toggle>
   `,
+  standalone: false,
 })
 export class GioFjsToggleTypeComponent extends FieldType<FieldTypeConfig<ToggleProps>> {}

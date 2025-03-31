@@ -33,7 +33,6 @@ import { GioElFieldComponent } from '../gio-el-field/gio-el-field.component';
 
 @Component({
   selector: 'gio-el-editor-condition-group',
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,

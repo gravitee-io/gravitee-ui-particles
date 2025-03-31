@@ -26,7 +26,6 @@ import { Operator } from '../../../models/Operator';
 
 @Component({
   selector: 'gio-el-editor-type-number',
-  standalone: true,
   imports: [CommonModule, MatFormFieldModule, MatSelectModule, MatInputModule, ReactiveFormsModule],
   templateUrl: './gio-el-editor-type-number.component.html',
   styleUrl: './gio-el-editor-type-number.component.scss',

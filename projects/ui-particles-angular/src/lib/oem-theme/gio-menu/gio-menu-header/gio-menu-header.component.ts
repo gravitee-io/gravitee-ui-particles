@@ -19,5 +19,6 @@ import { Component } from '@angular/core';
   selector: 'gio-menu-header',
   templateUrl: './gio-menu-header.component.html',
   styleUrls: ['./gio-menu-header.component.scss'],
+  standalone: false,
 })
 export class GioMenuHeaderComponent {}

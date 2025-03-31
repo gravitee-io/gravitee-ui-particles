@@ -20,6 +20,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
   templateUrl: './showcase-color.component.html',
   styleUrls: ['./showcase-color.component.scss', './gio-palettes.stories.scss'],
   encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class ShowcaseColorComponent {
   public colorPalettes: { name: string; colors: { name: string; color?: string; contrast?: string }[] }[] = [];

@@ -47,7 +47,6 @@ type PolicyGroupVM = {
 
 @Component({
   selector: 'gio-policy-group-studio',
-  standalone: true,
   imports: [GioPolicyStudioDetailsPhaseComponent, GioFormJsonSchemaModule, GioLoaderModule],
   templateUrl: './gio-policy-group-studio.component.html',
   styleUrl: './gio-policy-group-studio.component.scss',

@@ -42,5 +42,6 @@ import { GioClipboardComponent } from './gio-clipboard.base.component';
       <mat-icon [inline]="true">{{ clicked ? 'check' : 'content_copy' }}</mat-icon>
     </button>
   `,
+  standalone: false,
 })
 export class GioClipboardCopyWrapperComponent extends GioClipboardComponent {}

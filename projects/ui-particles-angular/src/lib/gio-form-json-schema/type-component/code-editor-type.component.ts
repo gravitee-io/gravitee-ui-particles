@@ -43,6 +43,7 @@ type CodeEditorProps = FormlyFieldProps & {
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class GioFjsCodeEditorTypeComponent extends FieldType<FieldTypeConfig<CodeEditorProps>> implements OnInit {
   public languageConfig?: MonacoEditorLanguageConfig;
