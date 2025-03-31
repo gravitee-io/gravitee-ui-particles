@@ -45,6 +45,7 @@ describe('GioSaveBarModule', () => {
           ></gio-save-bar>
         </div>
       `,
+      standalone: false,
     })
     class TestComponent {
       public opened = false;
@@ -146,6 +147,7 @@ describe('GioSaveBarModule', () => {
           <gio-save-bar [form]="form" [formInitialValues]="formInitialValues"></gio-save-bar>
         </form>
       `,
+      standalone: false,
     })
     class TestComponentWithFormComponent {
       public form = aForm;
@@ -261,6 +263,7 @@ describe('GioSaveBarModule', () => {
           <gio-save-bar [creationMode]="true" [hideSubmitButton]="hideSubmitButton" (submitted)="onSubmit($event)"></gio-save-bar>
         </div>
       `,
+      standalone: false,
     })
     class TestComponent {
       public hideSubmitButton = false;

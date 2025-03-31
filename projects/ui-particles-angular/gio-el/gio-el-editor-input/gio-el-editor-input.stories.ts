@@ -52,7 +52,6 @@ import { GioElEditorInputComponent } from './gio-el-editor-input.component';
     GioElEditorHelperToggleComponent,
     GioElEditorHelperInputDirective,
   ],
-  standalone: true,
 })
 class StoryInputComponent {
   public formControl = new FormControl();

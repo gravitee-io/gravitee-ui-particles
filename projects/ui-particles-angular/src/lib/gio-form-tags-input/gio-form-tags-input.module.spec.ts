@@ -43,6 +43,7 @@ describe('GioFormTagsInputModule - Static input', () => {
         <mat-error>Error</mat-error>
       </mat-form-field>
     `,
+    standalone: false,
   })
   class TestComponent {
     public required = false;
@@ -193,6 +194,7 @@ describe('GioFormTagsInputModule - Dynamic input', () => {
         <mat-error>Error</mat-error>
       </mat-form-field>
     `,
+    standalone: false,
   })
   class TestDynamicComponent {
     public required = false;

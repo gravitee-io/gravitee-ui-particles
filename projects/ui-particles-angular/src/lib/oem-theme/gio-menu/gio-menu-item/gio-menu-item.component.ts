@@ -23,6 +23,7 @@ import { GioMenuService } from '../gio-menu.service';
   selector: 'gio-menu-item',
   templateUrl: './gio-menu-item.component.html',
   styleUrls: ['./gio-menu-item.component.scss'],
+  standalone: false,
 })
 export class GioMenuItemComponent implements OnDestroy {
   @Input() public icon = '';

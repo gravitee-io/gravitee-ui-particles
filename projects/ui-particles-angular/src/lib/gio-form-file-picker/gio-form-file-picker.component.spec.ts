@@ -42,6 +42,7 @@ import { GioFormFilePickerModule } from './gio-form-file-picker.module';
       ></gio-form-file-picker>
     </form>
   `,
+  standalone: false,
 })
 export class TestFilePickerInputComponent {
   public multiple = false;

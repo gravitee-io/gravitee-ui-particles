@@ -27,6 +27,7 @@ export type GioLicenseDialogData = {
   selector: 'gio-license-dialog',
   templateUrl: './gio-license-dialog.component.html',
   styleUrls: ['./gio-license-dialog.component.scss'],
+  standalone: false,
 })
 export class GioLicenseDialogComponent {
   public featureInfo: FeatureInfo;

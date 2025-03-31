@@ -20,6 +20,7 @@ import { GioPendoModule, GioPendoService } from '../public-api';
 
 @Component({
   template: ``,
+  standalone: false,
 })
 class TestComponent {}
 

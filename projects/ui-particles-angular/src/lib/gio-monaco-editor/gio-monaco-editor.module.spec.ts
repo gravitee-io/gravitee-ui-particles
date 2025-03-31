@@ -27,6 +27,7 @@ import { GioMonacoEditorModule } from './gio-monaco-editor.module';
 
 @Component({
   template: `<gio-monaco-editor [formControl]="control" [languageConfig]="languageConfig"></gio-monaco-editor> `,
+  standalone: false,
 })
 class TestComponent {
   public languageConfig: MonacoEditorLanguageConfig = { language: 'markdown' };

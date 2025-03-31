@@ -42,6 +42,7 @@ import { GioPolicyStudioPoliciesCatalogDialogHarness } from './gio-ps-policies-c
 @Component({
   selector: 'gio-dialog-test',
   template: `<button mat-button id="open-dialog" (click)="openDialog()">Open dialog</button>`,
+  standalone: false,
 })
 class TestComponent {
   @Input()

@@ -47,7 +47,6 @@ type StepVM =
     };
 
 @Component({
-  standalone: true,
   imports: [CommonModule, MatTooltipModule, MatButtonModule, GioPolicyStudioDetailsPhaseStepComponent, GioIconsModule, GioBannerModule],
   selector: 'gio-ps-flow-details-phase',
   templateUrl: './gio-ps-flow-details-phase.component.html',

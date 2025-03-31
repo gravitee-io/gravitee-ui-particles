@@ -20,5 +20,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './gio-form-file-picker-label.component.html',
   styleUrls: ['./gio-form-file-picker-label.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class GioFormFilePickerLabelComponent {}

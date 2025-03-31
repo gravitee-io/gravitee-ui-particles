@@ -39,6 +39,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   selector: 'gio-material',
   templateUrl: './showcase-material.component.html',
   styleUrls: ['./showcase-material.component.scss'],
+  standalone: false,
 })
 export class ShowcaseMaterialComponent {
   public displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];

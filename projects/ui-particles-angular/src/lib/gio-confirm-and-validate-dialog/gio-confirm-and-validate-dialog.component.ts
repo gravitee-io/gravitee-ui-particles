@@ -36,6 +36,7 @@ export type GioConfirmAndValidateDialogData = {
   selector: 'gio-confirm-and-validate-dialog',
   templateUrl: './gio-confirm-and-validate-dialog.component.html',
   styleUrls: ['./gio-confirm-and-validate-dialog.component.scss'],
+  standalone: false,
 })
 export class GioConfirmAndValidateDialogComponent {
   public title: string;

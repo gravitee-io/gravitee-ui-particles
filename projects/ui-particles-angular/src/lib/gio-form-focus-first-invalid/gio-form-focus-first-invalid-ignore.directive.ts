@@ -20,5 +20,6 @@ export const GIO_FORM_FOCUS_INVALID_IGNORE_SELECTOR = 'gioFormFocusInvalidIgnore
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: `[${GIO_FORM_FOCUS_INVALID_IGNORE_SELECTOR}]`,
+  standalone: false,
 })
 export class GioFormFocusInvalidIgnoreDirective {}

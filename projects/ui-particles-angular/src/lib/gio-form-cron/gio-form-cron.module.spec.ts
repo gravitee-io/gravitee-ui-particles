@@ -26,6 +26,7 @@ import { GioFormCronModule } from './gio-form-cron.module';
 describe('GioFormCronModule', () => {
   @Component({
     template: ` <gio-form-cron [formControl]="testControl"></gio-form-cron> `,
+    standalone: false,
   })
   class TestComponent {
     public testControl = new UntypedFormControl(null);

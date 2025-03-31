@@ -24,6 +24,7 @@ import { GioLicenseDialogComponent, GioLicenseDialogData } from './gio-license-d
 
 @Directive({
   selector: '[gioLicense]',
+  standalone: false,
 })
 export class GioLicenseDirective implements OnInit, OnDestroy {
   /**

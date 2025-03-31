@@ -15,7 +15,7 @@
     limitations under the License.
 
 -->
-<div *ngIf="expirationDate && daysRemaining <= 30" class="status mat-elevation-z2" rel="noopener">
+<div *ngIf="expirationDate && daysRemaining <= 30" class="status" rel="noopener">
   <div [ngClass]="'status__title ' + statusColor">
     <div class="status__title__text">
       {{ title }}

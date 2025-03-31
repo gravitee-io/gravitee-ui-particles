@@ -29,7 +29,6 @@ import {
 
 @Component({
   selector: 'gio-el-editor-helper-toggle',
-  standalone: true,
   imports: [MatButtonModule, GioIconsModule, GioElEditorDialogComponent, MatDialogModule],
   templateUrl: './gio-el-editor-helper-toggle.component.html',
   styleUrl: './gio-el-editor-helper-toggle.component.scss',

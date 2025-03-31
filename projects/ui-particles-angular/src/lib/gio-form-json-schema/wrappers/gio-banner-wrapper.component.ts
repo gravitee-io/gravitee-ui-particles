@@ -20,5 +20,6 @@ import { Component } from '@angular/core';
   selector: 'gio-banner-wrapper',
   templateUrl: 'gio-banner-wrapper.component.html',
   styleUrls: ['gio-banner-wrapper.component.scss'],
+  standalone: false,
 })
 export class GioBannerWrapperComponent extends FieldWrapper {}

@@ -17,6 +17,7 @@ import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
   selector: '[gioBreadcrumbItem]',
+  standalone: false,
 })
 export class GioBreadcrumbItemDirective {
   constructor(public templateRef: TemplateRef<unknown>) {}

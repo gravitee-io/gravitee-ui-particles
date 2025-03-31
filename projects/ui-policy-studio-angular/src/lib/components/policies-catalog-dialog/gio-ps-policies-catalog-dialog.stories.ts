@@ -46,6 +46,7 @@ import {
       }
     `,
   ],
+  standalone: false,
 })
 class GioPolicyStudioPoliciesCatalogDialogStoryComponent {
   @Input()

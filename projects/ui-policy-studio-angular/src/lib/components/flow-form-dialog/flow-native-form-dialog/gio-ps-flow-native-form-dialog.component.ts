@@ -34,7 +34,6 @@ export type GioPolicyStudioFlowNativeFormDialogData = {
 };
 
 @Component({
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,

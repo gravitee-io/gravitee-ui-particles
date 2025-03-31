@@ -38,6 +38,7 @@ import { GioFormSelectionInlineCardComponent } from './gio-form-selection-inline
     },
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class GioFormSelectionInlineComponent implements ControlValueAccessor, AfterContentInit {
   @ContentChildren(forwardRef(() => GioFormSelectionInlineCardComponent), { descendants: true })

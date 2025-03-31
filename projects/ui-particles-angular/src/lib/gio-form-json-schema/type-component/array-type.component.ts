@@ -55,6 +55,7 @@ import { FieldArrayType } from '@ngx-formly/core';
     </div>
   `,
   styleUrls: ['./array-type.component.scss'],
+  standalone: false,
 })
 export class GioFjsArrayTypeComponent extends FieldArrayType implements OnInit {
   public collapse = false;

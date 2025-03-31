@@ -33,7 +33,6 @@ export type GioPolicyStudioStepEditDialogData = {
 export type GioPolicyStudioStepEditDialogResult = undefined | Step;
 
 @Component({
-  standalone: true,
   imports: [CommonModule, MatButtonModule, MatDialogModule, GioIconsModule, GioPolicyStudioStepFormComponent],
   selector: 'gio-ps-step-edit-dialog',
   templateUrl: './gio-ps-step-edit-dialog.component.html',

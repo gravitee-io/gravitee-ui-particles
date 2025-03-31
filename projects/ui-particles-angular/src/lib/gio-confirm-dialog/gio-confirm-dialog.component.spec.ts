@@ -29,6 +29,7 @@ import { GioConfirmDialogHarness } from './gio-confirm-dialog.harness';
 @Component({
   selector: 'gio-confirm-dialog-test',
   template: `<button mat-button id="open-confirm-dialog" (click)="openConfirmDialog()">Open confirm dialog</button>`,
+  standalone: false,
 })
 class TestComponent {
   public confirmed?: boolean;

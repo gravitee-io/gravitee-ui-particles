@@ -48,6 +48,7 @@ $expiration-notification-container-height: 152px;
 
 .status {
   @include expiration-notification-container;
+  @include mat.elevation(2);
 
   border: none;
   background: mat.m2-get-color-from-palette(gio.$mat-basic-palette, white);

@@ -19,7 +19,6 @@ import { FormlyFormOptions } from '@ngx-formly/core';
 import { combineLatest, Subject } from 'rxjs';
 import { debounceTime, startWith, takeUntil, tap } from 'rxjs/operators';
 import Ajv from 'ajv';
-import { CommonModule } from '@angular/common';
 
 import GioJsonSchema from './model/GioJsonSchema.json';
 import { FormlyJSONSchema7 } from './model/FormlyJSONSchema7';
@@ -30,7 +29,7 @@ const ajv = new Ajv({ strict: false, logger: false });
   selector: 'gio-demo',
   templateUrl: './gio-form-json-schema.stories.component.html',
   styleUrls: ['./gio-form-json-schema.stories.component.scss'],
-  imports: [CommonModule],
+  standalone: false,
 })
 export class DemoComponent implements OnChanges, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>();

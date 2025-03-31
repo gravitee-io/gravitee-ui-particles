@@ -27,6 +27,7 @@ import { GioMenuSearchService } from './gio-menu-search.service';
 
 @Component({
   template: ` <gio-menu-search *ngIf="menuItems"></gio-menu-search> `,
+  standalone: false,
 })
 class TestComponent {
   public menuItems = [

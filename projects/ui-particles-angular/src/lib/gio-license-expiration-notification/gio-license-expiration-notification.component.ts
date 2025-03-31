@@ -19,6 +19,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
   selector: 'gio-license-expiration-notification',
   templateUrl: './gio-license-expiration-notification.component.html',
   styleUrls: ['./gio-license-expiration-notification.component.scss'],
+  standalone: false,
 })
 export class GioLicenseExpirationNotificationComponent implements OnInit, OnChanges {
   @Input()

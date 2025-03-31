@@ -47,7 +47,7 @@
       <mat-icon svgIcon="gio:cancel"></mat-icon>
     </a>
 
-    <ng-container *ngTemplateOutlet="filePreview; context: { fileValue: this.fileValue }"></ng-container>
+    <ng-container *ngTemplateOutlet="filePreview; context: { fileValue: fileValue }"></ng-container>
   </div>
 </div>
 
@@ -64,7 +64,7 @@
     </ng-container>
 
     <div class="file-picker__preview disabled" *ngFor="let fileValue of fileValues">
-      <ng-container *ngTemplateOutlet="filePreview; context: { fileValue: this.fileValue }"></ng-container>
+      <ng-container *ngTemplateOutlet="filePreview; context: { fileValue: fileValue }"></ng-container>
     </div>
   </div>
 </ng-template>

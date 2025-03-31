@@ -31,6 +31,7 @@ import { Subject } from 'rxjs';
     </div>
   `,
   styleUrls: ['./multischema-type.component.scss'],
+  standalone: false,
 })
 export class GioFjsMultiSchemaTypeComponent extends FieldType implements OnInit, OnDestroy, AfterViewChecked {
   private unsubscribe$: Subject<void> = new Subject<void>();

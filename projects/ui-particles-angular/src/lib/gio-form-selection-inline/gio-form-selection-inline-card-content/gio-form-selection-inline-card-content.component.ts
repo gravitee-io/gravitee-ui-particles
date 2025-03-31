@@ -31,6 +31,7 @@ import { Component, Input } from '@angular/core';
     </div>
   </div>`,
   styleUrls: ['./gio-form-selection-inline-card-content.component.scss'],
+  standalone: false,
 })
 export class GioFormSelectionInlineCardContentComponent {
   @Input()
@@ -43,11 +44,13 @@ export class GioFormSelectionInlineCardContentComponent {
 @Component({
   selector: 'gio-card-content-title',
   template: `<ng-content></ng-content>`,
+  standalone: false,
 })
 export class GioFormSelectionInlineCardTitleComponent {}
 
 @Component({
   selector: 'gio-card-content-subtitle',
   template: `<ng-content></ng-content>`,
+  standalone: false,
 })
 export class GioFormSelectionInlineCardSubtitleComponent {}

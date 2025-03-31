@@ -19,6 +19,7 @@ import { Component, Input } from '@angular/core';
   selector: 'gio-top-bar-link',
   templateUrl: './gio-top-bar-link.component.html',
   styleUrls: ['./gio-top-bar-link.component.scss'],
+  standalone: false,
 })
 export class GioTopBarLinkComponent {
   @Input() public url = '';

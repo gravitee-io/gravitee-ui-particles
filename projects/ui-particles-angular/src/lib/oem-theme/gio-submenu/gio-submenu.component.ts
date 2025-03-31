@@ -31,6 +31,7 @@ import { GioMenuService, OverlayOptions } from '../gio-menu';
 
 @Directive({
   selector: '[gioSubmenuTitle]',
+  standalone: false,
 })
 export class GioSubmenuTitleDirective {}
 
@@ -40,6 +41,7 @@ export type GioSubmenuTheme = 'dark' | 'light';
   selector: 'gio-submenu',
   templateUrl: './gio-submenu.component.html',
   styleUrls: ['./gio-submenu.component.scss'],
+  standalone: false,
 })
 export class GioSubmenuComponent implements AfterViewInit, OnDestroy {
   @Input()

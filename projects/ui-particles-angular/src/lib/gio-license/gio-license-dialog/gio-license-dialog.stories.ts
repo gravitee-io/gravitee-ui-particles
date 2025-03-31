@@ -28,6 +28,7 @@ import { GioLicenseDialogModule } from './gio-license-dialog.module';
 @Component({
   selector: 'gio-license-dialog-story',
   template: `<button id="open-dialog" (click)="openDialog()">More information</button>`,
+  standalone: false,
 })
 class GioLicenseDialogStoryComponent {
   @Input() public featureInfo: FeatureInfo = {};

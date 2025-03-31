@@ -32,6 +32,7 @@ import { GioFormSelectionInlineModule } from './gio-form-selection-inline.module
       <gio-form-selection-inline-card value="E">Hello</gio-form-selection-inline-card>
     </gio-form-selection-inline>
   `,
+  standalone: false,
 })
 class TestComponent {
   public selectControl = new FormControl('');

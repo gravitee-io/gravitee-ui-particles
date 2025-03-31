@@ -48,6 +48,7 @@ import { CronDisplay, getDefaultCronDisplay, parseCronExpression, toCronDescript
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDestroy, Validator {
   public _onChange: (value: string | null) => void = () => ({});

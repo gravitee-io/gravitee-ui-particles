@@ -19,5 +19,6 @@ import { Component } from '@angular/core';
   selector: 'gio-menu-list',
   templateUrl: './gio-menu-list.component.html',
   styleUrls: ['./gio-menu-list.component.scss'],
+  standalone: false,
 })
 export class GioMenuListComponent {}

@@ -18,7 +18,10 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { isEmpty } from 'lodash';
 
-@Pipe({ name: 'sbGetIconsList' })
+@Pipe({
+  name: 'sbGetIconsList',
+  standalone: false,
+})
 export class SbGetIconsListPipe implements PipeTransform {
   private icons: string[] = [];
 

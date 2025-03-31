@@ -23,7 +23,6 @@ import { ChannelSelector, ConditionSelector, ConnectorInfo, HttpSelector, Operat
 import { FlowVM } from '../../policy-studio/gio-policy-studio.model';
 
 @Component({
-  standalone: true,
   imports: [CommonModule, GioIconsModule, MatCommonModule],
   selector: 'gio-ps-flow-details-info-bar',
   templateUrl: './gio-ps-flow-details-info-bar.component.html',

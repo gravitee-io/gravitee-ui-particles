@@ -24,7 +24,6 @@ import { GioMonacoEditorModule, MonacoEditorLanguageConfig } from '@gravitee/ui-
 
 @Component({
   selector: 'gio-el-editor-input',
-  standalone: true,
   imports: [GioMonacoEditorModule, ReactiveFormsModule],
   templateUrl: './gio-el-editor-input.component.html',
   styleUrl: './gio-el-editor-input.component.scss',

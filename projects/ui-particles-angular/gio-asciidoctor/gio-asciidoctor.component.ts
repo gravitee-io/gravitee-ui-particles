@@ -27,6 +27,7 @@ import { GioAsciidoctorService } from './gio-asciidoctor.service';
   selector: 'gio-asciidoctor',
   template: '',
   styleUrls: ['./gio-asciidoctor.component.scss'],
+  standalone: false,
 })
 export class GioAsciidoctorComponent implements OnChanges, OnDestroy {
   @Input()

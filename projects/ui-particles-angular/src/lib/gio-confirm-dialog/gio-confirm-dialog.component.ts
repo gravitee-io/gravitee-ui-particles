@@ -36,6 +36,7 @@ export type GioConfirmDialogResult = boolean;
   selector: 'gio-confirm-dialog',
   templateUrl: './gio-confirm-dialog.component.html',
   styleUrls: ['./gio-confirm-dialog.component.scss'],
+  standalone: false,
 })
 export class GioConfirmDialogComponent {
   public title: string;

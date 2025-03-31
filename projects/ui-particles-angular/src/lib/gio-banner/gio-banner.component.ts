@@ -21,6 +21,7 @@ export type GioBannerTypes = 'error' | 'info' | 'success' | 'warning';
   selector: 'gio-banner',
   templateUrl: './gio-banner.component.html',
   styleUrls: ['./gio-banner.component.scss'],
+  standalone: false,
 })
 export class GioBannerComponent {
   @Input()
@@ -44,11 +45,13 @@ export class GioBannerComponent {
 
 @Directive({
   selector: '[gioBannerBody]',
+  standalone: false,
 })
 export class GioBannerBodyDirective {}
 
 @Directive({
   selector: '[gioBannerAction]',
+  standalone: false,
 })
 export class GioBannerActionDirective {}
 
@@ -56,6 +59,7 @@ export class GioBannerActionDirective {}
   selector: 'gio-banner-error',
   templateUrl: './gio-banner.component.html',
   styleUrls: ['./gio-banner.component.scss'],
+  standalone: false,
 })
 export class GioBannerErrorComponent extends GioBannerComponent {
   public type = 'error' as GioBannerTypes;
@@ -66,6 +70,7 @@ export class GioBannerErrorComponent extends GioBannerComponent {
   selector: 'gio-banner-info',
   templateUrl: './gio-banner.component.html',
   styleUrls: ['./gio-banner.component.scss'],
+  standalone: false,
 })
 export class GioBannerInfoComponent extends GioBannerComponent {
   public type = 'info' as GioBannerTypes;
@@ -76,6 +81,7 @@ export class GioBannerInfoComponent extends GioBannerComponent {
   selector: 'gio-banner-success',
   templateUrl: './gio-banner.component.html',
   styleUrls: ['./gio-banner.component.scss'],
+  standalone: false,
 })
 export class GioBannerSuccessComponent extends GioBannerComponent {
   public type = 'success' as GioBannerTypes;
@@ -86,6 +92,7 @@ export class GioBannerSuccessComponent extends GioBannerComponent {
   selector: 'gio-banner-warning',
   templateUrl: './gio-banner.component.html',
   styleUrls: ['./gio-banner.component.scss'],
+  standalone: false,
 })
 export class GioBannerWarningComponent extends GioBannerComponent {
   public type = 'warning' as GioBannerTypes;

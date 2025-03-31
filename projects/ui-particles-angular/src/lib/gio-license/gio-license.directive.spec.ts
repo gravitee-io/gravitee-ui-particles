@@ -21,7 +21,7 @@ import { GioLicenseTestingModule } from './gio-license.testing.module';
 import { LicenseOptions } from './gio-license.service';
 import { GioLicenseModule } from './gio-license.module';
 
-@Component({ template: `<div [gioLicense]="license" (click)="onClick()">A Content</div>` })
+@Component({ template: `<div [gioLicense]="license" (click)="onClick()">A Content</div>`, standalone: false })
 class TestLicenseComponent {
   @Input()
   public license?: LicenseOptions = {};

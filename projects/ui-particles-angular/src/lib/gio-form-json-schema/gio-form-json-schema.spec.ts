@@ -44,6 +44,7 @@ describe('GioFormJsonSchema', () => {
         <button type="submit">Submit</button>
       </form>
     `,
+    standalone: false,
     changeDetection: ChangeDetectionStrategy.OnPush,
   })
   class TestComponent {

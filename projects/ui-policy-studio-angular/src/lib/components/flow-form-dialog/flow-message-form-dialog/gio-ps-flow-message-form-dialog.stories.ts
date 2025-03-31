@@ -41,6 +41,7 @@ import {
       }
     `,
   ],
+  standalone: false,
 })
 class GioPolicyStudioFlowMessageFormDialogStoryComponent {
   @Input() public flow?: FlowVM = undefined;

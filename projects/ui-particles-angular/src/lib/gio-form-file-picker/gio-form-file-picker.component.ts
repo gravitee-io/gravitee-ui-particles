@@ -34,6 +34,7 @@ type FileValue = {
   templateUrl: './gio-form-file-picker.component.html',
   styleUrls: ['./gio-form-file-picker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class GioFormFilePickerComponent implements OnInit, ControlValueAccessor {
   @Input()

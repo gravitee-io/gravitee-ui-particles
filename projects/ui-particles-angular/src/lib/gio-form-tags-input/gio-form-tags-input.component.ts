@@ -54,6 +54,7 @@ export type DisplayValueWithFn = (value: string) => Observable<string>;
       useExisting: GioFormTagsInputComponent,
     },
   ],
+  standalone: false,
 })
 export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, ControlValueAccessor, DoCheck, OnDestroy {
   private static nextId = 0;

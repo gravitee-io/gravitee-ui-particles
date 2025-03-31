@@ -53,6 +53,7 @@ type HeadersProps = FormlyFieldProps & {
     </div>
   `,
   styleUrls: ['./headers-type.component.scss'],
+  standalone: false,
 })
 export class GioFjsHeadersTypeComponent extends FieldType<FieldTypeConfig<HeadersProps>> {
   public override defaultOptions?: Partial<FieldTypeConfig<HeadersProps>> | undefined = {

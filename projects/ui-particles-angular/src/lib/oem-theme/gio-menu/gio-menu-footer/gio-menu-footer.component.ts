@@ -19,5 +19,6 @@ import { Component } from '@angular/core';
   selector: 'gio-menu-footer',
   templateUrl: './gio-menu-footer.component.html',
   styleUrls: ['./gio-menu-footer.component.scss'],
+  standalone: false,
 })
 export class GioMenuFooterComponent {}

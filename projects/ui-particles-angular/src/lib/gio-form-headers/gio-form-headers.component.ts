@@ -129,6 +129,7 @@ const HEADER_NAMES = [
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class GioFormHeadersComponent implements OnInit, ControlValueAccessor, Validator {
   @Input()

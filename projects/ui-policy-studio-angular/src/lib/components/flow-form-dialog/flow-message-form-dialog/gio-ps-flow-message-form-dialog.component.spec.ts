@@ -41,6 +41,7 @@ import { GioPolicyStudioFlowMessageFormDialogHarness } from './gio-ps-flow-messa
 @Component({
   selector: 'gio-dialog-test',
   template: `<button mat-button id="open-dialog" (click)="openDialog()">Open dialog</button>`,
+  standalone: false,
 })
 class TestComponent {
   public flow?: FlowVM;

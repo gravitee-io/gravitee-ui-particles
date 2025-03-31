@@ -19,5 +19,6 @@ import { FieldType } from '@ngx-formly/core';
 @Component({
   selector: 'gio-fjs-null-type',
   template: ``,
+  standalone: false,
 })
 export class GioFjsNullTypeComponent extends FieldType {}

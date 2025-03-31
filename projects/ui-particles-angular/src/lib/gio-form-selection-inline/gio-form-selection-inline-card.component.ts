@@ -29,6 +29,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Hos
   `,
   styleUrls: ['./gio-form-selection-inline-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class GioFormSelectionInlineCardComponent {
   @Input()

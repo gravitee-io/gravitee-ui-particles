@@ -23,6 +23,7 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
   selector: 'gio-form-slide-toggle',
   templateUrl: './gio-form-slide-toggle.component.html',
   styleUrls: ['./gio-form-slide-toggle.component.scss'],
+  standalone: false,
 })
 export class GioFormSlideToggleComponent implements AfterContentInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>();

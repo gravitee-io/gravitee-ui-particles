@@ -19,5 +19,6 @@ import { Component } from '@angular/core';
   selector: 'gio-menu-license-expiration-notification',
   templateUrl: './gio-menu-license-expiration-notification.component.html',
   styleUrls: ['./gio-menu-license-expiration-notification.component.scss'],
+  standalone: false,
 })
 export class GioMenuLicenseExpirationNotificationComponent {}

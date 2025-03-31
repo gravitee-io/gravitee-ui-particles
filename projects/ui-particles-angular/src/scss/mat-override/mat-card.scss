@@ -20,4 +20,11 @@
   .mat-mdc-card:not(.mat-mdc-card .mat-mdc-card, [class*='mat-mdc-elevation-z'], [class*='mat-elevation-z'], [appearance='outlined']) {
     @include mat.elevation(3);
   }
+
+  // Create removed mat-card elevation classes with material elevation mixin
+  @for $i from 0 through 24 {
+    .mat-mdc-card.mat-elevation-z#{$i} {
+      @include mat.elevation($i);
+    }
+  }
 }

@@ -19,5 +19,6 @@ import { Component } from '@angular/core';
   selector: 'gio-top-bar-menu',
   templateUrl: './gio-top-bar-menu.component.html',
   styleUrls: ['./gio-top-bar-menu.component.scss'],
+  standalone: false,
 })
 export class GioTopBarMenuComponent {}

@@ -48,6 +48,7 @@ import { GioJsonSchemaContext } from './model/GioJsonSchemaContext';
   template: `<formly-form *ngIf="formGroup" [fields]="fields" [options]="options" [form]="formGroup" [model]="model"></formly-form>`,
   styleUrls: ['./gio-form-json-schema.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnChanges, OnInit, AfterViewInit, OnDestroy {
   public static isDisplayable(jsonSchema: GioJsonSchema): boolean {

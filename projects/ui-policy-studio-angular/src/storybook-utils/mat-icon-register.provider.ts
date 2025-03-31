@@ -13,27 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { APP_INITIALIZER } from '@angular/core';
+import { EnvironmentProviders, inject, provideAppInitializer } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Provider } from '@angular/core';
 
-export const matIconRegisterProvider: (icons: { id: string; svg?: string }[]) => Provider = icons => ({
-  provide: APP_INITIALIZER,
-  deps: [MatIconRegistry, DomSanitizer],
-  useFactory: (matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) => () => {
-    const BASE_64_PREFIX = 'data:image/svg+xml;base64,';
+export const matIconRegisterProvider: (icons: { id: string; svg?: string }[]) => EnvironmentProviders = icons =>
+  provideAppInitializer(() => {
+    const initializerFn = ((matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) => () => {
+      const BASE_64_PREFIX = 'data:image/svg+xml;base64,';
 
-    icons.forEach(({ id, svg: icon }) => {
-      if (icon && icon.startsWith(BASE_64_PREFIX)) {
-        matIconRegistry.addSvgIconLiteralInNamespace(
-          'gio-literal',
-          id,
-          // No Sonar because the bypass is deliberate and should only be used with safe data
-          domSanitizer.bypassSecurityTrustHtml(atob(icon.replace(BASE_64_PREFIX, ''))), // NOSONAR
-        );
-      }
-    });
-  },
-  multi: true,
-});
+      icons.forEach(({ id, svg: icon }) => {
+        if (icon && icon.startsWith(BASE_64_PREFIX)) {
+          matIconRegistry.addSvgIconLiteralInNamespace(
+            'gio-literal',
+            id,
+            // No Sonar because the bypass is deliberate and should only be used with safe data
+            domSanitizer.bypassSecurityTrustHtml(atob(icon.replace(BASE_64_PREFIX, ''))), // NOSONAR
+          );
+        }
+      });
+    })(inject(MatIconRegistry), inject(DomSanitizer));
+    return initializerFn();
+  });

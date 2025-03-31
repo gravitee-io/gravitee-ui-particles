@@ -21,6 +21,7 @@ export type GioTopBarTypes = 'am' | 'apim' | 'cockpit';
   selector: 'gio-top-bar',
   templateUrl: './gio-top-bar.component.html',
   styleUrls: ['./gio-top-bar.component.scss'],
+  standalone: false,
 })
 export class GioTopBarComponent {
   @Input() public type: GioTopBarTypes = 'am';

@@ -30,7 +30,6 @@ import {
 import { FlowPhase, isPolicy, isSharedPolicyGroupPolicy, Step, GenericPolicy, ApiType } from '../../models';
 
 @Component({
-  standalone: true,
   imports: [CommonModule, GioIconsModule, MatButtonModule, MatMenuModule, MatTooltipModule],
   selector: 'gio-ps-flow-details-phase-step',
   templateUrl: './gio-ps-flow-details-phase-step.component.html',
