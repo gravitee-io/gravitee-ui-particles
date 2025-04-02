@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from "@angular/core";
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -25,7 +25,6 @@ import { GioIconsModule, GioLoaderModule } from "@gravitee/ui-particles-angular"
   templateUrl: './<%= dasherize(name) %>.component.html',
   styleUrls: ['./<%= dasherize(name) %>.component.scss'],
   imports: [CommonModule, GioIconsModule, GioLoaderModule, MatButtonModule, MatTableModule, MatTooltipModule],
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class <%= classify(name) %>Component {

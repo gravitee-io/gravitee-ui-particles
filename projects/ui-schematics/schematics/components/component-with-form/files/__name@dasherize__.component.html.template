@@ -21,7 +21,7 @@
     <mat-card-subtitle>Add a description here</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-     <form *ngIf="<%= camelize(name) %>Form" [formGroup]="<%= camelize(name) %>Form">
+     <form [formGroup]="<%= camelize(name) %>Form">
         <mat-form-field>
           <mat-label>Name</mat-label>
           <input matInput formControlName="name" required />
@@ -30,4 +30,4 @@
      </form>
   </mat-card-content>
 </mat-card>
-<gio-save-bar [form]="<%= camelize(name) %>Form" (resetClicked)="reset()" (submitted)="submit()"></gio-save-bar>
+<gio-save-bar [form]="<%= camelize(name) %>Form" (resetClicked)="reset()" (submitted)="submit()" />

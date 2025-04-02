@@ -33,7 +33,7 @@
           matTooltip="Edit"
           (click)="edit.emit(element.id)"
         >
-          <mat-icon svgIcon="gio:edit-pencil"></mat-icon>
+          <mat-icon svgIcon="gio:edit-pencil" />
         </button>
 
         <button
@@ -42,7 +42,7 @@
           matTooltip="Delete"
           (click)="delete.emit(element)"
         >
-          <mat-icon svgIcon="gio:trash"></mat-icon>
+          <mat-icon svgIcon="gio:trash" />
         </button>
       </div>
     </td>
@@ -53,11 +53,12 @@
 
   <!-- Row shown when there is no data -->
   <tr class="mat-mdc-row mdc-data-table__row" *matNoDataRow>
-    <td *ngIf="!loading" class="mat-mdc-cell mdc-data-table__cell" [attr.colspan]="displayedColumns.length">
-      No data to display.
-    </td>
-    <td *ngIf="loading" class="mat-mdc-cell mdc-data-table__cell" [attr.colspan]="displayedColumns.length">
-      <gio-loader></gio-loader>
+    <td class="mat-mdc-cell mdc-data-table__cell" [attr.colspan]="displayedColumns.length">
+        @if (loading) {
+          <gio-loader />
+        } @else {
+          No data to display.
+        }
     </td>
   </tr>
 </table>
