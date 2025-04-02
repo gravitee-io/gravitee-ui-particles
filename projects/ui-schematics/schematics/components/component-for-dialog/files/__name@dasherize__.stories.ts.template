@@ -24,8 +24,7 @@ import { <%= classify(name) %>Component, <%= classify(name) %>Data, <%= classify
 @Component({
   selector: 'story-component',
   template: `<button id="open-dialog" (click)="open()">Open dialog</button>`,
-  imports: [<%= classify(name) %>Component, MatDialogModule, MatIconTestingModule],
-  standalone: true,
+  imports: [MatDialogModule, MatIconTestingModule],
 })
 class StoryDialogComponent {
   constructor(private readonly matDialog: MatDialog) {}

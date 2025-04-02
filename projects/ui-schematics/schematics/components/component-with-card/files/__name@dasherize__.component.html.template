@@ -29,7 +29,7 @@
       icon="search"
       title="Empty state title"
       subtitle="Empty state subtitle"
-    ></gio-card-empty-state>
+      />
   </mat-card-content>
 </mat-card>
 <% } else { %>

@@ -27,8 +27,7 @@ import { <%= classify(name) %>Component, <%= classify(name) %>Data, <%= classify
 @Component({
   selector: 'test-component',
   template: ``,
-  imports: [<%= classify(name) %>Component, MatDialogModule, MatIconTestingModule],
-  standalone: true,
+  imports: [MatDialogModule, MatIconTestingModule],
 })
 class SpecDialogComponent {
   constructor(private readonly matDialog: MatDialog) {}

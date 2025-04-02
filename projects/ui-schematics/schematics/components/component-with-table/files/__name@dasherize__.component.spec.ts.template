@@ -24,7 +24,8 @@ import { MatIconTestingModule } from "@angular/material/icon/testing";
 
 @Component({
   selector: 'test-component',
-  template: ` <<%= dasherize(name) %> [dataSource]="dataSource" [loading]="loading"></<%= dasherize(name) %>>`,
+  template: ` <<%= dasherize(name) %> [dataSource]="dataSource" [loading]="loading" />`,
+  imports: [<%= classify(name) %>Component],
 })
 class TestComponent {
   loading = false;
@@ -38,8 +39,7 @@ describe('<%= classify(name) %>Component', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TestComponent],
-      imports: [MatIconTestingModule, NoopAnimationsModule, <%= classify(name) %>Component]
+      imports: [MatIconTestingModule, NoopAnimationsModule, TestComponent]
     })
     .compileComponents();
 
