@@ -1,3 +1,15 @@
+# [14.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.12.0...v14.0.0) (2025-04-03)
+
+
+### Features
+
+* migrate angular and material to 19 ([d0ce31a](https://github.com/gravitee-io/gravitee-ui-particles/commit/d0ce31a7b53d3828e2b5656a56492cdf9981e687))
+
+
+### BREAKING CHANGES
+
+* Needs angular & material ^19.0.0. Generic CSS classes `mat-elevation-z#` removed.
+
 # [13.12.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.11.0...v13.12.0) (2025-03-11)
 
 
