@@ -11,20 +11,24 @@ Custom style for Angular Material button toggle group.
 
 {/* <Story id="components-button-toggle-group--default" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
 
-<Story id="components-button-toggle-group--default" />
+<Story id="components-button-toggle-group--all" />
 
 ## Usage
 
-Add class `gio-button-toggle-group` to `mat-button-toggle-group` component.
+Add class `gio-button-toggle-group` or `gio-button-toggle-group-icons` to `mat-button-toggle-group` component.
 
 OR
 
-Use include mixin `gio-button-toggle-group` in your own class like :
+Use include mixin `gio-button-toggle-group` or `gio-button-toggle-group-icons` in your own class like :
 
 ```scss
 @use '@gravitee/ui-particles-angular' as gio;
 
 .my-class {
   @include gio.gio-button-toggle-group()
+}
+
+.my-class-icons-only {
+  @include gio.gio-button-toggle-group-icons()
 }
 ```

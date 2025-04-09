@@ -52,8 +52,24 @@ $typography: map.get(theme.$mat-theme, typography);
   }
 }
 
+@mixin gio-button-toggle-group-icons {
+  .mat-button-toggle.mat-button-toggle + .mat-button-toggle {
+    border: none;
+    margin-left: 4px;
+  }
+
+  .mat-button-toggle .mat-button-toggle-label-content {
+    padding: 0 6px;
+  }
+}
+
 @mixin theme() {
   .gio-button-toggle-group {
     @include gio-button-toggle-group;
+  }
+
+  .gio-button-toggle-group-icons {
+    @include gio-button-toggle-group;
+    @include gio-button-toggle-group-icons;
   }
 }
