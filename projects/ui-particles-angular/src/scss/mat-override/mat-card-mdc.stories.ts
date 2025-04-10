@@ -39,12 +39,18 @@ export const MatCardMDC: StoryObj = {
           <br>
   
           <mat-card>
+            <mat-card-header>
+              <mat-card-title>My Title</mat-card-title>
+            </mat-card-header>
             <mat-card-content>
               MatCard inside MatCard keep elevation to lvl 1 by default
             </mat-card-content>
           </mat-card>
           <br>
           <mat-card class="mat-mdc-elevation-specific mat-elevation-z2">
+            <mat-card-header>
+              <mat-card-title>My Title</mat-card-title>
+            </mat-card-header>
             <mat-card-content>
               MatCard inside MatCard with custom elevation to lvl 2
             </mat-card-content>
@@ -53,6 +59,9 @@ export const MatCardMDC: StoryObj = {
       </mat-card>
       <br>
       <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>My Title</mat-card-title>
+        </mat-card-header>
         <mat-card-content>
         Mat card appearance="outlined". No default elevation
         </mat-card-content>
