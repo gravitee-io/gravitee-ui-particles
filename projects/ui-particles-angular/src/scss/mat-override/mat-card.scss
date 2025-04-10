@@ -13,7 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@use 'sass:map';
 @use '@angular/material' as mat;
+
+@use '../gio-mat-theme-variable' as theme;
+
+$typography: map.get(theme.$mat-theme, typography);
 
 @mixin mat-card() {
   // Mat card MDC
@@ -25,6 +30,14 @@
   @for $i from 0 through 24 {
     .mat-mdc-card.mat-elevation-z#{$i} {
       @include mat.elevation($i);
+    }
+  }
+
+  .mat-mdc-card {
+    .mat-mdc-card-title {
+      @include mat.m2-typography-level($typography, subtitle-1);
+
+      padding-bottom: 4px;
     }
   }
 }
