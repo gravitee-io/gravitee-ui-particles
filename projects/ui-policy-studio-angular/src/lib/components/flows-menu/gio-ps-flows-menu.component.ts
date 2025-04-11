@@ -427,6 +427,7 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
     const duplicatedFlow = cloneDeep(flowToDuplicate);
     duplicatedFlow._id = uniqueId('flow_');
     duplicatedFlow.name = `${duplicatedFlow.name} - Copy`;
+    duplicatedFlow._hasChanged = true;
     const index = flowsGroupToEdit.flows.indexOf(flowToDuplicate);
     flowsGroupToEdit.flows.splice(index + 1, 0, duplicatedFlow);
     this.flowsGroupsChange.emit(this.flowsGroups);

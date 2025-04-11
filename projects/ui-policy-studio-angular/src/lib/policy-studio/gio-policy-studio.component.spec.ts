@@ -1277,6 +1277,31 @@ describe('GioPolicyStudioComponent', () => {
         expect(firstSaveFlows).toBeDefined();
         expect(firstSaveFlows?.enabled).toEqual(true);
       });
+
+      it('should duplicate flow', async () => {
+        component.commonFlows = [
+          fakeChannelFlow({
+            name: 'name',
+            enabled: false,
+          }),
+        ];
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+
+        // Enable flow
+        await policyStudioHarness.duplicateFlow('name');
+
+        let saveOutput: SaveOutput | undefined;
+        component.save.subscribe(value => (saveOutput = value));
+        await policyStudioHarness.save();
+
+        expect(saveOutput?.commonFlows).toBeDefined();
+        expect(saveOutput?.commonFlows?.length).toEqual(2);
+        const duplicatedFlow = saveOutput?.commonFlows?.[1];
+        expect(duplicatedFlow).toBeDefined();
+        expect(duplicatedFlow?.name).toEqual('name - Copy');
+      });
     });
   });
 
