@@ -13,9 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import Monaco from 'monaco-editor';
+
+import { GIO_MONACO_EDITOR_CONFIG, GioMonacoEditorConfig } from '../models/GioMonacoEditorConfig';
 
 declare global {
   interface Window {
@@ -25,10 +27,9 @@ declare global {
   }
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class GioMonacoEditorService {
+  private readonly config: GioMonacoEditorConfig = inject(GIO_MONACO_EDITOR_CONFIG);
   public loaded$ = new ReplaySubject<{ monaco: typeof Monaco }>(1);
   private loaded = false;
 
@@ -47,8 +48,11 @@ export class GioMonacoEditorService {
       }
 
       const onGotAmdLoader = () => {
+        const baseUrl = this.config.baseUrl || (window.location.origin + window.location.pathname).replace(/\/$/, '');
         // Load Monaco
-        window.require.config({ paths: { vs: window.location.origin + '/assets/monaco-editor/min/vs' } });
+        window.require.config({
+          paths: { vs: baseUrl + '/assets/monaco-editor/min/vs' },
+        });
 
         window.require(['vs/editor/editor.main'], () => {
           resolve();
