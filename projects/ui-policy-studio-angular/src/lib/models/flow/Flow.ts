@@ -17,6 +17,7 @@ import { Selector } from './Selector';
 import { Step } from './Step';
 
 export interface Flow {
+  id?: string;
   /**
    * Flow's name.
    */

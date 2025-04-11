@@ -426,6 +426,8 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
       throw new Error(`Flow ${flowId} not found`);
     }
     const duplicatedFlow = cloneDeep(flowToDuplicate);
+    delete duplicatedFlow.id;
+
     duplicatedFlow._id = uniqueId('flow_');
     duplicatedFlow.name = `${duplicatedFlow.name} - Copy`;
     duplicatedFlow._hasChanged = true;
