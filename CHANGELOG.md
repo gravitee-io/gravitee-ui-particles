@@ -1,3 +1,10 @@
+## [14.1.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v14.1.0...v14.1.1) (2025-04-11)
+
+
+### Bug Fixes
+
+* fix display of gio-button-toggle-group component with only icons ([0bcb5a8](https://github.com/gravitee-io/gravitee-ui-particles/commit/0bcb5a81a6370a8026643db8cf8db38729e5daa0))
+
 # [14.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v14.0.0...v14.1.0) (2025-04-11)
 
 
