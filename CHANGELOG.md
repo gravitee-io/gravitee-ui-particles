@@ -1,3 +1,10 @@
+## [13.12.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.12.0...v13.12.1) (2025-04-11)
+
+
+### Bug Fixes
+
+* make duplicate only work ([ac6bcb4](https://github.com/gravitee-io/gravitee-ui-particles/commit/ac6bcb4ad5de498121c7e1b4db3f13540983c31f))
+
 # [13.12.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.11.0...v13.12.0) (2025-03-11)
 
 
