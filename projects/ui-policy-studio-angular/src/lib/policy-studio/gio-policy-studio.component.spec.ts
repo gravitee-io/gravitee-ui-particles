@@ -1281,6 +1281,7 @@ describe('GioPolicyStudioComponent', () => {
       it('should duplicate flow', async () => {
         component.commonFlows = [
           fakeChannelFlow({
+            id: 'id',
             name: 'name',
             enabled: false,
           }),
@@ -1301,6 +1302,7 @@ describe('GioPolicyStudioComponent', () => {
         const duplicatedFlow = saveOutput?.commonFlows?.[1];
         expect(duplicatedFlow).toBeDefined();
         expect(duplicatedFlow?.name).toEqual('name - Copy');
+        expect(duplicatedFlow?.id).toEqual(undefined);
       });
     });
   });
