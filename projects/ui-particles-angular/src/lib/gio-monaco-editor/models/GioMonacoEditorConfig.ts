@@ -18,6 +18,7 @@ import { InjectionToken } from '@angular/core';
 import { MonacoEditorTheme } from './MonacoEditorTheme';
 
 export type GioMonacoEditorConfig = {
+  baseUrl?: string;
   theme?: MonacoEditorTheme;
 };
 
