@@ -18,6 +18,7 @@ import { ComponentHarness, parallel } from '@angular/cdk/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatIconHarness } from '@angular/material/icon/testing';
 import { DivHarness } from '@gravitee/ui-particles-angular/testing';
+import { MatMenuHarness } from '@angular/material/menu/testing';
 
 export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
   public static hostSelector = 'gio-ps-flows-menu';
@@ -106,5 +107,12 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
 
   public async openFlowExecutionConfig(): Promise<void> {
     await (await this.locatorFor(MatButtonHarness.with({ selector: '.header__configBtn_edit' }))())?.click();
+  }
+
+  public async clickDuplicateFlowBtn(flowText: string | RegExp): Promise<void> {
+    const flow = await this.locateFlowByText(flowText)();
+
+    const matMenu = await flow?.childLocatorFor(MatMenuHarness.with({ selector: '.list__flowsGroup__flows__flow__right__name__menu' }))();
+    await matMenu?.clickItem({ text: /Duplicate/ });
   }
 }
