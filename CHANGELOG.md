@@ -1,3 +1,10 @@
+## [13.12.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.12.1...v13.12.2) (2025-04-11)
+
+
+### Bug Fixes
+
+* ps - remove id of duplicated flow ([3130b0e](https://github.com/gravitee-io/gravitee-ui-particles/commit/3130b0eb963832d3b60f1d863ad4586b48f051c8))
+
 ## [13.12.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.12.0...v13.12.1) (2025-04-11)
 
 
