@@ -29,7 +29,13 @@ export default {
   component: GioMonacoEditorComponent,
   decorators: [
     moduleMetadata({
-      imports: [GioMonacoEditorModule, ReactiveFormsModule, MatFormFieldModule],
+      imports: [
+        GioMonacoEditorModule.forRoot({
+          baseUrl: '.',
+        }),
+        ReactiveFormsModule,
+        MatFormFieldModule,
+      ],
     }),
   ],
   parameters: {

@@ -59,9 +59,7 @@ function getPropertyPath(model: editor.ITextModel, position: Position): string[]
   );
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class GioLanguageElService implements OnDestroy {
   private unsubscribe$ = new Subject<void>();
 
