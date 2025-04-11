@@ -1,3 +1,16 @@
+# [14.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v14.0.0...v14.1.0) (2025-04-11)
+
+
+### Bug Fixes
+
+* issue with monaco editor and custom base path ([a05f222](https://github.com/gravitee-io/gravitee-ui-particles/commit/a05f222e6d23fe2bfdc377472914de7caba09f74))
+* make duplicate only work ([c6a7f7d](https://github.com/gravitee-io/gravitee-ui-particles/commit/c6a7f7d5020bbb53704701bd1ef0dcca53018720))
+
+
+### Features
+
+* add override for default mat-card-title typography ([3f5314c](https://github.com/gravitee-io/gravitee-ui-particles/commit/3f5314c6bcce5649521698845e516763a151fcb6))
+
 # [14.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.12.0...v14.0.0) (2025-04-03)
 
 
