@@ -98,6 +98,15 @@ export class GioPolicyStudioHarness extends ComponentHarness {
   }
 
   /**
+   * Duplicate a flow
+   *
+   * @param flowName Flow name to clone
+   */
+  public async duplicateFlow(flowName: string): Promise<void> {
+    await (await this.menuHarness()).clickDuplicateFlowBtn(new RegExp(flowName, 'i'));
+  }
+
+  /**
    * Select a flow in the menu
    *
    * @param flowName Flow name to select
