@@ -66,6 +66,8 @@ export type MonacoEditorLanguageConfig =
   template: ` <div *ngIf="loaded$ | async">Loading...</div>`,
   styleUrls: ['./gio-monaco-editor.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
+  providers: [GioMonacoEditorService, GioLanguageJsonService, GioLanguageElService],
 })
 export class GioMonacoEditorComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
   @Input()
