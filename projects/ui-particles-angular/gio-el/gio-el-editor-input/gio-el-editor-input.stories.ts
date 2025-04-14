@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, StoryObj } from '@storybook/angular';
-import { Component } from '@angular/core';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Component, importProvidersFrom } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { action } from '@storybook/addon-actions';
+import { GioMonacoEditorModule } from '@gravitee/ui-particles-angular';
 
 import { GioElEditorHelperToggleComponent } from '../gio-el-editor-helper/gio-el-editor-helper-toggle.component';
 import { GioElEditorHelperInputDirective } from '../gio-el-editor-helper/gio-el-editor-helper-input.directive';
@@ -70,6 +71,14 @@ class StoryInputComponent {
 export default {
   title: 'Components / EL / CodeEditor input for MatFormField',
   component: StoryInputComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [GioMonacoEditorModule.forRoot({ baseUrl: '.' })],
+    }),
+    applicationConfig({
+      providers: [importProvidersFrom(GioMonacoEditorModule.forRoot({ baseUrl: '.' })), GioMonacoEditorModule],
+    }),
+  ],
 } as Meta;
 
 export const Default: StoryObj = {};
