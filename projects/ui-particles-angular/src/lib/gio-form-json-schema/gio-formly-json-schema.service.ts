@@ -33,8 +33,8 @@ export class GioFormlyJsonSchemaService {
   public toFormlyFieldConfig(jsonSchema: GioJsonSchema, context?: GioJsonSchemaContext): FormlyFieldConfig {
     return this.formlyJsonschema.toFieldConfig(jsonSchema, {
       map: (mappedField: FormlyFieldConfig, mapSource: JSONSchema7) => {
+        mappedField = this.uiTypeMap(mappedField, mapSource); // Keep first in order to correctly construct tree
         mappedField = this.displayIfMap(mappedField, mapSource, context);
-        mappedField = this.uiTypeMap(mappedField, mapSource);
         mappedField = this.uiBorder(mappedField, mapSource);
         mappedField = this.formatMap(mappedField, mapSource);
         mappedField = this.bannerMap(mappedField, mapSource);
