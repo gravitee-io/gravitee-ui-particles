@@ -134,7 +134,9 @@ import { GioFjsCronTypeComponent } from './type-component/cron-type.component';
     GioIconsModule,
     GioFormSlideToggleModule,
     GioFormHeadersModule,
-    GioMonacoEditorModule,
+    GioMonacoEditorModule.forRoot({
+      baseUrl: '.',
+    }),
     GioFormCronModule,
 
     MatSlideToggleModule,

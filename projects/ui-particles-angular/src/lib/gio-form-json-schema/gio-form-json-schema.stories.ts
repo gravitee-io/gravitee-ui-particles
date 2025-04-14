@@ -66,7 +66,7 @@ import { uiBorderExample } from './json-schema-example/uiBorder';
     MatButtonModule,
     MatButtonToggleModule,
     GioFormJsonSchemaModule,
-    GioMonacoEditorModule.forRoot({ theme: 'vs-dark' }),
+    GioMonacoEditorModule.forRoot({ theme: 'vs-dark', baseUrl: '.' }),
   ],
   exports: [DemoComponent, GioFormJsonSchemaModule],
 })
