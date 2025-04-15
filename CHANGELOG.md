@@ -1,3 +1,10 @@
+## [14.1.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v14.1.3...v14.1.4) (2025-04-15)
+
+
+### Bug Fixes
+
+* keep ui type map as first field config transformation to construct tree correctly ([0427005](https://github.com/gravitee-io/gravitee-ui-particles/commit/0427005a960111da5bc4e5f4f3fcb184768bb293))
+
 ## [14.1.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v14.1.2...v14.1.3) (2025-04-15)
 
 
