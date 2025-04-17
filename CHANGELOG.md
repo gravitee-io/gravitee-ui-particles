@@ -1,3 +1,10 @@
+## [14.1.5](https://github.com/gravitee-io/gravitee-ui-particles/compare/v14.1.4...v14.1.5) (2025-04-17)
+
+
+### Bug Fixes
+
+* monaco editor with cypress ([5bfe7d0](https://github.com/gravitee-io/gravitee-ui-particles/commit/5bfe7d073ccbbf1d38981ed11de4d7624566f31b))
+
 ## [14.1.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v14.1.3...v14.1.4) (2025-04-15)
 
 
