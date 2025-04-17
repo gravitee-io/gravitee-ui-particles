@@ -16,13 +16,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { Component } from '@angular/core';
+import { Component, importProvidersFrom } from '@angular/core';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { GioMonacoEditorHarness } from '@gravitee/ui-particles-angular';
+import { GioMonacoEditorHarness, GioMonacoEditorModule } from '@gravitee/ui-particles-angular';
 
 import { GioElEditorDialogHarness } from '../gio-el-editor-dialog/gio-el-editor-dialog.harness';
 import { GioElEditorHelperInputDirective } from '../gio-el-editor-helper/gio-el-editor-helper-input.directive';
@@ -63,6 +63,7 @@ describe('GioElEditorInputComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [NoopAnimationsModule, MatIconTestingModule],
+      providers: [importProvidersFrom(GioMonacoEditorModule)],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestHelperComponent);

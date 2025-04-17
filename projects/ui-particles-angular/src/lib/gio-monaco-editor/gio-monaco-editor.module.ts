@@ -20,9 +20,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { GioMonacoEditorFormFieldDirective } from './gio-monaco-editor-form-field.directive';
 import { GioMonacoEditorComponent } from './gio-monaco-editor.component';
 import { GioMonacoEditorConfig, GIO_MONACO_EDITOR_CONFIG } from './models/GioMonacoEditorConfig';
-import { GioMonacoEditorService } from './services/gio-monaco-editor.service';
-import { GioLanguageJsonService } from './services/gio-language-json.service';
-import { GioLanguageElService } from './services/gio-language-el.service';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule],
@@ -33,9 +30,6 @@ import { GioLanguageElService } from './services/gio-language-el.service';
       provide: GIO_MONACO_EDITOR_CONFIG,
       useValue: {} as GioMonacoEditorConfig,
     },
-    GioMonacoEditorService,
-    GioLanguageJsonService,
-    GioLanguageElService,
   ],
 })
 export class GioMonacoEditorModule {
@@ -47,9 +41,6 @@ export class GioMonacoEditorModule {
           provide: GIO_MONACO_EDITOR_CONFIG,
           useValue: config,
         },
-        GioMonacoEditorService,
-        GioLanguageJsonService,
-        GioLanguageElService,
       ],
     };
   }

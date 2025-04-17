@@ -21,7 +21,9 @@ import type Monaco from 'monaco-editor';
 
 import { GioMonacoEditorService } from './gio-monaco-editor.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class GioLanguageJsonService implements OnDestroy {
   private unsubscribe$ = new Subject<void>();
   private monaco?: typeof Monaco;
