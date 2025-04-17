@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import isChromatic from 'chromatic/isChromatic';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { importProvidersFrom, NgModule } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -66,7 +66,7 @@ import { uiBorderExample } from './json-schema-example/uiBorder';
     MatButtonModule,
     MatButtonToggleModule,
     GioFormJsonSchemaModule,
-    GioMonacoEditorModule.forRoot({ theme: 'vs-dark', baseUrl: '.' }),
+    GioMonacoEditorModule,
   ],
   exports: [DemoComponent, GioFormJsonSchemaModule],
 })
@@ -77,6 +77,9 @@ export default {
   decorators: [
     moduleMetadata({
       imports: [CommonModule, MatSelectModule, GioFJSStoryModule],
+    }),
+    applicationConfig({
+      providers: [importProvidersFrom(GioMonacoEditorModule.forRoot({ theme: 'vs-dark', baseUrl: '.' }))],
     }),
   ],
   parameters: {
