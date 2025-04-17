@@ -27,7 +27,9 @@ declare global {
   }
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class GioMonacoEditorService {
   private readonly config: GioMonacoEditorConfig = inject(GIO_MONACO_EDITOR_CONFIG);
   public loaded$ = new ReplaySubject<{ monaco: typeof Monaco }>(1);
