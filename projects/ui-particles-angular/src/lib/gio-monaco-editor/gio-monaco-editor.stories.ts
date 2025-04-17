@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { UntypedFormControl, UntypedFormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { importProvidersFrom } from '@angular/core';
 
 import GioJsonSchema from '../gio-form-json-schema/model/GioJsonSchema.json';
 
@@ -30,6 +31,9 @@ export default {
   decorators: [
     moduleMetadata({
       imports: [GioMonacoEditorModule, ReactiveFormsModule, MatFormFieldModule],
+    }),
+    applicationConfig({
+      providers: [importProvidersFrom(GioMonacoEditorModule.forRoot({ theme: 'vs-dark', baseUrl: '.' }))],
     }),
   ],
   parameters: {
