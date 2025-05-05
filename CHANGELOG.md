@@ -1,3 +1,10 @@
+# [14.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v14.1.5...v14.2.0) (2025-05-05)
+
+
+### Features
+
+* add new icons ([836cb6a](https://github.com/gravitee-io/gravitee-ui-particles/commit/836cb6ac1a669ed80333130d7d8377c8570783a4))
+
 ## [14.1.5](https://github.com/gravitee-io/gravitee-ui-particles/compare/v14.1.4...v14.1.5) (2025-04-17)
 
 
