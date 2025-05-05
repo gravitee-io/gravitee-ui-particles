@@ -23,7 +23,7 @@ $typography: map.get(gio.$mat-theme, typography);
   display: flex;
   align-items: center;
   padding: 8px;
-  border: 1px solid mat.m2-get-color-from-palette(gio.$mat-accent-palette, darker20);
+  border: 1px solid mat.m2-get-color-from-palette(gio.$mat-primary-palette, default);
   border-radius: 8px;
 }
 
