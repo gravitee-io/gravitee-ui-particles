@@ -27,6 +27,7 @@ $typography: map.get(gio.$mat-theme, typography);
   align-items: center;
   padding: 8px 12px;
   border-radius: 4px;
+  background: map.get(gio.$mat-space-palette, lighter20);
   gap: 12px;
 
   @include mat.m2-typography-level($typography, subtitle-2);

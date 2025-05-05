@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 @use '@angular/material' as mat;
+@use './gio-mat-palettes' as palettes;
 
 $mat-oem-palette: mat.m2-define-palette(
   (
     // mat-space-palette lighter10
-    background: var(--gio-oem-palette--background, #1c1e39),
+    background: var(--gio-oem-palette--background, mat.m2-get-color-from-palette(palettes.$mat-space-palette, lighter10)),
     // mat-space-palette lighter30
-    active: var(--gio-oem-palette--active, #494b61),
+    active: var(--gio-oem-palette--active, mat.m2-get-color-from-palette(palettes.$mat-smoke-palette, darker40)),
     contrast: (
       background: var(--gio-oem-palette--background-contrast, #fff),
       active: var(--gio-oem-palette--active-contrast, #fff),
