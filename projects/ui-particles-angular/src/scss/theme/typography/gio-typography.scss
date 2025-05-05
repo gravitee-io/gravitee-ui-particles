@@ -26,6 +26,7 @@
 }
 
 @mixin subtitle-typography() {
+  font-family: Kanit, 'Helvetica Neue', sans-serif;
   font-size: 16px;
   font-weight: 500;
   letter-spacing: 0.4px;
@@ -33,12 +34,12 @@
 }
 
 @mixin link-typography() {
-  color: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, 'darker40');
+  color: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, 'lighter20');
   cursor: pointer;
   text-decoration-thickness: 2px;
 
   &:hover {
-    color: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, 'darker20');
+    color: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, 'lighter40');
   }
 }
 

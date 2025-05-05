@@ -23,17 +23,23 @@
   @if $withTilde == true {
     @import '~@fontsource/material-icons/400.css';
     @import '~@fontsource/fira-mono/400.css';
-    @import '~@fontsource/golos-ui/400.css';
-    @import '~@fontsource/golos-ui/500.css';
-    @import '~@fontsource/golos-ui/600.css';
+    @import '~@fontsource/kanit/400.css';
+    @import '~@fontsource/kanit/500.css';
+    @import '~@fontsource/kanit/600.css';
+    @import '~@fontsource/manrope/400.css';
+    @import '~@fontsource/manrope/500.css';
+    @import '~@fontsource/manrope/600.css';
   }
 
   @if $withTilde == false {
     @import '@fontsource/material-icons/400.css';
     @import '@fontsource/fira-mono/400.css';
-    @import '@fontsource/golos-ui/400.css';
-    @import '@fontsource/golos-ui/500.css';
-    @import '@fontsource/golos-ui/600.css';
+    @import '@fontsource/kanit/400.css';
+    @import '@fontsource/kanit/500.css';
+    @import '@fontsource/kanit/600.css';
+    @import '@fontsource/manrope/400.css';
+    @import '@fontsource/manrope/500.css';
+    @import '@fontsource/manrope/600.css';
   }
 
   // Material Icons
