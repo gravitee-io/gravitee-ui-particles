@@ -1,3 +1,10 @@
+## [14.2.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v14.2.0...v14.2.1) (2025-05-07)
+
+
+### Bug Fixes
+
+* do not show enabled flows created by GKO as disabled in the console ([4766817](https://github.com/gravitee-io/gravitee-ui-particles/commit/476681785b8f497e5ed07d7e81919357c4ad2a3d))
+
 # [14.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v14.1.5...v14.2.0) (2025-05-05)
 
 
