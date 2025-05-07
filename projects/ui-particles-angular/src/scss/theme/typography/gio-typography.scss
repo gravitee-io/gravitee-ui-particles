@@ -34,12 +34,12 @@
 }
 
 @mixin link-typography() {
-  color: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, 'lighter20');
+  color: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, 'darker40');
   cursor: pointer;
   text-decoration-thickness: 2px;
 
   &:hover {
-    color: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, 'lighter40');
+    color: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, 'darker20');
   }
 }
 
