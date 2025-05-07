@@ -77,7 +77,7 @@
               <gio-ps-flow-details-phase-step
                 class="content__step__step"
                 [readOnly]="readOnly"
-                [class.disabled]="readOnly || !stepVM.step.enabled"
+                [class.disabled]="!stepVM.step.enabled"
                 [genericPolicies]="genericPolicies"
                 [step]="stepVM.step"
                 [flowPhase]="policyFlowPhase"
