@@ -15,6 +15,10 @@
  */
 @mixin mat-button() {
   .mdc-button {
+    --mdc-outlined-button-label-text-weight: 700;
+    --mdc-filled-button-label-text-weight: 700;
+    --mdc-protected-button-label-text-weight: 700;
+
     &:has(.mdc-button__label:empty) {
       min-width: 36px;
 

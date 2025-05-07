@@ -26,29 +26,15 @@ $typography: map.get(gio.$mat-theme, typography);
   height: 36px;
   align-items: center;
   padding: 8px 12px;
+  border: 1px solid map.get(gio.$mat-dove-palette, darker60);
   border-radius: 4px;
+  background: map.get(gio.$mat-space-palette, lighter20);
   gap: 12px;
 
   @include mat.m2-typography-level($typography, subtitle-2);
 
-  &.am {
-    background: rgb(236 72 153 / 40%);
-    color: map.get(gio.$mat-error-palette, default-contrast);
-  }
-
   &.apim {
     background: oem.$oem-top-bar-apim-button-background;
     color: oem.$oem-menu-text;
-  }
-
-  &.cockpit,
-  &.cloud {
-    background: rgb(135 111 236 / 40%);
-    color: map.get(gio.$mat-accent-palette, default-contrast);
-  }
-
-  &.portal {
-    background: rgb(0 200 200 / 40%);
-    color: map.get(gio.$mat-accent-palette, default-contrast);
   }
 }

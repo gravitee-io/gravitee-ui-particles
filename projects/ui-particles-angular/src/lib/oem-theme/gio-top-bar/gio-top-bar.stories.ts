@@ -18,7 +18,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 import { GioIconsModule } from '../../gio-icons/gio-icons.module';
-import { OEM_THEME_ARG_TYPES, computeStylesForStory, OEM_DEFAULT_LOGO, resetStoryStyleInjection } from '../oem-theme.service';
+import {
+  OEM_THEME_ARG_TYPES,
+  computeStylesForStory,
+  OEM_DEFAULT_LOGO,
+  resetStoryStyleInjection,
+  GRAVITEE_LOGO,
+} from '../oem-theme.service';
 
 import { GioTopBarComponent } from './gio-top-bar.component';
 import { GioTopBarModule } from './gio-top-bar.module';
@@ -49,7 +55,7 @@ export const Default: StoryObj = {
         <div id="main" [style]="style">
           <gio-top-bar>
             <button mat-icon-button>
-              <mat-icon svgIcon="gio:gravitee" (click)="click('am')"></mat-icon>
+              <img src="${GRAVITEE_LOGO}" alt="Graviteeo logo" (click)="click('am')" style="height: 36px; width: 36px">
             </button>
             <gio-top-bar-content type="am" productName="Access Management"></gio-top-bar-content>
             <gio-top-bar-menu>
@@ -64,7 +70,7 @@ export const Default: StoryObj = {
           </gio-top-bar>
           <gio-top-bar>
             <button mat-icon-button>
-              <mat-icon svgIcon="gio:gravitee" (click)="click('apim')"></mat-icon>
+              <img src="${GRAVITEE_LOGO}" alt="Graviteeo logo" (click)="click('apim')" style="height: 36px; width: 36px">
             </button>
             <gio-top-bar-content type="apim" productName="API Management"></gio-top-bar-content>
             <gio-top-bar-link url="#" name="Developers portal"></gio-top-bar-link>
@@ -80,7 +86,7 @@ export const Default: StoryObj = {
           </gio-top-bar>
           <gio-top-bar>
             <button mat-icon-button>
-              <mat-icon svgIcon="gio:gravitee" (click)="click('cockpit')"></mat-icon>
+              <img src="${GRAVITEE_LOGO}" alt="Graviteeo logo" (click)="click('cockpit')" style="height: 36px; width: 36px">
             </button>
             <gio-top-bar-content type="cockpit" productName="Cockpit"></gio-top-bar-content>
             <gio-top-bar-menu>
@@ -95,7 +101,7 @@ export const Default: StoryObj = {
           </gio-top-bar>
           <gio-top-bar>
             <button mat-icon-button>
-              <mat-icon svgIcon="gio:gravitee" (click)="click('portal')"></mat-icon>
+              <img src="${GRAVITEE_LOGO}" alt="Graviteeo logo" (click)="click('portal')" style="height: 36px; width: 36px">
             </button>
             <gio-top-bar-content type="portal" productName="Developer Portal"></gio-top-bar-content>
             <gio-top-bar-menu>

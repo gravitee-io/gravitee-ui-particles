@@ -27,7 +27,7 @@
   <h2 class="gio-license-dialog__content__title" [innerHTML]="featureInfo.title || 'Unlock Gravitee Enterprise' | safe: 'html'"></h2>
   <div class="gio-license-dialog__content__description" [innerHTML]="featureInfo.description | safe: 'html'"></div>
   <div class="gio-license-dialog__content__action">
-    <a class="gio-license-dialog__content__action__button" mat-stroked-button color="accent" target="_blank" [href]="trialURL">
+    <a class="gio-license-dialog__content__action__button" mat-stroked-button color="primary" target="_blank" [href]="trialURL">
       {{ featureInfo.trialButtonLabel || 'Request an enterprise license' }} <mat-icon svgIcon="gio:external-link"></mat-icon>
     </a>
     <div *ngIf="!featureInfo.hideDays" class="gio-license-dialog__content__action__info">14 days trial</div>
