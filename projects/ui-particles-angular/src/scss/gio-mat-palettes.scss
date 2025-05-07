@@ -22,56 +22,6 @@
  */
 
 // Primary
-$mat-primary-palette: mat.m2-define-palette(
-  (
-    // Keep sync GIO color token with Material color token
-    darker80: #331d03,
-    900: #331d03,
-    darker60: #a93b12,
-    800: #a93b12,
-    darker40: #a5610f,
-    700: #a5610f,
-    darker20: #da3b00,
-    600: #da3b00,
-    default: #ff5718,
-    500: #ff5718,
-    lighter20: #fe733f,
-    400: #fe733f,
-    lighter40: #ff8557,
-    300: #ff8557,
-    lighter60: #ffa685,
-    200: #ffa685,
-    lighter80: #ffc2ac,
-    100: #ffc2ac,
-    50: #ffc2ac,
-    contrast: (
-      darker80: #fff,
-      900: #fff,
-      darker60: #fff,
-      800: #fff,
-      darker40: #fff,
-      700: #fff,
-      darker20: #fff,
-      600: #fff,
-      default: #000,
-      500: #000,
-      lighter20: #000,
-      400: #000,
-      lighter40: #000,
-      300: #000,
-      lighter60: #000,
-      200: #000,
-      lighter80: #000,
-      100: #000,
-      50: #000,
-    )
-  ),
-  lighter60,
-  lighter80,
-  darker80
-);
-
-// Accent
 $mat-accent-palette: mat.m2-define-palette(
   (
     // Keep sync GIO color token with Material color token
@@ -116,8 +66,58 @@ $mat-accent-palette: mat.m2-define-palette(
       50: #000,
     )
   ),
-  default,
+  lighter60,
   lighter40,
+  darker80
+);
+
+// Accent
+$mat-primary-palette: mat.m2-define-palette(
+  (
+    // Keep sync GIO color token with Material color token
+    darker80: #331d03,
+    900: #331d03,
+    darker60: #a93b12,
+    800: #a93b12,
+    darker40: #a5610f,
+    700: #a5610f,
+    darker20: #da3b00,
+    600: #da3b00,
+    default: #ff5718,
+    500: #ff5718,
+    lighter20: #fe733f,
+    400: #fe733f,
+    lighter40: #ff8557,
+    300: #ff8557,
+    lighter60: #ffa685,
+    200: #ffa685,
+    lighter80: #ffc2ac,
+    100: #ffc2ac,
+    50: #ffc2ac,
+    contrast: (
+      darker80: #fff,
+      900: #fff,
+      darker60: #fff,
+      800: #fff,
+      darker40: #fff,
+      700: #fff,
+      darker20: #fff,
+      600: #fff,
+      default: #000,
+      500: #000,
+      lighter20: #000,
+      400: #000,
+      lighter40: #000,
+      300: #000,
+      lighter60: #000,
+      200: #000,
+      lighter80: #000,
+      100: #000,
+      50: #000,
+    )
+  ),
+  default,
+  lighter80,
   darker80
 );
 
