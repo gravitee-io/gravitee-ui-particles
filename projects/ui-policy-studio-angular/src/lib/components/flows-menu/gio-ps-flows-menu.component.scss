@@ -64,8 +64,7 @@ $typography: map.get(gio.$mat-theme, typography);
       align-items: center;
       padding: 8px 8px 8px 10px;
       border-radius: 8px;
-      background-color: mat.m2-get-color-from-palette(gio.$mat-primary-palette, default);
-      color: #fff;
+      background-color: mat.m2-get-color-from-palette(gio.$mat-accent-palette, lighter60);
 
       &__label {
         @include mat.m2-typography-level($typography, subtitle-2);
@@ -92,8 +91,6 @@ $typography: map.get(gio.$mat-theme, typography);
       }
 
       &__addBtn {
-        --mdc-text-button-label-text-color: #fff;
-
         margin-left: 8px;
       }
     }
@@ -124,7 +121,7 @@ $typography: map.get(gio.$mat-theme, typography);
         &:hover,
         &.selected {
           padding: 6px; // compensate the border
-          border: 2px solid mat.m2-get-color-from-palette(gio.$mat-primary-palette, default);
+          border: 2px solid mat.m2-get-color-from-palette(gio.$mat-accent-palette, default);
           cursor: pointer;
         }
 
