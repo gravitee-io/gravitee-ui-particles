@@ -24,7 +24,7 @@ $typography: map.get(gio.$mat-theme, typography);
 // Map for palette by type
 $types: (
   error: gio.$mat-error-palette,
-  info: gio.$mat-primary-palette,
+  info: gio.$mat-smoke-palette,
   success: gio.$mat-success-palette,
   warning: gio.$mat-warning-palette,
 );
