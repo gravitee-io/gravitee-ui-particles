@@ -124,6 +124,11 @@ export class GioFormlyJsonSchemaService {
         ...mappedField.props,
         monacoEditorConfig: mapSource.gioConfig?.monacoEditorConfig,
       };
+    } else if (mapSource.type === 'string' && mapSource.format === 'gio-mcp-tools-editor') {
+      mappedField.type = 'gio-mcp-tools-editor';
+      mappedField.props = {
+        ...mappedField.props,
+      };
     } else if (mapSource.type === 'string' && mapSource.format === 'gio-cron') {
       mappedField.type = 'gio-cron';
       mappedField.props = {

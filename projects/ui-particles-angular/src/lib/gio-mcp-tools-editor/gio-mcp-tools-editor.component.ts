@@ -13,13 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, forwardRef } from '@angular/core';
+import {Component, forwardRef, input, InputSignal, signal, WritableSignal} from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { GioMonacoEditorModule } from '@gravitee/ui-particles-angular';
+import {GioMcpToolsDisplayComponent} from "./gio-mcp-tools-display/gio-mcp-tools-display.component";
+import {MCPTool} from "./gio-mcp-tools-editor.service";
+
+export interface McpToolsEditorConfig {}
 
 @Component({
   selector: 'gio-mcp-tools-editor',
-  imports: [ReactiveFormsModule, GioMonacoEditorModule, GioMonacoEditorModule],
+  imports: [ReactiveFormsModule, GioMonacoEditorModule, GioMcpToolsDisplayComponent],
   templateUrl: './gio-mcp-tools-editor.component.html',
   styleUrl: './gio-mcp-tools-editor.component.scss',
   providers: [
@@ -31,7 +35,28 @@ import { GioMonacoEditorModule } from '@gravitee/ui-particles-angular';
   ],
 })
 export class GioMcpToolsEditorComponent implements ControlValueAccessor {
+  public configuration: InputSignal<McpToolsEditorConfig> = input({});
+
   public control = new FormControl<string>('', { nonNullable: true });
+  public mcpTools: WritableSignal<MCPTool[]> = signal<MCPTool[]>([
+    {
+      name: 'my-unique-tool',
+      description: 'My unique tool',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          name: {
+            type: "array",
+            description: 'Name of the tool',
+          },
+          description: {
+            type: "array",
+            description: 'Description of the tool',
+          },
+        },
+      }
+    }
+  ])
 
   private onChange: (_: string) => void = () => {};
   private onTouched: () => void = () => {};

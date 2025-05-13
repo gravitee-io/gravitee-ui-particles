@@ -56,6 +56,7 @@ import { GioFjsHeadersTypeComponent } from './type-component/headers-type.compon
 import { GioPasswordEyeWrapperComponent, passwordEyeExtension } from './wrappers/gio-password-eye.component';
 import { GioFjsCodeEditorTypeComponent } from './type-component/code-editor-type.component';
 import { GioFjsCronTypeComponent } from './type-component/cron-type.component';
+import { GioFjsMcpToolsEditorTypeComponent } from './type-component/mcp-tools-editor-type.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { GioFjsCronTypeComponent } from './type-component/cron-type.component';
     GioFjsHeadersTypeComponent,
     GioFjsCodeEditorTypeComponent,
     GioFjsCronTypeComponent,
+    GioFjsMcpToolsEditorTypeComponent,
     GioBannerWrapperComponent,
     GioPasswordEyeWrapperComponent,
   ],
@@ -110,6 +112,10 @@ import { GioFjsCronTypeComponent } from './type-component/cron-type.component';
           name: 'gio-code-editor',
           component: GioFjsCodeEditorTypeComponent,
           wrappers: ['form-field'],
+        },
+        {
+          name: 'gio-mcp-tools-editor',
+          component: GioFjsMcpToolsEditorTypeComponent,
         },
         {
           name: 'gio-headers-array',
