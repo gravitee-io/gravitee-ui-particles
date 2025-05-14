@@ -18,7 +18,21 @@
 
 @use '../gio-mat-theme-variable' as theme;
 
+@use '../gio-mat-palettes' as palettes;
+
 @mixin mat-option() {
+  @include mat.select-overrides(
+    (
+      focused-arrow-color: mat.m2-get-color-from-palette(palettes.$mat-dove-palette, darker80),
+    )
+  );
+
+  @include mat.option-overrides(
+    (
+      selected-state-label-text-color: mat.m2-get-color-from-palette(palettes.$mat-dove-palette, darker80),
+    )
+  );
+
   .mat-typography .mat-mdc-option {
     min-height: 40px;
     @include mat.m2-typography-level(theme.$mat-typography, 'body-2');

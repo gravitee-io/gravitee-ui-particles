@@ -20,6 +20,18 @@
 @use '../gio-mat-palettes' as palettes;
 
 @mixin mat-form-field() {
+  @include mat.form-field-overrides(
+    (
+      outlined-caret-color: mat.m2-get-color-from-palette(palettes.$mat-dove-palette, darker80),
+      outlined-focus-outline-color: mat.m2-get-color-from-palette(palettes.$mat-dove-palette, darker80),
+      outlined-focus-label-text-color: mat.m2-get-color-from-palette(palettes.$mat-dove-palette, darker80),
+      filled-caret-color: mat.m2-get-color-from-palette(palettes.$mat-dove-palette, darker80),
+      filled-focus-active-indicator-color: mat.m2-get-color-from-palette(palettes.$mat-dove-palette, darker80),
+      filled-focus-label-text-color: mat.m2-get-color-from-palette(palettes.$mat-dove-palette, darker80),
+      focus-select-arrow-color: mat.m2-get-color-from-palette(palettes.$mat-dove-palette, darker80),
+    )
+  );
+
   .mat-mdc-form-field {
     margin: 0.45em 0;
   }

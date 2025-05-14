@@ -16,9 +16,10 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 @use '../../scss' as gio;
+@use '../../scss/gio-mat-palettes' as palettes;
 
 $foreground: map.get(gio.$mat-theme, foreground);
-$accent: map.get(gio.$mat-theme, accent);
+$accent: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, default);
 
 :host {
   display: flex;
@@ -57,12 +58,12 @@ $accent: map.get(gio.$mat-theme, accent);
   }
 
   &.selected {
-    border: 2px solid mat.m2-get-color-from-palette($accent);
+    border: 2px solid $accent;
     margin: 5px 0;
-    color: mat.m2-get-color-from-palette($accent);
+    color: $accent;
 
     .selection-icon__radio-icon {
-      color: mat.m2-get-color-from-palette($accent);
+      color: $accent;
     }
   }
 
@@ -80,7 +81,7 @@ $accent: map.get(gio.$mat-theme, accent);
     }
 
     .selection-icon__lock-icon {
-      color: mat.m2-get-color-from-palette($accent);
+      color: $accent;
     }
   }
 
