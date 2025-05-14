@@ -35,6 +35,7 @@
     margin-left: 4px;
     background-color: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, lighter);
     color: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, lighter-contrast);
+    font-family: mat.m2-font-family(theme.$mat-typography, caption);
     font-size: mat.m2-font-size(theme.$mat-typography, caption);
     font-weight: mat.m2-font-weight(theme.$mat-typography, caption);
     line-height: 16px;

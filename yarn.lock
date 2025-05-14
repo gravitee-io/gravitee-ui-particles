@@ -3261,10 +3261,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/golos-ui@npm:^4.5.3":
-  version: 4.5.3
-  resolution: "@fontsource/golos-ui@npm:4.5.3"
-  checksum: 10/66d710cb9e260519856683ed1666a571f4a6b9c6882efef31c6f54cca70980719c7927df2fc4e999dc32a1ea779ac6c2b719e336ffe32a4c9f695aabf8a3633f
+"@fontsource/kanit@npm:^5.2.6":
+  version: 5.2.6
+  resolution: "@fontsource/kanit@npm:5.2.6"
+  checksum: 10/ff7a148b7d002cf5a05ba882d999092967298c26b1af77d8c9f581c2d2283b8217231f74f09ed917ea8a18f4bd03eb1a715d86a98c1f0def5f2b388a22e33a7d
+  languageName: node
+  linkType: hard
+
+"@fontsource/manrope@npm:^5.2.5":
+  version: 5.2.5
+  resolution: "@fontsource/manrope@npm:5.2.5"
+  checksum: 10/e6f19a199dd6262431ef2f1575f0e9529b9bf78cf43956181a2c8bbe71af3dd1ea3488a529f82172b475f02c89aa6a1271dd863e028e3a2010cd6b4b036a0325
   languageName: node
   linkType: hard
 
@@ -12301,7 +12308,8 @@ __metadata:
     "@commitlint/cli": "npm:17.4.2"
     "@commitlint/config-conventional": "npm:17.4.2"
     "@fontsource/fira-mono": "npm:5.0.14"
-    "@fontsource/golos-ui": "npm:^4.5.3"
+    "@fontsource/kanit": "npm:^5.2.6"
+    "@fontsource/manrope": "npm:^5.2.5"
     "@fontsource/material-icons": "npm:5.0.19"
     "@ngx-formly/core": "npm:6.3.12"
     "@ngx-formly/material": "npm:6.3.12"
