@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { MatCardModule } from '@angular/material/card';
 
 import { GioIconsModule } from '../gio-icons/gio-icons.module';
 
@@ -21,7 +22,7 @@ export default {
   title: 'Components / Badge',
   decorators: [
     moduleMetadata({
-      imports: [GioIconsModule],
+      imports: [GioIconsModule, MatCardModule],
     }),
   ],
 } as Meta;
@@ -68,6 +69,14 @@ export const All: StoryObj = {
       <div style='margin: 10px'>
         <span class="gio-badge-neutral">1</span> <span class="gio-badge-neutral">2</span>
       </div> 
+      
+      <h4>Inside Card</h4>
+      <mat-card style="width: 300px; margin: 10px">
+      <mat-card-header>
+      <mat-card-title>Card with badge <span class="gio-badge-primary">Primary<mat-icon class="gio-right" svgIcon="gio:rocket" /></span></mat-card-title>
+      </mat-card-header>
+      <mat-card-content><p>Card content <span class="gio-badge-primary">Primary</span></p></mat-card-content>
+</mat-card>
     `,
   }),
 };

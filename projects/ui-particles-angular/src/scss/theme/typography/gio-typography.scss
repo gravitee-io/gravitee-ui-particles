@@ -26,6 +26,7 @@
 }
 
 @mixin subtitle-typography() {
+  font-family: Kanit, 'Helvetica Neue', sans-serif;
   font-size: 16px;
   font-weight: 500;
   letter-spacing: 0.4px;
