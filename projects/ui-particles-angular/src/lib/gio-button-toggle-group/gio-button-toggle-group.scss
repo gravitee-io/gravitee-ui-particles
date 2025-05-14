@@ -21,6 +21,12 @@
 $typography: map.get(theme.$mat-theme, typography);
 
 @mixin gio-button-toggle-group {
+  @include mat.button-toggle-overrides(
+    (
+      selected-state-text-color: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, default-contrast),
+    )
+  );
+
   width: fit-content;
   height: 44px;
   padding: 4px;
@@ -37,8 +43,8 @@ $typography: map.get(theme.$mat-theme, typography);
   }
 
   .mat-button-toggle.mat-button-toggle-checked:not(.mat-button-toggle-disabled) {
-    background-color: mat.m2-get-color-from-palette(palettes.$mat-accent-palette, 'darker20');
-    color: mat.m2-get-color-from-palette(palettes.$mat-accent-palette, default-contrast);
+    background-color: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, 'default');
+    color: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, default-contrast);
   }
 
   .mat-button-toggle.mat-button-toggle-checked.mat-button-toggle-disabled {

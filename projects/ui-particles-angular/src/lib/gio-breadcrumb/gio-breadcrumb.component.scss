@@ -19,7 +19,7 @@
 
 $textColor: mat.m2-get-color-from-palette(gio.$mat-space-palette, 'lighter40');
 $iconColor: mat.m2-get-color-from-palette(gio.$mat-space-palette, 'lighter80');
-$lastTextColor: mat.m2-get-color-from-palette(gio.$mat-accent-palette, 'darker20');
+$lastTextColor: mat.m2-get-color-from-palette(gio.$mat-primary-palette, 'default');
 
 .gio-breadcrumb {
   display: flex;

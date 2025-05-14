@@ -41,21 +41,25 @@ export const MatButtonMDC: StoryObj = {
                     <button mat-flat-button color="primary" class="button-large">Large button</button>
                     <button mat-flat-button color="primary" class="medium">Medium button (Default)</button>
                     <button mat-flat-button color="primary" class="small">Small button</button>
+                    <button mat-flat-button color="primary" class="small" [disabled]="true">Disabled</button>
                     </div>
                 <div class="button-container">
                     <button mat-flat-button color="primary" class="large"><mat-icon svgIcon="gio:plus"></mat-icon></button>
                     <button mat-flat-button color="primary" class="medium"><mat-icon svgIcon="gio:plus"></mat-icon></button>
                     <button mat-flat-button color="primary" class="small"><mat-icon svgIcon="gio:plus"></mat-icon></button>
+                    <button mat-flat-button color="primary" class="small" [disabled]="true"><mat-icon svgIcon="gio:plus"></mat-icon></button>
                     </div>
                 <div class="button-container">
                     <button mat-flat-button color="primary" class="large"><mat-icon svgIcon="gio:star-outline"></mat-icon>Large button</button>
                     <button mat-flat-button color="primary" class="medium"><mat-icon svgIcon="gio:star-outline"></mat-icon>Medium button</button>
                     <button mat-flat-button color="primary" class="small"><mat-icon svgIcon="gio:star-outline"></mat-icon>Small button</button>
+                    <button mat-flat-button color="primary" class="small" [disabled]="true"><mat-icon svgIcon="gio:star-outline"></mat-icon>Disabled</button>
                 </div>
                 <div class="button-container">
                     <button mat-flat-button color="primary" class="large">Large button<mat-icon svgIcon="gio:star-outline" iconPositionEnd></mat-icon></button>
                     <button mat-flat-button color="primary" class="medium">Medium button<mat-icon svgIcon="gio:star-outline" iconPositionEnd></mat-icon></button>
                     <button mat-flat-button color="primary" class="small">Small button<mat-icon svgIcon="gio:star-outline" iconPositionEnd></mat-icon></button>
+                    <button mat-flat-button color="primary" class="small" [disabled]="true">Disabled<mat-icon svgIcon="gio:star-outline" iconPositionEnd></mat-icon></button>
                 </div>
             </div>
             <div>
@@ -359,7 +363,7 @@ export const MatButtonMDC: StoryObj = {
                 display: flex;
                 flex-direction: row;
                 justify-content: space-around;
-                width: 500px;
+                width: 800px;
                 margin-bottom: 16px;
             }
        `,

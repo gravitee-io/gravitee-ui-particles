@@ -30,16 +30,16 @@ $oem-menu-border: color-mix(in srgb, $oem-menu-background 75%, $oem-menu-text);
 $oem-menu-environment-selected: var(--gio-oem-palette--active, map.get(gio.$mat-primary-palette, default));
 
 // Sub Menu
-$oem-sub-menu-background: var(--gio-oem-palette--sub-menu, map.get(gio.$mat-space-palette, default));
+$oem-sub-menu-background: var(--gio-oem-palette--sub-menu, map.get(gio.$mat-space-palette, lighter20));
 $oem-sub-menu-title: color-mix(in srgb, $oem-menu-text 70%, black);
 
 // Top Bar
 $oem-top-bar-notification: var(--gio-oem-palette--active, map.get(gio.$mat-accent-palette, lighter80));
 $oem-top-bar-notification-contrast: var(--gio-oem-palette--active-contrast, map.get(gio.$mat-space-palette, default));
-$oem-top-bar-apim-button-background: var(--gio-oem-palette--sub-menu, rgb(0 111 185 / 50%));
+$oem-top-bar-apim-button-background: var(--gio-oem-palette--sub-menu, map.get(gio.$mat-smoke-palette, darker60));
 
 // Light
-$oem-light-menu-selected: var(--gio-oem-palette--active, map.get(gio.$mat-accent-palette, default));
+$oem-light-menu-selected: var(--gio-oem-palette--active, map.get(gio.$mat-accent-palette, darker60));
 $oem-light-menu-background: color-mix(in srgb, $oem-light-menu-selected 60%, black);
 $oem-light-menu-text: map.get(palette.$mat-oem-palette, active-contrast);
 $oem-light-menu-hover: color-mix(in srgb, $oem-light-menu-selected 80%, black);

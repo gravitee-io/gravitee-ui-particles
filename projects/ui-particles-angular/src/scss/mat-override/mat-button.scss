@@ -13,7 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@use '@angular/material' as mat;
+
+@use '../gio-mat-palettes' as palettes;
+
 @mixin mat-button() {
+  @include mat.button-overrides(
+    (
+      outlined-label-text-weight: 700,
+      filled-label-text-weight: 700,
+      protected-label-text-weight: 700,
+      text-label-text-weight: 700,
+      outlined-label-text-color: mat.m2-get-color-from-palette(palettes.$mat-space-palette, lighter10),
+      text-label-text-color: mat.m2-get-color-from-palette(palettes.$mat-space-palette, lighter10),
+    )
+  );
+
   .mdc-button {
     &:has(.mdc-button__label:empty) {
       min-width: 36px;
@@ -25,6 +40,18 @@
         margin-left: -6px;
         font-size: 22px;
       }
+    }
+
+    &[color='primary']:not(:disabled) {
+      @include mat.button-overrides(
+        (
+          filled-label-text-color: mat.m2-get-color-from-palette(palettes.$mat-gradient-palette, button-contrast),
+          text-label-text-color: mat.m2-get-color-from-palette(palettes.$mat-gradient-palette, button-contrast),
+          outlined-label-text-color: mat.m2-get-color-from-palette(palettes.$mat-gradient-palette, button-contrast),
+        )
+      );
+
+      background: mat.m2-get-color-from-palette(palettes.$mat-gradient-palette, button);
     }
   }
 }
