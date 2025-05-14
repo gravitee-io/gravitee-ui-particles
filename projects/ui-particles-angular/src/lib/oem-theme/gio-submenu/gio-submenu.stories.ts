@@ -58,6 +58,7 @@ export const Default: StoryObj = {
               <gio-submenu-item (click)="onClick('plans')" [active]="isActive('plans')">Plans</gio-submenu-item>
               <gio-submenu-item (click)="onClick('doc')" [active]="isActive('doc')">Documentation</gio-submenu-item>
               <gio-submenu-item (click)="onClick('user')" [active]="isActive('user')">User & Group Access</gio-submenu-item>
+              <gio-submenu-item (click)="onClick('user')" [active]="isActive('user')">Entrypoints & Sharding tags</gio-submenu-item>
             </gio-submenu-group>
             <gio-submenu-group title="Proxy">
               <gio-submenu-item (click)="onClick('general-2')" [active]="isActive('general-2')">General</gio-submenu-item>
