@@ -1,3 +1,22 @@
+# [15.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v14.2.1...v15.0.0) (2025-05-15)
+
+
+* feat!: update palettes and components with new theme ([697bd2e](https://github.com/gravitee-io/gravitee-ui-particles/commit/697bd2ea980121ac0c215b10584d14f77097ebcb))
+* feat!: replace gravitee logo in stories and icons ([706d34e](https://github.com/gravitee-io/gravitee-ui-particles/commit/706d34ebf5539a663571667246fda1b4b7e3b947))
+* feat!: update fonts to kanit and manrope ([a265209](https://github.com/gravitee-io/gravitee-ui-particles/commit/a265209798f54ff959f904477cd70dbaac5d7e3a))
+
+
+### Features
+
+* handle when menu item titles are long ([2b95e8e](https://github.com/gravitee-io/gravitee-ui-particles/commit/2b95e8e3dc0fb01833a379e99a462c627927a34a))
+
+
+### BREAKING CHANGES
+
+* Palettes and component styling updated.
+* Gravitee logo updated
+* Golos UI font has been replaced with Kanit + Manrope
+
 ## [14.2.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v14.2.0...v14.2.1) (2025-05-07)
 
 
