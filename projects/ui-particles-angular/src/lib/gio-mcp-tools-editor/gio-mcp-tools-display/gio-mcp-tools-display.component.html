@@ -1,0 +1,12 @@
+<div>MCP Tools</div>
+@if (mcpTools()) {
+    @for (mcpTool of mcpTools(); track $index) {
+        <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header>
+                <h5>{{ mcpTool.name }}</h5>
+            </mat-expansion-panel-header>
+            <h4>Tool schema</h4>
+            <pre>{{ mcpTool.inputSchema | json }}</pre>
+        </mat-expansion-panel>
+    }
+}
