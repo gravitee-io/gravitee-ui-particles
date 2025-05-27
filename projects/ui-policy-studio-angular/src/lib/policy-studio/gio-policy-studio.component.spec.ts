@@ -88,7 +88,7 @@ describe('GioPolicyStudioComponent', () => {
     component.policies = fakeAllPolicies();
     component.sharedPolicyGroupPolicies = fakeAllSharedPolicyGroupPolicies();
     component.policySchemaFetcher = policy => of(fakePolicySchema(policy.id));
-    component.policyDocumentationFetcher = policy => of(`${policy.id} documentation`);
+    component.policyDocumentationFetcher = policy => of({ content: `${policy.id} documentation`, language: 'ASCIIDOC' });
     component.ngOnChanges({
       policies: new SimpleChange(null, null, true),
       sharedPolicyGroupPolicies: new SimpleChange(null, null, true),

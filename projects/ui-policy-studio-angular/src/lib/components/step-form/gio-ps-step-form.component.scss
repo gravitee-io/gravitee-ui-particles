@@ -26,6 +26,48 @@ $typography: map.get(gio.$mat-theme, typography);
   border-radius: 8px;
 }
 
+::ng-deep {
+  gio-ps-step-form {
+    .documentation__content__markdown {
+      table {
+        overflow: hidden;
+        width: 100%;
+        border: 1px solid mat.m2-get-color-from-palette(gio.$mat-dove-palette, darker20);
+        border-radius: 4px;
+        margin-bottom: 12px;
+        border-collapse: separate;
+        border-spacing: 0;
+
+        th,
+        td {
+          padding: 8px;
+          border-bottom: 1px solid mat.m2-get-color-from-palette(gio.$mat-dove-palette, darker20);
+        }
+
+        tr:last-child td {
+          border-bottom: none;
+        }
+
+        th:first-child {
+          border-top-left-radius: 4px;
+        }
+
+        th:last-child {
+          border-top-right-radius: 4px;
+        }
+
+        tr:last-child td:first-child {
+          border-bottom-left-radius: 4px;
+        }
+
+        tr:last-child td:last-child {
+          border-bottom-right-radius: 4px;
+        }
+      }
+    }
+  }
+}
+
 .settings {
   display: flex;
   flex: 0 0 50%;

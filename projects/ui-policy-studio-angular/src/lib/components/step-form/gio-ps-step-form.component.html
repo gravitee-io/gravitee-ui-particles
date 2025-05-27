@@ -61,7 +61,14 @@
       <span gioBannerBody>{{ infoBanner }}</span>
     </gio-banner-warning>
     <ng-container *ngIf="policyDocumentation$ | async as policyDocumentation; else loadingTmpl">
-      <gio-asciidoctor [content]="policyDocumentation"></gio-asciidoctor>
+      @switch (policyDocumentation.language) {
+        @case ('ASCIIDOC') {
+          <gio-asciidoctor [content]="policyDocumentation.content"></gio-asciidoctor>
+        }
+        @case ('MARKDOWN') {
+          <markdown class="documentation__content__markdown" [data]="policyDocumentation.content"></markdown>
+        }
+      }
     </ng-container>
   </div>
 </div>

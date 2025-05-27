@@ -29,3 +29,8 @@ export interface FlowGroupVM {
   name: string;
   flows: FlowVM[];
 }
+
+export interface PolicyDocumentation {
+  content: string;
+  language: 'MARKDOWN' | 'ASCIIDOC';
+}

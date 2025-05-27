@@ -15,6 +15,8 @@
  */
 
 // 09/06/2023 - All API V4 available policies.
+import { PolicyDocumentation } from '../../policy-studio/gio-policy-studio.model';
+
 const POLICIES_SCHEMA: Record<string, unknown> = {
   'message-filtering': undefined,
   'test-policy': {
@@ -457,7 +459,7 @@ export function fakePolicySchema(policyId: string): unknown {
   return POLICIES_SCHEMA[policyId] ?? {};
 }
 
-export function fakePolicyDocumentation(policyId: string): string {
+export function fakePolicyDocumentation(policyId: string): PolicyDocumentation {
   const POLICIES_DOC: Record<string, string> = {
     'test-policy': `
 = Test Policy documentation
@@ -484,5 +486,5 @@ nunc nisl aliquam nunc, sed aliquam nisl nunc eget nunc.
 `,
   };
 
-  return POLICIES_DOC[policyId] ?? '';
+  return { content: POLICIES_DOC[policyId] ?? '', language: 'ASCIIDOC' };
 }
