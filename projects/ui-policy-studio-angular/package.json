@@ -18,7 +18,8 @@
     "@angular/forms": "^19.0.0",
     "@angular/material": "^19.0.0",
     "@gravitee/ui-particles-angular": "*",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "ngx-markdown": "^19.1.1"
   },
   "publishConfig": {
     "access": "public"

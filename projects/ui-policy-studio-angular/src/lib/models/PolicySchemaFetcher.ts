@@ -15,7 +15,9 @@
  */
 import { Observable } from 'rxjs';
 
+import { PolicyDocumentation } from '../policy-studio/gio-policy-studio.model';
+
 import { Policy } from './policy/Policy';
 
 export type PolicySchemaFetcher = (policy: Policy) => Observable<unknown>;
-export type PolicyDocumentationFetcher = (policy: Policy) => Observable<string>;
+export type PolicyDocumentationFetcher = (policy: Policy) => Observable<PolicyDocumentation | string>;

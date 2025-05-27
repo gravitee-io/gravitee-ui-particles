@@ -20,12 +20,14 @@ import { tap } from 'rxjs/operators';
 
 import { Policy, PolicyDocumentationFetcher, PolicySchemaFetcher } from '../models';
 
+import { PolicyDocumentation } from './gio-policy-studio.model';
+
 @Injectable({
   providedIn: 'root',
 })
 export class GioPolicyStudioService {
   private schemasCache: Record<string, BehaviorSubject<unknown>> = {};
-  private documentationsCache: Record<string, BehaviorSubject<string>> = {};
+  private documentationsCache: Record<string, BehaviorSubject<PolicyDocumentation | string>> = {};
 
   private policySchemaFetcher?: PolicySchemaFetcher;
   private policyDocumentationFetcher?: PolicyDocumentationFetcher;
@@ -66,7 +68,7 @@ export class GioPolicyStudioService {
    * @param policy to get the documentation for
    * @returns the documentation for the policy
    */
-  public getPolicyDocumentation(policy: Policy): Observable<string> {
+  public getPolicyDocumentation(policy: Policy): Observable<PolicyDocumentation | string> {
     if (!this.policyDocumentationFetcher) throw new Error('PolicyDocumentationFetcher not defined!');
 
     if (this.documentationsCache[policy.id]) {

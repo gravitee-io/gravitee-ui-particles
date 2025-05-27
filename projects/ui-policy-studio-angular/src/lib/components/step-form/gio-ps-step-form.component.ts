@@ -30,9 +30,11 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { GioAsciidoctorModule } from '@gravitee/ui-particles-angular/gio-asciidoctor';
+import { MarkdownComponent } from 'ngx-markdown';
 
-import { FlowPhase, isPolicy, isSharedPolicyGroupPolicy, Step, toPolicy, GenericPolicy, ApiType } from '../../models';
+import { ApiType, FlowPhase, GenericPolicy, isPolicy, isSharedPolicyGroupPolicy, Step, toPolicy } from '../../models';
 import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.service';
+import { PolicyDocumentation } from '../../policy-studio/gio-policy-studio.model';
 
 @Component({
   imports: [
@@ -44,12 +46,15 @@ import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.se
     GioAsciidoctorModule,
     GioLoaderModule,
     GioBannerModule,
+    MarkdownComponent,
   ],
   selector: 'gio-ps-step-form',
   templateUrl: './gio-ps-step-form.component.html',
   styleUrls: ['./gio-ps-step-form.component.scss'],
 })
 export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDestroy {
+  private readonly noDocumentationAvailable: PolicyDocumentation = { content: 'No documentation available.', language: 'ASCIIDOC' };
+
   @Input()
   public readOnly = false;
 
@@ -72,7 +77,7 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
   public isValid = new EventEmitter<boolean>();
 
   public policySchema$?: Observable<GioJsonSchema | null | undefined>;
-  public policyDocumentation$?: Observable<string>;
+  public policyDocumentation$?: Observable<PolicyDocumentation>;
   public infoBanner?: string;
 
   public stepForm?: UntypedFormGroup;
@@ -96,15 +101,18 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
         );
 
         this.policyDocumentation$ = this.policyStudioService.getPolicyDocumentation(toPolicy(this.genericPolicy)).pipe(
-          map(doc => (isEmpty(doc) ? 'No documentation available.' : doc)),
-          catchError(() => of('No documentation available.')),
+          map(doc => {
+            if (typeof doc === 'string') {
+              return { content: doc, language: 'ASCIIDOC' } as PolicyDocumentation;
+            }
+            return isEmpty(doc?.content) ? this.noDocumentationAvailable : doc;
+          }),
+          catchError(() => of(this.noDocumentationAvailable)),
         );
       }
       if (isSharedPolicyGroupPolicy(this.genericPolicy)) {
         this.policySchema$ = of({});
-
-        this.policyDocumentation$ = of(' ');
-
+        this.policyDocumentation$ = of({ content: ' ', language: 'ASCIIDOC' });
         this.infoBanner = this.genericPolicy.prerequisiteMessage;
       }
     }

@@ -46,7 +46,7 @@ describe('GioPolicyGroupStudioComponent', () => {
 
     component.policies = fakeAllPolicies();
     component.policySchemaFetcher = policy => of(fakePolicySchema(policy.id));
-    component.policyDocumentationFetcher = policy => of(`${policy.id} documentation`);
+    component.policyDocumentationFetcher = policy => of({ content: `${policy.id} documentation`, language: 'ASCIIDOC' });
     component.apiType = apiType;
     component.flowPhase = flowPhase;
     component.ngOnChanges({
@@ -212,7 +212,7 @@ describe('GioPolicyGroupStudioComponent', () => {
 
       component.policies = fakeAllPolicies();
       component.policySchemaFetcher = policy => of(fakePolicySchema(policy.id));
-      component.policyDocumentationFetcher = policy => of(`${policy.id} documentation`);
+      component.policyDocumentationFetcher = policy => of({ content: `${policy.id} documentation`, language: 'ASCIIDOC' });
       component.apiType = apiType;
       component.executionPhase = executionPhase;
       component.ngOnChanges({
