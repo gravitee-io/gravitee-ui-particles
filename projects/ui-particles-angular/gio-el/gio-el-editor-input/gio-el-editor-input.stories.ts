@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { Component, importProvidersFrom } from '@angular/core';
+import { Component, importProvidersFrom, Input } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -24,6 +24,7 @@ import { GioMonacoEditorModule } from '@gravitee/ui-particles-angular';
 
 import { GioElEditorHelperToggleComponent } from '../gio-el-editor-helper/gio-el-editor-helper-toggle.component';
 import { GioElEditorHelperInputDirective } from '../gio-el-editor-helper/gio-el-editor-helper-input.directive';
+import { GioElService } from '../gio-el.service';
 
 import { GioElEditorInputComponent } from './gio-el-editor-input.component';
 
@@ -32,8 +33,13 @@ import { GioElEditorInputComponent } from './gio-el-editor-input.component';
   template: `
     <mat-form-field style="width: 100%">
       <mat-label>El condition</mat-label>
-      <gio-el-editor-input [gioElEditorHelper]="elEditor" [formControl]="formControl" />
-      <gio-el-editor-helper-toggle matIconSuffix #elEditor></gio-el-editor-helper-toggle>
+      <gio-el-editor-input [gioElEditorHelper]="elEditor" [formControl]="formControl" [singleLineMode]="singleLineMode" />
+      <gio-el-editor-helper-toggle
+        matIconSuffix
+        #elEditor
+        [enableConditionBuilder]="true"
+        [scopes]="['node']"
+      ></gio-el-editor-helper-toggle>
       <mat-hint>Accept EL</mat-hint>
     </mat-form-field>
 
@@ -48,17 +54,56 @@ import { GioElEditorInputComponent } from './gio-el-editor-input.component';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
-    GioElEditorInputComponent,
     MatButtonModule,
+    GioElEditorInputComponent,
     GioElEditorHelperToggleComponent,
     GioElEditorHelperInputDirective,
   ],
 })
 class StoryInputComponent {
+  @Input()
+  public singleLineMode: boolean = true;
+
   public formControl = new FormControl();
   public disable = false;
 
-  constructor() {
+  constructor(private gioElService: GioElService) {
+    this.gioElService.setElProperties('node', [
+      {
+        field: 'node',
+        label: 'Node',
+        properties: [
+          {
+            field: 'id',
+            label: 'Id',
+            type: 'string',
+          },
+          {
+            field: 'shardingTags',
+            label: 'Shared Tags',
+            type: 'Map', // FIXME: Array ?
+            valueProperty: {
+              type: 'string',
+            },
+          },
+          {
+            field: 'tenant',
+            label: 'Tenant',
+            type: 'string',
+          },
+          {
+            field: 'version',
+            label: 'Version',
+            type: 'string',
+          },
+          {
+            field: 'zone',
+            label: 'Zone',
+            type: 'string',
+          },
+        ],
+      },
+    ]);
     this.formControl.valueChanges.subscribe(value => action('El Value')(value));
   }
 
@@ -69,8 +114,14 @@ class StoryInputComponent {
 }
 
 export default {
-  title: 'Components / EL / CodeEditor input for MatFormField',
+  title: 'Components / EL / EL editor input for MatFormField',
   component: StoryInputComponent,
+  render: args => ({
+    template: `<gio-story-component [singleLineMode]="singleLineMode" ></gio-story-component>`,
+    props: {
+      singleLineMode: args.singleLineMode,
+    },
+  }),
   decorators: [
     moduleMetadata({
       imports: [GioMonacoEditorModule.forRoot({ baseUrl: '.' })],
@@ -81,4 +132,12 @@ export default {
   ],
 } as Meta;
 
-export const Default: StoryObj = {};
+export const ConditionElSingleLine: StoryObj = {};
+ConditionElSingleLine.args = {
+  singleLineMode: true,
+};
+
+export const ConditionElMultiLine: StoryObj = {};
+ConditionElMultiLine.args = {
+  singleLineMode: false,
+};

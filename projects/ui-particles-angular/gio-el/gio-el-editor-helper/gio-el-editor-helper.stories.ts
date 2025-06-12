@@ -21,6 +21,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { action } from '@storybook/addon-actions';
 
+import { GioElService } from '../gio-el.service';
+
 import { GioElEditorHelperInputDirective } from './gio-el-editor-helper-input.directive';
 import { GioElEditorHelperToggleComponent } from './gio-el-editor-helper-toggle.component';
 
@@ -30,7 +32,7 @@ import { GioElEditorHelperToggleComponent } from './gio-el-editor-helper-toggle.
     <mat-form-field>
       <mat-label>El condition</mat-label>
       <input matInput [gioElEditorHelper]="elEditor" [formControl]="formControl" />
-      <gio-el-editor-helper-toggle matIconSuffix #elEditor></gio-el-editor-helper-toggle>
+      <gio-el-editor-helper-toggle matIconSuffix #elEditor [enableConditionBuilder]="true"></gio-el-editor-helper-toggle>
       <mat-hint>Accept EL</mat-hint>
     </mat-form-field>
 
@@ -52,9 +54,9 @@ import { GioElEditorHelperToggleComponent } from './gio-el-editor-helper-toggle.
 })
 class StoryHelperComponent {
   public formControl = new FormControl();
-  public disable = false;
+  public disable = true;
 
-  constructor() {
+  constructor(_gioElService: GioElService) {
     this.formControl.valueChanges.subscribe(value => action('El Value')(value));
   }
 

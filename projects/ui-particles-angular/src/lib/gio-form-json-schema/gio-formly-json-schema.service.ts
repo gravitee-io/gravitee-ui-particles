@@ -129,6 +129,12 @@ export class GioFormlyJsonSchemaService {
       mappedField.props = {
         ...mappedField.props,
       };
+    } else if (mapSource.type === 'string' && mapSource.format && ['gio-el-input', 'gio-el-textarea'].includes(mapSource.format)) {
+      mappedField.type = mapSource.format;
+      mappedField.props = {
+        ...mappedField.props,
+        elConfig: mapSource.gioConfig?.elConfig,
+      };
     }
 
     return mappedField;
