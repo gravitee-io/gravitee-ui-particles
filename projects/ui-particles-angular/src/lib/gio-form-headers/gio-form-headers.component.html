@@ -44,7 +44,7 @@
         <mat-error *ngIf="control.get('key')?.hasError('pattern')">
           Header name must not contain spaces. (RegExp: {{ control.get('key')?.getError('pattern')?.requiredPattern }})
         </mat-error>
-        <mat-autocomplete #headerNamesAutocomplete="matAutocomplete">
+        <mat-autocomplete panelWidth="auto" #headerNamesAutocomplete="matAutocomplete">
           <mat-option *ngFor="let headerName of getFilteredHeaderNames(headerIndex, control.value) | async" [value]="headerName">{{
             headerName
           }}</mat-option>
@@ -52,7 +52,28 @@
       </td>
       <td class="gio-form-headers__table__header-row__td-value">
         <div class="gio-form-headers__table__header-row__td-value__field">
-          <textarea formControlName="value" matInput placeholder="Value..." cdkTextareaAutosize cdkAutosizeMinRows="1"></textarea>
+          <!--    TODO : If EL is enable or not-->
+          @if (true) {
+            <div class="gio-form-headers__table__header-row__td-value__field__el">
+              <!--              TODO find if we can ilmprove it to have a placeholder-->
+              <!--            <gio-el-editor-input class="gio-form-headers__table__header-row__td-value__field__el__input" [gioElEditorHelper]="elEditor" placeholder="Value..." formControlName="value"  />-->
+
+              <textarea
+                formControlName="value"
+                matInput
+                placeholder="Value..."
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="1"
+                [gioElEditorHelper]="elEditor"
+              ></textarea>
+
+              <div class="gio-form-headers__table__header-row__td-value__field__el__suffix">
+                <gio-el-editor-helper-toggle matIconSuffix #elEditor [scopes]="['node']"></gio-el-editor-helper-toggle>
+              </div>
+            </div>
+          } @else {
+            <textarea formControlName="value" matInput placeholder="Value..." cdkTextareaAutosize cdkAutosizeMinRows="1"></textarea>
+          }
         </div>
         <button
           class="gio-form-headers__table__header-row__td-value__button"

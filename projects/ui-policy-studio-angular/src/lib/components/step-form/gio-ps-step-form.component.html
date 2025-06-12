@@ -29,7 +29,8 @@
 
       <mat-form-field>
         <mat-label>Trigger condition</mat-label>
-        <input matInput formControlName="condition" />
+        <gio-el-editor-input [gioElEditorHelper]="elEditor" formControlName="condition" [singleLineMode]="true" />
+        <gio-el-editor-helper-toggle matIconSuffix #elEditor [scopes]="elScopes"></gio-el-editor-helper-toggle>
         <mat-hint>The condition to execute this policy. Supports Expression Language.</mat-hint>
       </mat-form-field>
 

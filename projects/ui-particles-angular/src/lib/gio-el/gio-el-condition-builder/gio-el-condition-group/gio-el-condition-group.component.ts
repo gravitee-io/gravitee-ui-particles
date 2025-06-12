@@ -21,7 +21,6 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatMenuModule } from '@angular/material/menu';
-import { GioIconsModule } from '@gravitee/ui-particles-angular';
 
 import { GioElConditionTypeBooleanComponent } from '../gio-el-condition-types/gio-el-condition-type-boolean/gio-el-condition-type-boolean.component';
 import { GioElConditionTypeDateComponent } from '../gio-el-condition-types/gio-el-condition-type-date/gio-el-condition-type-date.component';
@@ -31,6 +30,7 @@ import { ConditionForm, ConditionGroupForm } from '../gio-el-condition-builder.c
 import { ElProperties } from '../../models/ElProperties';
 import { GioElFieldComponent } from '../gio-el-field/gio-el-field.component';
 import { ElProperty } from '../../models/ElProperty';
+import { GioIconsModule } from '../../../gio-icons/gio-icons.module';
 
 @Component({
   selector: 'gio-el-condition-group',

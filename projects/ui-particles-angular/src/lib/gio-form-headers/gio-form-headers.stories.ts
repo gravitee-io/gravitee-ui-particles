@@ -13,9 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GioMonacoEditorModule } from '@gravitee/ui-particles-angular';
+import { importProvidersFrom } from '@angular/core';
 
 import { GioFormHeadersComponent } from './gio-form-headers.component';
 import { GioFormHeadersModule } from './gio-form-headers.module';
@@ -26,6 +28,9 @@ export default {
   decorators: [
     moduleMetadata({
       imports: [GioFormHeadersModule, FormsModule, ReactiveFormsModule],
+    }),
+    applicationConfig({
+      providers: [importProvidersFrom(GioMonacoEditorModule.forRoot({ theme: 'vs', baseUrl: '.' }))],
     }),
   ],
   argTypes: {},

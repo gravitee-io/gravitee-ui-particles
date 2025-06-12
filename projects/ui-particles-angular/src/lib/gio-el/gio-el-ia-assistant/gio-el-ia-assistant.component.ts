@@ -18,10 +18,12 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
-import { GioBannerModule, GioIconsModule } from '@gravitee/ui-particles-angular';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { get } from 'lodash';
+
+import { GioBannerModule } from '../../gio-banner/gio-banner.module';
+import { GioIconsModule } from '../../gio-icons/gio-icons.module';
 
 import { AiRequestConfig, ElIaAssistantService } from './el-ia-assistant.service';
 
@@ -81,11 +83,13 @@ export class GioElIaAssistantComponent {
     this.responseState.set('loading');
 
     this.elIaAssistantService
-      .sendRequest({
-        message,
-        context: this.elContext ?? '{}',
-        config: this.aiAssistantConfig,
-      })
+      .sendRequest(
+        {
+          message,
+          context: this.elContext ?? '{}',
+        },
+        this.aiAssistantConfig,
+      )
       .subscribe({
         next: response => {
           this.responseQuota.set(`${response.currentQuota}/${response.maxQuota}`);

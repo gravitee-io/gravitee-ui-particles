@@ -25,10 +25,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
 import { has, isEmpty, isNil } from 'lodash';
-import { GioIconsModule } from '@gravitee/ui-particles-angular';
 
 import { ElProperty, ElPropertyType } from '../models/ElProperty';
 import { ElProperties } from '../models/ElProperties';
+import { GioIconsModule } from '../../gio-icons/gio-icons.module';
 
 import { ExpressionLanguageBuilder } from './models/ExpressionLanguageBuilder';
 import { ConditionGroup } from './models/ConditionGroup';

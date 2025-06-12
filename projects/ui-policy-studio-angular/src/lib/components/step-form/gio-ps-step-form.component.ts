@@ -30,7 +30,12 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { GioAsciidoctorModule } from '@gravitee/ui-particles-angular/gio-asciidoctor';
-import { GioElFormJsonSchemaChildModule } from '@gravitee/ui-particles-angular/gio-el';
+import {
+  GioElEditorHelperInputDirective,
+  GioElEditorHelperToggleComponent,
+  GioElEditorInputComponent,
+  GioElFormJsonSchemaChildModule,
+} from '@gravitee/ui-particles-angular';
 
 import { FlowPhase, isPolicy, isSharedPolicyGroupPolicy, Step, toPolicy, GenericPolicy, ApiType } from '../../models';
 import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.service';
@@ -46,6 +51,9 @@ import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.se
     GioAsciidoctorModule,
     GioLoaderModule,
     GioBannerModule,
+    GioElEditorHelperInputDirective,
+    GioElEditorHelperToggleComponent,
+    GioElEditorInputComponent,
   ],
   selector: 'gio-ps-step-form',
   templateUrl: './gio-ps-step-form.component.html',
@@ -83,6 +91,10 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
 
   private unsubscribe$ = new Subject<void>();
   public isMessage = false;
+
+  // TODO : Just for test but the gole is to generate this from the phase of the policy studio
+  public elScopes: string[] | undefined = ['node', 'api', 'request', 'response', 'dictionaries'];
+
   constructor(private readonly policyStudioService: GioPolicyStudioService) {}
 
   public ngOnChanges(changes: SimpleChanges): void {

@@ -20,7 +20,11 @@ import { Subject } from 'rxjs';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { GioMonacoEditorFormFieldDirective, GioMonacoEditorModule, MonacoEditorLanguageConfig } from '@gravitee/ui-particles-angular';
+
+import { GioMonacoEditorModule } from '../../gio-monaco-editor/gio-monaco-editor.module';
+import { MonacoEditorLanguageConfig } from '../../gio-monaco-editor/gio-monaco-editor.component';
+import { GioMonacoEditorFormFieldDirective } from '../../gio-monaco-editor/gio-monaco-editor-form-field.directive';
+import ElSchema from '../../gio-monaco-editor/data/el-schema.json';
 
 @Component({
   selector: 'gio-el-editor-input',
@@ -36,6 +40,8 @@ export class GioElEditorInputComponent implements MatFormFieldControl<string>, C
 
   public languageConfig?: MonacoEditorLanguageConfig = {
     language: 'spel',
+    // TODO convert elContext to this JSON schema format for automatic completion
+    schema: ElSchema,
   };
 
   // TODO : IMHO we could have 3 mode :

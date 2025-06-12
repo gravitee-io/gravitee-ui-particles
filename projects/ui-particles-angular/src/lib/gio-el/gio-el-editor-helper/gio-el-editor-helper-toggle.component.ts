@@ -15,9 +15,7 @@
  */
 import { ChangeDetectorRef, Component, DestroyRef, ElementRef, inject, input, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { GIO_DIALOG_WIDTH, GioIconsModule } from '@gravitee/ui-particles-angular';
-import { PopoverTriggerDirective, GioPopoverComponent } from '@gravitee/ui-particles-angular/gio-popover';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { EMPTY, Subject } from 'rxjs';
 import { isEmpty, isNil } from 'lodash';
 import { rxResource, takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -31,6 +29,10 @@ import {
 } from '../gio-el-condition-builder-dialog/gio-el-condition-builder-dialog.component';
 import { GioElService } from '../gio-el.service';
 import { GioElIaAssistantComponent } from '../gio-el-ia-assistant/gio-el-ia-assistant.component';
+import { GioIconsModule } from '../../gio-icons/gio-icons.module';
+import { GIO_DIALOG_WIDTH } from '../../gio-dialog/gio-dialog.constant';
+import { PopoverTriggerDirective } from '../../gio-popover/gio-popover/gio-popover-trigger.directive';
+import { GioPopoverComponent } from '../../gio-popover/gio-popover/gio-popover.component';
 
 @Component({
   selector: 'gio-el-editor-helper-toggle',
@@ -78,26 +80,28 @@ export class GioElEditorHelperToggleComponent {
         ),
       ) ?? EMPTY,
   });
+  private conditionBuilderDialogRef?: MatDialogRef<GioElConditionBuilderDialogComponent, GioElConditionBuilderDialogResult>;
 
   public setDisabledState(disabled: boolean) {
-    this.matDialog.closeAll();
+    this.conditionBuilderDialogRef?.close();
     this.disabled = disabled;
   }
 
   public openConditionBuilder() {
-    return this.matDialog
-      .open<GioElConditionBuilderDialogComponent, GioElConditionBuilderDialogData, GioElConditionBuilderDialogResult>(
-        GioElConditionBuilderDialogComponent,
-        {
-          role: 'dialog',
-          id: 'gio-el-editor-dialog',
-          width: GIO_DIALOG_WIDTH.LARGE,
-          minWidth: 800,
-          data: {
-            elProperties$: this.gioElService?.elProperties$(['ALL']).pipe(filter(cm => !isNil(cm))),
-          },
-        },
-      )
+    this.conditionBuilderDialogRef = this.matDialog.open<
+      GioElConditionBuilderDialogComponent,
+      GioElConditionBuilderDialogData,
+      GioElConditionBuilderDialogResult
+    >(GioElConditionBuilderDialogComponent, {
+      role: 'dialog',
+      id: 'gio-el-editor-dialog',
+      width: GIO_DIALOG_WIDTH.LARGE,
+      minWidth: 800,
+      data: {
+        elProperties$: this.gioElService?.elProperties$(['ALL']).pipe(filter(cm => !isNil(cm))),
+      },
+    });
+    return this.conditionBuilderDialogRef
       .afterClosed()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(result => {

@@ -36,10 +36,10 @@ import { isEmpty, toString } from 'lodash';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { map, startWith } from 'rxjs/operators';
 import { MatButtonModule } from '@angular/material/button';
-import { GioIconsModule } from '@gravitee/ui-particles-angular';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { FocusMonitor } from '@angular/cdk/a11y';
 
+import { GioIconsModule } from '../../../gio-icons/gio-icons.module';
 import { ElProperties, isElProperty, ObjectElProperty } from '../../models/ElProperties';
 import { ElProperty } from '../../models/ElProperty';
 

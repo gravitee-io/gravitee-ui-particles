@@ -27,10 +27,23 @@ import {
   ValidationErrors,
   Validator,
   Validators,
+  ReactiveFormsModule,
 } from '@angular/forms';
 import { dropRight, isEmpty } from 'lodash';
 import { map, startWith, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatOptionModule } from '@angular/material/core';
+
+import { GioIconsModule } from '../gio-icons/gio-icons.module';
+import { GioElEditorHelperInputDirective } from '../gio-el/gio-el-editor-helper/gio-el-editor-helper-input.directive';
+import { GioElEditorHelperToggleComponent } from '../gio-el/gio-el-editor-helper/gio-el-editor-helper-toggle.component';
+import { GioElEditorInputComponent } from '../gio-el/gio-el-editor-input/gio-el-editor-input.component';
+import { GioMonacoEditorModule } from '../gio-monaco-editor/gio-monaco-editor.module';
 
 export type Header = { key: string; value: string };
 
@@ -129,7 +142,20 @@ const HEADER_NAMES = [
       multi: true,
     },
   ],
-  standalone: false,
+  imports: [
+    CommonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    GioIconsModule,
+    MatButtonModule,
+    MatAutocompleteModule,
+    MatOptionModule,
+    GioElEditorHelperInputDirective,
+    GioElEditorHelperToggleComponent,
+    GioElEditorInputComponent,
+    GioMonacoEditorModule,
+  ],
 })
 export class GioFormHeadersComponent implements OnInit, ControlValueAccessor, Validator {
   @Input()

@@ -13,32 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatOptionModule } from '@angular/material/core';
 
-import { GioIconsModule } from '../gio-icons/gio-icons.module';
-
-import { GioFormHeadersComponent } from './gio-form-headers.component';
 import { GioFormHeadersLabelComponent } from './gio-form-headers-label.component';
+import { GioFormHeadersComponent } from './gio-form-headers.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatInputModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    GioIconsModule,
-    MatButtonModule,
-    MatAutocompleteModule,
-    MatOptionModule,
-  ],
-  declarations: [GioFormHeadersComponent, GioFormHeadersLabelComponent],
+  imports: [GioFormHeadersComponent, GioFormHeadersLabelComponent],
   exports: [GioFormHeadersComponent, GioFormHeadersLabelComponent],
 })
 export class GioFormHeadersModule {}

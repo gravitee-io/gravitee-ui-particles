@@ -15,7 +15,7 @@
     limitations under the License.
 
 -->
-<button [disabled]="disabled" mat-button [matMenuTriggerFor]="helperMenu"><mat-icon svgIcon="gio:el"></mat-icon></button>
+<button [disabled]="disabled" type="button" mat-button [matMenuTriggerFor]="helperMenu"><mat-icon svgIcon="gio:el"></mat-icon></button>
 <mat-menu #helperMenu="matMenu">
   @if (enableConditionBuilder) {
     <button mat-menu-item (click)="openConditionBuilder()"><mat-icon svgIcon="gio:building"></mat-icon> EL Condition Builder</button>

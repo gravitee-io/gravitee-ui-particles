@@ -21,7 +21,8 @@ import { Subscription } from 'rxjs';
 import { GioElEditorHelperToggleComponent } from './gio-el-editor-helper-toggle.component';
 
 @Directive({
-  selector: 'input[gioElEditorHelper], gio-el-editor-input[gioElEditorHelper], gio-el-editor-helper-toggle[gioElEditorHelper]',
+  selector:
+    'input[gioElEditorHelper],textarea[gioElEditorHelper], gio-el-editor-input[gioElEditorHelper], gio-el-editor-helper-toggle[gioElEditorHelper]',
   standalone: true,
   providers: [],
 })
@@ -35,9 +36,8 @@ export class GioElEditorHelperInputDirective implements OnInit, OnChanges {
 
   @Input()
   public set gioElEditorHelper(gioElEditorHelperToggleComponent: GioElEditorHelperToggleComponent) {
-    this.gioElEditorHelperToggleComponent = gioElEditorHelperToggleComponent;
+    // this.gioElEditorHelperToggleComponent = gioElEditorHelperToggleComponent;
     gioElEditorHelperToggleComponent.setDisabledState(this.disabled);
-
     gioElEditorHelperToggleComponent.elValue$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(value => {
       // Todo: Maybe for textarea (and why not input) it's better to find a way to add new value a the cursor position
       // Or add an option to this directive to allow this behavior
@@ -66,7 +66,7 @@ export class GioElEditorHelperInputDirective implements OnInit, OnChanges {
 
   public ngOnChanges(simpleChanges: SimpleChanges): void {
     if (simpleChanges?.control?.currentValue) {
-      this.statusChangesSubscription?.unsubscribe();
+      // this.statusChangesSubscription?.unsubscribe();
 
       this.ngOnInit();
     }

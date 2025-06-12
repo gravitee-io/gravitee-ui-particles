@@ -199,6 +199,20 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
       this.textModel = monaco.editor.createModel(settings.value, settings.language, monaco.Uri.parse(settings.uri));
     });
 
+    monaco.editor.defineTheme('custom-dynamic-theme', {
+      base: 'vs',
+      inherit: true,
+      rules: [],
+      colors: {
+        // 'editorSuggestWidget.background': '#2a2d3e',
+        // 'editorSuggestWidget.selectedBackground': '#007acc',
+        // 'editorSuggestWidget.highlightForeground': '#ffffff',
+        // 'editorSuggestWidget.foreground': '#ffffff',
+      },
+    });
+
+    monaco.editor.setTheme('custom-dynamic-theme');
+
     const options = Object.assign({}, this.defaultOptions, this.options, {
       readOnly: this.readOnly,
       theme: this.config.theme ?? 'vs',

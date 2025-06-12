@@ -28,7 +28,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { GioMonacoEditorModule } from '../gio-monaco-editor/gio-monaco-editor.module';
 import { GioFormFocusInvalidModule } from '../gio-form-focus-first-invalid/gio-form-focus-first-invalid.module';
-import { GioElFormJsonSchemaChildModule } from '../../../gio-el/gio-el-form-json-schema-child/gio-el-form-json-schema-child.module';
+import { GioElFormJsonSchemaChildModule } from '../gio-el/gio-el-form-json-schema-child/gio-el-form-json-schema-child.module';
 
 import { DemoComponent } from './gio-form-json-schema.stories.component';
 import { GioFormJsonSchemaModule } from './gio-form-json-schema.module';
