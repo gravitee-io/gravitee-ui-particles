@@ -28,6 +28,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { GioMonacoEditorModule } from '../gio-monaco-editor/gio-monaco-editor.module';
 import { GioFormFocusInvalidModule } from '../gio-form-focus-first-invalid/gio-form-focus-first-invalid.module';
+import { GioElFormJsonSchemaChildModule } from '../../../gio-el/gio-el-form-json-schema-child/gio-el-form-json-schema-child.module';
 
 import { DemoComponent } from './gio-form-json-schema.stories.component';
 import { GioFormJsonSchemaModule } from './gio-form-json-schema.module';
@@ -50,6 +51,7 @@ import { codeEditorExample } from './json-schema-example/code-editor';
 import { displayIfExample } from './json-schema-example/displayIf';
 import { disableIfExample } from './json-schema-example/disableIf';
 import { uiBorderExample } from './json-schema-example/uiBorder';
+import { elExample } from './json-schema-example/el';
 
 @NgModule({
   declarations: [DemoComponent],
@@ -67,6 +69,7 @@ import { uiBorderExample } from './json-schema-example/uiBorder';
     MatButtonToggleModule,
     GioFormJsonSchemaModule,
     GioMonacoEditorModule,
+    GioElFormJsonSchemaChildModule,
   ],
   exports: [DemoComponent, GioFormJsonSchemaModule],
 })
@@ -222,6 +225,13 @@ export const References: StoryObj = {
 export const CodeEditor: StoryObj = {
   args: {
     jsonSchema: codeEditorExample,
+  },
+};
+
+export const ExpressionLanguage: StoryObj = {
+  name: 'Expression Language (EL)',
+  args: {
+    jsonSchema: elExample,
   },
 };
 

@@ -20,7 +20,7 @@ import { Subject } from 'rxjs';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { GioMonacoEditorModule, MonacoEditorLanguageConfig } from '@gravitee/ui-particles-angular';
+import { GioMonacoEditorFormFieldDirective, GioMonacoEditorModule, MonacoEditorLanguageConfig } from '@gravitee/ui-particles-angular';
 
 @Component({
   selector: 'gio-el-editor-input',
@@ -38,11 +38,15 @@ export class GioElEditorInputComponent implements MatFormFieldControl<string>, C
     language: 'spel',
   };
 
+  // TODO : IMHO we could have 3 mode :
+  //  singleLineMode : One line input, enters \n are ignored
+  //  multiLineMode : Multi line input, but we hide monacoeditor line numbers and other features
+  //  codeEditorMode : Full code editor with MonacoEditor features
   @Input()
   public singleLineMode = true;
 
-  @ViewChild('elInput')
-  public elInput!: HTMLInputElement;
+  @ViewChild(GioMonacoEditorFormFieldDirective)
+  public elInputFormField!: GioMonacoEditorFormFieldDirective;
 
   // From MatFormFieldControl
   public set value(address: string | null) {
@@ -190,9 +194,9 @@ export class GioElEditorInputComponent implements MatFormFieldControl<string>, C
   }
 
   // From ControlValueAccessor interface
-  public onContainerClick(): void {
+  public onContainerClick(event: MouseEvent): void {
     try {
-      this.focusMonitor.focusVia(this.elInput, 'program');
+      this.elInputFormField.onContainerClick(event);
     } catch (e) {
       // Best effort
     }

@@ -24,6 +24,7 @@ import { GioMonacoEditorModule } from '@gravitee/ui-particles-angular';
 
 import { GioElEditorHelperToggleComponent } from '../gio-el-editor-helper/gio-el-editor-helper-toggle.component';
 import { GioElEditorHelperInputDirective } from '../gio-el-editor-helper/gio-el-editor-helper-input.directive';
+import { GioElService } from '../gio-el.service';
 
 import { GioElEditorInputComponent } from './gio-el-editor-input.component';
 
@@ -33,7 +34,12 @@ import { GioElEditorInputComponent } from './gio-el-editor-input.component';
     <mat-form-field style="width: 100%">
       <mat-label>El condition</mat-label>
       <gio-el-editor-input [gioElEditorHelper]="elEditor" [formControl]="formControl" [singleLineMode]="singleLineMode" />
-      <gio-el-editor-helper-toggle matIconSuffix #elEditor></gio-el-editor-helper-toggle>
+      <gio-el-editor-helper-toggle
+        matIconSuffix
+        #elEditor
+        [enableConditionBuilder]="true"
+        [scopes]="['node']"
+      ></gio-el-editor-helper-toggle>
       <mat-hint>Accept EL</mat-hint>
     </mat-form-field>
 
@@ -48,8 +54,8 @@ import { GioElEditorInputComponent } from './gio-el-editor-input.component';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
-    GioElEditorInputComponent,
     MatButtonModule,
+    GioElEditorInputComponent,
     GioElEditorHelperToggleComponent,
     GioElEditorHelperInputDirective,
   ],
@@ -61,7 +67,43 @@ class StoryInputComponent {
   public formControl = new FormControl();
   public disable = false;
 
-  constructor() {
+  constructor(private gioElService: GioElService) {
+    this.gioElService.setElProperties('node', [
+      {
+        field: 'node',
+        label: 'Node',
+        properties: [
+          {
+            field: 'id',
+            label: 'Id',
+            type: 'string',
+          },
+          {
+            field: 'shardingTags',
+            label: 'Shared Tags',
+            type: 'Map', // FIXME: Array ?
+            valueProperty: {
+              type: 'string',
+            },
+          },
+          {
+            field: 'tenant',
+            label: 'Tenant',
+            type: 'string',
+          },
+          {
+            field: 'version',
+            label: 'Version',
+            type: 'string',
+          },
+          {
+            field: 'zone',
+            label: 'Zone',
+            type: 'string',
+          },
+        ],
+      },
+    ]);
     this.formControl.valueChanges.subscribe(value => action('El Value')(value));
   }
 

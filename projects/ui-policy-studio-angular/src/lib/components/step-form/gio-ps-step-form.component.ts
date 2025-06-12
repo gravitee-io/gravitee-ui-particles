@@ -30,6 +30,7 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { GioAsciidoctorModule } from '@gravitee/ui-particles-angular/gio-asciidoctor';
+import { GioElFormJsonSchemaChildModule } from '@gravitee/ui-particles-angular/gio-el';
 
 import { FlowPhase, isPolicy, isSharedPolicyGroupPolicy, Step, toPolicy, GenericPolicy, ApiType } from '../../models';
 import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.service';
@@ -41,6 +42,7 @@ import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.se
     MatInputModule,
     MatFormFieldModule,
     GioFormJsonSchemaModule,
+    GioElFormJsonSchemaChildModule,
     GioAsciidoctorModule,
     GioLoaderModule,
     GioBannerModule,

@@ -29,6 +29,9 @@ export interface GioConfig extends GioUiTypeConfig {
   monacoEditorConfig?: GioMonacoEditorConfig;
   enumLabelMap?: Record<string, string>;
   uiBorder?: 'none' | 'full';
+  elConfig?: {
+    scopes?: string[];
+  };
 }
 
 type GioBannerConfig =

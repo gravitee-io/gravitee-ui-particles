@@ -134,7 +134,7 @@ export class GioMonacoEditorFormFieldDirective implements OnInit, DoCheck, MatFo
     this.stateChanges.pipe(takeUntil(this.unsubscribe$)).subscribe(() => this.changeDetectorRef.markForCheck());
 
     this.focusMonitor
-      .monitor(this.elementRef.nativeElement, true)
+      .monitor(this.elementRef.nativeElement.parentElement, true)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(origin => {
         this.focused = !!origin;
