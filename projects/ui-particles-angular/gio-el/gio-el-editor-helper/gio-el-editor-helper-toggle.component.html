@@ -15,4 +15,21 @@
     limitations under the License.
 
 -->
-<button [disabled]="disabled" mat-button (click)="open()"><mat-icon svgIcon="gio:gift"></mat-icon></button>
+<button [disabled]="disabled" mat-button [matMenuTriggerFor]="helperMenu"><mat-icon svgIcon="gio:el"></mat-icon></button>
+<mat-menu #helperMenu="matMenu">
+  @if (enableConditionBuilder) {
+    <button mat-menu-item (click)="openConditionBuilder()"><mat-icon svgIcon="gio:building"></mat-icon> EL Condition Builder</button>
+  }
+  @if (enableELAIAssistant) {
+    <button mat-menu-item gioPopoverTrigger [gioPopoverTriggerFor]="aiPopover" [gioPopoverTriggerBasedOnElement]="elementRef">
+      <mat-icon svgIcon="gio:magic-wand"></mat-icon> EL AI Assistant
+    </button>
+  }
+
+  <button mat-menu-item gioPopoverTrigger (click)="onTryElInSandbox()">
+    <mat-icon svgIcon="gio:external-link"></mat-icon> Try EL in Sandbox
+  </button>
+</mat-menu>
+<gio-popover #aiPopover [closeOnBackdropClick]="false">
+  <gio-el-ia-assistant [elContext]="elContextResourceRef.value()" (tryElInSadnbox)="onTyEl($event)"></gio-el-ia-assistant>
+</gio-popover>

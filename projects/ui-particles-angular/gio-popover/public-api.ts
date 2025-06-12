@@ -14,9 +14,5 @@
  * limitations under the License.
  */
 
-export * from './gio-el-condition-builder/models/public-api';
-export * from './gio-el-editor-helper/gio-el-editor-helper-toggle.component';
-export * from './gio-el-editor-helper/gio-el-editor-helper-input.directive';
-export * from './gio-el-editor-input/gio-el-editor-input.component';
-
-export * from './gio-el.module';
+export * from './gio-popover/gio-popover.component';
+export * from './gio-popover/gio-popover-trigger.directive';

@@ -191,6 +191,17 @@
         "uiBorder": {
           "type": "string",
           "enum": ["none", "full"]
+        },
+        "elConfig": {
+          "type": "object",
+          "properties": {
+            "scopes": {
+              "type": "array",
+              "items": { "type": "string" },
+              "uniqueItems": true,
+              "default": []
+            }
+          }
         }
       }
     }

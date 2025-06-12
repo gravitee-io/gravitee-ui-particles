@@ -1,0 +1,57 @@
+<!--
+
+    Copyright (C) 2025 The Gravitee team (http://gravitee.io)
+    
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    
+            http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<h5>EL IA Assistant</h5>
+
+@if (aiAssistantConfig) {
+  <div class="aiRequestForm" [formGroup]="aiRequestFormGroup">
+    <mat-form-field class="example-full-width">
+      <mat-label>Describe the EL you want to generate</mat-label>
+      <textarea matInput formControlName="message"></textarea>
+      <mat-hint [align]="'end'">{{ aiRequestFormGroup.get('message')?.value?.length || 0 }}/256</mat-hint>
+    </mat-form-field>
+
+    <button mat-raised-button [disabled]="aiRequestFormGroup.invalid" (click)="sendMessageToIA()">
+      <mat-icon svgIcon="gio:magic-wand"></mat-icon>
+      Ask Newt AI
+    </button>
+  </div>
+
+  <div class="ai-card__content__response">
+    @if (responseState() === 'loading') {
+      <mat-progress-bar mode="indeterminate" class="loading"></mat-progress-bar>
+    } @else if (responseState() === 'success') {
+      <gio-banner-success>
+        <!--        <span matTooltip="Reset every hour" class="gio-badge-accent">Quota: {{ responseQuota() }}</span>-->
+        <code gioBannerBody [innerHTML]="responseMessage()"> </code>
+
+        @if (canTryEL()) {
+          <div gioBannerAction>
+            <button style="width: max-content" mat-stroked-button color="basic" (click)="onTryEL()">Try EL</button>
+          </div>
+        }
+      </gio-banner-success>
+    } @else if (responseState() === 'error') {
+      <gio-banner-error>
+        Error
+        <span gioBannerBody> {{ responseMessage() }} </span>
+      </gio-banner-error>
+    }
+  </div>
+} @else {
+  <p class="no-ai-config">AI Assistant is not configured.</p>
+}
