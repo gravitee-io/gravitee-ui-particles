@@ -1,3 +1,10 @@
+# [15.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.0.0...v15.1.0) (2025-06-12)
+
+
+### Features
+
+* handle multiple policy documentation types ([eadff6c](https://github.com/gravitee-io/gravitee-ui-particles/commit/eadff6c6139d3ee88110450b53c80ae0766c8233))
+
 # [15.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v14.2.1...v15.0.0) (2025-05-15)
 
 
