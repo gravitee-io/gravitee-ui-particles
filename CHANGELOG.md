@@ -1,3 +1,15 @@
+# [15.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.1.0...v15.2.0) (2025-06-17)
+
+
+### Bug Fixes
+
+* darken icon separator in breadcrumb ([6f02533](https://github.com/gravitee-io/gravitee-ui-particles/commit/6f025335d255da4fc29b83d3dd091fe9232add05))
+
+
+### Features
+
+* add hover state for primary gradient buttons ([ed4eefd](https://github.com/gravitee-io/gravitee-ui-particles/commit/ed4eefd08b878286a26760fce0f9ad22c44ea61b))
+
 # [15.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.0.0...v15.1.0) (2025-06-12)
 
 
