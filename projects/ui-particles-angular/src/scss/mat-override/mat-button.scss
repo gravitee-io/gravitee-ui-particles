@@ -42,16 +42,32 @@
       }
     }
 
-    &[color='primary']:not(:disabled) {
-      @include mat.button-overrides(
-        (
-          filled-label-text-color: mat.m2-get-color-from-palette(palettes.$mat-gradient-palette, button-contrast),
-          text-label-text-color: mat.m2-get-color-from-palette(palettes.$mat-gradient-palette, button-contrast),
-          outlined-label-text-color: mat.m2-get-color-from-palette(palettes.$mat-gradient-palette, button-contrast),
-        )
-      );
+    &[color='primary'] {
+      &:not(:disabled, :hover) {
+        @include mat.button-overrides(
+          (
+            filled-label-text-color: mat.m2-get-color-from-palette(palettes.$mat-gradient-palette, button-contrast),
+            text-label-text-color: mat.m2-get-color-from-palette(palettes.$mat-gradient-palette, button-contrast),
+            outlined-label-text-color: mat.m2-get-color-from-palette(palettes.$mat-gradient-palette, button-contrast),
+          )
+        );
 
-      background: mat.m2-get-color-from-palette(palettes.$mat-gradient-palette, button);
+        background-image: mat.m2-get-color-from-palette(palettes.$mat-gradient-palette, button);
+      }
+
+      &[mat-stroked-button]:hover,
+      &[mat-button]:hover {
+        @include mat.button-overrides(
+          (
+            outlined-label-text-color: mat.m2-get-color-from-palette(palettes.$mat-gradient-palette, button-contrast),
+            outlined-ripple-color: var(--mat-ripple-color, rgba(0, 0, 0, 0.1)),
+            text-label-text-color: mat.m2-get-color-from-palette(palettes.$mat-gradient-palette, button-contrast),
+            text-ripple-color: var(--mat-ripple-color, rgba(0, 0, 0, 0.1)),
+          )
+        );
+
+        background-color: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, default);
+      }
     }
   }
 }
