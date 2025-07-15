@@ -93,3 +93,9 @@ ImageWithRoundedBorder.args = {
   src: 'https://i.pravatar.cc/100?u=a042581f4e29020504d',
   roundedBorder: true,
 };
+
+export const ImageToCropWithRoundedBorder: StoryObj<GioAvatarComponent> = {};
+ImageToCropWithRoundedBorder.args = {
+  src: 'https://images.stockcake.com/public/2/d/8/2d81ce52-116c-47ca-9e41-66514c56de6c_large/sunset-city-view-stockcake.jpg',
+  roundedBorder: true,
+};
