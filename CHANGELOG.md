@@ -1,3 +1,10 @@
+## [15.2.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.2.0...v15.2.1) (2025-07-18)
+
+
+### Bug Fixes
+
+* avoid avatar overflow with wide ([6869a7f](https://github.com/gravitee-io/gravitee-ui-particles/commit/6869a7f16b7c0fc2367e0041c6896dcc0cda3b1a))
+
 # [15.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.1.0...v15.2.0) (2025-06-17)
 
 
