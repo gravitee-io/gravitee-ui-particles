@@ -308,6 +308,7 @@ workflows:
       or:
         - equal: [main, << pipeline.git.branch >>]
         - equal: [7.x, << pipeline.git.branch >>]
+        - equal: [14.x, << pipeline.git.branch >>]
         # TODO: Remove me. Used to test release
         - equal: [circleci, << pipeline.git.branch >>]
     jobs:
