@@ -13,5 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { BaseHarnessFilters, ComponentHarness, HarnessPredicate } from '@angular/cdk/testing';
 
-export * from './gio-el-condition-builder/models/public-api';
+import { GioElConditionGroupHarness } from './gio-el-condition-group/gio-el-condition-group.harness';
+
+export class GioElConditionBuilderHarness extends ComponentHarness {
+  public static hostSelector = 'gio-el-condition-builder';
+
+  public getMainConditionGroup = this.locatorFor(GioElConditionGroupHarness);
+
+  public static with(options: BaseHarnessFilters = {}): HarnessPredicate<GioElConditionBuilderHarness> {
+    return new HarnessPredicate(GioElConditionBuilderHarness, options);
+  }
+}
