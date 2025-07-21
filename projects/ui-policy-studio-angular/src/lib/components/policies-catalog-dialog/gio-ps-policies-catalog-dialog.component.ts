@@ -158,7 +158,7 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
             return selectedCategories.map(toLower).includes(toLower(policy.category));
           })
           .filter(policy => {
-            return search ? toLower(policy.name).includes(toLower(search)) : true;
+            return search ? toLower(policy.name + policy.description).includes(toLower(search)) : true;
           });
       });
 
