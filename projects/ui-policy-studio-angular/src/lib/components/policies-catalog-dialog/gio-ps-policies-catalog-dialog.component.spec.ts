@@ -202,6 +202,20 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
       await policiesCatalogDialog.searchFilter('Policy to test UI');
       expect(await policiesCatalogDialog.getPoliciesName()).toHaveLength(1);
     });
+
+    it('should shearch on policy name and description', async () => {
+      await componentTestingOpenDialog();
+
+      const policiesCatalogDialog = await loader.getHarness(GioPolicyStudioPoliciesCatalogDialogHarness);
+
+      // By name
+      await policiesCatalogDialog.searchFilter('Policy to test UI');
+      expect(await policiesCatalogDialog.getPoliciesName()).toHaveLength(1);
+
+      // By description
+      await policiesCatalogDialog.searchFilter('elementum imperdiet');
+      expect(await policiesCatalogDialog.getPoliciesName()).toHaveLength(1);
+    });
   });
 
   describe('When ApiType = MESSAGE and FlowPhase = RESPONSE', () => {
