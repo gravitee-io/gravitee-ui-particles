@@ -16,6 +16,12 @@
 
 -->
 <h2 mat-dialog-title class="title">
+  @if (selectedPolicy) {
+    <button class="title__goBackBtn" mat-stroked-button (click)="onGoBack()">
+      <mat-icon svgIcon="gio:arrow-left"></mat-icon>
+      Go back
+    </button>
+  }
   Policies for <span class="title__phase">{{ flowPhaseLabel }}</span> phase
 
   <button class="title__closeBtn" mat-icon-button aria-label="Close dialog" [mat-dialog-close]="">
@@ -91,11 +97,6 @@
 </ng-template>
 
 <mat-dialog-content *ngIf="selectedPolicy" class="policyForm">
-  <button class="policyForm__goBackBtn" mat-stroked-button (click)="onGoBack()">
-    <mat-icon svgIcon="gio:arrow-left"></mat-icon>
-    Go back
-  </button>
-
   <gio-banner *ngIf="isUnlicensed" type="error" icon="gio:universe">
     This policy is only available for users with an enterprise license.
     <span gioBannerBody>Request a license to upgrade your account and unlock this policy</span>

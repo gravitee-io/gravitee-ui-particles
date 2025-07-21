@@ -20,6 +20,11 @@
 $typography: map.get(gio.$mat-theme, typography);
 
 .title {
+  &__goBackBtn {
+    margin-right: 8px;
+    line-height: normal;
+  }
+
   &__closeBtn {
     top: 0;
     right: -24px;
