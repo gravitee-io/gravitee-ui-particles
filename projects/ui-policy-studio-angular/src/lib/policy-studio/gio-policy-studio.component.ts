@@ -286,15 +286,16 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
 const getFlowsGroups = (apiType: ApiType, commonFlows: Flow[] = [], plans: Plan[] = []): FlowGroupVM[] => {
   const commFlowsGroup: FlowGroupVM = {
     _id: 'flowsGroup_commonFlow',
-    name: apiType === 'NATIVE' ? 'Common' : 'Common flows',
+    _isPlan: false,
+    name: 'All plans',
     flows: commonFlows.map(flow => ({ ...flow, _id: uniqueId('flow_'), _hasChanged: false, _parentFlowGroupName: 'Common' })),
   };
 
   return [
     ...plans.map(plan => ({
       _id: uniqueId('flowsGroup_'),
-      _icon: 'gio:shield',
       _planId: plan.id,
+      _isPlan: true,
       name: plan.name,
       flows: plan.flows.map(flow => ({ ...flow, _id: uniqueId('flow_'), _hasChanged: false, _parentFlowGroupName: plan.name })),
     })),
@@ -337,7 +338,7 @@ const getPlansChangeOutput = (flowsGroups: FlowGroupVM[], initialFlowsGroups: Fl
 
   // Merge plans with changed flows and plans with deleted flows
   const plansWithChangedFlowsOutput = unionBy([...plansGroupsWithChangedFlows, ...plansGroupsWithDeletedFlows], '_planId').map(plan => ({
-    ...omit(plan, '_id', '_icon', '_planId'),
+    ...omit(plan, '_id', '_isPlan', '_planId'),
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- planId is always defined
     id: plan._planId!,
     flows: plan.flows.map(flow => omit(flow, '_id', '_hasChanged', '_parentFlowGroupName')),

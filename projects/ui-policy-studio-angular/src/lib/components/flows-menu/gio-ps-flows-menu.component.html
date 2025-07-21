@@ -40,8 +40,7 @@
   >
     <div class="list__flowsGroup__header">
       <div class="list__flowsGroup__header__label">
-        <mat-icon *ngIf="flowsGroup._icon" [svgIcon]="flowsGroup._icon"></mat-icon>
-        <span>{{ flowsGroup.name }}</span>
+        <span>{{ (flowsGroup._isPlan ? 'Plan: ' : '') + flowsGroup.name }}</span>
       </div>
       <div class="list__flowsGroup__header__addBtn">
         @if (apiType === 'NATIVE') {

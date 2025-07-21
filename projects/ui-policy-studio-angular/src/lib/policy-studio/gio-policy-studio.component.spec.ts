@@ -110,6 +110,7 @@ describe('GioPolicyStudioComponent', () => {
           {
             name: 'main flows',
             _id: 'main-flow',
+            _isPlan: true,
             flows: [
               {
                 ...fakeChannelFlow({ name: 'flow1' }),
@@ -161,7 +162,7 @@ describe('GioPolicyStudioComponent', () => {
 
         expect(await flowsMenuHarness.getAllFlowsGroups()).toMatchObject([
           {
-            name: 'Common flows',
+            name: 'All plans',
             flows: [],
           },
         ]);
@@ -189,7 +190,7 @@ describe('GioPolicyStudioComponent', () => {
             flows: [],
           },
           {
-            name: 'Common flows',
+            name: 'All plans',
             flows: [
               {
                 name: 'flow1',
@@ -232,7 +233,7 @@ describe('GioPolicyStudioComponent', () => {
             ],
           },
           { name: 'Bar plan', flows: [] },
-          { name: 'Common flows', flows: [] },
+          { name: 'All plans', flows: [] },
         ]);
       });
 
@@ -250,7 +251,7 @@ describe('GioPolicyStudioComponent', () => {
 
         expect(await flowsMenuHarness.getAllFlowsGroups()).toMatchObject([
           {
-            name: 'Common flows',
+            name: 'All plans',
             flows: [
               {
                 isSelected: true,
@@ -322,7 +323,7 @@ describe('GioPolicyStudioComponent', () => {
 
         expect(await flowsMenuHarness.getAllFlowsGroups()).toMatchObject([
           {
-            name: 'Common flows',
+            name: 'All plans',
             flows: [
               {
                 name: 'Flow 1',
@@ -348,7 +349,7 @@ describe('GioPolicyStudioComponent', () => {
         const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
 
         await policyStudioHarness.addFlow(
-          'Common flows',
+          'All plans',
           fakeChannelFlow({
             name: 'New flow',
             selectors: [
@@ -371,7 +372,7 @@ describe('GioPolicyStudioComponent', () => {
                 name: 'New flow',
               },
             ],
-            name: 'Common flows',
+            name: 'All plans',
           },
         ]);
       });
@@ -420,7 +421,7 @@ describe('GioPolicyStudioComponent', () => {
             name: 'Foo plan',
           },
           { name: 'Bar plan', flows: [] },
-          { name: 'Common flows', flows: [] },
+          { name: 'All plans', flows: [] },
         ]);
 
         expect(await detailsHarness.matchText(/Webhook/)).toEqual(true);
@@ -453,7 +454,7 @@ describe('GioPolicyStudioComponent', () => {
             name: 'Foo plan',
           },
           { name: 'Bar plan', flows: [] },
-          { name: 'Common flows', flows: [] },
+          { name: 'All plans', flows: [] },
         ]);
       });
 
@@ -1170,7 +1171,7 @@ describe('GioPolicyStudioComponent', () => {
                 name: 'Flow 1',
               },
             ],
-            name: 'Common flows',
+            name: 'All plans',
           },
         ]);
 
@@ -1377,7 +1378,7 @@ describe('GioPolicyStudioComponent', () => {
 
         expect(await policyStudioHarness.getFlowsMenu()).toMatchObject([
           {
-            name: 'Common flows',
+            name: 'All plans',
             flows: [
               {
                 name: 'Flow 1',
@@ -1435,7 +1436,7 @@ describe('GioPolicyStudioComponent', () => {
           commonFlows: new SimpleChange(null, null, true),
         });
 
-        await policyStudioHarness.addFlow('Common flows', fakeHttpFlow({ name: 'New flow' }));
+        await policyStudioHarness.addFlow('All plans', fakeHttpFlow({ name: 'New flow' }));
 
         let saveOutputToExpect: SaveOutput | undefined;
         component.save.subscribe(value => (saveOutputToExpect = value));
@@ -1839,7 +1840,7 @@ describe('GioPolicyStudioComponent', () => {
 
         expect(await policyStudioHarness.getFlowsMenu()).toMatchObject([
           {
-            name: 'Common',
+            name: 'All plans',
             flows: [
               {
                 name: 'Flow 1',
@@ -1875,7 +1876,7 @@ describe('GioPolicyStudioComponent', () => {
           commonFlows: new SimpleChange(null, null, true),
         });
 
-        await policyStudioHarness.addFlow('Common', fakeNativeFlow({ name: '' }));
+        await policyStudioHarness.addFlow('All plans', fakeNativeFlow({ name: '' }));
 
         let saveOutputToExpect: SaveOutput | undefined;
         component.save.subscribe(value => (saveOutputToExpect = value));
@@ -1884,7 +1885,7 @@ describe('GioPolicyStudioComponent', () => {
 
         expect(saveOutputToExpect?.commonFlows).toMatchObject([
           {
-            name: 'Common flow',
+            name: 'All plans flow',
             enabled: true,
           },
         ]);
