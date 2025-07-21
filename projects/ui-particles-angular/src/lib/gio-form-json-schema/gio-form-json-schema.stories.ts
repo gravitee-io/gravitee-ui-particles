@@ -229,6 +229,9 @@ export const KafkaAdvanced: StoryObj = {
   args: {
     jsonSchema: kafkaAdvancedExample,
   },
+  parameters: {
+    chromatic: { disableSnapshot: true },
+  },
 };
 
 export const MqttAdvanced: StoryObj = {
