@@ -47,6 +47,7 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
     return parallel(() =>
       flowsGroups.map(async flowsGroup => {
         const flowsGroupName = await flowsGroup.getText({ childSelector: '.list__flowsGroup__header__label' });
+        const flowsGroupNameWithoutPlanPrefix = flowsGroupName?.replace(/^Plan:\s*/, '') ?? null;
 
         const flowsDiv = await flowsGroup.childLocatorForAll(DivHarness.with({ selector: '.list__flowsGroup__flows__flow' }))();
 
@@ -62,7 +63,7 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
         );
 
         return {
-          name: flowsGroupName,
+          name: flowsGroupNameWithoutPlanPrefix,
           flows: await flowsInfos,
         };
       }),

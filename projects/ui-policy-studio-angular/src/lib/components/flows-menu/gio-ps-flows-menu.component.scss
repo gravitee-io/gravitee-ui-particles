@@ -62,9 +62,8 @@ $typography: map.get(gio.$mat-theme, typography);
     &__header {
       display: flex;
       align-items: center;
-      padding: 8px 8px 8px 10px;
+      padding: 8px 0 0;
       border-radius: 8px;
-      background-color: mat.m2-get-color-from-palette(gio.$mat-accent-palette, lighter60);
 
       &__label {
         @include mat.m2-typography-level($typography, subtitle-2);
