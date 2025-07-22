@@ -1,0 +1,61 @@
+<!--
+
+    Copyright (C) 2024 The Gravitee team (http://gravitee.io)
+    
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    
+            http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+
+<div class="container">
+  <span class="text">#</span>
+  <input class="input fieldSelect" matInput [formControl]="fieldFormControl" [matAutocomplete]="fieldSelectAuto" />
+
+  <mat-autocomplete
+    autoActiveFirstOption
+    requireSelection
+    #fieldSelectAuto="matAutocomplete"
+    panelWidth="auto"
+    [displayWith]="displayFn"
+    (optionSelected)="onFieldSelected($event)"
+  >
+    @for (option of fieldFilteredOptions$ | async; track option) {
+      @if (option.hasOwnProperty('options')) {
+        <mat-optgroup [label]="option.label">
+          @for (option of $any(option).options; track option) {
+            <mat-option [value]="option">{{ option.label }}</mat-option>
+          }
+        </mat-optgroup>
+      } @else {
+        <mat-option [value]="option">{{ option.label }}</mat-option>
+      }
+    }
+  </mat-autocomplete>
+  @if (selectedElProperty?.type === 'Map' || selectedElProperty?.type === 'MultiMap') {
+    <span class="text">["</span>
+    <input class="input key1" matInput [formControl]="key1FormControl" [matAutocomplete]="key1SelectAuto" />
+
+    <mat-autocomplete #key1SelectAuto="matAutocomplete" panelWidth="auto">
+      @for (option of key1FilteredOptions$ | async; track option) {
+        <mat-option [value]="option.value">{{ option.label }}</mat-option>
+      }
+    </mat-autocomplete>
+
+    <span class="text">"]</span>
+  }
+  @if (selectedElProperty?.type === 'MultiMap') {
+    <span class="text">[</span>
+    <input class="input key2" type="number" min="0" matInput [formControl]="key2FormControl" />
+
+    <span class="text">]</span>
+  }
+</div>
