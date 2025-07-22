@@ -1,3 +1,12 @@
+# [15.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.2.1...v15.3.0) (2025-07-22)
+
+
+### Features
+
+* ps - allow search by policy description ([3f42e4d](https://github.com/gravitee-io/gravitee-ui-particles/commit/3f42e4d3af874a8c3c56f2bd110712b725386759))
+* ps - improve visual hierarchy to distinguish between plans & flows ([cfb3ce4](https://github.com/gravitee-io/gravitee-ui-particles/commit/cfb3ce44b6749873b73af8a2809a86791bb12400))
+* ps - move "Go back" btn with dialog title ([ec0c09a](https://github.com/gravitee-io/gravitee-ui-particles/commit/ec0c09a45fd31ee9460ed97f35636e6774af2cb1))
+
 ## [15.2.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.2.0...v15.2.1) (2025-07-18)
 
 
