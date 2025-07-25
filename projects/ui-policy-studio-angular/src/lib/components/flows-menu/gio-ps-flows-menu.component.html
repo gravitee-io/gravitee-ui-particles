@@ -28,10 +28,19 @@
     </div>
   }
 </div>
+<div class="searchBar" *ngIf="!loading">
+  <mat-form-field class="searchBar__input">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput placeholder="Search by name, path, or group..." [formControl]="searchControl" />
+    <button *ngIf="searchControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="resetSearchTerm()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
 
 <div class="list" *ngIf="!loading; else loadingList" cdkDropListGroup>
   <div
-    *ngFor="let flowsGroup of flowGroupMenuItems"
+    *ngFor="let flowsGroup of filteredFlowGroupMenuItems"
     class="list__flowsGroup"
     cdkDropList
     [cdkDropListData]="flowsGroup"
@@ -58,74 +67,79 @@
     </div>
 
     <div class="list__flowsGroup__flows">
-      @for (flow of flowsGroup.flows; track flow._id) {
-        <div
-          class="list__flowsGroup__flows__flow"
-          [class.selected]="flow.selected"
-          [class.disabled]="!flow.enabled"
-          (click)="selectFlow(flowsGroup._id, flow._id)"
-          (mouseout)="flow.mouseOver = false"
-          (mouseover)="flow.mouseOver = true"
-          cdkDrag
-        >
-          <div class="list__flowsGroup__flows__flow__left">
-            <div *ngIf="flow.name" class="list__flowsGroup__flows__flow__left__name" [attr.title]="flow.name">
-              {{ flow.name }}
-            </div>
-            @if (apiType !== 'NATIVE') {
-              <div class="list__flowsGroup__flows__flow__left__infos">
-                <div class="list__flowsGroup__flows__flow__left__infos__badges">
-                  <span
-                    *ngFor="let badge of flow.badges"
-                    class="list__flowsGroup__flows__flow__left__infos__badges__badge"
-                    [ngClass]="badge.class"
-                    >{{ badge.label }}</span
-                  >
-                </div>
-                <div class="list__flowsGroup__flows__flow__left__infos__pathOrChannelLabel">
-                  <span *ngIf="flow.pathOrChannelLabel; else emptyPathOrChannelLabel" [attr.title]="flow.pathOrChannelLabel">{{
-                    flow.pathOrChannelLabel
-                  }}</span>
-                  <ng-template #emptyPathOrChannelLabel>
-                    <em>Empty</em>
-                  </ng-template>
-                </div>
-
-                <span
-                  *ngIf="flow.hasCondition"
-                  class="list__flowsGroup__flows__flow__left__infos__conditionBadge gio-badge-neutral"
-                  matTooltip="Conditioned"
-                  ><mat-icon svgIcon="gio:if"></mat-icon
-                ></span>
+      <ng-container *ngIf="flowsGroup.flows.length > 0; else noFlows">
+        @for (flow of flowsGroup.flows; track flow._id) {
+          <div
+            class="list__flowsGroup__flows__flow"
+            [class.selected]="flow.selected"
+            [class.disabled]="!flow.enabled"
+            (click)="selectFlow(flowsGroup._id, flow._id)"
+            (mouseout)="flow.mouseOver = false"
+            (mouseover)="flow.mouseOver = true"
+            cdkDrag
+          >
+            <div class="list__flowsGroup__flows__flow__left">
+              <div *ngIf="flow.name" class="list__flowsGroup__flows__flow__left__name" [attr.title]="flow.name">
+                {{ flow.name }}
               </div>
-            }
-          </div>
-          <div class="list__flowsGroup__flows__flow__right">
-            <button
-              class="list__flowsGroup__flows__flow__right__name__menu"
-              mat-button
-              [disabled]="readOnly"
-              [matMenuTriggerFor]="flowMenu"
-              (click)="$event.stopPropagation()"
-            >
-              <mat-icon svgIcon="gio:more-vertical"></mat-icon>
-            </button>
-            <mat-menu #flowMenu="matMenu">
-              <button [disabled]="readOnly" mat-menu-item (click)="onDisableFlow(flow._id)">
-                <mat-icon [svgIcon]="flow.enabled ? 'gio:prohibition' : 'gio:check-circled-outline'"></mat-icon>
-                <span>{{ flow.enabled ? 'Disable' : 'Enable' }}</span>
-              </button>
-              <button mat-menu-item (click)="onEditFlow(flow._id)"><mat-icon svgIcon="gio:edit-pencil"></mat-icon> Edit</button>
-              <button mat-menu-item (click)="onDeleteFlow(flow._id)"><mat-icon svgIcon="gio:trash"></mat-icon> Delete</button>
               @if (apiType !== 'NATIVE') {
-                <button mat-menu-item (click)="onDuplicateFlow(flowsGroup._id, flow._id)">
-                  <mat-icon svgIcon="gio:copy"></mat-icon> Duplicate
-                </button>
+                <div class="list__flowsGroup__flows__flow__left__infos">
+                  <div class="list__flowsGroup__flows__flow__left__infos__badges">
+                    <span
+                      *ngFor="let badge of flow.badges"
+                      class="list__flowsGroup__flows__flow__left__infos__badges__badge"
+                      [ngClass]="badge.class"
+                      >{{ badge.label }}</span
+                    >
+                  </div>
+                  <div class="list__flowsGroup__flows__flow__left__infos__pathOrChannelLabel">
+                    <span *ngIf="flow.pathOrChannelLabel; else emptyPathOrChannelLabel" [attr.title]="flow.pathOrChannelLabel">{{
+                      flow.pathOrChannelLabel
+                    }}</span>
+                    <ng-template #emptyPathOrChannelLabel>
+                      <em>Empty</em>
+                    </ng-template>
+                  </div>
+
+                  <span
+                    *ngIf="flow.hasCondition"
+                    class="list__flowsGroup__flows__flow__left__infos__conditionBadge gio-badge-neutral"
+                    matTooltip="Conditioned"
+                    ><mat-icon svgIcon="gio:if"></mat-icon
+                  ></span>
+                </div>
               }
-            </mat-menu>
+            </div>
+            <div class="list__flowsGroup__flows__flow__right">
+              <button
+                class="list__flowsGroup__flows__flow__right__name__menu"
+                mat-button
+                [disabled]="readOnly"
+                [matMenuTriggerFor]="flowMenu"
+                (click)="$event.stopPropagation()"
+              >
+                <mat-icon svgIcon="gio:more-vertical"></mat-icon>
+              </button>
+              <mat-menu #flowMenu="matMenu">
+                <button [disabled]="readOnly" mat-menu-item (click)="onDisableFlow(flow._id)">
+                  <mat-icon [svgIcon]="flow.enabled ? 'gio:prohibition' : 'gio:check-circled-outline'"></mat-icon>
+                  <span>{{ flow.enabled ? 'Disable' : 'Enable' }}</span>
+                </button>
+                <button mat-menu-item (click)="onEditFlow(flow._id)"><mat-icon svgIcon="gio:edit-pencil"></mat-icon> Edit</button>
+                <button mat-menu-item (click)="onDeleteFlow(flow._id)"><mat-icon svgIcon="gio:trash"></mat-icon> Delete</button>
+                @if (apiType !== 'NATIVE') {
+                  <button mat-menu-item (click)="onDuplicateFlow(flowsGroup._id, flow._id)">
+                    <mat-icon svgIcon="gio:copy"></mat-icon> Duplicate
+                  </button>
+                }
+              </mat-menu>
+            </div>
           </div>
-        </div>
-      }
+        }
+      </ng-container>
+      <ng-template #noFlows>
+        <div class="list__flowsGroup__no-flows">No flows yet</div>
+      </ng-template>
     </div>
   </div>
 </div>

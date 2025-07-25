@@ -13,36 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { tap } from 'rxjs/operators';
-import { cloneDeep, flatten, isEmpty, uniqueId } from 'lodash';
-import { GIO_DIALOG_WIDTH, GioIconsModule, GioLoaderModule } from '@gravitee/ui-particles-angular';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatButtonModule } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
-import { MatMenuModule } from '@angular/material/menu';
 import { CdkDrag, CdkDragDrop, CdkDropList, DragDropModule, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { GIO_DIALOG_WIDTH, GioIconsModule, GioLoaderModule } from '@gravitee/ui-particles-angular';
+import { cloneDeep, flatten, isEmpty, uniqueId } from 'lodash';
+import { debounceTime, distinctUntilChanged, startWith, takeUntil, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
-import {
-  GioPolicyStudioFlowMessageFormDialogComponent,
-  GioPolicyStudioFlowMessageFormDialogData,
-} from '../flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
-import { FlowGroupVM, FlowVM } from '../../policy-studio/gio-policy-studio.model';
 import { ApiType, ChannelSelector, ConditionSelector, ConnectorInfo, FlowExecution, HttpSelector, Operation } from '../../models';
-import {
-  GioPolicyStudioFlowProxyFormDialogComponent,
-  GioPolicyStudioFlowProxyFormDialogData,
-} from '../flow-form-dialog/flow-proxy-form-dialog/gio-ps-flow-proxy-form-dialog.component';
-import { GioPolicyStudioFlowFormDialogResult } from '../flow-form-dialog/gio-ps-flow-form-dialog-result.model';
+import { Selector } from '../../models/flow/Selector';
+import { FlowGroupVM, FlowVM } from '../../policy-studio/gio-policy-studio.model';
 import {
   GioPolicyStudioFlowExecutionFormDialogComponent,
   GioPolicyStudioFlowExecutionFormDialogData,
 } from '../flow-execution-form-dialog/gio-ps-flow-execution-form-dialog.component';
 import {
+  GioPolicyStudioFlowMessageFormDialogComponent,
+  GioPolicyStudioFlowMessageFormDialogData,
+} from '../flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
+import {
   GioPolicyStudioFlowNativeFormDialogComponent,
   GioPolicyStudioFlowNativeFormDialogData,
 } from '../flow-form-dialog/flow-native-form-dialog/gio-ps-flow-native-form-dialog.component';
+import {
+  GioPolicyStudioFlowProxyFormDialogComponent,
+  GioPolicyStudioFlowProxyFormDialogData,
+} from '../flow-form-dialog/flow-proxy-form-dialog/gio-ps-flow-proxy-form-dialog.component';
+import { GioPolicyStudioFlowFormDialogResult } from '../flow-form-dialog/gio-ps-flow-form-dialog-result.model';
 
 interface FlowGroupMenuVM extends FlowGroupVM {
   flows: FlowMenuVM[];
@@ -60,12 +65,23 @@ interface FlowMenuVM extends FlowVM {
 }
 
 @Component({
-  imports: [GioIconsModule, MatTooltipModule, MatButtonModule, CommonModule, GioLoaderModule, MatMenuModule, DragDropModule],
+  imports: [
+    GioIconsModule,
+    MatTooltipModule,
+    MatButtonModule,
+    CommonModule,
+    GioLoaderModule,
+    MatMenuModule,
+    DragDropModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+  ],
   selector: 'gio-ps-flows-menu',
   templateUrl: './gio-ps-flows-menu.component.html',
   styleUrls: ['./gio-ps-flows-menu.component.scss'],
 })
-export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
+export class GioPolicyStudioFlowsMenuComponent implements OnChanges, OnDestroy {
   @Input()
   public readOnly = false;
 
@@ -104,9 +120,27 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
 
   public flowGroupMenuItems: FlowGroupMenuVM[] = [];
 
+  public searchControl = new FormControl<string>('');
+
+  public filteredFlowGroupMenuItems: FlowGroupMenuVM[] = [];
+
+  private unsubscribe$ = new Subject<void>();
+
   public enterPredicate: (drag: CdkDrag<FlowGroupMenuVM>, drop: CdkDropList<FlowGroupMenuVM>) => boolean = () => true;
 
-  constructor(private readonly matDialog: MatDialog) {}
+  constructor(private readonly matDialog: MatDialog) {
+    this.searchControl.valueChanges
+      .pipe(
+        debounceTime(300),
+        startWith(''),
+        distinctUntilChanged(),
+        tap(searchTerm => {
+          this.applyFilter(searchTerm || '');
+        }),
+        takeUntil(this.unsubscribe$),
+      )
+      .subscribe();
+  }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.flowsGroups || changes.selectedFlowId) {
@@ -188,6 +222,60 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges {
         return true;
       };
     }
+    this.applyFilter(this.searchControl.value || '');
+  }
+
+  public ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  private applyFilter(searchTerm: string): void {
+    const term = searchTerm.toLowerCase();
+    if (!term) {
+      this.filteredFlowGroupMenuItems = [...this.flowGroupMenuItems];
+      return;
+    }
+    this.filteredFlowGroupMenuItems = this.flowGroupMenuItems
+      .map(group => {
+        const filteredFlows = group?.flows?.filter(flow => {
+          return (
+            (group.name && group.name?.toLowerCase().includes(term)) ||
+            (flow.name && flow.name?.toLowerCase().includes(term)) ||
+            (flow.pathOrChannelLabel && flow.pathOrChannelLabel?.toLowerCase().includes(term)) ||
+            (flow.selectors && flow.selectors?.some(selector => this.selectorMatches(selector, term))) ||
+            (flow.badges && flow.badges?.some(badges => badges.label?.toLowerCase().includes(term)))
+          );
+        });
+        return { ...group, flows: filteredFlows };
+      })
+      .filter(group => group.flows.length > 0);
+  }
+
+  public resetSearchTerm() {
+    this.searchControl.setValue('');
+    this.applyFilter('');
+  }
+
+  private selectorMatches(selector: Selector, term: string): boolean {
+    const type = selector.type;
+
+    if (type === 'HTTP') {
+      const httpSelector = selector as HttpSelector;
+      if (httpSelector.path?.toLowerCase().includes(term)) return true;
+      if (httpSelector.methods?.some(method => method.toLowerCase().includes(term))) {
+        return true;
+      }
+    }
+
+    if (type === 'CHANNEL') {
+      const channelSelector = selector as ChannelSelector;
+      if (channelSelector.channel?.toLowerCase().includes(term)) return true;
+      if (channelSelector.operations?.some(op => op.toLowerCase().includes(term))) {
+        return true;
+      }
+    }
+    return false;
   }
 
   public selectFlow(groupId: string, flowId: string): void {

@@ -17,6 +17,7 @@
 import { ComponentHarness } from '@angular/cdk/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatTabGroupHarness } from '@angular/material/tabs/testing';
+import { MatInputHarness } from '@angular/material/input/testing';
 
 import { ChannelSelector, ConditionSelector, Flow, FlowExecution, HttpSelector } from '../models';
 import { GioPolicyStudioFlowsMenuHarness } from '../components/flows-menu/gio-ps-flows-menu.harness';
@@ -242,5 +243,10 @@ export class GioPolicyStudioHarness extends ComponentHarness {
     const flowExecutionDialog = await this.documentRootLocatorFactory().locatorFor(GioPolicyStudioFlowExecutionFormDialogHarness)();
     await flowExecutionDialog.setFlowFormValues(flowExecution);
     await flowExecutionDialog.save();
+  }
+
+  public async getSearchInput(): Promise<MatInputHarness> {
+    const menu = await this.menuHarness();
+    return menu.getSearchInput();
   }
 }

@@ -32,7 +32,7 @@ $typography: map.get(gio.$mat-theme, typography);
   display: flex;
   align-items: center;
   padding: 0 16px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 
   &__label {
     @include gio.subtitle-typography;
@@ -46,6 +46,15 @@ $typography: map.get(gio.$mat-theme, typography);
 
   &__configBtn {
     margin-left: 8px;
+  }
+}
+
+.searchBar {
+  display: flex;
+  padding: 0 16px;
+
+  &__input {
+    flex: 1 1 auto;
   }
 }
 
@@ -172,6 +181,10 @@ $typography: map.get(gio.$mat-theme, typography);
           }
         }
       }
+    }
+
+    &__no-flows {
+      font-style: italic;
     }
 
     &.cdk-drop-list-dragging {
