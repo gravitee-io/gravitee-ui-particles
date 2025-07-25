@@ -19,6 +19,7 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatIconHarness } from '@angular/material/icon/testing';
 import { DivHarness } from '@gravitee/ui-particles-angular/testing';
 import { MatMenuHarness } from '@angular/material/menu/testing';
+import { MatInputHarness } from '@angular/material/input/testing';
 
 export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
   public static hostSelector = 'gio-ps-flows-menu';
@@ -115,5 +116,9 @@ export class GioPolicyStudioFlowsMenuHarness extends ComponentHarness {
 
     const matMenu = await flow?.childLocatorFor(MatMenuHarness.with({ selector: '.list__flowsGroup__flows__flow__right__name__menu' }))();
     await matMenu?.clickItem({ text: /Duplicate/ });
+  }
+
+  public async getSearchInput(): Promise<MatInputHarness> {
+    return this.locatorFor(MatInputHarness.with({ selector: '.searchBar__input input[matInput]' }))();
   }
 }

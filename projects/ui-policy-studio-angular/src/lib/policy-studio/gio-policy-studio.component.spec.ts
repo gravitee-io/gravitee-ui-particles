@@ -1305,6 +1305,82 @@ describe('GioPolicyStudioComponent', () => {
         expect(duplicatedFlow?.name).toEqual('name - Copy');
         expect(duplicatedFlow?.id).toEqual(undefined);
       });
+
+      describe('Flow search/filtering', () => {
+        let inputHarness: MatInputHarness;
+        beforeEach(() => {
+          const commonFlows = [
+            fakeChannelFlow({
+              name: 'Flow 1',
+              selectors: [
+                {
+                  type: 'CHANNEL',
+                  channel: 'channel1',
+                  channelOperator: 'EQUALS',
+                  operations: ['PUBLISH', 'SUBSCRIBE'],
+                },
+              ],
+            }),
+            fakeChannelFlow({
+              name: 'Flow 2',
+              selectors: [
+                {
+                  type: 'CHANNEL',
+                  channel: 'channel2',
+                  channelOperator: 'STARTS_WITH',
+                  operations: ['SUBSCRIBE'],
+                },
+              ],
+            }),
+          ];
+          component.commonFlows = commonFlows;
+          component.ngOnChanges({
+            commonFlows: new SimpleChange(null, null, true),
+          });
+        });
+
+        beforeEach(async () => {
+          inputHarness = await policyStudioHarness.getSearchInput();
+        });
+
+        it('should filter by channel name', fakeAsync(async () => {
+          await inputHarness.setValue('channel2');
+          tick(300);
+          fixture.detectChanges();
+          expect(await policyStudioHarness.getFlowsMenu()).toMatchObject([
+            {
+              name: 'All plans',
+              flows: [
+                {
+                  hasCondition: true,
+                  infos: 'SUBchannel2**',
+                  isSelected: false,
+                  name: 'Flow 2',
+                },
+              ],
+            },
+          ]);
+        }));
+
+        it('should filter by operations name', fakeAsync(async () => {
+          await inputHarness.setValue('PUBLISH');
+          tick(300);
+          fixture.detectChanges();
+          expect(await policyStudioHarness.getFlowsMenu()).toMatchObject([
+            {
+              name: 'All plans',
+              flows: [
+                {
+                  hasCondition: true,
+                  name: 'Flow 1',
+                  isSelected: true,
+                  infos: 'PUBSUBchannel1',
+                },
+              ],
+            },
+          ]);
+        }));
+      });
     });
   });
 
@@ -1796,6 +1872,159 @@ describe('GioPolicyStudioComponent', () => {
         const firstSaveFlows = saveOutput?.commonFlows?.[0];
         expect(firstSaveFlows).toBeDefined();
         expect(firstSaveFlows?.enabled).toEqual(false);
+      });
+
+      describe('Flow search/filtering', () => {
+        let inputHarness: MatInputHarness;
+        beforeEach(() => {
+          const commonFlows = [
+            fakeHttpFlow({
+              name: 'Flow 1',
+              selectors: [
+                {
+                  type: 'HTTP',
+                  methods: ['GET'],
+                  path: '/path1',
+                  pathOperator: 'EQUALS',
+                },
+              ],
+            }),
+            fakeHttpFlow({
+              name: 'Flow 2',
+              selectors: [
+                {
+                  type: 'HTTP',
+                  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+                  path: '/path2',
+                  pathOperator: 'STARTS_WITH',
+                },
+              ],
+            }),
+            fakeHttpFlow({
+              name: 'Flow 3',
+              selectors: [
+                {
+                  type: 'HTTP',
+                  methods: [],
+                  path: '/path3',
+                  pathOperator: 'EQUALS',
+                },
+              ],
+            }),
+          ];
+          component.commonFlows = commonFlows;
+          component.ngOnChanges({
+            commonFlows: new SimpleChange(null, null, true),
+          });
+        });
+
+        beforeEach(async () => {
+          inputHarness = await policyStudioHarness.getSearchInput();
+        });
+
+        it('should filter by flow name', fakeAsync(async () => {
+          await inputHarness.setValue('Flow 3');
+          tick(300);
+          fixture.detectChanges();
+          expect(await policyStudioHarness.getFlowsMenu()).toMatchObject([
+            {
+              name: 'All plans',
+              flows: [
+                {
+                  hasCondition: true,
+                  name: 'Flow 3',
+                  isSelected: false,
+                  infos: 'ALL/path3',
+                },
+              ],
+            },
+          ]);
+        }));
+
+        it('should filter by plan name', fakeAsync(async () => {
+          await inputHarness.setValue('All plans');
+          tick(300);
+          fixture.detectChanges();
+          expect(await policyStudioHarness.getFlowsMenu()).toMatchObject([
+            {
+              name: 'All plans',
+              flows: [
+                {
+                  hasCondition: true,
+                  name: 'Flow 1',
+                  isSelected: true,
+                  infos: 'GET/path1',
+                },
+                {
+                  hasCondition: true,
+                  name: 'Flow 2',
+                  isSelected: false,
+                  infos: 'GETPOST+2/path2/**',
+                },
+                {
+                  hasCondition: true,
+                  name: 'Flow 3',
+                  isSelected: false,
+                  infos: 'ALL/path3',
+                },
+              ],
+            },
+          ]);
+        }));
+
+        it('should filter by path label', fakeAsync(async () => {
+          await inputHarness.setValue('path1');
+          tick(300);
+          fixture.detectChanges();
+          expect(await policyStudioHarness.getFlowsMenu()).toMatchObject([
+            {
+              name: 'All plans',
+              flows: [
+                {
+                  hasCondition: true,
+                  name: 'Flow 1',
+                  isSelected: true,
+                  infos: 'GET/path1',
+                },
+              ],
+            },
+          ]);
+        }));
+
+        it('should filter by method(GET/PUT/POST)', fakeAsync(async () => {
+          await inputHarness.setValue('PUT');
+          tick(300);
+          fixture.detectChanges();
+          expect(await policyStudioHarness.getFlowsMenu()).toMatchObject([
+            {
+              name: 'All plans',
+              flows: [
+                {
+                  hasCondition: true,
+                  name: 'Flow 2',
+                  isSelected: false,
+                  infos: 'GETPOST+2/path2/**',
+                },
+              ],
+            },
+          ]);
+        }));
+
+        it('should clear filter when search is emptied', fakeAsync(async () => {
+          // Search one flow
+          await inputHarness.setValue('Flow 3');
+          tick(300);
+          fixture.detectChanges();
+          let menu = await policyStudioHarness.getFlowsMenu();
+          expect(menu[0].flows).toHaveLength(1);
+
+          // Clear search
+          await inputHarness.setValue('');
+          tick(300);
+          fixture.detectChanges();
+          menu = await policyStudioHarness.getFlowsMenu();
+          expect(menu[0].flows).toHaveLength(3);
+        }));
       });
     });
   });
