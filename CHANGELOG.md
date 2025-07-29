@@ -1,3 +1,10 @@
+# [15.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.3.0...v15.4.0) (2025-07-29)
+
+
+### Features
+
+* search flows in policy studio ([0c25728](https://github.com/gravitee-io/gravitee-ui-particles/commit/0c257283be641fc83874243c1989c37a85033663))
+
 # [15.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.2.1...v15.3.0) (2025-07-22)
 
 
