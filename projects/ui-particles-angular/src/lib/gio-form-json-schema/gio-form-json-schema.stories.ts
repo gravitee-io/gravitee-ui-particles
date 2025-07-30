@@ -50,6 +50,7 @@ import { codeEditorExample } from './json-schema-example/code-editor';
 import { displayIfExample } from './json-schema-example/displayIf';
 import { disableIfExample } from './json-schema-example/disableIf';
 import { uiBorderExample } from './json-schema-example/uiBorder';
+import { mcpToolsEditorExample } from './json-schema-example/mcp-tools-editor';
 
 @NgModule({
   declarations: [DemoComponent],
@@ -222,6 +223,12 @@ export const References: StoryObj = {
 export const CodeEditor: StoryObj = {
   args: {
     jsonSchema: codeEditorExample,
+  },
+};
+
+export const McpToolsEditor: StoryObj = {
+  args: {
+    jsonSchema: mcpToolsEditorExample,
   },
 };
 
