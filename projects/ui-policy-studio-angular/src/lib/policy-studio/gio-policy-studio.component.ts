@@ -146,6 +146,15 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
   @Input()
   public policyDocumentationFetcher: PolicyDocumentationFetcher = () => EMPTY;
 
+  @Input()
+  public planIndex: number = 0;
+
+  @Input()
+  public flowIndex: number = 0;
+
+  @Output() 
+  public selectedFlowChanged = new EventEmitter<{ planIndex: number; flowIndex: number }>();
+
   /**
    * Return what is needed to save.
    **/
@@ -183,13 +192,12 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
         .join(', ')}`;
     }
 
-    if (changes.commonFlows || changes.plans) {
+    if (changes.commonFlows || changes.plans || changes.planIndex || changes.flowIndex) {
       this.disableSaveButton = true;
       this.flowsGroups = getFlowsGroups(this.apiType, this.commonFlows, this.plans);
       this.initialFlowsGroups = cloneDeep(this.flowsGroups);
 
-      // Select first flow by default on first load
-      this.selectedFlow = flatten(this.flowsGroups.map(flowGroup => flowGroup.flows))[0];
+      this.selectedFlow = this.flowsGroups[this.planIndex].flows[this.flowIndex];
 
       // Reset saving state when flowsGroups are updated
       this.saving = false;
@@ -239,7 +247,27 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
   }
 
   public onSelectFlow(flowId: string): void {
-    this.selectedFlow = flatten(this.flowsGroups.map(flowGroup => flowGroup.flows)).find(f => f._id === flowId);
+    let newPlanIndex = 0;
+    let newFlowIndex = 0;
+    for (let currentPlanIndex = 0; currentPlanIndex < this.flowsGroups.length; currentPlanIndex++) {
+      const indexWithinPlan = this.flowsGroups[currentPlanIndex].flows.findIndex(flow => flow._id === flowId);
+      if (indexWithinPlan !== -1) {
+        newPlanIndex = currentPlanIndex;
+        newFlowIndex = indexWithinPlan;
+        break;
+      }
+    }
+
+    this.planIndex = newPlanIndex;
+    this.flowIndex = newFlowIndex;
+
+    this.selectedFlow = this.flowsGroups[newPlanIndex].flows[newFlowIndex];
+
+    this.selectedFlowChanged.emit({
+      planIndex: newPlanIndex,
+      flowIndex: newFlowIndex,
+    });
+
   }
 
   public onDeleteSelectedFlow(flow: FlowVM): void {
