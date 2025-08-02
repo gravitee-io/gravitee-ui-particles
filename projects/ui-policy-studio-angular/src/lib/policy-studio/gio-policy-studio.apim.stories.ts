@@ -75,12 +75,14 @@ export default {
     [entrypointsInfo]="entrypointsInfo"
     [endpointsInfo]="endpointsInfo"
     [commonFlows]="commonFlows"
+    [selectedFlowIndexes]="selectedFlowIndexes"
     [plans]="plans"
     [policies]="policies"
     [sharedPolicyGroupPolicies]="sharedPolicyGroupPolicies"
     [policySchemaFetcher]="policySchemaFetcher"
     [policyDocumentationFetcher]="policyDocumentationFetcher"
     [trialUrl]="trialUrl"
+    (selectedFlowChanged)="onFlowSelectionChange($event)"
     (save)="onSave($event)"
     >
     </gio-policy-studio></div>`,
@@ -92,6 +94,10 @@ export default {
       // Simulate a get policy schema http fetcher.
       policySchemaFetcher: (policy: Policy) => of(fakePolicySchema(policy.id)).pipe(delay(600)),
       policyDocumentationFetcher: (policy: Policy) => of(fakePolicyDocumentation(policy.id)).pipe(delay(600)),
+      onFlowSelectionChange: (event: { planIndex: number; flowIndex: number }) => {
+        console.info('onFlowSelectionChange', event);
+        action('onFlowSelectionChange')(event);
+      },
       onSave: (event: SaveOutput) => {
         console.info('saveOutput', event);
         action('saveOutput')(event);
@@ -167,6 +173,7 @@ export const MessageWithFlowsAndPlans: StoryObj = {
         name: '',
       }),
     ],
+    selectedFlowIndexes: { planIndex: 2, flowIndex: 2 },
     plans: [
       fakePlan({
         name: 'Plan without flow and with a very long name to test overflow Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
