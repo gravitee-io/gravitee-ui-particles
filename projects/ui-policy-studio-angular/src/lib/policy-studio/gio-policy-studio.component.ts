@@ -43,6 +43,8 @@ import { GioPolicyStudioDetailsComponent } from '../components/flow-details/gio-
 import { FlowGroupVM, FlowVM } from './gio-policy-studio.model';
 import { GioPolicyStudioService } from './gio-policy-studio.service';
 
+export type FlowSelection = { planIndex: number; flowIndex: number };
+
 @Component({
   imports: [
     CommonModule,
@@ -146,6 +148,12 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
   @Input()
   public policyDocumentationFetcher: PolicyDocumentationFetcher = () => EMPTY;
 
+  @Input()
+  public selectedFlowIndexes: FlowSelection = { planIndex: 0, flowIndex: 0 };
+
+  @Output()
+  public selectedFlowChanged = new EventEmitter<FlowSelection>();
+
   /**
    * Return what is needed to save.
    **/
@@ -183,13 +191,11 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
         .join(', ')}`;
     }
 
-    if (changes.commonFlows || changes.plans) {
+    if (changes.commonFlows || changes.plans || changes.selectedFlowIndexes) {
       this.disableSaveButton = true;
       this.flowsGroups = getFlowsGroups(this.apiType, this.commonFlows, this.plans);
       this.initialFlowsGroups = cloneDeep(this.flowsGroups);
-
-      // Select first flow by default on first load
-      this.selectedFlow = flatten(this.flowsGroups.map(flowGroup => flowGroup.flows))[0];
+      this.selectedFlow = this.flowsGroups[this.selectedFlowIndexes?.planIndex ?? 0]?.flows[this.selectedFlowIndexes?.flowIndex ?? 0];
 
       // Reset saving state when flowsGroups are updated
       this.saving = false;
@@ -239,20 +245,35 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
   }
 
   public onSelectFlow(flowId: string): void {
-    this.selectedFlow = flatten(this.flowsGroups.map(flowGroup => flowGroup.flows)).find(f => f._id === flowId);
+    let newPlanIndex = 0;
+    let newFlowIndex = 0;
+    for (let currentPlanIndex = 0; currentPlanIndex < this.flowsGroups.length; currentPlanIndex++) {
+      const indexWithinPlan = this.flowsGroups[currentPlanIndex].flows.findIndex(flow => flow._id === flowId);
+      if (indexWithinPlan !== -1) {
+        newPlanIndex = currentPlanIndex;
+        newFlowIndex = indexWithinPlan;
+        break;
+      }
+    }
+
+    this.selectedFlowIndexes = { planIndex: newPlanIndex, flowIndex: newFlowIndex };
+
+    this.selectedFlow = this.flowsGroups[newPlanIndex].flows[newFlowIndex];
+
+    this.selectedFlowChanged.emit(this.selectedFlowIndexes);
   }
 
   public onDeleteSelectedFlow(flow: FlowVM): void {
     // Define next selected flow and remove flow from flowsGroups
     const allFlowsId = flatten(this.flowsGroups.map(flowGroup => flowGroup.flows)).map(f => f._id);
     const flowToDeleteIndex = allFlowsId.indexOf(flow._id);
-    const nextSelectedFlow = allFlowsId[flowToDeleteIndex + 1] ?? allFlowsId[flowToDeleteIndex - 1];
+    const nextSelectedFlowId = allFlowsId[flowToDeleteIndex + 1] ?? allFlowsId[flowToDeleteIndex - 1];
     this.flowsGroups = this.flowsGroups.map(flowGroup => ({
       ...flowGroup,
       flows: flowGroup.flows.filter(f => f._id !== flow._id),
     }));
 
-    this.selectedFlow = flatten(this.flowsGroups.map(flowGroup => flowGroup.flows)).find(f => f._id === nextSelectedFlow);
+    this.onSelectFlow(nextSelectedFlowId);
 
     this.disableSaveButton = false;
   }

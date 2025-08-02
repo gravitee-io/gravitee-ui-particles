@@ -172,6 +172,7 @@ describe('GioPolicyStudioComponent', () => {
         const commonFlows = [fakeChannelFlow({ name: 'flow1' }), fakeChannelFlow({ name: '' })];
         component.commonFlows = commonFlows;
         component.plans = [fakePlan({ name: 'Foo plan', flows: [] })];
+        component.selectedFlowIndexes = { planIndex: 1, flowIndex: 0 };
         component.ngOnChanges({
           commonFlows: new SimpleChange(null, null, true),
         });
@@ -264,6 +265,19 @@ describe('GioPolicyStudioComponent', () => {
             ],
           },
         ]);
+        expect(component.selectedFlowIndexes).toEqual({ planIndex: 0, flowIndex: 0 });
+      });
+
+      it('should select flow from selectedFlowIndexes input', async () => {
+        const commonFlows = [fakeChannelFlow({ name: 'Flow 1' }), fakeChannelFlow({ name: 'Flow 2' })];
+        component.commonFlows = commonFlows;
+        component.selectedFlowIndexes = { planIndex: 0, flowIndex: 1 };
+        component.ngOnChanges({
+          commonFlows: new SimpleChange(null, null, true),
+        });
+        const flowsMenuHarness = await loader.getHarness(GioPolicyStudioFlowsMenuHarness);
+        const selectedFlow = await flowsMenuHarness.getSelectedFlow();
+        expect(selectedFlow).toEqual({ name: 'Flow 2' });
       });
 
       it('should navigate between flows using the menu', async () => {
@@ -284,9 +298,17 @@ describe('GioPolicyStudioComponent', () => {
         expect(await flowsMenuHarness.getSelectedFlow()).toEqual({ name: 'Foo flow 1' });
         expect((await policyStudioHarness.getSelectedFlowInfos()).Name).toEqual(['Foo flow 1']);
 
+        let expectedFlowIndexes;
+        component.selectedFlowChanged.subscribe(selectedFlowIndexes => {
+          expectedFlowIndexes = selectedFlowIndexes;
+        });
+
+        expect(expectedFlowIndexes).toBeUndefined();
+
         await policyStudioHarness.selectFlowInMenu('Common flow');
         expect(await flowsMenuHarness.getSelectedFlow()).toEqual({ name: 'Common flow' });
         expect((await policyStudioHarness.getSelectedFlowInfos()).Name).toEqual(['Common flow']);
+        expect(expectedFlowIndexes).toEqual({ planIndex: 2, flowIndex: 0 });
       });
 
       it('should display flow with ChannelSelector', async () => {
@@ -375,6 +397,7 @@ describe('GioPolicyStudioComponent', () => {
             name: 'All plans',
           },
         ]);
+        expect(component.selectedFlowIndexes).toEqual({ planIndex: 0, flowIndex: 0 });
       });
 
       it('should edit flow into plan', async () => {
@@ -456,6 +479,7 @@ describe('GioPolicyStudioComponent', () => {
           { name: 'Bar plan', flows: [] },
           { name: 'All plans', flows: [] },
         ]);
+        expect(component.selectedFlowIndexes).toEqual({ planIndex: 0, flowIndex: 0 });
       });
 
       it('should send commonFlowsChange on save when flow is updated', async () => {
@@ -1533,6 +1557,7 @@ describe('GioPolicyStudioComponent', () => {
             ],
           },
         ]);
+        expect(component.selectedFlowIndexes).toEqual({ planIndex: 0, flowIndex: 0 });
       });
 
       it('should edit flow into plan', async () => {
@@ -2118,6 +2143,7 @@ describe('GioPolicyStudioComponent', () => {
             enabled: true,
           },
         ]);
+        expect(component.selectedFlowIndexes).toEqual({ planIndex: 0, flowIndex: 0 });
       });
 
       it('should edit flow into plan', async () => {
