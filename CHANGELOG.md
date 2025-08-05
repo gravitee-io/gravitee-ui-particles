@@ -1,3 +1,10 @@
+## [15.4.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.4.0...v15.4.1) (2025-08-05)
+
+
+### Bug Fixes
+
+* make nested gio config disabled fields visible ([15f2abb](https://github.com/gravitee-io/gravitee-ui-particles/commit/15f2abbdc8b4e6290a49b69558be73abfc9ef7d6))
+
 # [15.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.3.0...v15.4.0) (2025-07-29)
 
 
