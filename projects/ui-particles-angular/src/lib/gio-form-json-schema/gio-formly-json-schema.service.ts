@@ -160,7 +160,8 @@ export class GioFormlyJsonSchemaService {
         if (isParentDisabled || isReadOnly) {
           // Useful when field is readonly to avoid to enable it
           field.formControl?.disable({ emitEvent: false });
-          return true;
+          // if the parent is already disabled there is no need to change anything at the child level
+          return false;
         }
 
         let parentField = field;
