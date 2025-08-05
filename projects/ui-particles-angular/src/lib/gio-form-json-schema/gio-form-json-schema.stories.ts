@@ -35,6 +35,7 @@ import { integerExample } from './json-schema-example/integer';
 import { stringExample } from './json-schema-example/string';
 import { mixedExample } from './json-schema-example/mixed';
 import { oneOfExample } from './json-schema-example/oneOf';
+import { oneOfNestedGioConfigDisableExample } from './json-schema-example/oneOfNestedGioConfigDisable';
 import { entrypointsGetResponse, getEntrypointConnectorSchema } from './json-schema-example/entrypoints';
 import { endpointsGetResponse, getEndpointConnectorSchema } from './json-schema-example/endpoints';
 import { enumExample } from './json-schema-example/enum';
@@ -197,6 +198,31 @@ export const WithUiBorder: StoryObj = {
 export const OneOf: StoryObj = {
   args: {
     jsonSchema: oneOfExample,
+  },
+};
+
+export const OneOfNestedGioConfigDisable: StoryObj = {
+  name: 'One Of with disableIf and parent disabled',
+  args: {
+    disabled: true,
+    jsonSchema: oneOfNestedGioConfigDisableExample,
+    initialValue: {
+      maxTotal: 8,
+      password: 'redispassword',
+      releaseCache: false,
+      sentinel: {
+        enabled: false,
+        masterId: 'sentinel-master',
+      },
+      standalone: {
+        enabled: true,
+        host: 'localhost',
+        port: 6379,
+      },
+      timeToLiveSeconds: 0,
+      timeout: 2000,
+      useSsl: true,
+    },
   },
 };
 
