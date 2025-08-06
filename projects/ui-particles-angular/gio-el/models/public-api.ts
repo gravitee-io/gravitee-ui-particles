@@ -14,8 +14,5 @@
  * limitations under the License.
  */
 
-export * from './Condition';
-export * from './ConditionModel';
-export * from './ConditionsModel';
-export * from './ExpressionLanguageBuilder';
-export * from './Operator';
+export * from './ElProperties';
+export * from './ElProperty';
