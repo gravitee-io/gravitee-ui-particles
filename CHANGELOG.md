@@ -1,3 +1,10 @@
+# [15.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.4.1...v15.5.0) (2025-08-08)
+
+
+### Features
+
+* add flow and plan index to URL and preserve selected flow after save ([09bfb53](https://github.com/gravitee-io/gravitee-ui-particles/commit/09bfb53d645fa0faf8d5a62d853917c95f9606c3))
+
 ## [15.4.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.4.0...v15.4.1) (2025-08-05)
 
 
