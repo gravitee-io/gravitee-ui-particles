@@ -1,3 +1,10 @@
+## [13.12.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.12.3...v13.12.4) (2025-08-08)
+
+
+### Bug Fixes
+
+* storybook with GioMonacoEditor ([69a188c](https://github.com/gravitee-io/gravitee-ui-particles/commit/69a188cf6040e4a6f3b451153145792c55bb79ca))
+
 ## [13.12.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.12.2...v13.12.3) (2025-07-18)
 
 
