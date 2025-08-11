@@ -13,5 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { ElPropertyType } from '../../models/ElProperty';
 
-export * from './gio-el-condition-builder/models/public-api';
+import { Operator } from './Operator';
+
+type ConditionValue<T> = T extends 'string'
+  ? string
+  : T extends 'number'
+    ? number
+    : T extends 'date'
+      ? Date
+      : T extends 'boolean'
+        ? boolean
+        : unknown;
+
+export class Condition<T extends ElPropertyType> {
+  constructor(
+    public field:
+      | string
+      | {
+          field: string;
+          key1?: string;
+          key2?: string;
+        },
+    public type: T,
+    public operator: Operator,
+    public value?: ConditionValue<T>,
+  ) {}
+}

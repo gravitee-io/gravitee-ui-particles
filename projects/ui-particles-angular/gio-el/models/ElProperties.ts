@@ -13,5 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { ElProperty } from './ElProperty';
 
-export * from './gio-el-condition-builder/models/public-api';
+export type ObjectElProperty = { field: string; label: string; properties: (ObjectElProperty | ElProperty)[] };
+
+export type ElProperties = (ObjectElProperty | ElProperty)[];
+
+export const isElProperty = (elProperties: ObjectElProperty | ElProperty): elProperties is ElProperty => {
+  return 'field' in elProperties && 'label' in elProperties && 'type' in elProperties;
+};
