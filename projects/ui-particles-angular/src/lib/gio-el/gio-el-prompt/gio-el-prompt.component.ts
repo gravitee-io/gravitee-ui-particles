@@ -26,19 +26,37 @@ import {
   ElementRef,
   AfterViewInit,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
-import { ElAiReply, isPromptError, isPromptSuccess } from '../models/ElAiReply';
 import { GioElService } from '../gio-el.service';
+import { ElAiPromptState, isPromptError, isPromptSuccess } from '../models/ElAiPromptState';
+import { GioIconsModule } from '../../gio-icons/gio-icons.module';
+import { GioBannerModule } from '../../gio-banner/gio-banner.module';
+import { GioClipboardModule } from '../../gio-clipboard/gio-clipboard.module';
 
-type PromptState = 'loading' | ElAiReply;
+type PromptState = 'loading' | ElAiPromptState;
 
 @Component({
   selector: 'gio-el-prompt',
   templateUrl: './gio-el-prompt.component.html',
   styleUrl: './gio-el-prompt.component.scss',
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInput,
+    MatButton,
+    MatProgressBarModule,
+    MatTooltipModule,
+    GioIconsModule,
+    GioBannerModule,
+    GioClipboardModule,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
 })
 export class GioElPromptComponent implements AfterViewInit {
   public readonly maxPromptSize = 256;

@@ -14,19 +14,18 @@
  * limitations under the License.
  */
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { GioPopoverComponent } from '@gravitee/ui-particles-angular';
 import { MatButtonModule } from '@angular/material/button';
 
 import { GioIconsModule } from '../gio-icons/gio-icons.module';
 
-import { GioPopoverModule } from './gio-popover.module';
+import { GioPopoverComponent, PopoverTriggerDirective } from '.';
 
 export default {
   title: 'Components / Popover',
   component: GioPopoverComponent,
   decorators: [
     moduleMetadata({
-      imports: [GioIconsModule, MatButtonModule, GioPopoverModule],
+      imports: [GioIconsModule, MatButtonModule, PopoverTriggerDirective],
       declarations: [],
     }),
   ],

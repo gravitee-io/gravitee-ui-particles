@@ -19,7 +19,6 @@ import { GioPopoverComponent } from './gio-popover.component';
 
 @Directive({
   selector: '[gioPopoverTrigger]',
-  standalone: false,
 })
 export class PopoverTriggerDirective {
   @Input({ required: true })

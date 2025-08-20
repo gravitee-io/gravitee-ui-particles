@@ -13,14 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@use '../../../scss' as gio;
+
+$background: map.get(gio.$mat-basic-palette, white);
+
 :host {
   display: flex;
   width: 400px;
   flex-direction: column;
   padding: 12px;
   border-radius: 4px;
-  background-color: #fff;
-  box-shadow: 0 2px 8px 0 rgb(0 0 0 / 16%);
+  background-color: $background;
+  @include mat.elevation(4);
 }
 
 .aiRequestForm {

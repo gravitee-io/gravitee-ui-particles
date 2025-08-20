@@ -34,15 +34,15 @@
   @if (responseState() === 'loading') {
     <mat-progress-bar mode="indeterminate" class="loading" />
   }
-  @if (el()) {
+  @if (el(); as expression) {
     <gio-banner-success>
-      <code gioClipboardCopyWrapper [contentToCopy]="el()" [innerHTML]="el()"> </code>
+      <code gioClipboardCopyWrapper [contentToCopy]="expression" [alwaysVisible]="true">{{ expression }}</code>
     </gio-banner-success>
   }
-  @if (errorMessage()) {
+  @if (errorMessage(); as message) {
     <gio-banner-error>
       Error
-      <span gioBannerBody> {{ errorMessage() }} </span>
+      <span gioBannerBody> {{ message }} </span>
     </gio-banner-error>
   }
 </div>

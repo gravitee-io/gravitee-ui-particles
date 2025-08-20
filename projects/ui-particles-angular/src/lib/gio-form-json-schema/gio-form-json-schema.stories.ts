@@ -28,6 +28,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { GioMonacoEditorModule } from '../gio-monaco-editor/gio-monaco-editor.module';
 import { GioFormFocusInvalidModule } from '../gio-form-focus-first-invalid/gio-form-focus-first-invalid.module';
+import { GioPopoverComponent, PopoverTriggerDirective } from '../gio-popover';
 
 import { DemoComponent } from './gio-form-json-schema.stories.component';
 import { GioFormJsonSchemaModule } from './gio-form-json-schema.module';
@@ -68,6 +69,8 @@ import { uiBorderExample } from './json-schema-example/uiBorder';
     MatButtonToggleModule,
     GioFormJsonSchemaModule,
     GioMonacoEditorModule,
+    GioPopoverComponent,
+    PopoverTriggerDirective,
   ],
   exports: [DemoComponent, GioFormJsonSchemaModule],
 })

@@ -130,6 +130,15 @@ export class GioFormlyJsonSchemaService {
         ...mappedField.props,
       };
     }
+    if (mapSource.gioConfig?.el || get(mapSource, ['x-schema-form', 'expression-language'], false)) {
+      mappedField.props = {
+        ...mappedField.props,
+        attributes: {
+          ...mappedField.props?.attributes,
+          el: 1,
+        },
+      };
+    }
 
     return mappedField;
   }
