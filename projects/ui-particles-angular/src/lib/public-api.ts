@@ -104,3 +104,5 @@ export * from './gio-form-selection-inline/public-api';
 export * from './oem-theme/public-api';
 
 export * from './gio-card-empty-state';
+
+export * from './gio-popover/public-api';
