@@ -14,14 +14,18 @@
  * limitations under the License.
  */
 import { Component, ElementRef, inject, Input, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 import { Overlay, OverlayPositionBuilder, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
+
+import { GioIconsModule } from '../gio-icons/gio-icons.module';
 
 @Component({
   selector: 'gio-popover',
   templateUrl: './gio-popover.component.html',
   styleUrl: './gio-popover.component.scss',
-  standalone: false,
+  imports: [CommonModule, GioIconsModule, MatButtonModule],
 })
 export class GioPopoverComponent {
   private overlay = inject(Overlay);

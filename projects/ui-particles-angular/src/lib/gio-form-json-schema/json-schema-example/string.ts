@@ -71,6 +71,14 @@ export const stringExample: GioJsonSchema = {
       type: 'string',
       pattern: '^\\S+$',
     },
+    el: {
+      title: 'EL String',
+      description: 'EL String',
+      type: 'string',
+      gioConfig: {
+        el: true,
+      },
+    },
   },
   required: ['requiredString', 'cron'],
 };

@@ -15,9 +15,8 @@
  */
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
-import { GioPopoverModule } from '../../gio-popover/gio-popover.module';
-import { GioElModule } from '../gio-el.module';
 import { GioClipboardModule } from '../../gio-clipboard/gio-clipboard.module';
+import { GioPopoverComponent, PopoverTriggerDirective } from '../../gio-popover';
 
 import { GioElPromptComponent } from './gio-el-prompt.component';
 
@@ -26,7 +25,7 @@ export default {
   component: GioElPromptComponent,
   decorators: [
     moduleMetadata({
-      imports: [GioPopoverModule, GioElModule, GioClipboardModule],
+      imports: [GioPopoverComponent, PopoverTriggerDirective, GioElPromptComponent, GioClipboardModule],
       declarations: [],
     }),
   ],

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { get } from 'lodash';
-export type ElAiReply = PromptSuccess | PromptError;
+export type ElAiPromptState = PromptSuccess | PromptError;
 
 export interface PromptSuccess {
   el: string;

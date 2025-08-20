@@ -17,23 +17,25 @@ import { Injectable } from '@angular/core';
 import { Observable, of, delay } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ElAiReply } from './models/ElAiReply';
+import { ElAiPromptState } from './models/ElAiPromptState';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GioElService {
-  public prompt(prompt: string): Observable<ElAiReply> {
+  private promptCallback: (prompt: string) => Observable<ElAiPromptState> = this.defaultPrompt;
+
+  public prompt(prompt: string): Observable<ElAiPromptState> {
+    return this.promptCallback(prompt);
+  }
+
+  private defaultPrompt(prompt: string): Observable<ElAiPromptState> {
     return of(prompt).pipe(
       delay(300),
       map(prompt => {
-        return Math.random() < 0.5
-          ? {
-              el: `{#${prompt}}`,
-            }
-          : {
-              message: `Error: ${prompt}`,
-            };
+        return {
+          message: `Error: no handler given (input prompt: ${prompt})`,
+        };
       }),
     );
   }

@@ -28,6 +28,8 @@ import { GioFormSlideToggleModule } from '../gio-form-slide-toggle/gio-form-slid
 import { GioFormHeadersModule } from '../gio-form-headers/gio-form-headers.module';
 import { GioMonacoEditorModule } from '../gio-monaco-editor/gio-monaco-editor.module';
 import { GioFormCronModule } from '../gio-form-cron/gio-form-cron.module';
+import { GioPopoverComponent, PopoverTriggerDirective } from '../gio-popover';
+import { GioElPromptComponent } from '../gio-el/gio-el-prompt/gio-el-prompt.component';
 
 import { GioFjsNullTypeComponent } from './type-component/null-type.component';
 import { GioFjsObjectTypeComponent } from './type-component/object-type.component';
@@ -56,6 +58,7 @@ import { GioFjsHeadersTypeComponent } from './type-component/headers-type.compon
 import { GioPasswordEyeWrapperComponent, passwordEyeExtension } from './wrappers/gio-password-eye.component';
 import { GioFjsCodeEditorTypeComponent } from './type-component/code-editor-type.component';
 import { GioFjsCronTypeComponent } from './type-component/cron-type.component';
+import { elHelpExtension, GioElHelperWrapperComponent } from './wrappers/gio-el-helper-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +73,7 @@ import { GioFjsCronTypeComponent } from './type-component/cron-type.component';
     GioFjsCronTypeComponent,
     GioBannerWrapperComponent,
     GioPasswordEyeWrapperComponent,
+    GioElHelperWrapperComponent,
   ],
   imports: [
     CommonModule,
@@ -96,6 +100,7 @@ import { GioFjsCronTypeComponent } from './type-component/cron-type.component';
       wrappers: [
         { name: 'gio-with-banner', component: GioBannerWrapperComponent },
         { name: 'gio-password-eye', component: GioPasswordEyeWrapperComponent },
+        { name: 'gio-el-help', component: GioElHelperWrapperComponent },
       ],
       types: [
         { name: 'null', component: GioFjsNullTypeComponent, wrappers: ['form-field'] },
@@ -123,6 +128,7 @@ import { GioFjsCronTypeComponent } from './type-component/cron-type.component';
       extensions: [
         { name: 'banner', extension: { onPopulate: bannerExtension } },
         { name: 'password-eye', extension: { onPopulate: passwordEyeExtension } },
+        { name: 'el-help', extension: { onPopulate: elHelpExtension } },
       ],
       extras: {
         checkExpressionOn: 'changeDetectionCheck',
@@ -138,6 +144,9 @@ import { GioFjsCronTypeComponent } from './type-component/cron-type.component';
       baseUrl: '.',
     }),
     GioFormCronModule,
+    GioPopoverComponent,
+    PopoverTriggerDirective,
+    GioElPromptComponent,
 
     MatSlideToggleModule,
     MatButtonModule,

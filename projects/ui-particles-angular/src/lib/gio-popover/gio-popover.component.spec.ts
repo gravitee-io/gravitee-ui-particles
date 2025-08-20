@@ -15,7 +15,6 @@
  */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GioPopoverModule } from './gio-popover.module';
 import { GioPopoverComponent } from './gio-popover.component';
 
 describe('GioPopoverComponent', () => {
@@ -24,7 +23,7 @@ describe('GioPopoverComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GioPopoverModule],
+      imports: [],
     }).compileComponents();
 
     fixture = TestBed.createComponent(GioPopoverComponent);
