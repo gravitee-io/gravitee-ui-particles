@@ -1,0 +1,48 @@
+<!--
+
+    Copyright (C) 2025 The Gravitee team (http://gravitee.io)
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<h5>EL IA Assistant</h5>
+
+<div class="aiRequestForm" [formGroup]="aiRequestFormGroup">
+  <mat-form-field class="example-full-width">
+    <mat-label>Describe the EL you want to generate</mat-label>
+    <textarea #promptArea matInput formControlName="prompt"></textarea>
+    <mat-hint [align]="'end'">{{ aiRequestFormGroup.get('prompt')?.value?.length || 0 }}/{{ maxPromptSize }}</mat-hint>
+  </mat-form-field>
+
+  <button mat-raised-button [disabled]="aiRequestFormGroup.invalid" (click)="sendPromptToIA()">
+    <mat-icon svgIcon="gio:magic-wand" />
+    Ask Newt AI
+  </button>
+</div>
+
+<div class="ai-card__content__response">
+  @if (responseState() === 'loading') {
+    <mat-progress-bar mode="indeterminate" class="loading" />
+  }
+  @if (el()) {
+    <gio-banner-success>
+      <code gioClipboardCopyWrapper [contentToCopy]="el()" [innerHTML]="el()"> </code>
+    </gio-banner-success>
+  }
+  @if (errorMessage()) {
+    <gio-banner-error>
+      Error
+      <span gioBannerBody> {{ errorMessage() }} </span>
+    </gio-banner-error>
+  }
+</div>
