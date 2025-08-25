@@ -1,3 +1,12 @@
+# [15.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.5.0...v15.6.0) (2025-08-25)
+
+
+### Features
+
+* add EL helper wrapper component and integrate EL support in form schemas ([87c7e56](https://github.com/gravitee-io/gravitee-ui-particles/commit/87c7e56986d73f3951b335842bf11a50552d7330))
+* create a new popover component ([2cc1b7b](https://github.com/gravitee-io/gravitee-ui-particles/commit/2cc1b7b55ebdd11e7d4ffdf109738add30584dc7))
+* create the prompt EL component ([039437a](https://github.com/gravitee-io/gravitee-ui-particles/commit/039437ae0cda919e42c30483b1c7f32ff3ddfa0b))
+
 # [15.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.4.1...v15.5.0) (2025-08-08)
 
 
