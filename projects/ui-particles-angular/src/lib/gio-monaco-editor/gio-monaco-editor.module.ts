@@ -17,14 +17,17 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { GioClipboardModule } from '../gio-clipboard/gio-clipboard.module';
+
 import { GioMonacoEditorFormFieldDirective } from './gio-monaco-editor-form-field.directive';
 import { GioMonacoEditorComponent } from './gio-monaco-editor.component';
 import { GioMonacoEditorConfig, GIO_MONACO_EDITOR_CONFIG } from './models/GioMonacoEditorConfig';
+import { GioMonacoClipboardCopyComponent } from './gio-monaco-clipboard-copy.component';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule],
-  declarations: [GioMonacoEditorComponent, GioMonacoEditorFormFieldDirective],
-  exports: [GioMonacoEditorComponent, GioMonacoEditorFormFieldDirective],
+  imports: [CommonModule, ReactiveFormsModule, GioClipboardModule],
+  declarations: [GioMonacoEditorComponent, GioMonacoEditorFormFieldDirective, GioMonacoClipboardCopyComponent],
+  exports: [GioMonacoEditorComponent, GioMonacoEditorFormFieldDirective, GioMonacoClipboardCopyComponent],
   providers: [
     {
       provide: GIO_MONACO_EDITOR_CONFIG,

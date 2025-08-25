@@ -15,7 +15,7 @@
  */
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
-import { UntypedFormControl, UntypedFormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { importProvidersFrom } from '@angular/core';
 
@@ -369,5 +369,73 @@ export const DisableMiniMap: StoryObj = {
   },
     }`,
     disableMiniMap: true,
+  },
+};
+
+export const DisabledWithCopy: StoryObj = {
+  render: ({ value, disabled }) => {
+    const control = new FormControl({ value, disabled }, Validators.required);
+    control.valueChanges.subscribe(value => {
+      action('valueChanges')(value);
+    });
+    control.statusChanges.subscribe(status => {
+      action('statusChanges')(status);
+    });
+    const form = new UntypedFormGroup({ control });
+    const options = {
+      readOnly: false,
+      renderLineHighlight: 'none',
+      hideCursorInOverviewRuler: true,
+      overviewRulerLanes: false,
+      overviewRulerBorder: false,
+      scrollbar: {
+        vertical: 'hidden',
+        horizontal: 'hidden',
+        useShadows: false,
+      },
+    };
+
+    return {
+      styles: [
+        `
+            .editor {
+                border: 1px solid grey;
+                border-radius: 4px;
+                height: 180px;
+                width: 500px important!;
+                overflow: hidden;
+            }
+            
+            .container {
+                width: 60%;
+            }
+        `,
+      ],
+      template: `
+                <div gioMonacoClipboardCopy class="container">
+                  <gio-monaco-editor
+                    class="editor"
+                    [formControl]="form"
+                    [options]="options"
+                    [disableMiniMap]="true"
+                  >
+                  </gio-monaco-editor>
+                </div>
+            `,
+      props: { form, options, value },
+    };
+  },
+  args: {
+    value: `
+            {
+              "headers": {
+                "Host": "api.gravitee.io",
+                "foo": "bar",
+                "User-Agent": "Gravitee.io/4.6.15-SNAPSHOT"
+              },
+              "query_params": {},
+              "bodySize": 0
+            }
+        `,
   },
 };
