@@ -1,3 +1,10 @@
+## [15.7.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.7.0...v15.7.1) (2025-08-26)
+
+
+### Bug Fixes
+
+* missing setter in GioElService ([2b52644](https://github.com/gravitee-io/gravitee-ui-particles/commit/2b5264490910aa106c34ec52024ce853aa693adc))
+
 # [15.7.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.6.0...v15.7.0) (2025-08-26)
 
 
