@@ -394,7 +394,6 @@ export const DisabledWithCopy: StoryObj = {
                 border: 1px solid grey;
                 border-radius: 4px;
                 height: 180px;
-                width: 500px important!;
                 overflow: hidden;
             }
             
@@ -418,15 +417,15 @@ export const DisabledWithCopy: StoryObj = {
     };
   },
   args: {
-    disabled: true,
-    value: `{
-  "headers": {
-    "Host": "api.gravitee.io",
-    "foo": "bar",
-    "User-Agent": "Gravitee.io/4.6.15-SNAPSHOT"
-  },
-  "query_params": {},
-  "bodySize": 0
-}`,
+    value: `
+        {
+          "headers": {
+            "Host": "api.gravitee.io",
+            "foo": "bar",
+            "User-Agent": "Gravitee.io/4.6.15-SNAPSHOT"
+          },
+          "query_params": {},
+          "bodySize": 0
+        }`,
   },
 };

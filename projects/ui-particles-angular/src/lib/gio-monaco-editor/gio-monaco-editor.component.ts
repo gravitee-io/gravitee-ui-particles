@@ -213,9 +213,17 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
     });
 
     if (!this.disableAutoFormat) {
+      this.standaloneCodeEditor.updateOptions({
+        readOnly: false,
+      });
+
       setTimeout(() => {
         this.standaloneCodeEditor?.getAction('editor.action.formatDocument')?.run();
       }, 80);
+
+      this.standaloneCodeEditor.updateOptions({
+        readOnly: options.readOnly,
+      });
     }
 
     if (this.singleLineMode) {
