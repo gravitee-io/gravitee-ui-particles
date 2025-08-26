@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component } from '@angular/core';
+import { Component, ContentChild } from '@angular/core';
+
+import { GioMonacoEditorComponent } from './gio-monaco-editor.component';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -22,9 +24,12 @@ import { Component } from '@angular/core';
   template: `
     <div class="editor-wrapper">
       <ng-content></ng-content>
-      <gio-clipboard-copy-icon class="copy-btn"></gio-clipboard-copy-icon>
+      <gio-clipboard-copy-icon class="copy-btn" [contentToCopy]="monacoEditor?.value ?? ''"></gio-clipboard-copy-icon>
     </div>
   `,
   standalone: false,
 })
-export class GioMonacoClipboardCopyComponent {}
+export class GioMonacoClipboardCopyComponent {
+  @ContentChild(GioMonacoEditorComponent, { static: false })
+  public monacoEditor: GioMonacoEditorComponent | null = null;
+}
