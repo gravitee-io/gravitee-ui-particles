@@ -33,7 +33,7 @@ import Monaco, { editor } from 'monaco-editor';
 import { ReplaySubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { GioMonacoEditorConfig, GIO_MONACO_EDITOR_CONFIG } from './models/GioMonacoEditorConfig';
+import { GIO_MONACO_EDITOR_CONFIG, GioMonacoEditorConfig } from './models/GioMonacoEditorConfig';
 import { GioLanguageJsonService } from './services/gio-language-json.service';
 import { GioMonacoEditorService } from './services/gio-monaco-editor.service';
 import { GioLanguageElService } from './services/gio-language-el.service';
@@ -200,7 +200,7 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
     });
 
     const options = Object.assign({}, this.defaultOptions, this.options, {
-      readOnly: this.readOnly,
+      readOnly: !this.ngControl && 'readOnly' in this.options ? this.options.readOnly : this.readOnly,
       theme: this.config.theme ?? 'vs',
       model: this.textModel,
       minimap: {
