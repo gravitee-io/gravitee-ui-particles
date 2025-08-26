@@ -1,3 +1,15 @@
+# [15.7.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.6.0...v15.7.0) (2025-08-26)
+
+
+### Bug Fixes
+
+* make monaco editor readonly even when we don't use a formControl ([b3ad88b](https://github.com/gravitee-io/gravitee-ui-particles/commit/b3ad88be9190650939768b8770210103e8751f4d))
+
+
+### Features
+
+* add monaco editor copy to clipboard component and story ([b49c256](https://github.com/gravitee-io/gravitee-ui-particles/commit/b49c25609f4f7fbd1148b7add6139da61c9f806d))
+
 # [15.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.5.0...v15.6.0) (2025-08-25)
 
 
