@@ -68,6 +68,26 @@ Example:
 <gio-monaco-editor [formControl]="control" [languageConfig]="languageConfig" [disableMiniMap]="disbaleMiniMap"></gio-monaco-editor>
 ```
 
+### With Copy to clipboard option
+
+You can enhance the editor with a copy-to-clipboard button by wrapping it inside a container that uses the gioMonacoClipboardCopy directive.
+This directive automatically places a gio-clipboard-copy-icon button in the top-right corner of the container, allowing users to quickly copy the entire editor content to their clipboard.
+⚠️ Note: This wrapper is designed to work with the minimap disabled.
+
+Example:
+```html
+<div gioMonacoClipboardCopy class="container">
+    <gio-monaco-editor
+        class="editor"
+        disabled
+        [ngModel]="value"
+        [options]="options"
+        [disableMiniMap]="true"
+        >
+    </gio-monaco-editor>
+</div>
+```
+
 ## Testing
 
 You can use `GioMonacoEditorHarness` to interact with a fake monaco editor in your tests.

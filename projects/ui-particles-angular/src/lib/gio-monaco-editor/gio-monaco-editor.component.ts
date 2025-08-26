@@ -18,6 +18,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  effect,
   ElementRef,
   HostBinding,
   Inject,
@@ -26,6 +27,8 @@ import {
   OnDestroy,
   Optional,
   Self,
+  signal,
+  WritableSignal,
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { isEqual, isString, uniqueId } from 'lodash';
@@ -102,6 +105,11 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
   private textModel?: editor.ITextModel;
   private toDisposes: Monaco.IDisposable[] = [];
 
+  private isMonacoEditorReady: WritableSignal<{ isSetup: boolean; hasFirstValue: boolean }> = signal({
+    isSetup: false,
+    hasFirstValue: false,
+  });
+
   protected _onChange: (_value: string | null) => void = () => ({});
 
   protected _onTouched: () => void = () => ({});
@@ -123,12 +131,25 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
       this.ngControl.valueAccessor = this;
     }
     this.monacoEditorService.loadEditor();
+
+    effect(() => {
+      const { isSetup, hasFirstValue } = this.isMonacoEditorReady();
+      if (isSetup && hasFirstValue) {
+        if (this.textModel) {
+          this.textModel.setValue(this.value);
+        }
+
+        this.updateModelLanguage();
+        this.autoformatValue();
+      }
+    });
   }
 
   public ngAfterViewInit() {
     // Wait until monaco editor is available
     this.monacoEditorService.loaded$.pipe(takeUntil(this.unsubscribe$)).subscribe(({ monaco }) => {
       this.setupEditor(monaco);
+      this.isMonacoEditorReady.update(({ hasFirstValue }) => ({ isSetup: true, hasFirstValue }));
 
       this.loaded$.next(false);
       this.changeDetectorRef.detectChanges();
@@ -152,12 +173,10 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
   }
 
   // From ControlValueAccessor interface
-  public writeValue(_value: string): void {
+  public writeValue(_value: string | null): void {
     if (_value) {
       this.value = isString(_value) ? _value : JSON.stringify(_value);
-    }
-    if (this.textModel) {
-      this.textModel.setValue(this.value);
+      this.isMonacoEditorReady.update(({ isSetup }) => ({ isSetup, hasFirstValue: true }));
     }
   }
 
@@ -211,12 +230,6 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
     this.standaloneCodeEditor = monaco.editor.create(domElement, {
       ...options,
     });
-
-    if (!this.disableAutoFormat) {
-      setTimeout(() => {
-        this.standaloneCodeEditor?.getAction('editor.action.formatDocument')?.run();
-      }, 80);
-    }
 
     if (this.singleLineMode) {
       this.standaloneCodeEditor?.addAction({
@@ -333,6 +346,29 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
         break;
       default:
         break;
+    }
+  }
+
+  private updateModelLanguage() {
+    const languageId = this.languageConfig?.language ?? (isJsonString(this.value) ? 'json' : 'plaintext');
+    if (this.textModel && window.monaco) {
+      window.monaco.editor.setModelLanguage(this.textModel, languageId);
+    }
+  }
+
+  private autoformatValue() {
+    if (!this.disableAutoFormat) {
+      setTimeout(() => {
+        const previousReadOnlyState = this.options.readOnly || this.readOnly;
+        this.standaloneCodeEditor?.updateOptions({ readOnly: false });
+        this.standaloneCodeEditor
+          ?.getAction('editor.action.formatDocument')
+          ?.run()
+          .finally(() => {
+            this.standaloneCodeEditor?.updateOptions({ readOnly: previousReadOnlyState });
+            this.changeDetectorRef.detectChanges();
+          });
+      }, 80);
     }
   }
 }
