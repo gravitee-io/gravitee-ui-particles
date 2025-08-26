@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 import { Injectable } from '@angular/core';
-import { Observable, of, delay } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
 
 import { ElAiPromptState } from './models/ElAiPromptState';
 
@@ -23,10 +23,10 @@ import { ElAiPromptState } from './models/ElAiPromptState';
   providedIn: 'root',
 })
 export class GioElService {
-  private promptCallback: (prompt: string) => Observable<ElAiPromptState> = this.defaultPrompt;
+  private _promptCallback: (prompt: string) => Observable<ElAiPromptState> = this.defaultPrompt;
 
   public prompt(prompt: string): Observable<ElAiPromptState> {
-    return this.promptCallback(prompt);
+    return this._promptCallback(prompt);
   }
 
   private defaultPrompt(prompt: string): Observable<ElAiPromptState> {
@@ -38,5 +38,9 @@ export class GioElService {
         };
       }),
     );
+  }
+
+  public set promptCallback(value: (prompt: string) => Observable<ElAiPromptState>) {
+    this._promptCallback = value;
   }
 }
