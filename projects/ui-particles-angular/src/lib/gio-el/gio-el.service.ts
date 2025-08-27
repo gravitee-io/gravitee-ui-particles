@@ -15,7 +15,6 @@
  */
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
 
 import { ElAiPromptState } from './models/ElAiPromptState';
 
@@ -23,24 +22,22 @@ import { ElAiPromptState } from './models/ElAiPromptState';
   providedIn: 'root',
 })
 export class GioElService {
-  private _promptCallback: (prompt: string) => Observable<ElAiPromptState> = this.defaultPrompt;
+  private _promptCallback?: (prompt: string) => Observable<ElAiPromptState> = undefined;
 
   public prompt(prompt: string): Observable<ElAiPromptState> {
+    if (this._promptCallback === undefined) {
+      return of({
+        message: `Error: no handler given (input prompt: ${prompt})`,
+      });
+    }
     return this._promptCallback(prompt);
-  }
-
-  private defaultPrompt(prompt: string): Observable<ElAiPromptState> {
-    return of(prompt).pipe(
-      delay(300),
-      map(prompt => {
-        return {
-          message: `Error: no handler given (input prompt: ${prompt})`,
-        };
-      }),
-    );
   }
 
   public set promptCallback(value: (prompt: string) => Observable<ElAiPromptState>) {
     this._promptCallback = value;
+  }
+
+  public isEnabled(): boolean {
+    return this._promptCallback !== undefined;
   }
 }
