@@ -59,6 +59,7 @@ import { GioPasswordEyeWrapperComponent, passwordEyeExtension } from './wrappers
 import { GioFjsCodeEditorTypeComponent } from './type-component/code-editor-type.component';
 import { GioFjsCronTypeComponent } from './type-component/cron-type.component';
 import { elHelpExtension, GioElHelperWrapperComponent } from './wrappers/gio-el-helper-wrapper.component';
+import { GIO_FORMLY_CONFIG } from './model/GioFormlyConfig';
 
 @NgModule({
   declarations: [
@@ -152,6 +153,6 @@ import { elHelpExtension, GioElHelperWrapperComponent } from './wrappers/gio-el-
     MatButtonModule,
   ],
   exports: [GioFormJsonSchemaComponent, FormlyModule],
-  providers: [GioFormlyJsonSchemaService],
+  providers: [GioFormlyJsonSchemaService, { provide: GIO_FORMLY_CONFIG, useValue: { elHelper: false } }],
 })
 export class GioFormJsonSchemaModule {}

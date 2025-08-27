@@ -52,6 +52,7 @@ import { codeEditorExample } from './json-schema-example/code-editor';
 import { displayIfExample } from './json-schema-example/displayIf';
 import { disableIfExample } from './json-schema-example/disableIf';
 import { uiBorderExample } from './json-schema-example/uiBorder';
+import { GIO_FORMLY_CONFIG } from './model/GioFormlyConfig';
 
 @NgModule({
   declarations: [DemoComponent],
@@ -83,7 +84,10 @@ export default {
       imports: [CommonModule, MatSelectModule, GioFJSStoryModule],
     }),
     applicationConfig({
-      providers: [importProvidersFrom(GioMonacoEditorModule.forRoot({ theme: 'vs-dark', baseUrl: '.' }))],
+      providers: [
+        importProvidersFrom(GioMonacoEditorModule.forRoot({ theme: 'vs-dark', baseUrl: '.' })),
+        { provide: GIO_FORMLY_CONFIG, useValue: { elHelper: false } },
+      ],
     }),
   ],
   parameters: {

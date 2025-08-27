@@ -22,12 +22,14 @@ import { Observable } from 'rxjs';
 
 import { GioIfConfig, GioJsonSchema } from './model/GioJsonSchema';
 import { GioJsonSchemaContext } from './model/GioJsonSchemaContext';
+import { GIO_FORMLY_CONFIG, GioFormlyConfig } from './model/GioFormlyConfig';
 
 @Injectable()
 export class GioFormlyJsonSchemaService {
   constructor(
     private readonly formlyJsonschema: FormlyJsonschema,
     private readonly builder: FormlyFormBuilder,
+    @Optional @Inject(GIO_FORMLY_CONFIG) private readonly config?: GioFormlyConfig,
   ) {}
 
   public toFormlyFieldConfig(jsonSchema: GioJsonSchema, context?: GioJsonSchemaContext): FormlyFieldConfig {
@@ -130,7 +132,7 @@ export class GioFormlyJsonSchemaService {
         ...mappedField.props,
       };
     }
-    if (mapSource.gioConfig?.el || get(mapSource, ['x-schema-form', 'expression-language'], false)) {
+    if (this.config?.elHelper && (mapSource.gioConfig?.el || get(mapSource, ['x-schema-form', 'expression-language'], false))) {
       mappedField.props = {
         ...mappedField.props,
         attributes: {
