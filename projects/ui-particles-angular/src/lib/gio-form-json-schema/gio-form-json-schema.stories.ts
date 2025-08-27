@@ -25,6 +25,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { GioElService } from '@gravitee/ui-particles-angular';
+import { inject, provideAppInitializer } from '@angular/core';
+import { of } from 'rxjs';
 
 import { GioMonacoEditorModule } from '../gio-monaco-editor/gio-monaco-editor.module';
 import { GioFormFocusInvalidModule } from '../gio-form-focus-first-invalid/gio-form-focus-first-invalid.module';
@@ -73,6 +76,7 @@ import { uiBorderExample } from './json-schema-example/uiBorder';
     PopoverTriggerDirective,
   ],
   exports: [DemoComponent, GioFormJsonSchemaModule],
+  providers: [],
 })
 export class GioFJSStoryModule {}
 
@@ -83,7 +87,13 @@ export default {
       imports: [CommonModule, MatSelectModule, GioFJSStoryModule],
     }),
     applicationConfig({
-      providers: [importProvidersFrom(GioMonacoEditorModule.forRoot({ theme: 'vs-dark', baseUrl: '.' }))],
+      providers: [
+        importProvidersFrom(GioMonacoEditorModule.forRoot({ theme: 'vs-dark', baseUrl: '.' })),
+        GioElService,
+        provideAppInitializer(() => {
+          inject(GioElService).promptCallback = () => of({ el: 'Hello world!' });
+        }),
+      ],
     }),
   ],
   parameters: {
