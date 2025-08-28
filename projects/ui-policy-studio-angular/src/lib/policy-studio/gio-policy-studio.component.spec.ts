@@ -1234,7 +1234,7 @@ describe('GioPolicyStudioComponent', () => {
         expect(firstSaveFlows?.request).toEqual([fakeTestPolicyStep({ description: 'description', enabled: false })]);
       });
 
-      it('should re enable save button after 5s', fakeAsync(async () => {
+      it('should keep save button disabled after saving', fakeAsync(async () => {
         const commonFlows = [fakeChannelFlow({ name: '' }), fakeChannelFlow({ name: 'Flow to delete' })];
         component.commonFlows = commonFlows;
         component.enableSavingTimer = true;
@@ -1251,8 +1251,9 @@ describe('GioPolicyStudioComponent', () => {
         await policyStudioHarness.save();
         expect(await policyStudioHarness.getSaveButtonState()).toEqual('SAVING');
 
+        // After 5s, save button should stay disabled until new changes are made
         tick(5000);
-        expect(await policyStudioHarness.getSaveButtonState()).toEqual('VISIBLE');
+        expect(await policyStudioHarness.getSaveButtonState()).toEqual('DISABLED');
       }));
 
       it('should disable flow', async () => {

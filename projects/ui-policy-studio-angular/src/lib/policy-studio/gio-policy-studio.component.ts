@@ -213,6 +213,9 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
     if (changes.policies || changes.sharedPolicyGroupPolicies) {
       this.initGenericPolicies();
     }
+    if (changes.loading && this.loading && !this.saving) {
+      this.saving = true;
+    }
   }
 
   public ngOnDestroy() {
@@ -290,6 +293,7 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
       ...(this.hasFlowExecutionChanged ? { flowExecution: this.flowExecution } : {}),
     });
     this.saving = true;
+    this.disableSaveButton = true;
 
     this.unSavingButtonSubscription?.unsubscribe();
     if (this.enableSavingTimer) {
