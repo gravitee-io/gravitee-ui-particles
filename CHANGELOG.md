@@ -1,3 +1,10 @@
+## [15.7.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.7.1...v15.7.2) (2025-08-28)
+
+
+### Bug Fixes
+
+* disable save button after save ([23a5999](https://github.com/gravitee-io/gravitee-ui-particles/commit/23a59998b8eb08b2559264788296a4a7e740ce47))
+
 ## [15.7.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.7.0...v15.7.1) (2025-08-26)
 
 
