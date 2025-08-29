@@ -1,3 +1,10 @@
+# [15.8.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.7.2...v15.8.0) (2025-08-29)
+
+
+### Features
+
+* make the el helper as optin ([d2c0493](https://github.com/gravitee-io/gravitee-ui-particles/commit/d2c0493388fa9337a3cf31420edab95a228226f6))
+
 ## [15.7.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.7.1...v15.7.2) (2025-08-28)
 
 
