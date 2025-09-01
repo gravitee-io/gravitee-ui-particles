@@ -1,3 +1,10 @@
+## [15.8.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.8.0...v15.8.1) (2025-09-01)
+
+
+### Bug Fixes
+
+* allow monaco to format content even when is readonly ([f23f2b7](https://github.com/gravitee-io/gravitee-ui-particles/commit/f23f2b78fe21cc6652ad396adb851008a1d1e7d3))
+
 # [15.8.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.7.2...v15.8.0) (2025-08-29)
 
 
