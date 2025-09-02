@@ -23,10 +23,12 @@ import {
   Component,
   DoCheck,
   ElementRef,
+  EventEmitter,
   HostBinding,
   Input,
   OnDestroy,
   Optional,
+  Output,
   Self,
   ViewChild,
 } from '@angular/core';
@@ -87,6 +89,10 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
   public set autocompleteOptions(v: AutocompleteOptions | ((search: string) => Observable<AutocompleteOptions>) | undefined) {
     this._autocompleteOptions = v;
   }
+
+  @Output()
+  public tagClicked = new EventEmitter<string>();
+
   public _autocompleteOptions?: AutocompleteOptions | ((search: string) => Observable<AutocompleteOptions>);
 
   /**

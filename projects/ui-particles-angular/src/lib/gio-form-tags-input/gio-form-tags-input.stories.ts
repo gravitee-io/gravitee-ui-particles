@@ -56,7 +56,7 @@ export default {
 export const WithoutFormField: StoryObj = {
   render: ({ tags = ['A', 'B'], placeholder, required, disabled }) => ({
     template: `
-      <gio-form-tags-input [disabled]="disabled" [required]="required" [placeholder]="placeholder" [ngModel]="tags" (ngModelChange)="onTagsChange($event)">
+      <gio-form-tags-input [disabled]="disabled" [required]="required" [placeholder]="placeholder" [ngModel]="tags" (ngModelChange)="onTagsChange($event)" (tagClicked)="onTagClicked($event)">
       </gio-form-tags-input>
     `,
     props: {
@@ -65,6 +65,7 @@ export const WithoutFormField: StoryObj = {
       required,
       disabled,
       onTagsChange: (e: Tags[]) => action('Tags')(e),
+      onTagClicked: (e: string) => action('TagClicked')(e),
     },
   }),
   args: {},
@@ -81,6 +82,7 @@ export const EmptyModel: StoryObj = {
         [placeholder]="placeholder" 
         [ngModel]="tags" 
         (ngModelChange)="onTagsChange($event)"
+        (tagClicked)="onTagClicked($event)"
       >
       </gio-form-tags-input>
     </mat-form-field>
@@ -91,6 +93,7 @@ export const EmptyModel: StoryObj = {
       required,
       disabled,
       onTagsChange: (e: Tags[]) => action('Tags')(e),
+      onTagClicked: (e: string) => action('TagClicked')(e),
     },
   }),
   args: {},

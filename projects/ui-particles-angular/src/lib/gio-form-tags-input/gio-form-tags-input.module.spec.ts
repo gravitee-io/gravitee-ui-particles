@@ -29,6 +29,8 @@ import { GioFormTagsInputHarness } from './gio-form-tags-input.harness';
 import { GioFormTagsInputModule } from './gio-form-tags-input.module';
 
 describe('GioFormTagsInputModule - Static input', () => {
+  const onTagClickMock = jest.fn();
+
   @Component({
     template: `
       <mat-form-field appearance="fill">
@@ -39,6 +41,7 @@ describe('GioFormTagsInputModule - Static input', () => {
           [formControl]="tagsControl"
           [tagValidationHook]="tagValidationHook"
           [autocompleteOptions]="autocompleteOptions"
+          (tagClicked)="onTagClick($event)"
         ></gio-form-tags-input>
         <mat-error>Error</mat-error>
       </mat-form-field>
@@ -52,6 +55,7 @@ describe('GioFormTagsInputModule - Static input', () => {
     public autocompleteOptions?: string[] = undefined;
 
     public tagsControl = new FormControl(null, Validators.required);
+    public onTagClick = onTagClickMock;
   }
 
   let component: TestComponent;
@@ -146,6 +150,23 @@ describe('GioFormTagsInputModule - Static input', () => {
     component.tagsControl.markAsTouched();
 
     expect(await matFormFieldHarness.hasErrors()).toBe(true);
+  });
+
+  it('should send a tagClicked event', async () => {
+    fixture.detectChanges();
+
+    const formTagsInputHarness = await loader.getHarness(GioFormTagsInputHarness);
+    expect(await formTagsInputHarness.getTags()).toEqual([]);
+
+    await formTagsInputHarness.addTag('tag1');
+    await formTagsInputHarness.addTag('tag2', 'blur');
+
+    expect(await formTagsInputHarness.getTags()).toEqual(['tag1', 'tag2']);
+
+    await formTagsInputHarness.clickTag('tag2');
+    expect(await formTagsInputHarness.getTags()).toEqual(['tag1', 'tag2']);
+
+    expect(onTagClickMock).toHaveBeenNthCalledWith(1, 'tag2');
   });
 
   describe('with autocomplete', () => {
