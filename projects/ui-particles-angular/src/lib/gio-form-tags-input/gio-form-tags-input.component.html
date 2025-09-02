@@ -16,7 +16,13 @@
 
 -->
 <mat-chip-grid #tagChipList [attr.aria-label]="ariaLabel" multiple [disabled]="disabled">
-  <mat-chip-row *ngFor="let tag of value" [removable]="!disabled" (removed)="removeChipToFormControl(tag)" [disabled]="disabled">
+  <mat-chip-row
+    *ngFor="let tag of value"
+    [removable]="!disabled"
+    (removed)="removeChipToFormControl(tag)"
+    [disabled]="disabled"
+    (click)="tagClicked.emit(tag)"
+  >
     {{ _displayValueWith ? (_displayValueWith(tag) | async) : tag }}
     <mat-icon matChipRemove>cancel</mat-icon>
   </mat-chip-row>

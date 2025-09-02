@@ -26,6 +26,11 @@ Documentation and examples for Form Tags Input, a component to specify a list of
 * `autocompleteOptions`: `AutocompleteOptions | ((search: string) => Observable<AutocompleteOptions>)` - List of options to autocomplete the input. Can be a static list or a function returning an observable to filter the options.
 * `displayValueWith`: `(value: string) => Observable<string>` - Function to display the label of the input value. Useful to display the label of an value id, for instance.
 * `useAutocompleteOptionsOnly`: `boolean` - Whether the input should only accept values from the autocomplete options.
+
+**Outputs**
+
+* `tagClicked`: `EventEmitter<string>` - Emitted when a tag is clicked.
+
   Example:
 
 ```html

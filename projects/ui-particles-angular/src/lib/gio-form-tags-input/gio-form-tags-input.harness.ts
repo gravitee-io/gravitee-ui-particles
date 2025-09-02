@@ -84,4 +84,14 @@ export class GioFormTagsInputHarness extends ComponentHarness {
 
     return matAutocompleteHarness;
   }
+
+  public async clickTag(tag: string): Promise<void> {
+    const matChipGrid = await this.getMatChipGridHarness();
+
+    const chips = await matChipGrid.getRows({ text: tag });
+    if (chips[0]) {
+      const host = await chips[0].host();
+      await host.click();
+    }
+  }
 }
