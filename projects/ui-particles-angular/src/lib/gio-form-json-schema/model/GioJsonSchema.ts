@@ -40,12 +40,16 @@ type GioBannerConfig =
   | {
       text: string;
     };
+
+export type ElColumns = 'key' | 'value' | 'both' | 'neither';
 /**
  * Used to override the default formly type. It's useful when we want to use a custom component.
  */
-type GioUiTypeConfig = {
+export type GioUiTypeConfig = {
   uiType?: 'gio-headers-array' | string;
-  uiTypeProps?: Record<string, unknown>;
+  uiTypeProps?: {
+    elColumns?: ElColumns;
+  } & Record<string, unknown>;
 };
 
 /*
@@ -63,7 +67,7 @@ export type GioIfConfig = {
  * And export with new name `GioJsonSchema` to make it more clear
  */
 declare module 'json-schema' {
-  export interface JSONSchema7 {
+  interface JSONSchema7 {
     gioConfig?: GioConfig;
     deprecated?: boolean;
   }

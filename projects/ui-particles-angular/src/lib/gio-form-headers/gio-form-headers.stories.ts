@@ -13,9 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { inject, provideAppInitializer } from '@angular/core';
+import { of } from 'rxjs';
+
+import { GioElService } from '../gio-el/gio-el.service';
 
 import { GioFormHeadersComponent } from './gio-form-headers.component';
 import { GioFormHeadersModule } from './gio-form-headers.module';
@@ -26,6 +30,14 @@ export default {
   decorators: [
     moduleMetadata({
       imports: [GioFormHeadersModule, FormsModule, ReactiveFormsModule],
+    }),
+    applicationConfig({
+      providers: [
+        GioElService,
+        provideAppInitializer(() => {
+          inject(GioElService).promptCallback = () => of({ el: 'Hello world!' });
+        }),
+      ],
     }),
   ],
   argTypes: {},
@@ -156,5 +168,40 @@ export const SmallWidth: StoryObj = {
         value: 'keep-alive',
       },
     ],
+  },
+};
+
+export const ReactiveFormEl: StoryObj = {
+  render: args => {
+    const headersControl = new UntypedFormControl({
+      value: args.headers,
+      disabled: args.disabled,
+    });
+
+    headersControl.valueChanges.subscribe(value => {
+      action('Tags')(value);
+    });
+
+    return {
+      template: `<gio-form-headers [config]="{elColumns: 'both'}" [formControl]="headersControl"></gio-form-headers> <br>Status :{{ headersControl.status }} | Touched :{{ headersControl.touched }}`,
+      props: { headersControl },
+    };
+  },
+  args: {
+    headers: [
+      {
+        key: 'host',
+        value: 'api.gravitee.io',
+      },
+      {
+        key: 'accept',
+        value: '*/*',
+      },
+      {
+        key: 'connection',
+        value: 'keep-alive',
+      },
+    ],
+    disabled: false,
   },
 };

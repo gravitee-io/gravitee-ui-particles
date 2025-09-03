@@ -25,7 +25,7 @@
   </thead>
   <tbody formArrayName="headers">
     @for (control of headersFormArray.controls; track control; let headerIndex = $index) {
-      <tr class="gio-form-headers__table__header-row" [formGroupName]="headerIndex" >
+      <tr class="gio-form-headers__table__header-row" [formGroupName]="headerIndex">
         <td class="gio-form-headers__table__header-row__td-key">
           <div class="gio-form-headers__table__header-row__td-key__field">
             <textarea
@@ -37,6 +37,15 @@
               [matAutocomplete]="headerNamesAutocomplete"
               [matAutocompleteDisabled]="autocompleteDisabled"
             ></textarea>
+            @if (isElEnabled() && (config?.elColumns === 'key' || config?.elColumns === 'both')) {
+              <button gioPopoverTrigger [gioPopoverTriggerFor]="aiPopover" type="button">
+                <mat-icon svgIcon="gio:el" />
+              </button>
+
+              <gio-popover #aiPopover [closeOnBackdropClick]="true">
+                <gio-el-prompt />
+              </gio-popover>
+            }
           </div>
           @if (control.get('key')?.hasError('pattern')) {
             <mat-error>
@@ -52,17 +61,26 @@
         <td class="gio-form-headers__table__header-row__td-value">
           <div class="gio-form-headers__table__header-row__td-value__field">
             <textarea formControlName="value" matInput placeholder="Value..." cdkTextareaAutosize cdkAutosizeMinRows="1"></textarea>
+            @if (isElEnabled() && (config?.elColumns === 'value' || config?.elColumns === 'both')) {
+              <button gioPopoverTrigger [gioPopoverTriggerFor]="aiPopover" type="button">
+                <mat-icon svgIcon="gio:el" />
+              </button>
+            }
+            @if (headersFormArray.controls.length - 1 !== headerIndex) {
+              <button
+                class="gio-form-headers__table__header-row__td-value__button"
+                mat-icon-button
+                aria-label="Delete"
+                (click)="onDeleteHeader(headerIndex)"
+              >
+                <mat-icon svgIcon="gio:cancel" />
+              </button>
+            }
+
+            <gio-popover #aiPopover [closeOnBackdropClick]="true" hidden>
+              <gio-el-prompt />
+            </gio-popover>
           </div>
-          @if (headersFormArray.controls.length - 1 !== headerIndex) {
-            <button
-              class="gio-form-headers__table__header-row__td-value__button"
-              mat-icon-button
-              aria-label="Delete"
-              (click)="onDeleteHeader(headerIndex)"
-            >
-              <mat-icon svgIcon="gio:cancel" />
-            </button>
-          }
         </td>
       </tr>
     }
