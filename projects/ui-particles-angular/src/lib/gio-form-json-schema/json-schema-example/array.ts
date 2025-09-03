@@ -80,6 +80,33 @@ export const arrayExample: GioJsonSchema = {
         uiType: 'gio-headers-array',
       },
     },
+
+    headers2: {
+      type: 'array',
+      title: 'HTTP Headers',
+      description: 'Default HTTP headers added or overridden by the API gateway to upstream',
+      items: {
+        type: 'object',
+        title: 'Header',
+        properties: {
+          name: {
+            type: 'string',
+            title: 'Name',
+          },
+          value: {
+            type: 'string',
+            title: 'Value',
+          },
+        },
+        required: ['name', 'value'],
+      },
+      gioConfig: {
+        uiType: 'gio-headers-array',
+        uiTypeProps: {
+          el: 'key',
+        },
+      },
+    },
   },
   required: ['booleanRequired'],
 };

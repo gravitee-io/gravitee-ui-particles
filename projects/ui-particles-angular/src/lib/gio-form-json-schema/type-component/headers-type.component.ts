@@ -16,7 +16,7 @@
 import { Component } from '@angular/core';
 import { FieldType, FieldTypeConfig, FormlyFieldProps } from '@ngx-formly/core';
 
-import { FormHeaderFieldMapper } from '../../gio-form-headers/gio-form-headers.component';
+import { FormHeaderConfig, FormHeaderFieldMapper, isFormHeaderElConfig } from '../../gio-form-headers/gio-form-headers.component';
 
 type HeadersProps = FormlyFieldProps & {
   // The key and value names of the output array
@@ -27,6 +27,7 @@ type HeadersProps = FormlyFieldProps & {
     keyName: string;
     valueName: string;
   };
+  config: FormHeaderConfig;
 };
 
 @Component({
@@ -53,7 +54,7 @@ type HeadersProps = FormlyFieldProps & {
       }
       @if (!collapse) {
         <div class="wrapper__rows" [class.collapse-open]="collapse" [class.collapse-close]="!collapse">
-          <gio-form-headers [headerFieldMapper]="outputConfig" [formControl]="formControl"/>
+          <gio-form-headers [headerFieldMapper]="outputConfig" [config]="{ el: elConfig }" [formControl]="formControl" />
         </div>
       }
     </div>
@@ -65,6 +66,9 @@ export class GioFjsHeadersTypeComponent extends FieldType<FieldTypeConfig<Header
   public override defaultOptions?: Partial<FieldTypeConfig<HeadersProps>> | undefined = {
     props: {
       outputConfig: this.outputConfig,
+      config: {
+        el: 'neither',
+      },
     },
   };
 
@@ -75,5 +79,10 @@ export class GioFjsHeadersTypeComponent extends FieldType<FieldTypeConfig<Header
       keyName: 'name',
       valueName: 'value',
     };
+  }
+
+  public get elConfig(): HeadersProps['config']['el'] {
+    const elConfig = (this.props as never)?.['config']?.['el'];
+    return isFormHeaderElConfig(elConfig) ? elConfig : 'neither';
   }
 }
