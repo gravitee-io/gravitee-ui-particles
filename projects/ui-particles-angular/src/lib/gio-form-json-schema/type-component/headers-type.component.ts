@@ -35,21 +35,27 @@ type HeadersProps = FormlyFieldProps & {
     <div class="wrapper">
       <div class="wrapper__header">
         <div class="wrapper__header__text">
-          <div class="wrapper__header__text__title" *ngIf="to.label">{{ to.label }}</div>
-          <p *ngIf="to.description">{{ to.description }}</p>
+          @if (props.label) {
+            <div class="wrapper__header__text__title">{{ props.label }}</div>
+          }
+          @if (props.description) {
+            <p>{{ props.description }}</p>
+          }
         </div>
         <div class="wrapper__header__collapse">
           <button type="button" mat-icon-button aria-label="Collapse" (click)="collapse = !collapse">
-            <mat-icon [class.collapse-open]="collapse" [class.collapse-close]="!collapse" svgIcon="gio:nav-arrow-down"></mat-icon>
+            <mat-icon [class.collapse-open]="collapse" [class.collapse-close]="!collapse" svgIcon="gio:nav-arrow-down" />
           </button>
         </div>
       </div>
-      <div class="wrapper__error" *ngIf="showError && formControl.errors">
-        <formly-validation-message [field]="field"></formly-validation-message>
-      </div>
-      <div *ngIf="!collapse" class="wrapper__rows" [class.collapse-open]="collapse" [class.collapse-close]="!collapse">
-        <gio-form-headers [headerFieldMapper]="outputConfig" [formControl]="formControl"></gio-form-headers>
-      </div>
+      @if (showError && formControl.errors) {
+        <formly-validation-message [field]="field" />
+      }
+      @if (!collapse) {
+        <div class="wrapper__rows" [class.collapse-open]="collapse" [class.collapse-close]="!collapse">
+          <gio-form-headers [headerFieldMapper]="outputConfig" [formControl]="formControl"/>
+        </div>
+      }
     </div>
   `,
   styleUrls: ['./headers-type.component.scss'],

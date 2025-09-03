@@ -24,46 +24,47 @@
     </tr>
   </thead>
   <tbody formArrayName="headers">
-    <tr
-      *ngFor="let control of headersFormArray.controls; index as headerIndex"
-      class="gio-form-headers__table__header-row"
-      [formGroupName]="headerIndex"
-    >
-      <td class="gio-form-headers__table__header-row__td-key">
-        <div class="gio-form-headers__table__header-row__td-key__field">
-          <textarea
-            formControlName="key"
-            matInput
-            placeholder="Name..."
-            cdkTextareaAutosize
-            cdkAutosizeMinRows="1"
-            [matAutocomplete]="headerNamesAutocomplete"
-            [matAutocompleteDisabled]="autocompleteDisabled"
-          ></textarea>
-        </div>
-        <mat-error *ngIf="control.get('key')?.hasError('pattern')">
-          Header name must not contain spaces. (RegExp: {{ control.get('key')?.getError('pattern')?.requiredPattern }})
-        </mat-error>
-        <mat-autocomplete #headerNamesAutocomplete="matAutocomplete">
-          <mat-option *ngFor="let headerName of getFilteredHeaderNames(headerIndex, control.value) | async" [value]="headerName">{{
-            headerName
-          }}</mat-option>
-        </mat-autocomplete>
-      </td>
-      <td class="gio-form-headers__table__header-row__td-value">
-        <div class="gio-form-headers__table__header-row__td-value__field">
-          <textarea formControlName="value" matInput placeholder="Value..." cdkTextareaAutosize cdkAutosizeMinRows="1"></textarea>
-        </div>
-        <button
-          class="gio-form-headers__table__header-row__td-value__button"
-          *ngIf="headersFormArray.controls.length - 1 !== headerIndex"
-          mat-icon-button
-          aria-label="Delete"
-          (click)="onDeleteHeader(headerIndex)"
-        >
-          <mat-icon svgIcon="gio:cancel"></mat-icon>
-        </button>
-      </td>
-    </tr>
+    @for (control of headersFormArray.controls; track control; let headerIndex = $index) {
+      <tr class="gio-form-headers__table__header-row" [formGroupName]="headerIndex" >
+        <td class="gio-form-headers__table__header-row__td-key">
+          <div class="gio-form-headers__table__header-row__td-key__field">
+            <textarea
+              formControlName="key"
+              matInput
+              placeholder="Name..."
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="1"
+              [matAutocomplete]="headerNamesAutocomplete"
+              [matAutocompleteDisabled]="autocompleteDisabled"
+            ></textarea>
+          </div>
+          @if (control.get('key')?.hasError('pattern')) {
+            <mat-error>
+              Header name must not contain spaces. (RegExp: {{ control.get('key')?.getError('pattern')?.requiredPattern }})
+            </mat-error>
+          }
+          <mat-autocomplete #headerNamesAutocomplete="matAutocomplete">
+            @for (headerName of getFilteredHeaderNames(headerIndex, control.value) | async; track headerName) {
+              <mat-option [value]="headerName">{{ headerName }}</mat-option>
+            }
+          </mat-autocomplete>
+        </td>
+        <td class="gio-form-headers__table__header-row__td-value">
+          <div class="gio-form-headers__table__header-row__td-value__field">
+            <textarea formControlName="value" matInput placeholder="Value..." cdkTextareaAutosize cdkAutosizeMinRows="1"></textarea>
+          </div>
+          @if (headersFormArray.controls.length - 1 !== headerIndex) {
+            <button
+              class="gio-form-headers__table__header-row__td-value__button"
+              mat-icon-button
+              aria-label="Delete"
+              (click)="onDeleteHeader(headerIndex)"
+            >
+              <mat-icon svgIcon="gio:cancel" />
+            </button>
+          }
+        </td>
+      </tr>
+    }
   </tbody>
 </table>
