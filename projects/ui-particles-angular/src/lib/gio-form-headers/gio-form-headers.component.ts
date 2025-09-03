@@ -15,7 +15,7 @@
  */
 
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { Component, ElementRef, forwardRef, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, forwardRef, HostBinding, inject, Input, OnInit } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -32,12 +32,20 @@ import { dropRight, isEmpty } from 'lodash';
 import { map, startWith, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
+import { ElColumns, GioUiTypeConfig } from '../gio-form-json-schema/model/GioJsonSchema';
+import { GioElService } from '../gio-el';
+
 export type Header = { key: string; value: string };
 
 export type FormHeaderFieldMapper = {
   keyName: string;
   valueName: string;
 };
+
+export function isFormHeaderElConfig(value: unknown): value is ElColumns {
+  const validValues = ['key', 'value', 'both', 'neither'];
+  return validValues.includes(value as string);
+}
 
 const HEADER_NAMES = [
   'Accept',
@@ -132,10 +140,15 @@ const HEADER_NAMES = [
   standalone: false,
 })
 export class GioFormHeadersComponent implements OnInit, ControlValueAccessor, Validator {
+  private readonly elService = inject(GioElService);
   @Input()
   public headerFieldMapper: FormHeaderFieldMapper = {
     keyName: 'key',
     valueName: 'value',
+  };
+  @Input()
+  public config: GioUiTypeConfig['uiTypeProps'] = {
+    elColumns: 'neither',
   };
 
   @Input()
@@ -295,6 +308,10 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor, Va
   public onDeleteHeader(headerIndex: number): void {
     this._onTouched();
     this.headersFormArray.removeAt(headerIndex);
+  }
+
+  public isElEnabled(): boolean {
+    return this.elService.isEnabled();
   }
 
   private addEmptyHeader() {

@@ -65,6 +65,8 @@ export class GioPopoverComponent {
       },
     ]);
 
+    this.trigger.nativeElement.hidden = false;
+
     this.overlayRef = this.overlay.create({
       positionStrategy,
       hasBackdrop: this.closeOnBackdropClick,
@@ -79,6 +81,10 @@ export class GioPopoverComponent {
   }
 
   public close(): void {
+    const nativeElement = this.trigger?.nativeElement;
+    if (nativeElement) {
+      nativeElement.hidden = false;
+    }
     this.overlayRef?.detach();
     this.overlayRef?.dispose();
     this.overlayRef = null;
