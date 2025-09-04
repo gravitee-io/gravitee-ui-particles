@@ -1,3 +1,10 @@
+# [15.9.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.8.1...v15.9.0) (2025-09-04)
+
+
+### Features
+
+* emit event on tag clicked in gio-form-tags-input ([26435d3](https://github.com/gravitee-io/gravitee-ui-particles/commit/26435d3df1b70ed485924a390956ece34064c784))
+
 ## [15.8.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.8.0...v15.8.1) (2025-09-01)
 
 
