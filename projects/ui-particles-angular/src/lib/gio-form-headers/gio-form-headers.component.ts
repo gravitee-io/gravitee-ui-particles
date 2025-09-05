@@ -39,6 +39,15 @@ export type FormHeaderFieldMapper = {
   valueName: string;
 };
 
+export type FormHeaderConfig = {
+  el: 'key' | 'value' | 'both' | 'neither';
+};
+
+export function isFormHeaderElConfig(value: unknown): value is 'key' | 'value' | 'both' | 'neither' {
+  const validValues = ['key', 'value', 'both', 'neither'];
+  return validValues.includes(value as string);
+}
+
 const HEADER_NAMES = [
   'Accept',
   'Accept-Charset',
@@ -136,6 +145,10 @@ export class GioFormHeadersComponent implements OnInit, ControlValueAccessor, Va
   public headerFieldMapper: FormHeaderFieldMapper = {
     keyName: 'key',
     valueName: 'value',
+  };
+  @Input()
+  public config: FormHeaderConfig = {
+    el: 'neither',
   };
 
   @Input()

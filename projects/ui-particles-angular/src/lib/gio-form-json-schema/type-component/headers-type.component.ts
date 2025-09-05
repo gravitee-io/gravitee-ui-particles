@@ -16,7 +16,7 @@
 import { Component } from '@angular/core';
 import { FieldType, FieldTypeConfig, FormlyFieldProps } from '@ngx-formly/core';
 
-import { FormHeaderFieldMapper } from '../../gio-form-headers/gio-form-headers.component';
+import { FormHeaderConfig, FormHeaderFieldMapper, isFormHeaderElConfig } from '../../gio-form-headers/gio-form-headers.component';
 
 type HeadersProps = FormlyFieldProps & {
   // The key and value names of the output array
@@ -27,6 +27,7 @@ type HeadersProps = FormlyFieldProps & {
     keyName: string;
     valueName: string;
   };
+  config: FormHeaderConfig;
 };
 
 @Component({
@@ -35,21 +36,27 @@ type HeadersProps = FormlyFieldProps & {
     <div class="wrapper">
       <div class="wrapper__header">
         <div class="wrapper__header__text">
-          <div class="wrapper__header__text__title" *ngIf="to.label">{{ to.label }}</div>
-          <p *ngIf="to.description">{{ to.description }}</p>
+          @if (props.label) {
+            <div class="wrapper__header__text__title">{{ props.label }}</div>
+          }
+          @if (props.description) {
+            <p>{{ props.description }}</p>
+          }
         </div>
         <div class="wrapper__header__collapse">
           <button type="button" mat-icon-button aria-label="Collapse" (click)="collapse = !collapse">
-            <mat-icon [class.collapse-open]="collapse" [class.collapse-close]="!collapse" svgIcon="gio:nav-arrow-down"></mat-icon>
+            <mat-icon [class.collapse-open]="collapse" [class.collapse-close]="!collapse" svgIcon="gio:nav-arrow-down" />
           </button>
         </div>
       </div>
-      <div class="wrapper__error" *ngIf="showError && formControl.errors">
-        <formly-validation-message [field]="field"></formly-validation-message>
-      </div>
-      <div *ngIf="!collapse" class="wrapper__rows" [class.collapse-open]="collapse" [class.collapse-close]="!collapse">
-        <gio-form-headers [headerFieldMapper]="outputConfig" [formControl]="formControl"></gio-form-headers>
-      </div>
+      @if (showError && formControl.errors) {
+        <formly-validation-message [field]="field" />
+      }
+      @if (!collapse) {
+        <div class="wrapper__rows" [class.collapse-open]="collapse" [class.collapse-close]="!collapse">
+          <gio-form-headers [headerFieldMapper]="outputConfig" [config]="{ el: elConfig }" [formControl]="formControl" />
+        </div>
+      }
     </div>
   `,
   styleUrls: ['./headers-type.component.scss'],
@@ -59,6 +66,9 @@ export class GioFjsHeadersTypeComponent extends FieldType<FieldTypeConfig<Header
   public override defaultOptions?: Partial<FieldTypeConfig<HeadersProps>> | undefined = {
     props: {
       outputConfig: this.outputConfig,
+      config: {
+        el: 'neither',
+      },
     },
   };
 
@@ -69,5 +79,10 @@ export class GioFjsHeadersTypeComponent extends FieldType<FieldTypeConfig<Header
       keyName: 'name',
       valueName: 'value',
     };
+  }
+
+  public get elConfig(): HeadersProps['config']['el'] {
+    const elConfig = (this.props as never)?.['config']?.['el'];
+    return isFormHeaderElConfig(elConfig) ? elConfig : 'neither';
   }
 }
