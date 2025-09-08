@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Inject } from '@angular/core';
+import { Component, inject, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { cloneDeep, uniqueId } from 'lodash';
@@ -23,7 +23,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { GioBannerModule, GioFormSlideToggleModule, GioFormTagsInputModule, GioIconsModule } from '@gravitee/ui-particles-angular';
+import {
+  GioBannerModule,
+  GioElPromptComponent,
+  GioElService,
+  GioFormSlideToggleModule,
+  GioFormTagsInputModule,
+  GioIconsModule,
+  GioPopoverComponent,
+  PopoverTriggerDirective,
+} from '@gravitee/ui-particles-angular';
 
 import { GioPolicyStudioFlowFormDialogResult } from '../gio-ps-flow-form-dialog-result.model';
 import { ConditionSelector, HttpMethod, HttpMethods, HttpSelector } from '../../../models';
@@ -51,6 +60,9 @@ const METHODS_AUTOCOMPLETE: HttpMethodVM[] = ['ALL', ...HttpMethods];
     GioBannerModule,
     GioIconsModule,
     GioFormTagsInputModule,
+    GioElPromptComponent,
+    GioPopoverComponent,
+    PopoverTriggerDirective,
   ],
   selector: 'gio-ps-flow-proxy-form-dialog',
   templateUrl: './gio-ps-flow-proxy-form-dialog.component.html',
@@ -62,6 +74,7 @@ export class GioPolicyStudioFlowProxyFormDialogComponent {
   public existingFlow?: FlowVM;
   public mode: 'create' | 'edit' = 'create';
   public methods = METHODS_AUTOCOMPLETE;
+  private readonly elService = inject(GioElService);
 
   constructor(
     public dialogRef: MatDialogRef<GioPolicyStudioFlowProxyFormDialogComponent, GioPolicyStudioFlowFormDialogResult>,
@@ -118,6 +131,10 @@ export class GioPolicyStudioFlowProxyFormDialogComponent {
 
   public tagValidationHook(tag: string, validationCb: (shouldAddTag: boolean) => void) {
     validationCb(METHODS_AUTOCOMPLETE.map(m => `${m}`).includes(tag.toUpperCase()));
+  }
+
+  public isEnabled(): boolean {
+    return this.elService.isEnabled();
   }
 }
 
