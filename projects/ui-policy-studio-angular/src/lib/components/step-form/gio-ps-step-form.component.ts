@@ -13,17 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { catchError, map, takeUntil } from 'rxjs/operators';
 import { Observable, of, Subject } from 'rxjs';
 import {
   GioBannerModule,
+  GioElPromptComponent,
+  GioElService,
   GioFormJsonSchemaComponent,
   GioFormJsonSchemaModule,
   GioJsonSchema,
   GioJsonSchemaContext,
   GioLoaderModule,
+  GioPopoverComponent,
+  PopoverTriggerDirective,
 } from '@gravitee/ui-particles-angular';
 import { isEmpty } from 'lodash';
 import { CommonModule } from '@angular/common';
@@ -31,6 +35,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { GioAsciidoctorModule } from '@gravitee/ui-particles-angular/gio-asciidoctor';
 import { MarkdownComponent } from 'ngx-markdown';
+import { MatIcon } from '@angular/material/icon';
 
 import { ApiType, FlowPhase, GenericPolicy, isPolicy, isSharedPolicyGroupPolicy, Step, toPolicy } from '../../models';
 import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.service';
@@ -47,6 +52,10 @@ import { PolicyDocumentation } from '../../policy-studio/gio-policy-studio.model
     GioLoaderModule,
     GioBannerModule,
     MarkdownComponent,
+    GioElPromptComponent,
+    GioPopoverComponent,
+    MatIcon,
+    PopoverTriggerDirective,
   ],
   selector: 'gio-ps-step-form',
   templateUrl: './gio-ps-step-form.component.html',
@@ -54,6 +63,7 @@ import { PolicyDocumentation } from '../../policy-studio/gio-policy-studio.model
 })
 export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDestroy {
   private readonly noDocumentationAvailable: PolicyDocumentation = { content: 'No documentation available.', language: 'ASCIIDOC' };
+  private readonly elService = inject(GioElService);
 
   @Input()
   public readOnly = false;
@@ -176,5 +186,9 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
       messageCondition: this.stepForm?.get('messageCondition')?.value ?? undefined,
       configuration,
     });
+  }
+
+  public isEnabled(): boolean {
+    return this.elService.isEnabled();
   }
 }
