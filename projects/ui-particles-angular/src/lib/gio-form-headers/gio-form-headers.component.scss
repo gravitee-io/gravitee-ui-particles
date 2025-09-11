@@ -36,6 +36,10 @@ $typography: map.get(gio.$mat-theme, typography);
   }
 }
 
+.gio-form-headers__table__header-row__td-value__button {
+  display: block;
+}
+
 .gio-form-headers {
   &__table {
     width: 100%;
@@ -91,7 +95,6 @@ $typography: map.get(gio.$mat-theme, typography);
 
     &__header-row:hover .gio-form-headers__table__header-row__td-value__button {
       z-index: 110;
-      display: block;
       background-color: mat.m2-get-color-from-palette(gio.$mat-basic-palette, white);
       opacity: 0.9;
     }

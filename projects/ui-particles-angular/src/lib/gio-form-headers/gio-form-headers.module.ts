@@ -23,7 +23,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatOptionModule } from '@angular/material/core';
 
 import { GioIconsModule } from '../gio-icons/gio-icons.module';
-import { GioElPromptComponent } from '../gio-el';
+import { GioElAssistantComponent, GioElPromptComponent } from '../gio-el';
 import { GioPopoverComponent, PopoverTriggerDirective } from '../gio-popover';
 
 import { GioFormHeadersComponent } from './gio-form-headers.component';
@@ -42,6 +42,7 @@ import { GioFormHeadersLabelComponent } from './gio-form-headers-label.component
     GioElPromptComponent,
     GioPopoverComponent,
     PopoverTriggerDirective,
+    GioElAssistantComponent,
   ],
   declarations: [GioFormHeadersComponent, GioFormHeadersLabelComponent],
   exports: [GioFormHeadersComponent, GioFormHeadersLabelComponent],

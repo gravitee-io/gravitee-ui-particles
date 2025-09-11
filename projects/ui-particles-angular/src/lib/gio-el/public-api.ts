@@ -15,5 +15,6 @@
  */
 
 export * from './gio-el-prompt/gio-el-prompt.component';
+export * from './gio-el-assistant/gio-el-assistant.component';
 export * from './models/ElAiPromptState';
 export * from './gio-el.service';
