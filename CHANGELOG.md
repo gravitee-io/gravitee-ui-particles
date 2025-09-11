@@ -1,3 +1,10 @@
+## [13.12.5](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.12.4...v13.12.5) (2025-09-11)
+
+
+### Bug Fixes
+
+* monaco editor with cypress ([3a15623](https://github.com/gravitee-io/gravitee-ui-particles/commit/3a156234ce37eb58779c0fd9062e8e0d83cb2c03))
+
 ## [13.12.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v13.12.3...v13.12.4) (2025-08-08)
 
 
