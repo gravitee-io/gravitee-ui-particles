@@ -1,3 +1,12 @@
+# [15.10.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.9.0...v15.10.0) (2025-09-11)
+
+
+### Features
+
+* add el assistant on some el compatible field ([fee7683](https://github.com/gravitee-io/gravitee-ui-particles/commit/fee7683dc0080f03368ea9f6d0a38cad5c358683))
+* add possibility to set EL assist to form-header ([f51d762](https://github.com/gravitee-io/gravitee-ui-particles/commit/f51d7623f5bdc09e43fbbf4a3d4a4d9f1a52644b))
+* create gio-el-assistant to simplify usage of el prompt ([a21847a](https://github.com/gravitee-io/gravitee-ui-particles/commit/a21847a7f61c98d0bbde7d17190532733ab364f1))
+
 # [15.9.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.8.1...v15.9.0) (2025-09-04)
 
 
