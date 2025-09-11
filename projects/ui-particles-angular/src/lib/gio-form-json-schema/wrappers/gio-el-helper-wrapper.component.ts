@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, TemplateRef, ViewChild, AfterViewInit, inject } from '@angular/core';
+import { Component, TemplateRef, ViewChild, AfterViewInit } from '@angular/core';
 import { FieldWrapper, FormlyFieldConfig } from '@ngx-formly/core';
-
-import { GioElService } from '../../gio-el';
 
 @Component({
   selector: 'gio-el-wrapper-wrapper',
@@ -24,21 +22,12 @@ import { GioElService } from '../../gio-el';
     <ng-container #fieldComponent></ng-container>
 
     <ng-template #matSuffix>
-      @if (isEnabled()) {
-        <button gioPopoverTrigger [gioPopoverTriggerFor]="aiPopover" type="button">
-          <mat-icon svgIcon="gio:el" />
-        </button>
-
-        <gio-popover #aiPopover [closeOnBackdropClick]="true">
-          <gio-el-prompt />
-        </gio-popover>
-      }
+      <gio-el-assistant />
     </ng-template>
   `,
   standalone: false,
 })
 export class GioElHelperWrapperComponent extends FieldWrapper implements AfterViewInit {
-  private readonly elService = inject(GioElService);
   @ViewChild('matSuffix', { static: true })
   public matSuffix!: TemplateRef<unknown>;
   public hide = true;
@@ -47,10 +36,6 @@ export class GioElHelperWrapperComponent extends FieldWrapper implements AfterVi
     if (this.matSuffix) {
       this.props.suffix = this.matSuffix;
     }
-  }
-
-  public isEnabled(): boolean {
-    return this.elService.isEnabled();
   }
 }
 

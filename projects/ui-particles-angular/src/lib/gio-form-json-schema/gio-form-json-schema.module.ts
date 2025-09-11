@@ -30,6 +30,7 @@ import { GioMonacoEditorModule } from '../gio-monaco-editor/gio-monaco-editor.mo
 import { GioFormCronModule } from '../gio-form-cron/gio-form-cron.module';
 import { GioPopoverComponent, PopoverTriggerDirective } from '../gio-popover';
 import { GioElPromptComponent } from '../gio-el/gio-el-prompt/gio-el-prompt.component';
+import { GioElAssistantComponent } from '../gio-el';
 
 import { GioFjsNullTypeComponent } from './type-component/null-type.component';
 import { GioFjsObjectTypeComponent } from './type-component/object-type.component';
@@ -150,6 +151,7 @@ import { elHelpExtension, GioElHelperWrapperComponent } from './wrappers/gio-el-
 
     MatSlideToggleModule,
     MatButtonModule,
+    GioElAssistantComponent,
   ],
   exports: [GioFormJsonSchemaComponent, FormlyModule],
   providers: [GioFormlyJsonSchemaService],
