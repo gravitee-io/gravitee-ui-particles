@@ -1,3 +1,10 @@
+## [15.10.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.10.1...v15.10.2) (2025-09-12)
+
+
+### Bug Fixes
+
+* fix el assistant in policy condition ([8ffd486](https://github.com/gravitee-io/gravitee-ui-particles/commit/8ffd4860d4e8d4d09415dab5a2a92782a09e04db))
+
 ## [15.10.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.10.0...v15.10.1) (2025-09-12)
 
 
