@@ -1,3 +1,10 @@
+## [15.10.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.10.0...v15.10.1) (2025-09-12)
+
+
+### Bug Fixes
+
+* clean up the component ([5374b95](https://github.com/gravitee-io/gravitee-ui-particles/commit/5374b95d2ac3092dbdd58d0956db9611c663097a))
+
 # [15.10.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.9.0...v15.10.0) (2025-09-11)
 
 
