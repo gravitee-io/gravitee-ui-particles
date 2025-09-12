@@ -15,11 +15,11 @@
  */
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { Component, importProvidersFrom, Input } from '@angular/core';
+import { Component, importProvidersFrom, inject, Input, provideAppInitializer } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { action } from '@storybook/addon-actions';
 import { of } from 'rxjs';
-import { GIO_DIALOG_WIDTH, GioFormJsonSchemaModule } from '@gravitee/ui-particles-angular';
+import { GIO_DIALOG_WIDTH, GioElService, GioFormJsonSchemaModule } from '@gravitee/ui-particles-angular';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { fakeTestPolicy, fakeTestPolicyStep, POLICIES_V4_UNREGISTERED_ICON } from '../../models/index-testing';
@@ -87,6 +87,10 @@ export default {
         matIconRegisterProvider(POLICIES_V4_UNREGISTERED_ICON.map(policy => ({ id: policy.id, svg: policy.icon }))),
         { provide: GioPolicyStudioService, useValue: provideGioPolicyStudioService() },
         importProvidersFrom(GioFormJsonSchemaModule),
+        GioElService,
+        provideAppInitializer(() => {
+          inject(GioElService).promptCallback = () => of({ el: 'Hello world!' });
+        }),
       ],
     }),
   ],

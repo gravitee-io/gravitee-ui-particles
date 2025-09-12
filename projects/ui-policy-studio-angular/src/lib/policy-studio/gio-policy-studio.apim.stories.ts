@@ -17,8 +17,8 @@ import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/an
 import { action } from '@storybook/addon-actions';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { importProvidersFrom } from '@angular/core';
-import { GioFormJsonSchemaModule } from '@gravitee/ui-particles-angular';
+import { importProvidersFrom, inject, provideAppInitializer } from '@angular/core';
+import { GioElService, GioFormJsonSchemaModule } from '@gravitee/ui-particles-angular';
 
 import { matIconRegisterProvider } from '../../storybook-utils/mat-icon-register.provider';
 import {
@@ -62,6 +62,10 @@ export default {
       providers: [
         matIconRegisterProvider(POLICIES_V4_UNREGISTERED_ICON.map(policy => ({ id: policy.id, svg: policy.icon }))),
         importProvidersFrom(GioFormJsonSchemaModule),
+        GioElService,
+        provideAppInitializer(() => {
+          inject(GioElService).promptCallback = () => of({ el: 'Hello world!' });
+        }),
       ],
     }),
   ],

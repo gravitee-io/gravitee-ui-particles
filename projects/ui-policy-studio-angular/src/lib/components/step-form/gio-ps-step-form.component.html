@@ -31,15 +31,7 @@
         <mat-label>Trigger condition</mat-label>
         <input matInput formControlName="condition" />
         <mat-hint>The condition to execute this policy. Supports Expression Language.</mat-hint>
-        @if (isEnabled()) {
-          <button gioPopoverTrigger [gioPopoverTriggerFor]="aiPopover" type="button">
-            <mat-icon svgIcon="gio:el" />
-          </button>
-
-          <gio-popover #aiPopover [closeOnBackdropClick]="true">
-            <gio-el-prompt />
-          </gio-popover>
-        }
+        <gio-el-assistant matSuffix />
       </mat-form-field>
 
       @if (isMessage) {
@@ -47,15 +39,7 @@
           <mat-label>Message trigger condition</mat-label>
           <input matInput formControlName="messageCondition" />
           <mat-hint>The condition to execute this policy on message. Supports Expression Language.</mat-hint>
-          @if (isEnabled()) {
-            <button gioPopoverTrigger [gioPopoverTriggerFor]="aiPopover" type="button">
-              <mat-icon svgIcon="gio:el" />
-            </button>
-
-            <gio-popover #aiPopover [closeOnBackdropClick]="true">
-              <gio-el-prompt />
-            </gio-popover>
-          }
+          <gio-el-assistant matSuffix />
         </mat-form-field>
       }
 
