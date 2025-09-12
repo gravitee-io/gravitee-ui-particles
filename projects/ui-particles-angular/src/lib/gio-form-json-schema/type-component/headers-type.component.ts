@@ -16,20 +16,20 @@
 import { Component } from '@angular/core';
 import { FieldType, FieldTypeConfig, FormlyFieldProps } from '@ngx-formly/core';
 
-import { FormHeaderFieldMapper, isFormHeaderElConfig } from '../../gio-form-headers/gio-form-headers.component';
-import { ElColumns, GioUiTypeConfig } from '../model/GioJsonSchema';
+import { FormHeaderFieldMapper } from '../../gio-form-headers/gio-form-headers.component';
+import { GioUiTypeConfig } from '../model/GioJsonSchema';
 
-type HeadersProps = FormlyFieldProps & {
-  // The key and value names of the output array
-  // Default: { keyName: 'name', valueName: 'value' }
-  // 📝 Note : For now this config is not editable by json-schema gioConfig. If it becomes
-  //           necessary it is possible to change the GioUiTypeConfig to pass this config.
-  outputConfig: {
-    keyName: string;
-    valueName: string;
+type HeadersProps = FormlyFieldProps &
+  GioUiTypeConfig['uiTypeProps'] & {
+    // The key and value names of the output array
+    // Default: { keyName: 'name', valueName: 'value' }
+    // 📝 Note : For now this config is not editable by json-schema gioConfig. If it becomes
+    //           necessary it is possible to change the GioUiTypeConfig to pass this config.
+    outputConfig: {
+      keyName: string;
+      valueName: string;
+    };
   };
-  config: GioUiTypeConfig['uiTypeProps'];
-};
 
 @Component({
   selector: 'gio-fjs-headers-type',
@@ -55,7 +55,11 @@ type HeadersProps = FormlyFieldProps & {
       }
       @if (!collapse) {
         <div class="wrapper__rows" [class.collapse-open]="collapse" [class.collapse-close]="!collapse">
-          <gio-form-headers [headerFieldMapper]="outputConfig" [config]="{ elColumns: elConfig }" [formControl]="formControl" />
+          <gio-form-headers
+            [headerFieldMapper]="outputConfig"
+            [config]="{ elColumns: props?.elColumns ?? 'neither' }"
+            [formControl]="formControl"
+          />
         </div>
       }
     </div>
@@ -67,9 +71,7 @@ export class GioFjsHeadersTypeComponent extends FieldType<FieldTypeConfig<Header
   public override defaultOptions?: Partial<FieldTypeConfig<HeadersProps>> | undefined = {
     props: {
       outputConfig: this.outputConfig,
-      config: {
-        elColumns: 'neither',
-      },
+      elColumns: 'neither',
     },
   };
 
@@ -80,10 +82,5 @@ export class GioFjsHeadersTypeComponent extends FieldType<FieldTypeConfig<Header
       keyName: 'name',
       valueName: 'value',
     };
-  }
-
-  public get elConfig(): ElColumns {
-    const elConfig: GioUiTypeConfig['uiTypeProps'] = JSON.parse(JSON.stringify(this.props));
-    return isFormHeaderElConfig(elConfig?.elColumns) ? elConfig?.elColumns : 'neither';
   }
 }
