@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, inject, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { cloneDeep, uniqueId } from 'lodash';
@@ -22,15 +22,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import {
-  GioBannerModule,
-  GioElPromptComponent,
-  GioElService,
-  GioFormSlideToggleModule,
-  GioIconsModule,
-  GioPopoverComponent,
-  PopoverTriggerDirective,
-} from '@gravitee/ui-particles-angular';
+import { GioBannerModule, GioElAssistantComponent, GioFormSlideToggleModule, GioIconsModule } from '@gravitee/ui-particles-angular';
 import { MatInputModule } from '@angular/material/input';
 
 import { GioPolicyStudioFlowFormDialogResult } from '../gio-ps-flow-form-dialog-result.model';
@@ -55,9 +47,7 @@ export type GioPolicyStudioFlowMessageFormDialogData = {
     GioFormSlideToggleModule,
     GioBannerModule,
     GioIconsModule,
-    GioElPromptComponent,
-    GioPopoverComponent,
-    PopoverTriggerDirective,
+    GioElAssistantComponent,
   ],
   selector: 'gio-ps-flow-message-form-dialog',
   templateUrl: './gio-ps-flow-message-form-dialog.component.html',
@@ -69,7 +59,6 @@ export class GioPolicyStudioFlowMessageFormDialogComponent {
 
   public existingFlow?: FlowVM;
   public mode: 'create' | 'edit' = 'create';
-  private readonly elService = inject(GioElService);
 
   constructor(
     public dialogRef: MatDialogRef<GioPolicyStudioFlowMessageFormDialogComponent, GioPolicyStudioFlowFormDialogResult>,
@@ -126,9 +115,5 @@ export class GioPolicyStudioFlowMessageFormDialogComponent {
     this.dialogRef.close({
       ...flowToSave,
     });
-  }
-
-  public isEnabled(): boolean {
-    return this.elService.isEnabled();
   }
 }

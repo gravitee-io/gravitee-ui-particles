@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, EventEmitter, inject, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { catchError, map, takeUntil } from 'rxjs/operators';
 import { Observable, of, Subject } from 'rxjs';
 import {
   GioBannerModule,
+  GioElAssistantComponent,
   GioElPromptComponent,
-  GioElService,
   GioFormJsonSchemaComponent,
   GioFormJsonSchemaModule,
   GioJsonSchema,
@@ -56,6 +56,7 @@ import { PolicyDocumentation } from '../../policy-studio/gio-policy-studio.model
     GioPopoverComponent,
     MatIcon,
     PopoverTriggerDirective,
+    GioElAssistantComponent,
   ],
   selector: 'gio-ps-step-form',
   templateUrl: './gio-ps-step-form.component.html',
@@ -63,7 +64,6 @@ import { PolicyDocumentation } from '../../policy-studio/gio-policy-studio.model
 })
 export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDestroy {
   private readonly noDocumentationAvailable: PolicyDocumentation = { content: 'No documentation available.', language: 'ASCIIDOC' };
-  private readonly elService = inject(GioElService);
 
   @Input()
   public readOnly = false;
@@ -186,9 +186,5 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
       messageCondition: this.stepForm?.get('messageCondition')?.value ?? undefined,
       configuration,
     });
-  }
-
-  public isEnabled(): boolean {
-    return this.elService.isEnabled();
   }
 }

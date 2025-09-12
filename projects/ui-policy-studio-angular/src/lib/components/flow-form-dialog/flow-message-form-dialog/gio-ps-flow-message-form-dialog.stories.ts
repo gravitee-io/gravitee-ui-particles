@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { Component, Input } from '@angular/core';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { Component, inject, Input, provideAppInitializer } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { action } from '@storybook/addon-actions';
-import { GIO_DIALOG_WIDTH } from '@gravitee/ui-particles-angular';
+import { GIO_DIALOG_WIDTH, GioElService } from '@gravitee/ui-particles-angular';
+import { of } from 'rxjs';
 
 import { FlowVM } from '../../../policy-studio/gio-policy-studio.model';
 import { fakeChannelFlow, fakeHTTPGetMessageEntrypoint, fakeSSEMessageEntrypoint } from '../../../models/index-testing';
@@ -87,6 +88,14 @@ export default {
     moduleMetadata({
       declarations: [GioPolicyStudioFlowMessageFormDialogStoryComponent],
       imports: [GioPolicyStudioFlowMessageFormDialogComponent, MatDialogModule],
+    }),
+    applicationConfig({
+      providers: [
+        GioElService,
+        provideAppInitializer(() => {
+          inject(GioElService).promptCallback = () => of({ el: 'Hello world!' });
+        }),
+      ],
     }),
   ],
   argTypes: {},
