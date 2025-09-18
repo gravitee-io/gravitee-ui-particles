@@ -63,7 +63,7 @@ export class GioElPromptComponent implements AfterViewInit {
   public aiRequestFormGroup: FormGroup<{
     prompt: FormControl<string | null>;
   }> = new FormGroup({
-    prompt: new FormControl('', [Validators.required, Validators.max(this.maxPromptSize)]),
+    prompt: new FormControl('', [Validators.required, Validators.maxLength(this.maxPromptSize)]),
   });
   public elService: GioElService = inject(GioElService);
 
@@ -71,6 +71,9 @@ export class GioElPromptComponent implements AfterViewInit {
   public responseState: WritableSignal<PromptState | null> = signal(null);
   @ViewChild('promptArea') public myInput!: ElementRef<HTMLInputElement>;
 
+  public get prompt() {
+    return this.aiRequestFormGroup.get('prompt');
+  }
   public el: Signal<string | null> = computed(() => {
     const state = this.responseState();
     return isPromptSuccess(state) ? state.el : null;
