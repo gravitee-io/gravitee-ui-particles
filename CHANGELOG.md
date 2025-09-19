@@ -1,3 +1,10 @@
+## [15.10.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.10.2...v15.10.3) (2025-09-19)
+
+
+### Bug Fixes
+
+* el assistant validation form ([73bf501](https://github.com/gravitee-io/gravitee-ui-particles/commit/73bf50151052136916f3f4b30e3acf3d4d1a9d2a))
+
 ## [15.10.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.10.1...v15.10.2) (2025-09-12)
 
 
