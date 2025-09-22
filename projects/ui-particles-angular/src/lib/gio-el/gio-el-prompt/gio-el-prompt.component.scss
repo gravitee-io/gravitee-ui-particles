@@ -54,3 +54,45 @@ code {
 gio-banner-error {
   overflow-wrap: anywhere;
 }
+
+.feedback-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.feedback-question {
+  flex: 1;
+}
+
+.feedback-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.feedback-button {
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &--helpful {
+    color: mat.m2-get-color-from-palette(gio.$mat-success-palette, default);
+
+    &:hover {
+      background-color: mat.m2-get-color-from-palette(gio.$mat-success-palette, lighter80, 0.4);
+    }
+  }
+
+  &--not-helpful {
+    color: mat.m2-get-color-from-palette(gio.$mat-error-palette, default);
+
+    &:hover {
+      background-color: mat.m2-get-color-from-palette(gio.$mat-error-palette, lighter80, 0.4);
+    }
+  }
+}

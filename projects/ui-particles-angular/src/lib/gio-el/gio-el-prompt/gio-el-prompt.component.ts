@@ -32,14 +32,16 @@ import { MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconButton } from '@angular/material/button';
 
 import { GioElService } from '../gio-el.service';
-import { ElAiPromptState, isPromptError, isPromptSuccess } from '../models/ElAiPromptState';
+import { ElAiPromptState, isPromptError, isPromptSuccess, FeedbackRequestId } from '../models/ElAiPromptState';
 import { GioIconsModule } from '../../gio-icons/gio-icons.module';
 import { GioBannerModule } from '../../gio-banner/gio-banner.module';
 import { GioClipboardModule } from '../../gio-clipboard/gio-clipboard.module';
 
 type PromptState = 'loading' | ElAiPromptState;
+type FeedbackState = 'helpful' | 'not-helpful' | null;
 
 @Component({
   selector: 'gio-el-prompt',
@@ -52,6 +54,7 @@ type PromptState = 'loading' | ElAiPromptState;
     MatButton,
     MatProgressBarModule,
     MatTooltipModule,
+    MatIconButton,
     GioIconsModule,
     GioBannerModule,
     GioClipboardModule,
@@ -71,6 +74,8 @@ export class GioElPromptComponent implements AfterViewInit {
   public responseState: WritableSignal<PromptState | null> = signal(null);
   @ViewChild('promptArea') public myInput!: ElementRef<HTMLInputElement>;
 
+  public feedbackState: WritableSignal<FeedbackState> = signal(null);
+
   public get prompt() {
     return this.aiRequestFormGroup.get('prompt');
   }
@@ -78,9 +83,20 @@ export class GioElPromptComponent implements AfterViewInit {
     const state = this.responseState();
     return isPromptSuccess(state) ? state.el : null;
   });
+
+  public feedbackRequestId: Signal<FeedbackRequestId | null> = computed(() => {
+    const state = this.responseState();
+    return isPromptSuccess(state) ? state.feedbackRequestId || null : null;
+  });
   public errorMessage: Signal<string | null> = computed(() => {
     const state = this.responseState();
     return isPromptError(state) ? state.message : null;
+  });
+
+  public showFeedback: Signal<boolean> = computed(() => {
+    const state = this.responseState();
+    const feedback = this.feedbackState();
+    return isPromptSuccess(state) && feedback === null;
   });
 
   public ngAfterViewInit() {
@@ -95,6 +111,16 @@ export class GioElPromptComponent implements AfterViewInit {
       return;
     }
     this.responseState.set('loading');
+    this.feedbackState.set(null);
     this.elService.prompt(prompt).subscribe(reply => this.responseState.set(reply));
+  }
+
+  public submitFeedback(feedback: 'helpful' | 'not-helpful') {
+    this.feedbackState.set(feedback);
+    const expression = this.el();
+    const feedbackRequestId = this.feedbackRequestId();
+    if (expression) {
+      this.elService.submitFeedback(feedback, feedbackRequestId || undefined).subscribe();
+    }
   }
 }
