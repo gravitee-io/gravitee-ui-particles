@@ -155,6 +155,7 @@ const icons = [
   'folder-topics',
   'gateway-cloud',
   'gateway-self-hosted',
+  'gcp',
   'gift',
   'git',
   'git-branch',
