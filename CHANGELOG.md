@@ -1,3 +1,10 @@
+# [15.11.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.10.3...v15.11.0) (2025-09-22)
+
+
+### Features
+
+* add gcp icon ([d737c2b](https://github.com/gravitee-io/gravitee-ui-particles/commit/d737c2b035acfef463a2b1191bdd5c080f4ebc56))
+
 ## [15.10.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.10.2...v15.10.3) (2025-09-19)
 
 
