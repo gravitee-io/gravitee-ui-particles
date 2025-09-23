@@ -1,3 +1,10 @@
+## [15.11.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.11.0...v15.11.1) (2025-09-23)
+
+
+### Bug Fixes
+
+* **el-assistant:** ensure to wrap the result of prompt ([469c867](https://github.com/gravitee-io/gravitee-ui-particles/commit/469c8677240112dd01f926b324dd28d952d149ea))
+
 # [15.11.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.10.3...v15.11.0) (2025-09-22)
 
 
