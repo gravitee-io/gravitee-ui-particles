@@ -46,3 +46,11 @@ $background: map.get(gio.$mat-basic-palette, white);
   align-items: center;
   justify-content: space-between;
 }
+
+code {
+  overflow-wrap: anywhere;
+}
+
+gio-banner-error {
+  overflow-wrap: anywhere;
+}
