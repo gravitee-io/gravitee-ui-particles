@@ -1,3 +1,10 @@
+## [15.11.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.11.1...v15.11.2) (2025-09-24)
+
+
+### Bug Fixes
+
+* **console-ui:** resize images in application dropdown for consistent alignment ([2b85188](https://github.com/gravitee-io/gravitee-ui-particles/commit/2b85188e0c121b02e66f40c5c6a786572c220222))
+
 ## [15.11.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.11.0...v15.11.1) (2025-09-23)
 
 
