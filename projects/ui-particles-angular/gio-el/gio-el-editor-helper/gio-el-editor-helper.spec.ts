@@ -24,11 +24,45 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
-import { GioElEditorDialogHarness } from '../gio-el-editor-dialog/gio-el-editor-dialog.harness';
+import { GioElConditionBuilderDialogHarness } from '../gio-el-condition-builder-dialog/gio-el-condition-builder-dialog.harness';
+import { GioElService } from '../gio-el.service';
+import { ElProperties } from '../models/ElProperties';
 
 import { GioElEditorHelperToggleComponent } from './gio-el-editor-helper-toggle.component';
 import { GioElEditorHelperInputDirective } from './gio-el-editor-helper-input.directive';
 import { GioElEditorHelperToggleHarness } from './gio-el-editor-helper-toggle.harness';
+
+const FAKE_EL_PROPERTIES: ElProperties = [
+  {
+    field: 'api',
+    label: 'Api',
+    properties: [
+      {
+        field: 'id',
+        label: 'Id',
+        type: 'string',
+      },
+      {
+        field: 'name',
+        label: 'Name',
+        type: 'string',
+      },
+      {
+        field: 'properties',
+        label: 'Properties',
+        type: 'Map',
+        valueProperty: {
+          type: 'string',
+        },
+      },
+      {
+        field: 'version',
+        label: 'Version',
+        type: 'string',
+      },
+    ],
+  },
+];
 
 @Component({
   selector: 'gio-story-component',
@@ -64,6 +98,9 @@ describe('GioElEditorHelperComponent', () => {
       imports: [NoopAnimationsModule, MatIconTestingModule],
     }).compileComponents();
 
+    const elService = TestBed.inject(GioElService);
+    elService.setElProperties('ALL', FAKE_EL_PROPERTIES);
+
     fixture = TestBed.createComponent(TestHelperComponent);
     fixture.detectChanges();
     loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
@@ -73,7 +110,7 @@ describe('GioElEditorHelperComponent', () => {
     const elEditorHelperToggle = await loader.getHarness(GioElEditorHelperToggleHarness);
     await elEditorHelperToggle.open();
 
-    const dialog = await loader.getHarnessOrNull(GioElEditorDialogHarness);
+    const dialog = await loader.getHarnessOrNull(GioElConditionBuilderDialogHarness);
     expect(dialog).toBeTruthy();
   });
 
@@ -86,13 +123,18 @@ describe('GioElEditorHelperComponent', () => {
     expect(await elEditorHelperToggle.isDisabled()).toBe(false);
   });
 
-  it('should update form control value when el editor dialog is saved', async () => {
+  it('should update form control value when el condition builder dialog is saved', async () => {
     const elEditorHelperToggle = await loader.getHarness(GioElEditorHelperToggleHarness);
     await elEditorHelperToggle.open();
 
-    const dialog = await loader.getHarness(GioElEditorDialogHarness);
-    await dialog.confirmMyAction();
+    const dialog = await loader.getHarness(GioElConditionBuilderDialogHarness);
+    const elEditor = await dialog.getElConditionBuilderHarness().then(elEditor => elEditor.getMainConditionGroup());
+    await elEditor.clickAddNewConditionButton();
+    await elEditor.selectConditionField(0, 'Id');
+    await elEditor.selectConditionOperator(0, 'Equals');
+    await elEditor.setConditionValue(0, 'What the 🦊 say ?');
+    await dialog.confirm();
 
-    expect(fixture.componentInstance.formControl.value).toEqual('What the 🦊 say ?');
+    expect(fixture.componentInstance.formControl.value).toEqual('{ #api.id == "What the 🦊 say ?" }');
   });
 });
