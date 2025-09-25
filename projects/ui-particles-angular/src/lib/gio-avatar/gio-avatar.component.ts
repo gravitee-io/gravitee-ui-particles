@@ -48,6 +48,8 @@ export class GioAvatarComponent implements AfterViewInit, OnChanges {
 
   public ngOnChanges(): void {
     this.finalSize = this.size || this.defaultSize;
+    this.width = this.finalSize;
+    this.height = this.finalSize;
   }
 
   public ngAfterViewInit(): void {
