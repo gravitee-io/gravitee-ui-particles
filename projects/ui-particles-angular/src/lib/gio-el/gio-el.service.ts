@@ -16,13 +16,21 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { ElAiPromptState } from './models/ElAiPromptState';
+import { ElAiPromptState, FeedbackRequestId } from './models/ElAiPromptState';
+
+export type FeedbackType = 'helpful' | 'not-helpful';
+
+export interface FeedbackSubmission {
+  feedback: FeedbackType;
+  feedbackRequestId?: FeedbackRequestId;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class GioElService {
   private _promptCallback?: (prompt: string) => Observable<ElAiPromptState> = undefined;
+  private _feedbackCallback?: (feedbackSubmission: FeedbackSubmission) => Observable<void> = undefined;
 
   public prompt(prompt: string): Observable<ElAiPromptState> {
     if (this._promptCallback === undefined) {
@@ -35,6 +43,22 @@ export class GioElService {
 
   public set promptCallback(value: (prompt: string) => Observable<ElAiPromptState>) {
     this._promptCallback = value;
+  }
+
+  public submitFeedback(feedback: FeedbackType, feedbackRequestId?: FeedbackRequestId): Observable<void> {
+    const feedbackSubmission: FeedbackSubmission = {
+      feedback,
+      feedbackRequestId,
+    };
+
+    if (this._feedbackCallback === undefined) {
+      return of(undefined);
+    }
+    return this._feedbackCallback(feedbackSubmission);
+  }
+
+  public set feedbackCallback(value: (feedbackSubmission: FeedbackSubmission) => Observable<void>) {
+    this._feedbackCallback = value;
   }
 
   public isEnabled(): boolean {

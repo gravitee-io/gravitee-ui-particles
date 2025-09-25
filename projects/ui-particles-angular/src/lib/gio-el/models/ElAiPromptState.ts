@@ -18,6 +18,13 @@ export type ElAiPromptState = PromptSuccess | PromptError;
 
 export interface PromptSuccess {
   el: string;
+  feedbackRequestId?: FeedbackRequestId;
+}
+
+export interface FeedbackRequestId {
+  chatId: string;
+  userMessageId: string;
+  agentMessageId: string;
 }
 
 export function isPromptSuccess(value: unknown): value is PromptSuccess {

@@ -42,6 +42,31 @@
     <gio-banner-success>
       <code gioClipboardCopyWrapper [contentToCopy]="expression" [alwaysVisible]="true">{{ expression }}</code>
     </gio-banner-success>
+    @if (showFeedback()) {
+      <gio-banner-info>
+        <div class="feedback-container">
+          <span class="feedback-question">Was the answer helpful?</span>
+          <div class="feedback-buttons">
+            <button
+              mat-icon-button
+              (click)="submitFeedback('helpful')"
+              matTooltip="Yes, this was helpful"
+              class="feedback-button feedback-button--helpful"
+            >
+              <mat-icon svgIcon="gio:thumbs-up"></mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              (click)="submitFeedback('not-helpful')"
+              matTooltip="No, this was not helpful"
+              class="feedback-button feedback-button--not-helpful"
+            >
+              <mat-icon svgIcon="gio:thumbs-down"></mat-icon>
+            </button>
+          </div>
+        </div>
+      </gio-banner-info>
+    }
   }
   @if (errorMessage(); as message) {
     <gio-banner-error>
