@@ -1,3 +1,10 @@
+## [14.2.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v14.2.2...v14.2.3) (2025-09-25)
+
+
+### Bug Fixes
+
+* resize images in application dropdown for consistent alignment ([2ca2d8c](https://github.com/gravitee-io/gravitee-ui-particles/commit/2ca2d8ca30cab00a5c3468e773a470b5162216a9))
+
 ## [14.2.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v14.2.1...v14.2.2) (2025-07-18)
 
 
