@@ -1,3 +1,10 @@
+# [15.12.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.11.2...v15.12.0) (2025-09-29)
+
+
+### Features
+
+* test implementation of el generation feedback ([e0e9750](https://github.com/gravitee-io/gravitee-ui-particles/commit/e0e97502f0a41c7e6c1eaa33587d16e06b04f415))
+
 ## [15.11.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.11.1...v15.11.2) (2025-09-24)
 
 
