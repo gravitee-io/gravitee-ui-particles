@@ -13,5 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { MatInputHarness } from '@angular/material/input/testing';
 
-export * from './gio-el-condition-builder/models/public-api';
+import { GioElConditionTypeComponentHarness } from '../gio-el-condition-type.harness';
+
+export class GioElConditionTypeStringHarness extends GioElConditionTypeComponentHarness {
+  public static hostSelector = 'gio-el-condition-type-string';
+
+  public async getValue(): Promise<string> {
+    const input = await this.locatorFor(MatInputHarness)();
+    return await input.getValue();
+  }
+
+  public async setValue(value: string): Promise<void> {
+    const input = await this.locatorFor(MatInputHarness)();
+    await input.setValue(value);
+  }
+}
