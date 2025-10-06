@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-export type ApiType = 'MESSAGE' | 'PROXY' | 'NATIVE';
+export type ApiType = 'MESSAGE' | 'LLM_PROXY' | 'MCP_PROXY' | 'PROXY' | 'NATIVE';
