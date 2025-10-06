@@ -159,6 +159,40 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
     PROXY__SUBSCRIBE: null, // n/a
     PROXY__CONNECT: null, // n/a
     PROXY__INTERACT: null, // n/a
+    // LLM Proxy
+    LLM_PROXY__REQUEST: {
+      name: 'Request phase',
+      description: 'Policies will be applied during the connection establishment',
+      startConnectorName: 'Incoming request',
+      endConnectorName: 'Outgoing request',
+    },
+    LLM_PROXY__RESPONSE: {
+      name: 'Response phase',
+      description: 'Policies will be applied to the response from the initial connection.',
+      startConnectorName: 'Incoming response',
+      endConnectorName: 'Outgoing response',
+    },
+    LLM_PROXY__PUBLISH: null, // n/a
+    LLM_PROXY__SUBSCRIBE: null, // n/a
+    LLM_PROXY__CONNECT: null, // n/a
+    LLM_PROXY__INTERACT: null, // n/a
+    // MCP Proxy
+    MCP_PROXY__REQUEST: {
+      name: 'Request phase',
+      description: 'Policies will be applied during the connection establishment',
+      startConnectorName: 'Incoming request',
+      endConnectorName: 'Outgoing request',
+    },
+    MCP_PROXY__RESPONSE: {
+      name: 'Response phase',
+      description: 'Policies will be applied to the response from the initial connection.',
+      startConnectorName: 'Incoming response',
+      endConnectorName: 'Outgoing response',
+    },
+    MCP_PROXY__PUBLISH: null, // n/a
+    MCP_PROXY__SUBSCRIBE: null, // n/a
+    MCP_PROXY__CONNECT: null, // n/a
+    MCP_PROXY__INTERACT: null, // n/a
     // HTTP Message
     MESSAGE__REQUEST: {
       name: 'Request phase',
