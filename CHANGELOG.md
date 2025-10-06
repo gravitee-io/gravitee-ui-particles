@@ -1,3 +1,10 @@
+# [15.13.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.12.0...v15.13.0) (2025-10-06)
+
+
+### Features
+
+* add LLM_PROXY and MCP_PROXY API type ([b68987e](https://github.com/gravitee-io/gravitee-ui-particles/commit/b68987e51740bd5f801c9ef7176ceb730ec6dedb))
+
 # [15.12.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.11.2...v15.12.0) (2025-09-29)
 
 
