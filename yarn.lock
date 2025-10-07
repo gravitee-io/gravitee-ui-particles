@@ -435,17 +435,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/cdk@npm:19.2.7":
-  version: 19.2.7
-  resolution: "@angular/cdk@npm:19.2.7"
+"@angular/cdk@npm:20.2.7":
+  version: 20.2.7
+  resolution: "@angular/cdk@npm:20.2.7"
   dependencies:
-    parse5: "npm:^7.1.2"
+    parse5: "npm:^8.0.0"
     tslib: "npm:^2.3.0"
   peerDependencies:
-    "@angular/common": ^19.0.0 || ^20.0.0
-    "@angular/core": ^19.0.0 || ^20.0.0
+    "@angular/common": ^20.0.0 || ^21.0.0
+    "@angular/core": ^20.0.0 || ^21.0.0
     rxjs: ^6.5.3 || ^7.4.0
-  checksum: 10/a0ac12a4fb9a8c4f2d06ec963ad54b67b75a6edce06c9f0c895eda0702dbe899b701f64e7c2f75f0ad3dc5c3d323206c16d3cf9b03d985f440c5178e7ba88f15
+  checksum: 10/9d45253ee8c6445542679b1a33ffce8c5d05d7b3983f66c291be69c183bf7d047a1dbe4253542fc26c963080a0c379791beb38bff8236cdaa1b3ad9f16aa94a0
   languageName: node
   linkType: hard
 
@@ -11573,7 +11573,7 @@ __metadata:
     "@angular-eslint/template-parser": "npm:18.3.0"
     "@angular/animations": "npm:20.3.3"
     "@angular/build": "npm:^20.3.4"
-    "@angular/cdk": "npm:19.2.7"
+    "@angular/cdk": "npm:20.2.7"
     "@angular/cli": "npm:20.3.4"
     "@angular/common": "npm:20.3.3"
     "@angular/compiler": "npm:20.3.3"
@@ -16749,7 +16749,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parse5@npm:^7.0.0, parse5@npm:^7.1.1, parse5@npm:^7.1.2":
+"parse5@npm:^7.0.0, parse5@npm:^7.1.1":
   version: 7.1.2
   resolution: "parse5@npm:7.1.2"
   dependencies:
