@@ -67,12 +67,12 @@
   },
   "devDependencies": {
     "@angular-builders/jest": "20.0.0",
-    "@angular-devkit/build-angular": "20.3.4",
     "@angular-eslint/builder": "18.3.0",
     "@angular-eslint/eslint-plugin": "18.3.0",
     "@angular-eslint/eslint-plugin-template": "18.3.0",
     "@angular-eslint/schematics": "18.3.0",
     "@angular-eslint/template-parser": "18.3.0",
+    "@angular/build": "^20.3.4",
     "@angular/cli": "20.3.4",
     "@angular/compiler-cli": "20.3.3",
     "@chromatic-com/storybook": "^1.6.1",
