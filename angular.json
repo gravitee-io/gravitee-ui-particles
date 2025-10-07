@@ -15,7 +15,7 @@
       "prefix": "gio",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "project": "projects/ui-analytics/ng-package.json"
           },
@@ -51,7 +51,7 @@
       "prefix": "gio",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "project": "projects/ui-particles-angular/ng-package.json"
           },
@@ -87,7 +87,7 @@
       "prefix": "gio",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "project": "projects/ui-policy-studio-angular/ng-package.json"
           },
