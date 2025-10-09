@@ -31,8 +31,8 @@ import { strings } from '@angular-devkit/core';
 import { buildDefaultPath, getWorkspace } from '@schematics/angular/utility/workspace';
 import { validateHtmlSelector } from '@schematics/angular/utility/validation';
 import { findModuleFromOptions } from '@schematics/angular/utility/find-module';
-import { ProjectDefinition } from '@angular-devkit/core/src/workspace';
 import { Schema } from '../schema';
+import { ProjectDefinition } from "@angular-devkit/core/src/workspace/definitions";
 
 function buildSelector(options: Schema, projectPrefix: string) {
   let selector = strings.dasherize(options.name);
