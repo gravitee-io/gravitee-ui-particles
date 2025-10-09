@@ -2449,8 +2449,8 @@ __metadata:
     tslib: "npm:^2.6.3"
     typescript: "npm:5.5.4"
   peerDependencies:
-    "@angular/common": ^17.2.0
-    "@angular/core": ^17.2.0
+    "@angular/common": ^20.3.4
+    "@angular/core": ^20.3.4
   languageName: unknown
   linkType: soft
 
