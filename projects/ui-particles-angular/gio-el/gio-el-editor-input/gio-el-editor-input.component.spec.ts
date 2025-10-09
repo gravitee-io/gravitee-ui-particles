@@ -24,12 +24,59 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { GioMonacoEditorHarness, GioMonacoEditorModule } from '@gravitee/ui-particles-angular';
 
-import { GioElEditorDialogHarness } from '../gio-el-editor-dialog/gio-el-editor-dialog.harness';
+import { GioElConditionBuilderDialogHarness } from '../gio-el-condition-builder-dialog/gio-el-condition-builder-dialog.harness';
 import { GioElEditorHelperInputDirective } from '../gio-el-editor-helper/gio-el-editor-helper-input.directive';
 import { GioElEditorHelperToggleComponent } from '../gio-el-editor-helper/gio-el-editor-helper-toggle.component';
 import { GioElEditorHelperToggleHarness } from '../gio-el-editor-helper/gio-el-editor-helper-toggle.harness';
+import { ElProperties } from '../models/ElProperties';
+import { GioElService } from '../gio-el.service';
 
 import { GioElEditorInputComponent } from './gio-el-editor-input.component';
+
+const FAKE_EL_PROPERTIES: ElProperties = [
+  {
+    field: 'api',
+    label: 'Api',
+    properties: [
+      {
+        field: 'id',
+        label: 'Id',
+        type: 'string',
+      },
+      {
+        field: 'name',
+        label: 'Name',
+        type: 'string',
+      },
+      {
+        field: 'properties',
+        label: 'Properties',
+        type: 'Map',
+        valueProperty: {
+          type: 'string',
+          values: ['a', 'b', 'c'],
+        },
+      },
+      {
+        field: 'mapmap',
+        label: 'Map<Map<string>>',
+        type: 'Map',
+        valueProperty: {
+          type: 'Map',
+          valueProperty: {
+            type: 'string',
+            values: ['a', 'b', 'c'],
+          },
+        },
+      },
+      {
+        field: 'version',
+        label: 'Version',
+        type: 'string',
+      },
+    ],
+  },
+];
 
 @Component({
   selector: 'gio-story-component',
@@ -66,6 +113,9 @@ describe('GioElEditorInputComponent', () => {
       providers: [importProvidersFrom(GioMonacoEditorModule)],
     }).compileComponents();
 
+    const elService = TestBed.inject(GioElService);
+    elService.setElProperties('ALL', FAKE_EL_PROPERTIES);
+
     fixture = TestBed.createComponent(TestHelperComponent);
     fixture.detectChanges();
     loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
@@ -92,13 +142,18 @@ describe('GioElEditorInputComponent', () => {
     expect(await elEditorHelperToggle.isDisabled()).toBe(false);
   });
 
-  it('should update form control value when el editor dialog is saved', async () => {
+  it('should update form control value when el condition builder dialog is saved', async () => {
     const elEditorHelperToggle = await loader.getHarness(GioElEditorHelperToggleHarness);
     await elEditorHelperToggle.open();
 
-    const dialog = await loader.getHarness(GioElEditorDialogHarness);
-    await dialog.confirmMyAction();
+    const dialog = await loader.getHarness(GioElConditionBuilderDialogHarness);
+    const elEditor = await dialog.getElConditionBuilderHarness().then(elEditor => elEditor.getMainConditionGroup());
+    await elEditor.clickAddNewConditionButton();
+    await elEditor.selectConditionField(0, 'Id');
+    await elEditor.selectConditionOperator(0, 'Equals');
+    await elEditor.setConditionValue(0, 'What the 🦊 say ?');
+    await dialog.confirm();
 
-    expect(fixture.componentInstance.formControl.value).toEqual('What the 🦊 say ?');
+    expect(fixture.componentInstance.formControl.value).toEqual('{ #api.id == "What the 🦊 say ?" }');
   });
 });

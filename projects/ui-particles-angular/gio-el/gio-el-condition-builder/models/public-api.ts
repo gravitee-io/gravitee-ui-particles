@@ -14,4 +14,6 @@
  * limitations under the License.
  */
 
-export * from './gio-el-condition-builder/models/public-api';
+export * from './Condition';
+export * from './ExpressionLanguageBuilder';
+export * from './Operator';
