@@ -19,7 +19,7 @@ import { isDate, isEmpty } from 'lodash';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
-import { CommonModule } from '@angular/common';
+
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -28,7 +28,7 @@ import { ConditionForm } from '../../gio-el-editor.component';
 
 @Component({
   selector: 'gio-el-editor-type-date',
-  imports: [CommonModule, MatFormFieldModule, MatSelectModule, MatInputModule, ReactiveFormsModule, MatDatepickerModule],
+  imports: [MatFormFieldModule, MatSelectModule, MatInputModule, ReactiveFormsModule, MatDatepickerModule],
   templateUrl: './gio-el-editor-type-date.component.html',
   styleUrl: './gio-el-editor-type-date.component.scss',
 })

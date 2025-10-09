@@ -1,70 +1,94 @@
 <!--
 
-    Copyright (C) 2023 The Gravitee team (http://gravitee.io)
-    
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-    
-            http://www.apache.org/licenses/LICENSE-2.0
-    
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+Copyright (C) 2023 The Gravitee team (http://gravitee.io)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 -->
-<div *ngIf="flow?.name" class="info">
-  <span class="info__label">Name</span>
-  <span class="info__value strong">{{ flow?.name }}</span>
-</div>
+@if (flow?.name) {
+  <div class="info">
+    <span class="info__label">Name</span>
+    <span class="info__value strong">{{ flow?.name }}</span>
+  </div>
+}
 
-<div *ngIf="entrypoints" class="info">
-  <span class="info__label">Entrypoints</span>
-  <span *ngFor="let entrypoint of entrypoints" class="info__value gio-badge gio-badge-neutral">
-    <mat-icon [svgIcon]="entrypoint.icon"></mat-icon>
-    {{ entrypoint.name }}</span
-  >
-</div>
+@if (entrypoints) {
+  <div class="info">
+    <span class="info__label">Entrypoints</span>
+    @for (entrypoint of entrypoints; track entrypoint) {
+      <span class="info__value gio-badge gio-badge-neutral">
+        <mat-icon [svgIcon]="entrypoint.icon"></mat-icon>
+        {{ entrypoint.name }}</span
+        >
+      }
+    </div>
+  }
 
-<!-- MESSAGE API type -->
+  <!-- MESSAGE API type -->
 
-<div *ngIf="operations" class="info">
-  <span class="info__label">Operations</span>
-  <span *ngFor="let operation of operations" class="info__value gio-badge-neutral"> {{ operation }}</span>
-</div>
+  @if (operations) {
+    <div class="info">
+      <span class="info__label">Operations</span>
+      @for (operation of operations; track operation) {
+        <span class="info__value gio-badge-neutral"> {{ operation }}</span>
+      }
+    </div>
+  }
 
-<div *ngIf="channel" class="info">
-  <span class="info__label">Channel</span>
-  <span class="info__value strong">{{ channel }}</span>
-</div>
+  @if (channel) {
+    <div class="info">
+      <span class="info__label">Channel</span>
+      <span class="info__value strong">{{ channel }}</span>
+    </div>
+  }
 
-<div *ngIf="channelOperator" class="info">
-  <span class="info__label">Channel Operator</span>
-  <span class="info__value gio-badge-neutral">{{ channelOperator }}</span>
-</div>
+  @if (channelOperator) {
+    <div class="info">
+      <span class="info__label">Channel Operator</span>
+      <span class="info__value gio-badge-neutral">{{ channelOperator }}</span>
+    </div>
+  }
 
-<!-- PROXY API type -->
+  <!-- PROXY API type -->
 
-<div *ngIf="path" class="info">
-  <span class="info__label">Path</span>
-  <span class="info__value strong">{{ path }}</span>
-</div>
+  @if (path) {
+    <div class="info">
+      <span class="info__label">Path</span>
+      <span class="info__value strong">{{ path }}</span>
+    </div>
+  }
 
-<div *ngIf="pathOperator" class="info">
-  <span class="info__label">Path Operator</span>
-  <span class="info__value gio-badge-neutral">{{ pathOperator }}</span>
-</div>
+  @if (pathOperator) {
+    <div class="info">
+      <span class="info__label">Path Operator</span>
+      <span class="info__value gio-badge-neutral">{{ pathOperator }}</span>
+    </div>
+  }
 
-<div *ngIf="methods" class="info">
-  <span class="info__label">HTTP methods</span>
-  <span *ngFor="let method of methods" class="info__value method" [ngClass]="method.class"> {{ method.name }}</span>
-</div>
+  @if (methods) {
+    <div class="info">
+      <span class="info__label">HTTP methods</span>
+      @for (method of methods; track method) {
+        <span class="info__value method" [ngClass]="method.class"> {{ method.name }}</span>
+      }
+    </div>
+  }
 
-<!-- Condition -->
+  <!-- Condition -->
 
-<div *ngIf="condition" class="info">
-  <span class="info__label">Condition</span>
-  <span class="info__value gio-badge-neutral condition">{{ condition }}</span>
-</div>
+  @if (condition) {
+    <div class="info">
+      <span class="info__label">Condition</span>
+      <span class="info__value gio-badge-neutral condition">{{ condition }}</span>
+    </div>
+  }

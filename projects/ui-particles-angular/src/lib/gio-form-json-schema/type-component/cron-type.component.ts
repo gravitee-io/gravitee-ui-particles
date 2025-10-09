@@ -23,10 +23,14 @@ type CronProps = FormlyFieldProps;
   selector: 'gio-fjs-code-editor-type',
   template: `
     <gio-form-cron [formControl]="formControl">
-      <gio-form-cron-label *ngIf="props.label">{{ props.label }}</gio-form-cron-label>
-      <gio-form-cron-hint *ngIf="props.description">{{ props.description }}</gio-form-cron-hint>
+      @if (props.label) {
+        <gio-form-cron-label>{{ props.label }}</gio-form-cron-label>
+      }
+      @if (props.description) {
+        <gio-form-cron-hint>{{ props.description }}</gio-form-cron-hint>
+      }
     </gio-form-cron>
-  `,
+    `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,

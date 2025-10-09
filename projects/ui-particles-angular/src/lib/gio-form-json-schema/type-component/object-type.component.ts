@@ -20,18 +20,26 @@ import { FieldType } from '@ngx-formly/core';
   selector: 'gio-fjs-object-type',
   template: `
     <div class="wrapper">
-      <div class="wrapper__title" *ngIf="to.label">{{ to.label }}</div>
-      <p *ngIf="to.description">{{ to.description }}</p>
-      <div class="wrapper__error gio-ng-invalid" *ngIf="showError && formControl.errors">
-        <formly-validation-message [field]="field"></formly-validation-message>
-      </div>
+      @if (to.label) {
+        <div class="wrapper__title">{{ to.label }}</div>
+      }
+      @if (to.description) {
+        <p>{{ to.description }}</p>
+      }
+      @if (showError && formControl.errors) {
+        <div class="wrapper__error gio-ng-invalid">
+          <formly-validation-message [field]="field"></formly-validation-message>
+        </div>
+      }
       <div class="wrapper__fields" [class.noUiBorder]="classNoUiBorder">
-        <ng-container *ngFor="let f of field.fieldGroup">
-          <formly-field *ngIf="f.type" class="wrapper__fields__field" [field]="f"></formly-field>
-        </ng-container>
+        @for (f of field.fieldGroup; track f) {
+          @if (f.type) {
+            <formly-field class="wrapper__fields__field" [field]="f"></formly-field>
+          }
+        }
       </div>
     </div>
-  `,
+    `,
   styleUrls: ['./object-type.component.scss'],
   standalone: false,
 })

@@ -1,51 +1,55 @@
 <!--
 
-    Copyright (C) 2015 The Gravitee team (http://gravitee.io)
+Copyright (C) 2015 The Gravitee team (http://gravitee.io)
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-            http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 -->
 <h2 mat-dialog-title class="title">
   <mat-icon class="title__icon" [svgIcon]="genericPolicy.icon ?? 'gio:puzzle'"></mat-icon>
 
-  <span *ngIf="step.name" class="title__name">
-    {{ step.name }}
-    <span *ngIf="genericPolicy.type === 'SHARED_POLICY_GROUP'" class="gio-badge-neutral policiesCatalog__list__policy__head__badge">
-      <mat-icon svgIcon="gio:users"></mat-icon>&nbsp;Shared Policy Group
-    </span></span
-  >
+  @if (step.name) {
+    <span class="title__name">
+      {{ step.name }}
+      @if (genericPolicy.type === 'SHARED_POLICY_GROUP') {
+        <span class="gio-badge-neutral policiesCatalog__list__policy__head__badge">
+          <mat-icon svgIcon="gio:users"></mat-icon>&nbsp;Shared Policy Group
+        </span>
+        }</span
+        >
+      }
 
-  <button class="title__closeBtn" mat-icon-button aria-label="Close dialog" [mat-dialog-close]="">
-    <mat-icon svgIcon="gio:cancel"></mat-icon>
-  </button>
+      <button class="title__closeBtn" mat-icon-button aria-label="Close dialog" [mat-dialog-close]="">
+        <mat-icon svgIcon="gio:cancel"></mat-icon>
+      </button>
 
-  <div class="title__description">
-    {{ genericPolicy.description }}
-  </div>
-</h2>
+      <div class="title__description">
+        {{ genericPolicy.description }}
+      </div>
+    </h2>
 
-<mat-dialog-content class="content">
-  <gio-ps-step-form
-    [readOnly]="readOnly"
-    [genericPolicy]="genericPolicy"
-    [flowPhase]="flowPhase"
-    [apiType]="apiType"
-    [(step)]="step"
-    (isValid)="isValid = $event"
-  ></gio-ps-step-form>
-</mat-dialog-content>
+    <mat-dialog-content class="content">
+      <gio-ps-step-form
+        [readOnly]="readOnly"
+        [genericPolicy]="genericPolicy"
+        [flowPhase]="flowPhase"
+        [apiType]="apiType"
+        [(step)]="step"
+        (isValid)="isValid = $event"
+      ></gio-ps-step-form>
+    </mat-dialog-content>
 
-<mat-dialog-actions class="actions" align="end">
-  <button class="actions__cancelBtn" mat-button [mat-dialog-close]="">Cancel</button>
-  <button class="actions__saveBtn" color="primary" mat-flat-button role="dialog" (click)="onSave()" [disabled]="!isValid">Save</button>
-</mat-dialog-actions>
+    <mat-dialog-actions class="actions" align="end">
+      <button class="actions__cancelBtn" mat-button [mat-dialog-close]="">Cancel</button>
+      <button class="actions__saveBtn" color="primary" mat-flat-button role="dialog" (click)="onSave()" [disabled]="!isValid">Save</button>
+    </mat-dialog-actions>

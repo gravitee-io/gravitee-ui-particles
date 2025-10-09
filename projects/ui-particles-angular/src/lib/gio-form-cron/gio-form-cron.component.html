@@ -1,207 +1,231 @@
 <!--
 
-    Copyright (C) 2015 The Gravitee team (http://gravitee.io)
+Copyright (C) 2015 The Gravitee team (http://gravitee.io)
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-            http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 -->
 <div class="label"><ng-content select="gio-form-cron-label"></ng-content></div>
 <div class="wrapper" [class.smallDisplay]="smallDisplay" [class.disabled]="isDisabled">
-  <ng-container *ngIf="internalFormGroup" [formGroup]="internalFormGroup">
-    <div class="menu">
-      <mat-button-toggle-group
-        class="gio-button-toggle-group menu__mode"
-        name="mode"
-        aria-label="Cron mode"
-        formControlName="mode"
-        [hideSingleSelectionIndicator]="true"
-      >
-        <mat-button-toggle value="secondly" matTooltip="Secondly" [matTooltipDisabled]="!smallDisplay">{{
-          smallDisplay ? 's' : 'Secondly'
-        }}</mat-button-toggle>
-        <mat-button-toggle value="minutely" matTooltip="Minutely" [matTooltipDisabled]="!smallDisplay">{{
-          smallDisplay ? 'm' : 'Minutely'
-        }}</mat-button-toggle>
-        <mat-button-toggle value="hourly" matTooltip="Hourly" [matTooltipDisabled]="!smallDisplay">{{
-          smallDisplay ? 'h' : 'Hourly'
-        }}</mat-button-toggle>
-        <mat-button-toggle value="daily" matTooltip="Daily" [matTooltipDisabled]="!smallDisplay">{{
-          smallDisplay ? 'D' : 'Daily'
-        }}</mat-button-toggle>
-        <mat-button-toggle value="weekly" matTooltip="Weekly" [matTooltipDisabled]="!smallDisplay">{{
-          smallDisplay ? 'W' : 'Weekly'
-        }}</mat-button-toggle>
-        <mat-button-toggle value="monthly" matTooltip="Monthly" [matTooltipDisabled]="!smallDisplay">{{
-          smallDisplay ? 'M' : 'Monthly'
-        }}</mat-button-toggle>
-        <mat-button-toggle value="custom" matTooltip="Custom" [matTooltipDisabled]="!smallDisplay">{{
-          smallDisplay ? 'C' : 'Custom'
-        }}</mat-button-toggle>
-      </mat-button-toggle-group>
-      <button
-        *ngIf="value && !isDisabled"
-        mat-button
-        aria-label="Clear"
-        matTooltip="Clear"
-        type="button"
-        (click)="onClear({ touched: true })"
-      >
-        <mat-icon>close</mat-icon>
-      </button>
-    </div>
-
-    <ng-container [ngSwitch]="internalFormGroup.get('mode')?.value">
-      <ng-container *ngSwitchCase="'secondly'">
-        <div class="modeForm">
-          <span class="cron-form-label">Every </span>
-          <mat-form-field class="modeForm__field-small">
-            <mat-label>Second</mat-label>
-            <mat-select formControlName="secondInterval">
-              <mat-option *ngFor="let second of seconds" [value]="second">{{ second }}</mat-option>
-            </mat-select>
-          </mat-form-field>
+  @if (internalFormGroup) {
+    <ng-container [formGroup]="internalFormGroup">
+      <div class="menu">
+        <mat-button-toggle-group
+          class="gio-button-toggle-group menu__mode"
+          name="mode"
+          aria-label="Cron mode"
+          formControlName="mode"
+          [hideSingleSelectionIndicator]="true"
+          >
+          <mat-button-toggle value="secondly" matTooltip="Secondly" [matTooltipDisabled]="!smallDisplay">{{
+            smallDisplay ? 's' : 'Secondly'
+          }}</mat-button-toggle>
+          <mat-button-toggle value="minutely" matTooltip="Minutely" [matTooltipDisabled]="!smallDisplay">{{
+            smallDisplay ? 'm' : 'Minutely'
+          }}</mat-button-toggle>
+          <mat-button-toggle value="hourly" matTooltip="Hourly" [matTooltipDisabled]="!smallDisplay">{{
+            smallDisplay ? 'h' : 'Hourly'
+          }}</mat-button-toggle>
+          <mat-button-toggle value="daily" matTooltip="Daily" [matTooltipDisabled]="!smallDisplay">{{
+            smallDisplay ? 'D' : 'Daily'
+          }}</mat-button-toggle>
+          <mat-button-toggle value="weekly" matTooltip="Weekly" [matTooltipDisabled]="!smallDisplay">{{
+            smallDisplay ? 'W' : 'Weekly'
+          }}</mat-button-toggle>
+          <mat-button-toggle value="monthly" matTooltip="Monthly" [matTooltipDisabled]="!smallDisplay">{{
+            smallDisplay ? 'M' : 'Monthly'
+          }}</mat-button-toggle>
+          <mat-button-toggle value="custom" matTooltip="Custom" [matTooltipDisabled]="!smallDisplay">{{
+            smallDisplay ? 'C' : 'Custom'
+          }}</mat-button-toggle>
+        </mat-button-toggle-group>
+        @if (value && !isDisabled) {
+          <button
+            mat-button
+            aria-label="Clear"
+            matTooltip="Clear"
+            type="button"
+            (click)="onClear({ touched: true })"
+            >
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </div>
+      @switch (internalFormGroup.get('mode')?.value) {
+        @case ('secondly') {
+          <div class="modeForm">
+            <span class="cron-form-label">Every </span>
+            <mat-form-field class="modeForm__field-small">
+              <mat-label>Second</mat-label>
+              <mat-select formControlName="secondInterval">
+                @for (second of seconds; track second) {
+                  <mat-option [value]="second">{{ second }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        }
+        @case ('minutely') {
+          <div class="modeForm">
+            <span class="cron-form-label">Every </span>
+            <mat-form-field class="modeForm__field-small">
+              <mat-label>Minute(s)</mat-label>
+              <mat-select formControlName="minuteInterval">
+                @for (minute of minutes; track minute) {
+                  <mat-option [value]="minute">{{ minute }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        }
+        @case ('hourly') {
+          <div class="modeForm">
+            <span class="cron-form-label">Every </span>
+            <mat-form-field class="modeForm__field-small">
+              <mat-label>Hour(s)</mat-label>
+              <mat-select formControlName="hourInterval">
+                @for (hour of hours; track hour) {
+                  <mat-option [value]="hour">{{ hour }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            <span class="cron-form-label">:</span>
+            <mat-form-field class="modeForm__field-small">
+              <mat-label>Minute(s)</mat-label>
+              <mat-select formControlName="minutes">
+                @for (minute of minutes; track minute) {
+                  <mat-option [value]="minute">{{ minute }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        }
+        @case ('daily') {
+          <div class="modeForm">
+            <span class="cron-form-label">Every </span>
+            <mat-form-field class="modeForm__field-small">
+              <mat-label>Day(s)</mat-label>
+              <mat-select formControlName="dayInterval">
+                @for (day of daysOfMonth; track day) {
+                  <mat-option [value]="day">{{ day }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            <span class="cron-form-label"> at </span>
+            <mat-form-field class="modeForm__field-small">
+              <mat-label>Hour(s)</mat-label>
+              <mat-select formControlName="hours">
+                @for (hour of hours; track hour) {
+                  <mat-option [value]="hour">{{ hour }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            <span class="cron-form-label">:</span>
+            <mat-form-field class="modeForm__field-small">
+              <mat-label>Minute(s)</mat-label>
+              <mat-select formControlName="minutes">
+                @for (minute of minutes; track minute) {
+                  <mat-option [value]="minute">{{ minute }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        }
+        @case ('weekly') {
+          <div class="modeForm">
+            <span class="cron-form-label">Every </span>
+            <mat-form-field class="modeForm__field-medium">
+              <mat-label>Day of the week</mat-label>
+              <mat-select formControlName="dayOfWeek">
+                @for (day of daysOfWeek; track day; let index = $index) {
+                  <mat-option [value]="index">{{ day }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            <span class="cron-form-label"> at </span>
+            <mat-form-field class="modeForm__field-small">
+              <mat-label>Hours</mat-label>
+              <mat-select formControlName="hours">
+                @for (hour of hours; track hour) {
+                  <mat-option [value]="hour">{{ hour }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            <span class="cron-form-label">:</span>
+            <mat-form-field class="modeForm__field-small">
+              <mat-label>Minutes</mat-label>
+              <mat-select formControlName="minutes">
+                @for (minute of minutes; track minute) {
+                  <mat-option [value]="minute">{{ minute }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        }
+        @case ('monthly') {
+          <div class="modeForm">
+            <span class="cron-form-label">On the </span>
+            <mat-form-field class="modeForm__field-small">
+              <mat-label>Day(s)</mat-label>
+              <mat-select formControlName="dayOfMonth">
+                @for (day of daysOfMonth; track day) {
+                  <mat-option [value]="day">{{ day }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            <span class="cron-form-label"> of every month at </span>
+            <mat-form-field class="modeForm__field-small">
+              <mat-label>Hours</mat-label>
+              <mat-select formControlName="hours">
+                @for (hour of hours; track hour) {
+                  <mat-option [value]="hour">{{ hour }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            <span class="cron-form-label">:</span>
+            <mat-form-field class="modeForm__field-small">
+              <mat-label>Minutes</mat-label>
+              <mat-select formControlName="minutes">
+                @for (minute of minutes; track minute) {
+                  <mat-option [value]="minute">{{ minute }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        }
+        @case ('custom') {
+          <div class="modeForm">
+            <mat-form-field class="modeForm__field-custom">
+              <mat-label>Cron expression</mat-label>
+              <input matInput formControlName="customExpression" placeholder="* * * * * *" />
+            </mat-form-field>
+          </div>
+        }
+      }
+      @if (value) {
+        <div class="preview">
+          @if (internalFormGroup.get('mode')?.value !== 'custom') {
+            <span class="preview__value">
+              {{ value }}
+            </span>
+          }
+          <span class="preview__hint">{{ expressionDescription }}</span>
         </div>
-      </ng-container>
-
-      <ng-container *ngSwitchCase="'minutely'">
-        <div class="modeForm">
-          <span class="cron-form-label">Every </span>
-          <mat-form-field class="modeForm__field-small">
-            <mat-label>Minute(s)</mat-label>
-            <mat-select formControlName="minuteInterval">
-              <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </ng-container>
-
-      <ng-container *ngSwitchCase="'hourly'">
-        <div class="modeForm">
-          <span class="cron-form-label">Every </span>
-          <mat-form-field class="modeForm__field-small">
-            <mat-label>Hour(s)</mat-label>
-            <mat-select formControlName="hourInterval">
-              <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <span class="cron-form-label">:</span>
-          <mat-form-field class="modeForm__field-small">
-            <mat-label>Minute(s)</mat-label>
-            <mat-select formControlName="minutes">
-              <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </ng-container>
-
-      <ng-container *ngSwitchCase="'daily'">
-        <div class="modeForm">
-          <span class="cron-form-label">Every </span>
-          <mat-form-field class="modeForm__field-small">
-            <mat-label>Day(s)</mat-label>
-            <mat-select formControlName="dayInterval">
-              <mat-option *ngFor="let day of daysOfMonth" [value]="day">{{ day }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <span class="cron-form-label"> at </span>
-          <mat-form-field class="modeForm__field-small">
-            <mat-label>Hour(s)</mat-label>
-            <mat-select formControlName="hours">
-              <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <span class="cron-form-label">:</span>
-          <mat-form-field class="modeForm__field-small">
-            <mat-label>Minute(s)</mat-label>
-            <mat-select formControlName="minutes">
-              <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </ng-container>
-
-      <ng-container *ngSwitchCase="'weekly'">
-        <div class="modeForm">
-          <span class="cron-form-label">Every </span>
-          <mat-form-field class="modeForm__field-medium">
-            <mat-label>Day of the week</mat-label>
-            <mat-select formControlName="dayOfWeek">
-              <mat-option *ngFor="let day of daysOfWeek; let index = index" [value]="index">{{ day }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <span class="cron-form-label"> at </span>
-          <mat-form-field class="modeForm__field-small">
-            <mat-label>Hours</mat-label>
-            <mat-select formControlName="hours">
-              <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <span class="cron-form-label">:</span>
-          <mat-form-field class="modeForm__field-small">
-            <mat-label>Minutes</mat-label>
-            <mat-select formControlName="minutes">
-              <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </ng-container>
-
-      <ng-container *ngSwitchCase="'monthly'">
-        <div class="modeForm">
-          <span class="cron-form-label">On the </span>
-          <mat-form-field class="modeForm__field-small">
-            <mat-label>Day(s)</mat-label>
-            <mat-select formControlName="dayOfMonth">
-              <mat-option *ngFor="let day of daysOfMonth" [value]="day">{{ day }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <span class="cron-form-label"> of every month at </span>
-          <mat-form-field class="modeForm__field-small">
-            <mat-label>Hours</mat-label>
-            <mat-select formControlName="hours">
-              <mat-option *ngFor="let hour of hours" [value]="hour">{{ hour }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <span class="cron-form-label">:</span>
-          <mat-form-field class="modeForm__field-small">
-            <mat-label>Minutes</mat-label>
-            <mat-select formControlName="minutes">
-              <mat-option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </ng-container>
-
-      <ng-container *ngSwitchCase="'custom'">
-        <div class="modeForm">
-          <mat-form-field class="modeForm__field-custom">
-            <mat-label>Cron expression</mat-label>
-            <input matInput formControlName="customExpression" placeholder="* * * * * *" />
-          </mat-form-field>
-        </div>
-      </ng-container>
+      } @else {
+        <div class="placeholder">No cron expression defined.</div>
+      }
     </ng-container>
+  }
 
-    <div *ngIf="value; else placeholder" class="preview">
-      <span *ngIf="internalFormGroup.get('mode')?.value !== 'custom'" class="preview__value">
-        {{ value }}
-      </span>
-      <span class="preview__hint">{{ expressionDescription }}</span>
-    </div>
-  </ng-container>
-
-  <ng-template #placeholder>
-    <div class="placeholder">No cron expression defined.</div>
-  </ng-template>
 </div>
 <div class="hint"><ng-content select="gio-form-cron-hint"></ng-content></div>

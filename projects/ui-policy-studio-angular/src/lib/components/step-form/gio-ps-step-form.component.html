@@ -1,18 +1,18 @@
 <!--
 
-    Copyright (C) 2023 The Gravitee team (http://gravitee.io)
-    
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-    
-            http://www.apache.org/licenses/LICENSE-2.0
-    
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+Copyright (C) 2023 The Gravitee team (http://gravitee.io)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 -->
 
@@ -20,37 +20,39 @@
   <div class="settings__header">Settings</div>
 
   <div class="settings__content">
-    <ng-container *ngIf="stepForm && (policySchema$ | async) as policySchema; else loadingTmpl" [formGroup]="stepForm">
-      <mat-form-field>
-        <mat-label>Description</mat-label>
-        <textarea matInput formControlName="description" cdkFocusInitial></textarea>
-        <mat-hint>Describe how your policy works.</mat-hint>
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Trigger condition</mat-label>
-        <input matInput formControlName="condition" />
-        <mat-hint>The condition to execute this policy. Supports Expression Language.</mat-hint>
-        <gio-el-assistant matSuffix />
-      </mat-form-field>
-
-      @if (isMessage) {
+    @if (stepForm && (policySchema$ | async); as policySchema) {
+      <ng-container [formGroup]="stepForm">
         <mat-form-field>
-          <mat-label>Message trigger condition</mat-label>
-          <input matInput formControlName="messageCondition" />
-          <mat-hint>The condition to execute this policy on message. Supports Expression Language.</mat-hint>
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" cdkFocusInitial></textarea>
+          <mat-hint>Describe how your policy works.</mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Trigger condition</mat-label>
+          <input matInput formControlName="condition" />
+          <mat-hint>The condition to execute this policy. Supports Expression Language.</mat-hint>
           <gio-el-assistant matSuffix />
         </mat-form-field>
-      }
-
-      <gio-form-json-schema
-        *ngIf="policySchema"
-        [jsonSchema]="$any(policySchema)"
-        [context]="context"
-        (ready)="onJsonSchemaReady($event)"
-        formControlName="configuration"
-      ></gio-form-json-schema>
-    </ng-container>
+        @if (isMessage) {
+          <mat-form-field>
+            <mat-label>Message trigger condition</mat-label>
+            <input matInput formControlName="messageCondition" />
+            <mat-hint>The condition to execute this policy on message. Supports Expression Language.</mat-hint>
+            <gio-el-assistant matSuffix />
+          </mat-form-field>
+        }
+        @if (policySchema) {
+          <gio-form-json-schema
+            [jsonSchema]="$any(policySchema)"
+            [context]="context"
+            (ready)="onJsonSchemaReady($event)"
+            formControlName="configuration"
+          ></gio-form-json-schema>
+        }
+      </ng-container>
+    } @else {
+      <gio-loader></gio-loader>
+    }
   </div>
 </div>
 
@@ -58,11 +60,13 @@
   <div class="documentation__header">Documentation</div>
 
   <div class="documentation__content">
-    <gio-banner-warning *ngIf="infoBanner">
-      Prerequisite message
-      <span gioBannerBody>{{ infoBanner }}</span>
-    </gio-banner-warning>
-    <ng-container *ngIf="policyDocumentation$ | async as policyDocumentation; else loadingTmpl">
+    @if (infoBanner) {
+      <gio-banner-warning>
+        Prerequisite message
+        <span gioBannerBody>{{ infoBanner }}</span>
+      </gio-banner-warning>
+    }
+    @if (policyDocumentation$ | async; as policyDocumentation) {
       @switch (policyDocumentation.language) {
         @case ('ASCIIDOC') {
           <gio-asciidoctor [content]="policyDocumentation.content"></gio-asciidoctor>
@@ -71,10 +75,9 @@
           <markdown class="documentation__content__markdown" [data]="policyDocumentation.content"></markdown>
         }
       }
-    </ng-container>
+    } @else {
+      <gio-loader></gio-loader>
+    }
   </div>
 </div>
 
-<ng-template #loadingTmpl>
-  <gio-loader></gio-loader>
-</ng-template>

@@ -13,16 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ChangeDetectorRef, Component, Input, OnChanges, OnDestroy } from '@angular/core';
-import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
-import { FormlyFormOptions } from '@ngx-formly/core';
-import { combineLatest, Subject } from 'rxjs';
-import { debounceTime, startWith, takeUntil, tap } from 'rxjs/operators';
+import {ChangeDetectorRef, Component, Input, OnChanges, OnDestroy} from '@angular/core';
+import {FormControl, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
+import {FormlyFormOptions} from '@ngx-formly/core';
+import {combineLatest, Subject} from 'rxjs';
+import {debounceTime, startWith, takeUntil, tap} from 'rxjs/operators';
 import Ajv from 'ajv';
 
 import GioJsonSchema from './model/GioJsonSchema.json';
-import { FormlyJSONSchema7 } from './model/FormlyJSONSchema7';
-import { GioJsonSchemaContext } from './model/GioJsonSchemaContext';
+import {FormlyJSONSchema7} from './model/FormlyJSONSchema7';
+import {GioJsonSchemaContext} from './model/GioJsonSchemaContext';
+import {MonacoEditorLanguageConfig} from "@gravitee/ui-particles-angular";
 
 const ajv = new Ajv({ strict: false, logger: false });
 @Component({
@@ -61,7 +62,7 @@ export class DemoComponent implements OnChanges, OnDestroy {
   public inputValueControl?: UntypedFormControl;
   public jsonSchemaControl?: UntypedFormControl;
 
-  public monacoEditorJsonSchemaLanguage = {
+  public monacoEditorJsonSchemaLanguage: MonacoEditorLanguageConfig = {
     language: 'json',
     schemas: [
       {
@@ -70,12 +71,8 @@ export class DemoComponent implements OnChanges, OnDestroy {
       },
     ],
   };
-  public monacoEditorJsonLanguage = {
+  public monacoEditorJsonLanguage: MonacoEditorLanguageConfig = {
     language: 'json',
-  };
-
-  public monacoEditorReadonlyOptions = {
-    readOnly: true,
   };
 
   constructor(private changeDetectorRef: ChangeDetectorRef) {}

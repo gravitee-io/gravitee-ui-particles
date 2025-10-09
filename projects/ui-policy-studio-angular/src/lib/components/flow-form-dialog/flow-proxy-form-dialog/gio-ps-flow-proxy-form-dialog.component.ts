@@ -17,7 +17,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { cloneDeep, uniqueId } from 'lodash';
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -45,7 +45,6 @@ const METHODS_AUTOCOMPLETE: HttpMethodVM[] = ['ALL', ...HttpMethods];
 
 @Component({
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatDialogModule,
@@ -57,8 +56,8 @@ const METHODS_AUTOCOMPLETE: HttpMethodVM[] = ['ALL', ...HttpMethods];
     GioBannerModule,
     GioIconsModule,
     GioFormTagsInputModule,
-    GioElAssistantComponent,
-  ],
+    GioElAssistantComponent
+],
   selector: 'gio-ps-flow-proxy-form-dialog',
   templateUrl: './gio-ps-flow-proxy-form-dialog.component.html',
   styleUrls: ['./gio-ps-flow-proxy-form-dialog.component.scss'],

@@ -1,18 +1,18 @@
 <!--
 
-    Copyright (C) 2015 The Gravitee team (http://gravitee.io)
+Copyright (C) 2015 The Gravitee team (http://gravitee.io)
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-            http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 -->
 <div
@@ -21,27 +21,40 @@
   [class.error]="type === 'error'"
   [class.warning]="type === 'warning'"
   [class.success]="type === 'success'"
->
+  >
   <div class="banner__wrapper">
-    <div *ngIf="icon; else defaultTypeIcon" class="banner__wrapper__icon">
-      <mat-icon [svgIcon]="icon"></mat-icon>
-    </div>
-    <ng-template #defaultTypeIcon>
-      <div class="banner__wrapper__icon" [ngSwitch]="type">
-        <mat-icon *ngSwitchCase="'info'" svgIcon="gio:chat-lines"></mat-icon>
-        <mat-icon *ngSwitchCase="'error'" svgIcon="gio:chat-bubble-error"></mat-icon>
-        <mat-icon *ngSwitchCase="'warning'" svgIcon="gio:chat-bubble-warning"></mat-icon>
-        <mat-icon *ngSwitchCase="'success'" svgIcon="gio:chat-bubble-check"></mat-icon>
+    @if (icon) {
+      <div class="banner__wrapper__icon">
+        <mat-icon [svgIcon]="icon"></mat-icon>
       </div>
-    </ng-template>
+    } @else {
+      <div class="banner__wrapper__icon">
+        @switch (type) {
+          @case ('info') {
+            <mat-icon svgIcon="gio:chat-lines"></mat-icon>
+          }
+          @case ('error') {
+            <mat-icon svgIcon="gio:chat-bubble-error"></mat-icon>
+          }
+          @case ('warning') {
+            <mat-icon svgIcon="gio:chat-bubble-warning"></mat-icon>
+          }
+          @case ('success') {
+            <mat-icon svgIcon="gio:chat-bubble-check"></mat-icon>
+          }
+        }
+      </div>
+    }
     <div class="banner__wrapper__head">
       <div class="banner__wrapper__title" [class.collapsible]="collapsible" (click)="toggleCollapse()">
         <ng-content></ng-content>
-        <div *ngIf="collapsible" class="banner__wrapper__title__collapse">
-          <button type="button" mat-icon-button aria-label="Collapse">
-            <mat-icon [class.collapse-open]="collapse" [class.collapse-close]="!collapse" svgIcon="gio:nav-arrow-down"></mat-icon>
-          </button>
-        </div>
+        @if (collapsible) {
+          <div class="banner__wrapper__title__collapse">
+            <button type="button" mat-icon-button aria-label="Collapse">
+              <mat-icon [class.collapse-open]="collapse" [class.collapse-close]="!collapse" svgIcon="gio:nav-arrow-down"></mat-icon>
+            </button>
+          </div>
+        }
       </div>
       <div #body class="banner__wrapper__body" [class.hide]="!body.children.length || (collapsible && !collapse)">
         <ng-content select="[gioBannerBody]"></ng-content>

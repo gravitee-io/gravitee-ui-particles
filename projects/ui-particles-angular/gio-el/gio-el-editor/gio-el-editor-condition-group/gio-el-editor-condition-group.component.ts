@@ -17,7 +17,7 @@ import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/co
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatMenuModule } from '@angular/material/menu';
@@ -34,7 +34,6 @@ import { GioElFieldComponent } from '../gio-el-field/gio-el-field.component';
 @Component({
   selector: 'gio-el-editor-condition-group',
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatSelectModule,
@@ -46,8 +45,8 @@ import { GioElFieldComponent } from '../gio-el-field/gio-el-field.component';
     GioElEditorTypeDateComponent,
     GioElEditorTypeStringComponent,
     GioElEditorTypeNumberComponent,
-    GioElFieldComponent,
-  ],
+    GioElFieldComponent
+],
   templateUrl: './gio-el-editor-condition-group.component.html',
   styleUrl: './gio-el-editor-condition-group.component.scss',
 })

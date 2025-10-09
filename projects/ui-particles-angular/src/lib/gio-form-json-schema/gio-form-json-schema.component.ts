@@ -45,7 +45,11 @@ import { GioJsonSchemaContext } from './model/GioJsonSchemaContext';
 
 @Component({
   selector: 'gio-form-json-schema',
-  template: `<formly-form *ngIf="formGroup" [fields]="fields" [options]="options" [form]="formGroup" [model]="model"></formly-form>`,
+  template: `
+    @if (formGroup) {
+        <formly-form [fields]="fields" [options]="options" [form]="formGroup" [model]="model"></formly-form>
+    }
+  `,
   styleUrls: ['./gio-form-json-schema.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,

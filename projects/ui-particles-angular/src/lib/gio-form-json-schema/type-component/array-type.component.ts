@@ -22,8 +22,12 @@ import { FieldArrayType } from '@ngx-formly/core';
     <div class="wrapper" [class.error]="formControl.touched && formControl.invalid" [class.noUiBorder]="classNoUiBorder">
       <div class="wrapper__header">
         <div class="wrapper__header__text">
-          <div class="wrapper__header__text__title" *ngIf="to.label">{{ to.label }}</div>
-          <p *ngIf="to.description">{{ to.description }}</p>
+          @if (to.label) {
+            <div class="wrapper__header__text__title">{{ to.label }}</div>
+          }
+          @if (to.description) {
+            <p>{{ to.description }}</p>
+          }
         </div>
         <div class="wrapper__header__collapse">
           <button type="button" mat-icon-button aria-label="Collapse" (click)="collapse = !collapse">
@@ -31,21 +35,25 @@ import { FieldArrayType } from '@ngx-formly/core';
           </button>
         </div>
       </div>
-
-      <div class="wrapper__error gio-ng-invalid" *ngIf="showError && formControl.errors">
-        <formly-validation-message [field]="field"></formly-validation-message>
-      </div>
-
-      <div [hidden]="collapse" class="wrapper__rows" [class.collapse-open]="collapse" [class.collapse-close]="!collapse">
-        <div *ngFor="let field of field.fieldGroup; let i = index" class="wrapper__rows__row">
-          <formly-field class="wrapper__rows__row__field" [field]="field"></formly-field>
-          <div class="wrapper__rows__row__remove">
-            <button type="button" mat-icon-button aria-label="Remove" [disabled]="this.formControl?.disabled ?? false" (click)="remove(i)">
-              <mat-icon svgIcon="gio:cancel"></mat-icon>
-            </button>
-          </div>
+    
+      @if (showError && formControl.errors) {
+        <div class="wrapper__error gio-ng-invalid">
+          <formly-validation-message [field]="field"></formly-validation-message>
         </div>
-
+      }
+    
+      <div [hidden]="collapse" class="wrapper__rows" [class.collapse-open]="collapse" [class.collapse-close]="!collapse">
+        @for (field of field.fieldGroup; track field; let i = $index) {
+          <div class="wrapper__rows__row">
+            <formly-field class="wrapper__rows__row__field" [field]="field"></formly-field>
+            <div class="wrapper__rows__row__remove">
+              <button type="button" mat-icon-button aria-label="Remove" [disabled]="this.formControl?.disabled ?? false" (click)="remove(i)">
+                <mat-icon svgIcon="gio:cancel"></mat-icon>
+              </button>
+            </div>
+          </div>
+        }
+    
         <div>
           <button type="button" mat-stroked-button aria-label="Add" [disabled]="this.formControl?.disabled ?? false" (click)="add()">
             <mat-icon svgIcon="gio:plus"></mat-icon> Add
@@ -53,7 +61,7 @@ import { FieldArrayType } from '@ngx-formly/core';
         </div>
       </div>
     </div>
-  `,
+    `,
   styleUrls: ['./array-type.component.scss'],
   standalone: false,
 })

@@ -16,7 +16,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { GioIconsModule } from '@gravitee/ui-particles-angular';
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 
 import { FlowPhase, Step, GenericPolicy, ApiType } from '../../models';
@@ -33,7 +33,7 @@ export type GioPolicyStudioStepEditDialogData = {
 export type GioPolicyStudioStepEditDialogResult = undefined | Step;
 
 @Component({
-  imports: [CommonModule, MatButtonModule, MatDialogModule, GioIconsModule, GioPolicyStudioStepFormComponent],
+  imports: [MatButtonModule, MatDialogModule, GioIconsModule, GioPolicyStudioStepFormComponent],
   selector: 'gio-ps-step-edit-dialog',
   templateUrl: './gio-ps-step-edit-dialog.component.html',
   styleUrls: ['./gio-ps-step-edit-dialog.component.scss'],

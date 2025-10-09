@@ -18,7 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GIO_DIALOG_WIDTH, GioConfirmDialogComponent, GioConfirmDialogData, GioIconsModule } from '@gravitee/ui-particles-angular';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
-import { CommonModule } from '@angular/common';
+
 import { get, isEmpty, isNil, has } from 'lodash';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -30,7 +30,7 @@ import {
 import { FlowPhase, isPolicy, isSharedPolicyGroupPolicy, Step, GenericPolicy, ApiType } from '../../models';
 
 @Component({
-  imports: [CommonModule, GioIconsModule, MatButtonModule, MatMenuModule, MatTooltipModule],
+  imports: [GioIconsModule, MatButtonModule, MatMenuModule, MatTooltipModule],
   selector: 'gio-ps-flow-details-phase-step',
   templateUrl: './gio-ps-flow-details-phase-step.component.html',
   styleUrls: ['./gio-ps-flow-details-phase-step.component.scss'],
