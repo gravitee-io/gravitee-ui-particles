@@ -22,14 +22,22 @@ import { Subject } from 'rxjs';
   selector: 'gio-fjs-multi-schema-type',
   template: `
     <div class="wrapper">
-      <div class="wrapper__title" *ngIf="props.label">{{ props.label }}</div>
-      <p *ngIf="props.description">{{ props.description }}</p>
-      <div class="wrapper__error gio-ng-invalid" *ngIf="showError && formControl.errors">
-        <formly-validation-message [field]="field"></formly-validation-message>
-      </div>
-      <formly-field *ngFor="let f of field.fieldGroup" [field]="f"></formly-field>
+      @if (props.label) {
+        <div class="wrapper__title">{{ props.label }}</div>
+      }
+      @if (props.description) {
+        <p>{{ props.description }}</p>
+      }
+      @if (showError && formControl.errors) {
+        <div class="wrapper__error gio-ng-invalid">
+          <formly-validation-message [field]="field"></formly-validation-message>
+        </div>
+      }
+      @for (f of field.fieldGroup; track f) {
+        <formly-field [field]="f"></formly-field>
+      }
     </div>
-  `,
+    `,
   styleUrls: ['./multischema-type.component.scss'],
   standalone: false,
 })

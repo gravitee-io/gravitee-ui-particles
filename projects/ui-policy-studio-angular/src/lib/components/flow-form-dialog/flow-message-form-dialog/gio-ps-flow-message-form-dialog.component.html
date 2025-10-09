@@ -1,84 +1,83 @@
 <!--
 
-    Copyright (C) 2015 The Gravitee team (http://gravitee.io)
+Copyright (C) 2015 The Gravitee team (http://gravitee.io)
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-            http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 -->
 <h2 mat-dialog-title class="title">
   {{ mode === 'create' ? 'Create a new flow' : 'Edit flow'
   }}<button class="title__closeBtn" mat-icon-button aria-label="Close dialog" [mat-dialog-close]="false">
-    <mat-icon svgIcon="gio:cancel"></mat-icon>
-  </button>
+  <mat-icon svgIcon="gio:cancel"></mat-icon>
+</button>
 </h2>
 
-<mat-dialog-content *ngIf="flowFormGroup" class="content" [formGroup]="flowFormGroup">
-  <p>Flows allow you to apply different policies per event phases. For example you can reroute calls based on the URL specified.</p>
-
-  <div class="content__row">
-    <mat-form-field>
-      <mat-label>Flow name</mat-label>
-      <input matInput formControlName="name" cdkFocusInitial />
-      <mat-hint>Names will be automatically generated with channel and operation if left blank.</mat-hint>
-    </mat-form-field>
-  </div>
-  <div class="content__row">
-    <mat-form-field>
-      <mat-label>Operator</mat-label>
-      <mat-select formControlName="channelOperator">
-        <mat-option value="EQUALS">Equals</mat-option>
-        <mat-option value="STARTS_WITH">Starts with</mat-option>
-      </mat-select>
-      <mat-hint>Channel operator.</mat-hint>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Channel</mat-label>
-      <input matInput formControlName="channel" />
-      <mat-hint>Publish or Subscribe channel. This is the path of your request.</mat-hint>
-    </mat-form-field>
-  </div>
-
-  <div class="content__row">
-    <mat-form-field>
-      <mat-label>Entrypoints</mat-label>
-      <mat-select multiple formControlName="entrypoints">
-        <mat-option *ngFor="let entrypoint of entrypoints" [value]="entrypoint.type">{{ entrypoint.name }}</mat-option>
-      </mat-select>
-      <mat-hint>Entrypoints where your flow will be executed. They will all be executed if left empty.</mat-hint>
-    </mat-form-field>
-  </div>
-
-  <div class="content__row">
-    <mat-form-field>
-      <mat-label>Entrypoints supported operations</mat-label>
-      <mat-select multiple formControlName="operations">
-        <mat-option value="PUBLISH">Publish</mat-option>
-        <mat-option value="SUBSCRIBE">Subscribe</mat-option>
-      </mat-select>
-      <mat-hint>They will all be supported if left empty.</mat-hint>
-    </mat-form-field>
-  </div>
-
-  <div class="content__row">
-    <mat-form-field>
-      <mat-label>Condition</mat-label>
-      <input matInput formControlName="condition" />
-      <mat-hint>Condition to execute the flow, supports Expression Language.</mat-hint>
-      <gio-el-assistant matSuffix />
-    </mat-form-field>
-  </div>
-</mat-dialog-content>
+@if (flowFormGroup) {
+  <mat-dialog-content class="content" [formGroup]="flowFormGroup">
+    <p>Flows allow you to apply different policies per event phases. For example you can reroute calls based on the URL specified.</p>
+    <div class="content__row">
+      <mat-form-field>
+        <mat-label>Flow name</mat-label>
+        <input matInput formControlName="name" cdkFocusInitial />
+        <mat-hint>Names will be automatically generated with channel and operation if left blank.</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="content__row">
+      <mat-form-field>
+        <mat-label>Operator</mat-label>
+        <mat-select formControlName="channelOperator">
+          <mat-option value="EQUALS">Equals</mat-option>
+          <mat-option value="STARTS_WITH">Starts with</mat-option>
+        </mat-select>
+        <mat-hint>Channel operator.</mat-hint>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Channel</mat-label>
+        <input matInput formControlName="channel" />
+        <mat-hint>Publish or Subscribe channel. This is the path of your request.</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="content__row">
+      <mat-form-field>
+        <mat-label>Entrypoints</mat-label>
+        <mat-select multiple formControlName="entrypoints">
+          @for (entrypoint of entrypoints; track entrypoint) {
+            <mat-option [value]="entrypoint.type">{{ entrypoint.name }}</mat-option>
+          }
+        </mat-select>
+        <mat-hint>Entrypoints where your flow will be executed. They will all be executed if left empty.</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="content__row">
+      <mat-form-field>
+        <mat-label>Entrypoints supported operations</mat-label>
+        <mat-select multiple formControlName="operations">
+          <mat-option value="PUBLISH">Publish</mat-option>
+          <mat-option value="SUBSCRIBE">Subscribe</mat-option>
+        </mat-select>
+        <mat-hint>They will all be supported if left empty.</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="content__row">
+      <mat-form-field>
+        <mat-label>Condition</mat-label>
+        <input matInput formControlName="condition" />
+        <mat-hint>Condition to execute the flow, supports Expression Language.</mat-hint>
+        <gio-el-assistant matSuffix />
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+}
 
 <mat-dialog-actions class="actions" align="end">
   <button class="actions__cancelBtn" mat-button [mat-dialog-close]="false">Cancel</button>

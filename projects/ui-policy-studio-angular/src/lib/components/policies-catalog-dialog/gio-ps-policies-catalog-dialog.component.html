@@ -1,18 +1,18 @@
 <!--
 
-    Copyright (C) 2015 The Gravitee team (http://gravitee.io)
+Copyright (C) 2015 The Gravitee team (http://gravitee.io)
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-            http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 -->
 <h2 mat-dialog-title class="title">
@@ -30,115 +30,133 @@
 </h2>
 
 <ng-container>
-  <mat-dialog-content *ngIf="!selectedPolicy" class="policiesCatalog">
-    <div class="policiesCatalog__filters" [formGroup]="filtersForm">
-      <mat-form-field class="policiesCatalog__filters__search" appearance="outline">
-        <mat-label>Search</mat-label>
-        <input matInput formControlName="search" cdkFocusInitial />
-        <button
-          matIconSuffix
-          mat-icon-button
-          aria-label="Clear"
-          *ngIf="filtersForm.get('search')?.value"
-          (click)="filtersForm.get('search')?.setValue('')"
-        >
-          <mat-icon svgIcon="gio:cancel"></mat-icon>
-        </button>
-      </mat-form-field>
-      <mat-chip-listbox
-        *ngIf="categories.length > 1"
-        class="policiesCatalog__filters__categories"
-        aria-label="Categories selection"
-        multiple
-        formControlName="categories"
-      >
-        <mat-chip-option *ngFor="let category of categories" [selected]="category" [value]="category"
-          >{{ category | titlecase }}
-        </mat-chip-option>
-      </mat-chip-listbox>
-    </div>
-
-    <div *ngIf="policies.length; else emptyPoliciesTpl" class="policiesCatalog__list">
-      <div *ngFor="let policy of policies" class="policiesCatalog__list__policy">
-        <div class="policiesCatalog__list__policy__head">
-          <mat-icon class="policiesCatalog__list__policy__head__icon" [svgIcon]="policy.icon ?? 'gio:puzzle'"></mat-icon>
-
-          <span *ngIf="policy.name" class="policiesCatalog__list__policy__head__name">{{ policy.name }}</span>
-
-          <span
-            *ngIf="policy.genericPolicy.type === 'SHARED_POLICY_GROUP'"
-            class="gio-badge-neutral policiesCatalog__list__policy__head__badge"
-            matTooltip="Shared Policy Group"
-          >
-            <mat-icon svgIcon="gio:users"></mat-icon>
-          </span>
-        </div>
-
-        <div class="policiesCatalog__list__policy__enterprise" *ngIf="policy.deployed === false">
-          <mat-icon
-            class="policiesCatalog__list__policy__enterprise__lock"
-            [svgIcon]="'gio:lock'"
-            matTooltip="This policy is only available for users with an enterprise license."
-          ></mat-icon>
-        </div>
-
-        <div *ngIf="policy.description" class="policiesCatalog__list__policy__description">{{ policy.description }}</div>
-
-        <button class="policiesCatalog__list__policy__selectBtn" mat-stroked-button role="dialog" (click)="onSelectPolicy(policy)">
-          Select
-        </button>
+  @if (!selectedPolicy) {
+    <mat-dialog-content class="policiesCatalog">
+      <div class="policiesCatalog__filters" [formGroup]="filtersForm">
+        <mat-form-field class="policiesCatalog__filters__search" appearance="outline">
+          <mat-label>Search</mat-label>
+          <input matInput formControlName="search" cdkFocusInitial />
+          @if (filtersForm.get('search')?.value) {
+            <button
+              matIconSuffix
+              mat-icon-button
+              aria-label="Clear"
+              (click)="filtersForm.get('search')?.setValue('')"
+              >
+              <mat-icon svgIcon="gio:cancel"></mat-icon>
+            </button>
+          }
+        </mat-form-field>
+        @if (categories.length > 1) {
+          <mat-chip-listbox
+            class="policiesCatalog__filters__categories"
+            aria-label="Categories selection"
+            multiple
+            formControlName="categories"
+            >
+            @for (category of categories; track category) {
+              <mat-chip-option [selected]="category" [value]="category"
+                >{{ category | titlecase }}
+              </mat-chip-option>
+            }
+          </mat-chip-listbox>
+        }
       </div>
-    </div>
-  </mat-dialog-content>
+      @if (policies.length) {
+        <div class="policiesCatalog__list">
+          @for (policy of policies; track policy) {
+            <div class="policiesCatalog__list__policy">
+              <div class="policiesCatalog__list__policy__head">
+                <mat-icon class="policiesCatalog__list__policy__head__icon" [svgIcon]="policy.icon ?? 'gio:puzzle'"></mat-icon>
+                @if (policy.name) {
+                  <span class="policiesCatalog__list__policy__head__name">{{ policy.name }}</span>
+                }
+                @if (policy.genericPolicy.type === 'SHARED_POLICY_GROUP') {
+                  <span
+                    class="gio-badge-neutral policiesCatalog__list__policy__head__badge"
+                    matTooltip="Shared Policy Group"
+                    >
+                    <mat-icon svgIcon="gio:users"></mat-icon>
+                  </span>
+                }
+              </div>
+              @if (policy.deployed === false) {
+                <div class="policiesCatalog__list__policy__enterprise">
+                  <mat-icon
+                    class="policiesCatalog__list__policy__enterprise__lock"
+                    [svgIcon]="'gio:lock'"
+                    matTooltip="This policy is only available for users with an enterprise license."
+                  ></mat-icon>
+                </div>
+              }
+              @if (policy.description) {
+                <div class="policiesCatalog__list__policy__description">{{ policy.description }}</div>
+              }
+              <button class="policiesCatalog__list__policy__selectBtn" mat-stroked-button role="dialog" (click)="onSelectPolicy(policy)">
+                Select
+              </button>
+            </div>
+          }
+        </div>
+      } @else {
+        <div class="emptyPoliciesCatalog">No policies available.</div>
+      }
+    </mat-dialog-content>
+  }
 </ng-container>
 
-<ng-template #emptyPoliciesTpl>
-  <div class="emptyPoliciesCatalog">No policies available.</div>
-</ng-template>
 
-<mat-dialog-content *ngIf="selectedPolicy" class="policyForm">
-  <gio-banner *ngIf="isUnlicensed" type="error" icon="gio:universe">
-    This policy is only available for users with an enterprise license.
-    <span gioBannerBody>Request a license to upgrade your account and unlock this policy</span>
-    <div gioBannerAction>
-      <a *ngIf="trialUrl" mat-stroked-button [href]="trialUrl" target="_blank">Request upgrade</a>
+@if (selectedPolicy) {
+  <mat-dialog-content class="policyForm">
+    @if (isUnlicensed) {
+      <gio-banner type="error" icon="gio:universe">
+        This policy is only available for users with an enterprise license.
+        <span gioBannerBody>Request a license to upgrade your account and unlock this policy</span>
+        <div gioBannerAction>
+          @if (trialUrl) {
+            <a mat-stroked-button [href]="trialUrl" target="_blank">Request upgrade</a>
+          }
+        </div>
+      </gio-banner>
+    }
+    <div class="policyForm__info">
+      <div class="policyForm__info__head">
+        <mat-icon class="policyForm__info__head__icon" [svgIcon]="selectedPolicy.icon ?? 'gio:puzzle'"></mat-icon>
+        @if (selectedPolicy.name) {
+          <span class="policyForm__info__head__name">{{ selectedPolicy.name }}</span>
+        }
+        @if (selectedPolicy.type === 'SHARED_POLICY_GROUP') {
+          <span class="gio-badge-neutral policiesCatalog__list__policy__head__badge">
+            <mat-icon svgIcon="gio:users"></mat-icon>&nbsp;Shared Policy Group
+          </span>
+        }
+      </div>
+      @if (selectedPolicy.description) {
+        <div class="policyForm__info__description">{{ selectedPolicy.description }}</div>
+      }
     </div>
-  </gio-banner>
-
-  <div class="policyForm__info">
-    <div class="policyForm__info__head">
-      <mat-icon class="policyForm__info__head__icon" [svgIcon]="selectedPolicy.icon ?? 'gio:puzzle'"></mat-icon>
-
-      <span *ngIf="selectedPolicy.name" class="policyForm__info__head__name">{{ selectedPolicy.name }}</span>
-
-      <span *ngIf="selectedPolicy.type === 'SHARED_POLICY_GROUP'" class="gio-badge-neutral policiesCatalog__list__policy__head__badge">
-        <mat-icon svgIcon="gio:users"></mat-icon>&nbsp;Shared Policy Group
-      </span>
-    </div>
-
-    <div *ngIf="selectedPolicy.description" class="policyForm__info__description">{{ selectedPolicy.description }}</div>
-  </div>
-
-  <gio-ps-step-form
-    [genericPolicy]="selectedPolicy"
-    [flowPhase]="flowPhase"
-    [apiType]="apiType"
-    (stepChange)="onStepChange($event)"
-    (isValid)="onIsValid($event)"
-  ></gio-ps-step-form>
-</mat-dialog-content>
+    <gio-ps-step-form
+      [genericPolicy]="selectedPolicy"
+      [flowPhase]="flowPhase"
+      [apiType]="apiType"
+      (stepChange)="onStepChange($event)"
+      (isValid)="onIsValid($event)"
+    ></gio-ps-step-form>
+  </mat-dialog-content>
+}
 
 <mat-dialog-actions class="actions" align="end">
   <button class="actions__cancelBtn" mat-button [mat-dialog-close]="">Cancel</button>
-  <button
-    *ngIf="selectedPolicy"
-    class="actions__addBtn"
-    color="primary"
-    mat-flat-button
-    role="dialog"
-    [disabled]="!isValid || isUnlicensed"
-    (click)="onAddPolicy()"
-  >
-    Add policy
-  </button>
+  @if (selectedPolicy) {
+    <button
+      class="actions__addBtn"
+      color="primary"
+      mat-flat-button
+      role="dialog"
+      [disabled]="!isValid || isUnlicensed"
+      (click)="onAddPolicy()"
+      >
+      Add policy
+    </button>
+  }
 </mat-dialog-actions>

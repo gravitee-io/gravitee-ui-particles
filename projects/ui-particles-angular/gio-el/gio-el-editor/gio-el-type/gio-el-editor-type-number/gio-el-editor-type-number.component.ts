@@ -19,14 +19,14 @@ import { isEmpty } from 'lodash';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
-import { CommonModule } from '@angular/common';
+
 
 import { ConditionForm } from '../../gio-el-editor.component';
 import { Operator } from '../../../models/Operator';
 
 @Component({
   selector: 'gio-el-editor-type-number',
-  imports: [CommonModule, MatFormFieldModule, MatSelectModule, MatInputModule, ReactiveFormsModule],
+  imports: [MatFormFieldModule, MatSelectModule, MatInputModule, ReactiveFormsModule],
   templateUrl: './gio-el-editor-type-number.component.html',
   styleUrl: './gio-el-editor-type-number.component.scss',
 })

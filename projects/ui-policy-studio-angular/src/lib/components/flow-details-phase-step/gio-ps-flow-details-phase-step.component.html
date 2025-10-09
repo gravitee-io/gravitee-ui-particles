@@ -1,18 +1,18 @@
 <!--
 
-    Copyright (C) 2023 The Gravitee team (http://gravitee.io)
-    
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-    
-            http://www.apache.org/licenses/LICENSE-2.0
-    
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+Copyright (C) 2023 The Gravitee team (http://gravitee.io)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 -->
 
@@ -20,27 +20,34 @@
   <div class="info__head">
     <mat-icon class="info__head__icon" [svgIcon]="genericPolicy?.icon ?? 'gio:puzzle'"></mat-icon>
 
-    <span *ngIf="step.name" class="info__head__name">{{ step.name }}</span>
+    @if (step.name) {
+      <span class="info__head__name">{{ step.name }}</span>
+    }
 
-    <span *ngIf="genericPolicy?.type === 'SHARED_POLICY_GROUP'" class="gio-badge-neutral" matTooltip="Shared Policy Group">
-      <mat-icon svgIcon="gio:users"></mat-icon>
-    </span>
+    @if (genericPolicy?.type === 'SHARED_POLICY_GROUP') {
+      <span class="gio-badge-neutral" matTooltip="Shared Policy Group">
+        <mat-icon svgIcon="gio:users"></mat-icon>
+      </span>
+    }
     @if (getPrerequisiteMessage) {
       <mat-icon class="info__head__info" svgIcon="gio:info" [matTooltip]="getPrerequisiteMessage"></mat-icon>
     }
-    <span
-      *ngIf="policyNotFound !== false"
-      class="gio-badge-error"
-      [matTooltip]="policyNotFound === 'SHARED_POLICY_GROUP' ? 'Shared Policy Group not found' : 'Policy not found'"
-    >
-      @if (policyNotFound === 'SHARED_POLICY_GROUP') {
-        <mat-icon svgIcon="gio:users"></mat-icon>&nbsp;
-      }
-      <mat-icon svgIcon="gio:alert-circle"></mat-icon>
-    </span>
+    @if (policyNotFound !== false) {
+      <span
+        class="gio-badge-error"
+        [matTooltip]="policyNotFound === 'SHARED_POLICY_GROUP' ? 'Shared Policy Group not found' : 'Policy not found'"
+        >
+        @if (policyNotFound === 'SHARED_POLICY_GROUP') {
+          <mat-icon svgIcon="gio:users"></mat-icon>&nbsp;
+        }
+        <mat-icon svgIcon="gio:alert-circle"></mat-icon>
+      </span>
+    }
   </div>
 
-  <div *ngIf="step.description" class="info__description">{{ step.description }}</div>
+  @if (step.description) {
+    <div class="info__description">{{ step.description }}</div>
+  }
 </div>
 
 <button class="menuBtn" mat-icon-button [matMenuTriggerFor]="policyMenu"><mat-icon svgIcon="gio:more-vertical"></mat-icon></button>
@@ -64,12 +71,16 @@
     <mat-icon svgIcon="gio:copy"></mat-icon>
     <span>Duplicate</span>
   </button>
-  <button *ngIf="disableMoveRight" [disabled]="readOnly" mat-menu-item (click)="onMoveRight()">
-    <mat-icon svgIcon="gio:arrow-right"></mat-icon>
-    <span>Move right</span>
-  </button>
-  <button *ngIf="disableMoveLeft" [disabled]="readOnly" mat-menu-item (click)="onMoveLeft()">
-    <mat-icon svgIcon="gio:arrow-left"></mat-icon>
-    <span>Move left</span>
-  </button>
+  @if (disableMoveRight) {
+    <button [disabled]="readOnly" mat-menu-item (click)="onMoveRight()">
+      <mat-icon svgIcon="gio:arrow-right"></mat-icon>
+      <span>Move right</span>
+    </button>
+  }
+  @if (disableMoveLeft) {
+    <button [disabled]="readOnly" mat-menu-item (click)="onMoveLeft()">
+      <mat-icon svgIcon="gio:arrow-left"></mat-icon>
+      <span>Move left</span>
+    </button>
+  }
 </mat-menu>

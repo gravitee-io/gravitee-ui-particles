@@ -1,51 +1,55 @@
 <!--
 
-    Copyright (C) 2015 The Gravitee team (http://gravitee.io)
+Copyright (C) 2015 The Gravitee team (http://gravitee.io)
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-            http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 -->
 
-<div *ngIf="isOpen" [@slideUpDown] [@.disabled]="creationMode">
-  <mat-card
-    class="save-bar__content mat-mdc-elevation-specific"
-    [class.mat-elevation-z3]="creationMode"
-    [class.mat-elevation-z6]="!creationMode"
-  >
-    <div class="save-bar__content__label">{{ creationMode ? '' : 'You have unsaved changes' }}</div>
-    <div class="save-bar__content__actions">
-      <button
-        *ngIf="!creationMode && !hideDiscardButton"
-        class="save-bar__content__actions__reset-button"
-        mat-button
-        type="button"
-        (click)="onResetClicked()"
+@if (isOpen) {
+  <div [@slideUpDown] [@.disabled]="creationMode">
+    <mat-card
+      class="save-bar__content mat-mdc-elevation-specific"
+      [class.mat-elevation-z3]="creationMode"
+      [class.mat-elevation-z6]="!creationMode"
       >
-        Discard
-      </button>
-      <ng-content></ng-content>
-      <button
-        *ngIf="!hideSubmitButton"
-        class="save-bar__content__actions__submit-button"
-        [class.invalid]="(form && form.invalid) || invalidState"
-        mat-flat-button
-        color="primary"
-        [type]="form ? 'submit' : 'button'"
-        [disabled]="isSubmitted"
-        (click)="onSubmitClicked()"
-      >
-        {{ creationMode ? 'Create' : 'Save' }}{{ isSubmitted ? '...' : '' }}
-      </button>
-    </div>
-  </mat-card>
-</div>
+      <div class="save-bar__content__label">{{ creationMode ? '' : 'You have unsaved changes' }}</div>
+      <div class="save-bar__content__actions">
+        @if (!creationMode && !hideDiscardButton) {
+          <button
+            class="save-bar__content__actions__reset-button"
+            mat-button
+            type="button"
+            (click)="onResetClicked()"
+            >
+            Discard
+          </button>
+        }
+        <ng-content></ng-content>
+        @if (!hideSubmitButton) {
+          <button
+            class="save-bar__content__actions__submit-button"
+            [class.invalid]="(form && form.invalid) || invalidState"
+            mat-flat-button
+            color="primary"
+            [type]="form ? 'submit' : 'button'"
+            [disabled]="isSubmitted"
+            (click)="onSubmitClicked()"
+            >
+            {{ creationMode ? 'Create' : 'Save' }}{{ isSubmitted ? '...' : '' }}
+          </button>
+        }
+      </div>
+    </mat-card>
+  </div>
+}

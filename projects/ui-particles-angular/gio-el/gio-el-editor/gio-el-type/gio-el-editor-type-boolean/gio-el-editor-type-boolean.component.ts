@@ -18,7 +18,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { isEmpty } from 'lodash';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { CommonModule } from '@angular/common';
+
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 
 import { Operator } from '../../../models/Operator';
@@ -26,7 +26,7 @@ import { ConditionForm } from '../../gio-el-editor.component';
 
 @Component({
   selector: 'gio-el-editor-type-boolean',
-  imports: [CommonModule, MatFormFieldModule, MatSelectModule, ReactiveFormsModule, MatSlideToggle],
+  imports: [MatFormFieldModule, MatSelectModule, ReactiveFormsModule, MatSlideToggle],
   templateUrl: './gio-el-editor-type-boolean.component.html',
   styleUrl: './gio-el-editor-type-boolean.component.scss',
 })

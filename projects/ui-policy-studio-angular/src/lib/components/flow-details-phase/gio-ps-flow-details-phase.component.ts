@@ -18,7 +18,7 @@ import { isEmpty, uniqueId } from 'lodash';
 import { MatDialog } from '@angular/material/dialog';
 import { GIO_DIALOG_WIDTH, GioBannerModule, GioIconsModule } from '@gravitee/ui-particles-angular';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 
 import {
@@ -47,7 +47,7 @@ type StepVM =
     };
 
 @Component({
-  imports: [CommonModule, MatTooltipModule, MatButtonModule, GioPolicyStudioDetailsPhaseStepComponent, GioIconsModule, GioBannerModule],
+  imports: [MatTooltipModule, MatButtonModule, GioPolicyStudioDetailsPhaseStepComponent, GioIconsModule, GioBannerModule],
   selector: 'gio-ps-flow-details-phase',
   templateUrl: './gio-ps-flow-details-phase.component.html',
   styleUrls: ['./gio-ps-flow-details-phase.component.scss'],
