@@ -22,6 +22,7 @@ module.exports = {
           },
         ],
         '@angular-eslint/prefer-inject': 'off',
+        '@angular-eslint/prefer-standalone': 'off',
       },
     },
     {
