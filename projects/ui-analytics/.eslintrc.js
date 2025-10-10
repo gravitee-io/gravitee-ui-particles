@@ -21,6 +21,7 @@ module.exports = {
             style: 'kebab-case',
           },
         ],
+        '@angular-eslint/prefer-inject': 'off',
       },
     },
     {
