@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { isEmpty } from 'lodash';
 import { GioIconsModule } from '@gravitee/ui-particles-angular';
 import { MatCommonModule } from '@angular/material/core';
@@ -28,12 +28,21 @@ import { FlowVM } from '../../policy-studio/gio-policy-studio.model';
   templateUrl: './gio-ps-flow-details-info-bar.component.html',
   styleUrls: ['./gio-ps-flow-details-info-bar.component.scss'],
 })
-export class GioPolicyStudioDetailsInfoBarComponent {
+export class GioPolicyStudioDetailsInfoBarComponent implements OnChanges {
   @Input()
   public flow?: FlowVM = undefined;
 
   @Input()
   public entrypointsInfo?: ConnectorInfo[];
+
+  private _methods?: { name: string; class: string }[] | null;
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['flow']) {
+      // Invalidate cache when flow changes
+      this._methods = undefined;
+    }
+  }
 
   public get condition(): string | undefined {
     const conditionSelector = this.flow?.selectors?.find(s => s.type === 'CONDITION') as ConditionSelector;
@@ -108,21 +117,17 @@ export class GioPolicyStudioDetailsInfoBarComponent {
     return httpSelector?.pathOperator;
   }
 
-  public get methods(): { name: string; class: string }[] | undefined {
-    const httpSelector = this.flow?.selectors?.find(s => s.type === 'HTTP') as HttpSelector;
-    if (!httpSelector) {
-      return undefined;
-    }
-    return httpSelector?.methods?.length
-      ? httpSelector?.methods.map(m => ({
-          name: m,
-          class: `gio-method-badge-${m.toLowerCase()}`,
-        }))
-      : [
-          {
-            name: 'ALL',
-            class: 'gio-badge-neutral',
-          },
-        ];
+  get methods() {
+      if (this._methods === undefined && this.flow) {
+          const httpSelector = this.flow.selectors?.find(s => s.type === 'HTTP') as HttpSelector;
+          if (!httpSelector) {
+              this._methods = null; // Cache null to avoid recomputation
+              return undefined;
+          }
+          this._methods = httpSelector?.methods?.length
+              ? httpSelector.methods.map(m => ({ name: m, class: `gio-method-badge-${m.toLowerCase()}` }))
+              : [{ name: 'ALL', class: 'gio-badge-neutral' }];
+      }
+      return this._methods === null ? undefined : this._methods;
   }
 }
