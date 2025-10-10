@@ -37,6 +37,8 @@ import {
   GioPolicyStudioStepEditDialogResult,
 } from './gio-ps-step-edit-dialog.component';
 import { GioPolicyStudioStepEditDialogHarness } from './gio-ps-step-edit-dialog.harness';
+import {GioPrismJsService} from "@gravitee/ui-particles-angular";
+import {GioAsciidoctorService} from "@gravitee/ui-particles-angular/gio-asciidoctor";
 
 @Component({
   selector: 'gio-dialog-test',
@@ -88,6 +90,20 @@ describe('GioPolicyStudioStepEditDialogComponent', () => {
             service.setPolicySchemaFetcher(policy => of(fakePolicySchema(policy.id)));
             service.setPolicyDocumentationFetcher(policy => of(fakePolicyDocumentation(policy.id)));
             return service;
+          },
+        },
+        {
+          provide: GioAsciidoctorService,
+          useValue: {
+            load: () => of({
+              convert: (content: string) => `<div class="asciidoctor-content">${content}</div>`, // Mock asciidoctor convert method
+            } as any),
+          },
+        },
+        {
+          provide: GioPrismJsService,
+          useValue: {
+            loadPrismJs: () => of({}), // Mock prismjs loading
           },
         },
       ],
