@@ -19,6 +19,7 @@ import { FormlyFormOptions } from '@ngx-formly/core';
 import { combineLatest, Subject } from 'rxjs';
 import { debounceTime, startWith, takeUntil, tap } from 'rxjs/operators';
 import Ajv from 'ajv';
+import { MonacoEditorLanguageConfig } from '@gravitee/ui-particles-angular';
 
 import GioJsonSchema from './model/GioJsonSchema.json';
 import { FormlyJSONSchema7 } from './model/FormlyJSONSchema7';
@@ -61,7 +62,7 @@ export class DemoComponent implements OnChanges, OnDestroy {
   public inputValueControl?: UntypedFormControl;
   public jsonSchemaControl?: UntypedFormControl;
 
-  public monacoEditorJsonSchemaLanguage = {
+  public monacoEditorJsonSchemaLanguage: MonacoEditorLanguageConfig = {
     language: 'json',
     schemas: [
       {
@@ -70,12 +71,8 @@ export class DemoComponent implements OnChanges, OnDestroy {
       },
     ],
   };
-  public monacoEditorJsonLanguage = {
+  public monacoEditorJsonLanguage: MonacoEditorLanguageConfig = {
     language: 'json',
-  };
-
-  public monacoEditorReadonlyOptions = {
-    readOnly: true,
   };
 
   constructor(private changeDetectorRef: ChangeDetectorRef) {}

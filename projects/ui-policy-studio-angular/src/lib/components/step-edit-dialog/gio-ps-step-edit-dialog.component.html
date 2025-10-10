@@ -1,13 +1,13 @@
 <!--
 
-    Copyright (C) 2015 The Gravitee team (http://gravitee.io)
-
+    Copyright (C) 2025 The Gravitee team (http://gravitee.io)
+    
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
-
+    
             http://www.apache.org/licenses/LICENSE-2.0
-
+    
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,12 +18,16 @@
 <h2 mat-dialog-title class="title">
   <mat-icon class="title__icon" [svgIcon]="genericPolicy.icon ?? 'gio:puzzle'"></mat-icon>
 
-  <span *ngIf="step.name" class="title__name">
-    {{ step.name }}
-    <span *ngIf="genericPolicy.type === 'SHARED_POLICY_GROUP'" class="gio-badge-neutral policiesCatalog__list__policy__head__badge">
-      <mat-icon svgIcon="gio:users"></mat-icon>&nbsp;Shared Policy Group
-    </span></span
-  >
+  @if (step.name) {
+    <span class="title__name">
+      {{ step.name }}
+      @if (genericPolicy.type === 'SHARED_POLICY_GROUP') {
+        <span class="gio-badge-neutral policiesCatalog__list__policy__head__badge">
+          <mat-icon svgIcon="gio:users"></mat-icon>&nbsp;Shared Policy Group
+        </span>
+      }
+    </span>
+  }
 
   <button class="title__closeBtn" mat-icon-button aria-label="Close dialog" [mat-dialog-close]="">
     <mat-icon svgIcon="gio:cancel"></mat-icon>

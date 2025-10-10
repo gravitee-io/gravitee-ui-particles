@@ -35,7 +35,7 @@ $typography: map.get(gio.$mat-theme, typography);
   @include mat.m2-typography-level($typography, caption);
 
   padding-left: 10px;
-  color: var(--mdc-outlined-text-field-label-text-color);
+  color: var(--mat-form-field-outlined-label-text-color);
 
   &:empty {
     display: none;
@@ -46,12 +46,12 @@ $typography: map.get(gio.$mat-theme, typography);
   display: inline-flex;
   flex-direction: column;
   padding: 8px;
-  border: 1px solid var(--mdc-outlined-text-field-outline-color);
+  border: 1px solid var(--mat-form-field-outlined-outline-color);
   border-radius: 4px;
 
   &:hover:not(.disabled) {
     padding: 8px;
-    border: 1px solid var(--mdc-outlined-text-field-hover-outline-color);
+    border: 1px solid var(--mat-form-field-outlined-hover-outline-color);
   }
 
   .menu {
@@ -138,7 +138,7 @@ $typography: map.get(gio.$mat-theme, typography);
   .wrapper {
     padding: 8px;
     border-width: 1px;
-    border-color: var(--mdc-outlined-text-field-error-outline-color);
+    border-color: var(--mat-form-field-outlined-error-outline-color);
 
     .preview,
     .placeholder {
@@ -148,7 +148,7 @@ $typography: map.get(gio.$mat-theme, typography);
 
   .label,
   .hint {
-    color: var(--mdc-outlined-text-field-error-outline-color);
+    color: var(--mat-form-field-outlined-error-outline-color);
   }
 }
 
