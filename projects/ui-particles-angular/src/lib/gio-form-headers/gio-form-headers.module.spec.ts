@@ -167,7 +167,7 @@ describe('GioFormHeadersModule', () => {
     expect(newHeaderRows.length).toEqual(3);
 
     // Check last row dose not have remove button
-    expect(newHeaderRows[2].removeButton).toEqual(null);
+    expect(newHeaderRows[2].removeButton).toBeFalsy();
 
     expect(testComponent.headersControl.value).toEqual([HEADERS[0], HEADERS[2]]);
   });
