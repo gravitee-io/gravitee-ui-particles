@@ -35,17 +35,25 @@ export class GioFormHeadersHarness extends ComponentHarness {
 
   private getHeaderRowsElement = this.locatorForAll('tr.gio-form-headers__table__header-row');
 
-  private getHeaderRowInputKey = (rowIndex: number): AsyncFactoryFn<MatInputHarness> =>
-    this.locatorFor(MatInputHarness.with({ ancestor: `[ng-reflect-name="${rowIndex}"]`, selector: '[formControlName=key]' }));
+  private async getHeaderRowInputKey(rowIndex: number): Promise<MatInputHarness> {
+      const keyInputs = await this.locatorForAll(MatInputHarness.with({  selector: '[formControlName=key]' }))();
+      return keyInputs[rowIndex];
+  }
 
-  private getHeaderRowInputKeyAutocomplete = (rowIndex: number): AsyncFactoryFn<MatAutocompleteHarness> =>
-    this.locatorFor(MatAutocompleteHarness.with({ ancestor: `tr[ng-reflect-name="${rowIndex}"]` }));
+  private async getHeaderRowInputKeyAutocomplete(rowIndex: number): Promise<MatAutocompleteHarness> {
+      const autoCompletes = await this.locatorForAll(MatAutocompleteHarness.with({ ancestor: `tr.gio-form-headers__table__header-row` }))();
+      return autoCompletes[rowIndex];
+  }
 
-  private getHeaderRowInputValue = (rowIndex: number): AsyncFactoryFn<MatInputHarness> =>
-    this.locatorFor(MatInputHarness.with({ ancestor: `tr[ng-reflect-name="${rowIndex}"]`, selector: '[formControlName=value]' }));
+  private async getHeaderRowInputValue(rowIndex: number): Promise<MatInputHarness> {
+    const inputs = await this.locatorForAll(MatInputHarness.with({ selector: '[formControlName=value]' }))();
+    return inputs[rowIndex];
+  }
 
-  private getHeaderRowRemoveButton = (rowIndex: number): AsyncFactoryFn<MatButtonHarness | null> =>
-    this.locatorForOptional(MatButtonHarness.with({ ancestor: `tr[ng-reflect-name="${rowIndex}"]`, selector: '[aria-label="Delete"]' }));
+  private async getHeaderRowRemoveButton(rowIndex: number): Promise<MatButtonHarness> {
+      const buttons = await this.locatorForAll(MatButtonHarness.with({selector: '[aria-label="Delete"]'}))();
+      return buttons[rowIndex];
+  }
 
   public async getHeaderRows(): Promise<
     {
@@ -59,10 +67,10 @@ export class GioFormHeadersHarness extends ComponentHarness {
 
     return Promise.all(
       rows.map(async (_, rowIndex) => ({
-        keyInput: await this.getHeaderRowInputKey(rowIndex)(),
-        keyAutocomplete: await this.getHeaderRowInputKeyAutocomplete(rowIndex)(),
-        valueInput: await this.getHeaderRowInputValue(rowIndex)(),
-        removeButton: await this.getHeaderRowRemoveButton(rowIndex)(),
+        keyInput: await this.getHeaderRowInputKey(rowIndex),
+        keyAutocomplete: await this.getHeaderRowInputKeyAutocomplete(rowIndex),
+        valueInput: await this.getHeaderRowInputValue(rowIndex),
+        removeButton: await this.getHeaderRowRemoveButton(rowIndex),
       })),
     );
   }
@@ -71,8 +79,8 @@ export class GioFormHeadersHarness extends ComponentHarness {
     const rows = await this.getHeaderRowsElement();
 
     return {
-      keyInput: await this.getHeaderRowInputKey(rows.length - 1)(),
-      valueInput: await this.getHeaderRowInputValue(rows.length - 1)(),
+      keyInput: await this.getHeaderRowInputKey(rows.length - 1),
+      valueInput: await this.getHeaderRowInputValue(rows.length - 1),
     };
   }
 
