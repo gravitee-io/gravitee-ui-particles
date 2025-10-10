@@ -59,7 +59,9 @@ describe('GioFormSelectionInlineModule', () => {
     const formSelectCards = await loader.getHarness(GioFormSelectionInlineHarness);
     expect(await formSelectCards.getSelectedValue()).toEqual(undefined);
 
-    component.selectControl.setValue('A');
+    component.selectControl.patchValue('A');
+    fixture.detectChanges();
+
     expect(await formSelectCards.getSelectedValue()).toBe('A');
 
     const cards = await formSelectCards.getSelectionCards();
