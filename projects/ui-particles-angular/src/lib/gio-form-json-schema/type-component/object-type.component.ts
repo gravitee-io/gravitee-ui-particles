@@ -39,7 +39,7 @@ import { FieldType } from '@ngx-formly/core';
         }
       </div>
     </div>
-    `,
+  `,
   styleUrls: ['./object-type.component.scss'],
   standalone: false,
 })

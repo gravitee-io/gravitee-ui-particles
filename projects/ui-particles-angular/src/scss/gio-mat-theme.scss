@@ -23,8 +23,8 @@
 @mixin mat-theme {
   @include mat.all-component-typographies(theme-variable.$mat-typography);
 
-  @include mat.elevation-classes();
-  @include mat.app-background();
+  @include mat.elevation-classes;
+  @include mat.app-background;
 
   @include mat.all-component-themes(theme-variable.$mat-theme);
 

@@ -25,10 +25,10 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Hos
         }
         <mat-icon class="selection-icon__radio-icon">{{ selected ? 'radio_button_checked' : 'radio_button_unchecked' }}</mat-icon>
       </span>
-    
+
       <div class="card__content"><ng-content></ng-content></div>
     </div>
-    `,
+  `,
   styleUrls: ['./gio-form-selection-inline-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,

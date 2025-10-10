@@ -1,18 +1,18 @@
 <!--
 
-Copyright (C) 2023 The Gravitee team (http://gravitee.io)
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+    Copyright (C) 2025 The Gravitee team (http://gravitee.io)
+    
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    
+            http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 
 -->
 <div class="json-schema-story">
@@ -23,9 +23,9 @@ limitations under the License.
           <mat-card-title>Json Schema</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            @if (jsonSchemaControl) {
-                <gio-monaco-editor [formControl]="jsonSchemaControl" [languageConfig]="monacoEditorJsonSchemaLanguage"></gio-monaco-editor>
-            }
+          @if (jsonSchemaControl) {
+            <gio-monaco-editor [formControl]="jsonSchemaControl" [languageConfig]="monacoEditorJsonSchemaLanguage"></gio-monaco-editor>
+          }
         </mat-card-content>
       </mat-card>
     }
@@ -48,60 +48,63 @@ limitations under the License.
             <pre>{{ form.status }} | {{ form.dirty ? 'DIRTY' : 'PRISTINE' }} | {{ form.touched ? 'TOUCHED' : 'UNTOUCHED' }}</pre>
             <mat-slide-toggle aria-label="Disable form" (change)="toggleDisabledProperty($event.checked)" [checked]="disabled"
               >Disable form</mat-slide-toggle
-              >
-              <button mat-button type="reset" [disabled]="disabled">Reset</button>
-              <button mat-stroked-button type="submit" [disabled]="disabled">Submit</button>
-            </mat-card-actions>
-          </form>
+            >
+            <button mat-button type="reset" [disabled]="disabled">Reset</button>
+            <button mat-stroked-button type="submit" [disabled]="disabled">Submit</button>
+          </mat-card-actions>
+        </form>
+      } @else {
+        Loading...
+      }
+    </mat-card>
+  </div>
+  @if (!isChromatic) {
+    <div class="row">
+      <mat-card class="json-schema-story__value">
+        <mat-card-header>
+          <mat-card-title>Input Value</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          @if (inputValueControl) {
+            <gio-monaco-editor [formControl]="inputValueControl" [languageConfig]="monacoEditorJsonLanguage"></gio-monaco-editor>
+          }
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="json-schema-story__output">
+        <mat-card-header>
+          <mat-card-title
+            >Output
+            <mat-button-toggle-group #outputMode="matButtonToggleGroup" value="json">
+              <mat-button-toggle value="json">Json</mat-button-toggle>
+              <mat-button-toggle value="error"> ({{ formValueErrorNumber ? formValueErrorNumber : 'No' }}) Errors</mat-button-toggle>
+            </mat-button-toggle-group>
+          </mat-card-title>
+        </mat-card-header>
+        @if (form) {
+          <mat-card-content>
+            @if (outputMode.value === 'json') {
+              <gio-monaco-editor
+                [ngModel]="formValue | json"
+                [languageConfig]="monacoEditorJsonLanguage"
+                [disabled]="'true'"
+              ></gio-monaco-editor>
+            }
+            @if (outputMode.value === 'error') {
+              <p>
+                Validate Input with JsonSchema validator (<a href="https://ajv.js.org/">AJV</a>). Allows to simulate rest-api error feedback
+                even if it's not exactly the same validator lib (nodejs vs java)
+              </p>
+              <gio-monaco-editor
+                [ngModel]="formValueError"
+                [languageConfig]="monacoEditorJsonLanguage"
+                [disabled]="'true'"
+              ></gio-monaco-editor>
+            }
+          </mat-card-content>
         } @else {
           Loading...
         }
       </mat-card>
     </div>
-    @if (!isChromatic) {
-      <div class="row">
-        <mat-card class="json-schema-story__value">
-          <mat-card-header>
-            <mat-card-title>Input Value</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-              @if (inputValueControl) {
-                <gio-monaco-editor [formControl]="inputValueControl" [languageConfig]="monacoEditorJsonLanguage"></gio-monaco-editor>
-              }
-          </mat-card-content>
-        </mat-card>
-        <mat-card class="json-schema-story__output">
-          <mat-card-header>
-            <mat-card-title
-              >Output
-              <mat-button-toggle-group #outputMode="matButtonToggleGroup" value="json">
-                <mat-button-toggle value="json">Json</mat-button-toggle>
-                <mat-button-toggle value="error"> ({{ formValueErrorNumber ? formValueErrorNumber : 'No' }}) Errors</mat-button-toggle>
-              </mat-button-toggle-group>
-            </mat-card-title>
-          </mat-card-header>
-          @if (form) {
-            <mat-card-content>
-              @if (outputMode.value === 'json') {
-                <gio-monaco-editor
-                  [ngModel]="formValue | json"
-                  [languageConfig]="monacoEditorJsonLanguage"
-                  [disabled]="'true'"
-                ></gio-monaco-editor>
-              }
-              @if (outputMode.value === 'error') {
-                <p>
-                  Validate Input with JsonSchema validator (<a href="https://ajv.js.org/">AJV</a>). Allows to simulate rest-api error feedback
-                  even if it's not exactly the same validator lib (nodejs vs java)
-                </p>
-                <gio-monaco-editor [ngModel]="formValueError" [languageConfig]="monacoEditorJsonLanguage" [disabled]="'true'"></gio-monaco-editor>
-              }
-            </mat-card-content>
-          } @else {
-            Loading...
-          }
-        </mat-card>
-      </div>
-    }
-  </div>
-
+  }
+</div>

@@ -30,7 +30,7 @@ type CronProps = FormlyFieldProps;
         <gio-form-cron-hint>{{ props.description }}</gio-form-cron-hint>
       }
     </gio-form-cron>
-    `,
+  `,
   styles: [``],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,

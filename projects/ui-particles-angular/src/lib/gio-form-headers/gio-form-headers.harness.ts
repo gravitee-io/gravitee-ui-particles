@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { AsyncFactoryFn, BaseHarnessFilters, ComponentHarness, HarnessPredicate, parallel } from '@angular/cdk/testing';
+import { BaseHarnessFilters, ComponentHarness, HarnessPredicate, parallel } from '@angular/cdk/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { MatAutocompleteHarness } from '@angular/material/autocomplete/testing';
@@ -36,13 +36,13 @@ export class GioFormHeadersHarness extends ComponentHarness {
   private getHeaderRowsElement = this.locatorForAll('tr.gio-form-headers__table__header-row');
 
   private async getHeaderRowInputKey(rowIndex: number): Promise<MatInputHarness> {
-      const keyInputs = await this.locatorForAll(MatInputHarness.with({  selector: '[formControlName=key]' }))();
-      return keyInputs[rowIndex];
+    const keyInputs = await this.locatorForAll(MatInputHarness.with({ selector: '[formControlName=key]' }))();
+    return keyInputs[rowIndex];
   }
 
   private async getHeaderRowInputKeyAutocomplete(rowIndex: number): Promise<MatAutocompleteHarness> {
-      const autoCompletes = await this.locatorForAll(MatAutocompleteHarness.with({ ancestor: `tr.gio-form-headers__table__header-row` }))();
-      return autoCompletes[rowIndex];
+    const autoCompletes = await this.locatorForAll(MatAutocompleteHarness.with({ ancestor: `tr.gio-form-headers__table__header-row` }))();
+    return autoCompletes[rowIndex];
   }
 
   private async getHeaderRowInputValue(rowIndex: number): Promise<MatInputHarness> {
@@ -51,8 +51,8 @@ export class GioFormHeadersHarness extends ComponentHarness {
   }
 
   private async getHeaderRowRemoveButton(rowIndex: number): Promise<MatButtonHarness> {
-      const buttons = await this.locatorForAll(MatButtonHarness.with({selector: '[aria-label="Delete"]'}))();
-      return buttons[rowIndex];
+    const buttons = await this.locatorForAll(MatButtonHarness.with({ selector: '[aria-label="Delete"]' }))();
+    return buttons[rowIndex];
   }
 
   public async getHeaderRows(): Promise<

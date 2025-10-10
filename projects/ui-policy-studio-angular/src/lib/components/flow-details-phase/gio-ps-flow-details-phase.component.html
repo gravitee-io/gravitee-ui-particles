@@ -1,18 +1,18 @@
 <!--
 
-Copyright (C) 2023 The Gravitee team (http://gravitee.io)
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+    Copyright (C) 2025 The Gravitee team (http://gravitee.io)
+    
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    
+            http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 
 -->
 
@@ -25,11 +25,7 @@ limitations under the License.
   </span>
 
   @if (!hasStartAndEndConnectors && !disabledNotYetAvailable) {
-    <span
-      class="header__infoIcon"
-      matTooltip="Policies might not be evaluated"
-      matTooltipPosition="before"
-      >
+    <span class="header__infoIcon" matTooltip="Policies might not be evaluated" matTooltipPosition="before">
       <mat-icon svgIcon="gio:info"></mat-icon>
     </span>
   }
@@ -76,48 +72,48 @@ limitations under the License.
                 <div class="content__step__policy__condition" [class.disabled]="!stepVM.step.enabled">
                   <span class="gio-badge-neutral" [matTooltip]="'Condition: ' + stepVM.step.condition"
                     ><mat-icon svgIcon="gio:if"></mat-icon> {{ stepVM.step.condition }}</span
-                    >
-                  </div>
-                }
+                  >
+                </div>
+              }
 
-                <gio-ps-flow-details-phase-step
-                  class="content__step__step"
-                  [readOnly]="readOnly"
-                  [class.disabled]="!stepVM.step.enabled"
-                  [genericPolicies]="genericPolicies"
-                  [step]="stepVM.step"
-                  [flowPhase]="policyFlowPhase"
-                  [apiType]="apiType"
-                  (stepChange)="onStepChange(stepVM.index, $event)"
-                  (deleted)="onStepDeleted(stepVM.index)"
-                  (disabled)="onStepDisabled(stepVM.index)"
-                  (duplicated)="onStepDuplicated(stepVM.index)"
-                  [disableMoveRight]="stepVM.index !== this.steps.length - 1"
-                  (movedRight)="onStepMovedRight(stepVM.index)"
-                  [disableMoveLeft]="stepVM.index !== 0"
-                  (movedLeft)="onStepMovedLeft(stepVM.index)"
-                ></gio-ps-flow-details-phase-step>
-              </div>
+              <gio-ps-flow-details-phase-step
+                class="content__step__step"
+                [readOnly]="readOnly"
+                [class.disabled]="!stepVM.step.enabled"
+                [genericPolicies]="genericPolicies"
+                [step]="stepVM.step"
+                [flowPhase]="policyFlowPhase"
+                [apiType]="apiType"
+                (stepChange)="onStepChange(stepVM.index, $event)"
+                (deleted)="onStepDeleted(stepVM.index)"
+                (disabled)="onStepDisabled(stepVM.index)"
+                (duplicated)="onStepDuplicated(stepVM.index)"
+                [disableMoveRight]="stepVM.index !== this.steps.length - 1"
+                (movedRight)="onStepMovedRight(stepVM.index)"
+                [disableMoveLeft]="stepVM.index !== 0"
+                (movedLeft)="onStepMovedLeft(stepVM.index)"
+              ></gio-ps-flow-details-phase-step>
+            </div>
 
-              <!-- Add policy button -->
-              <mat-icon class="content__step__rightArrow" svgIcon="gio:arrow-right"></mat-icon>
-              <button [disabled]="readOnly" class="content__step__addBtn" mat-button (click)="onAddPolicy(stepVM.index)">
-                <mat-icon svgIcon="gio:plus"></mat-icon>
-              </button>
-              <mat-icon class="content__step__rightArrow" svgIcon="gio:arrow-right"></mat-icon>
-            }
-          </div>
-        }
-      </div>
+            <!-- Add policy button -->
+            <mat-icon class="content__step__rightArrow" svgIcon="gio:arrow-right"></mat-icon>
+            <button [disabled]="readOnly" class="content__step__addBtn" mat-button (click)="onAddPolicy(stepVM.index)">
+              <mat-icon svgIcon="gio:plus"></mat-icon>
+            </button>
+            <mat-icon class="content__step__rightArrow" svgIcon="gio:arrow-right"></mat-icon>
+          }
+        </div>
+      }
     </div>
-  } @else {
-    <div class="disabledContent">
-      <gio-banner-warning>
-        Policies might not be evaluated
-        <span gioBannerBody>
-          Your current flow settings are not applicable to this phase. Select supporting endpoints and operations in the flow configuration to
-          enable this phase.
-        </span>
-      </gio-banner-warning>
-    </div>
-  }
+  </div>
+} @else {
+  <div class="disabledContent">
+    <gio-banner-warning>
+      Policies might not be evaluated
+      <span gioBannerBody>
+        Your current flow settings are not applicable to this phase. Select supporting endpoints and operations in the flow configuration to
+        enable this phase.
+      </span>
+    </gio-banner-warning>
+  </div>
+}

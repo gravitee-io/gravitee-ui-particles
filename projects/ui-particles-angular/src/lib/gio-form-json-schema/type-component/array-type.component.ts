@@ -35,25 +35,31 @@ import { FieldArrayType } from '@ngx-formly/core';
           </button>
         </div>
       </div>
-    
+
       @if (showError && formControl.errors) {
         <div class="wrapper__error gio-ng-invalid">
           <formly-validation-message [field]="field"></formly-validation-message>
         </div>
       }
-    
+
       <div [hidden]="collapse" class="wrapper__rows" [class.collapse-open]="collapse" [class.collapse-close]="!collapse">
         @for (field of field.fieldGroup; track field; let i = $index) {
           <div class="wrapper__rows__row">
             <formly-field class="wrapper__rows__row__field" [field]="field"></formly-field>
             <div class="wrapper__rows__row__remove">
-              <button type="button" mat-icon-button aria-label="Remove" [disabled]="this.formControl?.disabled ?? false" (click)="remove(i)">
+              <button
+                type="button"
+                mat-icon-button
+                aria-label="Remove"
+                [disabled]="this.formControl?.disabled ?? false"
+                (click)="remove(i)"
+              >
                 <mat-icon svgIcon="gio:cancel"></mat-icon>
               </button>
             </div>
           </div>
         }
-    
+
         <div>
           <button type="button" mat-stroked-button aria-label="Add" [disabled]="this.formControl?.disabled ?? false" (click)="add()">
             <mat-icon svgIcon="gio:plus"></mat-icon> Add
@@ -61,7 +67,7 @@ import { FieldArrayType } from '@ngx-formly/core';
         </div>
       </div>
     </div>
-    `,
+  `,
   styleUrls: ['./array-type.component.scss'],
   standalone: false,
 })

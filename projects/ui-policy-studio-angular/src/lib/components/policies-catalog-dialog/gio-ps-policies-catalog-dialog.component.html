@@ -1,18 +1,18 @@
 <!--
 
-Copyright (C) 2015 The Gravitee team (http://gravitee.io)
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+    Copyright (C) 2025 The Gravitee team (http://gravitee.io)
+    
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    
+            http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 
 -->
 <h2 mat-dialog-title class="title">
@@ -37,12 +37,7 @@ limitations under the License.
           <mat-label>Search</mat-label>
           <input matInput formControlName="search" cdkFocusInitial />
           @if (filtersForm.get('search')?.value) {
-            <button
-              matIconSuffix
-              mat-icon-button
-              aria-label="Clear"
-              (click)="filtersForm.get('search')?.setValue('')"
-              >
+            <button matIconSuffix mat-icon-button aria-label="Clear" (click)="filtersForm.get('search')?.setValue('')">
               <mat-icon svgIcon="gio:cancel"></mat-icon>
             </button>
           }
@@ -53,11 +48,9 @@ limitations under the License.
             aria-label="Categories selection"
             multiple
             formControlName="categories"
-            >
+          >
             @for (category of categories; track category) {
-              <mat-chip-option [selected]="category" [value]="category"
-                >{{ category | titlecase }}
-              </mat-chip-option>
+              <mat-chip-option [selected]="category" [value]="category">{{ category | titlecase }} </mat-chip-option>
             }
           </mat-chip-listbox>
         }
@@ -72,10 +65,7 @@ limitations under the License.
                   <span class="policiesCatalog__list__policy__head__name">{{ policy.name }}</span>
                 }
                 @if (policy.genericPolicy.type === 'SHARED_POLICY_GROUP') {
-                  <span
-                    class="gio-badge-neutral policiesCatalog__list__policy__head__badge"
-                    matTooltip="Shared Policy Group"
-                    >
+                  <span class="gio-badge-neutral policiesCatalog__list__policy__head__badge" matTooltip="Shared Policy Group">
                     <mat-icon svgIcon="gio:users"></mat-icon>
                   </span>
                 }
@@ -104,7 +94,6 @@ limitations under the License.
     </mat-dialog-content>
   }
 </ng-container>
-
 
 @if (selectedPolicy) {
   <mat-dialog-content class="policyForm">
@@ -155,7 +144,7 @@ limitations under the License.
       role="dialog"
       [disabled]="!isValid || isUnlicensed"
       (click)="onAddPolicy()"
-      >
+    >
       Add policy
     </button>
   }
