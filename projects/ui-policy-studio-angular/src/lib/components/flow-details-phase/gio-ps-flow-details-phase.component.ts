@@ -18,7 +18,6 @@ import { isEmpty, uniqueId } from 'lodash';
 import { MatDialog } from '@angular/material/dialog';
 import { GIO_DIALOG_WIDTH, GioBannerModule, GioIconsModule } from '@gravitee/ui-particles-angular';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
 import { MatButtonModule } from '@angular/material/button';
 
 import {

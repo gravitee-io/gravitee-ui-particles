@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import { Component, ElementRef, inject, Input, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
-
 import { MatButtonModule } from '@angular/material/button';
 import { Overlay, OverlayPositionBuilder, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';

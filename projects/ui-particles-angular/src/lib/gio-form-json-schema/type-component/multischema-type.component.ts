@@ -37,7 +37,7 @@ import { Subject } from 'rxjs';
         <formly-field [field]="f"></formly-field>
       }
     </div>
-    `,
+  `,
   styleUrls: ['./multischema-type.component.scss'],
   standalone: false,
 })

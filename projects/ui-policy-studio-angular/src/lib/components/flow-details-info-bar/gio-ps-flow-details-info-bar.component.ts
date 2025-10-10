@@ -117,17 +117,17 @@ export class GioPolicyStudioDetailsInfoBarComponent implements OnChanges {
     return httpSelector?.pathOperator;
   }
 
-  get methods() {
-      if (this._methods === undefined && this.flow) {
-          const httpSelector = this.flow.selectors?.find(s => s.type === 'HTTP') as HttpSelector;
-          if (!httpSelector) {
-              this._methods = null; // Cache null to avoid recomputation
-              return undefined;
-          }
-          this._methods = httpSelector?.methods?.length
-              ? httpSelector.methods.map(m => ({ name: m, class: `gio-method-badge-${m.toLowerCase()}` }))
-              : [{ name: 'ALL', class: 'gio-badge-neutral' }];
+  public get methods() {
+    if (this._methods === undefined && this.flow) {
+      const httpSelector = this.flow.selectors?.find(s => s.type === 'HTTP') as HttpSelector;
+      if (!httpSelector) {
+        this._methods = null; // Cache null to avoid recomputation
+        return undefined;
       }
-      return this._methods === null ? undefined : this._methods;
+      this._methods = httpSelector?.methods?.length
+        ? httpSelector.methods.map(m => ({ name: m, class: `gio-method-badge-${m.toLowerCase()}` }))
+        : [{ name: 'ALL', class: 'gio-badge-neutral' }];
+    }
+    return this._methods === null ? undefined : this._methods;
   }
 }

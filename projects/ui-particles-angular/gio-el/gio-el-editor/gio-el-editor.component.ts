@@ -13,38 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {
-    ChangeDetectionStrategy,
-    Component,
-    DestroyRef,
-    EventEmitter,
-    inject,
-    Input,
-    OnInit,
-    Output
-} from '@angular/core';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {MatButtonModule} from '@angular/material/button';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
+import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs/operators';
+import { get, has, isEmpty, isNil } from 'lodash';
+import { GioIconsModule } from '@gravitee/ui-particles-angular';
 
-import {MatSelectModule} from '@angular/material/select';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {map} from 'rxjs/operators';
-import {get, has, isEmpty, isNil} from 'lodash';
-import {GioIconsModule} from '@gravitee/ui-particles-angular';
+import { ConditionModel, ConditionType } from '../models/ConditionModel';
+import { ConditionsModel } from '../models/ConditionsModel';
+import { ExpressionLanguageBuilder } from '../models/ExpressionLanguageBuilder';
+import { ConditionGroup } from '../models/ConditionGroup';
+import { Condition } from '../models/Condition';
+import { Operator } from '../models/Operator';
 
-import {ConditionModel, ConditionType} from '../models/ConditionModel';
-import {ConditionsModel} from '../models/ConditionsModel';
-import {ExpressionLanguageBuilder} from '../models/ExpressionLanguageBuilder';
-import {ConditionGroup} from '../models/ConditionGroup';
-import {Condition} from '../models/Condition';
-import {Operator} from '../models/Operator';
-import {
-    GioElEditorConditionGroupComponent
-} from './gio-el-editor-condition-group/gio-el-editor-condition-group.component';
+import { GioElEditorConditionGroupComponent } from './gio-el-editor-condition-group/gio-el-editor-condition-group.component';
 
 export type ConditionForm = {
   field: FormControl<ConditionModel | null>;
@@ -68,8 +57,8 @@ export type ConditionGroupForm = {
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    GioElEditorConditionGroupComponent
-],
+    GioElEditorConditionGroupComponent,
+  ],
   templateUrl: './gio-el-editor.component.html',
   styleUrl: './gio-el-editor.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -18,7 +18,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { GIO_DIALOG_WIDTH, GioConfirmDialogComponent, GioConfirmDialogData, GioIconsModule } from '@gravitee/ui-particles-angular';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
-
 import { get, isEmpty, isNil, has } from 'lodash';
 import { MatTooltipModule } from '@angular/material/tooltip';
 

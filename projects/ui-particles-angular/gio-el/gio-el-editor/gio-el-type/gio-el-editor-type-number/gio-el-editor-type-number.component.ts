@@ -20,7 +20,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 
-
 import { ConditionForm } from '../../gio-el-editor.component';
 import { Operator } from '../../../models/Operator';
 
