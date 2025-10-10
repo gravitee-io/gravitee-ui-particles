@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { ComponentHarness, LocatorFactory } from '@angular/cdk/testing';
+import {ComponentHarness, LocatorFactory, TestElement} from '@angular/cdk/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 
 export type StepForm = {
@@ -68,6 +68,6 @@ export class GioPolicyStudioStepFormHarness extends ComponentHarness {
 
   public async getDocumentation(): Promise<string | null> {
     const documentation = await this.locatorFor('.documentation__content > gio-asciidoctor')();
-    return documentation.getAttribute('ng-reflect-content');
+    return documentation.text();
   }
 }
