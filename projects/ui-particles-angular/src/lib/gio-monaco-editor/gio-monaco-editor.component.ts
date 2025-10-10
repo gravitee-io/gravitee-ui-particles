@@ -66,10 +66,10 @@ export type MonacoEditorLanguageConfig =
 
 @Component({
   selector: 'gio-monaco-editor',
-  template: ` 
-      @if (loaded$ | async) {
-          <div>Loading...</div>
-      }
+  template: `
+    @if (loaded$ | async) {
+      <div>Loading...</div>
+    }
   `,
   styleUrls: ['./gio-monaco-editor.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

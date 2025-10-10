@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {ComponentHarness, LocatorFactory, TestElement} from '@angular/cdk/testing';
+import { ComponentHarness, LocatorFactory } from '@angular/cdk/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 
 export type StepForm = {

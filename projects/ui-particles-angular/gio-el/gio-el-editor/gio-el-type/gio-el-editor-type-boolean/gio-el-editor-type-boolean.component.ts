@@ -18,7 +18,6 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { isEmpty } from 'lodash';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 
 import { Operator } from '../../../models/Operator';

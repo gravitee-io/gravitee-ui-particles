@@ -20,7 +20,6 @@ import { isEmpty } from 'lodash';
 import { GIO_DIALOG_WIDTH, GioBannerModule, GioIconsModule, GioLoaderModule } from '@gravitee/ui-particles-angular';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
-
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { FlowVM } from '../../policy-studio/gio-policy-studio.model';
@@ -52,8 +51,8 @@ import {
     GioLoaderModule,
     GioPolicyStudioDetailsInfoBarComponent,
     MatTooltipModule,
-    GioBannerModule
-],
+    GioBannerModule,
+  ],
   selector: 'gio-ps-flow-details',
   templateUrl: './gio-ps-flow-details.component.html',
   styleUrls: ['./gio-ps-flow-details.component.scss'],

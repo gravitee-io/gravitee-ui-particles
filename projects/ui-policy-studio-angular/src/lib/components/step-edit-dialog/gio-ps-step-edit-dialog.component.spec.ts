@@ -25,6 +25,8 @@ import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { of } from 'rxjs';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { GioPrismJsService } from '@gravitee/ui-particles-angular';
+import { GioAsciidoctorService } from '@gravitee/ui-particles-angular/gio-asciidoctor';
 
 import { fakeTestPolicyStep, fakeTestPolicy } from '../../models/index-testing';
 import { Policy, Step } from '../../models';
@@ -37,8 +39,6 @@ import {
   GioPolicyStudioStepEditDialogResult,
 } from './gio-ps-step-edit-dialog.component';
 import { GioPolicyStudioStepEditDialogHarness } from './gio-ps-step-edit-dialog.harness';
-import {GioPrismJsService} from "@gravitee/ui-particles-angular";
-import {GioAsciidoctorService} from "@gravitee/ui-particles-angular/gio-asciidoctor";
 
 @Component({
   selector: 'gio-dialog-test',
@@ -95,9 +95,10 @@ describe('GioPolicyStudioStepEditDialogComponent', () => {
         {
           provide: GioAsciidoctorService,
           useValue: {
-            load: () => of({
-              convert: (content: string) => `<div class="asciidoctor-content">${content}</div>`, // Mock asciidoctor convert method
-            } as any),
+            load: () =>
+              of({
+                convert: (content: string) => `<div class="asciidoctor-content">${content}</div>`, // Mock asciidoctor convert method
+              }),
           },
         },
         {

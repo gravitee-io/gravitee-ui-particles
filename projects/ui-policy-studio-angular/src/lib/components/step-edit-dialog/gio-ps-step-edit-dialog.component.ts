@@ -16,7 +16,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { GioIconsModule } from '@gravitee/ui-particles-angular';
-
 import { MatButtonModule } from '@angular/material/button';
 
 import { FlowPhase, Step, GenericPolicy, ApiType } from '../../models';
