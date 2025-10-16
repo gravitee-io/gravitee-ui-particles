@@ -159,7 +159,7 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
             this._onChange(this.value);
           } catch (error) {
             this.hasError = true;
-            this.expressionDescription = `${error}` ?? 'Invalid cron expression.';
+            this.expressionDescription = `${error ?? 'Invalid cron expression.'}`;
             this._onChange(null);
           }
         }),
@@ -191,7 +191,7 @@ export class GioFormCronComponent implements ControlValueAccessor, OnInit, OnDes
       this.refreshInternalForm();
     } catch (error) {
       this.hasError = true;
-      this.expressionDescription = `${error}` ?? 'Invalid cron expression.';
+      this.expressionDescription = `${error ?? 'Invalid cron expression.'}`;
     }
   }
 

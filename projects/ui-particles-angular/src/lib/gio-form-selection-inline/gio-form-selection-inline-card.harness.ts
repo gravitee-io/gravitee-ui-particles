@@ -38,7 +38,7 @@ export class GioFormSelectionInlineCardHarness extends ComponentHarness {
 
   public async getValue(): Promise<string | null> {
     const host = await this.host();
-    return (await host.getAttribute('ng-reflect-value')) ?? null;
+    return (await host.getAttribute('value')) ?? null;
   }
 
   public async isSelected(): Promise<boolean> {

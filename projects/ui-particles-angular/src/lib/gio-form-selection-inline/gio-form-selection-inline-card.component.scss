@@ -30,7 +30,7 @@ $accent: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, default);
   min-width: 64px;
   min-height: 40px;
   flex: 1 1 auto;
-  border: 1px solid var(--mdc-outlined-text-field-outline-color);
+  border: 1px solid var(--mat-form-field-outlined-outline-color);
   border-radius: 4px;
   margin: 6px 0;
   cursor: pointer;
@@ -53,7 +53,7 @@ $accent: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, default);
 
     &__lock-icon,
     &__radio-icon {
-      color: var(--mdc-outlined-text-field-outline-color);
+      color: var(--mat-form-field-outlined-outline-color);
     }
   }
 
@@ -86,10 +86,10 @@ $accent: mat.m2-get-color-from-palette(palettes.$mat-primary-palette, default);
   }
 
   &:hover:not(.disabled, .selected) {
-    border-color: var(--mdc-outlined-text-field-hover-outline-color);
+    border-color: var(--mat-form-field-outlined-hover-outline-color);
 
     .selection-icon__radio-icon {
-      color: var(--mdc-outlined-text-field-hover-outline-color);
+      color: var(--mat-form-field-outlined-hover-outline-color);
     }
   }
 

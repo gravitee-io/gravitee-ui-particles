@@ -17,7 +17,6 @@ import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/co
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatMenuModule } from '@angular/material/menu';
@@ -34,7 +33,6 @@ import { GioElFieldComponent } from '../gio-el-field/gio-el-field.component';
 @Component({
   selector: 'gio-el-editor-condition-group',
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatSelectModule,

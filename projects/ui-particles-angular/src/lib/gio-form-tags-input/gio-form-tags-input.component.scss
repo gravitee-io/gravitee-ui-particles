@@ -18,7 +18,7 @@
   gio-form-tags-input {
     .mat-mdc-standard-chip {
       height: unset !important;
-      min-height: var(--mdc-chip-container-height);
+      min-height: var(--mat-chip-container-height);
     }
 
     .mat-mdc-standard-chip .mdc-evolution-chip__text-label {

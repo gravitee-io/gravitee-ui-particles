@@ -20,7 +20,9 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Hos
   template: `
     <div matRipple [matRippleDisabled]="_disabled" class="card" [class.selected]="selected" [class.disabled]="_disabled">
       <span class="selection-icon">
-        <mat-icon class="selection-icon__lock-icon" *ngIf="lock" svgIcon="gio:lock"></mat-icon>
+        @if (lock) {
+          <mat-icon class="selection-icon__lock-icon" svgIcon="gio:lock"></mat-icon>
+        }
         <mat-icon class="selection-icon__radio-icon">{{ selected ? 'radio_button_checked' : 'radio_button_unchecked' }}</mat-icon>
       </span>
 

@@ -1,6 +1,6 @@
 <!--
 
-    Copyright (C) 2024 The Gravitee team (http://gravitee.io)
+    Copyright (C) 2025 The Gravitee team (http://gravitee.io)
     
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -17,8 +17,14 @@
 -->
 <mat-card class="gio-empty-state">
   <mat-card-content class="gio-empty-state__content">
-    <mat-icon *ngIf="icon" class="gio-empty-state__content__icon" [svgIcon]="'gio:' + icon"></mat-icon>
-    <div *ngIf="title" class="mat-h3">{{ title }}</div>
-    <span *ngIf="subtitle" class="gio-empty-state__content__subtitle">{{ subtitle }}</span>
+    @if (icon) {
+      <mat-icon class="gio-empty-state__content__icon" [svgIcon]="'gio:' + icon"></mat-icon>
+    }
+    @if (title) {
+      <div class="mat-h3">{{ title }}</div>
+    }
+    @if (subtitle) {
+      <span class="gio-empty-state__content__subtitle">{{ subtitle }}</span>
+    }
   </mat-card-content>
 </mat-card>

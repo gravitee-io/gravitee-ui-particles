@@ -36,7 +36,7 @@ export class GioFormSelectionInlineHarness extends ComponentHarness {
 
   protected getCards = this.locatorForAll(GioFormSelectionInlineCardHarness);
 
-  protected getCardByValue = (value: string) => this.locatorFor(`gio-form-selection-inline-card[ng-reflect-value="${value}"]`)();
+  protected getCardByValue = (value: string) => this.locatorFor(`gio-form-selection-inline-card[value="${value}"]`)();
 
   public async getSelectedValue(): Promise<string | undefined> {
     const cards = await this.getCards();

@@ -25,6 +25,8 @@ import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { of } from 'rxjs';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { GioPrismJsService } from '@gravitee/ui-particles-angular';
+import { GioAsciidoctorService } from '@gravitee/ui-particles-angular/gio-asciidoctor';
 
 import { fakeAllPolicies } from '../../models/index-testing';
 import { ApiType, FlowPhase, isPolicy, isSharedPolicyGroupPolicy, toGenericPolicies, GenericPolicy, fromPolicyInput } from '../../models';
@@ -90,6 +92,21 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
             service.setPolicySchemaFetcher(policy => of(fakePolicySchema(policy.id)));
             service.setPolicyDocumentationFetcher(policy => of(fakePolicyDocumentation(policy.id)));
             return service;
+          },
+        },
+        {
+          provide: GioAsciidoctorService,
+          useValue: {
+            load: () =>
+              of({
+                convert: (content: string) => `<div class="asciidoctor-content">${content}</div>`, // Mock asciidoctor convert method
+              }),
+          },
+        },
+        {
+          provide: GioPrismJsService,
+          useValue: {
+            loadPrismJs: () => of({}), // Mock prismjs loading
           },
         },
       ],
@@ -165,6 +182,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
       await policiesCatalogDialog.selectPolicy('Policy to test UI');
 
       const stepForm = await policiesCatalogDialog.getStepForm();
+      fixture.detectChanges();
 
       expect(await stepForm.getDocumentation()).toContain('= Test Policy documentation');
     });
