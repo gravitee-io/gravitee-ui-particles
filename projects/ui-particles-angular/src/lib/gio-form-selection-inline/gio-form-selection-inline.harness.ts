@@ -36,7 +36,11 @@ export class GioFormSelectionInlineHarness extends ComponentHarness {
 
   protected getCards = this.locatorForAll(GioFormSelectionInlineCardHarness);
 
-  protected getCardByValue = (value: string) => this.locatorFor(`gio-form-selection-inline-card[value="${value}"]`)();
+  protected getCardByValue = (value: string) => {
+    const byValue = this.locatorForOptional(`gio-form-selection-inline-card[value="${value}"]`)();
+    const byReflectValue = this.locatorForOptional(`gio-form-selection-inline-card[ng-reflect-value="${value}"]`)();
+    return byValue.then(card => card ?? byReflectValue);
+  };
 
   public async getSelectedValue(): Promise<string | undefined> {
     const cards = await this.getCards();
@@ -78,8 +82,7 @@ export class GioFormSelectionInlineHarness extends ComponentHarness {
 
   public async select(value: string): Promise<void> {
     const card = await this.getCardByValue(value);
-
-    await card.click();
+    await card?.click();
   }
 
   public async isDisabled(): Promise<boolean> {
