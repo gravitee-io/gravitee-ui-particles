@@ -1,3 +1,15 @@
+# [16.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.13.0...v16.0.0) (2025-10-22)
+
+
+### chore
+
+* bump angular material to v20 ([d8b1887](https://github.com/gravitee-io/gravitee-ui-particles/commit/d8b18874a750c29dcd9d923f770074e95b53f863))
+
+
+### BREAKING CHANGES
+
+* Needs angular & material v20.
+
 # [15.13.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.12.0...v15.13.0) (2025-10-06)
 
 
