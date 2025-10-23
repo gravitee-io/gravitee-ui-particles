@@ -310,8 +310,11 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
   }
 
   // From MatFormFieldControl interface
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-  public onContainerClick(_event: MouseEvent): void {}
+  public onContainerClick(_event: MouseEvent): void {
+    if (this._tagInput) {
+      this._tagInput.nativeElement.focus();
+    }
+  }
 
   public addChipToFormControl(event: { value: string }): void {
     const input = this._tagInput?.nativeElement;
