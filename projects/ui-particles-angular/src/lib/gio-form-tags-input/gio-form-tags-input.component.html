@@ -41,10 +41,22 @@
         <div class="loader-option"><gio-loader></gio-loader></div>
       </mat-option>
     }
-    @for (option of autocompleteFilteredOptions$ | async; track option) {
-      <mat-option [value]="option.value">
-        {{ option.label }}
-      </mat-option>
+    @for (group of autocompleteFilteredOptions$ | async; track group.groupLabel) {
+      @if (group.groupLabel) {
+        <mat-optgroup [label]="group.groupLabel">
+          @for (option of group.groupOptions; track option.value) {
+            <mat-option [value]="option.value">
+              {{ option.label }}
+            </mat-option>
+          }
+        </mat-optgroup>
+      } @else {
+        @for (option of group.groupOptions; track option.value) {
+          <mat-option [value]="option.value">
+            {{ option.label }}
+          </mat-option>
+        }
+      }
     }
   </mat-autocomplete>
 </mat-chip-grid>
