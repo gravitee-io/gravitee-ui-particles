@@ -91,17 +91,23 @@ jobs:
           name: 🐙 Comment Pull Request
           command: |
             # First check there is an associated pull request, otherwise just stop the job here
-            if ! gh pr view --json title;
+            echo "Checking PR number"
+            if ! gh pr view --json number >/dev/null 2>&1;
             then
               echo "No PR found for this branch, stopping the job here."
               exit 0
             fi
+            echo "PR number checked"
+
             # If PR state is different from OPEN
+            echo "Checking PR is opened"
             if [ "$(gh pr view --json state --jq .state)" != "OPEN" ];
             then
               echo "PR is not opened, stopping the job here."
               exit 0
             fi
+            echo "PR opened check done"
+
             export PR_BODY_PRERELEASE_SECTION="
             <!-- Prerelease placeholder << parameters.angular_package_name >> -->
             ---
@@ -115,6 +121,8 @@ jobs:
             <!-- Prerelease placeholder << parameters.angular_package_name >> end -->
             "
             export CLEAN_BODY=$(gh pr view --json body --jq .body | sed '/Prerelease placeholder << parameters.angular_package_name >> -->/,/Prerelease placeholder << parameters.angular_package_name >> end -->/d')
+            
+            echo "PR edit with prerelease versions"
             gh pr edit --body "$CLEAN_BODY$PR_BODY_PRERELEASE_SECTION"
   release:
     parameters:
@@ -186,18 +194,24 @@ jobs:
       - run:
           name: 📚 Edit Pull Request Description
           command: |
+            echo "Checking PR number"
             # First check there is an associated pull request, otherwise just stop the job here
             if ! gh pr view --json title;
             then
               echo "No PR found for this branch, stopping the job here."
               exit 0
             fi
+            echo "PR number found"
+
             # If PR state is different from OPEN
+            echo "Checking if PR is opened"
             if [ "$(gh pr view --json state --jq .state)" != "OPEN" ];
             then
               echo "PR is not opened, stopping the job here."
               exit 0
             fi
+            echo "PR opened check done"
+
             export PR_BODY_STORYBOOK_SECTION="
             <!-- Storybook placeholder -->
             ---
@@ -205,6 +219,8 @@ jobs:
             <!-- Storybook placeholder end -->
             "
             export CLEAN_BODY=$(gh pr view --json body --jq .body | sed '/Storybook placeholder -->/,/Storybook placeholder end -->/d')
+            
+            echo "edit PR is with versions"
             gh pr edit --body "$CLEAN_BODY$PR_BODY_STORYBOOK_SECTION"
 workflows:
   version: 2.1
