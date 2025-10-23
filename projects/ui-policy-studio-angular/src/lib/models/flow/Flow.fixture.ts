@@ -114,7 +114,6 @@ export function fakeConditionedHttpFlow(modifier?: Partial<Flow> | ((baseApi: Fl
   if (isFunction(modifier)) {
     return modifier(base);
   }
-
   return {
     ...base,
     ...modifier,
@@ -158,6 +157,30 @@ export function fakeMcpFlow(modifier?: Partial<Flow> | ((baseApi: Flow) => Flow)
     return modifier(base);
   }
 
+  return {
+    ...base,
+    ...modifier,
+  };
+}
+export function fakeLlmFlow(modifier?: Partial<Flow> | ((baseApi: Flow) => Flow)): Flow {
+  const httpSelector: HttpSelector = {
+    type: 'HTTP',
+    path: '/path',
+    pathOperator: 'EQUALS',
+    methods: ['GET'],
+  };
+
+  const base: Flow = {
+    name: 'Flow name',
+    selectors: [httpSelector],
+    request: [],
+    response: [],
+    enabled: true,
+  };
+
+  if (isFunction(modifier)) {
+    return modifier(base);
+  }
   return {
     ...base,
     ...modifier,

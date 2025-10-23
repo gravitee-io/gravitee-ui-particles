@@ -61,6 +61,10 @@ import {
   GioPolicyStudioFlowMcpFormDialogComponent,
   GioPolicyStudioFlowMcpFormDialogData,
 } from '../flow-form-dialog/flow-mcp-form-dialog/gio-ps-flow-mcp-form-dialog.component';
+import {
+  GioPolicyStudioFlowLlmFormDialogComponent,
+  GioPolicyStudioFlowLlmFormDialogData,
+} from '../flow-form-dialog/flow-llm-form-dialog/gio-ps-flow-llm-form-dialog.component';
 
 interface FlowGroupMenuVM extends FlowGroupVM {
   flows: FlowMenuVM[];
@@ -389,6 +393,21 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges, OnDestroy {
           )
           .afterClosed();
         break;
+      case 'LLM_PROXY':
+        dialogResult = this.matDialog
+          .open<GioPolicyStudioFlowLlmFormDialogComponent, GioPolicyStudioFlowLlmFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+            GioPolicyStudioFlowLlmFormDialogComponent,
+            {
+              data: {
+                flow: undefined,
+              },
+              role: 'alertdialog',
+              id: 'gioPsFlowFormDialog',
+              width: GIO_DIALOG_WIDTH.MEDIUM,
+            },
+          )
+          .afterClosed();
+        break;
       default:
         throw new Error(`Unsupported API type ${this.apiType}`);
     }
@@ -537,6 +556,21 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges, OnDestroy {
             {
               data: {
                 parentGroupName: flowToEdit!._parentFlowGroupName,
+                flow: flowToEdit,
+              },
+              role: 'alertdialog',
+              id: 'gioPsFlowFormDialog',
+              width: GIO_DIALOG_WIDTH.MEDIUM,
+            },
+          )
+          .afterClosed();
+        break;
+      case 'LLM_PROXY':
+        dialogResult = this.matDialog
+          .open<GioPolicyStudioFlowLlmFormDialogComponent, GioPolicyStudioFlowLlmFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+            GioPolicyStudioFlowLlmFormDialogComponent,
+            {
+              data: {
                 flow: flowToEdit,
               },
               role: 'alertdialog',

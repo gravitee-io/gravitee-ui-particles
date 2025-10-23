@@ -58,5 +58,4 @@ export interface ConditionSelector extends BaseSelector {
 export interface McpSelector extends BaseSelector {
   methods?: string[];
 }
-
 export type Selector = HttpSelector | ChannelSelector | ConditionSelector | McpSelector;

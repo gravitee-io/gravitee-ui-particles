@@ -28,6 +28,7 @@ import { GioPolicyStudioFlowExecutionFormDialogHarness } from '../components/flo
 import { GioPolicyStudioDetailsPhaseHarness, PhaseType } from '../components/flow-details-phase/gio-ps-flow-details-phase.harness';
 import { GioPolicyStudioFlowNativeFormDialogHarness } from '../components/flow-form-dialog/flow-native-form-dialog/gio-ps-flow-native-form-dialog.harness';
 import { GioPolicyStudioFlowMcpFormDialogHarness } from '../components/flow-form-dialog/flow-mcp-form-dialog/gio-ps-flow-mcp-form-dialog.harness';
+import { GioPolicyStudioFlowLlmFormDialogHarness } from '../components/flow-form-dialog/flow-llm-form-dialog/gio-ps-flow-llm-form-dialog.harness';
 
 export class GioPolicyStudioHarness extends ComponentHarness {
   public static hostSelector = 'gio-policy-studio';
@@ -190,7 +191,6 @@ export class GioPolicyStudioHarness extends ComponentHarness {
     if (!!channelSelector && !!httpSelector) {
       throw new Error('Channel and HTTP selectors are not be used together.');
     }
-
     if (channelSelector) {
       const flowFormNewDialog = await this.documentRootLocatorFactory().locatorFor(GioPolicyStudioFlowMessageFormDialogHarness)();
 
@@ -213,8 +213,14 @@ export class GioPolicyStudioHarness extends ComponentHarness {
     }
 
     if (httpSelector) {
-      const flowFormNewDialog = await this.documentRootLocatorFactory().locatorFor(GioPolicyStudioFlowProxyFormDialogHarness)();
-
+      let flowFormNewDialog: GioPolicyStudioFlowProxyFormDialogHarness | GioPolicyStudioFlowLlmFormDialogHarness | null =
+        await this.documentRootLocatorFactory().locatorForOptional(GioPolicyStudioFlowProxyFormDialogHarness)();
+      if (!flowFormNewDialog) {
+        flowFormNewDialog = await this.documentRootLocatorFactory().locatorForOptional(GioPolicyStudioFlowLlmFormDialogHarness)();
+      }
+      if (!flowFormNewDialog) {
+        throw new Error('No Proxy or LLM flow form dialog found.');
+      }
       await flowFormNewDialog.setFlowFormValues({
         name: flow.name,
         path: httpSelector?.path,
@@ -222,7 +228,6 @@ export class GioPolicyStudioHarness extends ComponentHarness {
         methods: httpSelector?.methods,
         condition: conditionSelector?.condition,
       });
-
       await flowFormNewDialog.save();
       return;
     }
