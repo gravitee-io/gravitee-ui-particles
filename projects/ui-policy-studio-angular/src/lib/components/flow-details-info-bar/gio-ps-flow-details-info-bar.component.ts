@@ -19,7 +19,7 @@ import { GioIconsModule } from '@gravitee/ui-particles-angular';
 import { MatCommonModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 
-import { ChannelSelector, ConditionSelector, ConnectorInfo, HttpSelector, Operation } from '../../models';
+import { ChannelSelector, ConditionSelector, ConnectorInfo, HttpSelector, McpSelector, Operation } from '../../models';
 import { FlowVM } from '../../policy-studio/gio-policy-studio.model';
 
 @Component({
@@ -36,6 +36,8 @@ export class GioPolicyStudioDetailsInfoBarComponent implements OnChanges {
   public entrypointsInfo?: ConnectorInfo[];
 
   private _methods?: { name: string; class: string }[] | null;
+
+  private _mcpMethods?: { name: string; class: string }[] | null;
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['flow']) {
@@ -129,5 +131,21 @@ export class GioPolicyStudioDetailsInfoBarComponent implements OnChanges {
         : [{ name: 'ALL', class: 'gio-badge-neutral' }];
     }
     return this._methods === null ? undefined : this._methods;
+  }
+
+  // MCP Proxy API
+  public get mcpMethods() {
+    if (this._mcpMethods === undefined && this.flow) {
+      const mcpSelector = this.flow.selectors?.find(s => s.type === 'MCP') as McpSelector;
+      if (!mcpSelector) {
+        this._mcpMethods = null; // Cache null to avoid recomputation
+        return undefined;
+      }
+
+      this._mcpMethods = mcpSelector?.methods?.length
+        ? mcpSelector.methods.map(m => ({ name: m, class: `gio-badge-neutral` }))
+        : [{ name: 'All Methods', class: 'gio-badge-neutral' }];
+    }
+    return this._mcpMethods === null ? undefined : this._mcpMethods;
   }
 }

@@ -123,6 +123,8 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
               return genericPolicy.flowPhaseCompatibility?.HTTP_MESSAGE?.includes(flowDialogData.flowPhase);
             case 'NATIVE':
               return genericPolicy.flowPhaseCompatibility?.NATIVE_KAFKA?.includes(flowDialogData.flowPhase);
+            case 'MCP_PROXY':
+              return genericPolicy.flowPhaseCompatibility?.HTTP_MCP_PROXY?.includes(flowDialogData.flowPhase);
             default:
               throw new Error('Unknown API type');
           }

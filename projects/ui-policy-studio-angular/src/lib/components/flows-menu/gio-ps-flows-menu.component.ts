@@ -28,7 +28,16 @@ import { cloneDeep, flatten, isEmpty, uniqueId } from 'lodash';
 import { debounceTime, distinctUntilChanged, startWith, takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
-import { ApiType, ChannelSelector, ConditionSelector, ConnectorInfo, FlowExecution, HttpSelector, Operation } from '../../models';
+import {
+  ApiType,
+  ChannelSelector,
+  ConditionSelector,
+  ConnectorInfo,
+  FlowExecution,
+  HttpSelector,
+  McpSelector,
+  Operation,
+} from '../../models';
 import { Selector } from '../../models/flow/Selector';
 import { FlowGroupVM, FlowVM } from '../../policy-studio/gio-policy-studio.model';
 import {
@@ -48,6 +57,10 @@ import {
   GioPolicyStudioFlowProxyFormDialogData,
 } from '../flow-form-dialog/flow-proxy-form-dialog/gio-ps-flow-proxy-form-dialog.component';
 import { GioPolicyStudioFlowFormDialogResult } from '../flow-form-dialog/gio-ps-flow-form-dialog-result.model';
+import {
+  GioPolicyStudioFlowMcpFormDialogComponent,
+  GioPolicyStudioFlowMcpFormDialogData,
+} from '../flow-form-dialog/flow-mcp-form-dialog/gio-ps-flow-mcp-form-dialog.component';
 
 interface FlowGroupMenuVM extends FlowGroupVM {
   flows: FlowMenuVM[];
@@ -60,7 +73,7 @@ interface FlowMenuVM extends FlowVM {
     label: string;
     class: string;
   }[];
-  pathOrChannelLabel: string;
+  pathOrChannelLabel?: string;
   hasCondition: boolean;
 }
 
@@ -149,7 +162,7 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges, OnDestroy {
           ...flowGroup,
           flows: flowGroup.flows.map(flow => {
             const badges: FlowMenuVM['badges'] = [];
-            let pathOrChannelLabel = '';
+            let pathOrChannelLabel: string | undefined = undefined;
             let hasCondition = false;
 
             // MESSAGE API - CHANNEL
@@ -196,6 +209,29 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges, OnDestroy {
               }
 
               pathOrChannelLabel = `${httpSelector.path}${httpSelector.pathOperator === 'STARTS_WITH' ? '/**' : ''}`;
+            }
+
+            // MCP Proxy
+            const mcpSelector = flow.selectors?.find(s => s.type === 'MCP') as McpSelector;
+            if (mcpSelector) {
+              if (mcpSelector.methods && mcpSelector.methods.length > 0) {
+                // Keep only 2 first methods and add +X badge if there are more
+                const methodsToKeep = mcpSelector.methods.slice(0, 2);
+                const methodsLength = mcpSelector.methods.length;
+                badges.push(...methodsToKeep.map(method => ({ label: method, class: `gio-badge-neutral` })));
+                if (methodsLength > 2) {
+                  badges.push({
+                    label: `+${methodsLength - 2}`,
+                    class: 'gio-badge-neutral',
+                  });
+                }
+              } else {
+                badges.push({
+                  label: 'All Methods',
+                  class: 'gio-badge-neutral',
+                });
+              }
+              pathOrChannelLabel = '';
             }
 
             const conditionSelector = flow.selectors?.find(s => s.type === 'CONDITION') as ConditionSelector;
@@ -325,6 +361,22 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges, OnDestroy {
         dialogResult = this.matDialog
           .open<GioPolicyStudioFlowNativeFormDialogComponent, GioPolicyStudioFlowNativeFormDialogData, GioPolicyStudioFlowFormDialogResult>(
             GioPolicyStudioFlowNativeFormDialogComponent,
+            {
+              data: {
+                parentGroupName: flowGroup.name,
+                flow: undefined,
+              },
+              role: 'alertdialog',
+              id: 'gioPsFlowFormDialog',
+              width: GIO_DIALOG_WIDTH.MEDIUM,
+            },
+          )
+          .afterClosed();
+        break;
+      case 'MCP_PROXY':
+        dialogResult = this.matDialog
+          .open<GioPolicyStudioFlowMcpFormDialogComponent, GioPolicyStudioFlowMcpFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+            GioPolicyStudioFlowMcpFormDialogComponent,
             {
               data: {
                 parentGroupName: flowGroup.name,
@@ -473,6 +525,22 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges, OnDestroy {
               },
               role: 'alertdialog',
               id: 'gioPsFlowNativeFormDialog',
+              width: GIO_DIALOG_WIDTH.MEDIUM,
+            },
+          )
+          .afterClosed();
+        break;
+      case 'MCP_PROXY':
+        dialogResult = this.matDialog
+          .open<GioPolicyStudioFlowMcpFormDialogComponent, GioPolicyStudioFlowMcpFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+            GioPolicyStudioFlowMcpFormDialogComponent,
+            {
+              data: {
+                parentGroupName: flowToEdit!._parentFlowGroupName,
+                flow: flowToEdit,
+              },
+              role: 'alertdialog',
+              id: 'gioPsFlowFormDialog',
               width: GIO_DIALOG_WIDTH.MEDIUM,
             },
           )

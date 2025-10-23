@@ -84,6 +84,16 @@
   </div>
 }
 
+<!-- Mcp Methods-->
+@if (mcpMethods) {
+  <div class="info">
+    <span class="info__label">MCP Methods</span>
+    @for (mcpMethod of mcpMethods; track mcpMethod.name) {
+      <span class="info__value" [ngClass]="mcpMethod.class">{{ mcpMethod.name }}</span>
+    }
+  </div>
+}
+
 <!-- Condition -->
 
 @if (condition) {
