@@ -36,6 +36,7 @@ import {
   FlowExecution,
   HttpSelector,
   McpSelector,
+  LlmSelector,
   Operation,
 } from '../../models';
 import { Selector } from '../../models/flow/Selector';
@@ -61,6 +62,10 @@ import {
   GioPolicyStudioFlowMcpFormDialogComponent,
   GioPolicyStudioFlowMcpFormDialogData,
 } from '../flow-form-dialog/flow-mcp-form-dialog/gio-ps-flow-mcp-form-dialog.component';
+import {
+  GioPolicyStudioFlowLlmFormDialogComponent,
+  GioPolicyStudioFlowLlmFormDialogData,
+} from '../flow-form-dialog/flow-llm-form-dialog/gio-ps-flow-llm-form-dialog.component';
 
 interface FlowGroupMenuVM extends FlowGroupVM {
   flows: FlowMenuVM[];
@@ -233,7 +238,28 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges, OnDestroy {
               }
               pathOrChannelLabel = '';
             }
-
+            // LLM Proxy
+            const llmSelector = flow.selectors?.find(s => s.type === 'LLM') as LlmSelector;
+            if (llmSelector) {
+              if (llmSelector.methods && llmSelector.methods.length > 0) {
+                // Keep only 2 first methods and add +X badge if there are more
+                const methodsToKeep = llmSelector.methods.slice(0, 2);
+                const methodsLength = llmSelector.methods.length;
+                badges.push(...methodsToKeep.map(method => ({ label: method, class: `gio-badge-neutral` })));
+                if (methodsLength > 2) {
+                  badges.push({
+                    label: `+${methodsLength - 2}`,
+                    class: 'gio-badge-neutral',
+                  });
+                }
+              } else {
+                badges.push({
+                  label: 'All Methods',
+                  class: 'gio-badge-neutral',
+                });
+              }
+              pathOrChannelLabel = '';
+            }
             const conditionSelector = flow.selectors?.find(s => s.type === 'CONDITION') as ConditionSelector;
             if (conditionSelector && conditionSelector.condition) {
               hasCondition = true;
@@ -377,6 +403,22 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges, OnDestroy {
         dialogResult = this.matDialog
           .open<GioPolicyStudioFlowMcpFormDialogComponent, GioPolicyStudioFlowMcpFormDialogData, GioPolicyStudioFlowFormDialogResult>(
             GioPolicyStudioFlowMcpFormDialogComponent,
+            {
+              data: {
+                parentGroupName: flowGroup.name,
+                flow: undefined,
+              },
+              role: 'alertdialog',
+              id: 'gioPsFlowFormDialog',
+              width: GIO_DIALOG_WIDTH.MEDIUM,
+            },
+          )
+          .afterClosed();
+        break;
+      case 'LLM_PROXY':
+        dialogResult = this.matDialog
+          .open<GioPolicyStudioFlowLlmFormDialogComponent, GioPolicyStudioFlowLlmFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+            GioPolicyStudioFlowLlmFormDialogComponent,
             {
               data: {
                 parentGroupName: flowGroup.name,
@@ -534,6 +576,22 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges, OnDestroy {
         dialogResult = this.matDialog
           .open<GioPolicyStudioFlowMcpFormDialogComponent, GioPolicyStudioFlowMcpFormDialogData, GioPolicyStudioFlowFormDialogResult>(
             GioPolicyStudioFlowMcpFormDialogComponent,
+            {
+              data: {
+                parentGroupName: flowToEdit!._parentFlowGroupName,
+                flow: flowToEdit,
+              },
+              role: 'alertdialog',
+              id: 'gioPsFlowFormDialog',
+              width: GIO_DIALOG_WIDTH.MEDIUM,
+            },
+          )
+          .afterClosed();
+        break;
+      case 'LLM_PROXY':
+        dialogResult = this.matDialog
+          .open<GioPolicyStudioFlowLlmFormDialogComponent, GioPolicyStudioFlowLlmFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+            GioPolicyStudioFlowLlmFormDialogComponent,
             {
               data: {
                 parentGroupName: flowToEdit!._parentFlowGroupName,

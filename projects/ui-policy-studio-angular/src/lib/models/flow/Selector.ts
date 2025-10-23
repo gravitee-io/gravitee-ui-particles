@@ -17,7 +17,7 @@ import { HttpMethod } from './HttpMethod';
 
 export type Operation = 'PUBLISH' | 'SUBSCRIBE';
 export type Operator = 'EQUALS' | 'STARTS_WITH';
-export type BaseSelectorTypeEnum = 'HTTP' | 'CHANNEL' | 'CONDITION' | 'MCP';
+export type BaseSelectorTypeEnum = 'HTTP' | 'CHANNEL' | 'CONDITION' | 'MCP' | 'LLM';
 
 export interface BaseSelector {
   /**
@@ -58,5 +58,7 @@ export interface ConditionSelector extends BaseSelector {
 export interface McpSelector extends BaseSelector {
   methods?: string[];
 }
-
-export type Selector = HttpSelector | ChannelSelector | ConditionSelector | McpSelector;
+export interface LlmSelector extends BaseSelector {
+  methods?: string[];
+}
+export type Selector = HttpSelector | ChannelSelector | ConditionSelector | McpSelector | LlmSelector;

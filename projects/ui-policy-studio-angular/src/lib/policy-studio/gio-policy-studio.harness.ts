@@ -28,6 +28,7 @@ import { GioPolicyStudioFlowExecutionFormDialogHarness } from '../components/flo
 import { GioPolicyStudioDetailsPhaseHarness, PhaseType } from '../components/flow-details-phase/gio-ps-flow-details-phase.harness';
 import { GioPolicyStudioFlowNativeFormDialogHarness } from '../components/flow-form-dialog/flow-native-form-dialog/gio-ps-flow-native-form-dialog.harness';
 import { GioPolicyStudioFlowMcpFormDialogHarness } from '../components/flow-form-dialog/flow-mcp-form-dialog/gio-ps-flow-mcp-form-dialog.harness';
+import { GioPolicyStudioFlowLlmFormDialogHarness } from '../components/flow-form-dialog/flow-llm-form-dialog/gio-ps-flow-llm-form-dialog.harness';
 
 export class GioPolicyStudioHarness extends ComponentHarness {
   public static hostSelector = 'gio-policy-studio';
@@ -186,6 +187,7 @@ export class GioPolicyStudioHarness extends ComponentHarness {
     const httpSelector = flow.selectors?.find(s => s.type === 'HTTP') as HttpSelector | undefined;
     const conditionSelector = flow.selectors?.find(s => s.type === 'CONDITION') as ConditionSelector | undefined;
     const mcpSelector = flow.selectors?.find(s => s.type === 'MCP') as McpSelector | undefined;
+    const llmSelector = flow.selectors?.find(s => s.type === 'HTTP') as HttpSelector | undefined;
 
     if (!!channelSelector && !!httpSelector) {
       throw new Error('Channel and HTTP selectors are not be used together.');
@@ -239,7 +241,18 @@ export class GioPolicyStudioHarness extends ComponentHarness {
       await flowFormNewDialog.save();
       return;
     }
+    if (llmSelector) {
+      const flowFormNewDialog = await this.documentRootLocatorFactory().locatorFor(GioPolicyStudioFlowLlmFormDialogHarness)();
 
+      await flowFormNewDialog.setFlowFormValues({
+        name: flow.name,
+        methods: llmSelector?.methods,
+        condition: conditionSelector?.condition,
+      });
+
+      await flowFormNewDialog.save();
+      return;
+    }
     if (!channelSelector && !httpSelector) {
       const flowFormNewDialog = await this.documentRootLocatorFactory().locatorFor(GioPolicyStudioFlowNativeFormDialogHarness)();
       await flowFormNewDialog.setFlowFormValues({

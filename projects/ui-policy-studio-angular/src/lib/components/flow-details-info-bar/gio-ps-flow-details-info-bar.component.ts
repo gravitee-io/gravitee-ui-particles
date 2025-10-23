@@ -19,7 +19,7 @@ import { GioIconsModule } from '@gravitee/ui-particles-angular';
 import { MatCommonModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 
-import { ChannelSelector, ConditionSelector, ConnectorInfo, HttpSelector, McpSelector, Operation } from '../../models';
+import { ChannelSelector, ConditionSelector, ConnectorInfo, HttpSelector, McpSelector, LlmSelector, Operation } from '../../models';
 import { FlowVM } from '../../policy-studio/gio-policy-studio.model';
 
 @Component({
@@ -38,6 +38,8 @@ export class GioPolicyStudioDetailsInfoBarComponent implements OnChanges {
   private _methods?: { name: string; class: string }[] | null;
 
   private _mcpMethods?: { name: string; class: string }[] | null;
+
+  private _llmMethods?: { name: string; class: string }[] | null;
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['flow']) {
@@ -147,5 +149,21 @@ export class GioPolicyStudioDetailsInfoBarComponent implements OnChanges {
         : [{ name: 'All Methods', class: 'gio-badge-neutral' }];
     }
     return this._mcpMethods === null ? undefined : this._mcpMethods;
+  }
+  // LLM Proxy API
+  public get llmMethods() {
+    if (this._llmMethods === undefined && this.flow) {
+      //TODO need to add the type of the LLM selector
+      const llmSelector = this.flow.selectors?.find(s => s.type === 'LLM') as LlmSelector;
+      if (!llmSelector) {
+        this._llmMethods = null; // Cache null to avoid recomputation
+        return undefined;
+      }
+
+      this._llmMethods = llmSelector?.methods?.length
+        ? llmSelector.methods.map(m => ({ name: m, class: `gio-badge-neutral` }))
+        : [{ name: 'All Methods', class: 'gio-badge-neutral' }];
+    }
+    return this._llmMethods === null ? undefined : this._llmMethods;
   }
 }

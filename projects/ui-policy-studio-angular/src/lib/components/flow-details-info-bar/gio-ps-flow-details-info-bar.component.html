@@ -93,8 +93,16 @@
     }
   </div>
 }
+@if (llmMethods) {
+  <div class="info">
+    <span class="info__label">LLM Methods</span>
+    @for (llmMethod of llmMethods; track llmMethod.name) {
+      <span class="info__value" [ngClass]="llmMethod.class">{{ llmMethod.name }}</span>
+    }
+  </div>
+}
 
-<!-- Condition -->
+  <!-- Condition -->
 
 @if (condition) {
   <div class="info">
