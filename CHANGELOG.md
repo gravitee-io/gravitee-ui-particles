@@ -1,3 +1,10 @@
+## [16.0.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.0.0...v16.0.1) (2025-10-23)
+
+
+### Bug Fixes
+
+* update gio-card-selection-harness to fallback on ng-reflect attributes ([1564949](https://github.com/gravitee-io/gravitee-ui-particles/commit/15649492ca4afeedd83874cbfeff01fd347de85a))
+
 # [16.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v15.13.0...v16.0.0) (2025-10-22)
 
 
