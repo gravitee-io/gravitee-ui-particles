@@ -41,7 +41,10 @@ import { distinctUntilChanged, map, startWith, switchMap, tap } from 'rxjs/opera
 
 export type Tags = Array<string>;
 
-export type AutocompleteOptions = (string | { value: string; label: string })[];
+type AutocompleteOptionsFlat = (string | { value: string; label: string })[];
+type AutocompleteOptionsGroup = { groupLabel: string; groupOptions: AutocompleteOptionsFlat }[];
+
+export type AutocompleteOptions = AutocompleteOptionsFlat | AutocompleteOptionsGroup;
 
 export type DisplayValueWithFn = (value: string) => Observable<string>;
 
@@ -136,7 +139,7 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
   }
   private _tagInput: ElementRef<HTMLInputElement> | null = null;
 
-  public autocompleteFilteredOptions$?: Observable<Record<string, string>[]>;
+  public autocompleteFilteredOptions$?: Observable<{ groupLabel?: string; groupOptions: { value: string; label: string }[] }[]>;
 
   public _displayValueWith?: (value: string) => Observable<string>;
 
@@ -369,9 +372,11 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
             return this._autocompleteOptions(this._tagInput?.nativeElement.value ?? '').pipe(
               map(options => sanitizeAutocompleteOptions(options)),
               // Add options to displayValueCache to avoid call on select
-              tap(options => {
-                options.forEach(option => {
-                  this.displayValueCache[option.value] = option.label;
+              tap(groups => {
+                groups.forEach(group => {
+                  group.groupOptions.forEach(option => {
+                    this.displayValueCache[option.value] = option.label;
+                  });
                 });
               }),
             );
@@ -393,26 +398,55 @@ const defaultAutocompleteFilter = (
   options: AutocompleteOptions,
   search: string,
 ): {
-  value: string;
-  label: string;
+  groupLabel?: string;
+  groupOptions: { value: string; label: string }[];
 }[] => {
-  return sanitizeAutocompleteOptions(options).filter(
-    defaultHeader =>
-      defaultHeader.label.toLowerCase().includes((search ?? '').toLowerCase()) ||
-      defaultHeader.value.toLowerCase().includes((search ?? '').toLowerCase()),
-  );
+  const optionsFilter = (options: { value: string; label: string }[], search: string) => {
+    return options.filter(
+      option =>
+        option.label.toLowerCase().includes((search ?? '').toLowerCase()) ||
+        option.value.toLowerCase().includes((search ?? '').toLowerCase()),
+    );
+  };
+
+  return sanitizeAutocompleteOptions(options)
+    .map(group => ({
+      groupLabel: group.groupLabel,
+      groupOptions: optionsFilter(group.groupOptions, search),
+    }))
+    .filter(group => group.groupOptions.length > 0);
 };
 
 const sanitizeAutocompleteOptions = (
   options: AutocompleteOptions,
 ): {
-  value: string;
-  label: string;
+  groupLabel?: string;
+  groupOptions: { value: string; label: string }[];
 }[] => {
-  return options.map(option => {
-    if (option && typeof option !== 'string' && 'value' in option && 'label' in option) {
-      return option;
-    }
-    return { value: option, label: option };
-  });
+  const sanitizeFlatOptions = (flatOptions: AutocompleteOptionsFlat): { value: string; label: string }[] =>
+    flatOptions.map(option => {
+      if (option && typeof option !== 'string' && 'value' in option && 'label' in option) {
+        return option;
+      }
+      return { value: option, label: option };
+    });
+
+  if (
+    Array.isArray(options) &&
+    (options.length === 0 || typeof options[0] === 'string' || ('value' in options[0] && 'label' in options[0]))
+  ) {
+    const optionsFlat = options as AutocompleteOptionsFlat;
+    return [
+      {
+        groupOptions: sanitizeFlatOptions(optionsFlat),
+      },
+    ];
+  } else {
+    // Else option is Grouped
+    const optionsGrouped = options as AutocompleteOptionsGroup;
+    return optionsGrouped.map(group => ({
+      groupLabel: group.groupLabel,
+      groupOptions: sanitizeFlatOptions(group.groupOptions),
+    }));
+  }
 };
