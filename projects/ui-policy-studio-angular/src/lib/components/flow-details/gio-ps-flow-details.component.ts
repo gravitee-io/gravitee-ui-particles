@@ -44,6 +44,10 @@ import {
   GioPolicyStudioFlowMcpFormDialogComponent,
   GioPolicyStudioFlowMcpFormDialogData,
 } from '../flow-form-dialog/flow-mcp-form-dialog/gio-ps-flow-mcp-form-dialog.component';
+import {
+  GioPolicyStudioFlowLlmFormDialogComponent,
+  GioPolicyStudioFlowLlmFormDialogData,
+} from '../flow-form-dialog/flow-llm-form-dialog/gio-ps-flow-llm-form-dialog.component';
 
 @Component({
   imports: [
@@ -180,6 +184,21 @@ export class GioPolicyStudioDetailsComponent implements OnChanges {
             {
               data: {
                 parentGroupName: this.flow!._parentFlowGroupName,
+                flow: this.flow,
+              },
+              role: 'alertdialog',
+              id: 'gioPsFlowFormDialog',
+              width: GIO_DIALOG_WIDTH.MEDIUM,
+            },
+          )
+          .afterClosed();
+        break;
+      case 'LLM_PROXY':
+        dialogResult = this.matDialog
+          .open<GioPolicyStudioFlowLlmFormDialogComponent, GioPolicyStudioFlowLlmFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+            GioPolicyStudioFlowLlmFormDialogComponent,
+            {
+              data: {
                 flow: this.flow,
               },
               role: 'alertdialog',
