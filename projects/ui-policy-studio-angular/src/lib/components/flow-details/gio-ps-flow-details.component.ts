@@ -40,6 +40,10 @@ import {
   GioPolicyStudioFlowNativeFormDialogComponent,
   GioPolicyStudioFlowNativeFormDialogData,
 } from '../flow-form-dialog/flow-native-form-dialog/gio-ps-flow-native-form-dialog.component';
+import {
+  GioPolicyStudioFlowMcpFormDialogComponent,
+  GioPolicyStudioFlowMcpFormDialogData,
+} from '../flow-form-dialog/flow-mcp-form-dialog/gio-ps-flow-mcp-form-dialog.component';
 
 @Component({
   imports: [
@@ -164,6 +168,22 @@ export class GioPolicyStudioDetailsComponent implements OnChanges {
               },
               role: 'alertdialog',
               id: 'gioPsFlowNativeFormDialog',
+              width: GIO_DIALOG_WIDTH.MEDIUM,
+            },
+          )
+          .afterClosed();
+        break;
+      case 'MCP_PROXY':
+        dialogResult = this.matDialog
+          .open<GioPolicyStudioFlowMcpFormDialogComponent, GioPolicyStudioFlowMcpFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+            GioPolicyStudioFlowMcpFormDialogComponent,
+            {
+              data: {
+                parentGroupName: this.flow!._parentFlowGroupName,
+                flow: this.flow,
+              },
+              role: 'alertdialog',
+              id: 'gioPsFlowFormDialog',
               width: GIO_DIALOG_WIDTH.MEDIUM,
             },
           )

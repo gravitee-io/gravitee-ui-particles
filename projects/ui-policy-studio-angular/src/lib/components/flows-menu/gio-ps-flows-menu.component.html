@@ -20,7 +20,7 @@
   <div class="header__label">
     Flows <mat-icon svgIcon="gio:info" matTooltip="Flows allow you to apply different policies on your API event phases"></mat-icon>
   </div>
-  @if (apiType !== 'NATIVE') {
+  @if (apiType !== 'NATIVE' && apiType !== 'MCP_PROXY') {
     <div class="header__configBtn">
       <button class="header__configBtn_edit" mat-stroked-button [disabled]="loading" (click)="onConfigureExecution(flowExecution)">
         <mat-icon [svgIcon]="readOnly ? 'gio:eye-empty' : 'gio:settings'"></mat-icon>
@@ -44,7 +44,7 @@
 
 @if (!loading) {
   <div class="list" cdkDropListGroup>
-    @for (flowsGroup of filteredFlowGroupMenuItems; track flowsGroup) {
+    @for (flowsGroup of filteredFlowGroupMenuItems; track flowsGroup._id) {
       <div
         class="list__flowsGroup"
         cdkDropList
@@ -91,15 +91,15 @@
                   @if (apiType !== 'NATIVE') {
                     <div class="list__flowsGroup__flows__flow__left__infos">
                       <div class="list__flowsGroup__flows__flow__left__infos__badges">
-                        @for (badge of flow.badges; track badge) {
+                        @for (badge of flow.badges; track badge.label) {
                           <span class="list__flowsGroup__flows__flow__left__infos__badges__badge" [ngClass]="badge.class">{{
                             badge.label
                           }}</span>
                         }
                       </div>
                       <div class="list__flowsGroup__flows__flow__left__infos__pathOrChannelLabel">
-                        @if (flow.pathOrChannelLabel) {
-                          <span [attr.title]="flow.pathOrChannelLabel">{{ flow.pathOrChannelLabel }}</span>
+                        @if (flow.pathOrChannelLabel !== undefined) {
+                          <span [attr.title]="flow.pathOrChannelLabel" [innerHTML]="flow.pathOrChannelLabel"></span>
                         } @else {
                           <em>Empty</em>
                         }

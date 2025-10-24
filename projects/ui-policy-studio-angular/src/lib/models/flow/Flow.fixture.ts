@@ -16,7 +16,7 @@
 import { isFunction } from 'lodash';
 
 import { Flow } from './Flow';
-import { ChannelSelector, HttpSelector } from './Selector';
+import { ChannelSelector, HttpSelector, McpSelector } from './Selector';
 
 export function fakeChannelFlow(modifier?: Partial<Flow> | ((baseApi: Flow) => Flow)): Flow {
   const channelSelector: ChannelSelector = {
@@ -127,6 +127,30 @@ export function fakeNativeFlow(modifier?: Partial<Flow> | ((baseApi: Flow) => Fl
     interact: [],
     subscribe: [],
     publish: [],
+    enabled: true,
+  };
+
+  if (isFunction(modifier)) {
+    return modifier(base);
+  }
+
+  return {
+    ...base,
+    ...modifier,
+  };
+}
+
+export function fakeMcpFlow(modifier?: Partial<Flow> | ((baseApi: Flow) => Flow)): Flow {
+  const mcpSelector: McpSelector = {
+    type: 'MCP',
+    methods: [],
+  };
+
+  const base: Flow = {
+    name: 'Flow name',
+    selectors: [mcpSelector],
+    request: [],
+    response: [],
     enabled: true,
   };
 

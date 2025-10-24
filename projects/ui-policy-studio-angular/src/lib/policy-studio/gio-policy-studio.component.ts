@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
+import { Component, computed, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { cloneDeep, differenceBy, flatten, isEqual, omit, unionBy, uniqueId } from 'lodash';
 import { EMPTY, Subscription, timer } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -169,6 +169,18 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
   public disableSaveButton = true;
 
   public saving = false;
+
+  public apiTypeDisplayable = computed(() => {
+    const apiTypeMap: Record<ApiType, string> = {
+      LLM_PROXY: 'LLM Proxy',
+      PROXY: 'HTTP Proxy',
+      MESSAGE: 'HTTP Message',
+      NATIVE: 'Native',
+      MCP_PROXY: 'MCP Proxy',
+    };
+
+    return apiTypeMap[this.apiType];
+  });
 
   // Used to keep track of initial flows groups to know if there are deleted flows
   private initialFlowsGroups: FlowGroupVM[] = [];

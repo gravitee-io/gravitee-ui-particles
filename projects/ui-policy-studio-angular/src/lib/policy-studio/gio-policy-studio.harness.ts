@@ -19,7 +19,7 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatTabGroupHarness } from '@angular/material/tabs/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 
-import { ChannelSelector, ConditionSelector, Flow, FlowExecution, HttpSelector } from '../models';
+import { ChannelSelector, ConditionSelector, Flow, FlowExecution, HttpSelector, McpSelector } from '../models';
 import { GioPolicyStudioFlowsMenuHarness } from '../components/flows-menu/gio-ps-flows-menu.harness';
 import { GioPolicyStudioDetailsHarness } from '../components/flow-details/gio-ps-flow-details.harness';
 import { GioPolicyStudioFlowProxyFormDialogHarness } from '../components/flow-form-dialog/flow-proxy-form-dialog/gio-ps-flow-proxy-form-dialog.harness';
@@ -27,6 +27,7 @@ import { GioPolicyStudioFlowMessageFormDialogHarness } from '../components/flow-
 import { GioPolicyStudioFlowExecutionFormDialogHarness } from '../components/flow-execution-form-dialog/gio-ps-flow-execution-form-dialog.harness';
 import { GioPolicyStudioDetailsPhaseHarness, PhaseType } from '../components/flow-details-phase/gio-ps-flow-details-phase.harness';
 import { GioPolicyStudioFlowNativeFormDialogHarness } from '../components/flow-form-dialog/flow-native-form-dialog/gio-ps-flow-native-form-dialog.harness';
+import { GioPolicyStudioFlowMcpFormDialogHarness } from '../components/flow-form-dialog/flow-mcp-form-dialog/gio-ps-flow-mcp-form-dialog.harness';
 
 export class GioPolicyStudioHarness extends ComponentHarness {
   public static hostSelector = 'gio-policy-studio';
@@ -184,6 +185,7 @@ export class GioPolicyStudioHarness extends ComponentHarness {
     const channelSelector = flow.selectors?.find(s => s.type === 'CHANNEL') as ChannelSelector | undefined;
     const httpSelector = flow.selectors?.find(s => s.type === 'HTTP') as HttpSelector | undefined;
     const conditionSelector = flow.selectors?.find(s => s.type === 'CONDITION') as ConditionSelector | undefined;
+    const mcpSelector = flow.selectors?.find(s => s.type === 'MCP') as McpSelector | undefined;
 
     if (!!channelSelector && !!httpSelector) {
       throw new Error('Channel and HTTP selectors are not be used together.');
@@ -218,6 +220,19 @@ export class GioPolicyStudioHarness extends ComponentHarness {
         path: httpSelector?.path,
         pathOperator: httpSelector?.pathOperator,
         methods: httpSelector?.methods,
+        condition: conditionSelector?.condition,
+      });
+
+      await flowFormNewDialog.save();
+      return;
+    }
+
+    if (mcpSelector) {
+      const flowFormNewDialog = await this.documentRootLocatorFactory().locatorFor(GioPolicyStudioFlowMcpFormDialogHarness)();
+
+      await flowFormNewDialog.setFlowFormValues({
+        name: flow.name,
+        methods: mcpSelector?.methods,
         condition: conditionSelector?.condition,
       });
 
