@@ -32,7 +32,7 @@ import {
 
 import { GioPolicyStudioFlowFormDialogResult } from '../gio-ps-flow-form-dialog-result.model';
 import { FlowVM } from '../../../policy-studio/gio-policy-studio.model';
-import { ConditionSelector, HttpSelector, LlmSelector } from '../../../models';
+import { ConditionSelector, LlmSelector } from '../../../models';
 
 export type GioPolicyStudioFlowLlmFormDialogData = {
   flow?: FlowVM;

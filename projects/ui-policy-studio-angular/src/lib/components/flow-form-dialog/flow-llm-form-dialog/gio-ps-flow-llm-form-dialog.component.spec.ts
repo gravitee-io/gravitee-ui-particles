@@ -66,7 +66,7 @@ class TestComponent {
   }
 }
 
-describe('GioPolicyStudioFlowMLlmFormDialogComponent', () => {
+describe('GioPolicyStudioFlowLlmFormDialogComponent', () => {
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
   let loader: HarnessLoader;

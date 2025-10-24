@@ -19,7 +19,7 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatTabGroupHarness } from '@angular/material/tabs/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 
-import { ChannelSelector, ConditionSelector, Flow, FlowExecution, HttpSelector, McpSelector } from '../models';
+import { ChannelSelector, ConditionSelector, Flow, FlowExecution, HttpSelector, McpSelector, LlmSelector } from '../models';
 import { GioPolicyStudioFlowsMenuHarness } from '../components/flows-menu/gio-ps-flows-menu.harness';
 import { GioPolicyStudioDetailsHarness } from '../components/flow-details/gio-ps-flow-details.harness';
 import { GioPolicyStudioFlowProxyFormDialogHarness } from '../components/flow-form-dialog/flow-proxy-form-dialog/gio-ps-flow-proxy-form-dialog.harness';
@@ -187,7 +187,7 @@ export class GioPolicyStudioHarness extends ComponentHarness {
     const httpSelector = flow.selectors?.find(s => s.type === 'HTTP') as HttpSelector | undefined;
     const conditionSelector = flow.selectors?.find(s => s.type === 'CONDITION') as ConditionSelector | undefined;
     const mcpSelector = flow.selectors?.find(s => s.type === 'MCP') as McpSelector | undefined;
-    const llmSelector = flow.selectors?.find(s => s.type === 'HTTP') as HttpSelector | undefined;
+    const llmSelector = flow.selectors?.find(s => s.type === 'LLM') as LlmSelector | undefined;
 
     if (!!channelSelector && !!httpSelector) {
       throw new Error('Channel and HTTP selectors are not be used together.');
