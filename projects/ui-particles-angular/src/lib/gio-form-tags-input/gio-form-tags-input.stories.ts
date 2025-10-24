@@ -273,19 +273,94 @@ export const WithAutocompleteOnly: StoryObj = {
   },
 };
 
-const applications = range(10).map(i => ({
-  value: `${i}-applicationId`,
-  label: `${i} - Application`,
-}));
-
-export const WithAsyncAutocompleteOnly: StoryObj = {
-  render: ({ tags, placeholder, required, disabled, autocompleteOptions, displayValueWith, useAutocompleteOptionValueOnly }) => {
+const autocompleteOptionsWithGroup = [
+  {
+    groupLabel: 'Group 1',
+    groupOptions: [
+      {
+        label: 'Foo',
+        value: 'FOO',
+      },
+      {
+        label: 'Bar',
+        value: 'BAR',
+      },
+    ],
+  },
+  {
+    groupLabel: 'Group 2',
+    groupOptions: [
+      {
+        label: 'Baz',
+        value: 'BAZ',
+      },
+    ],
+  },
+];
+export const WithAutocompleteWithGroup: StoryObj = {
+  render: ({ tags, placeholder, required, disabled, tagValidationHook, autocompleteOptions }) => {
     const tagsControl = new UntypedFormControl({ value: tags, disabled });
 
     tagsControl.valueChanges.subscribe(value => {
       action('Tags')(value);
     });
 
+    return {
+      template: `
+      <mat-form-field appearance="fill" style="width:100%">
+        <mat-label>Http methods</mat-label>
+        <gio-form-tags-input
+          [required]="required" 
+          [placeholder]="placeholder" 
+          [formControl]="tagsControl"
+          [tagValidationHook]="tagValidationHook"
+          [autocompleteOptions]="autocompleteOptions"
+        >
+        </gio-form-tags-input>
+      </mat-form-field>
+      `,
+      props: {
+        tags,
+        placeholder,
+        required,
+        disabled,
+        tagsControl,
+        tagValidationHook,
+        autocompleteOptions,
+      },
+    };
+  },
+  args: {
+    tags: ['FOO'],
+    disabled: false,
+    placeholder: 'Select Foo or Bar',
+    autocompleteOptions: autocompleteOptionsWithGroup,
+    tagValidationHook: (tag: string, validationCb: (shouldAddTag: boolean) => void) => {
+      validationCb(
+        autocompleteOptionsWithGroup.flatMap(group => group.groupOptions.map(option => option.value)).includes(tag.toUpperCase()),
+      );
+    },
+  },
+  argTypes: {
+    tagValidationHook: {
+      control: { type: 'object' },
+    },
+  },
+};
+
+const applications = range(10).map(i => ({
+  value: `${i}-applicationId`,
+  label: `${i} - Application`,
+}));
+
+export const WithAsyncAutocompleteOnly: StoryObj = {
+  render: aa => {
+    const { tags, placeholder, required, disabled, autocompleteOptions, displayValueWith, useAutocompleteOptionValueOnly } = aa;
+    const tagsControl = new UntypedFormControl({ value: tags, disabled });
+
+    tagsControl.valueChanges.subscribe(value => {
+      action('Tags')(value);
+    });
     return {
       template: `
       <mat-form-field appearance="fill" style="width:100%">
@@ -328,6 +403,12 @@ export const WithAsyncAutocompleteOnly: StoryObj = {
   },
   argTypes: {
     tagValidationHook: {
+      control: { type: 'object' },
+    },
+    autocompleteOptions: {
+      control: { type: 'object' },
+    },
+    displayValueWith: {
       control: { type: 'object' },
     },
   },

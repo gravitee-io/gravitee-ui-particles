@@ -137,6 +137,8 @@ export function fakeTestPolicy(modifier?: Partial<Policy> | ((base: Policy) => P
     icon: 'gio:gift',
     flowPhaseCompatibility: {
       HTTP_PROXY: ['REQUEST', 'RESPONSE'],
+      HTTP_MCP_PROXY: ['REQUEST', 'RESPONSE'],
+      HTTP_LLM_PROXY: ['REQUEST', 'RESPONSE'],
       HTTP_MESSAGE: ['REQUEST', 'RESPONSE', 'SUBSCRIBE', 'PUBLISH'],
       NATIVE_KAFKA: ['CONNECT', 'INTERACT', 'PUBLISH', 'SUBSCRIBE'],
     },

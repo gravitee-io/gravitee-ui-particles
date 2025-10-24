@@ -217,3 +217,75 @@ export function fakeKafkaNativeEndpoint(modifier?: Partial<ConnectorInfo> | ((ba
     ...modifier,
   };
 }
+
+export function fakeMCPProxyEntrypoint(modifier?: Partial<ConnectorInfo> | ((base: ConnectorInfo) => ConnectorInfo)): ConnectorInfo {
+  const base: ConnectorInfo = {
+    type: 'mcp-proxy',
+    name: 'MCP Proxy',
+    supportedModes: ['REQUEST_RESPONSE'],
+    icon: 'gio:language',
+  };
+
+  if (isFunction(modifier)) {
+    return modifier(base);
+  }
+
+  return {
+    ...base,
+    ...modifier,
+  };
+}
+
+export function fakeMCPProxyEndpoint(modifier?: Partial<ConnectorInfo> | ((base: ConnectorInfo) => ConnectorInfo)): ConnectorInfo {
+  const base: ConnectorInfo = {
+    type: 'mcp-proxy',
+    name: 'MCP Proxy',
+    supportedModes: ['REQUEST_RESPONSE'],
+    icon: 'gio:language',
+  };
+
+  if (isFunction(modifier)) {
+    return modifier(base);
+  }
+
+  return {
+    ...base,
+    ...modifier,
+  };
+}
+
+export function fakeLlmProxyEntrypoint(modifier?: Partial<ConnectorInfo> | ((base: ConnectorInfo) => ConnectorInfo)): ConnectorInfo {
+  const base: ConnectorInfo = {
+    type: 'llm-proxy',
+    name: 'LLM Proxy',
+    supportedModes: ['REQUEST_RESPONSE'],
+    icon: 'gio:language',
+  };
+
+  if (isFunction(modifier)) {
+    return modifier(base);
+  }
+
+  return {
+    ...base,
+    ...modifier,
+  };
+}
+
+export function fakeLlmProxyEndpoint(modifier?: Partial<ConnectorInfo> | ((base: ConnectorInfo) => ConnectorInfo)): ConnectorInfo {
+  const base: ConnectorInfo = {
+    type: 'llm-proxy',
+    name: 'LLM Proxy',
+    supportedModes: ['REQUEST_RESPONSE'],
+    icon: 'gio:language',
+  };
+
+  if (isFunction(modifier)) {
+    return modifier(base);
+  }
+
+  return {
+    ...base,
+    ...modifier,
+  };
+}
