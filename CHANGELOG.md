@@ -1,3 +1,16 @@
+# [16.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.0.1...v16.1.0) (2025-10-27)
+
+
+### Bug Fixes
+
+* focus on the input if the click is on the label ([c01ef5d](https://github.com/gravitee-io/gravitee-ui-particles/commit/c01ef5d3c1948f9e1e7eb50678e47e6b649aff9c))
+
+
+### Features
+
+* allow the autocomplete list to have groups ([3391380](https://github.com/gravitee-io/gravitee-ui-particles/commit/3391380bc2dcf642056b5822c5ea38b91debccc2))
+* make PS support MCP Proxy api ([6cbf3ce](https://github.com/gravitee-io/gravitee-ui-particles/commit/6cbf3cea7fb01dd1e890c8bee59212c915988594))
+
 ## [16.0.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.0.0...v16.0.1) (2025-10-23)
 
 
