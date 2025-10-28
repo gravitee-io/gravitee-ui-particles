@@ -8,5 +8,5 @@
     "types": ["node"],
     "lib": ["dom", "es2018"]
   },
-  "exclude": ["**/*.spec.ts", "**/setup-jest.ts"]
+  "exclude": ["**/*.spec.ts", "**/*.stories.ts", "**/setup-jest.ts"]
 }

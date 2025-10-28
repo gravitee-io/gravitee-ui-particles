@@ -19,7 +19,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { UntypedFormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { MatSelectModule } from '@angular/material/select';
 
 import { Tags } from '../../lib/gio-form-tags-input/gio-form-tags-input.component';

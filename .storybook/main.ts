@@ -1,32 +1,14 @@
-import { dirname, join } from 'path';
-module.exports = {
-  framework: getAbsolutePath('@storybook/angular'),
+import type { StorybookConfig } from '@storybook/angular';
+
+const config: StorybookConfig = {
+  framework: {
+    name: '@storybook/angular',
+    options: {},
+  },
+
   stories: ['../projects/**/*.@(mdx|stories.@(ts))'],
 
-  addons: [
-    getAbsolutePath('@storybook/addon-a11y'),
-    getAbsolutePath('@storybook/addon-designs'),
-    {
-      name: '@storybook/addon-essentials',
-      options: {
-        docs: false,
-      },
-    },
-    {
-      name: '@storybook/addon-docs',
-      options: { transcludeMarkdown: true },
-    },
-    getAbsolutePath('@storybook/addon-mdx-gfm'),
-    '@chromatic-com/storybook',
-  ],
-
-  features: {
-    previewCsfV3: true,
-  },
-
-  angularOptions: {
-    enableIvy: true,
-  },
+  addons: ['@storybook/addon-a11y', '@storybook/addon-designs', '@storybook/addon-docs'],
 
   staticDirs: [
     { from: './favicon.ico', to: 'favicon.svg' },
@@ -41,12 +23,5 @@ module.exports = {
     { from: '../node_modules/prismjs/prism.js', to: '/assets/prismjs/prism.js' },
     { from: '../node_modules/prismjs/components/prism-json.js', to: '/assets/prismjs/components/prism-json.js' },
   ],
-
-  docs: {
-    autodocs: false,
-  },
 };
-
-function getAbsolutePath(value: string): any {
-  return dirname(require.resolve(join(value, 'package.json')));
-}
+export default config;

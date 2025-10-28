@@ -16,7 +16,7 @@
 import { Component, Input, Type } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { tap } from 'rxjs/operators';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import { GioConfirmAndValidateDialogComponent, GioConfirmAndValidateDialogData } from './gio-confirm-and-validate-dialog.component';
 

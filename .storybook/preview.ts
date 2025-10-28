@@ -17,17 +17,17 @@ export const parameters = {
     },
   },
   backgrounds: {
-    default: 'default',
-    values: [
-      {
+    options: {
+      default: {
         name: 'default',
         value: 'transparent',
       },
-      {
+
+      white: {
         name: 'white',
         value: 'white',
       },
-    ],
+    },
   },
 };
 
@@ -37,3 +37,9 @@ export const decorators = [
     providers: [importProvidersFrom(BrowserAnimationsModule), importProvidersFrom(HttpClientModule)],
   }),
 ];
+
+export const initialGlobals = {
+  backgrounds: {
+    value: 'default',
+  },
+};

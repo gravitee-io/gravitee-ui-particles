@@ -15,7 +15,7 @@
  */
 // tslint:disable: no-duplicate-string
 import { UntypedFormBuilder, UntypedFormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 
 import { GioFormFilePickerComponent } from './gio-form-file-picker.component';
