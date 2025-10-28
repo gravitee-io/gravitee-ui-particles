@@ -17,7 +17,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { Component, Input } from '@angular/core';
 import { tap } from 'rxjs/operators';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { of } from 'rxjs';
 import { GIO_DIALOG_WIDTH } from '@gravitee/ui-particles-angular';
 

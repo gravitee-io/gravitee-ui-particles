@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { range } from 'lodash';

@@ -24,7 +24,7 @@ import {
   OEM_DEFAULT_LOGO,
   resetStoryStyleInjection,
   GRAVITEE_LOGO,
-} from '../oem-theme.service';
+} from '../oem-theme.stories.service';
 
 import { GioTopBarComponent } from './gio-top-bar.component';
 import { GioTopBarModule } from './gio-top-bar.module';

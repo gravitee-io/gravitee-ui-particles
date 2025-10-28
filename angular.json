@@ -120,9 +120,23 @@
       "projectType": "library",
       "root": "./",
       "architect": {
+        "build-ng": {
+          "builder": "@angular/build:ng-packagr",
+          "options": {
+            "project": "projects/ui-policy-studio-angular/ng-package.json"
+          },
+          "configurations": {
+            "storybook": {
+              "tsConfig": ".storybook/tsconfig.json"
+            }
+          },
+          "defaultConfiguration": "storybook"
+        },
         "start": {
           "builder": "@storybook/angular:start-storybook",
           "options": {
+            "browserTarget": "storybook:build-ng",
+            "configDir": ".storybook",
             "styles": [".storybook/index.scss"],
             "compodoc": false,
             "port": 9008,
@@ -134,6 +148,8 @@
         "build": {
           "builder": "@storybook/angular:build-storybook",
           "options": {
+            "browserTarget": "storybook:build-ng",
+            "configDir": ".storybook",
             "styles": [".storybook/index.scss"],
             "compodoc": false,
             "stylePreprocessorOptions": {

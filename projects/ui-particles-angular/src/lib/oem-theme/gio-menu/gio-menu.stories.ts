@@ -15,11 +15,11 @@
  */
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { CommonModule } from '@angular/common';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { cleanLocalStorageReduceState } from '@gravitee/ui-particles-angular';
 
 import { GioSubmenuModule } from '../gio-submenu';
-import { computeAndInjectStylesForStory, OEM_DEFAULT_LOGO, OEM_THEME_ARG_TYPES } from '../oem-theme.service';
+import { computeAndInjectStylesForStory, OEM_DEFAULT_LOGO, OEM_THEME_ARG_TYPES } from '../oem-theme.stories.service';
 
 import { GioMenuModule } from './gio-menu.module';
 import { GioMenuItemComponent } from './gio-menu-item/gio-menu-item.component';

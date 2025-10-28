@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { inject, provideAppInitializer } from '@angular/core';
 import { of } from 'rxjs';

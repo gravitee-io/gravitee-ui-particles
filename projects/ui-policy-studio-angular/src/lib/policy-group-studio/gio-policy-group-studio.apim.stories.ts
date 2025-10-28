@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { applicationConfig, moduleMetadata } from '@storybook/angular';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { importProvidersFrom } from '@angular/core';

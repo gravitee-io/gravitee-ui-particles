@@ -17,7 +17,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import { GioFormSelectionInlineModule } from './gio-form-selection-inline.module';
 import { GioFormSelectionInlineComponent } from './gio-form-selection-inline.component';
