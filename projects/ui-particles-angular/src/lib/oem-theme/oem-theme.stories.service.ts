@@ -16,6 +16,8 @@
 
 import { Args, ArgTypes } from '@storybook/angular';
 
+import { computeStyles } from './oem-theme.service';
+
 export const OEM_THEME_ARG_TYPES: ArgTypes = {
   menuBackground: {
     control: 'color',
@@ -80,23 +82,4 @@ const resetStoryStyleInjection = (args: Args): void => {
   }
 };
 
-const computeStyles = (theme: OemTheme): { key: string; value: string }[] => {
-  const backgroundStyle = computeStyleAndContrastByPrefix('background', theme.menuBackground);
-  const activeStyle = computeStyleAndContrastByPrefix('active', theme.menuActive);
-  let subMenu: { key: string; value: string }[] = [];
-  // If the menu background is defined, then define the sub-menu color
-  if (theme.menuBackground) {
-    subMenu = [{ key: `--gio-oem-palette--sub-menu`, value: `color-mix(in srgb, ${theme.menuBackground} 80%, black)` }];
-  }
-  return [...backgroundStyle, ...activeStyle, ...subMenu];
-};
-
-const computeStyleAndContrastByPrefix = (prefix: string, color: string): { key: string; value: string }[] => {
-  if (!color) {
-    return [];
-  }
-  const paletteColor = { key: `--gio-oem-palette--${prefix}`, value: color };
-  const paletteColorContrast = { key: `--gio-oem-palette--${prefix}-contrast`, value: '#fff' };
-  return [paletteColor, paletteColorContrast];
-};
-export { computeStyles, computeStylesForStory, computeAndInjectStylesForStory, resetStoryStyleInjection };
+export { computeStylesForStory, computeAndInjectStylesForStory, resetStoryStyleInjection };
