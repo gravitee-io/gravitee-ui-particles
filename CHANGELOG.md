@@ -1,3 +1,10 @@
+# [16.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.1.0...v16.2.0) (2025-10-29)
+
+
+### Features
+
+* adapt ui for llm ([7fedb44](https://github.com/gravitee-io/gravitee-ui-particles/commit/7fedb443c33357cc4ac0432335b683dfd3c2b8d6))
+
 # [16.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.0.1...v16.1.0) (2025-10-27)
 
 
