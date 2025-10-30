@@ -1,3 +1,10 @@
+## [16.2.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.2.0...v16.2.1) (2025-10-30)
+
+
+### Bug Fixes
+
+* add export of oem-theme.service without stories stuff ([6a07d79](https://github.com/gravitee-io/gravitee-ui-particles/commit/6a07d796db60f823c694f0726d2d2a67655f03ff))
+
 # [16.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.1.0...v16.2.0) (2025-10-29)
 
 
