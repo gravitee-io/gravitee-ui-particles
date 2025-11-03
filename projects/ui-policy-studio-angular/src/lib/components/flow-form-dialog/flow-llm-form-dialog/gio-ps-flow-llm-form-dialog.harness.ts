@@ -17,7 +17,7 @@ import { ComponentHarness } from '@angular/cdk/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { MatSelectHarness } from '@angular/material/select/testing';
-import { GioFormTagsInputHarness } from '@gravitee/ui-particles-angular';
+import { GioFormTagsInputHarness, GioFormAutocompleteInputHarness } from '@gravitee/ui-particles-angular';
 
 export type GioPolicyStudioFlowLlmHarnessData = {
   name: string;
@@ -34,7 +34,7 @@ export class GioPolicyStudioFlowLlmFormDialogHarness extends ComponentHarness {
   private getCancelBtn = this.locatorFor(MatButtonHarness.with({ selector: '.actions__cancelBtn' }));
   private nameInput = this.locatorFor(MatInputHarness.with({ selector: '[formControlName="name"]' }));
   private pathOperatorInput = this.locatorFor(MatSelectHarness.with({ selector: '[formControlName="pathOperator"]' }));
-  private pathInput = this.locatorFor(MatInputHarness.with({ selector: '[formControlName="path"]' }));
+  private pathInput = this.locatorFor(GioFormAutocompleteInputHarness.with({ selector: '[formControlName="path"]' }));
   private methodsInput = this.locatorFor(GioFormTagsInputHarness.with({ selector: '[formControlName="methods"]' }));
   private conditionInput = this.locatorFor(MatInputHarness.with({ selector: '[formControlName="condition"]' }));
 
@@ -61,17 +61,36 @@ export class GioPolicyStudioFlowLlmFormDialogHarness extends ComponentHarness {
       }
       await pathOperatorInput.clickOptions({ text: new RegExp(flow.pathOperator, 'i') });
     }
-    if (flow.path) {
+    if (flow.path !== undefined) {
+      const pathValue = flow.path.startsWith('/') ? flow.path.substring(1) : flow.path;
       const input = await this.pathInput();
-      await input.setValue(flow.path);
+
+      // Try to use autocomplete selection if the path matches an option
+      try {
+        await input.focus();
+        await input.setValue(pathValue);
+
+        const autocomplete = await input.getMatAutocompleteHarness();
+        if (autocomplete && (await autocomplete.isOpen())) {
+          const options = await input.getAutocompleteOptions();
+          const matchingOption = options.find(opt => opt === `/${pathValue}` || opt === pathValue);
+          if (matchingOption) {
+            await input.selectOption(matchingOption);
+          }
+        }
+      } catch {
+        // Fallback to just setting the value
+        await input.setValue(pathValue);
+      }
     }
+
     if (flow.methods) {
       const methodsInput = await this.methodsInput();
-      await methodsInput.removeTag('ALL');
       for (const method of flow.methods) {
         await methodsInput.addTag(method);
       }
     }
+
     if (flow.condition) {
       const conditionInput = await this.conditionInput();
       await conditionInput.setValue(flow.condition);
