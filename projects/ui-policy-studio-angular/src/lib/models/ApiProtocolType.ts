@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-export type ApiProtocolType = 'HTTP_MESSAGE' | 'HTTP_PROXY' | 'MCP_PROXY' | 'HTTP_LLM_PROXY' | 'NATIVE_KAFKA';
+export type ApiProtocolType = 'HTTP_MESSAGE' | 'HTTP_PROXY' | 'MCP_PROXY' | 'LLM_PROXY' | 'NATIVE_KAFKA';
