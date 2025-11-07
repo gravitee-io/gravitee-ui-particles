@@ -124,7 +124,7 @@ export class GioPolicyStudioPoliciesCatalogDialogComponent implements OnDestroy 
             case 'NATIVE':
               return genericPolicy.flowPhaseCompatibility?.NATIVE_KAFKA?.includes(flowDialogData.flowPhase);
             case 'MCP_PROXY':
-              return genericPolicy.flowPhaseCompatibility?.HTTP_MCP_PROXY?.includes(flowDialogData.flowPhase);
+              return genericPolicy.flowPhaseCompatibility?.MCP_PROXY?.includes(flowDialogData.flowPhase);
             case 'LLM_PROXY':
               return genericPolicy.flowPhaseCompatibility?.HTTP_LLM_PROXY?.includes(flowDialogData.flowPhase);
             default:
