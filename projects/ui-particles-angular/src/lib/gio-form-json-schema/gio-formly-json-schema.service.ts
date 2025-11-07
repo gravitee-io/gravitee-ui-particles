@@ -14,21 +14,19 @@
  * limitations under the License.
  */
 import { Injectable } from '@angular/core';
-import { FormlyFieldConfig, FormlyFormBuilder } from '@ngx-formly/core';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 import { FormlyJsonschema } from '@ngx-formly/core/json-schema';
 import { JSONSchema7 } from 'json-schema';
 import { castArray, get, isArray, isEmpty, isNil, isObject, set } from 'lodash';
 import { Observable } from 'rxjs';
+import { AbstractControl } from '@angular/forms';
 
 import { GioIfConfig, GioJsonSchema } from './model/GioJsonSchema';
 import { GioJsonSchemaContext } from './model/GioJsonSchemaContext';
 
 @Injectable()
 export class GioFormlyJsonSchemaService {
-  constructor(
-    private readonly formlyJsonschema: FormlyJsonschema,
-    private readonly builder: FormlyFormBuilder,
-  ) {}
+  constructor(private readonly formlyJsonschema: FormlyJsonschema) {}
 
   public toFormlyFieldConfig(jsonSchema: GioJsonSchema, context?: GioJsonSchemaContext): FormlyFieldConfig {
     return this.formlyJsonschema.toFieldConfig(jsonSchema, {
@@ -43,6 +41,7 @@ export class GioFormlyJsonSchemaService {
         mappedField = this.enumLabelMap(mappedField, mapSource);
         mappedField = this.sanitizeOneOf(mappedField, mapSource);
         mappedField = this.deprecatedMap(mappedField, mapSource);
+        mappedField = this.uniqueValueMap(mappedField, mapSource);
 
         return mappedField;
       },
@@ -82,6 +81,7 @@ export class GioFormlyJsonSchemaService {
       mappedField = {
         key: mappedField.key,
         type: mapSource.gioConfig?.uiType,
+
         props: {
           ...mappedField.props,
           ...mapSource.gioConfig?.uiTypeProps,
@@ -139,7 +139,6 @@ export class GioFormlyJsonSchemaService {
         },
       };
     }
-
     return mappedField;
   }
 
@@ -261,6 +260,37 @@ export class GioFormlyJsonSchemaService {
       return {};
     }
 
+    return mappedField;
+  }
+
+  private uniqueValueMap(mappedField: FormlyFieldConfig, mapSource: JSONSchema7): FormlyFieldConfig {
+    let fieldNameWithErrors: string | undefined = undefined;
+    if (mapSource.gioConfig?.uniqueItemProperties) {
+      mappedField = {
+        ...mappedField,
+        validators: {
+          ...mappedField.validators,
+          uniqueFields: {
+            expression: (control: AbstractControl) => {
+              const items = control.value;
+              const uniqueProps = mapSource.gioConfig?.uniqueItemProperties ?? [];
+              if (!Array.isArray(items) || !uniqueProps.length) return true;
+
+              for (const prop of uniqueProps) {
+                const values = items.map(i => i?.[prop]).filter(v => v != null);
+                if (new Set(values).size !== values.length) {
+                  fieldNameWithErrors = prop;
+                  return false;
+                }
+              }
+
+              return true;
+            },
+            message: (_error: unknown, _field: FormlyFieldConfig) => `${fieldNameWithErrors || 'This field'} must be unique`,
+          },
+        },
+      };
+    }
     return mappedField;
   }
 }

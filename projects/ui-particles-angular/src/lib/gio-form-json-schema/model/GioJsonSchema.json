@@ -191,6 +191,10 @@
         "uiBorder": {
           "type": "string",
           "enum": ["none", "full"]
+        },
+        "uniqueItemProperties": {
+          "type": "array",
+          "items": { "type": "string" }
         }
       }
     }
