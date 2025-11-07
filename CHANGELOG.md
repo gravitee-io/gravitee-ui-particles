@@ -1,3 +1,11 @@
+## [16.2.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.2.1...v16.2.2) (2025-11-07)
+
+
+### Bug Fixes
+
+* rename ApiProtocolType HTTP_LLM_PROXY to LLM_PROXY ([49303be](https://github.com/gravitee-io/gravitee-ui-particles/commit/49303be9a37b4e837b67addf8ce9f753a40fa5eb))
+* rename ApiProtocolType HTTP_MCP_PROXY to MCP_PROXY ([329123f](https://github.com/gravitee-io/gravitee-ui-particles/commit/329123f2c2c9b96e8255df6067e0faaa0a0000e4))
+
 ## [16.2.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.2.0...v16.2.1) (2025-10-30)
 
 
