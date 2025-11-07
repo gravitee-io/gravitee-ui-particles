@@ -56,6 +56,39 @@ export const arrayExample: GioJsonSchema = {
         },
       },
     },
+    arrayOfObjectWithUniqueProperties: {
+      type: 'array',
+      title: 'Array of object with uniqueItemProperties',
+      description: 'Array of object with uniqueItemProperties description',
+      gioConfig: {
+        uniqueItemProperties: ['string', 'string2'],
+      },
+      items: {
+        type: 'object',
+        properties: {
+          string: {
+            type: 'string',
+            title: 'String',
+            description: 'String description',
+          },
+          string1: {
+            type: 'string',
+            title: 'String1',
+            description: 'String1 description',
+          },
+          string2: {
+            type: 'string',
+            title: 'String2',
+            description: 'String2 description',
+          },
+          boolean: {
+            type: 'boolean',
+            title: 'Boolean',
+            description: 'Boolean description',
+          },
+        },
+      },
+    },
 
     headers: {
       type: 'array',
