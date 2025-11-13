@@ -1,3 +1,10 @@
+## [16.2.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.2.2...v16.2.3) (2025-11-13)
+
+
+### Bug Fixes
+
+* ui changes to make model name unique ([8e01fcd](https://github.com/gravitee-io/gravitee-ui-particles/commit/8e01fcdcf8f2883f489c09b72a0e78a2a38e2c11))
+
 ## [16.2.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.2.1...v16.2.2) (2025-11-07)
 
 
