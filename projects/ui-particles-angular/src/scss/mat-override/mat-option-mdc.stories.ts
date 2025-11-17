@@ -54,3 +54,36 @@ export const MatOption: StoryObj = {
     matInput.focus();
   },
 };
+
+export const MatOptionGroup: StoryObj = {
+  render: () => ({
+    template: `
+        <mat-form-field [floatLabel]="'never'">
+            <input id="input" matInput placeholder="Name..." [matAutocomplete]="names" />
+        </mat-form-field>
+        <mat-autocomplete #names="matAutocomplete">
+          <mat-optgroup *ngFor="let group of optionGroups" [label]="group.label">
+            <mat-option *ngFor="let option of group.options" [value]="option">{{option}}</mat-option>
+          </mat-optgroup>
+        </mat-autocomplete>`,
+    props: {
+      optionGroups: [
+        { label: 'Group A (Bold label)', options: ['Abel', 'Alice', 'Annie'] },
+        { label: 'Group B', options: ['Bernard', 'Béatrice', 'Benoît'] },
+        { label: 'Group C', options: ['Constance', 'Clément', 'Catherine'] },
+      ],
+    },
+    styles: [
+      `
+        :host {
+          display: block;
+          min-height: 500px;
+        }
+        `,
+    ],
+  }),
+  play: ({ canvasElement }) => {
+    const matInput = canvasElement.querySelector('#input') as HTMLInputElement;
+    matInput.focus();
+  },
+};

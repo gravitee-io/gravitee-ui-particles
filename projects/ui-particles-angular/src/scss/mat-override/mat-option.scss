@@ -37,4 +37,10 @@
     min-height: 40px;
     @include mat.m2-typography-level(theme.$mat-typography, 'body-2');
   }
+
+  @include mat.core-overrides(
+    (
+      optgroup-label-text-weight: 700,
+    )
+  );
 }
