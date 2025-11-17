@@ -1,3 +1,12 @@
+## [16.2.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.2.3...v16.2.4) (2025-11-17)
+
+
+### Bug Fixes
+
+* add el to GioJsonSchema ([1c0f287](https://github.com/gravitee-io/gravitee-ui-particles/commit/1c0f28768228144b3b64300ca1747ffbce5f487f))
+* make the group label bold so it looks nicer ([44ab66d](https://github.com/gravitee-io/gravitee-ui-particles/commit/44ab66d078521b945cec2ca1f7c1a2babeb75c8b))
+* move MCP completion/complete method to Lifecycle Methods ([0f1a534](https://github.com/gravitee-io/gravitee-ui-particles/commit/0f1a534e92c0825e6a984599aabc37c81dbb066f))
+
 ## [16.2.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.2.2...v16.2.3) (2025-11-13)
 
 
