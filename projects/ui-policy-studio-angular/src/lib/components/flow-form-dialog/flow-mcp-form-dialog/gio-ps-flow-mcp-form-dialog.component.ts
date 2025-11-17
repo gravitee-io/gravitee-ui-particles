@@ -50,6 +50,7 @@ const MCP_METHODS: {
       { value: 'notifications/initialized', label: 'notifications/initialized' },
       { value: 'ping', label: 'ping' },
       { value: 'notifications/progress', label: 'notifications/progress' },
+      { value: 'completion/complete', label: 'completion/complete' },
     ],
   },
   {
@@ -78,7 +79,6 @@ const MCP_METHODS: {
       { value: 'prompts/list', label: 'prompts/list' },
       { value: 'prompts/get', label: 'prompts/get' },
       { value: 'notifications/prompts/list_changed', label: 'notifications/prompts/list_changed' },
-      { value: 'completion/complete', label: 'completion/complete' },
     ],
   },
   {
