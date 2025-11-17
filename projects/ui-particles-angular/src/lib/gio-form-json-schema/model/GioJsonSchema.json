@@ -195,6 +195,9 @@
         "uniqueItemProperties": {
           "type": "array",
           "items": { "type": "string" }
+        },
+        "el": {
+          "type": "boolean"
         }
       }
     }
