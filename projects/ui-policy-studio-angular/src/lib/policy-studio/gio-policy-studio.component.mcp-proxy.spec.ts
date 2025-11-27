@@ -216,6 +216,45 @@ describe('GioPolicyStudioComponent - MCP Proxy', () => {
       expect(await detailsHarness.matchText(/Edited flow name/)).toEqual(true);
     });
 
+    it('should display correct methods when switching between flows with different methods', async () => {
+      const commonFlows = [
+        fakeMcpFlow({
+          name: 'MCP Tools Flow',
+          selectors: [
+            {
+              type: 'MCP',
+              methods: ['tools/list', 'tools/call'],
+            },
+          ],
+        }),
+        fakeMcpFlow({
+          name: 'MCP Resources Flow',
+          selectors: [
+            {
+              type: 'MCP',
+              methods: ['resources/list', 'resources/read'],
+            },
+          ],
+        }),
+      ];
+
+      component.commonFlows = commonFlows;
+      component.ngOnChanges({
+        commonFlows: new SimpleChange(null, null, true),
+      });
+
+      expect(await policyStudioHarness.getSelectedFlowInfos()).toEqual({
+        'MCP Methods': ['tools/list', 'tools/call'],
+        Name: ['MCP Tools Flow'],
+      });
+
+      await policyStudioHarness.selectFlowInMenu('MCP Resources Flow');
+      expect(await policyStudioHarness.getSelectedFlowInfos()).toEqual({
+        'MCP Methods': ['resources/list', 'resources/read'],
+        Name: ['MCP Resources Flow'],
+      });
+    });
+
     it('should display phases steps', async () => {
       const commonFlows = [
         fakeMcpFlow({
