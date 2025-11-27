@@ -43,6 +43,7 @@ export class GioPolicyStudioDetailsInfoBarComponent implements OnChanges {
     if (changes['flow']) {
       // Invalidate cache when flow changes
       this._methods = undefined;
+      this._mcpMethods = undefined;
     }
   }
 
