@@ -1,3 +1,10 @@
+## [16.2.5](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.2.4...v16.2.5) (2025-12-02)
+
+
+### Bug Fixes
+
+* invalidate mcp methods in cache ([5c3e17c](https://github.com/gravitee-io/gravitee-ui-particles/commit/5c3e17c6da32d0cc8b5693b667ce79630c5004b5))
+
 ## [16.2.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.2.3...v16.2.4) (2025-11-17)
 
 
