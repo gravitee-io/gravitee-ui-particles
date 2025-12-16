@@ -124,6 +124,13 @@ jobs:
             
             echo "PR edit with prerelease versions"
             gh pr edit --body "$CLEAN_BODY$PR_BODY_PRERELEASE_SECTION"
+      - run:
+          command: |
+            mkdir -p /tmp/npm_logs
+            cp /home/circleci/.npm/_logs/* /tmp/npm_logs
+          when: on_fail
+      - store_artifacts:
+          path: /tmp/npm_logs
   release:
     parameters:
       dry_run:
@@ -153,7 +160,13 @@ jobs:
                 name: 🚀 Release the Kraken
                 working_directory: .
                 command: yarn semantic-release --debug
-
+      - run:
+          command: |
+            mkdir -p /tmp/npm_logs
+            cp /home/circleci/.npm/_logs/* /tmp/npm_logs
+          when: on_fail
+      - store_artifacts:
+          path: /tmp/npm_logs
   build-storybook:
     executor:
       class: large
