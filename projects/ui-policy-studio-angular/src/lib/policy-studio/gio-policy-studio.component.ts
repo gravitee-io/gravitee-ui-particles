@@ -172,6 +172,7 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
 
   public apiTypeDisplayable = computed(() => {
     const apiTypeMap: Record<ApiType, string> = {
+      A2A_PROXY: 'A2A Proxy',
       LLM_PROXY: 'LLM Proxy',
       PROXY: 'HTTP Proxy',
       MESSAGE: 'HTTP Message',
