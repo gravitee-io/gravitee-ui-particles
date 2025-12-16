@@ -45,6 +45,20 @@ type PolicyGroupVM = {
   endConnectorName: string;
 };
 
+const PROXY_REQUEST_PHASE: PolicyGroupVM = {
+  name: 'Request phase',
+  description: 'Policies will be applied during the connection establishment',
+  startConnectorName: 'Incoming request',
+  endConnectorName: 'Outgoing request',
+};
+
+const PROXY_RESPONSE_PHASE: PolicyGroupVM = {
+  name: 'Response phase',
+  description: 'Policies will be applied to the response from the initial connection.',
+  startConnectorName: 'Incoming response',
+  endConnectorName: 'Outgoing response',
+};
+
 @Component({
   selector: 'gio-policy-group-studio',
   imports: [GioPolicyStudioDetailsPhaseComponent, GioFormJsonSchemaModule, GioLoaderModule],
@@ -143,52 +157,29 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
 
   private phases: Record<`${ApiType}__${FlowPhase}`, PolicyGroupVM | null> = {
     // HTTP Proxy
-    PROXY__REQUEST: {
-      name: 'Request phase',
-      description: 'Policies will be applied during the connection establishment',
-      startConnectorName: 'Incoming request',
-      endConnectorName: 'Outgoing request',
-    },
-    PROXY__RESPONSE: {
-      name: 'Response phase',
-      description: 'Policies will be applied to the response from the initial connection.',
-      startConnectorName: 'Incoming response',
-      endConnectorName: 'Outgoing response',
-    },
+    PROXY__REQUEST: PROXY_REQUEST_PHASE,
+    PROXY__RESPONSE: PROXY_RESPONSE_PHASE,
     PROXY__PUBLISH: null, // n/a
     PROXY__SUBSCRIBE: null, // n/a
     PROXY__CONNECT: null, // n/a
     PROXY__INTERACT: null, // n/a
+    // A2A Proxy
+    A2A_PROXY__REQUEST: PROXY_REQUEST_PHASE,
+    A2A_PROXY__RESPONSE: PROXY_RESPONSE_PHASE,
+    A2A_PROXY__PUBLISH: null, // n/a
+    A2A_PROXY__SUBSCRIBE: null, // n/a
+    A2A_PROXY__CONNECT: null, // n/a
+    A2A_PROXY__INTERACT: null, // n/a
     // LLM Proxy
-    LLM_PROXY__REQUEST: {
-      name: 'Request phase',
-      description: 'Policies will be applied during the connection establishment',
-      startConnectorName: 'Incoming request',
-      endConnectorName: 'Outgoing request',
-    },
-    LLM_PROXY__RESPONSE: {
-      name: 'Response phase',
-      description: 'Policies will be applied to the response from the initial connection.',
-      startConnectorName: 'Incoming response',
-      endConnectorName: 'Outgoing response',
-    },
+    LLM_PROXY__REQUEST: PROXY_REQUEST_PHASE,
+    LLM_PROXY__RESPONSE: PROXY_RESPONSE_PHASE,
     LLM_PROXY__PUBLISH: null, // n/a
     LLM_PROXY__SUBSCRIBE: null, // n/a
     LLM_PROXY__CONNECT: null, // n/a
     LLM_PROXY__INTERACT: null, // n/a
     // MCP Proxy
-    MCP_PROXY__REQUEST: {
-      name: 'Request phase',
-      description: 'Policies will be applied during the connection establishment',
-      startConnectorName: 'Incoming request',
-      endConnectorName: 'Outgoing request',
-    },
-    MCP_PROXY__RESPONSE: {
-      name: 'Response phase',
-      description: 'Policies will be applied to the response from the initial connection.',
-      startConnectorName: 'Incoming response',
-      endConnectorName: 'Outgoing response',
-    },
+    MCP_PROXY__REQUEST: PROXY_REQUEST_PHASE,
+    MCP_PROXY__RESPONSE: PROXY_RESPONSE_PHASE,
     MCP_PROXY__PUBLISH: null, // n/a
     MCP_PROXY__SUBSCRIBE: null, // n/a
     MCP_PROXY__CONNECT: null, // n/a
