@@ -1,3 +1,10 @@
+# [16.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.2.5...v16.3.0) (2025-12-18)
+
+
+### Features
+
+* add A2A_PROXY API type ([d6d8d1d](https://github.com/gravitee-io/gravitee-ui-particles/commit/d6d8d1d610a50fca6d319d6eb77d75ae5b3e3785))
+
 ## [16.2.5](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.2.4...v16.2.5) (2025-12-02)
 
 
