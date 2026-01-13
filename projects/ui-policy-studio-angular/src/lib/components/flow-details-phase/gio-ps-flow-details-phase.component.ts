@@ -33,6 +33,7 @@ type StepVM =
   | {
       _id: string;
       type: 'connectors';
+      tooltip: string;
       connectors: {
         name?: string;
         icon?: string;
@@ -99,6 +100,7 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
         {
           _id: 'start',
           type: 'connectors',
+          tooltip: 'Entrypoint',
           connectors: this.startConnector.map(connector => ({
             name: connector.name,
             icon: connector.icon,
@@ -115,6 +117,7 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
         {
           _id: 'end',
           type: 'connectors',
+          tooltip: 'Endpoint',
           connectors: this.endConnector.map(connector => ({
             name: connector.name,
             icon: connector.icon,

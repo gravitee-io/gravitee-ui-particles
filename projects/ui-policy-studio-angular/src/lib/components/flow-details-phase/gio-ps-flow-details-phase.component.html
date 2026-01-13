@@ -45,7 +45,7 @@
         <div class="content__step">
           <!-- Connector -->
           @if (stepVM.type === 'connectors') {
-            <div class="content__step__connector">
+            <div class="content__step__connector" [matTooltip]="stepVM.tooltip">
               @for (connector of stepVM.connectors; track connector) {
                 <span class="gio-badge-white content__step__connector__badge">
                   @if (connector.icon) {
