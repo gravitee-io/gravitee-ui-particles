@@ -1,3 +1,10 @@
+# [16.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.3.0...v16.4.0) (2026-01-13)
+
+
+### Features
+
+* improve PS entrypoint / endpoint UI ([89fc779](https://github.com/gravitee-io/gravitee-ui-particles/commit/89fc77920a661112bc1fe0ae9aa4ad7490afd612))
+
 # [16.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.2.5...v16.3.0) (2025-12-18)
 
 
