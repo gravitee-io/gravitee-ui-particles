@@ -59,6 +59,13 @@ const PROXY_RESPONSE_PHASE: PolicyGroupVM = {
   endConnectorName: 'Outgoing response',
 };
 
+const NATIVE_ENTRYPOINT_CONNECT_PHASE: PolicyGroupVM = {
+  name: 'Entrypoint Connect phase',
+  description: 'Policies will be applied when client connects to entrypoint before authentication and message processing',
+  startConnectorName: 'Client',
+  endConnectorName: 'Entrypoint',
+};
+
 @Component({
   selector: 'gio-policy-group-studio',
   imports: [GioPolicyStudioDetailsPhaseComponent, GioFormJsonSchemaModule, GioLoaderModule],
@@ -161,29 +168,29 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
     PROXY__RESPONSE: PROXY_RESPONSE_PHASE,
     PROXY__PUBLISH: null, // n/a
     PROXY__SUBSCRIBE: null, // n/a
-    PROXY__CONNECT: null, // n/a
     PROXY__INTERACT: null, // n/a
+    PROXY__ENTRYPOINT_CONNECT: null, // n/a
     // A2A Proxy
     A2A_PROXY__REQUEST: PROXY_REQUEST_PHASE,
     A2A_PROXY__RESPONSE: PROXY_RESPONSE_PHASE,
     A2A_PROXY__PUBLISH: null, // n/a
     A2A_PROXY__SUBSCRIBE: null, // n/a
-    A2A_PROXY__CONNECT: null, // n/a
     A2A_PROXY__INTERACT: null, // n/a
+    A2A_PROXY__ENTRYPOINT_CONNECT: null, // n/a
     // LLM Proxy
     LLM_PROXY__REQUEST: PROXY_REQUEST_PHASE,
     LLM_PROXY__RESPONSE: PROXY_RESPONSE_PHASE,
     LLM_PROXY__PUBLISH: null, // n/a
     LLM_PROXY__SUBSCRIBE: null, // n/a
-    LLM_PROXY__CONNECT: null, // n/a
     LLM_PROXY__INTERACT: null, // n/a
+    LLM_PROXY__ENTRYPOINT_CONNECT: null, // n/a
     // MCP Proxy
     MCP_PROXY__REQUEST: PROXY_REQUEST_PHASE,
     MCP_PROXY__RESPONSE: PROXY_RESPONSE_PHASE,
     MCP_PROXY__PUBLISH: null, // n/a
     MCP_PROXY__SUBSCRIBE: null, // n/a
-    MCP_PROXY__CONNECT: null, // n/a
     MCP_PROXY__INTERACT: null, // n/a
+    MCP_PROXY__ENTRYPOINT_CONNECT: null, // n/a
     // HTTP Message
     MESSAGE__REQUEST: {
       name: 'Request phase',
@@ -209,16 +216,15 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
       startConnectorName: 'Incoming message response',
       endConnectorName: 'Outgoing message response',
     },
-    MESSAGE__CONNECT: null, // n/a
     MESSAGE__INTERACT: null, // n/a
+    MESSAGE__ENTRYPOINT_CONNECT: null, // n/a
     // NATIVE
-    // TODO: To implement we want to make PS compatible with the native API
-    NATIVE__CONNECT: null, // n/a
     NATIVE__INTERACT: null, // n/a
     NATIVE__PUBLISH: null, // n/a
     NATIVE__SUBSCRIBE: null, // n/a
     NATIVE__REQUEST: null, // n/a
     NATIVE__RESPONSE: null, // n/a
+    NATIVE__ENTRYPOINT_CONNECT: NATIVE_ENTRYPOINT_CONNECT_PHASE,
   };
 
   constructor(private readonly policyStudioService: GioPolicyStudioService) {}

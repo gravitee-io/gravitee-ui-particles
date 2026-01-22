@@ -108,6 +108,7 @@ export const NativeKafka: StoryObj = {
           interact: [fakeTestPolicyStep()],
           publish: [fakeTestPolicyStep()],
           subscribe: [fakeTestPolicyStep()],
+          entrypointConnect: [fakeTestPolicyStep()],
         };
       }),
     ],

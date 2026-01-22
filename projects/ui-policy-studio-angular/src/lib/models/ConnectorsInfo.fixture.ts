@@ -186,7 +186,7 @@ export function fakeKafkaNativeEntrypoint(modifier?: Partial<ConnectorInfo> | ((
   const base: ConnectorInfo = {
     type: 'native-kafka',
     name: 'Client',
-    supportedModes: ['INTERACT', 'PUBLISH', 'SUBSCRIBE'],
+    supportedModes: ['INTERACT', 'PUBLISH', 'SUBSCRIBE', 'ENTRYPOINT_CONNECT'],
     icon: 'gio:kafka',
   };
 
@@ -204,7 +204,7 @@ export function fakeKafkaNativeEndpoint(modifier?: Partial<ConnectorInfo> | ((ba
   const base: ConnectorInfo = {
     type: 'native-kafka',
     name: 'Broker',
-    supportedModes: ['INTERACT', 'PUBLISH', 'SUBSCRIBE'],
+    supportedModes: ['INTERACT', 'PUBLISH', 'SUBSCRIBE', 'ENTRYPOINT_CONNECT'],
     icon: 'gio:kafka',
   };
 

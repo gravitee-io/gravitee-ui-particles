@@ -29,12 +29,12 @@ export interface Flow {
 
   selectors?: Selector[];
 
-  connect?: Step[];
   interact?: Step[];
   request?: Step[];
   response?: Step[];
   subscribe?: Step[];
   publish?: Step[];
+  entrypointConnect?: Step[];
   /**
    * Flow's tags.
    */

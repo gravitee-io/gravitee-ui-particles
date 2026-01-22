@@ -44,8 +44,8 @@ const flowPhaseLabels: Record<FlowPhase, string> = {
   RESPONSE: 'Response',
   PUBLISH: 'Publish',
   SUBSCRIBE: 'Subscribe',
-  CONNECT: 'Connect',
   INTERACT: 'Interact',
+  ENTRYPOINT_CONNECT: 'Entrypoint Connect',
 };
 
 type PolicyVM = {
