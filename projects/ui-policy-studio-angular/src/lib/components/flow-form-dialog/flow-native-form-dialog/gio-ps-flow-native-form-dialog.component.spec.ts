@@ -198,5 +198,7 @@ const toFlow: (formValue: GioPolicyStudioFlowNativeHarnessData) => Flow = (formV
     interact: [],
     publish: [],
     subscribe: [],
+    clientConnect: [],
+    endpointConnect: [],
   };
 };

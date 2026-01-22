@@ -365,4 +365,142 @@ describe('GioPolicyGroupStudioComponent', () => {
       });
     });
   });
+
+  describe('NATIVE API - CLIENT_CONNECT phase', () => {
+    beforeEach(async () => {
+      await initComponent('NATIVE', 'CLIENT_CONNECT');
+    });
+
+    it('should display empty Policy Group with correct connectors', async () => {
+      const flowPhase = await PolicyGroupStudioHarness.getPolicyGroupPhase();
+
+      expect(flowPhase).toBeDefined();
+      const steps = await flowPhase.getSteps();
+
+      expect(steps).toEqual([
+        {
+          name: 'Client connection',
+          type: 'connector',
+        },
+        {
+          name: 'Gateway auth',
+          type: 'connector',
+        },
+      ]);
+    });
+
+    it('should add policy to CLIENT_CONNECT phase', async () => {
+      const phase = await PolicyGroupStudioHarness.getPolicyGroupPhase();
+
+      let expectedEnvironmentFlowOutput: PolicyGroupOutput | undefined = undefined;
+
+      component.policyGroupChange.subscribe(environmentFlow => (expectedEnvironmentFlowOutput = environmentFlow));
+
+      await PolicyGroupStudioHarness?.addStep(0, {
+        policyName: fakeTestPolicy().name,
+        description: 'Test CLIENT_CONNECT policy',
+        async waitForPolicyFormCompletionCb(locator) {
+          const testPolicyConfigurationInput = await locator.locatorFor(MatInputHarness.with({ selector: '[id*="test"]' }))();
+          await testPolicyConfigurationInput.setValue('client-connect-test');
+        },
+      });
+
+      expect(await phase.getSteps()).toEqual([
+        {
+          name: 'Client connection',
+          type: 'connector',
+        },
+        {
+          type: 'step',
+          name: fakeTestPolicy().name,
+          hasCondition: false,
+          description: 'Test CLIENT_CONNECT policy',
+        },
+        {
+          name: 'Gateway auth',
+          type: 'connector',
+        },
+      ]);
+      expect(expectedEnvironmentFlowOutput).toEqual([
+        {
+          configuration: {
+            test: 'client-connect-test',
+          },
+          description: 'Test CLIENT_CONNECT policy',
+          enabled: true,
+          name: 'Policy to test UI',
+          policy: 'test-policy',
+        },
+      ]);
+    });
+  });
+
+  describe('NATIVE API - ENDPOINT_CONNECT phase', () => {
+    beforeEach(async () => {
+      await initComponent('NATIVE', 'ENDPOINT_CONNECT');
+    });
+
+    it('should display empty Policy Group with correct connectors', async () => {
+      const flowPhase = await PolicyGroupStudioHarness.getPolicyGroupPhase();
+
+      expect(flowPhase).toBeDefined();
+      const steps = await flowPhase.getSteps();
+
+      expect(steps).toEqual([
+        {
+          name: 'Gateway',
+          type: 'connector',
+        },
+        {
+          name: 'Upstream Kafka',
+          type: 'connector',
+        },
+      ]);
+    });
+
+    it('should add policy to ENDPOINT_CONNECT phase', async () => {
+      const phase = await PolicyGroupStudioHarness.getPolicyGroupPhase();
+
+      let expectedEnvironmentFlowOutput: PolicyGroupOutput | undefined = undefined;
+
+      component.policyGroupChange.subscribe(environmentFlow => (expectedEnvironmentFlowOutput = environmentFlow));
+
+      await PolicyGroupStudioHarness?.addStep(0, {
+        policyName: fakeTestPolicy().name,
+        description: 'Test ENDPOINT_CONNECT policy',
+        async waitForPolicyFormCompletionCb(locator) {
+          const testPolicyConfigurationInput = await locator.locatorFor(MatInputHarness.with({ selector: '[id*="test"]' }))();
+          await testPolicyConfigurationInput.setValue('endpoint-connect-test');
+        },
+      });
+
+      expect(await phase.getSteps()).toEqual([
+        {
+          name: 'Gateway',
+          type: 'connector',
+        },
+        {
+          type: 'step',
+          name: fakeTestPolicy().name,
+          hasCondition: false,
+          description: 'Test ENDPOINT_CONNECT policy',
+        },
+        {
+          name: 'Upstream Kafka',
+          type: 'connector',
+        },
+      ]);
+      expect(expectedEnvironmentFlowOutput).toEqual([
+        {
+          configuration: {
+            test: 'endpoint-connect-test',
+          },
+          description: 'Test ENDPOINT_CONNECT policy',
+          enabled: true,
+          name: 'Policy to test UI',
+          policy: 'test-policy',
+        },
+      ]);
+    });
+  });
 });

@@ -240,7 +240,10 @@ export class GioPolicyStudioDetailsComponent implements OnChanges {
     });
   }
 
-  public onStepsChange(flowPhase: 'connect' | 'interact' | 'request' | 'response' | 'publish' | 'subscribe', steps: Step[]): void {
+  public onStepsChange(
+    flowPhase: 'connect' | 'interact' | 'request' | 'response' | 'publish' | 'subscribe' | 'clientConnect' | 'endpointConnect',
+    steps: Step[],
+  ): void {
     if (!this.flow) {
       return;
     }

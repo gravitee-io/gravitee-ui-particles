@@ -59,6 +59,20 @@ const PROXY_RESPONSE_PHASE: PolicyGroupVM = {
   endConnectorName: 'Outgoing response',
 };
 
+const NATIVE_CLIENT_CONNECT_PHASE: PolicyGroupVM = {
+  name: 'Client Connect phase',
+  description: 'Policies will be applied after client TCP connection, before authentication and message processing',
+  startConnectorName: 'Client connection',
+  endConnectorName: 'Gateway auth',
+};
+
+const NATIVE_ENDPOINT_CONNECT_PHASE: PolicyGroupVM = {
+  name: 'Endpoint Connect phase',
+  description: 'Policies will be applied before establishing upstream Kafka connection',
+  startConnectorName: 'Gateway',
+  endConnectorName: 'Upstream Kafka',
+};
+
 @Component({
   selector: 'gio-policy-group-studio',
   imports: [GioPolicyStudioDetailsPhaseComponent, GioFormJsonSchemaModule, GioLoaderModule],
@@ -163,6 +177,8 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
     PROXY__SUBSCRIBE: null, // n/a
     PROXY__CONNECT: null, // n/a
     PROXY__INTERACT: null, // n/a
+    PROXY__CLIENT_CONNECT: null, // n/a
+    PROXY__ENDPOINT_CONNECT: null, // n/a
     // A2A Proxy
     A2A_PROXY__REQUEST: PROXY_REQUEST_PHASE,
     A2A_PROXY__RESPONSE: PROXY_RESPONSE_PHASE,
@@ -170,6 +186,8 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
     A2A_PROXY__SUBSCRIBE: null, // n/a
     A2A_PROXY__CONNECT: null, // n/a
     A2A_PROXY__INTERACT: null, // n/a
+    A2A_PROXY__CLIENT_CONNECT: null, // n/a
+    A2A_PROXY__ENDPOINT_CONNECT: null, // n/a
     // LLM Proxy
     LLM_PROXY__REQUEST: PROXY_REQUEST_PHASE,
     LLM_PROXY__RESPONSE: PROXY_RESPONSE_PHASE,
@@ -177,6 +195,8 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
     LLM_PROXY__SUBSCRIBE: null, // n/a
     LLM_PROXY__CONNECT: null, // n/a
     LLM_PROXY__INTERACT: null, // n/a
+    LLM_PROXY__CLIENT_CONNECT: null, // n/a
+    LLM_PROXY__ENDPOINT_CONNECT: null, // n/a
     // MCP Proxy
     MCP_PROXY__REQUEST: PROXY_REQUEST_PHASE,
     MCP_PROXY__RESPONSE: PROXY_RESPONSE_PHASE,
@@ -184,6 +204,8 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
     MCP_PROXY__SUBSCRIBE: null, // n/a
     MCP_PROXY__CONNECT: null, // n/a
     MCP_PROXY__INTERACT: null, // n/a
+    MCP_PROXY__CLIENT_CONNECT: null, // n/a
+    MCP_PROXY__ENDPOINT_CONNECT: null, // n/a
     // HTTP Message
     MESSAGE__REQUEST: {
       name: 'Request phase',
@@ -211,14 +233,17 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
     },
     MESSAGE__CONNECT: null, // n/a
     MESSAGE__INTERACT: null, // n/a
+    MESSAGE__CLIENT_CONNECT: null, // n/a
+    MESSAGE__ENDPOINT_CONNECT: null, // n/a
     // NATIVE
-    // TODO: To implement we want to make PS compatible with the native API
     NATIVE__CONNECT: null, // n/a
     NATIVE__INTERACT: null, // n/a
     NATIVE__PUBLISH: null, // n/a
     NATIVE__SUBSCRIBE: null, // n/a
     NATIVE__REQUEST: null, // n/a
     NATIVE__RESPONSE: null, // n/a
+    NATIVE__CLIENT_CONNECT: NATIVE_CLIENT_CONNECT_PHASE,
+    NATIVE__ENDPOINT_CONNECT: NATIVE_ENDPOINT_CONNECT_PHASE,
   };
 
   constructor(private readonly policyStudioService: GioPolicyStudioService) {}

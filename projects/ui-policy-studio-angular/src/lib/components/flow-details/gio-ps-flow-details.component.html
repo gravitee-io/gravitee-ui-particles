@@ -152,22 +152,6 @@
           <mat-tab label="Global" bodyClass="content__tabs__body">
             <gio-ps-flow-details-phase
               class="content__phase"
-              name="Connect phase"
-              description="Policies will be applied when the client connects to the Gateway"
-              [disabledNotYetAvailable]="true"
-              [readOnly]="readOnly"
-              [startConnector]="endpointsInfo | gioFilterConnectorsByMode: 'CONNECT'"
-              [endConnector]="entrypointsInfo | gioFilterConnectorsByMode: 'CONNECT'"
-              [steps]="flow.connect ?? []"
-              [apiType]="apiType"
-              [genericPolicies]="genericPolicies"
-              [trialUrl]="trialUrl"
-              policyFlowPhase="CONNECT"
-              (stepsChange)="onStepsChange('connect', $event)"
-            >
-            </gio-ps-flow-details-phase>
-            <gio-ps-flow-details-phase
-              class="content__phase"
               name="Interact phase"
               description="Policies will be applied on all interactions between the client and the Gateway"
               [readOnly]="readOnly"
@@ -179,6 +163,34 @@
               [trialUrl]="trialUrl"
               policyFlowPhase="INTERACT"
               (stepsChange)="onStepsChange('interact', $event)"
+            ></gio-ps-flow-details-phase>
+            <gio-ps-flow-details-phase
+              class="content__phase"
+              name="Client Connect phase"
+              description="Policies executed after TCP connection, before authentication and message processing"
+              [readOnly]="readOnly"
+              [startConnector]="entrypointsInfo | gioFilterConnectorsByMode: 'CLIENT_CONNECT'"
+              [endConnector]="endpointsInfo | gioFilterConnectorsByMode: 'CLIENT_CONNECT'"
+              [steps]="flow.clientConnect ?? []"
+              [apiType]="apiType"
+              [genericPolicies]="genericPolicies"
+              [trialUrl]="trialUrl"
+              policyFlowPhase="CLIENT_CONNECT"
+              (stepsChange)="onStepsChange('clientConnect', $event)"
+            ></gio-ps-flow-details-phase>
+            <gio-ps-flow-details-phase
+              class="content__phase"
+              name="Endpoint Connect phase"
+              description="Policies executed before establishing upstream Kafka connection"
+              [readOnly]="readOnly"
+              [startConnector]="entrypointsInfo | gioFilterConnectorsByMode: 'ENDPOINT_CONNECT'"
+              [endConnector]="endpointsInfo | gioFilterConnectorsByMode: 'ENDPOINT_CONNECT'"
+              [steps]="flow.endpointConnect ?? []"
+              [apiType]="apiType"
+              [genericPolicies]="genericPolicies"
+              [trialUrl]="trialUrl"
+              policyFlowPhase="ENDPOINT_CONNECT"
+              (stepsChange)="onStepsChange('endpointConnect', $event)"
             ></gio-ps-flow-details-phase>
           </mat-tab>
           <mat-tab label="Event messages" bodyClass="content__tabs__body">

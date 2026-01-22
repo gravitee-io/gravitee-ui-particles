@@ -20,4 +20,4 @@ export interface ConnectorInfo {
   supportedModes: ConnectorMode[];
 }
 
-export type ConnectorMode = 'CONNECT' | 'INTERACT' | 'SUBSCRIBE' | 'PUBLISH' | 'REQUEST_RESPONSE';
+export type ConnectorMode = 'CONNECT' | 'INTERACT' | 'SUBSCRIBE' | 'PUBLISH' | 'REQUEST_RESPONSE' | 'CLIENT_CONNECT' | 'ENDPOINT_CONNECT';
