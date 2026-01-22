@@ -18,7 +18,7 @@ import { get } from 'lodash';
 
 import { ApiProtocolType } from '../ApiProtocolType';
 
-export type FlowPhase = 'REQUEST' | 'RESPONSE' | 'INTERACT' | 'CONNECT' | 'PUBLISH' | 'SUBSCRIBE';
+export type FlowPhase = 'REQUEST' | 'RESPONSE' | 'INTERACT' | 'PUBLISH' | 'SUBSCRIBE' | 'ENTRYPOINT_CONNECT';
 
 export interface Policy {
   id: string;

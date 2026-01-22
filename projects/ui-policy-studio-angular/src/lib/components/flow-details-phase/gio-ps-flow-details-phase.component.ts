@@ -100,7 +100,7 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
         {
           _id: 'start',
           type: 'connectors',
-          tooltip: 'Entrypoint',
+          tooltip: this.apiType === 'NATIVE' ? '' : 'Entrypoint',
           connectors: this.startConnector.map(connector => ({
             name: connector.name,
             icon: connector.icon,
@@ -117,7 +117,7 @@ export class GioPolicyStudioDetailsPhaseComponent implements OnChanges {
         {
           _id: 'end',
           type: 'connectors',
-          tooltip: 'Endpoint',
+          tooltip: this.apiType === 'NATIVE' ? '' : 'Endpoint',
           connectors: this.endConnector.map(connector => ({
             name: connector.name,
             icon: connector.icon,

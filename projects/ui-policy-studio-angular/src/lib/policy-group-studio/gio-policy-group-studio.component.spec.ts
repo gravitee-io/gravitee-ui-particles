@@ -365,4 +365,73 @@ describe('GioPolicyGroupStudioComponent', () => {
       });
     });
   });
+
+  describe('NATIVE API - ENTRYPOINT_CONNECT phase', () => {
+    beforeEach(async () => {
+      await initComponent('NATIVE', 'ENTRYPOINT_CONNECT');
+    });
+
+    it('should display empty Policy Group with correct connectors', async () => {
+      const flowPhase = await PolicyGroupStudioHarness.getPolicyGroupPhase();
+
+      expect(flowPhase).toBeDefined();
+      const steps = await flowPhase.getSteps();
+
+      expect(steps).toEqual([
+        {
+          name: 'Client',
+          type: 'connector',
+        },
+        {
+          name: 'Entrypoint',
+          type: 'connector',
+        },
+      ]);
+    });
+
+    it('should add policy to ENTRYPOINT_CONNECT phase', async () => {
+      const phase = await PolicyGroupStudioHarness.getPolicyGroupPhase();
+
+      let expectedEnvironmentFlowOutput: PolicyGroupOutput | undefined = undefined;
+
+      component.policyGroupChange.subscribe(environmentFlow => (expectedEnvironmentFlowOutput = environmentFlow));
+
+      await PolicyGroupStudioHarness?.addStep(0, {
+        policyName: fakeTestPolicy().name,
+        description: 'Test ENTRYPOINT_CONNECT policy',
+        async waitForPolicyFormCompletionCb(locator) {
+          const testPolicyConfigurationInput = await locator.locatorFor(MatInputHarness.with({ selector: '[id*="test"]' }))();
+          await testPolicyConfigurationInput.setValue('entrypoint-connect-test');
+        },
+      });
+
+      expect(await phase.getSteps()).toEqual([
+        {
+          name: 'Client',
+          type: 'connector',
+        },
+        {
+          type: 'step',
+          name: fakeTestPolicy().name,
+          hasCondition: false,
+          description: 'Test ENTRYPOINT_CONNECT policy',
+        },
+        {
+          name: 'Entrypoint',
+          type: 'connector',
+        },
+      ]);
+      expect(expectedEnvironmentFlowOutput).toEqual([
+        {
+          configuration: {
+            test: 'entrypoint-connect-test',
+          },
+          description: 'Test ENTRYPOINT_CONNECT policy',
+          enabled: true,
+          name: 'Policy to test UI',
+          policy: 'test-policy',
+        },
+      ]);
+    });
+  });
 });

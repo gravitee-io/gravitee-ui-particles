@@ -141,7 +141,7 @@ export function fakeTestPolicy(modifier?: Partial<Policy> | ((base: Policy) => P
       HTTP_PROXY: ['REQUEST', 'RESPONSE'],
       LLM_PROXY: ['REQUEST', 'RESPONSE'],
       MCP_PROXY: ['REQUEST', 'RESPONSE'],
-      NATIVE_KAFKA: ['CONNECT', 'INTERACT', 'PUBLISH', 'SUBSCRIBE'],
+      NATIVE_KAFKA: ['INTERACT', 'PUBLISH', 'SUBSCRIBE', 'ENTRYPOINT_CONNECT'],
     },
   };
 

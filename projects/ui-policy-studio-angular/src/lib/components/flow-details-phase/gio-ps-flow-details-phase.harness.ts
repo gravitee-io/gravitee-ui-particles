@@ -24,7 +24,7 @@ import { GioPolicyStudioStepEditDialogHarness } from '../step-edit-dialog/gio-ps
 import { GioPolicyStudioPoliciesCatalogDialogHarness } from '../policies-catalog-dialog/gio-ps-policies-catalog-dialog.harness';
 import { StepForm } from '../step-form/gio-ps-step-form.harness';
 
-export type PhaseType = 'INTERACT' | 'REQUEST' | 'RESPONSE' | 'PUBLISH' | 'SUBSCRIBE';
+export type PhaseType = 'INTERACT' | 'REQUEST' | 'RESPONSE' | 'PUBLISH' | 'SUBSCRIBE' | 'ENTRYPOINT_CONNECT';
 
 export type GioPolicyStudioDetailsPhaseHarnessFilters = BaseHarnessFilters & {
   type?: PhaseType;
@@ -36,6 +36,7 @@ const TYPE_TO_TEXT: Record<PhaseType, string> = {
   RESPONSE: 'Response phase',
   PUBLISH: 'Publish phase',
   SUBSCRIBE: 'Subscribe phase',
+  ENTRYPOINT_CONNECT: 'Entrypoint Connect phase',
 };
 
 export type StepCard =

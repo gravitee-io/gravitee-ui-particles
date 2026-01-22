@@ -103,6 +103,14 @@ export class GioPolicyStudioDetailsComponent implements OnChanges {
 
   public operations: Operation[] = [];
 
+  // Custom connectors for ENTRYPOINT_CONNECT phase
+  public readonly entrypointConnectStartConnector: ConnectorInfo[] = [
+    { type: 'custom', name: 'Client', icon: 'gio:kafka', supportedModes: [] },
+  ];
+  public readonly entrypointConnectEndConnector: ConnectorInfo[] = [
+    { type: 'custom', name: 'Entrypoint', icon: 'gio:kafka', supportedModes: [] },
+  ];
+
   constructor(private readonly matDialog: MatDialog) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -240,7 +248,10 @@ export class GioPolicyStudioDetailsComponent implements OnChanges {
     });
   }
 
-  public onStepsChange(flowPhase: 'connect' | 'interact' | 'request' | 'response' | 'publish' | 'subscribe', steps: Step[]): void {
+  public onStepsChange(
+    flowPhase: 'interact' | 'request' | 'response' | 'publish' | 'subscribe' | 'entrypointConnect',
+    steps: Step[],
+  ): void {
     if (!this.flow) {
       return;
     }

@@ -146,9 +146,14 @@ export class GioPolicyStudioHarness extends ComponentHarness {
    * @param phaseType Phase type to get
    */
   public async getSelectedFlowPhase(phaseType: PhaseType): Promise<GioPolicyStudioDetailsPhaseHarness | undefined> {
-    if (phaseType === 'PUBLISH' || phaseType === 'SUBSCRIBE') {
-      const matTabsHarness = await this.locatorFor(MatTabGroupHarness.with({ selector: '.content__tabs' }))();
-      await matTabsHarness.selectTab({ label: 'Event messages' });
+    const matTabsHarness = await this.locatorForOptional(MatTabGroupHarness.with({ selector: '.content__tabs' }))();
+
+    if (matTabsHarness) {
+      if (phaseType === 'PUBLISH' || phaseType === 'SUBSCRIBE') {
+        await matTabsHarness.selectTab({ label: 'Event messages' });
+      } else if (phaseType === 'INTERACT' || phaseType === 'ENTRYPOINT_CONNECT') {
+        await matTabsHarness.selectTab({ label: 'Global' });
+      }
     }
 
     const steps = await this.phaseHarness(phaseType);

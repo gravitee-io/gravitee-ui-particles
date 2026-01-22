@@ -203,6 +203,7 @@ describe('GioPolicyStudioComponent - Native Kafka', () => {
           name: 'Flow 1',
           interact: [fakeTestPolicyStep()],
           publish: [fakeTestPolicyStep()],
+          entrypointConnect: [fakeTestPolicyStep()],
         }),
       ];
       component.commonFlows = commonFlows;
@@ -212,6 +213,7 @@ describe('GioPolicyStudioComponent - Native Kafka', () => {
 
       const interactPhase = await policyStudioHarness.getSelectedFlowPhase('INTERACT');
       const publishPhase = await policyStudioHarness.getSelectedFlowPhase('PUBLISH');
+      const entrypointConnectPhase = await policyStudioHarness.getSelectedFlowPhase('ENTRYPOINT_CONNECT');
 
       expect(await interactPhase?.getSteps()).toStrictEqual([
         { name: 'Client', type: 'connector' },
@@ -224,6 +226,12 @@ describe('GioPolicyStudioComponent - Native Kafka', () => {
         { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
         { name: 'Broker', type: 'connector' },
       ]);
+
+      expect(await entrypointConnectPhase?.getSteps()).toStrictEqual([
+        { name: 'Client', type: 'connector' },
+        { name: 'Policy to test UI', description: 'Test Policy description', hasCondition: false, type: 'step' },
+        { name: 'Entrypoint', type: 'connector' },
+      ]);
     });
 
     it('should add step into phase', async () => {
@@ -232,6 +240,7 @@ describe('GioPolicyStudioComponent - Native Kafka', () => {
           name: 'Alphabetical policy',
           interact: [fakeTestPolicyStep({ description: 'B' })],
           publish: [fakeTestPolicyStep({ description: 'B' })],
+          entrypointConnect: [fakeTestPolicyStep({ description: 'B' })],
         }),
       ];
       component.commonFlows = commonFlows;
@@ -272,6 +281,17 @@ describe('GioPolicyStudioComponent - Native Kafka', () => {
         },
       });
 
+      // Add step A before B into ENTRYPOINT_CONNECT phase
+      const entrypointConnectPhase = await policyStudioHarness.getSelectedFlowPhase('ENTRYPOINT_CONNECT');
+      await entrypointConnectPhase?.addStep(0, {
+        policyName: fakeTestPolicy().name,
+        description: 'A',
+        async waitForPolicyFormCompletionCb(locator) {
+          const testPolicyConfigurationInput = await locator.locatorFor(MatInputHarness.with({ selector: '[id*="test"]' }))();
+          await testPolicyConfigurationInput.setValue('🦊');
+        },
+      });
+
       // Save
       let saveOutputToExpect: SaveOutput | undefined;
       component.save.subscribe(value => (saveOutputToExpect = value));
@@ -290,6 +310,11 @@ describe('GioPolicyStudioComponent - Native Kafka', () => {
         fakeTestPolicyStep({ description: 'A', configuration: { test: '🦊' } }),
         fakeTestPolicyStep({ description: 'B' }),
       ]);
+
+      expect(commonFlow?.entrypointConnect).toEqual([
+        fakeTestPolicyStep({ description: 'A', configuration: { test: '🦊' } }),
+        fakeTestPolicyStep({ description: 'B' }),
+      ]);
     });
 
     it('should edit step into phase', async () => {
@@ -298,6 +323,7 @@ describe('GioPolicyStudioComponent - Native Kafka', () => {
           name: 'Alphabetical policy',
           interact: [fakeTestPolicyStep({ description: 'B' })],
           publish: [fakeTestPolicyStep({ description: 'B' })],
+          entrypointConnect: [fakeTestPolicyStep({ description: 'B' })],
         }),
       ];
       component.commonFlows = commonFlows;
@@ -311,9 +337,15 @@ describe('GioPolicyStudioComponent - Native Kafka', () => {
         description: 'A',
       });
 
-      // Edit step B into RESPONSE phase
+      // Edit step B into PUBLISH phase
       const publishPhase = await policyStudioHarness.getSelectedFlowPhase('PUBLISH');
       await publishPhase?.editStep(0, {
+        description: 'A',
+      });
+
+      // Edit step B into ENTRYPOINT_CONNECT phase
+      const entrypointConnectPhase = await policyStudioHarness.getSelectedFlowPhase('ENTRYPOINT_CONNECT');
+      await entrypointConnectPhase?.editStep(0, {
         description: 'A',
       });
 
@@ -326,8 +358,8 @@ describe('GioPolicyStudioComponent - Native Kafka', () => {
       const commonFlow = saveOutputToExpect?.commonFlows?.[0];
       expect(commonFlow).toBeDefined();
       expect(commonFlow?.interact).toEqual([fakeTestPolicyStep({ description: 'A' })]);
-
       expect(commonFlow?.publish).toEqual([fakeTestPolicyStep({ description: 'A' })]);
+      expect(commonFlow?.entrypointConnect).toEqual([fakeTestPolicyStep({ description: 'A' })]);
     });
   });
 });
