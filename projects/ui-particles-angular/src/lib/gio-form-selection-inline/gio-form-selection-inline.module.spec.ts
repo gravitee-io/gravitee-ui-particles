@@ -25,17 +25,24 @@ import { GioFormSelectionInlineModule } from './gio-form-selection-inline.module
 @Component({
   template: `
     <gio-form-selection-inline [formControl]="selectControl">
-      <gio-form-selection-inline-card value="A">Hello</gio-form-selection-inline-card>
-      <gio-form-selection-inline-card value="B">Hello</gio-form-selection-inline-card>
-      <gio-form-selection-inline-card value="C">Hello</gio-form-selection-inline-card>
-      <gio-form-selection-inline-card [disabled]="true" value="D">Disabled</gio-form-selection-inline-card>
-      <gio-form-selection-inline-card value="E">Hello</gio-form-selection-inline-card>
+      <gio-form-selection-inline-card value="static">Static Content</gio-form-selection-inline-card>
+      <gio-form-selection-inline-card value="static-disabled" [disabled]="true">Static Disabled Content </gio-form-selection-inline-card>
+      @for (value of dynamicValues; track $index) {
+        <gio-form-selection-inline-card [disabled]="value.disabled" [value]="value.value">Hello </gio-form-selection-inline-card>
+      }
     </gio-form-selection-inline>
   `,
   standalone: false,
 })
 class TestComponent {
   public selectControl = new FormControl('');
+  public dynamicValues = [
+    { value: 'A', disabled: false },
+    { value: 'B', disabled: false },
+    { value: 'C', disabled: false },
+    { value: 'D', disabled: true },
+    { value: 'E', disabled: false },
+  ];
 }
 
 describe('GioFormSelectionInlineModule', () => {
@@ -53,28 +60,76 @@ describe('GioFormSelectionInlineModule', () => {
     loader = TestbedHarnessEnvironment.loader(fixture);
   });
 
-  it('should display form with form value', async () => {
+  it('should display static value', async () => {
     fixture.detectChanges();
 
     const formSelectCards = await loader.getHarness(GioFormSelectionInlineHarness);
     expect(await formSelectCards.getSelectedValue()).toEqual(undefined);
 
-    component.selectControl.patchValue('A');
+    await formSelectCards.select('static');
+    fixture.detectChanges();
+
+    expect(await formSelectCards.getSelectedValue()).toBe('static');
+
+    const cards = await formSelectCards.getSelectionCards();
+    expect(cards).toEqual([
+      { text: 'Static Content', value: 'static', selected: true, disabled: false },
+      { text: 'Static Disabled Content', value: 'static-disabled', selected: false, disabled: true },
+      { text: 'Hello', value: 'A', selected: false, disabled: false },
+      { text: 'Hello', value: 'B', selected: false, disabled: false },
+      { text: 'Hello', value: 'C', selected: false, disabled: false },
+      { text: 'Hello', value: 'D', selected: false, disabled: true },
+      { text: 'Hello', value: 'E', selected: false, disabled: false },
+    ]);
+  });
+
+  it('should not select disabled static value', async () => {
+    fixture.detectChanges();
+
+    const formSelectCards = await loader.getHarness(GioFormSelectionInlineHarness);
+    expect(await formSelectCards.getSelectedValue()).toEqual(undefined);
+
+    await formSelectCards.select('static-disabled');
+    fixture.detectChanges();
+
+    expect(await formSelectCards.getSelectedValue()).toBe(undefined);
+
+    const cards = await formSelectCards.getSelectionCards();
+    expect(cards).toEqual([
+      { text: 'Static Content', value: 'static', selected: false, disabled: false },
+      { text: 'Static Disabled Content', value: 'static-disabled', selected: false, disabled: true },
+      { text: 'Hello', value: 'A', selected: false, disabled: false },
+      { text: 'Hello', value: 'B', selected: false, disabled: false },
+      { text: 'Hello', value: 'C', selected: false, disabled: false },
+      { text: 'Hello', value: 'D', selected: false, disabled: true },
+      { text: 'Hello', value: 'E', selected: false, disabled: false },
+    ]);
+  });
+
+  it('should display form with dynamic form value', async () => {
+    fixture.detectChanges();
+
+    const formSelectCards = await loader.getHarness(GioFormSelectionInlineHarness);
+    expect(await formSelectCards.getSelectedValue()).toEqual(undefined);
+
+    await formSelectCards.select('A');
     fixture.detectChanges();
 
     expect(await formSelectCards.getSelectedValue()).toBe('A');
 
     const cards = await formSelectCards.getSelectionCards();
     expect(cards).toEqual([
+      { text: 'Static Content', value: 'static', selected: false, disabled: false },
+      { text: 'Static Disabled Content', value: 'static-disabled', selected: false, disabled: true },
       { text: 'Hello', value: 'A', selected: true, disabled: false },
       { text: 'Hello', value: 'B', selected: false, disabled: false },
       { text: 'Hello', value: 'C', selected: false, disabled: false },
-      { text: 'Disabled', value: 'D', selected: false, disabled: true },
+      { text: 'Hello', value: 'D', selected: false, disabled: true },
       { text: 'Hello', value: 'E', selected: false, disabled: false },
     ]);
   });
 
-  it('should change selection', async () => {
+  it('should change dynamic selection', async () => {
     fixture.detectChanges();
 
     const formSelectCards = await loader.getHarness(GioFormSelectionInlineHarness);
@@ -83,15 +138,15 @@ describe('GioFormSelectionInlineModule', () => {
     await formSelectCards.select('B');
     expect(await formSelectCards.getSelectedValue()).toEqual('B');
     expect(component.selectControl.value).toEqual('B');
-    expect(await formSelectCards.getUnselectedValues()).toEqual(['A', 'C', 'D', 'E']);
+    expect(await formSelectCards.getUnselectedValues()).toEqual(['static', 'static-disabled', 'A', 'C', 'D', 'E']);
 
     await formSelectCards.select('C');
     expect(await formSelectCards.getSelectedValue()).toEqual('C');
     expect(component.selectControl.value).toEqual('C');
-    expect(await formSelectCards.getUnselectedValues()).toEqual(['A', 'B', 'D', 'E']);
+    expect(await formSelectCards.getUnselectedValues()).toEqual(['static', 'static-disabled', 'A', 'B', 'D', 'E']);
   });
 
-  it('should not be able to change selection when the form is disabled', async () => {
+  it('should not be able to change dynamic selection when the form is disabled', async () => {
     component.selectControl.setValue('A');
     component.selectControl.disable();
     fixture.detectChanges();

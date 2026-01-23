@@ -13,71 +13,57 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {
-  AfterContentInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ContentChildren,
-  forwardRef,
-  QueryList,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { GioFormSelectionInlineCardComponent } from './gio-form-selection-inline-card.component';
+import { GIO_FORM_SELECTION_INLINE_STATE, GioFormSelectionInlineState } from './gio-form-selection-inline-state.token';
 
 @Component({
   selector: 'gio-form-selection-inline',
   templateUrl: './gio-form-selection-inline.component.html',
   styleUrls: ['./gio-form-selection-inline.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
       useExisting: forwardRef(() => GioFormSelectionInlineComponent),
     },
+    {
+      provide: GIO_FORM_SELECTION_INLINE_STATE,
+      useFactory: (component: GioFormSelectionInlineComponent) => component.getState(),
+      deps: [forwardRef(() => GioFormSelectionInlineComponent)],
+    },
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class GioFormSelectionInlineComponent implements ControlValueAccessor, AfterContentInit {
-  @ContentChildren(forwardRef(() => GioFormSelectionInlineCardComponent), { descendants: true })
-  private selectCardsList?: QueryList<GioFormSelectionInlineCardComponent>;
-
-  public selection?: string;
-
-  public disabled = false;
+export class GioFormSelectionInlineComponent implements ControlValueAccessor {
+  private readonly _disabled = signal<boolean>(false);
+  private readonly _selection = signal<string | undefined>(undefined);
 
   private _onChange: (value?: string) => void = () => ({});
 
   private _onTouched: () => void = () => ({});
 
-  constructor(private readonly changeDetector: ChangeDetectorRef) {}
+  constructor() {}
 
-  public ngAfterContentInit() {
-    this.selectCardsList?.forEach(card => {
-      card._parendDisabled = this.disabled;
-
-      if (card.value === this.selection) {
-        card.selected = true;
-
-        this.changeDetector.markForCheck();
-      }
-
-      card.onSelectFn = value => {
-        if (!this.disabled) {
+  // Expose state for injection token
+  public getState(): GioFormSelectionInlineState {
+    return {
+      disabled: this._disabled.asReadonly(),
+      selectedValue: this._selection.asReadonly(),
+      onCardSelect: (value?: string) => {
+        if (!this._disabled()) {
           this.updateCardsSelection(value);
         }
-      };
-      card._markForCheck();
-    });
+      },
+    };
   }
 
   // From ControlValueAccessor interface
   public writeValue(value: string): void {
-    this.selection = value;
+    this._selection.set(value);
     this.updateCardsSelection(value);
-    this.changeDetector.markForCheck();
   }
 
   // From ControlValueAccessor interface
@@ -92,30 +78,12 @@ export class GioFormSelectionInlineComponent implements ControlValueAccessor, Af
 
   // From ControlValueAccessor interface
   public setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-    if (this.selectCardsList) {
-      this.selectCardsList.forEach(card => {
-        card._parendDisabled = this.disabled;
-        card._markForCheck();
-      });
-    }
-    this.changeDetector.markForCheck();
+    this._disabled.set(isDisabled);
   }
 
   private updateCardsSelection(value?: string) {
-    if (this.selectCardsList) {
-      this.selectCardsList.forEach(card => {
-        const newSelectedValue = card.value === value;
-
-        if (newSelectedValue !== card.selected) {
-          card.selected = card.value === value;
-          card._markForCheck();
-        }
-      });
-
-      this.selection = value;
-      this._onChange(this.selection);
-      this._onTouched();
-    }
+    this._selection.set(value);
+    this._onChange(this._selection());
+    this._onTouched();
   }
 }
