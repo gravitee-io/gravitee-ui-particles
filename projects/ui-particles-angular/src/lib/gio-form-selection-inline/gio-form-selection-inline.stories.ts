@@ -171,3 +171,54 @@ export const WithContent: StoryObj = {
     };
   },
 };
+
+export const WithForLoop: StoryObj = {
+  render: args => {
+    const selectControl = new FormControl({
+      value: '',
+      disabled: args.disabled,
+    });
+
+    const options = [
+      { value: 'option-1', label: 'Option 1', disabled: false },
+      { value: 'option-2', label: 'Option 2', disabled: false },
+      { value: 'option-3', label: 'Option 3', disabled: false },
+      { value: 'option-4', label: 'Option 4 (Disabled)', disabled: true },
+      { value: 'option-5', label: 'Option 5', disabled: false },
+      { value: 'option-6', label: 'Option 6', disabled: false },
+    ];
+
+    selectControl.valueChanges.subscribe(value => {
+      action('On select')(value);
+    });
+
+    return {
+      template: `
+      <mat-card style="padding: 16px;">
+        <h3>Dynamic Options with *ngFor Loop</h3>
+        <p>Selected value: {{ selectControl.value || 'None' }}</p>
+        <gio-form-selection-inline [formControl]="selectControl">
+          <gio-form-selection-inline-card *ngFor="let option of options; trackBy: trackByValue" [value]="option.value" [disabled]="option.disabled">
+            {{ option.label }}
+          </gio-form-selection-inline-card>
+        </gio-form-selection-inline>
+        <br>
+        <p><strong>Status:</strong></p>
+        <ul>
+          <li>Touched: {{ selectControl.touched }}</li>
+          <li>Dirty: {{ selectControl.dirty }}</li>
+          <li>Valid: {{ selectControl.valid }}</li>
+        </ul>
+      </mat-card>
+      `,
+      props: {
+        selectControl,
+        options,
+        trackByValue: (index: number, option: { value: string; label: string; disabled: boolean }) => option.value,
+      },
+    };
+  },
+  args: {
+    disabled: false,
+  },
+};
