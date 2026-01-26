@@ -126,6 +126,8 @@ export function fakeNativeFlow(modifier?: Partial<Flow> | ((baseApi: Flow) => Fl
     interact: [],
     subscribe: [],
     publish: [],
+    clientConnect: [],
+    endpointConnect: [],
     enabled: true,
   };
 

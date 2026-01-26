@@ -35,6 +35,8 @@ export interface Flow {
   response?: Step[];
   subscribe?: Step[];
   publish?: Step[];
+  clientConnect?: Step[];
+  endpointConnect?: Step[];
   /**
    * Flow's tags.
    */
