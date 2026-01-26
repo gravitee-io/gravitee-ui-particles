@@ -12,7 +12,7 @@ executors:
         enum: ['small', 'medium', 'large', 'xlarge']
         default: 'medium'
     docker:
-      - image: cimg/node:22.12
+      - image: cimg/node:22.12.0
     resource_class: <<parameters.class>>
 
 commands:
@@ -137,7 +137,7 @@ jobs:
         type: boolean
         default: true
     docker:
-      - image: cimg/node:20.11
+      - image: cimg/node:20.11.1
     steps:
       - add_ssh_keys:
           fingerprints:
