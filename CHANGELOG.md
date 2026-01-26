@@ -1,3 +1,15 @@
+# [17.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.4.0...v17.0.0) (2026-01-26)
+
+
+### Bug Fixes
+
+* propagate value attr when creating gio form selection inline by for loop ([e0f77c5](https://github.com/gravitee-io/gravitee-ui-particles/commit/e0f77c55f3cfeaf426941a0d00fef35b4532df72))
+
+
+### BREAKING CHANGES
+
+* public attributes of the gio-form-selection-inline have changed
+
 # [16.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.3.0...v16.4.0) (2026-01-13)
 
 
