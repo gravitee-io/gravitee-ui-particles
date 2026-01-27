@@ -316,20 +316,18 @@ export const SmallMenu: StoryObj = {
               <gio-menu-selector tabindex="1" [selectedItemValue]="selectedItemValue" selectorTitle="Environment" [selectorItems]="selectorItems" (selectChange)="selectedItemValue=$event"></gio-menu-selector>
             </gio-menu-header>
             <gio-menu-list>    
-              <gio-menu-item tabindex="1" icon="gio:home" (click)="onClick('dashboard')" [active]="isActive('dashboard')">Dashboard</gio-menu-item>
-              <gio-menu-item tabindex="1" icon="gio:upload-cloud" (click)="onClick('apis')" [active]="isActive('apis')">Apis</gio-menu-item>
-              <gio-menu-item tabindex="1" icon="gio:settings" (click)="onClick('settings')" [active]="isActive('settings')">Settings</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:home" routerLink="/" routerLinkActive #rlaDashboard="routerLinkActive" [routerLinkActiveOptions]="{ exact: true }" [active]="rlaDashboard.isActive">Dashboard</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:upload-cloud" routerLink="/apis" routerLinkActive #rlaApis="routerLinkActive" [active]="rlaApis.isActive">Apis</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:settings" routerLink="/settings" routerLinkActive #rlaSettings="routerLinkActive" [active]="rlaSettings.isActive">Settings</gio-menu-item>
             </gio-menu-list>
             <gio-menu-footer>
-              <gio-menu-item tabindex="1" icon="gio:building" (click)="onClick('org')" [active]="isActive('org')">Settings</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:building" routerLink="/organization/settings" routerLinkActive #rlaOrg="routerLinkActive" [active]="rlaOrg.isActive">Settings</gio-menu-item>
             </gio-menu-footer>
           </gio-menu>
           <h1>Selected env: {{ selectedItemValue }}</h1>
         </div>
         `,
       props: {
-        onClick: (target: string) => (route = target),
-        isActive: (target: string) => (route != target ? null : true),
         selectedItemValue: 'onlyOne',
         selectorItems: [{ value: 'onlyOne', displayValue: '🧪 Only Env' }],
       },
