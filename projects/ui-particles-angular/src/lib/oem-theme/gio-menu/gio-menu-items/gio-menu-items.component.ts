@@ -68,10 +68,8 @@ export class GioMenuItemsComponent implements OnDestroy {
   }
 
   public onPanelHeaderClick(event: Event): void {
-    // In overlay mode, prevent the panel from toggling
-    if (this.showOverlay()) {
-      event.stopPropagation();
-    }
+    // Always prevent the panel from toggling - it should only expand based on route state
+    event.stopPropagation();
     this.onHeaderClick();
   }
 
