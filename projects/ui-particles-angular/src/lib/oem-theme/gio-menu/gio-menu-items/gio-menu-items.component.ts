@@ -15,6 +15,8 @@
  */
 
 import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter, map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'gio-menu-items',
@@ -29,7 +31,27 @@ export class GioMenuItemsComponent {
   @Input() public title = 'default';
   @Input() public active = false;
   @Input() public items: GioMenuItem[] = [];
+  @Input() public routerBasePath?: string;
+
   protected readonly panelOpenState = signal(false);
+
+  public isRouteActive$ = this.router.events.pipe(
+    filter(event => event instanceof NavigationEnd),
+    startWith(null),
+    map(() => this.routerBasePath && this.router.url.startsWith(this.routerBasePath)),
+  );
+
+  constructor(private readonly router: Router) { }
+
+  public get isActive(): boolean {
+    return this.active;
+  }
+
+  public onHeaderClick(): void {
+    if (this.routerBasePath) {
+      this.router.navigate([this.routerBasePath]);
+    }
+  }
 }
 
 export interface GioMenuItem {

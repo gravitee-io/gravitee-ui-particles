@@ -146,7 +146,7 @@ const gioMenuContentWithItemsPanel = `
                <gio-menu-item tabindex="1" (click)="onClick('rulesets')" [active]="isActive('rulesets')">Rulesets & Functions</gio-menu-item>
               </gio-menu-items>
               
-              <gio-menu-items [title]="'Analytics'" icon="gio:bar-chart-2" > 
+              <gio-menu-items [title]="'Analytics'" icon="gio:bar-chart-2" routerBasePath="/analytics"> 
                <gio-menu-item routerLink="/analytics" routerLinkActive [routerLinkActiveOptions]="{ exact: true }">Overview</gio-menu-item>
                <gio-menu-item routerLink="/analytics/dashboards" routerLinkActive>Dashboards</gio-menu-item>
                <gio-menu-item routerLink="/analytics/logs-explorer" routerLinkActive>Logs</gio-menu-item>

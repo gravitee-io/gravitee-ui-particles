@@ -16,8 +16,13 @@
 
 -->
 <mat-accordion>
-  <mat-expansion-panel class="gio-menu-items" [class.active]="active" hideToggle [expanded]="true">
-    <mat-expansion-panel-header>
+  <mat-expansion-panel
+    class="gio-menu-items"
+    [class.active]="isActive || (isRouteActive$ | async)"
+    hideToggle
+    [expanded]="isActive || (isRouteActive$ | async)"
+  >
+    <mat-expansion-panel-header (click)="onHeaderClick()">
       <mat-panel-title>
         @if (icon) {
           <mat-icon class="gio-menu-items__icon" [svgIcon]="icon"></mat-icon>
