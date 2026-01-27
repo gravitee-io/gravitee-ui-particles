@@ -84,3 +84,47 @@
         margin-left: 32px;
     }
 }
+
+:host-context(.gio-menu__reduced) {
+    .gio-menu-items {
+        &.mat-expansion-panel {
+            margin: 4px 0;
+        }
+
+        ::ng-deep .mat-expansion-panel-header {
+            width: 44px;
+            height: 36px !important;
+            justify-content: center;
+            padding: 0;
+
+            .mat-content {
+                justify-content: center;
+            }
+
+            .mat-expansion-panel-header-title {
+                justify-content: center;
+                flex-grow: 0;
+            }
+        }
+
+        .gio-menu-items__icon {
+            position: static;
+        }
+
+        .gio-menu-items__title {
+            display: none;
+        }
+
+        .gio-menu-items__icon-right {
+            display: none;
+        }
+
+        ::ng-deep .mat-expansion-panel-body {
+            display: none;
+        }
+
+        ::ng-deep .mat-expansion-indicator {
+            display: none;
+        }
+    }
+}
