@@ -20,6 +20,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ReactiveFormsModule } from '@angular/forms';
+import {
+  MatAccordion,
+  MatExpansionPanel,
+  MatExpansionPanelDescription,
+  MatExpansionPanelHeader,
+  MatExpansionPanelTitle,
+} from '@angular/material/expansion';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 import { GioIconsModule } from '../../gio-icons/gio-icons.module';
 
@@ -31,11 +40,13 @@ import { GioMenuSelectorComponent } from './gio-menu-selector/gio-menu-selector.
 import { GioMenuHeaderComponent } from './gio-menu-header/gio-menu-header.component';
 import { GioMenuLicenseExpirationNotificationComponent } from './gio-menu-license-expiration-notification/gio-menu-license-expiration-notification.component';
 import { GioMenuSearchComponent } from './gio-menu-search/gio-menu-search.component';
+import { GioMenuItemsComponent } from './gio-menu-items/gio-menu-items.component';
 
 @NgModule({
   declarations: [
     GioMenuComponent,
     GioMenuItemComponent,
+    GioMenuItemsComponent,
     GioMenuFooterComponent,
     GioMenuListComponent,
     GioMenuHeaderComponent,
@@ -46,6 +57,7 @@ import { GioMenuSearchComponent } from './gio-menu-search/gio-menu-search.compon
   exports: [
     GioMenuComponent,
     GioMenuItemComponent,
+    GioMenuItemsComponent,
     GioMenuFooterComponent,
     GioMenuListComponent,
     GioMenuHeaderComponent,
@@ -53,6 +65,22 @@ import { GioMenuSearchComponent } from './gio-menu-search/gio-menu-search.compon
     GioMenuSelectorComponent,
     GioMenuLicenseExpirationNotificationComponent,
   ],
-  imports: [CommonModule, MatAutocompleteModule, MatIconModule, MatInputModule, GioIconsModule, MatSelectModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    MatAutocompleteModule,
+    MatIconModule,
+    MatInputModule,
+    GioIconsModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatAccordion,
+    MatExpansionPanel,
+    MatExpansionPanelTitle,
+    MatExpansionPanelHeader,
+    MatExpansionPanelDescription,
+    RouterLink,
+    RouterLinkActive,
+    OverlayModule,
+  ],
 })
 export class GioMenuModule {}

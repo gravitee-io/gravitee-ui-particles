@@ -1,0 +1,272 @@
+/*
+ * Copyright (C) 2015 The Gravitee team (http://gravitee.io)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+@use 'sass:map';
+@use '../../../../scss/gio-oem-palette-variable' as oem;
+
+// ===== DESIGN TOKENS =====
+$panel-padding: 8px;
+$panel-border-radius: 8px;
+$item-height: 36px;
+$item-border-radius: 4px;
+$icon-size: 20px;
+$header-padding-left: $panel-padding + 8px;
+
+// ===== HOST =====
+// All selectors are scoped with .gio-menu-items-host to prevent style leaks
+.gio-menu-items-host {
+  position: relative;
+  display: block;
+}
+
+// ===== CONTAINER =====
+.gio-menu-items-host .gio-menu-items-container {
+  position: relative;
+
+  &--overlay-visible {
+    z-index: 1001;
+  }
+}
+
+// ===== TRIGGER (Icon only, visible only in reduced mode) =====
+.gio-menu-items-host .gio-menu-items-trigger {
+  display: none;
+  width: 44px;
+  height: $item-height;
+  align-items: center;
+  justify-content: center;
+  border-radius: $item-border-radius;
+  margin: 4px 0;
+  cursor: pointer;
+
+  &:hover {
+    background: oem.$oem-menu-hover;
+  }
+
+  &.active {
+    background: oem.$oem-menu-active;
+    color: oem.$oem-menu-active-text;
+  }
+}
+
+.gio-menu-items-host .gio-menu-items-trigger__icon {
+  width: $icon-size;
+  height: $icon-size;
+  color: oem.$oem-menu-text;
+}
+
+// ===== PANEL STYLES =====
+.gio-menu-items-host .gio-menu-items.mat-expansion-panel {
+  margin: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+// Header icon
+.gio-menu-items-host .gio-menu-items__icon {
+  position: static;
+  width: $icon-size;
+  height: $icon-size;
+  margin-right: $panel-padding + 4px;
+}
+
+// Header title
+.gio-menu-items-host .gio-menu-items__title {
+  display: block;
+  margin-left: 0;
+}
+
+// Right icon (for lock icon when license is missing)
+.gio-menu-items-host .gio-menu-items__icon-right {
+  position: absolute;
+  right: 16px;
+  width: $icon-size;
+  height: $icon-size;
+}
+
+// ===== HEADER STYLING =====
+.gio-menu-items-host .gio-menu-items .mat-expansion-panel-header {
+  width: 100%;
+  height: auto;
+  padding: 6px 16px 6px $header-padding-left;
+  border-radius: $item-border-radius;
+  border-bottom: 1px solid transparent;
+  margin: 3px 0;
+  box-shadow: none;
+  cursor: pointer;
+
+  &:hover {
+    background: oem.$oem-menu-hover;
+  }
+}
+
+.gio-menu-items-host .gio-menu-items .mat-expansion-panel-header .mat-content {
+  justify-content: flex-start;
+}
+
+.gio-menu-items-host .gio-menu-items .mat-expansion-panel-header .mat-expansion-panel-header-title {
+  justify-content: flex-start;
+  color: oem.$oem-menu-text;
+}
+
+// Active state
+.gio-menu-items-host .gio-menu-items.active .mat-expansion-panel-header {
+  border-radius: 0;
+}
+
+// Expanded state
+.gio-menu-items-host .gio-menu-items.mat-expanded {
+  border-radius: $panel-border-radius;
+  background: oem.$oem-sub-menu-background;
+}
+
+.gio-menu-items-host .gio-menu-items.mat-expanded .mat-expansion-panel-header {
+  border-bottom: 1px solid rgb(255 255 255 / 10%);
+  cursor: default;
+  pointer-events: none;
+
+  &:hover {
+    background: transparent;
+  }
+}
+
+// Hide default expansion indicator
+.gio-menu-items-host .gio-menu-items .mat-expansion-indicator {
+  display: none;
+}
+
+// Panel body
+.gio-menu-items-host .gio-menu-items .mat-expansion-panel-body {
+  padding: 0;
+}
+
+// ===== MENU ITEMS INSIDE PANEL =====
+.gio-menu-items-host .gio-menu-items-accordion gio-menu-item .gio-menu-item {
+  width: auto;
+  height: $item-height;
+  justify-content: flex-start;
+  padding: 0 $panel-padding;
+  border-radius: $item-border-radius;
+  margin: 4px $panel-padding;
+  background: transparent;
+
+  &:hover {
+    background: oem.$oem-menu-hover;
+  }
+}
+
+.gio-menu-items-host .gio-menu-items-accordion gio-menu-item .gio-menu-item__title {
+  display: block;
+  margin: 0;
+}
+
+.gio-menu-items-host .gio-menu-items-accordion gio-menu-item .gio-menu-item__icon {
+  position: absolute;
+  left: $header-padding-left;
+}
+
+.gio-menu-items-host .gio-menu-items-accordion gio-menu-item .gio-menu-item__icon-right {
+  display: block;
+}
+
+// Active menu item (router-link-active is the default class from routerLinkActive directive)
+.gio-menu-items-host .gio-menu-items-accordion gio-menu-item.router-link-active .gio-menu-item,
+.gio-menu-items-host .gio-menu-items-accordion gio-menu-item:has(.gio-menu-item__active) .gio-menu-item {
+  background: oem.$oem-menu-active;
+  color: oem.$oem-menu-active-text;
+}
+
+// ===== REDUCED MODE =====
+// In reduced mode, only the trigger is shown, the accordion is hidden
+// The overlay is rendered via CDK Overlay (outside the DOM hierarchy)
+.gio-menu__reduced .gio-menu-items-host .gio-menu-items-trigger {
+  display: flex;
+}
+
+// Hide the accordion in reduced mode since we use CDK Overlay instead
+.gio-menu__reduced .gio-menu-items-host .gio-menu-items-accordion {
+  display: none;
+}
+
+// ===== CDK OVERLAY STYLES =====
+// These styles are applied to the overlay rendered by CDK (outside the sidebar DOM)
+// stylelint-disable no-descending-specificity -- CDK overlay is a separate DOM context
+.gio-menu-items-overlay {
+  min-width: 200px;
+  border-radius: $panel-border-radius;
+  background: oem.$oem-sub-menu-background;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 20%);
+
+  // Remove link underline - overlay is outside sidebar DOM
+  a {
+    text-decoration: none;
+  }
+}
+
+.gio-menu-items-overlay__header {
+  padding: 6px 16px;
+  border-bottom: 1px solid rgb(255 255 255 / 10%);
+  color: oem.$oem-menu-text;
+  cursor: pointer;
+
+  &:hover {
+    border-radius: $panel-border-radius $panel-border-radius 0 0;
+    background: oem.$oem-menu-hover;
+  }
+}
+
+.gio-menu-items-overlay__title {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.gio-menu-items-overlay__content {
+  padding: 4px 0;
+}
+
+// Menu items inside the CDK overlay
+.gio-menu-items-overlay__content gio-menu-item .gio-menu-item {
+  width: auto;
+  height: $item-height;
+  justify-content: flex-start;
+  padding: 0 4px;
+  border-radius: $item-border-radius;
+  margin: 4px 14px;
+  background: transparent;
+
+  &:hover {
+    background: oem.$oem-menu-hover;
+  }
+}
+
+.gio-menu-items-overlay__content gio-menu-item .gio-menu-item__title {
+  display: block;
+  margin: 0;
+}
+
+.gio-menu-items-overlay__content gio-menu-item .gio-menu-item__icon {
+  display: none;
+}
+
+.gio-menu-items-overlay__content gio-menu-item .gio-menu-item__icon-right {
+  display: block;
+}
+
+// Active menu item in overlay
+.gio-menu-items-overlay__content gio-menu-item.router-link-active .gio-menu-item,
+.gio-menu-items-overlay__content gio-menu-item:has(.gio-menu-item__active) .gio-menu-item {
+  background: oem.$oem-menu-active;
+  color: oem.$oem-menu-active-text;
+}
