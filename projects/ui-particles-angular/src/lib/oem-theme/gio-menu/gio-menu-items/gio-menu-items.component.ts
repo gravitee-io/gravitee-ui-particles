@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, map, startWith } from 'rxjs/operators';
 
@@ -27,7 +27,7 @@ import { GioMenuService } from '../gio-menu.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class GioMenuItemsComponent {
+export class GioMenuItemsComponent implements OnDestroy {
   @Input() public icon = '';
   @Input() public iconRight?: string;
   @Input() public title = 'default';
@@ -44,10 +44,18 @@ export class GioMenuItemsComponent {
     map(() => this.routerBasePath && this.router.url.startsWith(this.routerBasePath)),
   );
 
+  private closeTimeout: ReturnType<typeof setTimeout> | null = null;
+
   constructor(
     private readonly router: Router,
     private readonly gioMenuService: GioMenuService,
   ) { }
+
+  public ngOnDestroy(): void {
+    if (this.closeTimeout) {
+      clearTimeout(this.closeTimeout);
+    }
+  }
 
   public get isActive(): boolean {
     return this.active;
@@ -59,11 +67,28 @@ export class GioMenuItemsComponent {
     }
   }
 
+  public onPanelHeaderClick(event: Event): void {
+    // In overlay mode, prevent the panel from toggling
+    if (this.showOverlay()) {
+      event.stopPropagation();
+    }
+    this.onHeaderClick();
+  }
+
   public onMouseEnter(): void {
+    // Cancel any pending close
+    if (this.closeTimeout) {
+      clearTimeout(this.closeTimeout);
+      this.closeTimeout = null;
+    }
     this.showOverlay.set(true);
   }
 
   public onMouseLeave(): void {
-    this.showOverlay.set(false);
+    // Delay closing to allow mouse to reach the overlay
+    this.closeTimeout = setTimeout(() => {
+      this.showOverlay.set(false);
+      this.closeTimeout = null;
+    }, 200);
   }
 }
