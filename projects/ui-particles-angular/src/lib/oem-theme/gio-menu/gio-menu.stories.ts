@@ -30,7 +30,7 @@ import { MenuSearchItem } from './gio-menu-search/gio-menu-search.component';
 import { GioMenuSearchService } from './gio-menu-search/gio-menu-search.service';
 
 const menuSearchItems = [
-  { name: 'Dashboard', routerLink: '.', category: 'Home' },
+  { name: 'Dashboard', routerLink: '/', category: 'Home' },
   { name: 'Apis', routerLink: '/apis', category: 'Apis' },
   { name: 'Configuration', routerLink: '/apis/:apiId', category: 'Apis' },
   { name: 'General', routerLink: '/apis/:apiId/', category: 'Apis' },
@@ -44,9 +44,12 @@ const menuSearchItems = [
   { name: 'Applications', routerLink: '/applications', category: 'Applications' },
   { name: 'Gateways', routerLink: '/gateways', category: 'Gateways' },
   { name: 'Audit', routerLink: '/audit', category: 'Audit' },
-  { name: 'Alerts', routerLink: '/alerts/list', category: 'Alerts' },
+  { name: 'Messages', routerLink: '/messages', category: 'Messages' },
+  { name: 'My alerts', routerLink: '/alerts', category: 'Alerts' },
+  { name: 'Activity', routerLink: '/alerts/activity', category: 'Alerts' },
   { name: 'Settings', routerLink: '/settings', category: 'Environment' },
-  { name: 'Overview', routerLink: '/analytics', category: 'Analytics' },
+  { name: 'Overview', routerLink: '/api-score', category: 'API Score' },
+  { name: 'Rulesets & Functions', routerLink: '/api-score/rulesets', category: 'API Score' },
   { name: 'Overview', routerLink: '/analytics', category: 'Analytics' },
   { name: 'Dashboards', routerLink: '/analytics/dashboards', category: 'Analytics' },
   { name: 'Logs', routerLink: '/analytics/logs-explorer', category: 'Analytics' },
@@ -114,16 +117,16 @@ const gioMenuContent = `
               <gio-menu-search *ngIf="hasSearch" (valueChanges)="valueChanges($event)"></gio-menu-search>
             </gio-menu-header>
             <gio-menu-list>    
-              <gio-menu-item tabindex="1" icon="gio:home" (click)="onClick('dashboard')" [active]="isActive('dashboard')">Dashboard</gio-menu-item>
-              <gio-menu-item tabindex="1" icon="gio:upload-cloud" (click)="onClick('apis')" [active]="isActive('apis')">Apis</gio-menu-item>
-              <gio-menu-item tabindex="1" icon="gio:multi-window" (click)="onClick('apps')" [active]="isActive('apps')">Applications</gio-menu-item>
-              <gio-menu-item tabindex="1" icon="gio:cloud-server" (click)="onClick('gateways')" [active]="isActive('gateways')">Gateways</gio-menu-item>
-              <gio-menu-item tabindex="1" icon="gio:verified" (click)="onClick('audit')" [active]="isActive('audit')" iconRight="gio:lock">Audit</gio-menu-item>
-              <gio-menu-item tabindex="1" icon="gio:message-text" (click)="onClick('messages')" [active]="isActive('messages')">Messages</gio-menu-item>
-              <gio-menu-item tabindex="1" icon="gio:settings" (click)="onClick('settings')" [active]="isActive('settings')">Settings</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:home" routerLink="/" routerLinkActive #rlaDashboard="routerLinkActive" [routerLinkActiveOptions]="{ exact: true }" [active]="rlaDashboard.isActive">Dashboard</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:upload-cloud" routerLink="/apis" routerLinkActive #rlaApis="routerLinkActive" [active]="rlaApis.isActive">Apis</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:multi-window" routerLink="/applications" routerLinkActive #rlaApplications="routerLinkActive" [active]="rlaApplications.isActive">Applications</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:cloud-server" routerLink="/gateways" routerLinkActive #rlaGateways="routerLinkActive" [active]="rlaGateways.isActive">Gateways</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:verified" routerLink="/audit" routerLinkActive #rlaAudit="routerLinkActive" [active]="rlaAudit.isActive" iconRight="gio:lock">Audit</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:message-text" routerLink="/messages" routerLinkActive #rlaMessages="routerLinkActive" [active]="rlaMessages.isActive">Messages</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:settings" routerLink="/settings" routerLinkActive #rlaSettings="routerLinkActive" [active]="rlaSettings.isActive">Settings</gio-menu-item>
             </gio-menu-list>
             <gio-menu-footer>
-              <gio-menu-item tabindex="1" icon="gio:building" (click)="onClick('org')" [active]="isActive('org')">Organization settings</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:building" routerLink="/organization/settings" routerLinkActive #rlaOrg="routerLinkActive" [active]="rlaOrg.isActive">Organization settings</gio-menu-item>
             </gio-menu-footer>`;
 
 const gioMenuContentWithItemsPanel = `
@@ -134,16 +137,16 @@ const gioMenuContentWithItemsPanel = `
               <gio-menu-search *ngIf="hasSearch" (valueChanges)="valueChanges($event)"></gio-menu-search>
             </gio-menu-header>
             <gio-menu-list>    
-              <gio-menu-item tabindex="1" icon="gio:home" (click)="onClick('dashboard')" [active]="isActive('dashboard')">Dashboard</gio-menu-item>
-              <gio-menu-item tabindex="1" icon="gio:upload-cloud" (click)="onClick('apis')" [active]="isActive('apis')">Apis</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:home" routerLink="/" routerLinkActive #rlaDashboard="routerLinkActive" [routerLinkActiveOptions]="{ exact: true }" [active]="rlaDashboard.isActive">Dashboard</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:upload-cloud" routerLink="/apis" routerLinkActive #rlaApis="routerLinkActive" [active]="rlaApis.isActive">Apis</gio-menu-item>
               <gio-menu-item tabindex="1" icon="gio:multi-window" routerLink="/applications" routerLinkActive #rlaApplications="routerLinkActive" [active]="rlaApplications.isActive">Applications</gio-menu-item>
               <gio-menu-item tabindex="1" icon="gio:cloud-server" routerLink="/gateways" routerLinkActive #rlaGateways="routerLinkActive" [active]="rlaGateways.isActive">Gateways</gio-menu-item>
-              <gio-menu-item tabindex="1" icon="gio:verified" (click)="onClick('audit')" [active]="isActive('audit')" iconRight="gio:lock">Audit</gio-menu-item>
-              <gio-menu-item tabindex="1" icon="gio:message-text" (click)="onClick('messages')" [active]="isActive('messages')">Messages</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:verified" routerLink="/audit" routerLinkActive #rlaAudit="routerLinkActive" [active]="rlaAudit.isActive" iconRight="gio:lock">Audit</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:message-text" routerLink="/messages" routerLinkActive #rlaMessages="routerLinkActive" [active]="rlaMessages.isActive">Messages</gio-menu-item>
 
-              <gio-menu-items [title]="'API Score'" icon="gio:shield-check" [active]="isActive('overview1') || isActive('rulesets')"> 
-               <gio-menu-item tabindex="1" (click)="onClick('overview1')" [active]="isActive('overview1')">Overview</gio-menu-item>
-               <gio-menu-item tabindex="1" (click)="onClick('rulesets')" [active]="isActive('rulesets')">Rulesets & Functions</gio-menu-item>
+              <gio-menu-items [title]="'API Score'" icon="gio:shield-check" routerBasePath="/api-score"> 
+               <gio-menu-item routerLink="/api-score" routerLinkActive [routerLinkActiveOptions]="{ exact: true }">Overview</gio-menu-item>
+               <gio-menu-item routerLink="/api-score/rulesets" routerLinkActive>Rulesets & Functions</gio-menu-item>
               </gio-menu-items>
               
               <gio-menu-items [title]="'Analytics'" icon="gio:bar-chart-2" routerBasePath="/analytics"> 
@@ -154,15 +157,15 @@ const gioMenuContentWithItemsPanel = `
                <gio-menu-item routerLink="/analytics/logs" routerLinkActive>Legacy logs</gio-menu-item>
               </gio-menu-items>
              
-              <gio-menu-items [title]="'Alerts'" icon="gio:alarm" [active]="isActive('myAlerts') || isActive('activity')"> 
-               <gio-menu-item tabindex="1" (click)="onClick('myAlerts')" [active]="isActive('myAlerts')">My alerts</gio-menu-item>
-               <gio-menu-item tabindex="1" (click)="onClick('activity')" [active]="isActive('activity')">Activity</gio-menu-item>
+              <gio-menu-items [title]="'Alerts'" icon="gio:alarm" routerBasePath="/alerts"> 
+               <gio-menu-item routerLink="/alerts" routerLinkActive [routerLinkActiveOptions]="{ exact: true }">My alerts</gio-menu-item>
+               <gio-menu-item routerLink="/alerts/activity" routerLinkActive>Activity</gio-menu-item>
               </gio-menu-items>
               
-              <gio-menu-item tabindex="1" icon="gio:settings" (click)="onClick('settings')" [active]="isActive('settings')">Settings</gio-menu-item>       
+              <gio-menu-item tabindex="1" icon="gio:settings" routerLink="/settings" routerLinkActive #rlaSettings="routerLinkActive" [active]="rlaSettings.isActive">Settings</gio-menu-item>       
             </gio-menu-list>
             <gio-menu-footer>
-              <gio-menu-item tabindex="1" icon="gio:building" (click)="onClick('org')" [active]="isActive('org')">Organization settings</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:building" routerLink="/organization/settings" routerLinkActive #rlaOrg="routerLinkActive" [active]="rlaOrg.isActive">Organization settings</gio-menu-item>
             </gio-menu-footer>`;
 
 const styles = [
