@@ -20,6 +20,37 @@
     display: block;
 }
 
+.gio-menu-items-container {
+    position: relative;
+}
+
+// ===== TRIGGER (Icon only, visible only in reduced mode) =====
+.gio-menu-items-trigger {
+    display: none; // Hidden by default, shown in reduced mode
+    width: 44px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 4px 0;
+
+    &:hover {
+        background: oem.$oem-menu-hover;
+    }
+
+    &.active {
+        box-shadow: 4px 0 oem.$oem-menu-active inset;
+    }
+
+    &__icon {
+        width: 20px !important;
+        height: 20px !important;
+        color: oem.$oem-menu-text;
+    }
+}
+
+// ===== NORMAL MODE STYLES (mat-expansion-panel) =====
 ::ng-deep {
 
     .mat-expansion-indicator,
@@ -85,46 +116,131 @@
     }
 }
 
+// ===== REDUCED MODE =====
 :host-context(.gio-menu__reduced) {
+
+    // Show trigger icon
+    .gio-menu-items-trigger {
+        display: flex;
+    }
+
+    // Transform the accordion into an overlay
+    .gio-menu-items-accordion {
+        position: absolute;
+        left: calc(100% + 8px);
+        top: 0;
+        min-width: 200px;
+        background: oem.$oem-sub-menu-background;
+        border-radius: 8px;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 1000;
+        transition: opacity 150ms, visibility 150ms;
+        padding: 8px;
+    }
+
     .gio-menu-items {
         &.mat-expansion-panel {
-            margin: 4px 0;
+            margin: 0;
+            background: transparent;
         }
 
+        // Header becomes overlay title
         ::ng-deep .mat-expansion-panel-header {
-            width: 44px;
-            height: 36px !important;
-            justify-content: center;
-            padding: 0;
+            width: 100%;
+            height: auto !important;
+            padding: 8px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 8px;
+            border-radius: 0;
+
+            &:hover {
+                background: transparent;
+            }
 
             .mat-content {
-                justify-content: center;
+                justify-content: flex-start;
             }
 
             .mat-expansion-panel-header-title {
-                justify-content: center;
-                flex-grow: 0;
+                justify-content: flex-start;
             }
         }
 
         .gio-menu-items__icon {
             position: static;
+            margin-right: 8px;
         }
 
         .gio-menu-items__title {
-            display: none;
+            display: block !important;
+            margin-left: 0 !important;
         }
 
         .gio-menu-items__icon-right {
             display: none;
         }
 
+        // Force show panel body content
         ::ng-deep .mat-expansion-panel-body {
-            display: none;
+            display: block !important;
+            padding: 0;
         }
 
         ::ng-deep .mat-expansion-indicator {
             display: none;
+        }
+    }
+
+    // Show overlay on hover
+    .gio-menu-items-container--overlay-visible {
+        .gio-menu-items-accordion {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    // Fix menu items inside overlay - match overlay background
+    .gio-menu-items-accordion {
+        ::ng-deep gio-menu-item {
+            .gio-menu-item {
+                width: 100% !important;
+                justify-content: flex-start !important;
+                margin: 4px 0;
+                padding: 8px 12px;
+                background: transparent !important; // Match overlay background
+
+                &:hover {
+                    background: oem.$oem-menu-hover !important;
+                }
+
+                // Active state in overlay
+                &__active {
+                    background: oem.$oem-menu-active !important;
+                    color: oem.$oem-menu-active-text !important;
+                }
+
+                &__title {
+                    display: block !important;
+                    margin: 0 !important;
+                }
+
+                &__icon {
+                    position: static !important;
+                    margin-right: 8px;
+                }
+
+                &__icon-right {
+                    display: block !important;
+                }
+            }
+        }
+
+        // Active state via host class
+        ::ng-deep gio-menu-item.active .gio-menu-item,
+        ::ng-deep gio-menu-item:has(.gio-menu-item__active) .gio-menu-item {
+            background: oem.$oem-menu-active !important;
+            color: oem.$oem-menu-active-text !important;
         }
     }
 }

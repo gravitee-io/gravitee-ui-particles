@@ -18,6 +18,8 @@ import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, map, startWith } from 'rxjs/operators';
 
+import { GioMenuService } from '../gio-menu.service';
+
 @Component({
   selector: 'gio-menu-items',
   templateUrl: './gio-menu-items.component.html',
@@ -30,10 +32,11 @@ export class GioMenuItemsComponent {
   @Input() public iconRight?: string;
   @Input() public title = 'default';
   @Input() public active = false;
-  @Input() public items: GioMenuItem[] = [];
   @Input() public routerBasePath?: string;
 
-  protected readonly panelOpenState = signal(false);
+  protected readonly showOverlay = signal(false);
+
+  public reduced$ = this.gioMenuService.reduced$;
 
   public isRouteActive$ = this.router.events.pipe(
     filter(event => event instanceof NavigationEnd),
@@ -41,7 +44,10 @@ export class GioMenuItemsComponent {
     map(() => this.routerBasePath && this.router.url.startsWith(this.routerBasePath)),
   );
 
-  constructor(private readonly router: Router) { }
+  constructor(
+    private readonly router: Router,
+    private readonly gioMenuService: GioMenuService,
+  ) { }
 
   public get isActive(): boolean {
     return this.active;
@@ -52,10 +58,12 @@ export class GioMenuItemsComponent {
       this.router.navigate([this.routerBasePath]);
     }
   }
-}
 
-export interface GioMenuItem {
-  title: string;
-  active?: boolean;
-  routerLink?: string;
+  public onMouseEnter(): void {
+    this.showOverlay.set(true);
+  }
+
+  public onMouseLeave(): void {
+    this.showOverlay.set(false);
+  }
 }

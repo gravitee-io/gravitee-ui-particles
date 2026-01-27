@@ -274,6 +274,40 @@ export const Reduced: StoryObj = {
   },
 };
 
+export const ReducedWithItemsPanel: StoryObj = {
+  argTypes: OEM_THEME_ARG_TYPES,
+  args: {
+    logo: OEM_DEFAULT_LOGO,
+  },
+  render: args => {
+    computeAndInjectStylesForStory(args, document);
+    return {
+      template: `
+        <div id="sidenav">
+          <gio-menu [reduced]="true">
+            ${gioMenuContentWithItemsPanel}
+          </gio-menu>
+          <div>
+            <h1>Selected env: {{ selectedItemValue }}</h1>
+            <h3 style="margin-left: 14px">Hover over the Analytics, API Score, or Alerts icons to see the overlay panel 👀</h3>
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+        `,
+      props: {
+        onClick: (target: string) => (route = target),
+        isActive: (target: string) => (route != target ? null : true),
+        selectedItemValue: 'dev',
+        selectorItems: [
+          { value: 'prod', displayValue: '🚀 Prod' },
+          { value: 'dev', displayValue: '🧪 Development' },
+        ],
+      },
+      styles,
+    };
+  },
+};
+
 export const WithOneItemInSelector: StoryObj = {
   argTypes: OEM_THEME_ARG_TYPES,
   args: {
