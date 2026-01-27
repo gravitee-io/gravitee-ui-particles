@@ -33,7 +33,7 @@ export class GioMenuItemComponent implements OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private readonly gioMenuService: GioMenuService) {}
+  constructor(private readonly gioMenuService: GioMenuService) { }
 
   public ngOnDestroy(): void {
     this.unsubscribe$.next();

@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { CommonModule } from '@angular/common';
 import { action } from 'storybook/actions';
+import { provideRouter } from '@angular/router';
 import { cleanLocalStorageReduceState } from '@gravitee/ui-particles-angular';
 
 import { GioSubmenuModule } from '../gio-submenu';
@@ -62,6 +63,9 @@ export default {
       cleanLocalStorageReduceState();
       return story();
     },
+    applicationConfig({
+      providers: [provideRouter([])],
+    }),
   ],
   render: () => ({}),
 } as Meta;
@@ -83,6 +87,38 @@ const gioMenuContent = `
               <gio-menu-item tabindex="1" icon="gio:verified" (click)="onClick('audit')" [active]="isActive('audit')" iconRight="gio:lock">Audit</gio-menu-item>
               <gio-menu-item tabindex="1" icon="gio:message-text" (click)="onClick('messages')" [active]="isActive('messages')">Messages</gio-menu-item>
               <gio-menu-item tabindex="1" icon="gio:settings" (click)="onClick('settings')" [active]="isActive('settings')">Settings</gio-menu-item>
+            </gio-menu-list>
+            <gio-menu-footer>
+              <gio-menu-item tabindex="1" icon="gio:building" (click)="onClick('org')" [active]="isActive('org')">Organization settings</gio-menu-item>
+            </gio-menu-footer>`;
+
+const gioMenuContentWithItemsPanel = `
+            <gio-menu-header>    
+              <div class="gio-menu-selector">
+                <gio-menu-selector tabindex="1" [selectedItemValue]="selectedItemValue" selectorTitle="Environment" [selectorItems]="selectorItems" (selectChange)="selectedItemValue=$event"></gio-menu-selector>
+              </div>
+              <gio-menu-search *ngIf="hasSearch" (valueChanges)="valueChanges($event)"></gio-menu-search>
+            </gio-menu-header>
+            <gio-menu-list>    
+              <gio-menu-item tabindex="1" icon="gio:home" (click)="onClick('dashboard')" [active]="isActive('dashboard')">Dashboard</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:upload-cloud" (click)="onClick('apis')" [active]="isActive('apis')">Apis</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:multi-window" (click)="onClick('apps')" [active]="isActive('apps')">Applications</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:cloud-server" (click)="onClick('gateways')" [active]="isActive('gateways')">Gateways</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:verified" (click)="onClick('audit')" [active]="isActive('audit')" iconRight="gio:lock">Audit</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:message-text" (click)="onClick('messages')" [active]="isActive('messages')">Messages</gio-menu-item>
+
+              <gio-menu-items [title]="'API Score'" icon="gio:shield-check" > 
+               <gio-menu-item tabindex="1" (click)="onClick('overview1')" [active]="isActive('overview1')">Overview</gio-menu-item>
+               <gio-menu-item tabindex="1" (click)="onClick('rulesets')" [active]="isActive('rulesets')">Rulesets & Functions</gio-menu-item>
+              </gio-menu-items>
+              <gio-menu-items [title]="'Analytics'" icon="gio:bar-chart-2" [items]="[{ title: 'default', routerLink: '/test' }]"></gio-menu-items> 
+              
+              <gio-menu-items [title]="'Alerts'" icon="gio:alarm" [active]="isActive('myAlerts') || isActive('activity')"> 
+               <gio-menu-item tabindex="1" (click)="onClick('myAlerts')" [active]="isActive('myAlerts')">My alerts</gio-menu-item>
+               <gio-menu-item tabindex="1" (click)="onClick('activity')" [active]="isActive('activity')">Activity</gio-menu-item>
+              </gio-menu-items>          
+              
+              <gio-menu-item tabindex="1" icon="gio:settings" (click)="onClick('settings')" [active]="isActive('settings')">Settings</gio-menu-item>       
             </gio-menu-list>
             <gio-menu-footer>
               <gio-menu-item tabindex="1" icon="gio:building" (click)="onClick('org')" [active]="isActive('org')">Organization settings</gio-menu-item>
@@ -113,6 +149,36 @@ export const Default: StoryObj = {
         <div id="sidenav">
           <gio-menu>
             ${gioMenuContent}
+          </gio-menu>
+          <h1>Selected env: {{ selectedItemValue }}</h1>
+        </div>
+        `,
+      props: {
+        onClick: (target: string) => (route = target),
+        isActive: (target: string) => (route != target ? null : true),
+        selectedItemValue: 'dev',
+        selectorItems: [
+          { value: 'prod', displayValue: '🚀 Prod' },
+          { value: 'dev', displayValue: '🧪 Development' },
+        ],
+      },
+      styles,
+    };
+  },
+};
+
+export const DefaultWithItemsPanel: StoryObj = {
+  argTypes: OEM_THEME_ARG_TYPES,
+  args: {
+    logo: OEM_DEFAULT_LOGO,
+  },
+  render: args => {
+    computeAndInjectStylesForStory(args, document);
+    return {
+      template: `
+        <div id="sidenav">
+          <gio-menu>
+            ${gioMenuContentWithItemsPanel}
           </gio-menu>
           <h1>Selected env: {{ selectedItemValue }}</h1>
         </div>
