@@ -35,11 +35,21 @@
         box-shadow: none !important;
     }
 
+    &.active {
+        ::ng-deep .mat-expansion-panel-header {
+            background: oem.$oem-menu-active;
+
+            .mat-expansion-panel-header-title {
+                color: oem.$oem-menu-active-text;
+            }
+        }
+    }
+
     ::ng-deep .mat-expansion-panel-header {
         height: 36px !important;
         padding: 0 16px;
         border-radius: 4px;
-      box-shadow: 4px 0 oem.$oem-menu-active inset;
+        box-shadow: 4px 0 oem.$oem-menu-active inset;
 
         &:hover {
             background: oem.$oem-menu-hover;

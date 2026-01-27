@@ -20,6 +20,11 @@
   display: block;
 }
 
+:host.active .gio-menu-item {
+  background: oem.$oem-menu-active;
+  color: oem.$oem-menu-active-text;
+}
+
 .gio-menu-item {
   position: relative;
   display: flex;
@@ -74,7 +79,7 @@
   }
 }
 
-.gio-menu-item:hover:not(.gio-menu-item__active) {
+:host:not(.active) .gio-menu-item:hover:not(.gio-menu-item__active) {
   background: oem.$oem-menu-hover;
   color: oem.$oem-menu-hover-text;
 }

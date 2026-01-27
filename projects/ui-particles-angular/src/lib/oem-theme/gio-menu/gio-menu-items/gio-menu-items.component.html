@@ -16,7 +16,7 @@
 
 -->
 <mat-accordion>
-  <mat-expansion-panel class="gio-menu-items" hideToggle [expanded]="true">
+  <mat-expansion-panel class="gio-menu-items" [class.active]="active" hideToggle [expanded]="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
         @if (icon) {
@@ -28,14 +28,6 @@
         }
       </mat-panel-title>
     </mat-expansion-panel-header>
-
-    @for (item of items || []; track item) {
-      <a [routerLink]="item.routerLink">
-        <gio-menu-item routerLinkActive #rla="routerLinkActive" [title]="item.title" [active]="rla.isActive">
-          {{ item.title }}
-        </gio-menu-item>
-      </a>
-    }
     <ng-content></ng-content>
   </mat-expansion-panel>
 </mat-accordion>

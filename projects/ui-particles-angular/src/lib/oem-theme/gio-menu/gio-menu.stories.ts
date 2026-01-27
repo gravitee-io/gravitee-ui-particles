@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+import { CommonModule, AsyncPipe } from '@angular/common';
 import { action } from 'storybook/actions';
-import { provideRouter } from '@angular/router';
+import { ActivatedRoute, provideRouter, RouterModule } from '@angular/router';
+import { map } from 'rxjs/operators';
 import { cleanLocalStorageReduceState } from '@gravitee/ui-particles-angular';
 
 import { GioSubmenuModule } from '../gio-submenu';
@@ -44,14 +46,35 @@ const menuSearchItems = [
   { name: 'Audit', routerLink: '/audit', category: 'Audit' },
   { name: 'Alerts', routerLink: '/alerts/list', category: 'Alerts' },
   { name: 'Settings', routerLink: '/settings', category: 'Environment' },
+  { name: 'Overview', routerLink: '/analytics', category: 'Analytics' },
+  { name: 'Overview', routerLink: '/analytics', category: 'Analytics' },
+  { name: 'Dashboards', routerLink: '/analytics/dashboards', category: 'Analytics' },
+  { name: 'Logs', routerLink: '/analytics/logs-explorer', category: 'Analytics' },
+  { name: 'Legacy Dashboard', routerLink: '/analytics/dashboard', category: 'Analytics' },
+  { name: 'Legacy Logs', routerLink: '/analytics/logs', category: 'Analytics' },
 ];
+
+@Component({
+  standalone: true,
+  imports: [CommonModule, AsyncPipe],
+  selector: 'gio-navigation-simulation',
+  template: `
+    <div style="padding: 24px">
+      <h1 data-testid="navigation-title">{{ title$ | async }}</h1>
+    </div>
+  `,
+})
+class GioNavigationSimulationComponent {
+  public title$ = this.activatedRoute.data.pipe(map(data => data.title));
+  constructor(private readonly activatedRoute: ActivatedRoute) { }
+}
 
 export default {
   title: 'OEM Theme / Menu',
   component: GioMenuItemComponent,
   decorators: [
     moduleMetadata({
-      imports: [CommonModule, GioMenuModule, GioSubmenuModule],
+      imports: [CommonModule, GioMenuModule, GioSubmenuModule, RouterModule],
       providers: [
         {
           provide: GioMenuSearchService,
@@ -64,7 +87,18 @@ export default {
       return story();
     },
     applicationConfig({
-      providers: [provideRouter([])],
+      providers: [
+        provideRouter([
+          ...menuSearchItems
+            .filter(item => item.routerLink !== '.' && !item.routerLink.includes(':'))
+            .map(item => ({
+              path: item.routerLink.replace(/^\//, ''),
+              component: GioNavigationSimulationComponent,
+              data: { title: `${item.category} : ${item.name}` },
+            })),
+          { path: '**', component: GioNavigationSimulationComponent, data: { title: 'Dashboard' } },
+        ]),
+      ],
     }),
   ],
   render: () => ({}),
@@ -102,21 +136,28 @@ const gioMenuContentWithItemsPanel = `
             <gio-menu-list>    
               <gio-menu-item tabindex="1" icon="gio:home" (click)="onClick('dashboard')" [active]="isActive('dashboard')">Dashboard</gio-menu-item>
               <gio-menu-item tabindex="1" icon="gio:upload-cloud" (click)="onClick('apis')" [active]="isActive('apis')">Apis</gio-menu-item>
-              <gio-menu-item tabindex="1" icon="gio:multi-window" (click)="onClick('apps')" [active]="isActive('apps')">Applications</gio-menu-item>
-              <gio-menu-item tabindex="1" icon="gio:cloud-server" (click)="onClick('gateways')" [active]="isActive('gateways')">Gateways</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:multi-window" routerLink="/applications" routerLinkActive #rlaApplications="routerLinkActive" [active]="rlaApplications.isActive">Applications</gio-menu-item>
+              <gio-menu-item tabindex="1" icon="gio:cloud-server" routerLink="/gateways" routerLinkActive #rlaGateways="routerLinkActive" [active]="rlaGateways.isActive">Gateways</gio-menu-item>
               <gio-menu-item tabindex="1" icon="gio:verified" (click)="onClick('audit')" [active]="isActive('audit')" iconRight="gio:lock">Audit</gio-menu-item>
               <gio-menu-item tabindex="1" icon="gio:message-text" (click)="onClick('messages')" [active]="isActive('messages')">Messages</gio-menu-item>
 
-              <gio-menu-items [title]="'API Score'" icon="gio:shield-check" > 
+              <gio-menu-items [title]="'API Score'" icon="gio:shield-check" [active]="isActive('overview1') || isActive('rulesets')"> 
                <gio-menu-item tabindex="1" (click)="onClick('overview1')" [active]="isActive('overview1')">Overview</gio-menu-item>
                <gio-menu-item tabindex="1" (click)="onClick('rulesets')" [active]="isActive('rulesets')">Rulesets & Functions</gio-menu-item>
               </gio-menu-items>
-              <gio-menu-items [title]="'Analytics'" icon="gio:bar-chart-2" [items]="[{ title: 'default', routerLink: '/test' }]"></gio-menu-items> 
               
+              <gio-menu-items [title]="'Analytics'" icon="gio:bar-chart-2" > 
+               <gio-menu-item routerLink="/analytics" routerLinkActive [routerLinkActiveOptions]="{ exact: true }">Overview</gio-menu-item>
+               <gio-menu-item routerLink="/analytics/dashboards" routerLinkActive>Dashboards</gio-menu-item>
+               <gio-menu-item routerLink="/analytics/logs-explorer" routerLinkActive>Logs</gio-menu-item>
+               <gio-menu-item routerLink="/analytics/dashboard" routerLinkActive>Legacy dashboard</gio-menu-item>
+               <gio-menu-item routerLink="/analytics/logs" routerLinkActive>Legacy logs</gio-menu-item>
+              </gio-menu-items>
+             
               <gio-menu-items [title]="'Alerts'" icon="gio:alarm" [active]="isActive('myAlerts') || isActive('activity')"> 
                <gio-menu-item tabindex="1" (click)="onClick('myAlerts')" [active]="isActive('myAlerts')">My alerts</gio-menu-item>
                <gio-menu-item tabindex="1" (click)="onClick('activity')" [active]="isActive('activity')">Activity</gio-menu-item>
-              </gio-menu-items>          
+              </gio-menu-items>
               
               <gio-menu-item tabindex="1" icon="gio:settings" (click)="onClick('settings')" [active]="isActive('settings')">Settings</gio-menu-item>       
             </gio-menu-list>
@@ -180,7 +221,10 @@ export const DefaultWithItemsPanel: StoryObj = {
           <gio-menu>
             ${gioMenuContentWithItemsPanel}
           </gio-menu>
-          <h1>Selected env: {{ selectedItemValue }}</h1>
+          <div>
+            <h1>Selected env: {{ selectedItemValue }}</h1>
+            <router-outlet></router-outlet>
+          </div>
         </div>
         `,
       props: {
