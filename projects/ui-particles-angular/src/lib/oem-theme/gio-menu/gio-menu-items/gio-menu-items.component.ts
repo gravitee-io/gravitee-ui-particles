@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, DestroyRef, inject, Input, signal, ViewEncapsulation } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, map, startWith } from 'rxjs/operators';
 
@@ -25,36 +26,47 @@ import { GioMenuService } from '../gio-menu.service';
   templateUrl: './gio-menu-items.component.html',
   styleUrls: ['./gio-menu-items.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   standalone: false,
+  // Add host class for scoping styles
+  host: {
+    class: 'gio-menu-items-host',
+  },
 })
-export class GioMenuItemsComponent implements OnDestroy {
+export class GioMenuItemsComponent {
   @Input() public icon = '';
   @Input() public iconRight?: string;
   @Input() public title = 'default';
   @Input() public active = false;
   @Input() public routerBasePath?: string;
 
-  protected readonly showOverlay = signal(false);
-
-  public reduced$ = this.gioMenuService.reduced$;
-
-  public isRouteActive$ = this.router.events.pipe(
-    filter(event => event instanceof NavigationEnd),
-    startWith(null),
-    map(() => this.routerBasePath && this.router.url.startsWith(this.routerBasePath)),
-  );
+  private readonly router = inject(Router);
+  private readonly gioMenuService = inject(GioMenuService);
+  private readonly destroyRef = inject(DestroyRef);
 
   private closeTimeout: ReturnType<typeof setTimeout> | null = null;
 
-  constructor(
-    private readonly router: Router,
-    private readonly gioMenuService: GioMenuService,
-  ) {}
+  protected readonly showOverlay = signal(false);
+  protected readonly reduced = toSignal(this.gioMenuService.reduced$, { initialValue: false });
 
-  public ngOnDestroy(): void {
-    if (this.closeTimeout) {
-      clearTimeout(this.closeTimeout);
-    }
+  protected readonly isRouteActive = toSignal(
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      startWith(null),
+      map(() => !!this.routerBasePath && this.router.url.startsWith(this.routerBasePath)),
+    ),
+    { initialValue: false },
+  );
+
+  protected readonly isPanelActive = computed(() => this.active || this.isRouteActive());
+  protected readonly isPanelExpanded = computed(() => this.isPanelActive() || (this.reduced() && this.showOverlay()));
+
+  constructor() {
+    this.destroyRef.onDestroy(() => {
+      if (this.closeTimeout) {
+        clearTimeout(this.closeTimeout);
+      }
+    });
   }
 
   public get isActive(): boolean {
@@ -68,13 +80,11 @@ export class GioMenuItemsComponent implements OnDestroy {
   }
 
   public onPanelHeaderClick(event: Event): void {
-    // Always prevent the panel from toggling - it should only expand based on route state
     event.stopPropagation();
     this.onHeaderClick();
   }
 
   public onMouseEnter(): void {
-    // Cancel any pending close
     if (this.closeTimeout) {
       clearTimeout(this.closeTimeout);
       this.closeTimeout = null;
@@ -83,7 +93,6 @@ export class GioMenuItemsComponent implements OnDestroy {
   }
 
   public onMouseLeave(): void {
-    // Delay closing to allow mouse to reach the overlay
     this.closeTimeout = setTimeout(() => {
       this.showOverlay.set(false);
       this.closeTimeout = null;
