@@ -16,83 +16,19 @@
 @use 'sass:map';
 @use '../../../../scss/gio-oem-palette-variable' as oem;
 
-// ===== SHARED MIXINS =====
-@mixin panel-base {}
+// ===== DESIGN TOKENS =====
+$panel-padding: 8px;
+$panel-border-radius: 8px;
+$item-height: 36px;
+$icon-size: 20px;
+$content-indent: 28px; // Left margin for title text
 
-@mixin panel-header {
-    width: 100%;
-    height: auto !important;
-    padding: 8px 12px;
-    margin-bottom: 8px;
-    border-radius: 0;
-    box-shadow: none !important;
-    border-bottom: 1px solid transparent; // Placeholder for transition
-    cursor: pointer; // Keep pointer cursor to indicate clickability
-
-    &:hover {
-        background: transparent;
-    }
-
-    .mat-content {
-        justify-content: flex-start;
-    }
-
-    .mat-expansion-panel-header-title {
-        justify-content: flex-start;
-        color: oem.$oem-menu-text;
-    }
-}
-
-@mixin panel-icon {
-    position: static !important;
-    margin-right: 8px;
-    width: 20px !important;
-    height: 20px !important;
-}
-
-@mixin panel-title {
-    display: block !important;
-    margin-left: 0 !important;
-}
-
-@mixin menu-item-in-panel {
-    width: 100% !important;
-    justify-content: flex-start !important;
-    margin: 4px 0;
-    padding: 8px 12px;
-    background: transparent !important;
-
-    &:hover {
-        background: oem.$oem-menu-hover !important;
-    }
-
-    &__active {
-        background: oem.$oem-menu-active !important;
-        color: oem.$oem-menu-active-text !important;
-    }
-
-    &__title {
-        display: block !important;
-        margin: 0 !important;
-    }
-
-    &__icon {
-        position: static !important;
-        margin-right: 8px;
-    }
-
-    &__icon-right {
-        display: block !important;
-    }
-}
-
-// ===== HOST =====
+// ===== HOST & CONTAINER =====
 :host {
     display: block;
     position: relative;
 }
 
-// ===== CONTAINER =====
 .gio-menu-items-container {
     position: relative;
 
@@ -105,7 +41,7 @@
 .gio-menu-items-trigger {
     display: none;
     width: 44px;
-    height: 36px;
+    height: $item-height;
     align-items: center;
     justify-content: center;
     border-radius: 4px;
@@ -122,18 +58,13 @@
     }
 
     &__icon {
-        width: 20px !important;
-        height: 20px !important;
+        width: $icon-size !important;
+        height: $icon-size !important;
         color: oem.$oem-menu-text;
     }
 }
 
-// ===== ACCORDION (NORMAL MODE) =====
-.gio-menu-items-accordion {
-    @include panel-base;
-}
-
-// ===== PANEL STYLES =====
+// ===== PANEL STYLES (shared between normal and overlay modes) =====
 .gio-menu-items {
     &.mat-expansion-panel {
         margin: 0;
@@ -141,63 +72,122 @@
         box-shadow: none !important;
     }
 
-    &.active {
-        ::ng-deep .mat-expansion-panel-header {
-            box-shadow: 4px 0 oem.$oem-menu-active inset;
-        }
+    // Active indicator on header
+    &.active ::ng-deep .mat-expansion-panel-header {
+        box-shadow: 4px 0 oem.$oem-menu-active inset;
     }
 
-    ::ng-deep .mat-expansion-panel-header {
-        @include panel-header;
-    }
-
-    // Show border only when panel is expanded
+    // Expanded state: show background and border
     &.mat-expanded {
         background: oem.$oem-sub-menu-background;
-        border-radius: 8px;
+        border-radius: $panel-border-radius;
 
         ::ng-deep .mat-expansion-panel-header {
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
     }
 
-    ::ng-deep .mat-expansion-panel-body {
-        padding: 0 8px 8px 8px;
+    // Header styling
+    ::ng-deep .mat-expansion-panel-header {
+        width: 100%;
+        height: auto !important;
+        padding: $panel-padding (
+            $panel-padding + 8px
+        );
+    margin-bottom: $panel-padding;
+    border-radius: 4px; // Same as menu-item
+    box-shadow: none !important;
+    border-bottom: 1px solid transparent;
+    cursor: pointer;
+
+    &:hover {
+        background: oem.$oem-menu-hover;
     }
 
-    ::ng-deep .mat-expansion-indicator {
-        display: none;
+    .mat-content {
+        justify-content: flex-start;
     }
 
-    &__icon {
-        @include panel-icon;
+    .mat-expansion-panel-header-title {
+        justify-content: flex-start;
+        color: oem.$oem-menu-text;
     }
+}
 
-    &__title {
-        @include panel-title;
-    }
+// Hide default expansion indicator
+::ng-deep .mat-expansion-indicator {
+    display: none;
+}
 
-    &__icon-right {
-        display: none;
-    }
+// Panel body - no left padding, items handle their own alignment
+::ng-deep .mat-expansion-panel-body {
+    padding: 0 0 $panel-padding 0;
+}
+
+// Header icon
+&__icon {
+    position: static !important;
+    margin-right: $panel-padding;
+    width: $icon-size !important;
+    height: $icon-size !important;
+}
+
+// Header title
+&__title {
+    display: block !important;
+    margin-left: 0 !important;
+}
+
+// Right icon (hidden)
+&__icon-right {
+    display: none;
+}
 }
 
 // ===== MENU ITEMS INSIDE PANEL =====
-.gio-menu-items-accordion {
-    ::ng-deep gio-menu-item {
-        .gio-menu-item {
-            @include menu-item-in-panel;
-        }
-    }
+// Text must align with header title text (after icon)
+// Header: padding-left(16px) + icon(20px) + margin-right(8px) = 44px
+$title-text-start: (
+    $panel-padding + 8px) + $icon-size + $panel-padding;
 
-    ::ng-deep gio-menu-item.active .gio-menu-item,
-    ::ng-deep gio-menu-item:has(.gio-menu-item__active) .gio-menu-item {
-        background: oem.$oem-menu-active !important;
-        color: oem.$oem-menu-active-text !important;
-    }
+.gio-menu-items-accordion ::ng-deep gio-menu-item .gio-menu-item {
+    width: auto !important;
+    height: $item-height;
+    justify-content: flex-start !important;
+    margin: 4px ($panel-padding + 8px
+    );
+padding: 0 $panel-padding;
+padding-left: $icon-size + $panel-padding; // Space after icon position
+background: transparent !important;
+border-radius: 4px;
+
+&:hover {
+    background: oem.$oem-menu-hover !important;
 }
 
-// ===== REDUCED MODE OVERRIDES =====
+&__title {
+    display: block !important;
+    margin: 0 !important;
+}
+
+&__icon {
+    position: absolute !important;
+    left: $panel-padding + 8px;
+}
+
+&__icon-right {
+    display: block !important;
+}
+}
+
+// Active menu item
+.gio-menu-items-accordion ::ng-deep gio-menu-item.active .gio-menu-item,
+.gio-menu-items-accordion ::ng-deep gio-menu-item:has(.gio-menu-item__active) .gio-menu-item {
+    background: oem.$oem-menu-active !important;
+    color: oem.$oem-menu-active-text !important;
+}
+
+// ===== REDUCED MODE (overlay behavior only) =====
 :host-context(.gio-menu__reduced) {
     .gio-menu-items-trigger {
         display: flex;
@@ -205,7 +195,7 @@
 
     .gio-menu-items-accordion {
         position: absolute;
-        left: calc(100% + 8px);
+        left: calc(100% + $panel-padding);
         top: 0;
         min-width: 200px;
         opacity: 0;
@@ -213,14 +203,28 @@
         pointer-events: none;
         z-index: 1002;
         transition: none;
+        background: oem.$oem-sub-menu-background;
+        border-radius: $panel-border-radius;
+
+        // Override gio-menu-item reduced mode styles
+        // These styles are set in gio-menu-item.component.scss for reduced mode
+        // but we need to reset them for the overlay display
+        ::ng-deep gio-menu-item .gio-menu-item {
+            width: auto !important;
+            margin: 4px ($panel-padding + 8px) !important;
+            padding: 0 $panel-padding !important;
+            padding-left: ($icon-size + $panel-padding) !important;
+
+            &__title {
+                display: block !important;
+            }
+        }
     }
 
-    .gio-menu-items-container--overlay-visible {
-        .gio-menu-items-accordion {
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-            transition: opacity 100ms ease-in;
-        }
+    .gio-menu-items-container--overlay-visible .gio-menu-items-accordion {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transition: opacity 100ms ease-in;
     }
 }
