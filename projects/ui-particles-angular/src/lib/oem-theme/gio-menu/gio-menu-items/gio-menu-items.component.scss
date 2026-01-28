@@ -76,13 +76,19 @@ $content-indent: 28px; // Left margin for title text
         border-radius: 0px;
     }
 
-    // Expanded state: show background and border
+    // Expanded state: show background and border, disable header interactivity
     &.mat-expanded {
         background: oem.$oem-sub-menu-background;
         border-radius: $panel-border-radius;
 
         ::ng-deep .mat-expansion-panel-header {
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: default;
+            pointer-events: none;
+
+            &:hover {
+                background: transparent;
+            }
         }
     }
 
@@ -118,7 +124,7 @@ $content-indent: 28px; // Left margin for title text
 
     // Panel body - no left padding, items handle their own alignment
     ::ng-deep .mat-expansion-panel-body {
-        padding: 0 0 $panel-padding 0;
+        padding: 0;
     }
 
     // Header icon
