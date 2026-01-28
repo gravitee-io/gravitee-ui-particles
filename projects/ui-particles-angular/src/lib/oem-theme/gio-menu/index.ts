@@ -18,6 +18,7 @@ export * from './gio-menu.module';
 export * from './gio-menu.service';
 export * from './gio-menu.component';
 export * from './gio-menu-item/gio-menu-item.component';
+export * from './gio-menu-items/gio-menu-items.component';
 export * from './gio-menu-list/gio-menu-list.component';
 export * from './gio-menu-footer/gio-menu-footer.component';
 export * from './gio-menu-header/gio-menu-header.component';

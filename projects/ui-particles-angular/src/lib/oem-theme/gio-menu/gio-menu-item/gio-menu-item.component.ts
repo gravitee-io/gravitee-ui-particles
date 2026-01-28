@@ -13,7 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, HostListener, Input, OnDestroy } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, Optional } from '@angular/core';
+import { RouterLinkActive } from '@angular/router';
 import { of, Subject } from 'rxjs';
 import { delay, filter, switchMap, takeUntil, tap } from 'rxjs/operators';
 
@@ -33,7 +34,14 @@ export class GioMenuItemComponent implements OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
 
-  constructor(private readonly gioMenuService: GioMenuService) {}
+  constructor(
+    private readonly gioMenuService: GioMenuService,
+    @Optional() private readonly routerLinkActive: RouterLinkActive,
+  ) {}
+
+  public get isActive(): boolean {
+    return this.active || this.routerLinkActive?.isActive || false;
+  }
 
   public ngOnDestroy(): void {
     this.unsubscribe$.next();
@@ -41,13 +49,13 @@ export class GioMenuItemComponent implements OnDestroy {
   }
 
   public onMouseLeave(): void {
-    if (this.active) {
+    if (this.isActive) {
       this.gioMenuService.overlay({ open: false });
     }
   }
 
   public onMouseEnter($event: MouseEvent): void {
-    if (this.active) {
+    if (this.isActive) {
       const menuItem = $event.target as HTMLInputElement;
       this.gioMenuService.overlay({ open: true, top: menuItem.getBoundingClientRect().top, parent: menuItem });
     }
@@ -72,7 +80,7 @@ export class GioMenuItemComponent implements OnDestroy {
         switchMap(() => of($event.target as HTMLElement)),
         tap(menuItem => {
           this.gioMenuService.overlay({ open: false });
-          if (this.active) {
+          if (this.isActive) {
             this.gioMenuService.overlay({ open: true, top: menuItem.getBoundingClientRect().top, parent: menuItem, focus: true });
           } else {
             menuItem.click();

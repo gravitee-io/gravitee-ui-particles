@@ -62,6 +62,11 @@
   }
 }
 
+:host.active .gio-menu-item {
+  background: oem.$oem-menu-active;
+  color: oem.$oem-menu-active-text;
+}
+
 :host-context(.gio-menu__reduced) .gio-menu-item {
   width: 44px;
   justify-content: center;
@@ -74,15 +79,16 @@
   }
 }
 
-.gio-menu-item:hover:not(.gio-menu-item__active) {
-  background: oem.$oem-menu-hover;
-  color: oem.$oem-menu-hover-text;
-}
-
 :host-context(.gio-menu__reduced .gio-menu-footer) .gio-menu-item {
   margin: 20px 0;
 }
 
 :host-context(.gio-menu__reduced .gio-menu-footer) .gio-menu-item__outlined {
   margin: 20px 0;
+}
+
+// Hover state - must come after :host-context selectors due to specificity rules
+:host:not(.active) .gio-menu-item:hover:not(.gio-menu-item__active) {
+  background: oem.$oem-menu-hover;
+  color: oem.$oem-menu-hover-text;
 }
