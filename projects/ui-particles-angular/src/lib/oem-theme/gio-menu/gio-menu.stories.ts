@@ -153,8 +153,8 @@ const gioMenuContentWithItemsPanel = `
                <gio-menu-item routerLink="/analytics" routerLinkActive [routerLinkActiveOptions]="{ exact: true }">Overview</gio-menu-item>
                <gio-menu-item routerLink="/analytics/dashboards" routerLinkActive>Dashboards</gio-menu-item>
                <gio-menu-item routerLink="/analytics/logs-explorer" routerLinkActive>Logs</gio-menu-item>
-               <gio-menu-item routerLink="/analytics/dashboard" routerLinkActive>Legacy dashboard</gio-menu-item>
-               <gio-menu-item routerLink="/analytics/logs" routerLinkActive>Legacy logs</gio-menu-item>
+               <gio-menu-item routerLink="/analytics/dashboard" routerLinkActive>Legacy - Dashboard</gio-menu-item>
+               <gio-menu-item routerLink="/analytics/logs" routerLinkActive>Legacy - Logs</gio-menu-item>
               </gio-menu-items>
              
               <gio-menu-items [title]="'Alerts'" icon="gio:alarm" routerBasePath="/alerts"> 

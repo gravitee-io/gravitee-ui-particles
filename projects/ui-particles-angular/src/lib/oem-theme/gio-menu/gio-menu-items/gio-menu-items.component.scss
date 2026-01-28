@@ -72,9 +72,8 @@ $content-indent: 28px; // Left margin for title text
         box-shadow: none !important;
     }
 
-    // Active indicator on header
     &.active ::ng-deep .mat-expansion-panel-header {
-        box-shadow: 4px 0 oem.$oem-menu-active inset;
+        border-radius: 0px;
     }
 
     // Expanded state: show background and border
@@ -91,57 +90,55 @@ $content-indent: 28px; // Left margin for title text
     ::ng-deep .mat-expansion-panel-header {
         width: 100%;
         height: auto !important;
-        padding: $panel-padding (
-            $panel-padding + 8px
-        );
-    margin-bottom: $panel-padding;
-    border-radius: 4px; // Same as menu-item
-    box-shadow: none !important;
-    border-bottom: 1px solid transparent;
-    cursor: pointer;
+        padding: 6px 16px 6px ($panel-padding + 8px);
+        margin: 3px 0;
+        border-radius: 4px; // Same as menu-item
+        box-shadow: none !important;
+        border-bottom: 1px solid transparent;
+        cursor: pointer;
 
-    &:hover {
-        background: oem.$oem-menu-hover;
+        &:hover {
+            background: oem.$oem-menu-hover;
+        }
+
+        .mat-content {
+            justify-content: flex-start;
+        }
+
+        .mat-expansion-panel-header-title {
+            justify-content: flex-start;
+            color: oem.$oem-menu-text;
+        }
     }
 
-    .mat-content {
-        justify-content: flex-start;
+    // Hide default expansion indicator
+    ::ng-deep .mat-expansion-indicator {
+        display: none;
     }
 
-    .mat-expansion-panel-header-title {
-        justify-content: flex-start;
-        color: oem.$oem-menu-text;
+    // Panel body - no left padding, items handle their own alignment
+    ::ng-deep .mat-expansion-panel-body {
+        padding: 0 0 $panel-padding 0;
     }
-}
 
-// Hide default expansion indicator
-::ng-deep .mat-expansion-indicator {
-    display: none;
-}
+    // Header icon
+    &__icon {
+        position: static !important;
+        margin-right: $panel-padding + 4px;
+        width: $icon-size !important;
+        height: $icon-size !important;
+    }
 
-// Panel body - no left padding, items handle their own alignment
-::ng-deep .mat-expansion-panel-body {
-    padding: 0 0 $panel-padding 0;
-}
+    // Header title
+    &__title {
+        display: block !important;
+        margin-left: 0 !important;
+    }
 
-// Header icon
-&__icon {
-    position: static !important;
-    margin-right: $panel-padding;
-    width: $icon-size !important;
-    height: $icon-size !important;
-}
-
-// Header title
-&__title {
-    display: block !important;
-    margin-left: 0 !important;
-}
-
-// Right icon (hidden)
-&__icon-right {
-    display: none;
-}
+    // Right icon (hidden)
+    &__icon-right {
+        display: none;
+    }
 }
 
 // ===== MENU ITEMS INSIDE PANEL =====
@@ -154,30 +151,29 @@ $title-text-start: (
     width: auto !important;
     height: $item-height;
     justify-content: flex-start !important;
-    margin: 4px ($panel-padding + 8px
-    );
-padding: 0 $panel-padding;
-padding-left: $icon-size + $panel-padding; // Space after icon position
-background: transparent !important;
-border-radius: 4px;
+    margin: 4px $panel-padding ;
+    padding: 0 $panel-padding;
+    padding-left: $panel-padding;
+    background: transparent !important;
+    border-radius: 4px;
 
-&:hover {
-    background: oem.$oem-menu-hover !important;
-}
+    &:hover {
+        background: oem.$oem-menu-hover !important;
+    }
 
-&__title {
-    display: block !important;
-    margin: 0 !important;
-}
+    &__title {
+        display: block !important;
+        margin: 0 !important;
+    }
 
-&__icon {
-    position: absolute !important;
-    left: $panel-padding + 8px;
-}
+    &__icon {
+        position: absolute !important;
+        left: $panel-padding + 8px;
+    }
 
-&__icon-right {
-    display: block !important;
-}
+    &__icon-right {
+        display: block !important;
+    }
 }
 
 // Active menu item
@@ -195,36 +191,40 @@ border-radius: 4px;
 
     .gio-menu-items-accordion {
         position: absolute;
-        left: calc(100% + $panel-padding);
-        top: 0;
-        min-width: 200px;
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        z-index: 1002;
-        transition: none;
-        background: oem.$oem-sub-menu-background;
-        border-radius: $panel-border-radius;
+        left: calc(100% + $panel-padding
+        );
+    top: -2px;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 1002;
+    transition: none;
+    background: oem.$oem-sub-menu-background;
+    border-radius: $panel-border-radius;
 
-        // Override gio-menu-item reduced mode styles
-        // These styles are set in gio-menu-item.component.scss for reduced mode
-        // but we need to reset them for the overlay display
-        ::ng-deep gio-menu-item .gio-menu-item {
-            width: auto !important;
-            margin: 4px ($panel-padding + 8px) !important;
-            padding: 0 $panel-padding !important;
-            padding-left: ($icon-size + $panel-padding) !important;
+    &.active ::ng-deep .mat-expansion-panel-header {
+        border-radius: 0px;
+    }
 
-            &__title {
-                display: block !important;
-            }
+    // Override gio-menu-item reduced mode styles
+    // These styles are set in gio-menu-item.component.scss for reduced mode
+    // but we need to reset them for the overlay display
+    ::ng-deep gio-menu-item .gio-menu-item {
+        width: auto !important;
+        margin: 4px ($panel-padding + 6px) !important;
+        padding: 0 4px !important;
+
+        &__title {
+            display: block !important;
         }
     }
+}
 
-    .gio-menu-items-container--overlay-visible .gio-menu-items-accordion {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-        transition: opacity 100ms ease-in;
-    }
+.gio-menu-items-container--overlay-visible .gio-menu-items-accordion {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 100ms ease-in;
+}
 }
