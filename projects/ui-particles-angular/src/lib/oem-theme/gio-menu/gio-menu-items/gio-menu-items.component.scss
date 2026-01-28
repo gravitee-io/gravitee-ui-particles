@@ -178,8 +178,8 @@ $header-padding-left: $panel-padding + 8px;
   display: block;
 }
 
-// Active menu item
-.gio-menu-items-host .gio-menu-items-accordion gio-menu-item.active .gio-menu-item,
+// Active menu item (router-link-active is the default class from routerLinkActive directive)
+.gio-menu-items-host .gio-menu-items-accordion gio-menu-item.router-link-active .gio-menu-item,
 .gio-menu-items-host .gio-menu-items-accordion gio-menu-item:has(.gio-menu-item__active) .gio-menu-item {
   background: oem.$oem-menu-active;
   color: oem.$oem-menu-active-text;

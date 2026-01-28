@@ -231,8 +231,6 @@ export const DefaultWithItemsPanel: StoryObj = {
         </div>
         `,
       props: {
-        onClick: (target: string) => (route = target),
-        isActive: (target: string) => (route != target ? null : true),
         selectedItemValue: 'dev',
         selectorItems: [
           { value: 'prod', displayValue: '🚀 Prod' },
@@ -295,8 +293,6 @@ export const ReducedWithItemsPanel: StoryObj = {
         </div>
         `,
       props: {
-        onClick: (target: string) => (route = target),
-        isActive: (target: string) => (route != target ? null : true),
         selectedItemValue: 'dev',
         selectorItems: [
           { value: 'prod', displayValue: '🚀 Prod' },
