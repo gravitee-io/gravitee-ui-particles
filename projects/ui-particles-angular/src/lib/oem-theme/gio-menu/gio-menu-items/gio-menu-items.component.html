@@ -15,28 +15,37 @@
     limitations under the License.
 
 -->
-<div class="gio-menu-items-container" [class.gio-menu-items-container--reduced]="reduced$ | async"
-  [class.gio-menu-items-container--overlay-visible]="showOverlay()" (mouseenter)="onMouseEnter()"
-  (mouseleave)="onMouseLeave()">
+<div
+  class="gio-menu-items-container"
+  [class.gio-menu-items-container--reduced]="reduced$ | async"
+  [class.gio-menu-items-container--overlay-visible]="showOverlay()"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
+>
   <!-- Trigger for reduced mode (icon only) -->
   <div class="gio-menu-items-trigger" [class.active]="isActive || (isRouteActive$ | async)" (click)="onHeaderClick()">
     @if (icon) {
-    <mat-icon class="gio-menu-items-trigger__icon" [svgIcon]="icon"></mat-icon>
+      <mat-icon class="gio-menu-items-trigger__icon" [svgIcon]="icon"></mat-icon>
     }
   </div>
 
   <!-- Normal mode: Material expansion panel / Reduced mode: becomes overlay -->
   <mat-accordion class="gio-menu-items-accordion">
-    <mat-expansion-panel class="gio-menu-items" [class.active]="isActive || (isRouteActive$ | async)" hideToggle
-      [expanded]="isActive || (isRouteActive$ | async) || ((reduced$ | async) && showOverlay())" [disabled]="true">
+    <mat-expansion-panel
+      class="gio-menu-items"
+      [class.active]="isActive || (isRouteActive$ | async)"
+      hideToggle
+      [expanded]="isActive || (isRouteActive$ | async) || ((reduced$ | async) && showOverlay())"
+      [disabled]="true"
+    >
       <mat-expansion-panel-header (click)="onPanelHeaderClick($event)">
         <mat-panel-title>
           @if (icon) {
-          <mat-icon class="gio-menu-items__icon" [svgIcon]="icon"></mat-icon>
+            <mat-icon class="gio-menu-items__icon" [svgIcon]="icon"></mat-icon>
           }
           <span class="gio-menu-items__title">{{ title }}</span>
           @if (iconRight) {
-          <mat-icon class="gio-menu-items__icon-right" [svgIcon]="iconRight"></mat-icon>
+            <mat-icon class="gio-menu-items__icon-right" [svgIcon]="iconRight"></mat-icon>
           }
         </mat-panel-title>
       </mat-expansion-panel-header>

@@ -49,7 +49,7 @@ export class GioMenuItemsComponent implements OnDestroy {
   constructor(
     private readonly router: Router,
     private readonly gioMenuService: GioMenuService,
-  ) { }
+  ) {}
 
   public ngOnDestroy(): void {
     if (this.closeTimeout) {

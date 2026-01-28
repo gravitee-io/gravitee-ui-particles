@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { applicationConfig, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { action } from 'storybook/actions';
 import { ActivatedRoute, provideRouter, RouterModule } from '@angular/router';
@@ -69,7 +69,7 @@ const menuSearchItems = [
 })
 class GioNavigationSimulationComponent {
   public title$ = this.activatedRoute.data.pipe(map(data => data.title));
-  constructor(private readonly activatedRoute: ActivatedRoute) { }
+  constructor(private readonly activatedRoute: ActivatedRoute) {}
 }
 
 export default {

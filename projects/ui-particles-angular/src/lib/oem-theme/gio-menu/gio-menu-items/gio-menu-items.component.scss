@@ -25,212 +25,211 @@ $content-indent: 28px; // Left margin for title text
 
 // ===== HOST & CONTAINER =====
 :host {
-    display: block;
-    position: relative;
+  position: relative;
+  display: block;
 }
 
 .gio-menu-items-container {
-    position: relative;
+  position: relative;
 
-    &--overlay-visible {
-        z-index: 1001;
-    }
+  &--overlay-visible {
+    z-index: 1001;
+  }
 }
 
 // ===== TRIGGER (Icon only, visible only in reduced mode) =====
 .gio-menu-items-trigger {
-    display: none;
-    width: 44px;
-    height: $item-height;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 4px 0;
+  display: none;
+  width: 44px;
+  height: $item-height;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  margin: 4px 0;
+  cursor: pointer;
 
-    &:hover {
-        background: oem.$oem-menu-hover;
-    }
+  &:hover {
+    background: oem.$oem-menu-hover;
+  }
 
-    &.active {
-        background: oem.$oem-menu-active !important;
-        color: oem.$oem-menu-active-text !important;
-    }
+  &.active {
+    background: oem.$oem-menu-active !important;
+    color: oem.$oem-menu-active-text !important;
+  }
 
-    &__icon {
-        width: $icon-size !important;
-        height: $icon-size !important;
-        color: oem.$oem-menu-text;
-    }
+  &__icon {
+    width: $icon-size !important;
+    height: $icon-size !important;
+    color: oem.$oem-menu-text;
+  }
 }
 
 // ===== PANEL STYLES (shared between normal and overlay modes) =====
 .gio-menu-items {
-    &.mat-expansion-panel {
-        margin: 0;
-        background: transparent;
-        box-shadow: none !important;
+  &.mat-expansion-panel {
+    margin: 0;
+    background: transparent;
+    box-shadow: none !important;
+  }
+
+  // Header styling (base styles - must come before more specific selectors)
+  ::ng-deep .mat-expansion-panel-header {
+    width: 100%;
+    height: auto !important;
+    padding: 6px 16px 6px ($panel-padding + 8px);
+    border-radius: 4px; // Same as menu-item
+    border-bottom: 1px solid transparent;
+    margin: 3px 0;
+    box-shadow: none !important;
+    cursor: pointer;
+
+    &:hover {
+      background: oem.$oem-menu-hover;
     }
 
-    &.active ::ng-deep .mat-expansion-panel-header {
-        border-radius: 0px;
+    .mat-content {
+      justify-content: flex-start;
     }
 
-    // Expanded state: show background and border, disable header interactivity
-    &.mat-expanded {
-        background: oem.$oem-sub-menu-background;
-        border-radius: $panel-border-radius;
-
-        ::ng-deep .mat-expansion-panel-header {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            cursor: default;
-            pointer-events: none;
-
-            &:hover {
-                background: transparent;
-            }
-        }
+    .mat-expansion-panel-header-title {
+      justify-content: flex-start;
+      color: oem.$oem-menu-text;
     }
+  }
 
-    // Header styling
+  // Active state (comes after base header styles)
+  &.active ::ng-deep .mat-expansion-panel-header {
+    border-radius: 0;
+  }
+
+  // Expanded state: show background and border, disable header interactivity
+  &.mat-expanded {
+    border-radius: $panel-border-radius;
+    background: oem.$oem-sub-menu-background;
+
     ::ng-deep .mat-expansion-panel-header {
-        width: 100%;
-        height: auto !important;
-        padding: 6px 16px 6px ($panel-padding + 8px);
-        margin: 3px 0;
-        border-radius: 4px; // Same as menu-item
-        box-shadow: none !important;
-        border-bottom: 1px solid transparent;
-        cursor: pointer;
+      border-bottom: 1px solid rgb(255 255 255 / 10%);
+      cursor: default;
+      pointer-events: none;
 
-        &:hover {
-            background: oem.$oem-menu-hover;
-        }
-
-        .mat-content {
-            justify-content: flex-start;
-        }
-
-        .mat-expansion-panel-header-title {
-            justify-content: flex-start;
-            color: oem.$oem-menu-text;
-        }
+      &:hover {
+        background: transparent;
+      }
     }
+  }
 
-    // Hide default expansion indicator
-    ::ng-deep .mat-expansion-indicator {
-        display: none;
-    }
+  // Hide default expansion indicator
+  ::ng-deep .mat-expansion-indicator {
+    display: none;
+  }
 
-    // Panel body - no left padding, items handle their own alignment
-    ::ng-deep .mat-expansion-panel-body {
-        padding: 0;
-    }
+  // Panel body - no left padding, items handle their own alignment
+  ::ng-deep .mat-expansion-panel-body {
+    padding: 0;
+  }
 
-    // Header icon
-    &__icon {
-        position: static !important;
-        margin-right: $panel-padding + 4px;
-        width: $icon-size !important;
-        height: $icon-size !important;
-    }
+  // Header icon
+  &__icon {
+    position: static !important;
+    width: $icon-size !important;
+    height: $icon-size !important;
+    margin-right: $panel-padding + 4px;
+  }
 
-    // Header title
-    &__title {
-        display: block !important;
-        margin-left: 0 !important;
-    }
+  // Header title
+  &__title {
+    display: block !important;
+    margin-left: 0 !important;
+  }
 
-    // Right icon (hidden)
-    &__icon-right {
-        display: none;
-    }
+  // Right icon (hidden)
+  &__icon-right {
+    display: none;
+  }
 }
 
 // ===== MENU ITEMS INSIDE PANEL =====
 // Text must align with header title text (after icon)
 // Header: padding-left(16px) + icon(20px) + margin-right(8px) = 44px
-$title-text-start: (
-    $panel-padding + 8px) + $icon-size + $panel-padding;
+$title-text-start: ($panel-padding + 8px) + $icon-size + $panel-padding;
 
 .gio-menu-items-accordion ::ng-deep gio-menu-item .gio-menu-item {
-    width: auto !important;
-    height: $item-height;
-    justify-content: flex-start !important;
-    margin: 4px $panel-padding ;
-    padding: 0 $panel-padding;
-    padding-left: $panel-padding;
-    background: transparent !important;
-    border-radius: 4px;
+  width: auto !important;
+  height: $item-height;
+  justify-content: flex-start !important;
+  padding: 0 $panel-padding;
+  padding-left: $panel-padding;
+  border-radius: 4px;
+  margin: 4px $panel-padding;
+  background: transparent !important;
 
-    &:hover {
-        background: oem.$oem-menu-hover !important;
-    }
+  &:hover {
+    background: oem.$oem-menu-hover !important;
+  }
 
-    &__title {
-        display: block !important;
-        margin: 0 !important;
-    }
+  &__title {
+    display: block !important;
+    margin: 0 !important;
+  }
 
-    &__icon {
-        position: absolute !important;
-        left: $panel-padding + 8px;
-    }
+  &__icon {
+    position: absolute !important;
+    left: $panel-padding + 8px;
+  }
 
-    &__icon-right {
-        display: block !important;
-    }
+  &__icon-right {
+    display: block !important;
+  }
 }
 
 // Active menu item
 .gio-menu-items-accordion ::ng-deep gio-menu-item.active .gio-menu-item,
 .gio-menu-items-accordion ::ng-deep gio-menu-item:has(.gio-menu-item__active) .gio-menu-item {
-    background: oem.$oem-menu-active !important;
-    color: oem.$oem-menu-active-text !important;
+  background: oem.$oem-menu-active !important;
+  color: oem.$oem-menu-active-text !important;
 }
 
 // ===== REDUCED MODE (overlay behavior only) =====
 :host-context(.gio-menu__reduced) {
-    .gio-menu-items-trigger {
-        display: flex;
-    }
+  .gio-menu-items-trigger {
+    display: flex;
+  }
 
-    .gio-menu-items-accordion {
-        position: absolute;
-        left: calc(100% + $panel-padding
-        );
-    top: -2px;
-    min-width: 200px;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+  .gio-menu-items-accordion {
+    position: absolute;
     z-index: 1002;
-    transition: none;
-    background: oem.$oem-sub-menu-background;
+    top: -2px;
+    left: calc(100% + $panel-padding);
+    min-width: 200px;
     border-radius: $panel-border-radius;
+    background: oem.$oem-sub-menu-background;
+    opacity: 0;
+    pointer-events: none;
+    transition: none;
+    visibility: hidden;
 
     &.active ::ng-deep .mat-expansion-panel-header {
-        border-radius: 0px;
+      border-radius: 0;
     }
 
     // Override gio-menu-item reduced mode styles
     // These styles are set in gio-menu-item.component.scss for reduced mode
     // but we need to reset them for the overlay display
     ::ng-deep gio-menu-item .gio-menu-item {
-        width: auto !important;
-        margin: 4px ($panel-padding + 6px) !important;
-        padding: 0 4px !important;
+      width: auto !important;
+      padding: 0 4px !important;
+      margin: 4px ($panel-padding + 6px) !important;
 
-        &__title {
-            display: block !important;
-        }
+      &__title {
+        display: block !important;
+      }
     }
-}
+  }
 
-.gio-menu-items-container--overlay-visible .gio-menu-items-accordion {
+  .gio-menu-items-container--overlay-visible .gio-menu-items-accordion {
     opacity: 1;
-    visibility: visible;
     pointer-events: auto;
     transition: opacity 100ms ease-in;
-}
+    visibility: visible;
+  }
 }
