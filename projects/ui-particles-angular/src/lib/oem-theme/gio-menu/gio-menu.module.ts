@@ -30,7 +30,6 @@ import {
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 import { GioIconsModule } from '../../gio-icons/gio-icons.module';
-import { GioLicenseModule } from '../../gio-license/gio-license.module';
 
 import { GioMenuItemComponent } from './gio-menu-item/gio-menu-item.component';
 import { GioMenuComponent } from './gio-menu.component';
@@ -80,7 +79,6 @@ import { GioMenuItemsComponent } from './gio-menu-items/gio-menu-items.component
     MatExpansionPanelDescription,
     RouterLink,
     RouterLinkActive,
-    GioLicenseModule,
   ],
 })
 export class GioMenuModule {}
