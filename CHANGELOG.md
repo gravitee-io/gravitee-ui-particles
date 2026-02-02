@@ -1,3 +1,10 @@
+# [17.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.0.0...v17.1.0) (2026-02-02)
+
+
+### Features
+
+* **side-nav:** add menu-items component in sidenav ([8204d48](https://github.com/gravitee-io/gravitee-ui-particles/commit/8204d48ae0a51a783d818ae683dc627e25ae8f29))
+
 # [17.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.4.0...v17.0.0) (2026-01-26)
 
 
