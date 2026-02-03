@@ -18,7 +18,7 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { GioIconsModule } from '@gravitee/ui-particles-angular';
 
 export default {
-  title: 'Components / Button Toggle Group',
+  title: 'Components / Button / Button Toggle Group',
   decorators: [
     moduleMetadata({
       imports: [MatButtonToggleModule, GioIconsModule],
