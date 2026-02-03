@@ -108,3 +108,5 @@ export * from './gio-card-empty-state';
 
 export * from './gio-popover/public-api';
 export * from './gio-el/public-api';
+export * from './gio-action-menu/gio-action-menu.component';
+export * from './gio-action-menu/gio-action-menu-item.component';
