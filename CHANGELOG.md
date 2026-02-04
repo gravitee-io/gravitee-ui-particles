@@ -1,3 +1,10 @@
+# [17.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.1.0...v17.2.0) (2026-02-04)
+
+
+### Features
+
+* **button:** add action-menu component ([a6f2ce6](https://github.com/gravitee-io/gravitee-ui-particles/commit/a6f2ce6a38304ba821a73260340de02597dbf15d))
+
 # [17.1.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.0.0...v17.1.0) (2026-02-02)
 
 
