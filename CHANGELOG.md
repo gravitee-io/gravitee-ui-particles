@@ -1,3 +1,10 @@
+# [17.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.2.0...v17.3.0) (2026-02-06)
+
+
+### Features
+
+* add entrypoint connect phase for native apis ([17a96d7](https://github.com/gravitee-io/gravitee-ui-particles/commit/17a96d7216b8bb8c6c654d1c2c123dbf87477e7e))
+
 # [17.2.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.1.0...v17.2.0) (2026-02-04)
 
 
