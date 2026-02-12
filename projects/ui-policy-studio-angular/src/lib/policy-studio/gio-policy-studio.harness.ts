@@ -219,16 +219,15 @@ export class GioPolicyStudioHarness extends ComponentHarness {
     }
 
     if (httpSelector) {
-      let flowFormNewDialog:
-        | GioPolicyStudioFlowProxyFormDialogHarness
-        | GioPolicyStudioFlowLlmFormDialogHarness
-        | GioPolicyStudioFlowA2aFormDialogHarness
-        | null = await this.documentRootLocatorFactory().locatorForOptional(GioPolicyStudioFlowProxyFormDialogHarness)();
-      if (!flowFormNewDialog) {
-        flowFormNewDialog = await this.documentRootLocatorFactory().locatorForOptional(GioPolicyStudioFlowLlmFormDialogHarness)();
-      }
-      if (!flowFormNewDialog) {
-        flowFormNewDialog = await this.documentRootLocatorFactory().locatorForOptional(GioPolicyStudioFlowA2aFormDialogHarness)();
+      const httpDialogHarnesses = [
+        GioPolicyStudioFlowProxyFormDialogHarness,
+        GioPolicyStudioFlowLlmFormDialogHarness,
+        GioPolicyStudioFlowA2aFormDialogHarness,
+      ];
+      let flowFormNewDialog = null;
+      for (const harness of httpDialogHarnesses) {
+        flowFormNewDialog = await this.documentRootLocatorFactory().locatorForOptional(harness)();
+        if (flowFormNewDialog) break;
       }
       if (!flowFormNewDialog) {
         throw new Error('No Proxy, LLM or A2A flow form dialog found.');
