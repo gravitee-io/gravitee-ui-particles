@@ -65,6 +65,10 @@ import {
   GioPolicyStudioFlowLlmFormDialogComponent,
   GioPolicyStudioFlowLlmFormDialogData,
 } from '../flow-form-dialog/flow-llm-form-dialog/gio-ps-flow-llm-form-dialog.component';
+import {
+  GioPolicyStudioFlowA2aFormDialogComponent,
+  GioPolicyStudioFlowA2aFormDialogData,
+} from '../flow-form-dialog/flow-a2a-form-dialog/gio-ps-flow-a2a-form-dialog.component';
 
 interface FlowGroupMenuVM extends FlowGroupVM {
   flows: FlowMenuVM[];
@@ -408,6 +412,21 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges, OnDestroy {
           )
           .afterClosed();
         break;
+      case 'A2A_PROXY':
+        dialogResult = this.matDialog
+          .open<GioPolicyStudioFlowA2aFormDialogComponent, GioPolicyStudioFlowA2aFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+            GioPolicyStudioFlowA2aFormDialogComponent,
+            {
+              data: {
+                flow: undefined,
+              },
+              role: 'alertdialog',
+              id: 'gioPsFlowFormDialog',
+              width: GIO_DIALOG_WIDTH.MEDIUM,
+            },
+          )
+          .afterClosed();
+        break;
       default:
         throw new Error(`Unsupported API type ${this.apiType}`);
     }
@@ -569,6 +588,21 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges, OnDestroy {
         dialogResult = this.matDialog
           .open<GioPolicyStudioFlowLlmFormDialogComponent, GioPolicyStudioFlowLlmFormDialogData, GioPolicyStudioFlowFormDialogResult>(
             GioPolicyStudioFlowLlmFormDialogComponent,
+            {
+              data: {
+                flow: flowToEdit,
+              },
+              role: 'alertdialog',
+              id: 'gioPsFlowFormDialog',
+              width: GIO_DIALOG_WIDTH.MEDIUM,
+            },
+          )
+          .afterClosed();
+        break;
+      case 'A2A_PROXY':
+        dialogResult = this.matDialog
+          .open<GioPolicyStudioFlowA2aFormDialogComponent, GioPolicyStudioFlowA2aFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+            GioPolicyStudioFlowA2aFormDialogComponent,
             {
               data: {
                 flow: flowToEdit,

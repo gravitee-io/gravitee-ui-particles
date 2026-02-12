@@ -187,3 +187,28 @@ export function fakeLlmFlow(modifier?: Partial<Flow> | ((baseApi: Flow) => Flow)
     ...modifier,
   };
 }
+
+export function fakeA2aFlow(modifier?: Partial<Flow> | ((baseApi: Flow) => Flow)): Flow {
+  const httpSelector: HttpSelector = {
+    type: 'HTTP',
+    path: '/path',
+    pathOperator: 'EQUALS',
+    methods: ['GET'],
+  };
+
+  const base: Flow = {
+    name: 'Flow name',
+    selectors: [httpSelector],
+    request: [],
+    response: [],
+    enabled: true,
+  };
+
+  if (isFunction(modifier)) {
+    return modifier(base);
+  }
+  return {
+    ...base,
+    ...modifier,
+  };
+}

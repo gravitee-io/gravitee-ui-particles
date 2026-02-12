@@ -272,6 +272,36 @@
           (stepsChange)="onStepsChange('response', $event)"
         ></gio-ps-flow-details-phase>
       }
+      @if (apiType === 'A2A_PROXY') {
+        <gio-ps-flow-details-phase
+          class="content__phase"
+          name="Request phase"
+          description="Policies will be applied during the connection establishment"
+          [readOnly]="readOnly"
+          [startConnector]="entrypointsInfo | gioFilterConnectorsByMode: 'REQUEST_RESPONSE'"
+          [endConnector]="endpointsInfo | gioFilterConnectorsByMode: 'REQUEST_RESPONSE'"
+          [steps]="flow.request ?? []"
+          [apiType]="apiType"
+          [genericPolicies]="genericPolicies"
+          [trialUrl]="trialUrl"
+          policyFlowPhase="REQUEST"
+          (stepsChange)="onStepsChange('request', $event)"
+        ></gio-ps-flow-details-phase>
+        <gio-ps-flow-details-phase
+          class="content__phase"
+          name="Response phase"
+          description="Policies will be applied during the connection termination"
+          [readOnly]="readOnly"
+          [startConnector]="endpointsInfo | gioFilterConnectorsByMode: 'REQUEST_RESPONSE'"
+          [endConnector]="entrypointsInfo | gioFilterConnectorsByMode: 'REQUEST_RESPONSE'"
+          [steps]="flow.response ?? []"
+          [apiType]="apiType"
+          [genericPolicies]="genericPolicies"
+          [trialUrl]="trialUrl"
+          policyFlowPhase="RESPONSE"
+          (stepsChange)="onStepsChange('response', $event)"
+        ></gio-ps-flow-details-phase>
+      }
     </div>
   } @else {
     <div class="emptyFlows">

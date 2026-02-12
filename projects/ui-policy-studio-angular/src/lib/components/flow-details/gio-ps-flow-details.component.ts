@@ -48,6 +48,10 @@ import {
   GioPolicyStudioFlowLlmFormDialogComponent,
   GioPolicyStudioFlowLlmFormDialogData,
 } from '../flow-form-dialog/flow-llm-form-dialog/gio-ps-flow-llm-form-dialog.component';
+import {
+  GioPolicyStudioFlowA2aFormDialogComponent,
+  GioPolicyStudioFlowA2aFormDialogData,
+} from '../flow-form-dialog/flow-a2a-form-dialog/gio-ps-flow-a2a-form-dialog.component';
 
 @Component({
   imports: [
@@ -205,6 +209,21 @@ export class GioPolicyStudioDetailsComponent implements OnChanges {
         dialogResult = this.matDialog
           .open<GioPolicyStudioFlowLlmFormDialogComponent, GioPolicyStudioFlowLlmFormDialogData, GioPolicyStudioFlowFormDialogResult>(
             GioPolicyStudioFlowLlmFormDialogComponent,
+            {
+              data: {
+                flow: this.flow,
+              },
+              role: 'alertdialog',
+              id: 'gioPsFlowFormDialog',
+              width: GIO_DIALOG_WIDTH.MEDIUM,
+            },
+          )
+          .afterClosed();
+        break;
+      case 'A2A_PROXY':
+        dialogResult = this.matDialog
+          .open<GioPolicyStudioFlowA2aFormDialogComponent, GioPolicyStudioFlowA2aFormDialogData, GioPolicyStudioFlowFormDialogResult>(
+            GioPolicyStudioFlowA2aFormDialogComponent,
             {
               data: {
                 flow: this.flow,

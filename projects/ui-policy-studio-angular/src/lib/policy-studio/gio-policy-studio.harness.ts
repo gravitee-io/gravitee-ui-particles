@@ -29,6 +29,7 @@ import { GioPolicyStudioDetailsPhaseHarness, PhaseType } from '../components/flo
 import { GioPolicyStudioFlowNativeFormDialogHarness } from '../components/flow-form-dialog/flow-native-form-dialog/gio-ps-flow-native-form-dialog.harness';
 import { GioPolicyStudioFlowMcpFormDialogHarness } from '../components/flow-form-dialog/flow-mcp-form-dialog/gio-ps-flow-mcp-form-dialog.harness';
 import { GioPolicyStudioFlowLlmFormDialogHarness } from '../components/flow-form-dialog/flow-llm-form-dialog/gio-ps-flow-llm-form-dialog.harness';
+import { GioPolicyStudioFlowA2aFormDialogHarness } from '../components/flow-form-dialog/flow-a2a-form-dialog/gio-ps-flow-a2a-form-dialog.harness';
 
 export class GioPolicyStudioHarness extends ComponentHarness {
   public static hostSelector = 'gio-policy-studio';
@@ -218,13 +219,19 @@ export class GioPolicyStudioHarness extends ComponentHarness {
     }
 
     if (httpSelector) {
-      let flowFormNewDialog: GioPolicyStudioFlowProxyFormDialogHarness | GioPolicyStudioFlowLlmFormDialogHarness | null =
-        await this.documentRootLocatorFactory().locatorForOptional(GioPolicyStudioFlowProxyFormDialogHarness)();
+      let flowFormNewDialog:
+        | GioPolicyStudioFlowProxyFormDialogHarness
+        | GioPolicyStudioFlowLlmFormDialogHarness
+        | GioPolicyStudioFlowA2aFormDialogHarness
+        | null = await this.documentRootLocatorFactory().locatorForOptional(GioPolicyStudioFlowProxyFormDialogHarness)();
       if (!flowFormNewDialog) {
         flowFormNewDialog = await this.documentRootLocatorFactory().locatorForOptional(GioPolicyStudioFlowLlmFormDialogHarness)();
       }
       if (!flowFormNewDialog) {
-        throw new Error('No Proxy or LLM flow form dialog found.');
+        flowFormNewDialog = await this.documentRootLocatorFactory().locatorForOptional(GioPolicyStudioFlowA2aFormDialogHarness)();
+      }
+      if (!flowFormNewDialog) {
+        throw new Error('No Proxy, LLM or A2A flow form dialog found.');
       }
       await flowFormNewDialog.setFlowFormValues({
         name: flow.name,
