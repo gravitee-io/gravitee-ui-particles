@@ -289,3 +289,24 @@ export function fakeLlmProxyEndpoint(modifier?: Partial<ConnectorInfo> | ((base:
     ...modifier,
   };
 }
+
+export function fakeA2aProxyConnector(modifier?: Partial<ConnectorInfo> | ((base: ConnectorInfo) => ConnectorInfo)): ConnectorInfo {
+  const base: ConnectorInfo = {
+    type: 'a2a-proxy',
+    name: 'A2A Proxy',
+    supportedModes: ['REQUEST_RESPONSE'],
+    icon: 'gio:language',
+  };
+
+  if (isFunction(modifier)) {
+    return modifier(base);
+  }
+
+  return {
+    ...base,
+    ...modifier,
+  };
+}
+
+export const fakeA2aProxyEntrypoint = fakeA2aProxyConnector;
+export const fakeA2aProxyEndpoint = fakeA2aProxyConnector;

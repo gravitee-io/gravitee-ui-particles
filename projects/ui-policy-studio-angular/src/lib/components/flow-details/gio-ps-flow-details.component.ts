@@ -28,10 +28,7 @@ import {
   GioPolicyStudioFlowMessageFormDialogData,
 } from '../flow-form-dialog/flow-message-form-dialog/gio-ps-flow-message-form-dialog.component';
 import { ApiType, ChannelSelector, ConnectorInfo, Operation, Policy, Step, GenericPolicy } from '../../models';
-import {
-  GioPolicyStudioFlowProxyFormDialogComponent,
-  GioPolicyStudioFlowProxyFormDialogData,
-} from '../flow-form-dialog/flow-proxy-form-dialog/gio-ps-flow-proxy-form-dialog.component';
+import { GioPolicyStudioFlowProxyFormDialogComponent } from '../flow-form-dialog/flow-proxy-form-dialog/gio-ps-flow-proxy-form-dialog.component';
 import { GioPolicyStudioFlowFormDialogResult } from '../flow-form-dialog/gio-ps-flow-form-dialog-result.model';
 import { GioPolicyStudioDetailsPhaseComponent } from '../flow-details-phase/gio-ps-flow-details-phase.component';
 import { GioFilterConnectorsByModePipe } from '../filter-pipe/gio-flter-connectors-by-mode.pipe';
@@ -44,10 +41,8 @@ import {
   GioPolicyStudioFlowMcpFormDialogComponent,
   GioPolicyStudioFlowMcpFormDialogData,
 } from '../flow-form-dialog/flow-mcp-form-dialog/gio-ps-flow-mcp-form-dialog.component';
-import {
-  GioPolicyStudioFlowLlmFormDialogComponent,
-  GioPolicyStudioFlowLlmFormDialogData,
-} from '../flow-form-dialog/flow-llm-form-dialog/gio-ps-flow-llm-form-dialog.component';
+import { GioPolicyStudioFlowLlmFormDialogComponent } from '../flow-form-dialog/flow-llm-form-dialog/gio-ps-flow-llm-form-dialog.component';
+import { GioPolicyStudioFlowA2aFormDialogComponent } from '../flow-form-dialog/flow-a2a-form-dialog/gio-ps-flow-a2a-form-dialog.component';
 
 @Component({
   imports: [
@@ -155,20 +150,25 @@ export class GioPolicyStudioDetailsComponent implements OnChanges {
           .afterClosed();
         break;
       case 'PROXY':
+      case 'LLM_PROXY':
+      case 'A2A_PROXY': {
+        const httpProxyComponentMap = {
+          PROXY: GioPolicyStudioFlowProxyFormDialogComponent,
+          LLM_PROXY: GioPolicyStudioFlowLlmFormDialogComponent,
+          A2A_PROXY: GioPolicyStudioFlowA2aFormDialogComponent,
+        };
         dialogResult = this.matDialog
-          .open<GioPolicyStudioFlowProxyFormDialogComponent, GioPolicyStudioFlowProxyFormDialogData, GioPolicyStudioFlowFormDialogResult>(
-            GioPolicyStudioFlowProxyFormDialogComponent,
-            {
-              data: {
-                flow: this.flow,
-              },
-              role: 'alertdialog',
-              id: 'gioPsFlowProxyFormDialog',
-              width: GIO_DIALOG_WIDTH.MEDIUM,
+          .open(httpProxyComponentMap[this.apiType], {
+            data: {
+              flow: this.flow,
             },
-          )
+            role: 'alertdialog',
+            id: this.apiType === 'PROXY' ? 'gioPsFlowProxyFormDialog' : 'gioPsFlowFormDialog',
+            width: GIO_DIALOG_WIDTH.MEDIUM,
+          })
           .afterClosed();
         break;
+      }
       case 'NATIVE':
         dialogResult = this.matDialog
           .open<GioPolicyStudioFlowNativeFormDialogComponent, GioPolicyStudioFlowNativeFormDialogData, GioPolicyStudioFlowFormDialogResult>(
@@ -192,21 +192,6 @@ export class GioPolicyStudioDetailsComponent implements OnChanges {
             {
               data: {
                 parentGroupName: this.flow!._parentFlowGroupName,
-                flow: this.flow,
-              },
-              role: 'alertdialog',
-              id: 'gioPsFlowFormDialog',
-              width: GIO_DIALOG_WIDTH.MEDIUM,
-            },
-          )
-          .afterClosed();
-        break;
-      case 'LLM_PROXY':
-        dialogResult = this.matDialog
-          .open<GioPolicyStudioFlowLlmFormDialogComponent, GioPolicyStudioFlowLlmFormDialogData, GioPolicyStudioFlowFormDialogResult>(
-            GioPolicyStudioFlowLlmFormDialogComponent,
-            {
-              data: {
                 flow: this.flow,
               },
               role: 'alertdialog',
