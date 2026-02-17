@@ -1,3 +1,10 @@
+# [17.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.3.0...v17.4.0) (2026-02-17)
+
+
+### Features
+
+* **policy-studio:** add A2A_PROXY flow support in policy studio ([bafa8bb](https://github.com/gravitee-io/gravitee-ui-particles/commit/bafa8bbf7eba4e4938eb51ebbd141bbd52a931ff))
+
 # [17.3.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.2.0...v17.3.0) (2026-02-06)
 
 
