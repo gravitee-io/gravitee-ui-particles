@@ -1,3 +1,10 @@
+# [17.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.5.0...v17.6.0) (2026-02-23)
+
+
+### Features
+
+* enhance schema processing to recursively handle all nested objects and arrays ([f47f463](https://github.com/gravitee-io/gravitee-ui-particles/commit/f47f4634840e4f5a3c14e3def8dbfdc2abe5b1c3))
+
 # [17.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.4.0...v17.5.0) (2026-02-23)
 
 
