@@ -1,3 +1,10 @@
+# [17.5.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.4.0...v17.5.0) (2026-02-23)
+
+
+### Features
+
+* enhance GioJsonSchema with support for inline gioConfig on $ref definitions ([d048f4d](https://github.com/gravitee-io/gravitee-ui-particles/commit/d048f4d866b5c93104eae9f7701886a11f22cdb3))
+
 # [17.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.3.0...v17.4.0) (2026-02-17)
 
 
