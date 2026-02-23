@@ -18,6 +18,12 @@ import { GioJsonSchema } from '../model/GioJsonSchema';
 
 export const displayIfExample: GioJsonSchema = {
   type: 'object',
+  definitions: {
+    simpleString: {
+      type: 'string',
+      title: 'String field in ref',
+    },
+  },
   properties: {
     showStringField: {
       type: 'boolean',
@@ -27,6 +33,16 @@ export const displayIfExample: GioJsonSchema = {
     stringField: {
       type: 'string',
       title: 'String field',
+      gioConfig: {
+        displayIf: {
+          $eq: {
+            'value.showStringField': true,
+          },
+        },
+      },
+    },
+    objectWithRef: {
+      $ref: '#/definitions/simpleString',
       gioConfig: {
         displayIf: {
           $eq: {

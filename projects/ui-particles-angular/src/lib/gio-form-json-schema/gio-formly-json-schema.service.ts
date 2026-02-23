@@ -29,7 +29,8 @@ export class GioFormlyJsonSchemaService {
   constructor(private readonly formlyJsonschema: FormlyJsonschema) {}
 
   public toFormlyFieldConfig(jsonSchema: GioJsonSchema, context?: GioJsonSchemaContext): FormlyFieldConfig {
-    return this.formlyJsonschema.toFieldConfig(jsonSchema, {
+    const preprocessed = this.preserveGioConfigOnRefs(jsonSchema);
+    return this.formlyJsonschema.toFieldConfig(preprocessed, {
       map: (mappedField: FormlyFieldConfig, mapSource: JSONSchema7) => {
         mappedField = this.uiTypeMap(mappedField, mapSource); // Keep first in order to correctly construct tree
         mappedField = this.displayIfMap(mappedField, mapSource, context);
@@ -261,6 +262,69 @@ export class GioFormlyJsonSchemaService {
     }
 
     return mappedField;
+  }
+
+  /**
+   * Formly's $ref resolution only preserves title, description, default and widget from sibling properties.
+   * This method walks the schema and inlines $ref definitions when gioConfig is present alongside a $ref,
+   * so that gioConfig is not lost during resolution.
+   */
+  private preserveGioConfigOnRefs(schema: GioJsonSchema): GioJsonSchema {
+    return this.walkSchema(schema, schema);
+  }
+
+  private walkSchema(node: GioJsonSchema, root: GioJsonSchema): GioJsonSchema {
+    if (!isObject(node) || isArray(node)) {
+      return node;
+    }
+
+    let result = { ...node };
+
+    // If this node has a $ref alongside gioConfig, inline the resolved definition
+    if (result.$ref && result.gioConfig) {
+      const resolved = this.resolveRef(result.$ref, root);
+      if (resolved) {
+        const { $ref, ...rest } = result;
+        result = { ...resolved, ...rest };
+      }
+    }
+
+    // Recurse into properties
+    if (result.properties) {
+      const newProps: Record<string, GioJsonSchema> = {};
+      for (const [key, value] of Object.entries(result.properties)) {
+        newProps[key] = this.walkSchema(value as GioJsonSchema, root);
+      }
+      result = { ...result, properties: newProps };
+    }
+
+    // Recurse into items
+    if (result.items) {
+      if (isArray(result.items)) {
+        result = { ...result, items: result.items.map(item => this.walkSchema(item as GioJsonSchema, root)) };
+      } else if (isObject(result.items)) {
+        result = { ...result, items: this.walkSchema(result.items as GioJsonSchema, root) };
+      }
+    }
+
+    // Recurse into allOf / oneOf / anyOf
+    for (const keyword of ['allOf', 'oneOf', 'anyOf'] as const) {
+      if (isArray(result[keyword])) {
+        result = { ...result, [keyword]: (result[keyword] as GioJsonSchema[]).map(s => this.walkSchema(s, root)) };
+      }
+    }
+
+    return result;
+  }
+
+  private resolveRef(ref: string, root: GioJsonSchema): GioJsonSchema | null {
+    const [, pointer] = ref.split('#/');
+    if (!pointer) {
+      return null;
+    }
+    return pointer
+      .split('/')
+      .reduce<GioJsonSchema | null>((acc, path) => (acc && ((acc as Record<string, unknown>)[path] as GioJsonSchema)) ?? null, root);
   }
 
   private uniqueValueMap(mappedField: FormlyFieldConfig, mapSource: JSONSchema7): FormlyFieldConfig {

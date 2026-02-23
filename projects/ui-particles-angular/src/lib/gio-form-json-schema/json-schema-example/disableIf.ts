@@ -18,11 +18,16 @@ import { GioJsonSchema } from '../model/GioJsonSchema';
 
 export const disableIfExample: GioJsonSchema = {
   type: 'object',
+  definitions: {
+    simpleString: {
+      type: 'string',
+      title: 'String field in ref',
+    },
+  },
   properties: {
     disableStringField: {
       type: 'boolean',
       title: 'Disable "string field" and "array field"',
-      description: 'Enable or disable field below',
     },
     stringField: {
       type: 'string',
@@ -41,6 +46,16 @@ export const disableIfExample: GioJsonSchema = {
       items: {
         type: 'string',
       },
+      gioConfig: {
+        disableIf: {
+          $eq: {
+            'value.disableStringField': true,
+          },
+        },
+      },
+    },
+    objectWithRef: {
+      $ref: '#/definitions/simpleString',
       gioConfig: {
         disableIf: {
           $eq: {
