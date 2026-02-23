@@ -28,6 +28,7 @@ export const disableIfExample: GioJsonSchema = {
     disableStringField: {
       type: 'boolean',
       title: 'Disable "string field" and "array field"',
+      description: 'Enable or disable field below',
     },
     stringField: {
       type: 'string',

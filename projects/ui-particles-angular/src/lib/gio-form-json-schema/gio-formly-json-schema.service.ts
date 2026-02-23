@@ -289,28 +289,17 @@ export class GioFormlyJsonSchemaService {
       }
     }
 
-    // Recurse into properties
-    if (result.properties) {
-      const newProps: Record<string, GioJsonSchema> = {};
-      for (const [key, value] of Object.entries(result.properties)) {
-        newProps[key] = this.walkSchema(value as GioJsonSchema, root);
-      }
-      result = { ...result, properties: newProps };
-    }
-
-    // Recurse into items
-    if (result.items) {
-      if (isArray(result.items)) {
-        result = { ...result, items: result.items.map(item => this.walkSchema(item as GioJsonSchema, root)) };
-      } else if (isObject(result.items)) {
-        result = { ...result, items: this.walkSchema(result.items as GioJsonSchema, root) };
-      }
-    }
-
-    // Recurse into allOf / oneOf / anyOf
-    for (const keyword of ['allOf', 'oneOf', 'anyOf'] as const) {
-      if (isArray(result[keyword])) {
-        result = { ...result, [keyword]: (result[keyword] as GioJsonSchema[]).map(s => this.walkSchema(s, root)) };
+    // Recurse into all nested objects and arrays to cover properties, items,
+    // allOf/oneOf/anyOf, definitions, gioExternalDefinitions, dependencies, etc.
+    for (const [key, value] of Object.entries(result)) {
+      if (key === 'gioConfig') continue;
+      if (isArray(value)) {
+        result = {
+          ...result,
+          [key]: value.map(item => (isObject(item) && !isArray(item) ? this.walkSchema(item as GioJsonSchema, root) : item)),
+        };
+      } else if (isObject(value)) {
+        result = { ...result, [key]: this.walkSchema(value as GioJsonSchema, root) };
       }
     }
 
