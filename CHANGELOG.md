@@ -1,3 +1,10 @@
+## [17.6.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.6.0...v17.6.1) (2026-02-27)
+
+
+### Bug Fixes
+
+* show entrypoint connect phase above interact for native Kafka APIs ([1d2b150](https://github.com/gravitee-io/gravitee-ui-particles/commit/1d2b15002d4ceb7ed5b26791f3b7ffb7148e5ce9))
+
 # [17.6.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.5.0...v17.6.0) (2026-02-23)
 
 
