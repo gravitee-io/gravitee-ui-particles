@@ -26,6 +26,8 @@ export class GioSubmenuItemComponent {
 
   @Input() public iconRight?: string;
 
+  @Input() public iconRightTooltip?: string;
+
   @ViewChild('gioSubmenuItem', { static: false })
   private gioSubmenuItem: ElementRef<HTMLDivElement> | undefined;
 

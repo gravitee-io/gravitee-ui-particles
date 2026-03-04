@@ -149,7 +149,7 @@ const gioMenuContentWithItemsPanel = `
                <gio-menu-item routerLink="/api-score/rulesets" routerLinkActive>Rulesets & Functions</gio-menu-item>
               </gio-menu-items>
               
-              <gio-menu-items [title]="'Analytics'" icon="gio:bar-chart-2" routerBasePath="/analytics"> 
+              <gio-menu-items [title]="'Analytics'" icon="gio:bar-chart-2" routerBasePath="/analytics" iconRight="info" iconRightTooltip="This is a tooltip"> 
                <gio-menu-item routerLink="/analytics" routerLinkActive [routerLinkActiveOptions]="{ exact: true }">Overview</gio-menu-item>
                <gio-menu-item routerLink="/analytics/dashboards" routerLinkActive>Dashboards</gio-menu-item>
                <gio-menu-item routerLink="/analytics/logs-explorer" routerLinkActive>Logs</gio-menu-item>
@@ -401,7 +401,7 @@ const gioSubmenuContent = `
           <gio-submenu-item tabindex="1" (click)="onClick('path')" [active]="isActive('path')">Path mappings</gio-submenu-item>
           <gio-submenu-item tabindex="1" (click)="onClick('alerts')" [active]="isActive('alerts')">Alerts</gio-submenu-item>
         </gio-submenu-group>
-      <gio-submenu-item tabindex="1" (click)="onClick('audit')" [active]="isActive('audit')" iconRight="gio:lock">Audit</gio-submenu-item>`;
+      <gio-submenu-item tabindex="1" (click)="onClick('audit')" [active]="isActive('audit')" iconRight="gio:lock" iconRightTooltip="Locked Submenu Item">Audit</gio-submenu-item>`;
 
 export const WithSubMenu: StoryObj = {
   argTypes: OEM_THEME_ARG_TYPES,

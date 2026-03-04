@@ -18,6 +18,11 @@
 <div #gioSubmenuItem class="gio-submenu-item" [class.gio-submenu-item__active]="active">
   <span class="gio-submenu-item__title"><ng-content></ng-content></span>
   @if (iconRight) {
-    <mat-icon class="gio-submenu-item__icon-right" [svgIcon]="iconRight"></mat-icon>
+    <mat-icon
+      class="gio-submenu-item__icon-right"
+      [svgIcon]="iconRight.startsWith('gio:') ? iconRight : ''"
+      [matTooltip]="iconRightTooltip"
+      >{{ iconRight.startsWith('gio:') ? '' : iconRight }}</mat-icon
+    >
   }
 </div>

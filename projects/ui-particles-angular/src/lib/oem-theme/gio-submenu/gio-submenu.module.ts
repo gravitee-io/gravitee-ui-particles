@@ -16,6 +16,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { GioIconsModule } from '../../gio-icons/gio-icons.module';
 
@@ -26,6 +27,6 @@ import { GioSubmenuItemComponent } from './gio-submenu-item/gio-submenu-item.com
 @NgModule({
   declarations: [GioSubmenuComponent, GioSubmenuGroupComponent, GioSubmenuItemComponent, GioSubmenuTitleDirective],
   exports: [GioSubmenuComponent, GioSubmenuGroupComponent, GioSubmenuItemComponent, GioSubmenuTitleDirective],
-  imports: [CommonModule, MatIconModule, GioIconsModule],
+  imports: [CommonModule, MatIconModule, GioIconsModule, MatTooltipModule],
 })
 export class GioSubmenuModule {}

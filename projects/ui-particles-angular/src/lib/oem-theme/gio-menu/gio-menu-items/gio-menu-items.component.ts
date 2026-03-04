@@ -37,6 +37,7 @@ import { GioMenuService } from '../gio-menu.service';
 export class GioMenuItemsComponent {
   @Input() public icon = '';
   @Input() public iconRight?: string;
+  @Input() public iconRightTooltip?: string;
   @Input() public title = 'default';
   @Input() public active = false;
   @Input() public routerBasePath?: string;
