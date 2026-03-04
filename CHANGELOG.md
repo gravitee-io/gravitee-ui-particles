@@ -1,3 +1,10 @@
+# [17.7.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.6.1...v17.7.0) (2026-03-04)
+
+
+### Features
+
+* **button:** add icon right and tooltip support to gio-menu-items component ([ef45baf](https://github.com/gravitee-io/gravitee-ui-particles/commit/ef45bafb985cea3a461fdecaa73c81c356b17d13))
+
 ## [17.6.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.6.0...v17.6.1) (2026-02-27)
 
 
