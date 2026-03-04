@@ -29,6 +29,7 @@ import {
 } from '@angular/material/expansion';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { GioIconsModule } from '../../gio-icons/gio-icons.module';
 
@@ -81,6 +82,7 @@ import { GioMenuItemsComponent } from './gio-menu-items/gio-menu-items.component
     RouterLink,
     RouterLinkActive,
     OverlayModule,
+    MatTooltipModule,
   ],
 })
 export class GioMenuModule {}

@@ -28,6 +28,8 @@
   }
   <span class="gio-menu-item__title"><ng-content></ng-content></span>
   @if (iconRight) {
-    <mat-icon class="gio-menu-item__icon-right" [svgIcon]="iconRight"></mat-icon>
+    <mat-icon class="gio-menu-item__icon-right" [svgIcon]="iconRight.startsWith('gio:') ? iconRight : ''" [matTooltip]="iconRightTooltip">{{
+      iconRight.startsWith('gio:') ? '' : iconRight
+    }}</mat-icon>
   }
 </div>

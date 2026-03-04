@@ -91,9 +91,13 @@ $header-padding-left: $panel-padding + 8px;
 // Right icon (for lock icon when license is missing)
 .gio-menu-items-host .gio-menu-items__icon-right {
   position: absolute;
+  z-index: 1;
   right: 16px;
-  width: $icon-size;
-  height: $icon-size;
+  width: 18px;
+  height: 18px;
+  cursor: default;
+  font-size: 18px;
+  pointer-events: auto;
 }
 
 // ===== HEADER STYLING =====

@@ -62,7 +62,13 @@
             }
             <span class="gio-menu-items__title">{{ title }}</span>
             @if (iconRight) {
-              <mat-icon class="gio-menu-items__icon-right" [svgIcon]="iconRight"></mat-icon>
+              <mat-icon
+                class="gio-menu-items__icon-right"
+                [svgIcon]="iconRight.startsWith('gio:') ? iconRight : ''"
+                [matTooltip]="iconRightTooltip"
+                matTooltipPosition="above"
+                >{{ iconRight.startsWith('gio:') ? '' : iconRight }}</mat-icon
+              >
             }
           </mat-panel-title>
         </mat-expansion-panel-header>
