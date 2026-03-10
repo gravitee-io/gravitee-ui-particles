@@ -175,10 +175,44 @@ export const toCronDescription = (cronExpression: string): string => {
   throwIfInvalid(cronExpression);
 
   if (!isEmpty(cronExpression)) {
-    return Cronstrue.toString(cronExpression);
+    return Cronstrue.toString(expandMisleadingSteps(cronExpression));
   }
 
   return '';
+};
+
+/**
+ * Expand step values (like *\/50) that don't evenly divide the field range
+ * into explicit value lists (like 0,50) so that cronstrue generates an accurate description.
+ *
+ * For example, *\/50 in the minutes field means "at every minute divisible by 50" (i.e. 0 and 50),
+ * NOT "every 50 minutes". Without this fix, cronstrue would display "Every 50 minutes" which is misleading.
+ *
+ * See: https://github.com/bradymholt/cRonstrue/issues/360
+ */
+const expandMisleadingSteps = (cronExpression: string): string => {
+  const parts = cronExpression.trim().split(/\s+/);
+  // Field ranges: [seconds, minutes, hours, day-of-month, month, day-of-week]
+  const fieldRanges = [60, 60, 24, undefined, undefined, undefined];
+
+  const expandedParts = parts.map((part, index) => {
+    const range = fieldRanges[index];
+    if (range === undefined) return part;
+
+    const match = part.match(/^\*\/(\d+)$/);
+    if (!match) return part;
+
+    const step = parseInt(match[1], 10);
+    if (step <= 0 || range % step === 0) return part;
+
+    const values: number[] = [];
+    for (let v = 0; v < range; v += step) {
+      values.push(v);
+    }
+    return values.join(',');
+  });
+
+  return expandedParts.join(' ');
 };
 
 /**
