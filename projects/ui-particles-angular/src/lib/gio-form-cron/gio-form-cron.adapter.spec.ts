@@ -109,6 +109,23 @@ describe('toCronDescription', () => {
     expect(toCronDescription(cron)).toEqual(expected);
   });
 
+  it.each([
+    ['0 */50 * * * *', 'At 0 and 50 minutes past the hour'],
+    ['0 */7 * * * *', 'At 0, 7, 14, 21, 28, 35, 42, 49, and 56 minutes past the hour'],
+    ['0 */40 * * * *', 'At 0 and 40 minutes past the hour'],
+    ['*/50 * * * * *', 'At 0 and 50 seconds past the minute'],
+  ])('should return accurate description for misleading step %s', (cron, expected) => {
+    expect(toCronDescription(cron)).toEqual(expected);
+  });
+
+  it.each([
+    ['0 */15 * * * *', 'Every 15 minutes'],
+    ['0 */30 * * * *', 'Every 30 minutes'],
+    ['*/10 * * * * *', 'Every 10 seconds'],
+  ])('should keep standard description for evenly dividing step %s', (cron, expected) => {
+    expect(toCronDescription(cron)).toEqual(expected);
+  });
+
   it.each(['15 10 * * 5', '1 2 3 4 5', '1 2 3 4 5 ', '1 2 3 4  5', '1 2 3 4   5'])('throw when cron [%s] does not have 6 parts', cron => {
     expect(() => toCronDescription(cron)).toThrowError('Cron expression must have 6 parts.');
   });
