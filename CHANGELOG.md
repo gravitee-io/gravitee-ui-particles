@@ -1,3 +1,10 @@
+## [16.4.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.4.0...v16.4.1) (2026-03-11)
+
+
+### Bug Fixes
+
+* **cron:** show accurate description for step values that don't evenly divide the range ([2cc01b8](https://github.com/gravitee-io/gravitee-ui-particles/commit/2cc01b8ff1badf478aaa28f324acc511057ea9ed))
+
 # [16.4.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.3.0...v16.4.0) (2026-01-13)
 
 
