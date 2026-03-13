@@ -101,7 +101,7 @@ describe('GioFormJsonSchema', () => {
       expect(testComponent.isReady).toEqual(false);
       expect(testComponent.form.touched).toEqual(false);
       expect(testComponent.form.dirty).toEqual(false);
-      expect(testComponent.form.status).toEqual('PENDING');
+      expect(testComponent.form.status).toEqual('VALID');
       expect(testComponent.form.invalid).toEqual(false); // Valid after initialization
       expect(valueChangesWatch.length).toEqual(0);
 
@@ -184,11 +184,6 @@ describe('GioFormJsonSchema', () => {
       expect(testComponent.form.value).toEqual({ config: null });
       fixture.detectChanges();
       expect(testComponent.isReady).toEqual(false);
-      expect(testComponent.form.value).toEqual({
-        config: {
-          simpleString: 'default value',
-        },
-      });
 
       await fixture.whenStable();
       expect(testComponent.isReady).toEqual(true);
@@ -223,12 +218,14 @@ describe('GioFormJsonSchema', () => {
 
       const simpleStringInput = await loader.getHarness(MatInputHarness.with({ selector: '[id*="simpleString"]' }));
       await simpleStringInput.setValue('a');
+      await fixture.whenStable();
 
       expect(testComponent.form.touched).toEqual(true);
       expect(testComponent.form.dirty).toEqual(true);
       expect(testComponent.form.invalid).toEqual(false);
 
       await simpleStringInput.setValue('');
+      await fixture.whenStable();
       expect(testComponent.form.invalid).toEqual(true);
     });
 

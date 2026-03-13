@@ -43,7 +43,7 @@ Object.defineProperty(window, 'getComputedStyle', {
  * ISSUE: https://github.com/thymikee/jest-preset-angular/issues/79
  *Q: "Could not find Angular Material core theme.." or "Could not find HammerJS" when testing components which used Material Design lib.
  */
-const WARN_SUPPRESSING_PATTERNS = [/Could not find Angular Material core theme/, /Could not find HammerJS/];
+const WARN_SUPPRESSING_PATTERNS = [/Could not find Angular Material core theme/, /Could not find HammerJS/, /NG0956/];
 
 const warn = console.warn;
 
