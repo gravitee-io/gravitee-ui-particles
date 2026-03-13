@@ -99,6 +99,11 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnChang
 
   private stateChanges$ = new Subject<void>();
 
+  private isWritingValue = false;
+
+  private isStable = false;
+
+  private isUpdatingParent = false;
   constructor(
     private readonly gioFormlyJsonSchema: GioFormlyJsonSchemaService,
     private readonly elRef: ElementRef,
@@ -168,10 +173,10 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnChang
     this.formGroup.valueChanges
       .pipe(
         distinctUntilChanged(isEqual),
+        filter(() => !this.isWritingValue && this.isStable),
         tap(value => {
-          this.ngControl?.control?.reset(value, { emitEvent: false });
+          this.syncValueToParent(value);
         }),
-        takeUntil(this.ready),
         takeUntil(this.unsubscribe$),
       )
       .subscribe();
@@ -246,7 +251,22 @@ export class GioFormJsonSchemaComponent implements ControlValueAccessor, OnChang
 
   // From ControlValueAccessor
   public writeValue(value: unknown): void {
+    if (this.isUpdatingParent) return;
+    this.isWritingValue = true;
+    this.isStable = false;
     this.model = cloneDeep(value) ?? {};
+    setTimeout(() => {
+      this.isWritingValue = false;
+      this.isStable = true;
+      this.syncValueToParent(this.formGroup.value);
+      this.changeDetectorRef.markForCheck();
+    }, 0);
+  }
+
+  private syncValueToParent(value: unknown): void {
+    this.isUpdatingParent = true;
+    this.ngControl?.control?.setValue(value, { emitEvent: false });
+    this.isUpdatingParent = false;
   }
 
   // From ControlValueAccessor
