@@ -1,3 +1,10 @@
+## [17.7.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.7.1...v17.7.2) (2026-03-24)
+
+
+### Bug Fixes
+
+* **policy-studio:** deduplicate entrypoints and endpoints info by type ([9340749](https://github.com/gravitee-io/gravitee-ui-particles/commit/9340749ee2adc6b9dab21ffc504a98426a30b68e))
+
 ## [17.7.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.7.0...v17.7.1) (2026-03-11)
 
 
