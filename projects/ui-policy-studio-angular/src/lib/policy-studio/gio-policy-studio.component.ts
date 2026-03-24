@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { Component, computed, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
-import { cloneDeep, differenceBy, flatten, isEqual, omit, unionBy, uniqueId } from 'lodash';
+import { cloneDeep, differenceBy, flatten, isEqual, omit, unionBy, uniqBy, uniqueId } from 'lodash';
 import { EMPTY, Subscription, timer } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { GioIconsModule } from '@gravitee/ui-particles-angular';
@@ -80,13 +80,13 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
   /**
    * List of entrypoints to display
    */
-  @Input()
+  @Input({ transform: (values: ConnectorInfo[]) => uniqBy(values ?? [], 'type') })
   public entrypointsInfo: ConnectorInfo[] = [];
 
   /**
    * List of endpoints to display
    */
-  @Input()
+  @Input({ transform: (values: ConnectorInfo[]) => uniqBy(values ?? [], 'type') })
   public endpointsInfo: ConnectorInfo[] = [];
 
   /**
