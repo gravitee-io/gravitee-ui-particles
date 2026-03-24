@@ -99,7 +99,7 @@ export const NativeKafka: StoryObj = {
   args: {
     apiType: 'NATIVE' satisfies ApiType,
     entrypointsInfo: [fakeKafkaNativeEntrypoint()],
-    endpointsInfo: [fakeKafkaNativeEndpoint()],
+    endpointsInfo: [fakeKafkaNativeEndpoint(), fakeKafkaNativeEndpoint(), fakeKafkaNativeEndpoint(), fakeKafkaNativeEndpoint()],
     commonFlows: [
       fakeNativeFlow(base => {
         return {
