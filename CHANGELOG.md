@@ -1,3 +1,10 @@
+## [17.7.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.7.3...v17.7.4) (2026-03-31)
+
+
+### Bug Fixes
+
+* change license dialog button to min-width ([64bbaab](https://github.com/gravitee-io/gravitee-ui-particles/commit/64bbaabd6f59ed03f6104e40987d16fc41d8c18a))
+
 ## [17.7.3](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.7.2...v17.7.3) (2026-03-25)
 
 
