@@ -1,3 +1,10 @@
+## [16.4.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.4.1...v16.4.2) (2026-04-14)
+
+
+### Bug Fixes
+
+* prevent data loss in endpoint configuration toggle ([57fda8f](https://github.com/gravitee-io/gravitee-ui-particles/commit/57fda8f98c13d0ffa2080be86541b6f7df5627c6))
+
 ## [16.4.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v16.4.0...v16.4.1) (2026-03-11)
 
 
