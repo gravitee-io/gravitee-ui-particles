@@ -197,6 +197,45 @@ describe('GioPolicyStudioComponent - Native Kafka', () => {
       expect(await detailsHarness.matchText(/Edited flow name/)).toEqual(true);
     });
 
+    it('should not display entrypoint connect phase for plan flows', async () => {
+      const planFlows = [
+        fakeNativeFlow({
+          name: 'Plan flow 1',
+          interact: [fakeTestPolicyStep()],
+          entrypointConnect: [fakeTestPolicyStep()],
+        }),
+      ];
+      const plans = [fakePlan({ name: 'My plan', flows: planFlows })];
+      component.plans = plans;
+      component.ngOnChanges({
+        plans: new SimpleChange(null, null, true),
+      });
+
+      await expect(policyStudioHarness.getSelectedFlowPhase('ENTRYPOINT_CONNECT')).rejects.toThrow();
+
+      const interactPhase = await policyStudioHarness.getSelectedFlowPhase('INTERACT');
+      expect(interactPhase).toBeDefined();
+    });
+
+    it('should show entrypoint connect phase when switching from plan flow to common flow', async () => {
+      const plans = [fakePlan({ name: 'My plan', flows: [fakeNativeFlow({ name: 'Plan flow' })] })];
+      const commonFlows = [fakeNativeFlow({ name: 'Common flow', entrypointConnect: [fakeTestPolicyStep()] })];
+      component.plans = plans;
+      component.commonFlows = commonFlows;
+      component.ngOnChanges({
+        plans: new SimpleChange(null, null, true),
+        commonFlows: new SimpleChange(null, null, true),
+      });
+
+      // Plan flow selected first — entrypoint connect hidden
+      await expect(policyStudioHarness.getSelectedFlowPhase('ENTRYPOINT_CONNECT')).rejects.toThrow();
+
+      // Switch to common flow — entrypoint connect should reappear
+      await policyStudioHarness.selectFlowInMenu('Common flow');
+      const entrypointConnectPhase = await policyStudioHarness.getSelectedFlowPhase('ENTRYPOINT_CONNECT');
+      expect(entrypointConnectPhase).toBeDefined();
+    });
+
     it('should display phases steps', async () => {
       const commonFlows = [
         fakeNativeFlow({

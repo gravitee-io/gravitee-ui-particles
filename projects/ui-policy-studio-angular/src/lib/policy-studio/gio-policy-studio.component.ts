@@ -164,6 +164,8 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
 
   public selectedFlow?: FlowVM = undefined;
 
+  public selectedFlowIsPlan = false;
+
   public flowsGroups: FlowGroupVM[] = [];
 
   public disableSaveButton = true;
@@ -208,7 +210,9 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
       this.disableSaveButton = true;
       this.flowsGroups = getFlowsGroups(this.apiType, this.commonFlows, this.plans);
       this.initialFlowsGroups = cloneDeep(this.flowsGroups);
-      this.selectedFlow = this.flowsGroups[this.selectedFlowIndexes?.planIndex ?? 0]?.flows[this.selectedFlowIndexes?.flowIndex ?? 0];
+      const planIndex = this.selectedFlowIndexes?.planIndex ?? 0;
+      this.selectedFlow = this.flowsGroups[planIndex]?.flows[this.selectedFlowIndexes?.flowIndex ?? 0];
+      this.selectedFlowIsPlan = this.flowsGroups[planIndex]?._isPlan ?? false;
 
       // Reset saving state when flowsGroups are updated
       this.saving = false;
@@ -275,6 +279,7 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
     this.selectedFlowIndexes = { planIndex: newPlanIndex, flowIndex: newFlowIndex };
 
     this.selectedFlow = this.flowsGroups[newPlanIndex].flows[newFlowIndex];
+    this.selectedFlowIsPlan = this.flowsGroups[newPlanIndex]?._isPlan ?? false;
 
     this.selectedFlowChanged.emit(this.selectedFlowIndexes);
   }

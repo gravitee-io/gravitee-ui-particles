@@ -72,6 +72,9 @@ export class GioPolicyStudioDetailsComponent implements OnChanges {
   public apiType!: ApiType;
 
   @Input()
+  public isPlanFlow = false;
+
+  @Input()
   public flow?: FlowVM = undefined;
 
   @Input()
