@@ -150,20 +150,22 @@
       @if (apiType === 'NATIVE') {
         <mat-tab-group class="content__tabs" dynamicHeight>
           <mat-tab label="Global" bodyClass="content__tabs__body">
-            <gio-ps-flow-details-phase
-              class="content__phase"
-              name="Entrypoint Connect phase"
-              description="Policies will be applied when client connects to entrypoint before authentication and message processing"
-              [readOnly]="readOnly"
-              [startConnector]="entrypointConnectStartConnector"
-              [endConnector]="entrypointConnectEndConnector"
-              [steps]="flow.entrypointConnect ?? []"
-              [apiType]="apiType"
-              [genericPolicies]="genericPolicies"
-              [trialUrl]="trialUrl"
-              policyFlowPhase="ENTRYPOINT_CONNECT"
-              (stepsChange)="onStepsChange('entrypointConnect', $event)"
-            ></gio-ps-flow-details-phase>
+            @if (!isPlanFlow) {
+              <gio-ps-flow-details-phase
+                class="content__phase"
+                name="Entrypoint Connect phase"
+                description="Policies will be applied when client connects to entrypoint before authentication and message processing"
+                [readOnly]="readOnly"
+                [startConnector]="entrypointConnectStartConnector"
+                [endConnector]="entrypointConnectEndConnector"
+                [steps]="flow.entrypointConnect ?? []"
+                [apiType]="apiType"
+                [genericPolicies]="genericPolicies"
+                [trialUrl]="trialUrl"
+                policyFlowPhase="ENTRYPOINT_CONNECT"
+                (stepsChange)="onStepsChange('entrypointConnect', $event)"
+              ></gio-ps-flow-details-phase>
+            }
             <gio-ps-flow-details-phase
               class="content__phase"
               name="Interact phase"
