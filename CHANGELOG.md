@@ -1,3 +1,10 @@
+## [17.7.5](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.7.4...v17.7.5) (2026-04-15)
+
+
+### Bug Fixes
+
+* **policy-studio:** hide entrypoint connect phase for plan flows ([e48f6ab](https://github.com/gravitee-io/gravitee-ui-particles/commit/e48f6aba33cce2408623b276b8d6cc2ee94cb206))
+
 ## [17.7.4](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.7.3...v17.7.4) (2026-03-31)
 
 
