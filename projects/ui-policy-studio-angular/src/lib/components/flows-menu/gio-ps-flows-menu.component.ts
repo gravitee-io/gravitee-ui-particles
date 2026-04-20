@@ -342,6 +342,7 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges, OnDestroy {
           })
           .afterClosed();
         break;
+      case 'A2A_PROXY':
       case 'PROXY':
         dialogResult = openHttpProxyDialog(
           this.matDialog,
@@ -508,6 +509,7 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges, OnDestroy {
           })
           .afterClosed();
         break;
+      case 'A2A_PROXY':
       case 'PROXY':
         dialogResult = openHttpProxyDialog(
           this.matDialog,
