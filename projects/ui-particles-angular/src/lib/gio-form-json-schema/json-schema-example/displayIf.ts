@@ -114,6 +114,62 @@ export const displayIfExample: GioJsonSchema = {
         },
       },
     },
+    arrayWithDisplayIf: {
+      type: 'array',
+      title: 'Array — relative displayIf inside item',
+      description: 'Each item: the toggle controls visibility of a sibling field in the SAME row, using the relative path "./showField".',
+      items: {
+        type: 'object',
+        properties: {
+          showField: {
+            type: 'boolean',
+            title: 'Show "field" in this row',
+          },
+          field: {
+            type: 'string',
+            title: 'Field',
+            gioConfig: {
+              displayIf: {
+                $eq: {
+                  './showField': true,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    arrayWithNestedDisplayIf: {
+      type: 'array',
+      title: 'Array — relative displayIf inside a sub-object',
+      description: 'Each item has a sub-object whose field references the item-level toggle via "../showField" (one level up).',
+      items: {
+        type: 'object',
+        properties: {
+          showField: {
+            type: 'boolean',
+            title: 'Show nested "field"',
+          },
+          sub: {
+            type: 'object',
+            title: 'Sub-object',
+            properties: {
+              field: {
+                type: 'string',
+                title: 'Field',
+                gioConfig: {
+                  displayIf: {
+                    $eq: {
+                      '../showField': true,
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   },
   gioConfig: {
     banner: {

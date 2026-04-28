@@ -55,16 +55,8 @@ export class GioFormlyJsonSchemaService {
       mappedField.expressions = {
         ...mappedField.expressions,
         hide: field => {
-          let parentField = field;
-          while (parentField.parent) {
-            parentField = parentField.parent;
-          }
-
           try {
-            return !displayIf({
-              value: parentField.model,
-              context,
-            });
+            return !displayIf({ field, context });
           } catch (e) {
             // Ignore the error and display the field
             return false;
@@ -173,16 +165,8 @@ export class GioFormlyJsonSchemaService {
           return false;
         }
 
-        let parentField = field;
-        while (parentField.parent) {
-          parentField = parentField.parent;
-        }
-
         try {
-          const isDisabled = disableIf({
-            value: parentField.model,
-            context,
-          });
+          const isDisabled = disableIf({ field, context });
           // Useful when full form is re-enabled to sync the fromControl enable/disable state
           isDisabled ? field.formControl?.disable({ emitEvent: false }) : field.formControl?.enable({ emitEvent: false });
           return isDisabled;
@@ -357,23 +341,95 @@ const getBannerProperties = (banner: { title: string; text: string } | { text: s
 
 const getGioIf = (
   gioIf?: GioIfConfig,
-): ((objectToCheck?: { value?: FormlyFieldConfig['model']; context?: Record<string, unknown> }) => boolean) | undefined => {
+): ((args: { field: FormlyFieldConfig; context?: Record<string, unknown> }) => boolean) | undefined => {
   const $eq = gioIf?.$eq;
   if (isNil($eq) || !isObject($eq)) {
     return undefined;
   }
 
-  return objectToCheck => {
-    if (isEmpty(objectToCheck)) {
+  return ({ field, context }) => {
+    if (!field) {
       return false;
     }
 
     return Object.entries($eq)
       .map(([k, v]) => ({ path: k, eqValue: castArray(v) }))
       .every(({ path, eqValue }) => {
-        const value = get(objectToCheck, path);
+        const value = resolveGioIfPath(path, field, context);
 
-        return eqValue.includes(value);
+        return eqValue.includes(value as string | number | boolean);
       });
   };
 };
+
+/**
+ * Resolves a `displayIf` / `disableIf` path against the form state.
+ *
+ * Path syntax (backward compatible):
+ *   - `value.<dotPath>` / `context.<dotPath>` → root model / external context (legacy)
+ *   - `./<dotPath>`                          → current scope (`field.model`)
+ *   - `../<dotPath>` (any depth)             → walks up the ancestor chain by one
+ *                                              scope per `..`, where a "scope" is an
+ *                                              ancestor whose `model` differs from
+ *                                              the previous one (Formly wrappers that
+ *                                              share the same model are skipped).
+ *
+ * Relative paths let conditions inside an array item (or a sub-object of an item)
+ * reference siblings or item-level fields, which is impossible with `value.` since
+ * the array index of the current row is unknown.
+ */
+const resolveGioIfPath = (path: string, field: FormlyFieldConfig, context?: Record<string, unknown>): unknown => {
+  if (path === 'value' || path.startsWith('value.')) {
+    const root = getRootModel(field);
+    return path === 'value' ? root : get(root, path.slice('value.'.length));
+  }
+  if (path === 'context' || path.startsWith('context.')) {
+    return path === 'context' ? context : get(context, path.slice('context.'.length));
+  }
+  if (path.startsWith('./') || path.startsWith('../') || path === '.' || path === '..') {
+    let upCount = 0;
+    let rest = path;
+    let consumed = true;
+    while (consumed) {
+      consumed = false;
+      if (rest.startsWith('../')) {
+        upCount++;
+        rest = rest.slice(3);
+        consumed = true;
+      } else if (rest === '..') {
+        upCount++;
+        rest = '';
+      } else if (rest.startsWith('./')) {
+        rest = rest.slice(2);
+        consumed = true;
+      } else if (rest === '.') {
+        rest = '';
+      }
+    }
+    const scope = getModelChain(field)[upCount];
+    return rest === '' ? scope : get(scope, rest);
+  }
+  return undefined;
+};
+
+const getRootModel = (field: FormlyFieldConfig): unknown => {
+  let cur = field;
+  while (cur.parent) cur = cur.parent;
+  return cur.model;
+};
+
+const getModelChain = (field: FormlyFieldConfig): unknown[] => {
+  const chain: unknown[] = [];
+  let cur: FormlyFieldConfig | undefined = field;
+  let last: unknown = MODEL_CHAIN_SENTINEL;
+  while (cur) {
+    if (cur.model !== last) {
+      chain.push(cur.model);
+      last = cur.model;
+    }
+    cur = cur.parent;
+  }
+  return chain;
+};
+
+const MODEL_CHAIN_SENTINEL = Symbol('model-chain-sentinel');

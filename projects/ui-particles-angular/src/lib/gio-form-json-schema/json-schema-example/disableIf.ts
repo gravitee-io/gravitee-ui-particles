@@ -102,6 +102,62 @@ export const disableIfExample: GioJsonSchema = {
         },
       },
     },
+    arrayWithDisableIf: {
+      type: 'array',
+      title: 'Array — relative disableIf inside item',
+      description: 'Each item: the toggle disables a sibling field in the SAME row, using the relative path "./disableField".',
+      items: {
+        type: 'object',
+        properties: {
+          disableField: {
+            type: 'boolean',
+            title: 'Disable "field" in this row',
+          },
+          field: {
+            type: 'string',
+            title: 'Field',
+            gioConfig: {
+              disableIf: {
+                $eq: {
+                  './disableField': true,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    arrayWithNestedDisableIf: {
+      type: 'array',
+      title: 'Array — relative disableIf inside a sub-object',
+      description: 'Each item has a sub-object whose field references the item-level toggle via "../disableField" (one level up).',
+      items: {
+        type: 'object',
+        properties: {
+          disableField: {
+            type: 'boolean',
+            title: 'Disable nested "field"',
+          },
+          sub: {
+            type: 'object',
+            title: 'Sub-object',
+            properties: {
+              field: {
+                type: 'string',
+                title: 'Field',
+                gioConfig: {
+                  disableIf: {
+                    $eq: {
+                      '../disableField': true,
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   },
   gioConfig: {
     banner: {
