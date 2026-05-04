@@ -1,3 +1,10 @@
+# [17.8.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.7.5...v17.8.0) (2026-05-04)
+
+
+### Features
+
+* **form-json-schema:** support relative paths in displayIf/disableIf ([2960627](https://github.com/gravitee-io/gravitee-ui-particles/commit/296062735b6d04a9ad98e6390e41d497f0b357e7))
+
 ## [17.7.5](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.7.4...v17.7.5) (2026-04-15)
 
 
