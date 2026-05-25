@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-export type ApiType = 'A2A_PROXY' | 'LLM_PROXY' | 'MCP_PROXY' | 'MESSAGE' | 'NATIVE' | 'PROXY';
+export type ApiType = 'A2A_PROXY' | 'LLM_PROXY' | 'MCP_PROXY' | 'MCP_STUDIO' | 'MESSAGE' | 'NATIVE' | 'PROXY';

@@ -383,6 +383,7 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges, OnDestroy {
           .afterClosed();
         break;
       case 'MCP_PROXY':
+      case 'MCP_STUDIO':
         dialogResult = this.matDialog
           .open<GioPolicyStudioFlowMcpFormDialogComponent, GioPolicyStudioFlowMcpFormDialogData, GioPolicyStudioFlowFormDialogResult>(
             GioPolicyStudioFlowMcpFormDialogComponent,
@@ -549,6 +550,7 @@ export class GioPolicyStudioFlowsMenuComponent implements OnChanges, OnDestroy {
           .afterClosed();
         break;
       case 'MCP_PROXY':
+      case 'MCP_STUDIO':
         dialogResult = this.matDialog
           .open<GioPolicyStudioFlowMcpFormDialogComponent, GioPolicyStudioFlowMcpFormDialogData, GioPolicyStudioFlowFormDialogResult>(
             GioPolicyStudioFlowMcpFormDialogComponent,
