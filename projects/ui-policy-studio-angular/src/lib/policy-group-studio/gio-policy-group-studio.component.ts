@@ -191,6 +191,13 @@ export class GioPolicyGroupStudioComponent implements OnChanges {
     MCP_PROXY__SUBSCRIBE: null, // n/a
     MCP_PROXY__INTERACT: null, // n/a
     MCP_PROXY__ENTRYPOINT_CONNECT: null, // n/a
+    // MCP Studio
+    MCP_STUDIO__REQUEST: PROXY_REQUEST_PHASE,
+    MCP_STUDIO__RESPONSE: PROXY_RESPONSE_PHASE,
+    MCP_STUDIO__PUBLISH: null, // n/a
+    MCP_STUDIO__SUBSCRIBE: null, // n/a
+    MCP_STUDIO__INTERACT: null, // n/a
+    MCP_STUDIO__ENTRYPOINT_CONNECT: null, // n/a
     // HTTP Message
     MESSAGE__REQUEST: {
       name: 'Request phase',

@@ -180,6 +180,7 @@ export class GioPolicyStudioComponent implements OnChanges, OnDestroy {
       MESSAGE: 'HTTP Message',
       NATIVE: 'Native',
       MCP_PROXY: 'MCP Proxy',
+      MCP_STUDIO: 'MCP Studio',
     };
 
     return apiTypeMap[this.apiType];

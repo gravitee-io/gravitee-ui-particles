@@ -194,6 +194,7 @@ export class GioPolicyStudioDetailsComponent implements OnChanges {
           .afterClosed();
         break;
       case 'MCP_PROXY':
+      case 'MCP_STUDIO':
         dialogResult = this.matDialog
           .open<GioPolicyStudioFlowMcpFormDialogComponent, GioPolicyStudioFlowMcpFormDialogData, GioPolicyStudioFlowFormDialogResult>(
             GioPolicyStudioFlowMcpFormDialogComponent,
