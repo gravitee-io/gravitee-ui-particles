@@ -1,3 +1,10 @@
+# [17.9.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.8.0...v17.9.0) (2026-05-25)
+
+
+### Features
+
+* **mcp-studio:** added new api type ([e86ee86](https://github.com/gravitee-io/gravitee-ui-particles/commit/e86ee86eaa319c66a78cc7ef14392ddbec4c191f))
+
 # [17.8.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.7.5...v17.8.0) (2026-05-04)
 
 
