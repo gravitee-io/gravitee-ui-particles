@@ -144,7 +144,7 @@ describe('GioLicenseExpirationNotificationComponent', () => {
       fixture.detectChanges();
 
       const harness = await loader.getHarness(GioLicenseExpirationNotificationHarness);
-      expect(await harness.getLink()).toEqual('https://www.gravitee.io/contact-us-licence');
+      expect(await harness.getLink()).toEqual('https://www.gravitee.io/contact-us');
       expect(await harness.getCallToActionText()).toEqual('Contact Gravitee');
     });
 
