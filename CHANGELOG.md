@@ -1,3 +1,10 @@
+## [17.9.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.9.0...v17.9.1) (2026-08-04)
+
+
+### Bug Fixes
+
+* update license expiry contact-us url ([530fb72](https://github.com/gravitee-io/gravitee-ui-particles/commit/530fb7251ba22911999b92eb5bf6935e3ab0158d))
+
 # [17.9.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.8.0...v17.9.0) (2026-05-25)
 
 
