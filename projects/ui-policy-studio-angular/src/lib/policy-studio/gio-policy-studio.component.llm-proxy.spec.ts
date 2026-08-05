@@ -216,7 +216,7 @@ describe('GioPolicyStudioComponent - LLM Proxy', () => {
                 {
                   type: 'HTTP',
                   methods: ['GET'],
-                  path: '/path1',
+                  path: '/models',
                   pathOperator: 'EQUALS',
                 },
               ],

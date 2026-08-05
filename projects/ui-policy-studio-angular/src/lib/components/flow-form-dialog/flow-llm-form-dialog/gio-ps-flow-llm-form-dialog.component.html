@@ -46,9 +46,7 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Path</mat-label>
-        <span matTextPrefix>/&nbsp;</span>
-        <input matInput formControlName="path" />
-        <mat-hint>Path</mat-hint>
+        <gio-form-autocomplete-input formControlName="path" [autocompleteInputOptions]="paths"></gio-form-autocomplete-input>
       </mat-form-field>
     </div>
     <div class="content__row">
@@ -56,7 +54,7 @@
         <mat-label>Methods for your flow</mat-label>
         <gio-form-tags-input
           formControlName="methods"
-          [autocompleteOptions]="methods"
+          [autocompleteOptions]="availableMethods"
           [tagValidationHook]="tagValidationHook"
         ></gio-form-tags-input>
       </mat-form-field>

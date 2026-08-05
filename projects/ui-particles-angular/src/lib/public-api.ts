@@ -24,6 +24,10 @@ export * from './gio-form-tags-input/gio-form-tags-input.component';
 export * from './gio-form-tags-input/gio-form-tags-input.module';
 export * from './gio-form-tags-input/gio-form-tags-input.harness';
 
+export * from './gio-form-autocomplete-input/gio-form-autocomplete-input.component';
+export * from './gio-form-autocomplete-input/gio-form-autocomplete-input.module';
+export * from './gio-form-autocomplete-input/gio-form-autocomplete-input.harness';
+
 export * from './gio-banner/gio-banner.component';
 export * from './gio-banner/gio-banner.module';
 

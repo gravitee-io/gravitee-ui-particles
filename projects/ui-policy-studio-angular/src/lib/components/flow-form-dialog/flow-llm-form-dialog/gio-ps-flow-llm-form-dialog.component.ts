@@ -27,20 +27,22 @@ import {
   GioElAssistantComponent,
   GioFormSlideToggleModule,
   GioFormTagsInputModule,
+  GioFormAutocompleteInputModule,
   GioIconsModule,
 } from '@gravitee/ui-particles-angular';
 
 import { GioPolicyStudioFlowFormDialogResult } from '../gio-ps-flow-form-dialog-result.model';
-import { ConditionSelector, HttpMethod, HttpMethods, HttpSelector } from '../../../models';
+import { ConditionSelector, HttpMethod, HttpSelector } from '../../../models';
 import { FlowVM } from '../../../policy-studio/gio-policy-studio.model';
 
 export type GioPolicyStudioFlowLlmFormDialogData = {
   flow?: FlowVM;
 };
 
-type HttpMethodVM = HttpMethod | 'ALL';
+type HttpMethodVM = HttpMethod;
 
-const METHODS_AUTOCOMPLETE: HttpMethodVM[] = ['ALL', ...HttpMethods];
+const METHODS_AUTOCOMPLETE: HttpMethodVM[] = ['POST', 'GET'];
+const LLM_PATHS: string[] = ['/chat/completions', '/embeddings', '/models'];
 
 @Component({
   imports: [
@@ -55,6 +57,8 @@ const METHODS_AUTOCOMPLETE: HttpMethodVM[] = ['ALL', ...HttpMethods];
     GioBannerModule,
     GioIconsModule,
     GioFormTagsInputModule,
+    GioFormAutocompleteInputModule,
+
     GioElAssistantComponent,
   ],
   selector: 'gio-ps-flow-llm-form-dialog',
@@ -67,16 +71,17 @@ export class GioPolicyStudioFlowLlmFormDialogComponent {
   public existingFlow?: FlowVM;
   public mode: 'create' | 'edit' = 'create';
   public methods = METHODS_AUTOCOMPLETE;
+  public paths = LLM_PATHS;
+  public availableMethods: HttpMethodVM[] = ['POST', 'GET'];
 
   constructor(
     public dialogRef: MatDialogRef<GioPolicyStudioFlowLlmFormDialogComponent, GioPolicyStudioFlowFormDialogResult>,
     @Inject(MAT_DIALOG_DATA) flowDialogData: GioPolicyStudioFlowLlmFormDialogData,
   ) {
     this.existingFlow = cloneDeep(flowDialogData?.flow);
-    this.mode = this.existingFlow ? 'edit' : 'create';
-
     const httpSelector = flowDialogData?.flow?.selectors?.find(s => s.type === 'HTTP') as HttpSelector;
     const conditionSelector = flowDialogData?.flow?.selectors?.find(s => s.type === 'CONDITION') as ConditionSelector;
+
     this.flowFormGroup = new UntypedFormGroup({
       name: new UntypedFormControl(flowDialogData?.flow?.name ?? ''),
       pathOperator: new UntypedFormControl(httpSelector?.pathOperator ?? 'EQUALS'),
@@ -84,6 +89,44 @@ export class GioPolicyStudioFlowLlmFormDialogComponent {
       methods: new UntypedFormControl(sanitizeMethodFormValue(httpSelector?.methods)),
       condition: new UntypedFormControl(conditionSelector?.condition ?? ''),
     });
+    // Subscribe to path changes to update methods
+    this.flowFormGroup.get('path')?.valueChanges.subscribe((path: string) => {
+      const fullPath = sanitizePath(path);
+
+      switch (fullPath) {
+        case '/chat/completions':
+          this.availableMethods = ['POST'];
+          break;
+        case '/embeddings':
+          this.availableMethods = ['POST'];
+          break;
+        case '/models':
+          this.availableMethods = ['GET'];
+          break;
+        default:
+          this.availableMethods = [];
+          break;
+      }
+      this.flowFormGroup?.get('methods')?.setValue([]);
+    });
+    const selectedPath = this.flowFormGroup.get('path')?.value;
+    switch (selectedPath) {
+      case '/chat/completions':
+        if (this.methods.includes('POST')) this.availableMethods = [];
+        else this.availableMethods = ['POST'];
+        break;
+      case '/embeddings':
+        if (this.methods.includes('POST')) this.availableMethods = [];
+        else this.availableMethods = ['POST'];
+        break;
+      case '/models':
+        if (this.methods.includes('GET')) this.availableMethods = [];
+        else this.availableMethods = ['GET'];
+        break;
+      default:
+        this.availableMethods = [];
+        break;
+    }
   }
 
   public onSubmit(): void {
@@ -125,12 +168,13 @@ export class GioPolicyStudioFlowLlmFormDialogComponent {
 }
 
 const sanitizeMethods: (value: HttpMethodVM[]) => HttpMethod[] = (value?: HttpMethodVM[]) => {
-  if (!value || value.find(m => m === 'ALL')) return [];
+  if (!value) return [];
   return value as HttpMethod[];
 };
 
 const sanitizeMethodFormValue: (methods?: HttpMethod[]) => HttpMethodVM[] = (methods?: HttpMethod[]) => {
-  if (!methods || methods.length === 0) return ['ALL'];
+  if (!methods || methods.length === 0) return [];
+
   return methods;
 };
 
