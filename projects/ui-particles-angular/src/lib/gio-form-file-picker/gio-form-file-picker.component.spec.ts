@@ -160,7 +160,7 @@ describe('FilePickerInputComponent', () => {
       const filePickerInputHarness = await loader.getHarness(GioFormFilePickerInputHarness.with({ formControlName: 'file' }));
 
       const previewImages = await filePickerInputHarness.getPreviews();
-      expect(previewImages).toEqual(['background-image: url(rperr-aa.png);']);
+      expect(previewImages).toEqual(['background-image: url("rperr-aa.png");']);
       expect(await filePickerInputHarness.isAddButtonPresent()).toBeFalsy();
     });
 
@@ -172,7 +172,7 @@ describe('FilePickerInputComponent', () => {
       const filePickerInputHarness = await loader.getHarness(GioFormFilePickerInputHarness.with({ formControlName: 'file' }));
 
       const previewImages = await filePickerInputHarness.getPreviews();
-      expect(previewImages).toEqual(['background-image: url(rperr-aa.png);', 'background-image: url(mschaller-shocked.gif);']);
+      expect(previewImages).toEqual(['background-image: url("rperr-aa.png");', 'background-image: url("mschaller-shocked.gif");']);
       expect(await filePickerInputHarness.isAddButtonPresent()).toBeTruthy();
     });
 
