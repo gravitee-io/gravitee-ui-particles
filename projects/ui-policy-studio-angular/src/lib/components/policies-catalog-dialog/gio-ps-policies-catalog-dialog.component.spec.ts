@@ -99,7 +99,7 @@ describe('GioPolicyStudioPoliciesCatalogDialogComponent', () => {
           useValue: {
             load: () =>
               of({
-                convert: (content: string) => `<div class="asciidoctor-content">${content}</div>`, // Mock asciidoctor convert method
+                convert: (content: string) => Promise.resolve(`<div class="asciidoctor-content">${content}</div>`), // Mock asciidoctor convert method
               }),
           },
         },

@@ -16,7 +16,12 @@
 import { Injectable } from '@angular/core';
 import { from, Observable, of } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
-import asciidoctor, { Asciidoctor } from '@asciidoctor/core';
+
+/**
+ * The `@asciidoctor/core` module itself: since 4.0.0 the package exposes its API as module level
+ * functions instead of the instance built by the default exported factory.
+ */
+export type Asciidoctor = typeof import('@asciidoctor/core');
 
 declare global {
   interface Window {
@@ -38,7 +43,7 @@ export class GioAsciidoctorService {
   private loadAsciidoctor(): Observable<Asciidoctor> {
     if (!window._gioAsciidoctor) {
       const loadAsciidoctor = async () => {
-        window._gioAsciidoctor = asciidoctor();
+        window._gioAsciidoctor = await import('@asciidoctor/core');
         return window._gioAsciidoctor;
       };
 

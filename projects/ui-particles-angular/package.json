@@ -22,20 +22,20 @@
     "@angular/core": "^20.3.3",
     "@angular/forms": "^20.3.3",
     "@angular/material": "^20.2.8",
-    "@asciidoctor/core": "^3.0.0",
+    "@asciidoctor/core": "^4.0.0",
     "@ngx-formly/core": "^6.2.2",
     "@ngx-formly/material": "^6.2.2",
     "ngx-file-helpers": "^11.0.0 || ^12.0.0",
     "prismjs": "^1.29.0"
   },
   "peerDependenciesMeta": {
+    "@asciidoctor/core": {
+      "optional": true
+    },
     "@ngx-formly/core": {
       "optional": true
     },
     "@ngx-formly/material": {
-      "optional": true
-    },
-    "asciidoctor": {
       "optional": true
     },
     "prismjs": {

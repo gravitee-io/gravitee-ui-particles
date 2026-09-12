@@ -11,31 +11,17 @@ The Asciidoctor component renders [AsciiDoc](https://asciidoctor.org/docs/what-i
 This component requires the following peer dependencies as its optional dependencies:
 
 ```bash
-# asciidoctor
-npm install asciidoctor --save
-yarn add asciidoctor
+# @asciidoctor/core
+npm install @asciidoctor/core --save
+yarn add @asciidoctor/core
 
 # prismjs
 npm install prismjs --save
 yarn add prismjs
 ```
 
-Add asciidoctor assets to `angular.json`
-
-```json
-...
-// projects > [your project name] > architect > build >
-"assets": [
-    ...
-        {
-            "glob": "(browser|css)/asciidoctor.(js|css)",
-            "input": "node_modules/@asciidoctor/core/dist",
-            "output": "assets/asciidoctor"
-        }
-     ...
-    ]
-...
-```
+Asciidoctor itself needs no asset: the component imports it, and the default Asciidoctor stylesheet is bundled with this
+library.
 
 Add prism and its components assets to `angular.json`
 
@@ -58,3 +44,40 @@ Add prism and its components assets to `angular.json`
     ]
 ...
 ```
+
+## Bundling `@asciidoctor/core`
+
+Since 4.0.0, the browser bundle of `@asciidoctor/core` still carries its Node.js only code paths. They are unreachable
+in a browser and each one is already guarded — a `try`/`catch`, or a `typeof process` check — but a bundler resolves
+them statically, before any guard runs, and fails on two of them:
+
+- `new URL('../../data', import.meta.url)`, which a bundler reads as an asset reference to a directory;
+- `import('node:fs')`, `import('node:fs/promises')`, `import('node:async_hooks')` and `import('node:path')`.
+
+How to let them through depends on the builder:
+
+- **esbuild** (`@angular/build:application`) ignores the `new URL` and only needs the `node:` imports declared as
+  external, in `angular.json`:
+
+  ```json
+  "externalDependencies": ["node:fs", "node:fs/promises", "node:async_hooks", "node:path"]
+  ```
+
+- **webpack** (`@angular-devkit/build-angular:browser`) has no equivalent option, so it needs a webpack configuration —
+  through `@angular-builders/custom-webpack`, or `webpackFinal` for Storybook:
+
+  ```js
+  config.module.parser = { ...config.module.parser, javascript: { url: false } };
+  config.plugins.push(new webpack.IgnorePlugin({ resourceRegExp: /^node:/ }));
+  ```
+
+- **Jest** cannot load `@asciidoctor/core` 4 at all under jsdom: its `browser` export is ESM and uses `import.meta`,
+  and its CommonJS build calls `createRequire()` on `document.baseURI`. Tests that instantiate `gio-asciidoctor` have
+  to stub `GioAsciidoctorService`:
+
+  ```ts
+  {
+    provide: GioAsciidoctorService,
+    useValue: { load: () => of({ convert: (content: string) => Promise.resolve(`<div>${content}</div>`) }) },
+  }
+  ```

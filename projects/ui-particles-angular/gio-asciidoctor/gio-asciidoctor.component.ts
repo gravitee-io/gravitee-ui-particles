@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 import { APP_ID, Component, ElementRef, Inject, Input, OnChanges, OnDestroy, SecurityContext, SimpleChanges } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { ReplaySubject, Subject, forkJoin } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Asciidoctor, Options } from '@asciidoctor/core';
 import { GioPrismJsService } from '@gravitee/ui-particles-angular';
 
-import { GioAsciidoctorService } from './gio-asciidoctor.service';
+import { Asciidoctor, GioAsciidoctorService } from './gio-asciidoctor.service';
 
 @Component({
   selector: 'gio-asciidoctor',
@@ -36,8 +35,8 @@ export class GioAsciidoctorComponent implements OnChanges, OnDestroy {
   @Input()
   public src?: string;
 
-  private options: Options = {
-    header_footer: false,
+  private options = {
+    standalone: false,
     attributes: {
       showtitle: true,
     },
@@ -91,24 +90,28 @@ export class GioAsciidoctorComponent implements OnChanges, OnDestroy {
     }
 
     // When asciidoctor is not loaded yet, wait for it
-    this.asciidoctor$.pipe(takeUntil(this.unsubscribe$)).subscribe(asciidoctor => {
-      const html = asciidoctor.convert(content, this.options);
-      this.elementRef.nativeElement.innerHTML = this.sanitizer.sanitize(SecurityContext.HTML, html);
+    this.asciidoctor$
+      .pipe(
+        switchMap(asciidoctor => asciidoctor.convert(content, this.options)),
+        takeUntil(this.unsubscribe$),
+      )
+      .subscribe(html => {
+        this.elementRef.nativeElement.innerHTML = this.sanitizer.sanitize(SecurityContext.HTML, String(html));
 
-      // Highlight all code blocks with PrismJs
-      const highlights = this.elementRef.nativeElement.querySelectorAll('pre.highlight');
-      for (const element of highlights) {
-        element.setAttribute('class', 'prismjs highlight');
-        if (window.Prism) {
-          window.Prism.highlightAllUnder(element, false);
+        // Highlight all code blocks with PrismJs
+        const highlights = this.elementRef.nativeElement.querySelectorAll('pre.highlight');
+        for (const element of highlights) {
+          element.setAttribute('class', 'prismjs highlight');
+          if (window.Prism) {
+            window.Prism.highlightAllUnder(element, false);
+          }
         }
-      }
 
-      // Manually add Angular encapsulation attribute to all elements at the end
-      const descandants = this.elementRef.nativeElement.querySelectorAll('*');
-      for (const element of descandants) {
-        element.setAttribute(`_ngcontent-${this.appId}-${this._uniqueId}`, '');
-      }
-    });
+        // Manually add Angular encapsulation attribute to all elements at the end
+        const descandants = this.elementRef.nativeElement.querySelectorAll('*');
+        for (const element of descandants) {
+          element.setAttribute(`_ngcontent-${this.appId}-${this._uniqueId}`, '');
+        }
+      });
   }
 }
