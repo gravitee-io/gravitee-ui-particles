@@ -26,7 +26,7 @@ import { of } from 'rxjs';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { GioPrismJsService } from '@gravitee/ui-particles-angular';
-import { GioAsciidoctorService } from '@gravitee/ui-particles-angular/gio-asciidoctor';
+import { GioAsciidoctorTestingModule } from '@gravitee/ui-particles-angular/gio-asciidoctor';
 
 import { fakeTestPolicyStep, fakeTestPolicy } from '../../models/index-testing';
 import { Policy, Step } from '../../models';
@@ -76,6 +76,7 @@ describe('GioPolicyStudioStepEditDialogComponent', () => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
       imports: [
+        GioAsciidoctorTestingModule,
         GioPolicyStudioStepEditDialogComponent,
         HttpClientTestingModule,
         MatDialogModule,
@@ -90,15 +91,6 @@ describe('GioPolicyStudioStepEditDialogComponent', () => {
             service.setPolicySchemaFetcher(policy => of(fakePolicySchema(policy.id)));
             service.setPolicyDocumentationFetcher(policy => of(fakePolicyDocumentation(policy.id)));
             return service;
-          },
-        },
-        {
-          provide: GioAsciidoctorService,
-          useValue: {
-            load: () =>
-              of({
-                convert: (content: string) => `<div class="asciidoctor-content">${content}</div>`, // Mock asciidoctor convert method
-              }),
           },
         },
         {

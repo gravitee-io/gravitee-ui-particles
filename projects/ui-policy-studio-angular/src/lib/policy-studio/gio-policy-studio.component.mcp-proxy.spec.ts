@@ -26,6 +26,7 @@ import { of } from 'rxjs';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { GioFormJsonSchemaModule } from '@gravitee/ui-particles-angular';
+import { GioAsciidoctorTestingModule } from '@gravitee/ui-particles-angular/gio-asciidoctor';
 
 import {
   fakeAllPolicies,
@@ -52,7 +53,7 @@ describe('GioPolicyStudioComponent - MCP Proxy', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule, HttpClientTestingModule, GioPolicyStudioComponent, MatIconTestingModule],
+      imports: [GioAsciidoctorTestingModule, NoopAnimationsModule, HttpClientTestingModule, GioPolicyStudioComponent, MatIconTestingModule],
       providers: [importProvidersFrom(GioFormJsonSchemaModule)],
     })
       .overrideProvider(InteractivityChecker, {

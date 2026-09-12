@@ -14,13 +14,18 @@
  * limitations under the License.
  */
 import { Injectable } from '@angular/core';
-import { from, Observable, of } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
-import asciidoctor, { Asciidoctor } from '@asciidoctor/core';
+import { from, Observable } from 'rxjs';
+
+/**
+ * The `@asciidoctor/core` module itself: since 4.0.0 the package exposes its API as module level
+ * functions instead of the instance built by the default exported factory.
+ */
+export type Asciidoctor = typeof import('@asciidoctor/core');
 
 declare global {
   interface Window {
-    _gioAsciidoctor: Asciidoctor;
+    /** The pending — then settled — import, shared by every caller. See `GioAsciidoctorService`. */
+    _gioAsciidoctor?: Promise<Asciidoctor>;
   }
 }
 
@@ -29,22 +34,26 @@ declare global {
 })
 export class GioAsciidoctorService {
   public load(): Observable<Asciidoctor> {
-    return this.loadAsciidoctor().pipe(
-      // If already loaded, we don't want to load it again
-      shareReplay(1),
-    );
+    return from(this.loadAsciidoctor());
   }
 
-  private loadAsciidoctor(): Observable<Asciidoctor> {
+  /**
+   * Imports the module once, however many callers ask for it.
+   *
+   * The promise is held on the window rather than on the service so that several root injectors —
+   * several Angular applications on the same page — share a single import.
+   */
+  private loadAsciidoctor(): Promise<Asciidoctor> {
     if (!window._gioAsciidoctor) {
-      const loadAsciidoctor = async () => {
-        window._gioAsciidoctor = asciidoctor();
-        return window._gioAsciidoctor;
-      };
-
-      return from(loadAsciidoctor());
-    } else {
-      return of(window._gioAsciidoctor);
+      // Nothing is awaited between the check and the assignment, so components created in the same
+      // tick join the same import instead of each starting one.
+      window._gioAsciidoctor = import('@asciidoctor/core').catch((error: unknown) => {
+        // Forget a failed import, otherwise every later caller would be handed the same rejection.
+        window._gioAsciidoctor = undefined;
+        throw error;
+      });
     }
+
+    return window._gioAsciidoctor;
   }
 }
