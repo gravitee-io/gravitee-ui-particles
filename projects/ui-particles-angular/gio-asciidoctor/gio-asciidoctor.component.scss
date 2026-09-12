@@ -21,7 +21,7 @@
 $typography: map.get(gio.$mat-theme, typography);
 
 // Default Asciidoctor CSS
-@import '../../../node_modules/@asciidoctor/core/dist/css/asciidoctor.css';
+@import '../../../node_modules/@asciidoctor/core/data/asciidoctor-default.css';
 
 @import '../../../node_modules/prismjs/themes/prism-okaidia.css';
 
