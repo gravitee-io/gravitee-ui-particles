@@ -1,4 +1,5 @@
 import type { StorybookConfig } from '@storybook/angular';
+import webpack from 'webpack';
 
 const config: StorybookConfig = {
   framework: {
@@ -19,9 +20,20 @@ const config: StorybookConfig = {
     },
     { from: './images/audit-trail.svg', to: '/images/audit-trail.svg' },
     { from: '../node_modules/monaco-editor', to: '/assets/monaco-editor' },
-    { from: '../node_modules/@asciidoctor/core/dist/browser/asciidoctor.min.js', to: '/assets/asciidoctor/asciidoctor.js' },
     { from: '../node_modules/prismjs/prism.js', to: '/assets/prismjs/prism.js' },
     { from: '../node_modules/prismjs/components/prism-json.js', to: '/assets/prismjs/components/prism-json.js' },
   ],
+
+  webpackFinal: async config => {
+    // `@asciidoctor/core` 4 keeps its Node.js only code paths in the browser bundle, behind guards webpack does not
+    // follow: a `new URL('../../data', import.meta.url)` it tries to resolve as an asset, and `import('node:*')` calls
+    // it refuses to leave alone. Both are unreachable in a browser, and both are already wrapped in a try/catch there.
+    config.module = {
+      ...config.module,
+      parser: { ...config.module?.parser, javascript: { ...config.module?.parser?.javascript, url: false } },
+    };
+    config.plugins = [...(config.plugins ?? []), new webpack.IgnorePlugin({ resourceRegExp: /^node:/ })];
+    return config;
+  },
 };
 export default config;

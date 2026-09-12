@@ -16,3 +16,4 @@
 export * from './gio-asciidoctor.module';
 export * from './gio-asciidoctor.component';
 export * from './gio-asciidoctor.service';
+export * from './gio-asciidoctor.testing.module';

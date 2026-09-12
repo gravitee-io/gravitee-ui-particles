@@ -11,31 +11,17 @@ The Asciidoctor component renders [AsciiDoc](https://asciidoctor.org/docs/what-i
 This component requires the following peer dependencies as its optional dependencies:
 
 ```bash
-# asciidoctor
-npm install asciidoctor --save
-yarn add asciidoctor
+# @asciidoctor/core
+npm install @asciidoctor/core --save
+yarn add @asciidoctor/core
 
 # prismjs
 npm install prismjs --save
 yarn add prismjs
 ```
 
-Add asciidoctor assets to `angular.json`
-
-```json
-...
-// projects > [your project name] > architect > build >
-"assets": [
-    ...
-        {
-            "glob": "(browser|css)/asciidoctor.(js|css)",
-            "input": "node_modules/@asciidoctor/core/dist",
-            "output": "assets/asciidoctor"
-        }
-     ...
-    ]
-...
-```
+Asciidoctor itself needs no asset: the component imports it, and the default Asciidoctor stylesheet is bundled with this
+library.
 
 Add prism and its components assets to `angular.json`
 
@@ -58,3 +44,82 @@ Add prism and its components assets to `angular.json`
     ]
 ...
 ```
+
+## Bundling `@asciidoctor/core`
+
+Since 4.0.0, the browser bundle of `@asciidoctor/core` still carries its Node.js only code paths. They are unreachable
+in a browser and each one is already guarded — a `try`/`catch`, or a `typeof process` check — but a bundler resolves
+them statically, before any guard runs, and fails on two of them:
+
+- `new URL('../../data', import.meta.url)`, which a bundler reads as an asset reference to a directory;
+- `import('node:fs')`, `import('node:fs/promises')`, `import('node:async_hooks')` and `import('node:path')`.
+
+The component imports the module itself, so nothing has to be copied to the assets — but the application that bundles
+it has to let those two through, and how depends on the builder.
+
+### esbuild
+
+`@angular/build:application` ignores the `new URL` on its own, so the `node:` imports are the only thing to declare, in
+the build options of `angular.json`:
+
+```json
+"externalDependencies": ["node:fs", "node:fs/promises", "node:async_hooks", "node:path"]
+```
+
+### webpack
+
+`@angular-devkit/build-angular:browser` has no equivalent option: it needs a webpack configuration, through
+`@angular-builders/custom-webpack`.
+
+```js
+module.exports = config => {
+  config.module.parser = {
+    ...config.module.parser,
+    javascript: { ...config.module.parser?.javascript, url: false },
+  };
+  // `externals` also accepts a function, an object or a string, so keep whatever is already there.
+  const externals = Array.isArray(config.externals) ? config.externals : config.externals ? [config.externals] : [];
+  config.externals = [
+    ...externals,
+    ({ request }, callback) => (/^node:/.test(request) ? callback(null, `commonjs ${request}`) : callback()),
+  ];
+  return config;
+};
+```
+
+Reach for `externals` rather than `new webpack.IgnorePlugin({ resourceRegExp: /^node:/ })`, which is the obvious
+answer and the one that breaks: the builder compiles with the copy of webpack it embeds, so a plugin instantiated from
+the copy the application resolves is handed hooks it does not recognise, and fails with
+`Cannot read properties of undefined (reading 'tap')`. Deduplicating `webpack` and `@angular-devkit/build-angular`
+with a resolution is worth doing anyway.
+
+Storybook has the same two copies and the same symptom. Its `webpackFinal` gets the plugin without the import — this
+is what the Storybook of this repository runs:
+
+```js
+config.plugins.push({
+  apply: compiler => {
+    compiler.hooks.normalModuleFactory.tap('ignore-node-schemes', factory => {
+      factory.hooks.beforeResolve.tap('ignore-node-schemes', request => (/^node:/.test(request.request) ? false : undefined));
+    });
+  },
+});
+```
+
+### Jest
+
+`@asciidoctor/core` 4 cannot be loaded under jsdom at all: its `browser` export is ESM using `import.meta`, which
+neither ts-jest nor babel-preset-env transforms, and its CommonJS build calls `createRequire()` on `document.baseURI`,
+which is not a `file:` URL. A test that renders a `<gio-asciidoctor>` has to replace the service that imports it —
+import `GioAsciidoctorTestingModule` rather than writing the stub again:
+
+```ts
+import { GioAsciidoctorTestingModule } from '@gravitee/ui-particles-angular/gio-asciidoctor';
+
+TestBed.configureTestingModule({
+  imports: [GioAsciidoctorTestingModule /* … */],
+});
+```
+
+It provides a `GioAsciidoctorService` whose conversion wraps the content in
+`<div class="asciidoctor-content">…</div>`, which is enough to assert that the component rendered it.

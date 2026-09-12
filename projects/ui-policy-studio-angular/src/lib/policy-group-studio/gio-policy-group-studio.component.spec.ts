@@ -21,6 +21,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
+import { GioAsciidoctorTestingModule } from '@gravitee/ui-particles-angular/gio-asciidoctor';
 
 import { fakePolicySchema } from '../models/policy/PolicySchema.fixture';
 import { fakeAllPolicies, fakeTestPolicy } from '../models/policy/Policy.fixture';
@@ -36,7 +37,14 @@ describe('GioPolicyGroupStudioComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GioPolicyGroupStudioComponent, NoopAnimationsModule, HttpClientTestingModule, MatIconTestingModule],
+      imports: [
+        GioAsciidoctorTestingModule,
+        GioPolicyGroupStudioComponent,
+        NoopAnimationsModule,
+        HttpClientTestingModule,
+        MatIconTestingModule,
+      ],
+      providers: [],
     }).compileComponents();
   });
 
