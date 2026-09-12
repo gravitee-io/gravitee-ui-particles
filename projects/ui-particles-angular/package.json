@@ -29,13 +29,13 @@
     "prismjs": "^1.29.0"
   },
   "peerDependenciesMeta": {
+    "@asciidoctor/core": {
+      "optional": true
+    },
     "@ngx-formly/core": {
       "optional": true
     },
     "@ngx-formly/material": {
-      "optional": true
-    },
-    "asciidoctor": {
       "optional": true
     },
     "prismjs": {
