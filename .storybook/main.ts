@@ -1,5 +1,4 @@
 import type { StorybookConfig } from '@storybook/angular';
-import webpack from 'webpack';
 
 const config: StorybookConfig = {
   framework: {
@@ -32,7 +31,18 @@ const config: StorybookConfig = {
       ...config.module,
       parser: { ...config.module?.parser, javascript: { ...config.module?.parser?.javascript, url: false } },
     };
-    config.plugins = [...(config.plugins ?? []), new webpack.IgnorePlugin({ resourceRegExp: /^node:/ })];
+    // What `webpack.IgnorePlugin` does, without the import: Storybook bundles its own copy of webpack,
+    // and a plugin built from the one the workspace resolves does not typecheck against it.
+    config.plugins = [
+      ...(config.plugins ?? []),
+      {
+        apply: compiler => {
+          compiler.hooks.normalModuleFactory.tap('ignore-node-schemes', factory => {
+            factory.hooks.beforeResolve.tap('ignore-node-schemes', request => (/^node:/.test(request.request) ? false : undefined));
+          });
+        },
+      },
+    ];
     return config;
   },
 };
