@@ -12768,7 +12768,7 @@ __metadata:
     "@types/svg-parser": "npm:2.0.6"
     "@typescript-eslint/eslint-plugin": "npm:7.2.0"
     "@typescript-eslint/parser": "npm:7.2.0"
-    ajv: "npm:^8.17.1"
+    ajv: "npm:^8.20.0"
     chromatic: "npm:13.3.2"
     cronstrue: "npm:^2.50.0"
     eslint: "npm:8.57.0"
@@ -12783,7 +12783,7 @@ __metadata:
     jest-preset-angular: "npm:15.0.2"
     json-schema: "npm:^0.4.0"
     license-check-and-add: "npm:4.0.5"
-    lodash: "npm:^4.17.21"
+    lodash: "npm:^4.18.1"
     monaco-editor: "npm:^0.50.0"
     ng-packagr: "npm:20.3.2"
     ngx-file-helpers: "npm:14.0.1"
@@ -15618,6 +15618,13 @@ __metadata:
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: 10/c08619c038846ea6ac754abd6dd29d2568aa705feb69339e836dfa8d8b09abbb2f859371e86863eda41848221f9af43714491467b5b0299122431e202bb0c532
+  languageName: node
+  linkType: hard
+
+"lodash@npm:^4.18.1":
+  version: 4.18.1
+  resolution: "lodash@npm:4.18.1"
+  checksum: 10/306fea53dfd39dad1f03d45ba654a2405aebd35797b673077f401edb7df2543623dc44b9effbb98f69b32152295fff725a4cec99c684098947430600c6af0c3f
   languageName: node
   linkType: hard
 
