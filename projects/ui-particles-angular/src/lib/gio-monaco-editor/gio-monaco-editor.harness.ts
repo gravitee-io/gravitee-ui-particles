@@ -34,7 +34,7 @@ export const ConfigureTestingGioMonacoEditor = () => {
         exports: [GioMonacoEditorTestingComponent],
       },
     });
-  } catch (e) {
+  } catch {
     // Do nothing
   }
 };

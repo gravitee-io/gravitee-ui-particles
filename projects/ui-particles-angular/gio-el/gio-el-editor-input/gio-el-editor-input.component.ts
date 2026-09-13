@@ -196,7 +196,7 @@ export class GioElEditorInputComponent implements MatFormFieldControl<string>, C
   public onContainerClick(): void {
     try {
       this.focusMonitor.focusVia(this.elInput, 'program');
-    } catch (e) {
+    } catch {
       // Best effort
     }
   }

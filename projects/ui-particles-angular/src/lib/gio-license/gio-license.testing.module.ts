@@ -56,7 +56,6 @@ export const OEM_LICENSE_CONFIGURATION_TESTING: LicenseConfiguration = {
         isMissingFeature$: () => of(true),
         getFeatureInfo: () => ({}),
         getTrialURL: () => '',
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
         openDialog: () => {},
       },
     },
@@ -77,7 +76,6 @@ export class GioLicenseTestingModule {
             isMissingFeature$: () => of(!license),
             getFeatureInfo: () => ({}),
             getTrialURL: () => '',
-            // eslint-disable-next-line @typescript-eslint/no-empty-function
             openDialog: () => {},
           },
         },

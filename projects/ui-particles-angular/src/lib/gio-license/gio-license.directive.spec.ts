@@ -26,7 +26,6 @@ class TestLicenseComponent {
   @Input()
   public license?: LicenseOptions = {};
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   public onClick() {}
 }
 

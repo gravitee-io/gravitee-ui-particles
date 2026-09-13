@@ -57,7 +57,7 @@ export class GioFormlyJsonSchemaService {
         hide: field => {
           try {
             return !displayIf({ field, context });
-          } catch (e) {
+          } catch {
             // Ignore the error and display the field
             return false;
           }
@@ -170,7 +170,7 @@ export class GioFormlyJsonSchemaService {
           // Useful when full form is re-enabled to sync the fromControl enable/disable state
           isDisabled ? field.formControl?.disable({ emitEvent: false }) : field.formControl?.enable({ emitEvent: false });
           return isDisabled;
-        } catch (e) {
+        } catch {
           // Ignore the error and keep default value
           return field.props?.disabled || false;
         }

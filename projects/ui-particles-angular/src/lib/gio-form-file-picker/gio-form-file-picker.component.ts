@@ -53,9 +53,7 @@ export class GioFormFilePickerComponent implements OnInit, ControlValueAccessor 
   public dragHover = false;
   public isDisabled = false;
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onChangeCallback: (files: (string | NewFile)[]) => void = () => {};
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   private onTouchedCallback = () => {};
 
   constructor(
@@ -193,7 +191,7 @@ const isImgUrl = (url: string): Promise<boolean> => {
       img.onerror = () => resolve(false);
       img.onload = () => resolve(true);
     });
-  } catch (error) {
+  } catch {
     return Promise.resolve(false);
   }
 };

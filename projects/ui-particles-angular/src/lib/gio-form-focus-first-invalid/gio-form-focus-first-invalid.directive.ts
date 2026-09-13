@@ -43,7 +43,7 @@ export class GioBaseFormFocusInvalidDirective {
         invalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
         invalidControl.focus({ preventScroll: true });
       }
-    } catch (error) {
+    } catch {
       // Best effort. If the focus doesn't work it's not very important
       // 🧪 Useful to avoid som error in tests
     }

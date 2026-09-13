@@ -380,7 +380,7 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
 const isJsonString = (str: string): boolean => {
   try {
     JSON.parse(str);
-  } catch (e) {
+  } catch {
     return false;
   }
   return true;
