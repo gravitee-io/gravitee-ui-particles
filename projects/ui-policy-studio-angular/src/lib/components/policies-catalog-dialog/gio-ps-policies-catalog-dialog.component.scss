@@ -55,7 +55,7 @@ $typography: map.get(gio.$mat-theme, typography);
     --grid-item-max-width: calc((100% - var(--total-gap-width)) / var(--grid-column-count));
 
     display: grid;
-    grid-gap: var(--grid-layout-gap);
+    gap: var(--grid-layout-gap);
     grid-template-columns: repeat(auto-fill, minmax(max(var(--grid-item-min-width), var(--grid-item-max-width)), 1fr));
 
     &__policy {
