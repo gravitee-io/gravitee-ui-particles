@@ -33,7 +33,7 @@ import {
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { isEqual, isString, uniqueId } from 'lodash';
 import Monaco, { editor } from 'monaco-editor';
-import { ReplaySubject, Subject } from 'rxjs';
+import { ReplaySubject, Subject, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { GIO_MONACO_EDITOR_CONFIG, GioMonacoEditorConfig } from './models/GioMonacoEditorConfig';
@@ -361,21 +361,62 @@ export class GioMonacoEditorComponent implements ControlValueAccessor, AfterView
   }
 
   private autoformatValue() {
-    if (!this.disableAutoFormat) {
-      setTimeout(() => {
-        const previousReadOnlyState = this.options.readOnly || this.readOnly;
-        this.standaloneCodeEditor?.updateOptions({ readOnly: false });
-        this.standaloneCodeEditor
-          ?.getAction('editor.action.formatDocument')
-          ?.run()
-          .finally(() => {
-            this.standaloneCodeEditor?.updateOptions({ readOnly: previousReadOnlyState });
-            this.changeDetectorRef.detectChanges();
-          });
-      }, 80);
+    if (this.disableAutoFormat) {
+      return;
     }
+
+    // JSON is formatted here rather than by Monaco. `editor.action.formatDocument` needs the JSON
+    // language mode to have loaded, and the editor is already on screen by then: the value shows up
+    // unformatted, then reflows. Formatting the string ourselves leaves nothing to wait for.
+    if (this.textModel?.getLanguageId() === 'json') {
+      const formatted = formatJsonString(this.textModel.getValue());
+      if (formatted !== undefined) {
+        this.textModel.setValue(formatted);
+        this.changeDetectorRef.detectChanges();
+        return;
+      }
+    }
+
+    // Every other language goes through Monaco, which owns their formatters. Monaco registers one
+    // when it loads the language's mode, on its own schedule, and nothing tells us when that has
+    // happened: a fixed delay is a race, and the action calls itself supported well before it can
+    // do anything. So run it until it changes the document, or until we have tried long enough.
+    this.formatThroughMonaco();
+  }
+
+  private formatThroughMonaco(attemptsLeft = FORMATTER_ATTEMPTS): void {
+    if (attemptsLeft <= 0 || !this.standaloneCodeEditor || !this.textModel) {
+      return;
+    }
+
+    const valueBefore = this.textModel.getValue();
+    const previousReadOnlyState = this.options.readOnly || this.readOnly;
+    this.standaloneCodeEditor.updateOptions({ readOnly: false });
+
+    this.standaloneCodeEditor
+      .getAction('editor.action.formatDocument')
+      ?.run()
+      .finally(() => {
+        this.standaloneCodeEditor?.updateOptions({ readOnly: previousReadOnlyState });
+        this.changeDetectorRef.detectChanges();
+
+        // The edit lands after the action resolves, so look at the value a moment later.
+        timer(FORMATTER_RETRY_INTERVAL_MS)
+          .pipe(takeUntil(this.unsubscribe$))
+          .subscribe(() => {
+            if (this.textModel?.getValue() === valueBefore) {
+              this.formatThroughMonaco(attemptsLeft - 1);
+            }
+          });
+      });
   }
 }
+
+/** How long to leave Monaco to apply its edit, and to load the mode, between two attempts. */
+const FORMATTER_RETRY_INTERVAL_MS = 300;
+
+/** How many times to ask before giving up and leaving the value as it came. */
+const FORMATTER_ATTEMPTS = 8;
 
 const isJsonString = (str: string): boolean => {
   try {
@@ -384,4 +425,17 @@ const isJsonString = (str: string): boolean => {
     return false;
   }
   return true;
+};
+
+/**
+ * Re-indent a JSON string the way Monaco's formatter would, with two spaces.
+ *
+ * @returns the formatted string, or `undefined` when the input is not JSON and should be left alone
+ */
+export const formatJsonString = (value: string): string | undefined => {
+  try {
+    return JSON.stringify(JSON.parse(value), null, 2);
+  } catch {
+    return undefined;
+  }
 };
