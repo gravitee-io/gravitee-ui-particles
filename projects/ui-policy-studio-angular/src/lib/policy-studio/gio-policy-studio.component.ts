@@ -383,7 +383,6 @@ const getPlansChangeOutput = (flowsGroups: FlowGroupVM[], initialFlowsGroups: Fl
   // Merge plans with changed flows and plans with deleted flows
   const plansWithChangedFlowsOutput = unionBy([...plansGroupsWithChangedFlows, ...plansGroupsWithDeletedFlows], '_planId').map(plan => ({
     ...omit(plan, '_id', '_isPlan', '_planId'),
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- planId is always defined
     id: plan._planId!,
     flows: plan.flows.map(flow => omit(flow, '_id', '_hasChanged', '_parentFlowGroupName')),
   }));

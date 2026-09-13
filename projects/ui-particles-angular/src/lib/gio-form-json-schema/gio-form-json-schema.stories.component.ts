@@ -101,7 +101,7 @@ export class DemoComponent implements OnChanges, OnDestroy {
 
           this.resetUiPreview();
           this.changeDetectorRef.detectChanges();
-        } catch (e) {
+        } catch {
           // Ignore if not valid JSON
           return;
         }

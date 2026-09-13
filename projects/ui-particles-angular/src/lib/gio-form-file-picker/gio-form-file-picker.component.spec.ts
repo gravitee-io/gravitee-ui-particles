@@ -47,7 +47,7 @@ import { GioFormFilePickerModule } from './gio-form-file-picker.module';
 export class TestFilePickerInputComponent {
   public multiple = false;
   public accept = '*';
-  public ngModelChange: () => void = () => {}; // eslint-disable-line @typescript-eslint/no-empty-function
+  public ngModelChange: () => void = () => {};
   public myForm = new UntypedFormBuilder().group({
     file: [],
     fileRequired: [undefined, Validators.required],
