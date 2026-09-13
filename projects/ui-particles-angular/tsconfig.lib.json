@@ -6,7 +6,7 @@
     "declarationMap": true,
     "inlineSources": true,
     "types": ["node"],
-    "lib": ["dom", "es2018"]
+    "lib": ["dom", "es2022"]
   },
   "exclude": ["**/*.spec.ts", "**/*.stories.ts", "**/setup-jest.ts"]
 }

@@ -15,7 +15,7 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "es2020",
-    "lib": ["es2018", "dom"],
+    "lib": ["es2022", "dom"],
     "paths": {
       "@gravitee/ui-particles-angular": ["dist/ui-particles-angular", "projects/ui-particles-angular/src/public-api.ts"],
       "@gravitee/ui-particles-angular/*": ["dist/ui-particles-angular/*", "projects/ui-particles-angular/*/public-api.ts"],
