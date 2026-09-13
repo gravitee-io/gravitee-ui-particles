@@ -60,7 +60,7 @@ $typography: map.get(gio.$mat-theme, typography);
 
 .list {
   padding: 0 16px;
-  overflow-y: overlay;
+  overflow-y: auto;
 
   &__flowsGroup {
     display: flex;

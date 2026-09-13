@@ -284,8 +284,7 @@ $mat-basic-palette: mat.m2-define-palette(
     white: mat.m2-get-color-from-palette($mat-smoke-palette, lighter80),
     disabled: rgb(0 0 0 / 12%),
     // Same color as the disabled color of material
-    contrast:
-      (
+    contrast: (
         black: mat.m2-get-color-from-palette($mat-smoke-palette, lighter80),
         white: mat.m2-get-color-from-palette($mat-smoke-palette, darker80),
         disabled: rgb(0 0 0 / 26%),

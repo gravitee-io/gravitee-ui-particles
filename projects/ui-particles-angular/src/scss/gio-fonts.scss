@@ -63,11 +63,11 @@
     font-weight: normal;
     letter-spacing: normal;
     line-height: 1;
+    overflow-wrap: normal;
 
     /* Support for Safari and Chrome. */
     text-rendering: optimizelegibility;
     text-transform: none;
     white-space: nowrap;
-    word-wrap: normal;
   }
 }
