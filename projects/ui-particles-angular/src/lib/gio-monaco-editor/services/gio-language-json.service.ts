@@ -44,7 +44,7 @@ export class GioLanguageJsonService implements OnDestroy {
       throw new Error('Monaco is not loaded');
     }
     this.monaco = monaco;
-    const defaults = monaco.languages.json.jsonDefaults;
+    const defaults = monaco.json.jsonDefaults;
 
     defaults.setDiagnosticsOptions({
       validate: true,
@@ -57,10 +57,10 @@ export class GioLanguageJsonService implements OnDestroy {
       throw new Error('Monaco is not loaded');
     }
 
-    const defaults = this.monaco.languages.json.jsonDefaults;
+    const defaults = this.monaco.json.jsonDefaults;
     const options = defaults.diagnosticsOptions;
 
-    let schemas: Monaco.languages.json.DiagnosticsOptions['schemas'] = definitions.map(({ uri, schema }) => ({
+    let schemas: Monaco.json.DiagnosticsOptions['schemas'] = definitions.map(({ uri, schema }) => ({
       uri,
       schema,
       fileMatch: [id || '*.json'],
