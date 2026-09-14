@@ -1,3 +1,31 @@
+# [18.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.9.1...v18.0.0) (2026-09-14)
+
+
+* feat(gio-asciidoctor)!: move to @asciidoctor/core 4 ([4379ce5](https://github.com/gravitee-io/gravitee-ui-particles/commit/4379ce560ca3a80945db2d54550e7a3b2d31fb96))
+
+
+### Bug Fixes
+
+* **gio-asciidoctor:** mark @asciidoctor/core, not asciidoctor, as the optional peer ([f5f625c](https://github.com/gravitee-io/gravitee-ui-particles/commit/f5f625ca4286775b7b5d432d3deda094fc2bcf3c))
+* **gio-monaco-editor:** format without waiting on a fixed delay ([5f4fcdc](https://github.com/gravitee-io/gravitee-ui-particles/commit/5f4fcdc1cf6f6a4080eea4cdf81efbcac34ad6c0))
+
+
+### Features
+
+* **gio-form-json-schema:** accept [@ngx-formly](https://github.com/ngx-formly) 7 and 8 ([c9bf5fa](https://github.com/gravitee-io/gravitee-ui-particles/commit/c9bf5fa75e4f1decc3c16919075886e85309e3cc))
+
+
+### BREAKING CHANGES
+
+* Needs @asciidoctor/core ^4.0.0. Its API is now made of module level functions and
+converting is asynchronous, so GioAsciidoctorService.load() emits the module itself and its
+convert() returns a promise. window._gioAsciidoctor now holds the pending import rather than the
+module. Bundlers also need the browser-only code paths of @asciidoctor/core let through, and Jest
+cannot load it at all under jsdom — import GioAsciidoctorTestingModule in a test bed, and see the
+component README.
+
+https://gravitee.atlassian.net/browse/BX-401
+
 ## [17.9.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.9.0...v17.9.1) (2026-08-04)
 
 
