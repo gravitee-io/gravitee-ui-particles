@@ -94,7 +94,7 @@
     "@types/svg-parser": "2.0.6",
     "@typescript-eslint/eslint-plugin": "8.70.0",
     "@typescript-eslint/parser": "8.70.0",
-    "chromatic": "18.8.1",
+    "chromatic": "18.9.5",
     "eslint": "9.39.5",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-import": "2.32.0",
