@@ -214,6 +214,7 @@ export class GioFormTagsInputComponent implements MatFormFieldControl<Tags>, Con
 
   public set disabled(dis: boolean) {
     this._disabled = coerceBooleanProperty(dis);
+    this.changeDetectorRef.markForCheck();
     this.stateChanges.next();
   }
 

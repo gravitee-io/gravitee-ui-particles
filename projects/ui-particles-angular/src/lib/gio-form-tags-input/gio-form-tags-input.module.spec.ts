@@ -140,6 +140,18 @@ describe('GioFormTagsInputModule - Static input', () => {
     expect(await formTagsInputHarness.isDisabled()).toBe(true);
   });
 
+  it('should handle enabled state back with control', async () => {
+    component.tagsControl.disable();
+    fixture.detectChanges();
+
+    const formTagsInputHarness = await loader.getHarness(GioFormTagsInputHarness);
+    expect(await formTagsInputHarness.isDisabled()).toBe(true);
+
+    component.tagsControl.enable();
+
+    expect(await formTagsInputHarness.isDisabled()).toBe(false);
+  });
+
   it('should update error state when control is touched', async () => {
     component.tagsControl.addValidators(Validators.required);
     fixture.detectChanges();
