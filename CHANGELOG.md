@@ -1,3 +1,10 @@
+## [18.0.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v18.0.0...v18.0.1) (2026-09-25)
+
+
+### Bug Fixes
+
+* **gio-form-tags-input:** repaint when the control is enabled back ([d1ffed4](https://github.com/gravitee-io/gravitee-ui-particles/commit/d1ffed45cc864eb5b9fae5ef88d6901c96d90937))
+
 # [18.0.0](https://github.com/gravitee-io/gravitee-ui-particles/compare/v17.9.1...v18.0.0) (2026-09-14)
 
 
