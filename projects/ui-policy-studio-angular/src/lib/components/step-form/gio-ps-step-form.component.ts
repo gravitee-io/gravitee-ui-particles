@@ -96,10 +96,16 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
 
   private unsubscribe$ = new Subject<void>();
   public isMessage = false;
+  /**
+   * A policy plugin that cannot honour a message condition (e.g. one working on raw frames) declares it in its plugin
+   * properties: the field is then never offered.
+   */
+  public supportsMessageCondition = true;
   constructor(private readonly policyStudioService: GioPolicyStudioService) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.genericPolicy) {
+      this.supportsMessageCondition = !isPolicy(this.genericPolicy) || this.genericPolicy.supportsMessageCondition !== false;
       if (isPolicy(this.genericPolicy)) {
         this.policySchema$ = this.policyStudioService.getPolicySchema(toPolicy(this.genericPolicy)).pipe(
           map(schema => {
@@ -183,7 +189,8 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
       ...this.step,
       description: this.stepForm?.get('description')?.value,
       condition: this.stepForm?.get('condition')?.value ?? undefined,
-      messageCondition: this.stepForm?.get('messageCondition')?.value ?? undefined,
+      // A condition left on a step by an earlier version is dropped as soon as the step is saved again
+      messageCondition: this.supportsMessageCondition ? (this.stepForm?.get('messageCondition')?.value ?? undefined) : undefined,
       configuration,
     });
   }
