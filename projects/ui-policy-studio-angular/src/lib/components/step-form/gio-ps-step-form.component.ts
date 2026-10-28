@@ -96,10 +96,16 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
 
   private unsubscribe$ = new Subject<void>();
   public isMessage = false;
+  /**
+   * A policy plugin that cannot honour a message condition (e.g. one working on raw frames) declares it in its plugin
+   * properties: the field is then never offered.
+   */
+  public supportsMessageCondition = true;
   constructor(private readonly policyStudioService: GioPolicyStudioService) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.genericPolicy) {
+      this.supportsMessageCondition = !isPolicy(this.genericPolicy) || this.genericPolicy.supportsMessageCondition !== false;
       if (isPolicy(this.genericPolicy)) {
         this.policySchema$ = this.policyStudioService.getPolicySchema(toPolicy(this.genericPolicy)).pipe(
           map(schema => {
@@ -159,14 +165,6 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
     this.stepForm.statusChanges.pipe(takeUntil(this.unsubscribe$)).subscribe(valid => {
       this.isValid.emit(valid === 'VALID');
     });
-  }
-
-  /**
-   * A policy plugin that cannot honour a message condition (e.g. one working on raw frames) declares it in its plugin
-   * properties: the field is then never offered.
-   */
-  public get supportsMessageCondition(): boolean {
-    return !isPolicy(this.genericPolicy) || this.genericPolicy.supportsMessageCondition !== false;
   }
 
   public onJsonSchemaReady(isReady: boolean) {

@@ -25,7 +25,7 @@ import { GioAsciidoctorTestingModule } from '@gravitee/ui-particles-angular/gio-
 import { of } from 'rxjs';
 
 import { fakeAllPolicies } from '../../models/index-testing';
-import { FlowPhase, fromPolicyInput, Step, toGenericPolicies } from '../../models';
+import { FlowPhase, fromPolicyInput, GenericPolicy, Step, toGenericPolicies } from '../../models';
 import { GioPolicyStudioService } from '../../policy-studio/gio-policy-studio.service';
 
 import { GioPolicyStudioStepFormComponent } from './gio-ps-step-form.component';
@@ -35,7 +35,7 @@ describe('GioPolicyStudioStepFormComponent', () => {
 
   const schema = { type: 'object', properties: { test: { type: 'string', title: 'Test' } } };
 
-  const createComponent = async (flowPhase: FlowPhase, supportsMessageCondition?: boolean, step?: Step) => {
+  const createComponent = async (flowPhase: FlowPhase, supportsMessageCondition?: boolean, step?: Step, genericPolicy?: GenericPolicy) => {
     await TestBed.configureTestingModule({
       imports: [
         GioPolicyStudioStepFormComponent,
@@ -63,12 +63,13 @@ describe('GioPolicyStudioStepFormComponent', () => {
     fixture.componentRef.setInput('apiType', 'NATIVE');
     fixture.componentRef.setInput(
       'genericPolicy',
-      toGenericPolicies(
-        fakeAllPolicies()
-          .map(fromPolicyInput)
-          .map(policy => ({ ...policy, ...(supportsMessageCondition === undefined ? {} : { supportsMessageCondition }) })),
-        [],
-      )[0],
+      genericPolicy ??
+        toGenericPolicies(
+          fakeAllPolicies()
+            .map(fromPolicyInput)
+            .map(policy => ({ ...policy, ...(supportsMessageCondition === undefined ? {} : { supportsMessageCondition }) })),
+          [],
+        )[0],
     );
     if (step) {
       fixture.componentRef.setInput('step', step);
@@ -107,6 +108,16 @@ describe('GioPolicyStudioStepFormComponent', () => {
     } as Step);
 
     expect(await messageConditionInputs(loader)).toHaveLength(0);
+  });
+
+  it('should show the message condition on a shared policy group step', async () => {
+    const sharedPolicyGroup = toGenericPolicies(
+      [],
+      [{ id: 'spg', policyId: 'shared-policy-group-policy', name: 'spg', apiType: 'NATIVE', phase: 'PUBLISH' }],
+    )[0];
+    const loader = await createComponent('PUBLISH', undefined, undefined, sharedPolicyGroup);
+
+    expect(await messageConditionInputs(loader)).toHaveLength(1);
   });
 
   it('should hide the message condition on a non message phase', async () => {
