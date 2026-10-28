@@ -61,7 +61,9 @@ describe('GioPolicyStudioStepFormComponent', () => {
     fixture = TestBed.createComponent(GioPolicyStudioStepFormComponent);
     fixture.componentRef.setInput('flowPhase', flowPhase);
     fixture.componentRef.setInput('apiType', 'NATIVE');
-    fixture.componentRef.setInput('genericPolicy', toGenericPolicies(
+    fixture.componentRef.setInput(
+      'genericPolicy',
+      toGenericPolicies(
         fakeAllPolicies()
           .map(fromPolicyInput)
           .map(policy => ({ ...policy, ...(supportsMessageCondition === undefined ? {} : { supportsMessageCondition }) })),
