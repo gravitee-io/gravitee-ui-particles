@@ -161,6 +161,14 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
     });
   }
 
+  /**
+   * A policy working on raw frames declares `gioConfig.messageCondition: false` in its schema:
+   * the message condition cannot apply to it, so the field is not offered.
+   */
+  public supportsMessageCondition(policySchema: GioJsonSchema | null | undefined): boolean {
+    return (policySchema as { gioConfig?: { messageCondition?: boolean } } | null | undefined)?.gioConfig?.messageCondition !== false;
+  }
+
   public onJsonSchemaReady(isReady: boolean) {
     // When ready and if the form is valid, emit
     if (isReady) {
