@@ -33,7 +33,9 @@ import { GioPolicyStudioStepFormComponent } from './gio-ps-step-form.component';
 describe('GioPolicyStudioStepFormComponent', () => {
   let fixture: ComponentFixture<GioPolicyStudioStepFormComponent>;
 
-  const createComponent = async (flowPhase: FlowPhase, schema: unknown, step?: Step) => {
+  const schema = { type: 'object', properties: { test: { type: 'string', title: 'Test' } } };
+
+  const createComponent = async (flowPhase: FlowPhase, supportsMessageCondition?: boolean, step?: Step) => {
     await TestBed.configureTestingModule({
       imports: [
         GioPolicyStudioStepFormComponent,
@@ -59,7 +61,13 @@ describe('GioPolicyStudioStepFormComponent', () => {
     fixture = TestBed.createComponent(GioPolicyStudioStepFormComponent);
     fixture.componentRef.setInput('flowPhase', flowPhase);
     fixture.componentRef.setInput('apiType', 'NATIVE');
-    fixture.componentRef.setInput('genericPolicy', toGenericPolicies(fakeAllPolicies().map(fromPolicyInput), [])[0]);
+    fixture.componentRef.setInput('genericPolicy', toGenericPolicies(
+        fakeAllPolicies()
+          .map(fromPolicyInput)
+          .map(policy => ({ ...policy, ...(supportsMessageCondition === undefined ? {} : { supportsMessageCondition }) })),
+        [],
+      )[0],
+    );
     if (step) {
       fixture.componentRef.setInput('step', step);
     }
@@ -72,32 +80,56 @@ describe('GioPolicyStudioStepFormComponent', () => {
   const messageConditionInputs = async (loader: Awaited<ReturnType<typeof createComponent>>) =>
     loader.getAllHarnesses(MatInputHarness.with({ selector: '[formControlName="messageCondition"]' }));
 
-  const schemaWith = (gioConfig?: unknown) => ({
-    type: 'object',
-    properties: { test: { type: 'string', title: 'Test' } },
-    ...(gioConfig ? { gioConfig } : {}),
-  });
-
-  it('should show the message condition on a publish step when the policy schema does not forbid it', async () => {
-    const loader = await createComponent('PUBLISH', schemaWith());
+  it('should show the message condition on a publish step when the policy does not declare it unsupported', async () => {
+    const loader = await createComponent('PUBLISH');
 
     expect(await messageConditionInputs(loader)).toHaveLength(1);
   });
 
-  it('should hide the message condition when the policy schema declares gioConfig.messageCondition = false', async () => {
-    const loader = await createComponent('PUBLISH', schemaWith({ messageCondition: false }));
+  it('should show the message condition when the policy declares it supported', async () => {
+    const loader = await createComponent('SUBSCRIBE', true);
+
+    expect(await messageConditionInputs(loader)).toHaveLength(1);
+  });
+
+  it('should hide the message condition when the policy declares it unsupported', async () => {
+    const loader = await createComponent('PUBLISH', false);
+
+    expect(await messageConditionInputs(loader)).toHaveLength(0);
+  });
+
+  it('should hide the message condition even when the step already carries one', async () => {
+    const loader = await createComponent('SUBSCRIBE', false, {
+      policy: 'test-policy',
+      messageCondition: '{#message.topic == "a"}',
+    } as Step);
 
     expect(await messageConditionInputs(loader)).toHaveLength(0);
   });
 
   it('should hide the message condition on a non message phase', async () => {
-    const loader = await createComponent('REQUEST', schemaWith());
+    const loader = await createComponent('REQUEST');
 
     expect(await messageConditionInputs(loader)).toHaveLength(0);
   });
 
-  it('should keep an existing message condition when the field is hidden', async () => {
-    await createComponent('SUBSCRIBE', schemaWith({ messageCondition: false }), {
+  it('should drop a stale message condition when saving a step of a policy that does not support it', async () => {
+    await createComponent('SUBSCRIBE', false, {
+      policy: 'test-policy',
+      condition: 'a == b',
+      messageCondition: '{#message.topic == "a"}',
+    } as Step);
+    const emitted: Step[] = [];
+    fixture.componentInstance.stepChange.subscribe(step => emitted.push(step));
+
+    fixture.componentInstance.emitStepChange();
+
+    expect(emitted[0].messageCondition).toBeUndefined();
+    expect(emitted[0].condition).toEqual('a == b');
+  });
+
+  it('should keep the message condition when saving a step of a policy that supports it', async () => {
+    await createComponent('SUBSCRIBE', undefined, {
       policy: 'test-policy',
       messageCondition: '{#message.topic == "a"}',
     } as Step);

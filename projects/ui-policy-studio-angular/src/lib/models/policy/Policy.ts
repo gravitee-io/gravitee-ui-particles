@@ -29,6 +29,11 @@ export interface Policy {
   version?: string;
   flowPhaseCompatibility?: Partial<Record<ApiProtocolType, FlowPhase[]>>;
   deployed?: boolean;
+  /**
+   * Declared by the policy plugin. `false` when the policy cannot honour a message condition (e.g. it works on raw frames).
+   * Missing means supported.
+   */
+  supportsMessageCondition?: boolean;
 }
 
 /**

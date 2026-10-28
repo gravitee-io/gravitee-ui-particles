@@ -162,11 +162,11 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
   }
 
   /**
-   * A policy working on raw frames declares `gioConfig.messageCondition: false` in its schema:
-   * the message condition cannot apply to it, so the field is not offered.
+   * A policy plugin that cannot honour a message condition (e.g. one working on raw frames) declares it in its plugin
+   * properties: the field is then never offered.
    */
-  public supportsMessageCondition(policySchema: GioJsonSchema | null | undefined): boolean {
-    return (policySchema as { gioConfig?: { messageCondition?: boolean } } | null | undefined)?.gioConfig?.messageCondition !== false;
+  public get supportsMessageCondition(): boolean {
+    return !isPolicy(this.genericPolicy) || this.genericPolicy.supportsMessageCondition !== false;
   }
 
   public onJsonSchemaReady(isReady: boolean) {
@@ -191,7 +191,8 @@ export class GioPolicyStudioStepFormComponent implements OnChanges, OnInit, OnDe
       ...this.step,
       description: this.stepForm?.get('description')?.value,
       condition: this.stepForm?.get('condition')?.value ?? undefined,
-      messageCondition: this.stepForm?.get('messageCondition')?.value ?? undefined,
+      // A condition left on a step by an earlier version is dropped as soon as the step is saved again
+      messageCondition: this.supportsMessageCondition ? (this.stepForm?.get('messageCondition')?.value ?? undefined) : undefined,
       configuration,
     });
   }
