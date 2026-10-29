@@ -1,3 +1,10 @@
+## [18.0.2](https://github.com/gravitee-io/gravitee-ui-particles/compare/v18.0.1...v18.0.2) (2026-10-29)
+
+
+### Bug Fixes
+
+* **policy-studio:** hide the message condition for policies that declare they cannot honour it ([#562](https://github.com/gravitee-io/gravitee-ui-particles/issues/562)) ([c3b9b99](https://github.com/gravitee-io/gravitee-ui-particles/commit/c3b9b99f976696d13a0bdef48b249433de27abbb))
+
 ## [18.0.1](https://github.com/gravitee-io/gravitee-ui-particles/compare/v18.0.0...v18.0.1) (2026-09-25)
 
 
