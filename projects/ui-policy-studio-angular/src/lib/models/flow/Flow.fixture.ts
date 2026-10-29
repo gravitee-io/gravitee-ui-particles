@@ -166,7 +166,7 @@ export function fakeMcpFlow(modifier?: Partial<Flow> | ((baseApi: Flow) => Flow)
 export function fakeLlmFlow(modifier?: Partial<Flow> | ((baseApi: Flow) => Flow)): Flow {
   const httpSelector: HttpSelector = {
     type: 'HTTP',
-    path: '/path',
+    path: '/models',
     pathOperator: 'EQUALS',
     methods: ['GET'],
   };

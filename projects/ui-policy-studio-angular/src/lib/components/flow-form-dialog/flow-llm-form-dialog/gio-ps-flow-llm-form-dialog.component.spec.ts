@@ -23,7 +23,7 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { InteractivityChecker } from '@angular/cdk/a11y';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 
-import { fakeChannelFlow, fakeHttpFlow, fakeLlmFlow } from '../../../models/index-testing';
+import { fakeChannelFlow, fakeLlmFlow } from '../../../models/index-testing';
 import { FlowVM } from '../../../policy-studio/gio-policy-studio.model';
 import { GioPolicyStudioFlowFormDialogResult } from '../gio-ps-flow-form-dialog-result.model';
 import { Flow, HttpMethod, Operator, toHttpMethod } from '../../../models';
@@ -96,7 +96,7 @@ describe('GioPolicyStudioFlowLlmFormDialogComponent', () => {
     const flow = fakeLlmFlow({
       name: 'FlO1',
       selectors: [
-        { type: 'HTTP', path: '/path', pathOperator: 'EQUALS', methods: [] },
+        { type: 'HTTP', path: '/embeddigns', pathOperator: 'EQUALS', methods: [] },
         { type: 'CONDITION', condition: 'condition' },
       ],
     });
@@ -140,13 +140,17 @@ describe('GioPolicyStudioFlowLlmFormDialogComponent', () => {
     await flowFormDialogHarness.setFlowFormValues({
       name: 'Test name',
       pathOperator: 'EQUALS',
-      path: 'test-path',
+      path: '/models',
       methods: ['GET'],
     });
+    fixture.detectChanges();
+    await fixture.whenStable();
+
     await flowFormDialogHarness.save();
 
     expect(component.flow).toEqual({
       _id: expect.any(String),
+
       _hasChanged: true,
       name: 'Test name',
       enabled: true,
@@ -154,7 +158,7 @@ describe('GioPolicyStudioFlowLlmFormDialogComponent', () => {
         {
           type: 'HTTP',
           pathOperator: 'EQUALS',
-          path: '/test-path',
+          path: '/models',
           methods: ['GET'],
         },
       ],
@@ -168,10 +172,15 @@ describe('GioPolicyStudioFlowLlmFormDialogComponent', () => {
     await flowFormDialogHarness.setFlowFormValues({
       name: 'Test name',
       pathOperator: 'EQUALS',
-      path: 'test-path',
-      methods: ['ALL'],
+      path: '/models',
+      methods: ['GET', 'POST'],
     });
+    fixture.detectChanges();
+    await fixture.whenStable();
+
     await flowFormDialogHarness.save();
+    fixture.detectChanges();
+    await fixture.whenStable();
 
     expect(component.flow).toEqual({
       _id: expect.any(String),
@@ -182,8 +191,8 @@ describe('GioPolicyStudioFlowLlmFormDialogComponent', () => {
         {
           type: 'HTTP',
           pathOperator: 'EQUALS',
-          path: '/test-path',
-          methods: [],
+          path: '/models',
+          methods: ['GET', 'POST'],
         },
       ],
     });
@@ -196,7 +205,7 @@ describe('GioPolicyStudioFlowLlmFormDialogComponent', () => {
     await flowFormDialogHarness.setFlowFormValues({
       name: 'Test name',
       pathOperator: 'EQUALS',
-      path: 'test-path',
+      path: '/embeddings',
       methods: ['POST', 'blabla'],
     });
 
@@ -211,7 +220,7 @@ describe('GioPolicyStudioFlowLlmFormDialogComponent', () => {
         {
           type: 'HTTP',
           pathOperator: 'EQUALS',
-          path: '/test-path',
+          path: '/embeddings',
           methods: ['POST'],
         },
       ],
@@ -225,7 +234,7 @@ describe('GioPolicyStudioFlowLlmFormDialogComponent', () => {
     await flowFormDialogHarness.setFlowFormValues({
       name: 'Test name',
       pathOperator: 'EQUALS',
-      path: 'test-path',
+      path: '/models',
       methods: ['GET'],
       condition: 'Test condition',
     });
@@ -240,7 +249,7 @@ describe('GioPolicyStudioFlowLlmFormDialogComponent', () => {
         {
           type: 'HTTP',
           pathOperator: 'EQUALS',
-          path: '/test-path',
+          path: '/models',
           methods: ['GET'],
         },
         {
@@ -273,7 +282,7 @@ describe('GioPolicyStudioFlowLlmFormDialogComponent', () => {
     component.flowToEdit = {
       _id: 'test-id',
       _hasChanged: false,
-      ...fakeHttpFlow(),
+      ...fakeLlmFlow(),
     };
     await componentTestingOpenDialog();
 
@@ -282,7 +291,7 @@ describe('GioPolicyStudioFlowLlmFormDialogComponent', () => {
     await flowFormDialogHarness.setFlowFormValues({
       name: 'Test name',
       pathOperator: 'EQUALS',
-      path: 'test-path',
+      path: '/',
       methods: ['GET'],
       condition: 'Test condition',
     });
@@ -291,14 +300,14 @@ describe('GioPolicyStudioFlowLlmFormDialogComponent', () => {
     expect(component.flow).toEqual({
       _id: 'test-id',
       _hasChanged: true,
-      ...fakeHttpFlow(),
+      ...fakeLlmFlow(),
       name: 'Test name',
       enabled: true,
       selectors: [
         {
           type: 'HTTP',
           pathOperator: 'EQUALS',
-          path: '/test-path',
+          path: '/models',
           methods: ['GET'],
         },
         {
@@ -317,9 +326,6 @@ describe('GioPolicyStudioFlowLlmFormDialogComponent', () => {
 });
 
 const toMethods: (methods: string[]) => HttpMethod[] = (methods: string[]) => {
-  if (methods.includes('ALL')) {
-    return [];
-  }
   return methods.map(method => toHttpMethod(method)).filter(v => v !== undefined) as HttpMethod[];
 };
 

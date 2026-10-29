@@ -1,0 +1,67 @@
+<!--
+
+    Copyright (C) 2025 The Gravitee team (http://gravitee.io)
+    
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    
+            http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<!--
+    Copyright (C) 2025 The Gravitee team (http://gravitee.io)
+    
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    
+            http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<input
+  #input
+  type="text"
+  matInput
+  [attr.aria-label]="ariaLabel"
+  [placeholder]="placeholder"
+  [disabled]="disabled"
+  [matAutocomplete]="auto"
+  [value]="inputValue"
+  (input)="onInputChange($any($event.target).value)"
+/>
+<mat-autocomplete #auto="matAutocomplete" (optionSelected)="onAutocompleteInputSelect($event)">
+  @if (loading) {
+    <mat-option disabled id="loader">
+      <div class="loader-option"><gio-loader></gio-loader></div>
+    </mat-option>
+  }
+  @for (group of autocompleteInputFilteredOptions$ | async; track group.groupLabel) {
+    @if (group.groupLabel) {
+      <mat-optgroup [label]="group.groupLabel">
+        @for (option of group.groupOptions; track option.value) {
+          <mat-option [value]="option.value">
+            {{ option.label }}
+          </mat-option>
+        }
+      </mat-optgroup>
+    } @else {
+      @for (option of group.groupOptions; track option.value) {
+        <mat-option [value]="option.value">
+          {{ option.label }}
+        </mat-option>
+      }
+    }
+  }
+</mat-autocomplete>
